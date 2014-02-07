@@ -256,10 +256,57 @@ function PopulateParticipations(){
 	echo "Table Participations Populated.\n";
 }
 
+function PopulateCorrections(){
+	global $dbServer, $dbUser, $dbPass, $dbName;
+	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+
+	$db->select_db($dbName) or die($db->error);
+
+	$query="SELECT `id` FROM Users;";
+	$result=$db->query($query) or die($db->error);
+	$qU=0;
+	$Users=[];
+	while($Users[$qU]=mysqli_fetch_array($result)['id'])$qU++;
+	
+	
+	$query="SELECT `id` FROM Contests;";
+	$result=$db->query($query) or die($db->error);
+	while ( $row = mysqli_fetch_array($result) ) {
+		$ContestId=$row['id'];
+
+		$query="SELECT `id` FROM Problems WHERE `ContestId`=$ContestId";
+		$Problems=$db->query($query) or die($db->error);
+
+		$query="SELECT `ContestantId` FROM Participations WHERE `ContestId`=$ContestId";
+		$ContestantsResult=$db->query($query) or die($db->error);
+
+		$n=0;
+		$Contestants=[];
+		while($Contestants[$n]=mysqli_fetch_array($ContestantsResult)['ContestantId'])$n++;
+		
+		while($Prow = mysqli_fetch_array($Problems)){
+			$ProblemId=$Prow['id'];
+			$q=mt_rand(0,$n);
+			for($i=0;$i<$q;$i++) {
+				if(mt_rand(1,10)>=7) continue;
+				$query="INSERT INTO `Corrections` (ProblemId,ContestantId,mark,comment,UserId) VALUES
+						($ProblemId,$Contestants[$i],".mt_rand(0,7).",'Commento cretino',".$Users[mt_rand(0,$qU-1)].");";
+				$db->query($query) or die($db->error);
+			}
+		}
+		
+	}
+
+	echo "Table Corrections Populated.\n";
+}
+
 CreateDatabase();
 PopulateContestants();
 PopulateContests();
 PopulateProblems();
 PopulateUsers();
 PopulateParticipations();
+PopulateCorrections();
+
 ?>
