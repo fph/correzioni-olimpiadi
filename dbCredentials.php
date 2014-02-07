@@ -1,4 +1,5 @@
 <?php
+$dbServer='localhost';
 $dbUser='Olimpiadi';
 $dbPass='alfabeto';
 $dbName='CorOli';
