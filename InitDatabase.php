@@ -20,7 +20,7 @@ function CreateDatabase() {
 	'CREATE TABLE IF NOT EXISTS `Users` (
 		`id` int NOT NULL AUTO_INCREMENT,
 		`user` varchar(31) NOT NULL,
-		`pass` varchar(63) NOT NULL,
+		`passHash` varchar(255) NOT NULL,
 		PRIMARY KEY (`id`),
 		UNIQUE KEY(`user`)
 	) ENGINE=InnoDB;';
@@ -105,7 +105,7 @@ function CreateDatabase() {
 		FOREIGN KEY (`ContestantId`) REFERENCES Contestants(`id`)
 			ON DELETE CASCADE ON UPDATE CASCADE,
 		FOREIGN KEY (`UserId`) REFERENCES Users(`id`)
-			ON DELETE CASCADE ON UPDATE CASCADE
+			ON DELETE SET NULL ON UPDATE CASCADE
 	) ENGINE=InnoDB;';
 	$db->query($query) or die($db->error);
 
@@ -161,8 +161,74 @@ function PopulateContests() {
 	echo "Table Contests Populated.\n";
 }
 
+function PopulateProblems() {
+	global $dbServer, $dbUser, $dbPass, $dbName;
+	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+	
+	$query="INSERT INTO $dbName.`Problems` (`name`,`ContestId`) VALUES
+		('1',1),
+		('2',1),
+		('3',1),
+		('4',1),
+		('5',1),
+		('6',1),
+		('7',1),
+		('8',1),
+		('9',1),
+		('10',1),
+		('11',1),
+		('12',1),
+		('13',1),
+		('14',1),
+		('15',1),
+		('16',1),
+		('A1',2),
+		('A2',2),
+		('A3',2),
+		('C1',2),
+		('C2',2),
+		('C3',2),
+		('G1',2),
+		('G2',2),
+		('G3',2),
+		('N1',2),
+		('N2',2),
+		('N3',2),
+		('1',3),
+		('2',3),
+		('3',3),
+		('1',4),
+		('2',4),
+		('3',4),
+		('Problem 1',5),
+		('Problem 2',5),
+		('Problem 3',5);";
+	$db->query($query) or die($db->error);
+	$db->close();
+
+	echo "Table Problems Populated.\n";
+}
+
+function PopulateUsers() {
+	global $dbServer, $dbUser, $dbPass, $dbName;
+	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+	
+	$query="INSERT INTO $dbName.`Users` (`user`,`passHash`) VALUES
+		('Xamog','".password_hash('meraviglioso',PASSWORD_DEFAULT)."'),
+		('LudoP','".password_hash('yochicco',PASSWORD_DEFAULT)."'),
+		('dario2994','".password_hash('acca',PASSWORD_DEFAULT)."'),
+		('SimoTheWolf','".password_hash('vero o falso?',PASSWORD_DEFAULT)."');";
+	$db->query($query) or die($db->error);
+	$db->close();
+
+	echo "Table Users Populated.\n";
+}
+
 CreateDatabase();
 PopulateContestants();
 PopulateContests();
-
+PopulateProblems();
+PopulateUsers();
 ?>
