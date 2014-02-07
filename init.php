@@ -59,9 +59,9 @@ $query=
 	KEY(`ContestId`),
 	KEY(`ContestantId`),
 
-	FOREIGN KEY (ContestId) REFERENCES Contests(id)
+	FOREIGN KEY (`ContestId`) REFERENCES Contests(`id`)
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (ContestantId) REFERENCES Contestants(id)
+	FOREIGN KEY (`ContestantId`) REFERENCES Contestants(`id`)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;';
 mysql_query( $query ) or die(mysql_error());
@@ -77,7 +77,7 @@ $query=
 	PRIMARY KEY (`id`),
 	KEY(`ContestId`),
 
-	FOREIGN KEY (ContestId) REFERENCES Contests(id)
+	FOREIGN KEY (`ContestId`) REFERENCES Contests(`id`)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;';
 mysql_query( $query ) or die(mysql_error());
@@ -91,14 +91,17 @@ $query=
 	`ContestantId` int NOT NULL,
 	`mark` int,
 	`comment` varchar(255),
+	`UserId` int,
 	
 	PRIMARY KEY (`id`),
 	KEY (`ProblemId`),
 	KEY (`ContestantId`),
 
-	FOREIGN KEY (ProblemId) REFERENCES Problems(id)
+	FOREIGN KEY (`ProblemId`) REFERENCES Problems(`id`)
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (ContestantId) REFERENCES Contestants(id)
+	FOREIGN KEY (`ContestantId`) REFERENCES Contestants(`id`)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (`UserId`) REFERENCES Users(`id`)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;';
 mysql_query( $query ) or die(mysql_error());
