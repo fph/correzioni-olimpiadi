@@ -74,8 +74,8 @@ function CreateDatabase() {
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Problems` (
 		`id` int NOT NULL AUTO_INCREMENT,
-		`name` varchar(31) NOT NULL,
 		`ContestId` int NOT NULL,
+		`name` varchar(31) NOT NULL,
 		
 		PRIMARY KEY (`id`),
 		KEY(`ContestId`),
@@ -219,6 +219,7 @@ function PopulateUsers() {
 		('Xamog','".password_hash('meraviglioso',PASSWORD_DEFAULT)."'),
 		('LudoP','".password_hash('yochicco',PASSWORD_DEFAULT)."'),
 		('dario2994','".password_hash('acca',PASSWORD_DEFAULT)."'),
+		('fph','".password_hash('pizzica',PASSWORD_DEFAULT)."'),
 		('SimoTheWolf','".password_hash('vero o falso?',PASSWORD_DEFAULT)."');";
 	$db->query($query) or die($db->error);
 	$db->close();
@@ -226,9 +227,39 @@ function PopulateUsers() {
 	echo "Table Users Populated.\n";
 }
 
+function PopulateParticipations(){
+	global $dbServer, $dbUser, $dbPass, $dbName;
+	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+
+	$db->select_db($dbName) or die($db->error);
+
+	$query="SELECT `id` FROM Contestants";
+	$result=$db->query($query) or die($db->error);
+	$n=0;
+	$Contestants=[];
+	while( $Contestants[$n] = mysqli_fetch_array($result)['id'] ) $n++;
+	
+	$query="SELECT `id` FROM Contests;";
+	$result=$db->query($query) or die($db->error);
+	while ( $row = mysqli_fetch_array($result) ) {
+		$ContestId=$row['id'];
+		$q=mt_rand(0,$n);
+		for($i=0;$i<$q;$i++) {
+			if(mt_rand(1,10)>=7) continue;
+			
+			$query="INSERT INTO `Participations` (ContestId,ContestantId) VALUES ($ContestId,$Contestants[$i]);";
+			$db->query($query) or die($db->error);
+		}
+	}
+
+	echo "Table Participations Populated.\n";
+}
+
 CreateDatabase();
 PopulateContestants();
 PopulateContests();
 PopulateProblems();
 PopulateUsers();
+PopulateParticipations();
 ?>
