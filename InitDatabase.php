@@ -216,11 +216,11 @@ function PopulateUsers() {
 	if($db->connect_errno) die ($db->connect_error);
 	
 	$query="INSERT INTO $dbName.`Users` (`user`,`passHash`) VALUES
-		('Xamog','".password_hash('meraviglioso',PASSWORD_DEFAULT)."'),
-		('LudoP','".password_hash('yochicco',PASSWORD_DEFAULT)."'),
-		('dario2994','".password_hash('acca',PASSWORD_DEFAULT)."'),
-		('fph','".password_hash('pizzica',PASSWORD_DEFAULT)."'),
-		('SimoTheWolf','".password_hash('vero o falso?',PASSWORD_DEFAULT)."');";
+		('Xamog','".passwordHash('meraviglioso')."'),
+		('LudoP','".passwordHash('yochicco')."'),
+		('dario2994','".passwordHash('acca')."'),
+		('fph','".passwordHash('pizzica')."'),
+		('SimoTheWolf','".passwordHash('vero o falso?')."');";
 	$db->query($query) or die($db->error);
 	$db->close();
 
