@@ -245,6 +245,7 @@ function PopulateParticipations(){
 	while ( $row = mysqli_fetch_array($result) ) {
 		$ContestId=$row['id'];
 		$q=mt_rand(0,$n);
+		//~ echo "$ContestId $q\n";
 		for($i=0;$i<$q;$i++) {
 			if(mt_rand(1,10)>=7) continue;
 			
@@ -288,8 +289,10 @@ function PopulateCorrections(){
 		while($Prow = mysqli_fetch_array($Problems)){
 			$ProblemId=$Prow['id'];
 			$q=mt_rand(0,$n);
+			//~ echo "$ProblemId $q\n";
 			for($i=0;$i<$q;$i++) {
 				if(mt_rand(1,10)>=7) continue;
+				//~ echo "\t $Contestants[$i]\n";
 				$query="INSERT INTO `Corrections` (ProblemId,ContestantId,mark,comment,UserId) VALUES
 						($ProblemId,$Contestants[$i],".mt_rand(0,7).",'Commento cretino',".$Users[mt_rand(0,$qU-1)].");";
 				$db->query($query) or die($db->error);
