@@ -9,6 +9,6 @@ function escape_input($value)
 
 function passwordHash($pass) {
 	$salt="trecentoquarantaseidue";
-	return password_hash($pass,PASSWORD_DEFAULT,['salt'=>$salt]);
+	return crypt($pass,$salt);
 }
 ?>
