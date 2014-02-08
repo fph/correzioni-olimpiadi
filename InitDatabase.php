@@ -1,5 +1,5 @@
 <?php
-include 'dbCredentials.php';
+include_once 'dbCredentials.php';
 
 function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
