@@ -2,19 +2,18 @@
 include 'dbCredentials.php';
 
 function CreateDatabase() {
-	global $dbServer, $dbUser, $dbPass, $dbName;
-	$db=new mysqli ($dbServer, $dbUser, $dbPass);
+	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
 
-	$query='DROP DATABASE IF EXISTS `'.$dbName.'`;'; //DEBUG
+	$query='DROP DATABASE IF EXISTS `'.dbName.'`;'; //DEBUG
 	$db->query($query) or die($db->error);
 
-	$query='CREATE DATABASE IF NOT EXISTS `'.$dbName.'`;';
+	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`;';
 	$db->query($query) or die($db->error);
 
-	echo "Database ".$dbName." created.\n";
-	$db->select_db($dbName) or die($db->error);
+	echo "Database ".dbName." created.\n";
+	$db->select_db(dbName) or die($db->error);
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Users` (
@@ -116,11 +115,10 @@ function CreateDatabase() {
 }
 
 function PopulateContestants() {
-	global $dbServer, $dbUser, $dbPass, $dbName;
-	$db=new mysqli ($dbServer, $dbUser, $dbPass);
+	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query="INSERT INTO $dbName.`Contestants` (`name`, `surname`) VALUES
+	$query="INSERT INTO ".dbName.".`Contestants` (`name`, `surname`) VALUES
 		('Federico', 'Glaudo'),
 		('Giada', 'Franz'),
 		('Gioacchino', 'Antonelli'),
@@ -144,11 +142,10 @@ function PopulateContestants() {
 }
 
 function PopulateContests() {
-	global $dbServer, $dbUser, $dbPass, $dbName;
-	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query="INSERT INTO $dbName.`Contests` (`name`) VALUES
+	$query="INSERT INTO ".dbName.".`Contests` (`name`) VALUES
 		('Senior 2013'),
 		('WinterCamp 2011 Ammissione'),
 		('Preimo 2010 TST giorno 1'),
@@ -162,11 +159,10 @@ function PopulateContests() {
 }
 
 function PopulateProblems() {
-	global $dbServer, $dbUser, $dbPass, $dbName;
-	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query="INSERT INTO $dbName.`Problems` (`name`,`ContestId`) VALUES
+	$query="INSERT INTO ".dbName.".`Problems` (`name`,`ContestId`) VALUES
 		('1',1),
 		('2',1),
 		('3',1),
@@ -211,11 +207,10 @@ function PopulateProblems() {
 }
 
 function PopulateUsers() {
-	global $dbServer, $dbUser, $dbPass, $dbName;
-	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query="INSERT INTO $dbName.`Users` (`user`,`passHash`) VALUES
+	$query="INSERT INTO ".dbName.".`Users` (`user`,`passHash`) VALUES
 		('Xamog','".passwordHash('meraviglioso')."'),
 		('LudoP','".passwordHash('yochicco')."'),
 		('dario2994','".passwordHash('acca')."'),
@@ -228,11 +223,10 @@ function PopulateUsers() {
 }
 
 function PopulateParticipations(){
-	global $dbServer, $dbUser, $dbPass, $dbName;
-	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 
-	$db->select_db($dbName) or die($db->error);
+	$db->select_db(dbName) or die($db->error);
 
 	$query="SELECT `id` FROM Contestants";
 	$result=$db->query($query) or die($db->error);
@@ -258,11 +252,10 @@ function PopulateParticipations(){
 }
 
 function PopulateCorrections(){
-	global $dbServer, $dbUser, $dbPass, $dbName;
-	$db=new mysqli ($dbServer,$dbUser,$dbPass);
+	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
-
-	$db->select_db($dbName) or die($db->error);
+	
+	$db->select_db(dbName) or die($db->error);
 
 	$query="SELECT `id` FROM Users;";
 	$result=$db->query($query) or die($db->error);
