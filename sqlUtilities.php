@@ -1,4 +1,14 @@
 <?php
+
+$TableInformation=array(
+	"Contestants" => array("id","name","surname"),
+	"Contests" => array("id","name","date"),
+	"Corrections" => array("id","ProblemId","ContestantId","mark","comment","UserId"),
+	"Participations" => array("id","ContestId","ContestantId"),
+	"Problems" => array("id","ContestId","name"),
+	"Users" => array("id","user","passHash"),
+);
+
 function escape_input($value)
 {
 	if (is_null($value)) $value="";
