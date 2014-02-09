@@ -33,6 +33,7 @@
     padding-bottom:20px;
     border-left: solid 1px black;
     border-right:solid 1px black;
+    min-height:50%;
 }
 
 body {

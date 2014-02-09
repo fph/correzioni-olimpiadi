@@ -4,6 +4,7 @@ require_once "../Utilities.php";
 SuperRequire_once("General", "dbCredentials.php");
 SuperRequire_once("General", "SessionManager.php");
 SuperRequire_once("General", "AskInformation.php");
+SuperRequire_once("General", "TemplateCreation.php");
 
 session_start();
 
@@ -17,7 +18,7 @@ if (!is_null($_POST["user"])) {
 	$UserId=VerifyCredentials($_POST["user"],$_POST["psw"]);
 	
 	if( $UserId == -1 ) {
-		SuperInclude("View", "Login.php" );
+		TemplatePage("Login.php","");
 	}
 	else {
 		StartSession($UserId);
@@ -25,5 +26,5 @@ if (!is_null($_POST["user"])) {
 		die();
 	}
 }
-else SuperInclude( "View","Login.php" );
+else TemplatePage("Login.php","");
 ?>

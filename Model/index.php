@@ -2,5 +2,5 @@
 	require_once "../Utilities.php";
 	SuperRequire_once("General","TemplateCreation.php");
 	
-	TemplatePage("index.php","UpperBar.php");
+	TemplatePage("index.php","ClassicUserBar.php");
 ?>
