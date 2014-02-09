@@ -1,13 +1,15 @@
 <head>
-  <link href="global.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		<?php include "global.css" ?>
+	</style>
 </head>
 <body>
 	<?php
-		include "UpperBar.php"
+		include $Bar
 	?>
 	<div id="internalBody">
 		<?php
-			include $_GET["Content"];
+			include $Content;
 		?>
 	</div>
 </body>
