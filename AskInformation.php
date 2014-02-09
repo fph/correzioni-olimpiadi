@@ -28,7 +28,7 @@
 		$result=$db->query($query) or die($db->error);
 		
 		if ($UserId=mysqli_fetch_array($result)['id']) return $UserId;
-		return 0;
+		return -1;
 	}
 	
 ?>

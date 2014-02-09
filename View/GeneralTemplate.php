@@ -7,7 +7,7 @@
 	?>
 	<div id="internalBody">
 		<?php
-			include $_GET["PageName"];
+			include $_GET["Content"];
 		?>
 	</div>
 </body>
