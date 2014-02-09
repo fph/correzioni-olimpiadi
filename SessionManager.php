@@ -1,11 +1,13 @@
 <?php
-	include_once "dbCredentials.php";
+	require_once "Utilities.php";
+	
+	SuperRequire_once("General","dbCredentials.php");
+	
 	function StartSession($UserId){
 		echo $UserId;
 		session_start();
 		$_SESSION["UserId"]=$UserId;
 		$_SESSION["LoginTimestamp"]=time();
-		header("Location: index.php");
 	}
 	
 	function EndSession(){
