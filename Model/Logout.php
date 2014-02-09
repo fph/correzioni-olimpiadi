@@ -1,5 +1,6 @@
 <?php
-	include_once "SessionManager.php";
+	require_once "../Utilities.php";
+	SuperRequire_once( "General" , "SessionManager.php" );
 	EndSession();
-	header("Location: Login.php");
+	SuperRedirect("Model","Login.php");
 ?>

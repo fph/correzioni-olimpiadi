@@ -1,5 +1,7 @@
 <?php
-	include_once "dbCredentials.php";
+	require_once "Utilities.php";
+	SuperRequire_once("General", "dbCredentials.php");
+	SuperRequire_once("General", "sqlUtilities.php");
 	
 	function AskCategory($category){
 		global $TableInformation;

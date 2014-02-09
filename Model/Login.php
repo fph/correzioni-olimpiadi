@@ -15,12 +15,14 @@ else {
 
 if (!is_null($_POST["user"])) {
 	$UserId=VerifyCredentials($_POST["user"],$_POST["psw"]);
+	
 	if( $UserId == -1 ) {
 		SuperInclude("View", "Login.php" );
 	}
 	else {
 		StartSession($UserId);
 		SuperRedirect("Model","index.php");
+		die();
 	}
 }
 else SuperInclude( "View","Login.php" );
