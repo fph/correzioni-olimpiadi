@@ -13,22 +13,5 @@
 		session_unset();
 		session_destroy();
 	}
-	
-	function VerifyCredentials($postUser, $postPsw){
-		$user=escape_input($postUser);
-		$psw=escape_input(passwordHash($postPsw));
-		
-		$db=new mysqli(dbServer, dbUser, dbPass);
-		if ($db->connect_errno) die($db->connect_error);
-		
-		$db->select_db(dbName);
-		$query="SELECT id FROM Users WHERE user=$user AND passHash=$psw";
-		$result=$db->query($query) or die($db->error);
-		
-		if ($UserId=mysqli_fetch_array($result)['id']) StartSession($UserId);
-		else {
-			echo "Username o password errati.\n";
-		}
-	}
 ?>
 
