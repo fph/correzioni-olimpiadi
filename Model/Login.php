@@ -7,11 +7,19 @@ SuperRequire_once("General", "TemplateCreation.php");
 
 $SessionStatus=CheckSession();
 
-if (!is_null($_POST["user"])) {
+if( CheckSession() == -1 ) {
+	TemplatePage("Login.php","SessionExpired_bar.php");
+	die();
+}
+else if( CheckSession() == 1 ) {
+	SuperRedirect("Model","index.php");
+	die();
+}
+else if ( CheckSession()==0 and !is_null($_POST["user"]) ) {
 	$UserId=VerifyCredentials($_POST["user"],$_POST["psw"]);
 	
 	if( $UserId == -1 ) {
-		TemplatePage("Login.php","");
+		TemplatePage("Login.php","LoginError_bar.php");
 	}
 	else {
 		StartSession($UserId,$_POST['user']);
@@ -19,5 +27,5 @@ if (!is_null($_POST["user"])) {
 		die();
 	}
 }
-else TemplatePage("Login.php","");
+else if( CheckSession()==0 ) TemplatePage("Login.php","");
 ?>
