@@ -1,23 +1,27 @@
 div.ContainerBar {
+	display: table;
     border: none;
     position: fixed;
     height: 50px;
     right: 0;
     left: 0;
-    vertical-align: middle;
-    margin-bottom: 0;
     z-index: 1000;
-    display: block;
     top: 0;
+    width: 100%;
 }
 
 div.innerBar {
-    margin: 0 auto;
-    margin-top:10px;
+	margin-left: auto;
+	margin-right:auto;
     width: 80%;
     padding: 6px 12px;
+    text-align: center;
 }
 
+div#floater {
+	display: table-cell;
+	vertical-align: middle;
+}
 
 #ClassicUser_ContainerBar {
     background: aliceblue;
@@ -25,6 +29,10 @@ div.innerBar {
 
 #logout {
 	float: right;
+}
+
+#username {
+	float: left;
 }
 
 #internalBody {
@@ -41,6 +49,13 @@ div.innerBar {
 }
 
 #LoginError_ContainerBar {
+	 background: red;
+	 font-weight: bold;
+	 color: white;
+	 font-size: large;
+}
+
+#SessionExpired_ContainerBar {
 	 background: red;
 }
 
