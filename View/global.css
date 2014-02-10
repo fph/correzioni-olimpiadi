@@ -16,6 +16,7 @@ div.innerBar {
     width: 80%;
     padding: 6px 12px;
     text-align: center;
+    overflow: hidden;
 }
 
 div#floater {
