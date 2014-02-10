@@ -16,9 +16,9 @@
 	
 	function CheckSession() {
 		session_start();
-		if ( !isset($_SESSION["UserId"]) ) return 1;
+		if ( !isset($_SESSION["UserId"]) ) return 0;
 		if ( time()-$_SESSION["LoginTimestamp"]>3600 ) return -1;
-		return 0;
+		return 1;
 	}
 ?>
 
