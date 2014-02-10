@@ -15,11 +15,5 @@
 	$v_contestant=RequestById('Contestants',$contestId);
 	$v_corrections=AskParticipation($contestId,$contestantId);
 	
-	//~ foreach ($v_corrections as $cor) {
-		//~ echo $cor["Problem"]." ";
-		//~ if ($cor["done"]) echo $cor["User"];
-		//~ echo "<br>";
-	//~ }
-	
 	TemplatePage("ViewParticipation.php","ClassicUser");
 ?>
