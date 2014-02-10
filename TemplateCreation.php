@@ -1,7 +1,20 @@
 <?php
 require_once "Utilities.php";
 
-function TemplatePage($Content, $Bar){
+SuperRequire_once("General","SessionManager.php");
+
+function TemplatePage($Content, $Bar, $IsSessionToBeChecked=1 ){
+	if( $IsSessionToBeChecked ){
+		$SessionSituation=CheckSession();
+		if( $SessionSituation==-1 ) {
+			SuperRedirect("Model","Login.php");
+			die();
+		}
+		else if( $SessionSituation==0 ) {
+			SuperRedirect("Model","Login.php");
+			die();
+		}
+	}
 	echo '<head> <style type="text/css">';
 	SuperInclude("View","global.css");
 	echo '</style></head><body>';

@@ -8,7 +8,7 @@ SuperRequire_once("General", "TemplateCreation.php");
 $SessionStatus=CheckSession();
 
 if( CheckSession() == -1 ) {
-	TemplatePage("Login.php","SessionExpired");
+	TemplatePage("Login.php","SessionExpired",0);
 	die();
 }
 else if( CheckSession() == 1 ) {
@@ -19,7 +19,7 @@ else if ( CheckSession()==0 and !is_null($_POST["user"]) ) {
 	$UserId=VerifyCredentials($_POST["user"],$_POST["psw"]);
 	
 	if( $UserId == -1 ) {
-		TemplatePage("Login.php","LoginError");
+		TemplatePage("Login.php","LoginError",0);
 	}
 	else {
 		StartSession($UserId,$_POST['user']);
@@ -27,5 +27,5 @@ else if ( CheckSession()==0 and !is_null($_POST["user"]) ) {
 		die();
 	}
 }
-else if( CheckSession()==0 ) TemplatePage("Login.php","");
+else if( CheckSession()==0 ) TemplatePage("Login.php","",0);
 ?>
