@@ -63,10 +63,50 @@ div#floater {
 body {
 	background: #F6F4F0;
 	margin: 0;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
-table,th, td {
-	border: 1px solid gray;
-	border-spacing: 2px;
-	border-color: gray;
+
+table.InformationTable table,thead,th,tbody,td {
+	border-collapse: collapse;
+	font-size: 15px;
+	text-align: left;
+}
+
+table.InformationTable th {
+	color: #039;
+	border-bottom: 2px solid #6678b1;
+	padding: 5px 5px;
+}
+
+table.InformationTable td {
+	color: #039;
+	border-bottom: 1px solid #ECF3FA;
+	padding: 5px 5px;
+}
+
+table.InformationTable td:nth-child(1) {
+	min-width: 100px;
+}
+
+table.InformationTable td:nth-child(2) {
+	min-width: 50px;
+}
+
+table.InformationTable td:nth-child(3) {
+	min-width: 300px;
+}
+
+table.InformationTable td:nth-child(4) {
+	min-width: 100px;
+}
+
+#contest {
+	font-size: 20px;
+	margin: 10px;
+}
+
+#contestant {
+	font-size: 15px;
+	margin: 10px;
 }

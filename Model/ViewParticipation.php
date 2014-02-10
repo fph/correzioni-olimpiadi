@@ -5,8 +5,7 @@
 	SuperRequire_once("General","AskInformation.php");
 	SuperRequire_once("General", "TemplateCreation.php");
 	
-	//~ $participationId=$_POST["participationId"];  //Riga commentata per il test
-	$participationId=1;
+	$participationId=$_GET["participationId"]; 
 	
 	$contestId=ContestByParticipation($participationId);
 	$contestantId=ContestantByParticipation($participationId);

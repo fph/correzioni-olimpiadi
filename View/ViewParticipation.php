@@ -2,6 +2,7 @@
 global $v_corrections, $v_contestant, $v_contest_name;
 ?>
 
+
 <div id="contest">
 <?php
 	echo $v_contest_name."<br>";
@@ -14,26 +15,29 @@ global $v_corrections, $v_contestant, $v_contest_name;
 ?>
 </div>
 
-<table id="participationTable">
-	<tr>
+<table class="InformationTable" id="participationTable">
+	<thead><tr>
 		<th>Problem</th>
-		<th>Mark</th>
-		<th>Comment</th>
-		<th>User</th>
-	</tr>
+		<th class='markColumn'>Mark</th>
+		<th class='commentColumn'>Comment</th>
+		<th class='userColumn'>User</th>
+	</tr></thead>
+	
+	<tbody>
 	<?php
 		foreach($v_corrections as $cor) {
-			echo "<tr><td>".$cor["Problem"]."</td>";
+			echo "<tr><td class='problemColumn'>".$cor["Problem"]."</td>";
 			if ($cor["done"]) {
-				echo "<td>".$cor["mark"]."</td>";
-				echo "<td>".$cor["comment"]."</td>";
-				echo "<td>".$cor["User"]."</td>";
+				echo "<td class='markColumn'>".$cor["mark"]."</td>";
+				echo "<td class='commentColumn'>".$cor["comment"]."</td>";
+				echo "<td class='userColumn'>".$cor["User"]."</td>";
 			}
 			else {
-				echo "<td>//</td><td>//</td><td>//</td>";
+				echo "<td class='markColumn'>//</td><td class='commentColumn'>//</td><td class='userColumn'>//</td>";
 			}
 			echo "</tr>";
 		}
 	?>
-
+	</tbody>
+	
 </table>
