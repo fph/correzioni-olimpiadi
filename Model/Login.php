@@ -5,13 +5,7 @@ SuperRequire_once("General", "SessionManager.php");
 SuperRequire_once("General", "AskInformation.php");
 SuperRequire_once("General", "TemplateCreation.php");
 
-session_start();
-
-if (!isset($_SESSION["UserId"]) or time()-$_SESSION["LoginTimestamp"]>3600) EndSession();
-else {
-	SuperRedirect("Model","index.php");
-	die();
-}
+$SessionStatus=CheckSession();
 
 if (!is_null($_POST["user"])) {
 	$UserId=VerifyCredentials($_POST["user"],$_POST["psw"]);
@@ -20,7 +14,7 @@ if (!is_null($_POST["user"])) {
 		TemplatePage("Login.php","");
 	}
 	else {
-		StartSession($UserId);
+		StartSession($UserId,$_POST['user']);
 		SuperRedirect("Model","index.php");
 		die();
 	}
