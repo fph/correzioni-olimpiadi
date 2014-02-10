@@ -93,7 +93,7 @@
 		
 		$query="SELECT id FROM ".dbName.".Permissions WHERE UserId={$UserId} AND ContestId={$ContestId};";
 		$result=$db->query($query) or die($db->error);
-		if( is_null( mysqli_fetch_array($result) ) return 0;
+		if( is_null( mysqli_fetch_array($result) ) ) return 0;
 		else return 1;
 	}
 ?>
