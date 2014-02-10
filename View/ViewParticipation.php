@@ -14,12 +14,26 @@ global $v_corrections, $v_contestant, $v_contest_name;
 ?>
 </div>
 
-<?php
-foreach ($v_corrections as $cor) {
-	echo $cor["Problem"]." ";
-	if ($cor["done"]) {
-		echo $cor["mark"]." ".$cor["comment"]." ".$cor["User"]."<br>";
-	}
-	else echo "Non ancora corretto <br>";
-}
-?>
+<table id="participationTable">
+	<tr>
+		<th>Problem</th>
+		<th>Mark</th>
+		<th>Comment</th>
+		<th>User</th>
+	</tr>
+	<?php
+		foreach($v_corrections as $cor) {
+			echo "<tr><td>".$cor["Problem"]."</td>";
+			if ($cor["done"]) {
+				echo "<td>".$cor["mark"]."</td>";
+				echo "<td>".$cor["comment"]."</td>";
+				echo "<td>".$cor["User"]."</td>";
+			}
+			else {
+				echo "<td>//</td><td>//</td><td>//</td>";
+			}
+			echo "</tr>";
+		}
+	?>
+
+</table>
