@@ -21,5 +21,5 @@
 		//~ echo "<br>";
 	//~ }
 	
-	TemplatePage("ViewParticipation.php","ClassicUse_bar.php");
+	TemplatePage("ViewParticipation.php","ClassicUser");
 ?>
