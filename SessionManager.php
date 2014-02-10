@@ -1,8 +1,6 @@
 <?php
 	require_once "Utilities.php";
 	
-	SuperRequire_once("General","dbCredentials.php");
-	
 	function StartSession($UserId){
 		session_start();
 		$_SESSION["UserId"]=$UserId;

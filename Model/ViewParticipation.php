@@ -2,7 +2,6 @@
 	
 	require_once "../Utilities.php";
 	SuperRequire_once("General","sqlUtilities.php");
-	SuperRequire_once("General","dbCredentials.php");
 	
 	echo 1;
 	
