@@ -32,32 +32,52 @@
 		return -1;
 	}
 	
-	function AskParticipation($participation){
+	function RequestById($table,$id){ //Richiede la info corrispondenti a quell'id
+		$db=new mysqli(dbServer, dbUser, dbPass);
+		if ($db->connect_errno) die($db->connect_error);
+		$db->select_db(dbName);
+		
+		$query="SELECT * FROM {$table} WHERE id={$id}";
+		$result=$db->query($query) or die($db->error);
+		return mysqli_fetch_array($result);
+	}
+	
+	function ContestByParticipation($participationId){
+		$res=RequestById("Participations",$participationId);
+		return $res["ContestId"];
+	}
+	
+	function ContestantByParticipation($participationId){
+		$res=RequestById('Participations',$participationId);
+		return $res["ContestantId"];
+	}
+	
+	function AskParticipation($contestId,$contestantId){
 		
 		$db=new mysqli(dbServer, dbUser, dbPass);
 		if ($db->connect_errno) die($db->connect_error);
-		
-		//Dato l'id della partecipazione ottiene gli id di Contest e Contestant
 		$db->select_db(dbName);
-		$query="SELECT * FROM Participations WHERE id={$participation}";
-		$result=$db->query($query) or die($db->error);
-		
-		$res=mysqli_fetch_array($result);
-		$contest=escape_input($res["ContestId"]); //id del contest 
-		$contestant=escape_input($res["ContestantId"]); //id del contestant
 		
 		//Mette nell'array problems le informazioni sui problemi della gara selezionata
-		$query="SELECT * FROM Problems WHERE ContestId=$contest";
+		$query="SELECT * FROM Problems WHERE ContestId={$contestId}";
 		$result=$db->query($query) or die($db->error);
-		
 		$problems=array();
 		while ($row=mysqli_fetch_array($result)) array_push($problems,$row);
 		
 		$corrections=array();
 		foreach ($problems as $prob) {
-			$query="SELECT * FROM Corrections WHERE ContestantId={$contestant} AND ProblemId={$prob['id']}";
+			$query="SELECT * FROM Corrections WHERE ContestantId={$contestantId} AND ProblemId={$prob['id']}";
 			$result=$db->query($query) or die($db->error);
-			array_push($corrections, mysqli_fetch_array($result));
+			$nn=mysqli_fetch_array($result);
+			if ($nn==NULL) {
+				$nn["done"]=false;
+			}
+			else {
+				$nn["done"]=true;
+				$nn["User"]=RequestById("Users",$nn["UserId"])["user"];
+			}
+			$nn["Problem"]=RequestById("Problems",$prob["id"])["name"];
+			array_push($corrections, $nn);
 		}
 		return $corrections;
 	}
