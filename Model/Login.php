@@ -8,6 +8,7 @@ SuperRequire_once("General", "TemplateCreation.php");
 $SessionStatus=CheckSession();
 
 if( CheckSession() == -1 ) {
+	EndSession();
 	TemplatePage("Login.php","SessionExpired",0);
 	die();
 }
