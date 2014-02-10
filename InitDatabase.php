@@ -1,5 +1,6 @@
 <?php
 require_once "Utilities.php";
+SuperRequire_once("General","sqlUtilities.php");
 
 function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
@@ -24,9 +25,21 @@ function CreateDatabase() {
 		UNIQUE KEY(`user`)
 	) ENGINE=InnoDB;';
 	$db->query($query) or die($db->error);
-
+	
 	echo "Table Users created.\n";
-
+	
+	$query=
+	'CREATE TABLE IF NOT EXISTS `Administrators` (
+		`UserId` int NOT NULL,
+		PRIMARY KEY (`UserId`),
+		
+		FOREIGN KEY (`UserId`) REFERENCES Users(`id`)
+			ON DELETE CASCADE ON UPDATE CASCADE
+	) ENGINE=InnoDB;';
+	$db->query($query) or die($db->error);
+	
+	echo "Table Administrators created.\n";
+	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Contests` (
 		`id` int NOT NULL AUTO_INCREMENT,
@@ -39,6 +52,25 @@ function CreateDatabase() {
 
 	echo "Table Contests created.\n";
 
+	$query=
+	'CREATE TABLE IF NOT EXISTS `Permissions` (
+		`id` int NOT NULL AUTO_INCREMENT,
+		`UserId` int NOT NULL,
+		`ContestId` int NOT NULL,
+		
+		PRIMARY KEY (`id`),
+		KEY (`UserId`),
+		KEY (`ContestId`),
+		
+		FOREIGN KEY (`UserId`) REFERENCES Users(`id`)
+			ON DELETE CASCADE ON UPDATE CASCADE,
+		FOREIGN KEY (`ContestId`) REFERENCES Contests(`id`)
+			ON DELETE CASCADE ON UPDATE CASCADE
+	) ENGINE=InnoDB;';
+	$db->query($query) or die($db->error);
+	
+	echo "Table Permissions created.\n";
+	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Contestants` (
 		`id` int NOT NULL AUTO_INCREMENT,
@@ -114,6 +146,81 @@ function CreateDatabase() {
 	$db->close();
 }
 
+function PopulateUsers() {
+	$db=new mysqli (dbServer, dbUser, dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+	
+	//~ echo "CIAO";
+	
+	$query="INSERT INTO ".dbName.".`Users` (`user`,`passHash`) VALUES
+		('Xamog','".passwordHash('meraviglioso')."'),
+		('LudoP','".passwordHash('yochicco')."'),
+		('dario2994','".passwordHash('acca')."'),
+		('fph','".passwordHash('pizzica')."'),
+		('SimoTheWolf','".passwordHash('vero o falso?')."');";
+	//~ echo $query;
+	$db->query($query) or die($db->error);
+	$db->close();
+
+	echo "Table Users Populated.\n";
+}
+
+function PopulateAdministrators() {
+	$db=new mysqli (dbServer, dbUser, dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+	
+	$query="SELECT id FROM ".dbName.".Users WHERE user='dario2994';";
+	//~ echo $query;
+	$dario2994_id=$db->query($query) or die($db->error);
+	$query="INSERT INTO ".dbName.".Administrators (UserId) VALUES (".mysqli_fetch_array($dario2994_id)['id'].");";
+	$db->query($query) or die($db->error);
+	$db->close();
+
+	echo "Table Users Populated.\n";
+}
+
+function PopulateContests() {
+	$db=new mysqli (dbServer, dbUser, dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+	
+	$query="INSERT INTO ".dbName.".`Contests` (`name`) VALUES
+		('Senior 2013'),
+		('WinterCamp 2011 Ammissione'),
+		('Preimo 2010 TST giorno 1'),
+		('Preimo 2010 TST giorno 2'),
+		('IMO 2013 day1'),
+		('Senior 2012 Test Iniziale');";
+	$db->query($query) or die($db->error);
+	$db->close();
+
+	echo "Table Contests Populated.\n";
+}
+
+function PopulatePermissions(){
+	$db=new mysqli (dbServer, dbUser, dbPass);
+	if($db->connect_errno) die ($db->connect_error);
+	
+	$query="SELECT id FROM ".dbName.".Users";
+	$UsersResult=$db->query($query) or die($db->error);
+	$n=0;
+	$Users=[];
+	while($Users[$n]=mysqli_fetch_array($UsersResult)['id'])$n++;
+	
+	$query="SELECT id FROM ".dbName.".Contests";
+	$Contests=$db->query($query) or die($db->error);
+	
+	while($Contest=mysqli_fetch_array($Contests)['id']) {
+		$m=mt_rand(0,$n);
+		for($i=0;$i<$m;$i++) {
+			$query="INSERT INTO ".dbName.".Permissions (UserId,ContestId) VALUES (".$Users[$i].",".$Contest.");";
+			$db->query($query) or die($db->error);
+		}
+	}
+	$db->close();
+
+	echo "Table Permissions Populated.\n";
+}
+
 function PopulateContestants() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
@@ -141,21 +248,33 @@ function PopulateContestants() {
 	echo "Table Contestants Populated.\n";
 }
 
-function PopulateContests() {
+function PopulateParticipations(){
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
-	
-	$query="INSERT INTO ".dbName.".`Contests` (`name`) VALUES
-		('Senior 2013'),
-		('WinterCamp 2011 Ammissione'),
-		('Preimo 2010 TST giorno 1'),
-		('Preimo 2010 TST giorno 2'),
-		('IMO 2013 day1'),
-		('Senior 2012 Test Iniziale');";
-	$db->query($query) or die($db->error);
-	$db->close();
 
-	echo "Table Contests Populated.\n";
+	$db->select_db(dbName) or die($db->error);
+
+	$query="SELECT `id` FROM Contestants";
+	$result=$db->query($query) or die($db->error);
+	$n=0;
+	$Contestants=[];
+	while( $Contestants[$n] = mysqli_fetch_array($result)['id'] ) $n++;
+	
+	$query="SELECT `id` FROM Contests;";
+	$result=$db->query($query) or die($db->error);
+	while ( $row = mysqli_fetch_array($result) ) {
+		$ContestId=$row['id'];
+		$q=mt_rand(0,$n);
+		//~ echo "$ContestId $q\n";
+		for($i=0;$i<$q;$i++) {
+			if(mt_rand(1,10)>=7) continue;
+			
+			$query="INSERT INTO `Participations` (ContestId,ContestantId) VALUES ($ContestId,$Contestants[$i]);";
+			$db->query($query) or die($db->error);
+		}
+	}
+
+	echo "Table Participations Populated.\n";
 }
 
 function PopulateProblems() {
@@ -206,51 +325,6 @@ function PopulateProblems() {
 	echo "Table Problems Populated.\n";
 }
 
-function PopulateUsers() {
-	$db=new mysqli (dbServer, dbUser, dbPass);
-	if($db->connect_errno) die ($db->connect_error);
-	
-	$query="INSERT INTO ".dbName.".`Users` (`user`,`passHash`) VALUES
-		('Xamog','".passwordHash('meraviglioso')."'),
-		('LudoP','".passwordHash('yochicco')."'),
-		('dario2994','".passwordHash('acca')."'),
-		('fph','".passwordHash('pizzica')."'),
-		('SimoTheWolf','".passwordHash('vero o falso?')."');";
-	$db->query($query) or die($db->error);
-	$db->close();
-
-	echo "Table Users Populated.\n";
-}
-
-function PopulateParticipations(){
-	$db=new mysqli (dbServer, dbUser, dbPass);
-	if($db->connect_errno) die ($db->connect_error);
-
-	$db->select_db(dbName) or die($db->error);
-
-	$query="SELECT `id` FROM Contestants";
-	$result=$db->query($query) or die($db->error);
-	$n=0;
-	$Contestants=[];
-	while( $Contestants[$n] = mysqli_fetch_array($result)['id'] ) $n++;
-	
-	$query="SELECT `id` FROM Contests;";
-	$result=$db->query($query) or die($db->error);
-	while ( $row = mysqli_fetch_array($result) ) {
-		$ContestId=$row['id'];
-		$q=mt_rand(0,$n);
-		//~ echo "$ContestId $q\n";
-		for($i=0;$i<$q;$i++) {
-			if(mt_rand(1,10)>=7) continue;
-			
-			$query="INSERT INTO `Participations` (ContestId,ContestantId) VALUES ($ContestId,$Contestants[$i]);";
-			$db->query($query) or die($db->error);
-		}
-	}
-
-	echo "Table Participations Populated.\n";
-}
-
 function PopulateCorrections(){
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
@@ -298,11 +372,16 @@ function PopulateCorrections(){
 }
 
 CreateDatabase();
-PopulateContestants();
-PopulateContests();
-PopulateProblems();
+
 PopulateUsers();
+PopulateAdministrators();
+PopulateContests();
+PopulatePermissions();
+PopulateContestants();
 PopulateParticipations();
+PopulateProblems();
 PopulateCorrections();
+
+echo "THE DATABASE IS COMPLETELY INITIALIZED!\n";
 
 ?>
