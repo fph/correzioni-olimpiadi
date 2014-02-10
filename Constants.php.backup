@@ -1,0 +1,8 @@
+<?php
+define('dbServer','192.168.15.170');
+define('dbUser','Olimpiadi');
+define('dbPass','alfabeto');
+define('dbName','CorOli');
+define('ServerRoot','/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-olimpiadi');
+define('urlRoot','/~dario2994/correzioni-olimpiadi');
+?>

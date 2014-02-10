@@ -1,4 +1,5 @@
 <?php
+	require_once "Constants.php";
 	
 	function GenerateAbsolutePath($type,$path) {
 		if( $type == "Model" ) return "/Model/$path";
@@ -7,12 +8,11 @@
 	}
 	
 	function GenerateIncludePath($type,$path){
-		$ServerRoot="/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-olimpiadi";
-		return $ServerRoot.GenerateAbsolutePath($type,$path);
+		return ServerRoot.GenerateAbsolutePath($type,$path);
 	}
 	
 	function GenerateUrl($type,$path) {
-		return "/~dario2994/correzioni-olimpiadi".GenerateAbsolutePath($type,$path);
+		return urlRoot.GenerateAbsolutePath($type,$path);
 	}
 	
 	function SuperInclude($type, $path) {
