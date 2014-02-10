@@ -4,6 +4,8 @@
 	SuperRequire_once("General","sqlUtilities.php");
 	SuperRequire_once("General","dbCredentials.php");
 	
+	echo 1;
+	
 	//~ $participation=escape_input($_POST["ParticipationId"]);
 	$participation=escape_input('1');
 	
