@@ -108,14 +108,3 @@ table.InformationTable td:nth-child(5) {
 	color:#FFAD33;
 	background-color:#ffffff;
 }
-
-
-#contest {
-	font-size: 20px;
-	margin: 10px;
-}
-
-#contestant {
-	font-size: 15px;
-	margin: 10px;
-}

@@ -96,4 +96,52 @@
 		if( is_null( mysqli_fetch_array($result) ) ) return 0;
 		else return 1;
 	}
+	
+	function ProblemsByContest($contestId){
+		$db=new mysqli(dbServer, dbUser, dbPass);
+		if ($db->connect_errno) die($db->connect_error);
+		$db->select_db(dbName);
+		
+		//Mette nell'array problems le informazioni sui problemi della gara selezionata
+		$query="SELECT * FROM Problems WHERE ContestId={$contestId}";
+		$result=$db->query($query) or die($db->error);
+		$problems=array();
+		while ($row=mysqli_fetch_array($result)) array_push($problems,$row);
+		return $problems;
+	}
+	
+	function ContestantsByContest($contestId){
+		$db=new mysqli(dbServer, dbUser, dbPass);
+		if ($db->connect_errno) die($db->connect_error);
+		$db->select_db(dbName);
+		
+		//Mette nell'array problems le informazioni sui problemi della gara selezionata
+		$query="SELECT * FROM Contestants WHERE ContestId={$contestId}";
+		$result=$db->query($query) or die($db->error);
+		$contestants=array();
+		while ($row=mysqli_fetch_array($result)) array_push($contestants,$row);
+		return $contestants;
+	}
+	
+	function AskProblem($problemId) {
+		$db=new mysqli(dbServer, dbUser, dbPass);
+		if ($db->connect_errno) die($db->connect_error);
+		$db->select_db(dbName);
+		
+		$corrections=array();
+		$query="SELECT * FROM Corrections WHERE ProblemId={$prob['id']}";
+		$result=$db->query($query) or die($db->error);
+		$nn=mysqli_fetch_array($result);
+		if ( is_null($nn) ) {
+			$nn["done"]=false;
+		}
+		else {
+			$nn["done"]=true;
+			$nn["User"]=RequestById("Users",$nn["UserId"])["user"];
+			$nn["Contestant"]=RequestById("Contestants",$nn["ContestantId"]);
+		}
+		array_push($corrections, $nn);
+		
+		return $corrections;
+	}
 ?>
