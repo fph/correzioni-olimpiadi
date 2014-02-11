@@ -17,7 +17,7 @@ global $v_corrections, $v_contestant, $v_contest_name;
 
 <table class="InformationTable" id="participationTable">
 	<thead><tr>
-		<th>Problem</th>
+		<th class='problemColumn'>Problem</th>
 		<th class='markColumn'>Mark</th>
 		<th class='commentColumn'>Comment</th>
 		<th class='userColumn'>User</th>
