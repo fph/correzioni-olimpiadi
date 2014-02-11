@@ -2,6 +2,11 @@
 global $v_contest, $v_contestants;
 ?>
 
+<script>
+	function Redirect() {
+		document.location="ViewProblem.php?problemId=35";
+	}
+</script>
 
 <div id="contest">
 <?php
@@ -18,7 +23,7 @@ global $v_contest, $v_contestants;
 	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
-			echo "<tr class='trlink'>";
+			echo "<tr class='trlink' onclick=Redirect()>";
 			echo "<td class='nameColumn'>".$con["name"]."</td>";
 			echo "<td class='surnameColumn'>".$con["surname"]."</td>";
 			echo "</tr>";

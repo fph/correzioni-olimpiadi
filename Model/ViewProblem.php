@@ -5,7 +5,7 @@
 	SuperRequire_once("General","AskInformation.php");
 	SuperRequire_once("General", "TemplateCreation.php");
 	
-	$problemId=$_GET["problemId"]; 
+	$problemId=escape_input($_GET["problemId"]); 
 	$problem=RequestById("Problems",$problemId);
 	
 	$v_problem=$problem["name"];
