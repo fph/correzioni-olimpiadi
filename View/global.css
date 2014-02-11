@@ -14,7 +14,6 @@ div.innerBar {
 	margin-left: auto;
 	margin-right:auto;
     width: 80%;
-    padding: 6px 12px;
     overflow: hidden;
 }
 
@@ -107,4 +106,15 @@ table.InformationTable td:nth-child(5) {
 .modifyButton:hover {
 	color:#FFAD33;
 	background-color:#ffffff;
+}
+
+
+#contest {
+	font-size: 20px;
+	margin: 10px;
+}
+
+#contestant {
+	font-size: 15px;
+	margin: 10px;
 }

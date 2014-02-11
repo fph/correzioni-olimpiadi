@@ -6,6 +6,8 @@
 	float: right;
 }
 
-#username {
+#UserNameLink {
+	text-decoration: none;
+	font-weight: bold;
 	float: left;
 }
