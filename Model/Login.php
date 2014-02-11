@@ -2,7 +2,9 @@
 require_once "../Utilities.php";
 
 SuperRequire_once("General", "SessionManager.php");
+echo 1;
 SuperRequire_once("General", "AskInformation.php");
+echo 2;
 SuperRequire_once("General", "TemplateCreation.php");
 
 $SessionStatus=CheckSession();

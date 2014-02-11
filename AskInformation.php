@@ -2,19 +2,23 @@
 	require_once "Utilities.php";
 	SuperRequire_once("General", "sqlUtilities.php");
 	
-	function AskCategory($category){
+	//~ function RequestFromTable($tableName, $info, $data) {
+		//~ $query="SELECT ".$info." FROM ".dbName.".".$tableName." WHERE ";
+	//~ }
+	
+	function AskWholeTable($table){
 		global $TableInformation;
 		$db=new mysqli(dbServer, dbUser, dbPass);
 		if ($db->connect_errno) die($db->connect_error);
 		
 		$db->select_db(dbName);
-		$query="SELECT * FROM $category";
+		$query='SELECT * FROM '.$table;
 		$result=$db->query($query) or die($db->error);
 		
-		while ($row=mysqli_fetch_array($result)) {
-			foreach ($TableInformation[$category] as $v) echo $row[$v]." ";
-			echo "<br>";
-		}
+		$resultArray=[];
+		$n=0;
+		while ($resultArray[$n]=mysqli_fetch_array($result)) $n++;
+		return ['len'=>$n, 'list'=>$resultArray];
 	}
 	
 	function VerifyCredentials($postUser, $postPsw){
@@ -37,7 +41,8 @@
 		if ($db->connect_errno) die($db->connect_error);
 		$db->select_db(dbName);
 		
-		$query="SELECT * FROM {$table} WHERE id={$id}";
+		$query="SELECT * FROM {$table} WHERE id=".escape_input($id);
+		echo $query." ";
 		$result=$db->query($query) or die($db->error);
 		return mysqli_fetch_array($result);
 	}
@@ -59,7 +64,7 @@
 		$db->select_db(dbName);
 		
 		//Mette nell'array problems le informazioni sui problemi della gara selezionata
-		$query="SELECT * FROM Problems WHERE ContestId={$contestId}";
+		$query="SELECT * FROM Problems WHERE ContestId=".escape_input($contestId);
 		$result=$db->query($query) or die($db->error);
 		$problems=array();
 		while ($row=mysqli_fetch_array($result)) array_push($problems,$row);
@@ -148,4 +153,9 @@
 		
 		return $corrections;
 	}
+	
+	//~ function ChangeUsername($NewUser,$UserId) {
+		//~ escape_input($NewUser);
+	//~ }
+	
 ?>
