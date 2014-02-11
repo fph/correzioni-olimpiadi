@@ -48,8 +48,7 @@
 	function ManyResultQuery($db, $query) {
 		$result=$db->query($query) or die($db->error);
 		$arr=[];
-		$n=0;
-		while($arr[$n]=mysqli_fetch_array($result))$n++;
+		while($x=mysqli_fetch_array($result)) $arr[]=$x;
 		return $arr;
 	}
 	
