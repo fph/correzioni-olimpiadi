@@ -32,7 +32,7 @@
 		return -1;
 	}
 	
-	function RequestById($table,$id){ //Richiede la info corrispondenti a quell'id
+	function RequestById($table,$id){ //Richiede la info corrispondenti a quell'id, returns null if there isn't any corresponding id 
 		$db=new mysqli(dbServer, dbUser, dbPass);
 		if ($db->connect_errno) die($db->connect_error);
 		$db->select_db(dbName);
