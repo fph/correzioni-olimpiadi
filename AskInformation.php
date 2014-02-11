@@ -129,7 +129,7 @@
 		$db->select_db(dbName);
 		
 		$corrections=array();
-		$query="SELECT * FROM Corrections WHERE ProblemId={$prob['id']}";
+		$query="SELECT * FROM Corrections WHERE ProblemId={$problemId}";
 		$result=$db->query($query) or die($db->error);
 		$nn=mysqli_fetch_array($result);
 		if ( is_null($nn) ) {

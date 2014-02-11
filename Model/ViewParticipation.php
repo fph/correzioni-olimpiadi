@@ -14,5 +14,5 @@
 	$v_contestant=RequestById('Contestants',$contestId);
 	$v_corrections=AskParticipation($contestId,$contestantId);
 	
-	TemplatePage("ViewParticipation.php","ClassicUser");
+	TemplatePage("ViewParticipation","ClassicUser");
 ?>

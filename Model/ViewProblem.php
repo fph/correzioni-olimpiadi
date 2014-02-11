@@ -6,9 +6,11 @@
 	SuperRequire_once("General", "TemplateCreation.php");
 	
 	$problemId=$_GET["problemId"]; 
+	$problem=RequestById("Problems",$problemId);
 	
-	$v_problem=RequestById($problemId);
+	$v_problem=$problem["name"];
+	$v_contest=RequestById("Contests",$problem["ContestId"])["name"];
 	$v_corrections=AskProblem($problemId);
 	
-	TemplatePage("ViewProblem.php","ClassicUser");
+	TemplatePage("ViewProblem","ClassicUser");
 ?>
