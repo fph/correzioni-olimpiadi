@@ -1,0 +1,11 @@
+#ClassicUser_ContainerBar {
+    background: aliceblue;
+}
+
+#logout {
+	float: right;
+}
+
+#username {
+	float: left;
+}

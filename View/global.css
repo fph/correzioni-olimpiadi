@@ -2,7 +2,7 @@ div.ContainerBar {
 	display: table;
     border: none;
     position: fixed;
-    height: 50px;
+    height: 35px;
     right: 0;
     left: 0;
     z-index: 1000;
@@ -15,28 +15,15 @@ div.innerBar {
 	margin-right:auto;
     width: 80%;
     padding: 6px 12px;
-    text-align: center;
     overflow: hidden;
 }
 
-div#floater {
+div.ContainerBar #floater {
 	display: table-cell;
 	vertical-align: middle;
 }
 
-#ClassicUser_ContainerBar {
-    background: aliceblue;
-}
-
-#logout {
-	float: right;
-}
-
-#username {
-	float: left;
-}
-
-#internalBody {
+div.internalBody {
     width: 80%;
     background: white;
     margin: 0 auto;
@@ -47,17 +34,6 @@ div#floater {
     border-left: solid 1px black;
     border-right:solid 1px black;
     min-height:50%;
-}
-
-#LoginError_ContainerBar {
-	 background: red;
-	 font-weight: bold;
-	 color: white;
-	 font-size: large;
-}
-
-#SessionExpired_ContainerBar {
-	 background: red;
 }
 
 body {

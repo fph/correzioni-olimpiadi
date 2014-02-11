@@ -17,14 +17,16 @@ function TemplatePage($Content, $Bar, $IsSessionToBeChecked=1 ){
 	}
 	echo '<head> <style type="text/css">';
 	SuperInclude("View","global.css");
+	SuperInclude("View",$Bar."_bar.css");
+	SuperInclude("View",$Content.".css");
 	echo '</style></head><body>';
 	echo 	'<div class="ContainerBar" id="'.$Bar.'_ContainerBar">
 				<div id="Floater">
 					<div class="innerBar">';
 						SuperInclude("View",$Bar."_bar.php");
 	echo '</div></div></div>';
-	echo '<div id="internalBody">';
-	SuperInclude("View",$Content);
+	echo '<div class="internalBody" id="'.$Content.'_InternalBody">';
+	SuperInclude("View",$Content.".php");
 	echo '</div></body>';
 }
 
