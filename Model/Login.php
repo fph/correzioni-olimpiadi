@@ -24,9 +24,10 @@ else if( CheckSession() == 1 ) {
 else if ( CheckSession()==0 and !is_null($_POST["user"]) ) {
 	$db=OpenDbConnection();
 	$UserId=OneResultQuery($db, QuerySelect('Users',
-	['user'=>$_POST['user'],'passHash'=>passwordHash( $_POST['passHash'] )],
-	['UserId']
-	) ) ['UserId'];
+	['user'=>$_POST['user'],'passHash'=>passwordHash( $_POST['password'] )],
+	['id']
+	) ) ['id'];
+	
 	$db->close();
 	
 	if( is_null($UserId) ) {

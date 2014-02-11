@@ -23,7 +23,7 @@
 			}
 		}
 		else $query.='* ';
-		$query.=" FROM ".dbName.".".$tableName.' ';
+		$query.=' FROM '.$tableName.' ';
 		
 		if( !is_null( $data ) ) {
 			$query .='WHERE ';
