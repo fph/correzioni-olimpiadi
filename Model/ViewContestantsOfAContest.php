@@ -5,11 +5,11 @@
 	SuperRequire_once("General","AskInformation.php");
 	SuperRequire_once("General", "TemplateCreation.php");
 	
-	$contestId=$_GET["contestId"]; 
+	$v_contestId=$_GET["contestId"]; 
 	
-	$v_contest=RequestById("Contests",$contestId)["name"];
+	$v_contest=RequestById("Contests",$v_contestId)["name"];
 	
-	$v_contestants=ContestantsByContest($contestId);
+	$v_contestants=ContestantsByContest($v_contestId);
 	
 	TemplatePage("ViewContestantsOfAContest","ClassicUser");
 ?>

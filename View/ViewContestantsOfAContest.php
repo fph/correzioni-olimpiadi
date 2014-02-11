@@ -1,10 +1,10 @@
 <?php
-global $v_contest, $v_contestants;
+global $v_contest, $v_contestId, $v_contestants;
 ?>
 
 <script>
-	function Redirect() {
-		document.location="ViewProblem.php?problemId=35";
+	function Redirect(contestId, contestantId) {
+		document.location="ViewParticipation.php?contestId="+contestId+"&contestantId="+contestantId;
 	}
 </script>
 
@@ -23,7 +23,7 @@ global $v_contest, $v_contestants;
 	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
-			echo "<tr class='trlink' onclick=Redirect()>";
+			echo "<tr class='trlink' onclick=Redirect(".$v_contestId.",".$con["id"].")>";
 			echo "<td class='nameColumn'>".$con["name"]."</td>";
 			echo "<td class='surnameColumn'>".$con["surname"]."</td>";
 			echo "</tr>";
