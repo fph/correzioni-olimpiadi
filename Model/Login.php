@@ -9,8 +9,6 @@ SuperRequire_once("General", "TemplateCreation.php");
 
 $SessionStatus=CheckSession();
 
-echo 1;
-
 if( CheckSession() == -1 ) {
 	EndSession();
 	$v_ErrorMessage="Your session is expired, login again.";
