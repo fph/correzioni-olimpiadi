@@ -20,5 +20,12 @@
 		if ( time()-$_SESSION["LoginTimestamp"]>3600 ) return -1;
 		return 1;
 	}
+	
+	function GetUsernameBySession() {
+		session_start();
+		if( isset($_SESSION['UserId']) ) return $_SESSION['UserId'];
+		return '';
+	}
+	
 ?>
 

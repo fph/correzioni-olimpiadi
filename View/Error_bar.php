@@ -1,1 +1,1 @@
-<?php global $v_errorMessage; echo $v_warningMessage ?>
+<?php global $v_ErrorMessage; echo $v_ErrorMessage ?>

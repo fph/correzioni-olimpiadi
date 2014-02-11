@@ -1,4 +1,4 @@
-<a href="UserConfiguration.php" id="UsernameLink"> 
+<a href="AccountSettings.php" id="UsernameLink"> 
 <span id="UsernameInner">
 <?php
 	session_start();
