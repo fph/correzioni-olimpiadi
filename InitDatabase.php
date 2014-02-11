@@ -157,6 +157,7 @@ function PopulateUsers() {
 		('LudoP','".passwordHash('yochicco')."'),
 		('dario2994','".passwordHash('acca')."'),
 		('fph','".passwordHash('pizzica')."'),
+		('walypala23','".passwordHash('gamma')."'),
 		('SimoTheWolf','".passwordHash('vero o falso?')."');";
 	//~ echo $query;
 	$db->query($query) or die($db->error);
