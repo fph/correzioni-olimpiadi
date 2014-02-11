@@ -198,8 +198,4 @@
 		return $corrections;
 	}
 	
-	//~ function ChangeUsername($NewUser,$UserId) {
-		//~ escape_input($NewUser);
-	//~ }
-	
 ?>
