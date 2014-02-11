@@ -157,6 +157,7 @@ function PopulateUsers() {
 		('LudoP','".passwordHash('yochicco')."'),
 		('dario2994','".passwordHash('acca')."'),
 		('fph','".passwordHash('pizzica')."'),
+		('walypala23','".passwordHash('gamma')."'),
 		('SimoTheWolf','".passwordHash('vero o falso?')."');";
 	//~ echo $query;
 	$db->query($query) or die($db->error);
@@ -337,6 +338,8 @@ function PopulateCorrections(){
 	$Users=[];
 	while($Users[$qU]=mysqli_fetch_array($result)['id'])$qU++;
 	
+	$CharactersList='abcdefghilmnopqrstuvzabcdefghilmnopqrstuvz        1234567890';
+	$CharactersNumber=strlen($CharactersList);
 	
 	$query="SELECT `id` FROM Contests;";
 	$result=$db->query($query) or die($db->error);
@@ -359,9 +362,13 @@ function PopulateCorrections(){
 			//~ echo "$ProblemId $q\n";
 			for($i=0;$i<$q;$i++) {
 				if(mt_rand(1,10)>=7) continue;
-				//~ echo "\t $Contestants[$i]\n";
+				
+				$CommentLength=mt_rand(0,200);
+				$Comment='';
+				for($j=0;$j<$CommentLength;$j++) $Comment .= $CharactersList[mt_rand(0,$CharactersNumber)];
+				
 				$query="INSERT INTO `Corrections` (ProblemId,ContestantId,mark,comment,UserId) VALUES
-						($ProblemId,$Contestants[$i],".mt_rand(0,7).",'Commento cretino',".$Users[mt_rand(0,$qU-1)].");";
+						($ProblemId,$Contestants[$i],".mt_rand(0,7).",'".$Comment."',".$Users[mt_rand(0,$qU-1)].");";
 				$db->query($query) or die($db->error);
 			}
 		}
