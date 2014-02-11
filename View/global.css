@@ -64,32 +64,6 @@ table.InformationTable td {
 	padding: 5px 5px;
 }
 
-table.InformationTable td:nth-child(1) {
-	min-width: 100px;
-}
-
-table.InformationTable td:nth-child(2) {
-	min-width: 50px;
-}
-
-table.InformationTable td:nth-child(3) {
-	min-width: 300px;
-}
-
-table.InformationTable td:nth-child(4) {
-	min-width: 100px;
-}
-
-table.InformationTable th:nth-child(5) {
-	border-bottom: 2px #6678b1;
-	padding: 5px 5px;
-}
-
-table.InformationTable td:nth-child(5) {
-	border-bottom: 1px #6678b1;
-	padding: 5px 5px;
-}
-
 .modifyButton {
 	color:#ffffff;
 	background-color:#FFAD33;
@@ -108,13 +82,28 @@ table.InformationTable td:nth-child(5) {
 	background-color:#ffffff;
 }
 
-
-#contest {
-	font-size: 20px;
-	margin: 10px;
+.problemColumn {
+	min-width: 100px;
 }
 
-#contestant {
-	font-size: 15px;
-	margin: 10px;
+.markColumn {
+	min-width: 50px;
 }
+
+.commentColumn {
+	width: 400px;
+}
+
+.userColumn {
+	min-width: 100px;
+}
+
+.nameColumn {
+	min-width: 100px;
+}
+
+.surnameColumn {
+	min-width: 100px;
+}
+
+

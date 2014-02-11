@@ -131,16 +131,17 @@
 		$corrections=array();
 		$query="SELECT * FROM Corrections WHERE ProblemId={$problemId}";
 		$result=$db->query($query) or die($db->error);
-		$nn=mysqli_fetch_array($result);
-		if ( is_null($nn) ) {
-			$nn["done"]=false;
+		while ($nn=mysqli_fetch_array($result)) {
+			if ( is_null($nn) ) {
+				$nn["done"]=false;
+			}
+			else {
+				$nn["done"]=true;
+				$nn["User"]=RequestById("Users",$nn["UserId"])["user"];
+				$nn["Contestant"]=RequestById("Contestants",$nn["ContestantId"]);
+			}
+			array_push($corrections, $nn);
 		}
-		else {
-			$nn["done"]=true;
-			$nn["User"]=RequestById("Users",$nn["UserId"])["user"];
-			$nn["Contestant"]=RequestById("Contestants",$nn["ContestantId"]);
-		}
-		array_push($corrections, $nn);
 		
 		return $corrections;
 	}
