@@ -116,10 +116,13 @@
 		$db->select_db(dbName);
 		
 		//Mette nell'array problems le informazioni sui problemi della gara selezionata
-		$query="SELECT * FROM Contestants WHERE ContestId={$contestId}";
+		$query="SELECT * FROM Participations WHERE ContestId={$contestId}";
 		$result=$db->query($query) or die($db->error);
 		$contestants=array();
-		while ($row=mysqli_fetch_array($result)) array_push($contestants,$row);
+		while ($row=mysqli_fetch_array($result)) {
+			$nn=RequestById("Contestants",$row["ContestantId"]);
+			array_push($contestants,$nn);
+		}
 		return $contestants;
 	}
 	
