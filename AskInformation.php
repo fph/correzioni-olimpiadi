@@ -134,18 +134,15 @@
 		return $corrections;
 	}
 	
-	function IsAdmin($UserId) {
-		if( is_null( RequestById("Administrators",$UserId) ) ) return 0;
+	function IsAdmin($db, $UserId) {
+		$result=OneResultQuery( $db, QuerySelect('Administrators',['UserId'=>$UserId]) );
+		if( is_null( $result ) ) return 0;
 		else return 1;
 	}
 	
-	function VerifyPermission($UserId,$ContestId) {
-		$db=new mysqli(dbServer,dbUser,dbPass);
-		if ($db->connect_errno) die($db->connect_error);
-		
-		$query="SELECT id FROM ".dbName.".Permissions WHERE UserId={$UserId} AND ContestId={$ContestId};";
-		$result=$db->query($query) or die($db->error);
-		if( is_null( mysqli_fetch_array($result) ) ) return 0;
+	function VerifyPermission($db, $UserId,$ContestId) {
+		$result=OneResultQuery( $db, QuerySelect('Permissions',['UserId'=>$UserId, 'ContestId'=>$ContestId],['id']) );
+		if( is_null( $result ) ) return 0;
 		else return 1;
 	}
 	
