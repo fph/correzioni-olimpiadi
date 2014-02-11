@@ -5,10 +5,8 @@
 	SuperRequire_once("General","AskInformation.php");
 	SuperRequire_once("General", "TemplateCreation.php");
 	
-	$participationId=$_GET["participationId"]; 
-	
-	$contestId=ContestByParticipation($participationId);
-	$contestantId=ContestantByParticipation($participationId);
+	$contestId=$_GET["contestId"];
+	$contestantId=$_GET["contestantId"];
 	
 	$v_contest_name=RequestById('Contests',$contestId)["name"];
 	$v_contestant=RequestById('Contestants',$contestId);
