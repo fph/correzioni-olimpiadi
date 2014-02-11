@@ -5,12 +5,22 @@
 	SuperRequire_once("General","AskInformation.php");
 	SuperRequire_once("General", "TemplateCreation.php");
 	
-	$problemId=escape_input($_GET["problemId"]); 
-	$problem=RequestById("Problems",$problemId);
+	//~ $problemId=$_GET["problemId"];
+	$problemId1;
 	
-	$v_problem=$problem["name"];
-	$v_contest=RequestById("Contests",$problem["ContestId"])["name"];
-	$v_corrections=AskProblem($problemId);
+	$db=OpenDbConnection();
+	
+	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$problemId]));
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$v_problem['ContestId']]));
+	//~ $v_corrections=ManyResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problemId]));
+	
+	
+	//~ foreach($v_corrections as $cor){
+		//~ $cor['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$cor['ContestantId']]));
+		//~ $cor['user']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['user']))['user'];
+	//~ }
+	
+	$db->close();
 	
 	TemplatePage("ViewProblem","ClassicUser");
 ?>

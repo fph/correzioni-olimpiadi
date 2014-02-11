@@ -14,7 +14,7 @@ global $v_contest, $v_contestId, $v_contestants;
 ?>
 </div>
 
-<table class="InformationTable" id="participationTable">
+<table class="InformationTable">
 	<thead><tr>
 		<th class='nameColumn'>Name</th>
 		<th class='surnameColumn'>Surname</th>

@@ -3,13 +3,13 @@ global $v_contest, $v_problem, $v_corrections;
 ?>
 
 
-<div id="problem">
+<div id="problemInfo">
 <?php
-	echo $v_contest." - ".$v_problem;
+	echo $v_contest['name']." - ".$v_problem['name'];
 ?>
 </div>
 
-<table class="InformationTable" id="participationTable">
+<table class="InformationTable" id="problemTable">
 	<thead><tr>
 		<th class='nameColumn'>Name</th>
 		<th class='surnameColumn'>Surname</th>
@@ -22,12 +22,12 @@ global $v_contest, $v_problem, $v_corrections;
 	<tbody>
 	<?php
 		foreach($v_corrections as $cor) {
-			echo "<tr><td class='nameColumn'>".$cor["Contestant"]["name"]."</td>";
-			echo "<td class='surnameColumn'>".$cor["Contestant"]["surname"]."</td>";
+			echo "<tr><td class='nameColumn'>".$cor['contestant']['name']."</td>";
+			echo "<td class='surnameColumn'>".$cor['contestant']['surname']."</td>";
 			if ($cor["done"]) {
-				echo "<td class='markColumn'>".$cor["mark"]."</td>";
-				echo "<td class='commentColumn'>".$cor["comment"]."</td>";
-				echo "<td class='userColumn'>".$cor["User"]."</td>";
+				echo "<td class='markColumn'>".$cor['mark']."</td>";
+				echo "<td class='commentColumn'>".$cor['comment']."</td>";
+				echo "<td class='userColumn'>".$cor['user']."</td>";
 				echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
 			}
 			else {
