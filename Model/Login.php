@@ -9,7 +9,8 @@ $SessionStatus=CheckSession();
 
 if( CheckSession() == -1 ) {
 	EndSession();
-	TemplatePage("Login","SessionExpired",0);
+	$v_errorMessage="Your session is expired, login again.";
+	TemplatePage("Login","Error",0);
 	die();
 }
 else if( CheckSession() == 1 ) {
@@ -20,7 +21,8 @@ else if ( CheckSession()==0 and !is_null($_POST["user"]) ) {
 	$UserId=VerifyCredentials($_POST["user"],$_POST["psw"]);
 	
 	if( $UserId == -1 ) {
-		TemplatePage("Login","LoginError",0);
+		$v_errorMessage="Incorrect username or password";
+		TemplatePage("Login","Error",0);
 	}
 	else {
 		StartSession($UserId,$_POST['user']);
