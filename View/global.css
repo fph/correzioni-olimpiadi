@@ -117,3 +117,7 @@ table.InformationTable td {
 	min-width: 100px;
 }
 
+.contestColumn {
+	min-width: 200px;
+}
+

@@ -24,16 +24,14 @@ global $v_contest, $v_problem, $v_corrections;
 		foreach($v_corrections as $cor) {
 			echo "<tr><td class='nameColumn'>".$cor['contestant']['name']."</td>";
 			echo "<td class='surnameColumn'>".$cor['contestant']['surname']."</td>";
-			if ($cor["done"]) {
-				echo "<td class='markColumn'>".$cor['mark']."</td>";
-				echo "<td class='commentColumn'>".$cor['comment']."</td>";
-				echo "<td class='userColumn'>".$cor['user']."</td>";
-				echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
-			}
-			else {
-				echo "<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='userColumn'>-</td>";
-				echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
-			}
+			echo "<td class='markColumn'>".$cor['mark']."</td>";
+			echo "<td class='commentColumn'>".$cor['comment']."</td>";
+			echo "<td class='userColumn'>".$cor['user']."</td>";
+			echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
+			//~ else {
+				//~ echo "<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='userColumn'>-</td>";
+				//~ echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
+			//~ }
 			echo "</tr>";
 		}
 	?>

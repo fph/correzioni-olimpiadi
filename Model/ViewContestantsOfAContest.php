@@ -5,11 +5,19 @@
 	SuperRequire_once("General","AskInformation.php");
 	SuperRequire_once("General", "TemplateCreation.php");
 	
-	$v_contestId=$_GET["contestId"]; 
+	$contestId=$_GET["contestId"]; 
 	
-	$v_contest=RequestById("Contests",$v_contestId)["name"];
+	$db=OpenDbConnection();
 	
-	$v_contestants=ContestantsByContest($v_contestId);
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$contestId]));
+	
+	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$contestId]));
+	
+	foreach($v_contestants as &$con){
+		$con=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
+	}
+	
+	$db->close();
 	
 	TemplatePage("ViewContestantsOfAContest","ClassicUser");
 ?>

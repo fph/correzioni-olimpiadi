@@ -33,10 +33,6 @@
 		$v_corrections[]= $nn;
 	}
 	$db->close();
-	//~ 
-	//~ $v_contest_name=RequestById('Contests',$contestId)["name"];
-	//~ $v_contestant=RequestById('Contestants',$contestId);
-	//~ $v_corrections=AskParticipation($contestId,$contestantId);
 	
 	TemplatePage("ViewParticipation","ClassicUser");
 ?>

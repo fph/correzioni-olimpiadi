@@ -1,5 +1,5 @@
 <?php
-global $v_contest, $v_contestId, $v_contestants;
+global $v_contest, $v_contestants;
 ?>
 
 <script>
@@ -10,11 +10,11 @@ global $v_contest, $v_contestId, $v_contestants;
 
 <div id="contest">
 <?php
-	echo $v_contest;
+	echo $v_contest['name'];
 ?>
 </div>
 
-<table class="InformationTable">
+<table class="InformationTable" id="contestantsOfAContestTable">
 	<thead><tr>
 		<th class='nameColumn'>Name</th>
 		<th class='surnameColumn'>Surname</th>
@@ -23,9 +23,9 @@ global $v_contest, $v_contestId, $v_contestants;
 	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
-			echo "<tr class='trlink' onclick=Redirect(".$v_contestId.",".$con["id"].")>";
-			echo "<td class='nameColumn'>".$con["name"]."</td>";
-			echo "<td class='surnameColumn'>".$con["surname"]."</td>";
+			echo "<tr class='trlink' onclick=Redirect(".$v_contest['id'].",".$con['id'].")>";
+			echo "<td class='nameColumn'>".$con['name']."</td>";
+			echo "<td class='surnameColumn'>".$con['surname']."</td>";
 			echo "</tr>";
 		}
 	?>
