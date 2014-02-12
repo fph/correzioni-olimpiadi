@@ -23,6 +23,7 @@ div#MainBar_inner {
 	overflow: hidden;
 }
 
+/*
 div#MainBar_inner #logout {
 	float: right;
 }
@@ -30,5 +31,22 @@ div#MainBar_inner #logout {
 div#MainBar_inner #UserNameLink {
 	text-decoration: none;
 	font-weight: bold;
+	float: right;
+}
+*/
+
+div#MainBar_inner h1#MainBar_title {
 	float: left;
+	margin: 0;
+	font-size: 16px;
+}
+
+div#MainBar_inner div#MainBar_UserList {
+	float: right;
+}
+
+#MainBar_UserList a{
+	text-decoration: none;
+	font-weight: bold;
+	color: #039;
 }
