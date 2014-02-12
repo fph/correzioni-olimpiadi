@@ -31,9 +31,9 @@ function TemplatePage($Content, $IsSessionToBeChecked=1, $Message=NULL ){
 	}
 	SuperInclude("View","MainBar.php");
 	
-	echo '<div class="internalBody" id="'.$Content.'_InternalBody">';
+	echo '<div class="internalBody" id="'.$Content.'_InternalBody"><div id="ContentContainer">';
 	SuperInclude("View",$Content.".php");
-	echo '</div></body>';
+	echo '</div></div></body>';
 }
 
 ?>
