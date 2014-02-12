@@ -1,0 +1,80 @@
+.InformationTable {
+	border-collapse: collapse;
+	margin: 20px;
+}
+
+table.InformationTable thead,th,tbody,td {
+	border-collapse: collapse;
+	font-size: 15px;
+	text-align: left;
+	vertical-align:baseline;
+}
+
+table.InformationTable thead {
+	color: #039;
+}
+
+table.InformationTable th {
+	border-bottom: 2px solid #6678b1;
+	padding: 5px 5px;
+}
+
+table.InformationTable tbody {
+	color: #039;
+}
+
+table.InformationTable td {
+	border-bottom: 1px solid #ECF3FA;
+	padding: 5px 5px;
+}
+
+table.InformationTable .trlink:hover {
+	cursor:pointer;
+	color:#66CCCC;
+}
+
+table.InformationTable .modifyButton {
+	color:#ffffff;
+	background-color:#FFAD33;
+	border: 1px solid #FFAD33;
+	font-weight: bold;
+	font-size: 10px;
+	border-radius: 3px;
+	padding: 3px;
+	text-decoration:none;
+	display:inline-block;
+	text-align: center;
+}
+
+table.InformationTable .modifyButton:hover {
+	color:#FFAD33;
+	background-color:#ffffff;
+}
+
+table.InformationTable .problemColumn {
+	min-width: 100px;
+}
+
+table.InformationTable .markColumn {
+	min-width: 50px;
+}
+
+table.InformationTable .commentColumn {
+	width: 400px;
+}
+
+table.InformationTable .userColumn {
+	min-width: 100px;
+}
+
+table.InformationTable .nameColumn {
+	min-width: 100px;
+}
+
+table.InformationTable .surnameColumn {
+	min-width: 100px;
+}
+
+table.InformationTable .contestColumn {
+	min-width: 200px;
+}
