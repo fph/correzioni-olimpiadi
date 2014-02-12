@@ -3,17 +3,17 @@ global $v_corrections, $v_contestant, $v_contest;
 ?>
 
 
-<div id="contestInfo">
+<h2 class="pageTitle">
 <?php
 	echo $v_contest['name'];
 ?>
-</div>
+</h2>
 
-<div id="contestantInfo">
+<h3 class="pageSubtitle">
 <?php
 	echo $v_contestant['name']." ".$v_contestant['surname'];
 ?>
-</div>
+</h3>
 
 <table class="InformationTable" id="participationTable">
 	<thead><tr>

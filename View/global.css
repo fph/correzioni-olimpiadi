@@ -17,3 +17,26 @@ body {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
+.pageTitle {
+	font-size: 2em;
+	margin: 15px;
+}
+
+.pageSubtitle {
+	font-size: 1.5em;
+	margin: 15px;
+}
+
+.TableLink {
+	font-size: 1.3em;
+	margin: 20px;
+}
+
+.TableLink td {
+	padding: 10px;
+}
+
+.TableLink .trlink:hover {
+	cursor:pointer;
+	color: green;
+}

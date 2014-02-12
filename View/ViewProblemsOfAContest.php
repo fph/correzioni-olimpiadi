@@ -8,11 +8,11 @@ global $v_contest, $v_problems;
 	}
 </script>
 
-<div id="contest">
+<h2 class="pageTitle" id="contest">
 <?php
 	echo $v_contest['name'];
 ?>
-</div>
+</h2>
 
 <table class="InformationTable" id="problemsOfAContestTable">
 	<thead><tr>

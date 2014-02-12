@@ -8,11 +8,11 @@ global $v_contest, $v_contestants;
 	}
 </script>
 
-<div id="contest">
+<h2 class="pageTitle">
 <?php
 	echo $v_contest['name'];
 ?>
-</div>
+</h2>
 
 <table class="InformationTable" id="contestantsOfAContestTable">
 	<thead><tr>

@@ -1,9 +1,6 @@
 .InformationTable {
 	border-collapse: collapse;
 	margin: 20px;
-}
-
-table.InformationTable thead,th,tbody,td {
 	border-collapse: collapse;
 	font-size: 15px;
 	text-align: left;
@@ -77,4 +74,14 @@ table.InformationTable .surnameColumn {
 
 table.InformationTable .contestColumn {
 	min-width: 200px;
+}
+
+table.InformationTable td.modifyColumn {
+	border-bottom: 1px #6678b1;
+	padding: 5px 5px;
+}
+
+table.InformationTable th.modifyColumn {
+	border-bottom: 2px #6678b1;
+	padding: 5px 5px;
 }

@@ -3,11 +3,17 @@ global $v_contest, $v_problem, $v_corrections;
 ?>
 
 
-<div id="problemInfo">
+<h2 class="pageTitle">
 <?php
-	echo $v_contest['name']." - ".$v_problem['name'];
+	echo $v_contest['name'];
 ?>
-</div>
+</h2>
+
+<h3 class="pageSubtitle">
+<?php
+	echo $v_problem['name'];
+?>
+</h3>
 
 <table class="InformationTable" id="problemTable">
 	<thead><tr>

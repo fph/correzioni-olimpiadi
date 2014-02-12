@@ -7,25 +7,26 @@ global $v_contest;
 		document.location="ViewContestantsOfAContest.php?contestId="+contestId;
 	}
 	function RedirectProblems(contestId) {
-		document.location="ViewCProblemsOfAContest.php?contestId="+contestId;
+		document.location="ViewProblemsOfAContest.php?contestId="+contestId;
 	}
 </script>
 
-<div id="contestInfo">
+<h2 class="pageTitle">
 	<?php
 		echo $v_contest['name'];
 	?>
-</div>
+</h2>
 
-
-<div id="LinkToContestants" onclick=RedirectContestants(<?php echo $v_contest['id']; ?>)>
-	Contestants
-</div>
-
-<div id="LinkToProblems" onclick=RedirectProblems(<?php echo $v_contest['id'] ?>)>
-	Problems
-</div>
-
-<div id="LinkToStatistics" onclick=RedirectContestants(<?php echo $v_contest['id'] ?>)>
-	Statistics
-</div>
+<table class="TableLink">
+	<tr class="trlink" id="LinkToContestants" onclick=RedirectContestants(<?php echo $v_contest['id']; ?>)>
+	<td>Contestants</td>
+	</tr>
+	
+	<tr class="trlink" id="LinkToProblems" onclick=RedirectProblems(<?php echo $v_contest['id']; ?>)>
+	<td>Problems</td>
+	</tr>
+	
+	<tr class="trlink" id="LinkToStatistics" onclick=RedirectContestants(<?php echo $v_contest['id']; ?>)>
+	<td>Statistics</td>
+	</tr>
+</table>
