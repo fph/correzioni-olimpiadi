@@ -2,5 +2,7 @@
 global $v_Message; 
 ?>
 <div class="ShowMessage" id="ShowMessage_<?php echo $v_Message['type']; ?>"> 
-	<?php echo $v_Message['text']; ?>
+	<span id="ShowMessage_span">
+		<?php echo $v_Message['text']; ?>
+	</span>
 </div>

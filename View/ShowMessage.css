@@ -1,3 +1,40 @@
 div.ShowMessage {
-	z-index: 10000;
+	display: table;
+
+	z-index: 1001;
+	position: fixed;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: 30%;
+	
+	text-align: center;
+	
+	width: 25%;
+	min-width: 200px;
+	height: 5%;
+	min-height: 50px;
+	
+	background-color: green;
+	
+	border-radius: 10px;
+}
+
+div.ShowMessage span#ShowMessage_span {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#ShowMessage_bad {
+	background-color: rgba(255,0,0,0.7);
+	color: white;
+	font-size: large;
+	font-weight: bold;
+}
+
+#ShowMessage_good {
+	background-color: rgba(0,255,0,0.7);
+	color: white;
+	font-size: large;
+	font-weight: bold;
 }
