@@ -20,5 +20,5 @@
 	
 	$db->close();
 	
-	TemplatePage("ViewProblem","ClassicUser");
+	TemplatePage("ViewProblem");
 ?>

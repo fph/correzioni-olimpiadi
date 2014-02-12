@@ -34,5 +34,5 @@
 	}
 	$db->close();
 	
-	TemplatePage("ViewParticipation","ClassicUser");
+	TemplatePage("ViewParticipation");
 ?>

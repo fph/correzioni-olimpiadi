@@ -19,5 +19,5 @@
 	
 	$db->close();
 	
-	TemplatePage("ViewContestantsOfAContest","ClassicUser");
+	TemplatePage("ViewContestantsOfAContest");
 ?>

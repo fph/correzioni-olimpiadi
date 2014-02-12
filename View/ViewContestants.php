@@ -4,7 +4,7 @@ global $v_contestants;
 
 <script>
 	function Redirect(contestantId) {
-		document.location="ViewContestantInformation.php?contestantId="+contestantId;
+		document.location="ViewContestsOfAContestant.php?contestantId="+contestantId;
 	}
 </script>
 
