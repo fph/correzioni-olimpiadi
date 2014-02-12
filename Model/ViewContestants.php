@@ -8,7 +8,7 @@
 	$db=OpenDbConnection();
 	
 	$v_contestants=ManyResultQuery($db, QuerySelect('Contestants'));
-	
+		
 	$db->close();
 	
 	TemplatePage("ViewContestants");

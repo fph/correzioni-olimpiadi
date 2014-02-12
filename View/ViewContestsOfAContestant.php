@@ -15,7 +15,7 @@ global $v_contestant, $v_contests;
 </h2>
 
 <?php
-if (empty($v_contestants)) {
+if (empty($v_contests)) {
 	echo "<div class='emptyTable'> No contests yet. </div>";
 }
 else {

@@ -5,6 +5,7 @@
 	font-size: 15px;
 	text-align: left;
 	vertical-align:baseline;
+	min-width: 60%;
 }
 
 table.InformationTable thead {
@@ -27,7 +28,11 @@ table.InformationTable td {
 
 table.InformationTable .trlink:hover {
 	cursor:pointer;
-	color:#66CCCC;
+	background-color: aliceblue;
+/*
+	background-color: #99FF99;
+*/
+	color:#000066;
 }
 
 table.InformationTable .modifyButton {
