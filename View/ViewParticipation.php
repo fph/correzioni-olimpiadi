@@ -31,7 +31,7 @@ global $v_corrections, $v_contestant, $v_contest;
 			if ($cor["done"]) {
 				echo "<td class='markColumn'>".$cor['mark']."</td>";
 				echo "<td class='commentColumn'>".$cor['comment']."</td>";
-				echo "<td class='userColumn'>".$cor['user']."</td>";
+				echo "<td class='userColumn'>".$cor['username']."</td>";
 				echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
 			}
 			else {

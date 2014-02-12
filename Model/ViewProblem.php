@@ -15,7 +15,7 @@
 	
 	foreach($v_corrections as &$cor) {
 		$cor['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$cor['ContestantId']]));
-		$cor['user']=OneResultQuery($db, QuerySelect('Users', ['id'=>$cor['UserId']], ['user']))['user'];
+		$cor['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$cor['UserId']], ['username']))['username'];
 	}
 	
 	$db->close();

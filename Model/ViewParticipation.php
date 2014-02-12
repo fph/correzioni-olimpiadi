@@ -28,7 +28,7 @@
 		else $nn['done']=true;
 		
 		$nn['problem']=OneResultQuery($db, QuerySelect('Problems', ['id'=>$pro['id']], ['name']))['name'];
-		$nn['user']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['user']))['user'];
+		$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
 		
 		$v_corrections[]= $nn;
 	}
