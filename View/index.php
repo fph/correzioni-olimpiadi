@@ -6,6 +6,9 @@ global $v_contest;
 	function RedirectContests() {
 		document.location="ViewContests.php";
 	}
+	function RedirectContestants() {
+		document.location="ViewContestants.php";
+	}
 </script>
 
 <h2 class="pageTitle">

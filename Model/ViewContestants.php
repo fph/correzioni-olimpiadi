@@ -7,9 +7,9 @@
 	
 	$db=OpenDbConnection();
 	
-	$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
+	$v_contestants=ManyResultQuery($db, QuerySelect('Contestants'));
 	
 	$db->close();
 	
-	TemplatePage("ViewContests");
+	TemplatePage("ViewContestants");
 ?>
