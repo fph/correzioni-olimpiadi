@@ -5,15 +5,14 @@ SuperRequire_once("General","SessionManager.php");
 SuperRequire_once("General","AskInformation.php");
 
 if( !is_null( $_POST["NewUsername"] ) ) {
-	$queryResult=changeUsername( $_POST["NewUsername"], GetUsernameBySession() );
-	if( $queryResult==1 ) {
-		$v_GoodMessage="Username changed successfully."
-		TemplatePage("AccountSettings.php","GoodMessage");
-	}
-	else if( $queryResult==0 ) {
-		$v_ErrorMessage="An error occurred changing username, try again.";
-		TemplatePage("AccountSettings.php","ErrorMessage");
-	}
+	$db=OpenDbConnection();
+	Query($db, QueryUpdate('Users',['id'=>GetUserIdBySession()],['username'=>$_POST['NewUsername']]));
+	
+	StartSession(GetUserIdBySession(),$_POST['NewUsername']);
+	
+	$v_GoodMessage="Username changed successfully.";
+	TemplatePage("AccountSettings","GoodMessage");
+	
 	die();
 }
 

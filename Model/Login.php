@@ -19,10 +19,10 @@ else if( CheckSession() == 1 ) {
 	SuperRedirect("Model","index.php");
 	die();
 }
-else if ( CheckSession()==0 and !is_null($_POST["user"]) ) {
+else if ( CheckSession()==0 and !is_null($_POST["username"]) ) {
 	$db=OpenDbConnection();
 	$UserId=OneResultQuery($db, QuerySelect('Users',
-	['user'=>$_POST['user'],'passHash'=>passwordHash( $_POST['password'] )],
+	['username'=>$_POST['username'],'passHash'=>passwordHash( $_POST['password'] )],
 	['id']
 	) ) ['id'];
 	
@@ -33,7 +33,7 @@ else if ( CheckSession()==0 and !is_null($_POST["user"]) ) {
 		TemplatePage("Login","Error",0);
 	}
 	else {
-		StartSession($UserId,$_POST['user']);
+		StartSession($UserId,$_POST['username']);
 		SuperRedirect("Model","index.php");
 		die();
 	}

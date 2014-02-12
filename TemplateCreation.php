@@ -17,6 +17,7 @@ function TemplatePage($Content, $Bar, $IsSessionToBeChecked=1 ){
 	}
 	echo '<head> <style type="text/css">';
 	SuperInclude("View","global.css");
+	SuperInclude("View","InformationTable.css");
 	SuperInclude("View",$Bar."_bar.css");
 	SuperInclude("View",$Content.".css");
 	echo '</style></head><body>';

@@ -6,7 +6,7 @@ $TableInformation=array(
 	"Corrections" => array("id","ProblemId","ContestantId","mark","comment","UserId"),
 	"Participations" => array("id","ContestId","ContestantId"),
 	"Problems" => array("id","ContestId","name"),
-	"Users" => array("id","user","passHash"),
+	"Users" => array("id","username","passHash"),
 );
 
 function escape_input($value)

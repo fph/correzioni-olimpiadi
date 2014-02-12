@@ -21,10 +21,16 @@
 		return 1;
 	}
 	
-	function GetUsernameBySession() {
+	function GetUserIdBySession() {
 		session_start();
 		if( isset($_SESSION['UserId']) ) return $_SESSION['UserId'];
-		return '';
+		else return -1;
+	}
+	
+	function GetUsernameBySession() {
+		session_start();
+		if( isset($_SESSION['username']) ) return $_SESSION['username'];
+		else return '';
 	}
 	
 ?>

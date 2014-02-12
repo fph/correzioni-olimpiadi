@@ -19,10 +19,10 @@ function CreateDatabase() {
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Users` (
 		`id` int NOT NULL AUTO_INCREMENT,
-		`user` varchar(31) NOT NULL,
+		`username` varchar(31) NOT NULL,
 		`passHash` varchar(255) NOT NULL,
 		PRIMARY KEY (`id`),
-		UNIQUE KEY(`user`)
+		UNIQUE KEY(`username`)
 	) ENGINE=InnoDB;';
 	$db->query($query) or die($db->error);
 	
@@ -152,7 +152,7 @@ function PopulateUsers() {
 	
 	//~ echo "CIAO";
 	
-	$query="INSERT INTO ".dbName.".`Users` (`user`,`passHash`) VALUES
+	$query="INSERT INTO ".dbName.".`Users` (`username`,`passHash`) VALUES
 		('Xamog','".passwordHash('meraviglioso')."'),
 		('LudoP','".passwordHash('yochicco')."'),
 		('dario2994','".passwordHash('acca')."'),
@@ -170,7 +170,7 @@ function PopulateAdministrators() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query="SELECT id FROM ".dbName.".Users WHERE user='dario2994';";
+	$query="SELECT id FROM ".dbName.".Users WHERE username='dario2994';";
 	//~ echo $query;
 	$dario2994_id=$db->query($query) or die($db->error);
 	$query="INSERT INTO ".dbName.".Administrators (UserId) VALUES (".mysqli_fetch_array($dario2994_id)['id'].");";

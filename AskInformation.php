@@ -10,11 +10,11 @@
 		return $db;
 	}
 	
-	function QuerySelect($tableName, $data=NULL, $info=NULL) {
+	function QuerySelect($tableName, $constraints=NULL, $data=NULL) {
 		$query="SELECT ";
-		if( !is_null($info) ) {
+		if( !is_null($data) ) {
 			$first=0;
-			foreach ( $info as $x ) {
+			foreach ( $data as $x ) {
 				if( $first==0 ){
 					$query .=$x.' '; 
 					$first=1;
@@ -25,10 +25,10 @@
 		else $query.='* ';
 		$query.=' FROM '.$tableName.' ';
 		
-		if( !is_null( $data ) ) {
+		if( !is_null( $constraints ) ) {
 			$query .='WHERE ';
 			$first=0;
-			foreach ( $data as $field => $value ) {
+			foreach ( $constraints as $field => $value ) {
 				if( $first==0 ) {
 					$query .= $field.'='.escape_input($value).' ';
 					$first=1;
@@ -36,6 +36,35 @@
 				else $query .= 'AND '.$field.'='.escape_input($value).' ';
 			}
 		} 
+		
+		return $query;
+	}
+	
+	function QueryUpdate($tableName, $constraints, $data) {
+		$query="UPDATE ".$tableName." SET ";
+		if( !is_null($data) ) {
+			$first=0;
+			foreach ( $data as $field => $value ) {
+				if( $first==0 ){
+					$query .= $field.' = '.escape_input($value).' '; 
+					$first=1;
+				}
+				else $query .=', '.$field.' = '.escape_input($value).' ';
+			}
+		}
+		else die( "EMPTY UPDATE" );
+		
+		if( !is_null( $constraints ) ) {
+			$query .='WHERE ';
+			$first=0;
+			foreach ( $constraints as $field => $value ) {
+				if( $first==0 ) {
+					$query .= $field.'='.escape_input($value).' ';
+					$first=1;
+				}
+				else $query .= 'AND '.$field.'='.escape_input($value).' ';
+			}
+		}
 		
 		return $query;
 	}
@@ -50,6 +79,10 @@
 		$arr=[];
 		while($x=mysqli_fetch_array($result)) $arr[]=$x;
 		return $arr;
+	}
+	
+	function Query($db, $query) {
+		$db->query($query) or die($db->error);
 	}
 	
 	function IsAdmin($db, $UserId) {
