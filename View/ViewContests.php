@@ -12,6 +12,13 @@ global $v_contests;
 	All contests
 </h2>
 
+<?php
+if (empty($v_contests)) {
+	echo "<div class='emptyTable'> No contests yet. </div>";
+}
+else {
+?>
+
 <table class="InformationTable">
 	<thead><tr>
 		<th class='contestColumn'>Contest</th>
@@ -28,3 +35,7 @@ global $v_contests;
 	</tbody>
 	
 </table>
+
+<?php
+}
+?>

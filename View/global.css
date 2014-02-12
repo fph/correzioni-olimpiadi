@@ -51,3 +51,7 @@ body {
 	cursor:pointer;
 	color: green;
 }
+
+.emptyTable {
+	margin:20px;
+}

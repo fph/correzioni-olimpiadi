@@ -14,6 +14,13 @@ global $v_contest, $v_contestants;
 ?>
 </h2>
 
+<?php
+if (empty($v_contestants)) {
+	echo "<div class='emptyTable'> No contestants yet. </div>";
+}
+else {
+?>
+
 <table class="InformationTable" id="contestantsOfAContestTable">
 	<thead><tr>
 		<th class='nameColumn'>Name</th>
@@ -32,3 +39,7 @@ global $v_contest, $v_contestants;
 	</tbody>
 	
 </table>
+
+<?php
+}
+?>

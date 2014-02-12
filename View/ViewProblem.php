@@ -15,6 +15,13 @@ global $v_contest, $v_problem, $v_corrections;
 ?>
 </h3>
 
+<?php
+if (empty($v_corrections)) {
+	echo "<div class='emptyTable'> No corrections yet. </div>";
+}
+else {
+?>
+
 <table class="InformationTable" id="problemTable">
 	<thead><tr>
 		<th class='nameColumn'>Name</th>
@@ -40,3 +47,7 @@ global $v_contest, $v_problem, $v_corrections;
 	</tbody>
 	
 </table>
+
+<?php
+}
+?>

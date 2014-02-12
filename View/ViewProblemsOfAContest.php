@@ -14,6 +14,13 @@ global $v_contest, $v_problems;
 ?>
 </h2>
 
+<?php
+if (empty($v_problems)) {
+	echo "<div class='emptyTable'> No problems yet. </div>";
+}
+else {
+?>
+
 <table class="InformationTable" id="problemsOfAContestTable">
 	<thead><tr>
 		<th class='problemColumn'>Problem</th>
@@ -30,3 +37,7 @@ global $v_contest, $v_problems;
 	</tbody>
 	
 </table>
+
+<?php
+}
+?>
