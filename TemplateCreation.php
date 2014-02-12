@@ -3,7 +3,8 @@ require_once "Utilities.php";
 
 SuperRequire_once("General","SessionManager.php");
 
-function TemplatePage($Content, $Bar, $IsSessionToBeChecked=1 ){
+
+function TemplatePage($Content, $IsSessionToBeChecked=1, $Message=NULL ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
 		if( $SessionSituation==-1 ) {
@@ -18,14 +19,18 @@ function TemplatePage($Content, $Bar, $IsSessionToBeChecked=1 ){
 	echo '<head> <style type="text/css">';
 	SuperInclude("View","global.css");
 	SuperInclude("View","InformationTable.css");
-	SuperInclude("View",$Bar."_bar.css");
+	SuperInclude("View","MainBar.css");
 	SuperInclude("View",$Content.".css");
+	if( !is_null( $Message ) ) SuperInclude("View","ShowMessage.css");
 	echo '</style></head><body>';
-	echo 	'<div class="ContainerBar" id="'.$Bar.'_ContainerBar">
-				<div id="Floater">
-					<div class="innerBar">';
-						SuperInclude("View",$Bar."_bar.php");
-	echo '</div></div></div>';
+	
+	if( !is_null( $Message ) ){
+		global $v_Message;
+		$v_Message=$Message;
+		SuperInclude("View","ShowMessage.php");
+	}
+	SuperInclude("View","MainBar.php");
+	
 	echo '<div class="internalBody" id="'.$Content.'_InternalBody">';
 	SuperInclude("View",$Content.".php");
 	echo '</div></body>';

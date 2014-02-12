@@ -10,8 +10,7 @@ if( !is_null( $_POST["NewUsername"] ) ) {
 	
 	StartSession(GetUserIdBySession(),$_POST['NewUsername']);
 	
-	$v_GoodMessage="Username changed successfully.";
-	TemplatePage("AccountSettings","GoodMessage");
+	TemplatePage("AccountSettings",1,['type'=>'good', 'text'=>'Username changed successfully.']);
 	
 	die();
 }
@@ -20,5 +19,5 @@ else if ( 0 ) {
 	die();
 }
 
-TemplatePage("AccountSettings","ClassicUser");
+TemplatePage("AccountSettings");
 ?>
