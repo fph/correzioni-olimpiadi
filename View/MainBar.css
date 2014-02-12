@@ -8,7 +8,7 @@ div#MainBar_container {
 	z-index: 1000;
 	top: 0;
 	width: 100%;
-	background: aliceblue;
+	background: #339933;
 }
 
 div#MainBar_floater {
@@ -21,32 +21,35 @@ div#MainBar_inner {
 	margin-right:auto;
 	width: 80%;
 	overflow: hidden;
+	min-width:600px;
 }
-
-/*
-div#MainBar_inner #logout {
-	float: right;
-}
-
-div#MainBar_inner #UserNameLink {
-	text-decoration: none;
-	font-weight: bold;
-	float: right;
-}
-*/
 
 div#MainBar_inner h1#MainBar_title {
 	float: left;
 	margin: 0;
-	font-size: 16px;
+	font-size: 20px;
+	padding-left: 20px;
+	color: white;
 }
 
 div#MainBar_inner div#MainBar_UserList {
 	float: right;
+	padding-top:2px;
+	padding-right:20px;
+}
+
+#MainBar_UserList #UsernameLink {
+	border-right:1px solid #006600;
 }
 
 #MainBar_UserList a{
 	text-decoration: none;
 	font-weight: bold;
-	color: #039;
+	color: black;
+	padding: 0px 4px 0px 8px;
+}
+
+#MainBar_UserList a:hover {
+	text-decoration: none;
+	color: white;
 }
