@@ -11,7 +11,7 @@ global $v_corrections, $v_contestant, $v_contest;
 
 <h3 class="pageSubtitle">
 <?php
-	echo $v_contestant['name']." ".$v_contestant['surname'];
+	echo $v_contestant['surname']." ".$v_contestant['name'];
 ?>
 </h3>
 

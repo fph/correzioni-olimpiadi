@@ -23,16 +23,16 @@ else {
 
 <table class="InformationTable" id="contestantsOfAContestTable">
 	<thead><tr>
-		<th class='nameColumn'>Nome</th>
 		<th class='surnameColumn'>Cognome</th>
+		<th class='nameColumn'>Nome</th>
 	</tr></thead>
 	
 	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
 			echo "<tr class='trlink' onclick=Redirect(".$v_contest['id'].",".$con['id'].")>";
-			echo "<td class='nameColumn'>".$con['name']."</td>";
 			echo "<td class='surnameColumn'>".$con['surname']."</td>";
+			echo "<td class='nameColumn'>".$con['name']."</td>";
 			echo "</tr>";
 		}
 	?>

@@ -10,7 +10,7 @@ global $v_contestant, $v_contests;
 
 <h2 class="pageTitle">
 <?php
-	echo $v_contestant['name']." ".$v_contestant['surname'];
+	echo $v_contestant['surname']." ".$v_contestant['name'];
 ?>
 </h2>
 
