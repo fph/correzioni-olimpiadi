@@ -41,7 +41,9 @@ else {
 			echo "<td class='markColumn'>".$cor['mark']."</td>";
 			echo "<td class='commentColumn'>".$cor['comment']."</td>";
 			echo "<td class='userColumn'>".$cor['username']."</td>";
-			echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
+			echo "<td class='modifyColumn'> <div class='modifyButtonContainer' onclick=prova()>";
+			echo "<img class='modifyButtonImage' src='../View/Images/ModifyButtonImage.png'}>";
+			echo "</div> </td>";
 			echo "</tr>";
 		}
 	?>

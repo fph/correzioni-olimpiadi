@@ -43,33 +43,18 @@ table.InformationTable .modifyButtonImage {
 	heigth: 22px;
 }
 
-table.InformationTable .modifyButtonImage:hover {
+table.InformationTable .modifyButtonContainer {
+	width: 22px;
+	heigth: 22px;
+}
+
+table.InformationTable .modifyButtonContainer:hover {
 	cursor: pointer;
 }
 
 table.InformationTable .modifyColumn {
 	width:25px;
 }
-
-/*
-table.InformationTable .modifyButton {
-	color:#ffffff;
-	background-color:#FFAD33;
-	border: 1px solid #FFAD33;
-	font-weight: bold;
-	font-size: 10px;
-	border-radius: 3px;
-	padding: 3px;
-	text-decoration:none;
-	display:inline-block;
-	text-align: center;
-}
-
-table.InformationTable .modifyButton:hover {
-	color:#FFAD33;
-	background-color:#ffffff;
-}
-*/
 
 table.InformationTable td.modifyColumn {
 	border-bottom: 1px #6678b1;
