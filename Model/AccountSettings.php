@@ -10,7 +10,7 @@ if( !is_null( $_POST["NewUsername"] ) ) {
 	
 	StartSession(GetUserIdBySession(),$_POST['NewUsername']);
 	
-	TemplatePage("AccountSettings",1,['type'=>'good', 'text'=>'Username changed successfully.']);
+	TemplatePage("AccountSettings",['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1,['type'=>'good', 'text'=>'Username changed successfully.']);
 	
 	die();
 }
@@ -19,5 +19,5 @@ else if ( 0 ) {
 	die();
 }
 
-TemplatePage("AccountSettings");
+TemplatePage("AccountSettings",['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php']);
 ?>
