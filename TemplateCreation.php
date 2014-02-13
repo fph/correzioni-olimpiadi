@@ -16,6 +16,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 			die();
 		}
 	}
+	echo '<!DOCTYPE html> ';
 	echo '<head> <style type="text/css">';
 	SuperInclude("View","global.css");
 	SuperInclude("View","InformationTable.css");

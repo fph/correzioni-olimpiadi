@@ -10,7 +10,7 @@
 		return $db;
 	}
 	
-	function QuerySelect($tableName, $constraints=NULL, $data=NULL) {
+	function QuerySelect($tableName, $constraints=NULL, $data=NULL, $order=NULL) {
 		$query="SELECT ";
 		if( !is_null($data) ) {
 			$first=0;
@@ -36,6 +36,10 @@
 				else $query .= 'AND '.$field.'='.escape_input($value).' ';
 			}
 		} 
+		
+		if( is_null( $order ) ) {
+			$query .= 'ORDER BY '.$order.' ';
+		}
 		
 		return $query;
 	}
