@@ -43,8 +43,9 @@ else {
 			else {
 				echo "<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='userColumn'>-</td>";
 			}
-			echo "<td class='modifyColumn'> <img class='modifyButtonImage' src='../View/Images/ModifyButtonImage.png'> </td>";
-			//~ echo "<td class='modifyColumn'> <button class='modifyButton'>Modifica</div> </td>";
+			echo "<td class='modifyColumn'> <div class='modifyButtonContainer' onclick=prova()>";
+			echo "<img class='modifyButtonImage' src='../View/Images/ModifyButtonImage.png'}>";
+			echo "</div> </td>";
 			echo "</tr>";
 		}
 	?>
