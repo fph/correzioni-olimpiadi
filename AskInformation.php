@@ -101,4 +101,11 @@
 		else return 1;
 	}
 	
+	function sortByKey($array, $key){
+		usort($array,function ($a,$b) {
+				return strcmp($a[$key],$b[$key]);
+			});
+		return $array;
+	}
+	
 ?>

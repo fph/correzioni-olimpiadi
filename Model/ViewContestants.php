@@ -7,7 +7,7 @@
 	
 	$db=OpenDbConnection();
 	
-	$v_contestants=ManyResultQuery($db, QuerySelect('Contestants'), NULL, 'surname');
+	$v_contestants=ManyResultQuery($db, QuerySelect('Contestants',NULL,NULL,'surname'));
 		
 	$db->close();
 	
