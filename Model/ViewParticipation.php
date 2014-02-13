@@ -34,5 +34,9 @@
 	}
 	$db->close();
 	
-	TemplatePage("ViewParticipation");
+	TemplatePage("ViewParticipation",[	'Index'=>'index.php',
+										'Gare'=>'ViewContests.php',
+										$v_contest['name']=>'ViewContestInformation.php',
+										'Partecipanti'=>'ViewContestantsOfAContest.php?contestId='.$contestId,
+										$v_contestant['name']." ".$v_contestant['surname']=>'ViewParticipation.php?contestId='.$contestId.'&contestantId='.$contestantId]);
 ?>

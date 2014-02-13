@@ -11,6 +11,8 @@
 	$v_contest=OneResultQuery($db, QuerySelect('Contests',['id'=>$contestId]));
 	$db->close();
 	
-	TemplatePage("ViewContestInformation");
+	TemplatePage("ViewContestInformation",[	'Index'=>'index.php',
+											'Gare'=>'ViewContests.php',
+											$v_contest['name']=>'ViewContestInformation.php']);
 ?>
 
