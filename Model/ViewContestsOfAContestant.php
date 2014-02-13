@@ -19,5 +19,7 @@
 	
 	$db->close();
 	
-	TemplatePage("ViewContestsOfAContestant");
+	TemplatePage("ViewContestsOfAContestant",[	'Index'=>'index.php',
+												'Partecipanti'=>'ViewContestants.php',
+												'Gare'=>'ViewContestsOfAContestant.php?contestantId='.$contestantId]);
 ?>

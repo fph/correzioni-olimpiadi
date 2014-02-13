@@ -11,5 +11,6 @@
 		
 	$db->close();
 	
-	TemplatePage("ViewContestants");
+	TemplatePage("ViewContestants",['Index'=>'index.php',
+									'Partecipanti'=>'ViewContestants.php']);
 ?>
