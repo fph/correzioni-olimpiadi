@@ -35,6 +35,8 @@ else if ( !is_null( $_POST['NewPassword'] ) and !is_null( $_POST['OldPassword'] 
 		TemplatePage("AccountSettings",
 		['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1,
 		['type'=>'bad', 'text' => 'La nuova password è troppo breve.']);
+		
+		die();
 	}
 	$db=OpenDbConnection();
 	

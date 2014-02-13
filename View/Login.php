@@ -7,7 +7,7 @@
 	</tr>
 	<tr>
 		<td> <input type="text" name="username"> </td>
-		<td> <input type="text" name="password"> </td>
+		<td> <input type="password" name="password"> </td>
 		<td> <input type="submit" value="Login"> </td>
 	</tr>
 	</table>
