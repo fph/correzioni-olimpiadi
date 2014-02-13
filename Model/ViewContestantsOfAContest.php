@@ -17,6 +17,10 @@
 		$con=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
 	}
 	
+	usort($v_contestants, build_sorter('surname'));
+	
+	
+	
 	$db->close();
 	
 	TemplatePage("ViewContestantsOfAContest",[	'Index'=>'index.php',

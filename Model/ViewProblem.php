@@ -15,8 +15,11 @@
 	
 	foreach($v_corrections as &$cor) {
 		$cor['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$cor['ContestantId']]));
+		$cor['surname']=$cor['contestant']['surname'];
 		$cor['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$cor['UserId']], ['username']))['username'];
 	}
+	
+	usort($v_corrections, build_sorter('surname'));
 	
 	$db->close();
 	

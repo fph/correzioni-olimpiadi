@@ -7,7 +7,7 @@
 	
 	$db=OpenDbConnection();
 	
-	$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
+	$v_contests=ManyResultQuery($db, QuerySelect('Contests',NULL,NULL,'date'));
 	
 	$db->close();
 	

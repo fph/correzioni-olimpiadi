@@ -17,6 +17,8 @@
 		$con=OneResultQuery($db, QuerySelect('Contests', ['id'=>$con['ContestId']]));
 	}
 	
+	usort($v_contests, build_sorter('date'));
+	
 	$db->close();
 	
 	TemplatePage("ViewContestsOfAContestant",[	'Index'=>'index.php',
