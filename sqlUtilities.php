@@ -1,6 +1,7 @@
 <?php
 
 $TableInformation=array(
+	//~ "Administrators" => array('
 	"Contestants" => array("id","name","surname"),
 	"Contests" => array("id","name","date"),
 	"Corrections" => array("id","ProblemId","ContestantId","mark","comment","UserId"),
