@@ -11,7 +11,7 @@
 	
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$contestId]));
 	
-	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$contestId]));
+	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$contestId]), NULL, 'surname');
 	
 	foreach($v_contestants as &$con){
 		$con=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
