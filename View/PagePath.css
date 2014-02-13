@@ -1,3 +1,17 @@
 div#PagePath {
 	padding: 50px 0px 0px 40px;
 }
+
+a.PathElement {
+	font-weight:bold;
+	color: green;
+	text-decoration:none;
+}
+
+a.PathElement:hover {
+	color:black;
+}
+
+strong.PathSeparator {
+	color: gray;
+}
