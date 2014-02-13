@@ -34,17 +34,17 @@ else {
 	<tbody>
 	<?php
 		foreach($v_corrections as $cor) {
-			echo "<tr><td class='problemColumn'>".$cor['problem']."</td>";
+			echo "<tr id='Participation".$cor['problem']['id']."'><td class='problemColumn'>".$cor['problem']['name']."</td>";
 			if ($cor["done"]) {
 				echo "<td class='markColumn'>".$cor['mark']."</td>";
 				echo "<td class='commentColumn'>".$cor['comment']."</td>";
 				echo "<td class='userColumn'>".$cor['username']."</td>";
-				echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
 			}
 			else {
 				echo "<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='userColumn'>-</td>";
-				echo "<td class='modifyColumn'> <a target='_blank' class='modifyButton' href=''>Modify</a> </td>";
 			}
+			echo "<td class='modifyColumn'> <img class='modifyButtonImage' src='../View/Images/ModifyButtonImage.png'> </td>";
+			//~ echo "<td class='modifyColumn'> <button class='modifyButton'>Modifica</div> </td>";
 			echo "</tr>";
 		}
 	?>
