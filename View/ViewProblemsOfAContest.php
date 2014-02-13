@@ -16,14 +16,14 @@ global $v_contest, $v_problems;
 
 <?php
 if (empty($v_problems)) {
-	echo "<div class='emptyTable'> No problems yet. </div>";
+	echo "<div class='emptyTable'> Ancora nessun problema inserito. </div>";
 }
 else {
 ?>
 
 <table class="InformationTable" id="problemsOfAContestTable">
 	<thead><tr>
-		<th class='problemColumn'>Problem</th>
+		<th class='problemColumn'>Problemi</th>
 	</tr></thead>
 	
 	<tbody>

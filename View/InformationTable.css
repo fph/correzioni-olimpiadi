@@ -81,6 +81,10 @@ table.InformationTable .contestColumn {
 	min-width: 200px;
 }
 
+table.InformationTable .dateColumn {
+	min-width: 50px;
+}
+
 table.InformationTable td.modifyColumn {
 	border-bottom: 1px #6678b1;
 	padding: 5px 5px;

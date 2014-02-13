@@ -23,7 +23,8 @@ else {
 
 <table class="InformationTable">
 	<thead><tr>
-		<th class='contestColumn'>Contest</th>
+		<th class='contestColumn'>Gara</th>
+		<th class='dateColumn'>Data</th>
 	</tr></thead>
 	
 	<tbody>
@@ -31,6 +32,8 @@ else {
 		foreach($v_contests as $con) {
 			echo "<tr class='trlink' onclick=Redirect(".$con['id'].",".$v_contestant['id'].")>";
 			echo "<td class='contestColumn'>".$con['name']."</td>";
+			if (!is_null($con['date']))echo "<td class='dateColumn'>".$con['date']."</td>";
+			else echo "<td class='dateColumn'>-</td>";
 			echo "</tr>";
 		}
 	?>

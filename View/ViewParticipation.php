@@ -17,17 +17,17 @@ global $v_corrections, $v_contestant, $v_contest;
 
 <?php
 if (empty($v_corrections)) {
-	echo "<div class='emptyTable'> No corrections yet. </div>";
+	echo "<div class='emptyTable'> Ancora nessuna correzione. </div>";
 }
 else {
 ?>
 
 <table class="InformationTable" id="participationTable">
 	<thead><tr>
-		<th class='problemColumn'>Problem</th>
-		<th class='markColumn'>Mark</th>
-		<th class='commentColumn'>Comment</th>
-		<th class='userColumn'>User</th>
+		<th class='problemColumn'>Problema</th>
+		<th class='markColumn'>Voto</th>
+		<th class='commentColumn'>Commento</th>
+		<th class='userColumn'>Correttore</th>
 		<th class='modifyColumn'></th>
 	</tr></thead>
 	

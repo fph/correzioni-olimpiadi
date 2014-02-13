@@ -9,20 +9,20 @@ global $v_contestants;
 </script>
 
 <h2 class="pageTitle">
-	All contestants
+	Tutti i partecipanti
 </h2>
 
 <?php
 if (empty($v_contestants)) {
-	echo "<div class='emptyTable'> No contestants yet. </div>";
+	echo "<div class='emptyTable'> Ancora nessun partecipante inserito. </div>";
 }
 else {
 ?>
 
 <table class="InformationTable">
 	<thead><tr>
-		<th class='nameColumn'>Name</th>
-		<th class='surnameColumn'>Surname</th>
+		<th class='nameColumn'>Nome</th>
+		<th class='surnameColumn'>Cognome</th>
 	</tr></thead>
 	
 	<tbody>

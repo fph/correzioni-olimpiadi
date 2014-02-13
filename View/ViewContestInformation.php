@@ -19,14 +19,14 @@ global $v_contest;
 
 <table class="TableLink">
 	<tr class="trlink" id="LinkToContestants" onclick=RedirectContestants(<?php echo $v_contest['id']; ?>)>
-	<td>Contestants</td>
+	<td>Partecipanti</td>
 	</tr>
 	
 	<tr class="trlink" id="LinkToProblems" onclick=RedirectProblems(<?php echo $v_contest['id']; ?>)>
-	<td>Problems</td>
+	<td>Problemi</td>
 	</tr>
 	
 	<tr class="trlink" id="LinkToStatistics" onclick=RedirectContestants(<?php echo $v_contest['id']; ?>)>
-	<td>Statistics</td>
+	<td>Statistiche</td>
 	</tr>
 </table>

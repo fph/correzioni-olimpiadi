@@ -17,18 +17,18 @@ global $v_contest, $v_problem, $v_corrections;
 
 <?php
 if (empty($v_corrections)) {
-	echo "<div class='emptyTable'> No corrections yet. </div>";
+	echo "<div class='emptyTable'> Ancora nessuna correzione. </div>";
 }
 else {
 ?>
 
 <table class="InformationTable" id="problemTable">
 	<thead><tr>
-		<th class='nameColumn'>Name</th>
-		<th class='surnameColumn'>Surname</th>
-		<th class='markColumn'>Mark</th>
-		<th class='commentColumn'>Comment</th>
-		<th class='userColumn'>User</th>
+		<th class='nameColumn'>Nome</th>
+		<th class='surnameColumn'>Cognome</th>
+		<th class='markColumn'>Voto</th>
+		<th class='commentColumn'>Commento</th>
+		<th class='userColumn'>Correttore</th>
 		<th class='modifyColumn'></th>
 	</tr></thead>
 	

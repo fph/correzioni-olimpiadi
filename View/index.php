@@ -17,10 +17,10 @@ global $v_contest;
 
 <table class="TableLink">
 	<tr class="trlink" id="LinkToContests" onclick=RedirectContests()>
-	<td>Contests</td>
+	<td>Gare</td>
 	</tr>
 	
 	<tr class="trlink" id="LinkToContestants" onclick=RedirectContestants()>
-	<td>Contestants</td>
+	<td>Partecipanti</td>
 	</tr>
 </table>
