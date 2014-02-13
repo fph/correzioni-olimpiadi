@@ -38,6 +38,12 @@ table.InformationTable tbody tr:hover {
 	Modify button
 */
 
+table.InformationTable .modifyButtonImage {
+	width: 22px;
+	heigth: 22px;
+}
+
+/*
 table.InformationTable .modifyButton {
 	color:#ffffff;
 	background-color:#FFAD33;
@@ -55,6 +61,7 @@ table.InformationTable .modifyButton:hover {
 	color:#FFAD33;
 	background-color:#ffffff;
 }
+*/
 
 table.InformationTable td.modifyColumn {
 	border-bottom: 1px #6678b1;
@@ -65,6 +72,8 @@ table.InformationTable th.modifyColumn {
 	border-bottom: 2px #6678b1;
 	padding: 5px 5px;
 }
+
+
 
 /*
 	Columns' widths
