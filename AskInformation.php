@@ -37,7 +37,7 @@
 			}
 		} 
 		
-		if( is_null( $order ) ) {
+		if( !is_null( $order ) ) {
 			$query .= 'ORDER BY '.$order.' ';
 		}
 		
