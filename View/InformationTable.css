@@ -43,6 +43,14 @@ table.InformationTable .modifyButtonImage {
 	heigth: 22px;
 }
 
+table.InformationTable .modifyButtonImage:hover {
+	cursor: pointer;
+}
+
+table.InformationTable .modifyColumn {
+	width:25px;
+}
+
 /*
 table.InformationTable .modifyButton {
 	color:#ffffff;
