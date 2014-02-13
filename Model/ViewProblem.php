@@ -20,5 +20,9 @@
 	
 	$db->close();
 	
-	TemplatePage("ViewProblem");
+	TemplatePage("ViewProblem",['Index'=>'index.php',
+								'Gare'=>'ViewContests.php',
+								$v_contest['name']=>'ViewContestInformation.php?contestId='.$v_contest['id'],
+								'Problemi'=>'ViewProblemsOfAContest.php?contestId='.$v_contest['id'],
+								$v_problem['name']=>'ViewProblem.php?problemId='.$problemId]);
 ?>
