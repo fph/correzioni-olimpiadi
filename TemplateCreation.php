@@ -16,16 +16,19 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 			die();
 		}
 	}
-	echo '<!DOCTYPE html> ';
-	echo '<head> <style type="text/css">';
-	SuperInclude("View","global.css");
-	SuperInclude("View","InformationTable.css");
-	SuperInclude("View","MainBar.css");
-	SuperInclude("View","PagePath.css");
-	SuperInclude("View",$Content.".css");
-	if( !is_null( $Message ) ) SuperInclude("View","ShowMessage.css");
-	echo '</style></head><body>';
-	
+	?>
+<!DOCTYPE html>
+<head> 
+	<link type='text/css' rel='stylesheet' href='../View/css/global.css'>
+	<link type='text/css' rel='stylesheet' href='../View/css/MainBar.css'>
+	<link type='text/css' rel='stylesheet' href='../View/css/ShowMessage.css'>
+	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
+	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
+	<link type='text/css' rel='stylesheet' href='../View/css/<?php echo $Content ?>.css'>
+</head>
+
+<body>
+<?php
 	if( !is_null( $Message ) ){
 		global $v_Message;
 		$v_Message=$Message;
