@@ -13,5 +13,8 @@
 	
 	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$contestId]));
 		
-	TemplatePage("ViewProblemsOfAContest");
+	TemplatePage("ViewProblemsOfAContest",[	'Index'=>'index.php',
+											'Gare'=>'ViewContests.php',
+											$v_contest['name']=>'ViewContestInformation.php?contestId='.$contestId,
+											'Problemi'=>'ViewProblemsOfAContest.php?contestId='.$contestId]);
 ?>

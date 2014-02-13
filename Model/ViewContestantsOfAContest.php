@@ -21,6 +21,6 @@
 	
 	TemplatePage("ViewContestantsOfAContest",[	'Index'=>'index.php',
 												'Gare'=>'ViewContests.php',
-												$v_contest['name']=>'ViewContestInformation.php',
+												$v_contest['name']=>'ViewContestInformation.php?contestId='.$contestId,
 												'Partecipanti'=>'ViewContestantsOfAContest.php?contestId='.$contestId]);
 ?>

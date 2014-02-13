@@ -11,5 +11,5 @@
 	
 	$db->close();
 	
-	TemplatePage("ViewContests",['Index'=>'index.php','Contests'=>'ViewContests.php']);
+	TemplatePage("ViewContests",['Index'=>'index.php','Gare'=>'ViewContests.php']);
 ?>
