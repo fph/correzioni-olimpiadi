@@ -12,7 +12,7 @@ div.internalBody {
 }
 
 #ContentContainer {
-	padding: 0px 10px 30px 10px;
+	margin: 35px 5% 20px 5%;
 }
 
 html,body {
@@ -27,17 +27,20 @@ body {
 
 .pageTitle {
 	font-size: 2em;
-	margin: 15px;
+	padding-left: 5%;
 }
+
 
 .pageSubtitle {
 	font-size: 1.5em;
-	margin: 15px;
+	padding-left: 7%;
 }
 
 .TableLink {
 	font-size: 1.3em;
-	margin: 20px;
+/*
+	DEBUG
+*/
 }
 
 .TableLink td {
@@ -50,5 +53,7 @@ body {
 }
 
 .emptyTable {
-	margin:20px;
+/*
+	DEBUG
+*/
 }
