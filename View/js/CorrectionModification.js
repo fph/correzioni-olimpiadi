@@ -30,10 +30,6 @@ function Confirm(element_this){
 	var ContestantId=getContestantId(parent_tr);
 	var ProblemId=getProblemId(parent_tr);
 	
-	//~ var ContestantId=document.getElementsByClassName('pageSubtitle')[0].id;
-	//~ 
-	//~ var ProblemId=parent_tr.getElementsByClassName('problemColumn')[0].id;
-	
 	var markChild=parent_tr.getElementsByClassName('markColumn')[0];
 	
 	var selectEl=markChild.getElementsByClassName('selectMark')[0];
@@ -75,7 +71,7 @@ function OnModification(element_this) {
 	
 	var cancelChild=parent_tr.getElementsByClassName('cancelColumn')[0];
 	
-	var newMarkHTML="<select class='selectMark'><option name ='-'>-</option>";
+	var newMarkHTML="<select class='selectMark'>";
 	for (i=0; i<=7; i++) {
 		if (i==markHTML) newMarkHTML+="<option name ='"+i+"' selected='selected'>"+i+"</option>";
 		else newMarkHTML+="<option name ='"+i+"'>"+i+"</option>";
