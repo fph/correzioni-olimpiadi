@@ -78,11 +78,11 @@ table.InformationTable .problemColumn {
 }
 
 table.InformationTable .markColumn {
-	min-width: 50px;
+	width: 5%;
 }
 
 table.InformationTable .commentColumn {
-	width: 400px;
+	width: 50%;
 }
 
 table.InformationTable .userColumn {
@@ -103,4 +103,13 @@ table.InformationTable .contestColumn {
 
 table.InformationTable .dateColumn {
 	min-width: 50px;
+}
+
+/*
+	OnModification
+*/
+
+table.InformationTable .modifyTextareaComment {
+	width: 100%;
+	heigth: 100%;
 }
