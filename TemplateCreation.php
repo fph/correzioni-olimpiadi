@@ -25,8 +25,8 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/<?=$Content?>.css'>
-	<script type='text/javascript' src='../View/ShowMessage.js'> </script>
-	<script type='text/javascript' src='../View/AjaxManager.js'> </script>
+	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
+	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
 </head>
 
 <body> 
