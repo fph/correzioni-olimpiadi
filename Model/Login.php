@@ -10,7 +10,7 @@ $SessionStatus=CheckSession();
 
 if( CheckSession() == -1 ) {
 	EndSession();
-	TemplatePage("Login",[],0,['type'=>'bad', 'text'=>"Your session is expired, login again."]);
+	TemplatePage("Login",[],0,['type'=>'bad', 'text'=>"La sessione è scaduta, fai login di nuovo"]);
 	die();
 }
 else if( CheckSession() == 1 ) {
@@ -27,7 +27,7 @@ else if ( CheckSession()==0 and !is_null($_POST["username"]) ) {
 	$db->close();
 	
 	if( is_null($UserId) ) {
-		TemplatePage("Login",[],0,['type'=>'bad', 'text'=>"Incorrect username or password."]);
+		TemplatePage("Login",[],0,['type'=>'bad', 'text'=>"Username o password non corretti"]);
 		die();
 	}
 	else {

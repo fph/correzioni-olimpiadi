@@ -13,7 +13,7 @@ if( !is_null( $_POST["NewUsername"] ) ) {
 		$db->close();
 		TemplatePage("AccountSettings",
 		['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1,
-		['type'=>'bad', 'text'=>'Username già in uso da un utente, scegline un altro.']);
+		['type'=>'bad', 'text'=>'Username già in uso da un utente, scegline un altro']);
 		die();
 	}
 	
@@ -24,7 +24,7 @@ if( !is_null( $_POST["NewUsername"] ) ) {
 	
 	TemplatePage("AccountSettings",
 	['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1,
-	['type'=>'good', 'text'=>'Username cambiato con successo.']);
+	['type'=>'good', 'text'=>'Username cambiato con successo']);
 	
 	die();
 }
@@ -46,7 +46,7 @@ else if ( !is_null( $_POST['NewPassword'] ) and !is_null( $_POST['OldPassword'] 
 		$db->close();
 		TemplatePage("AccountSettings",
 		['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1,
-		['type'=>'bad', 'text'=>'La vecchia password non è corretta.']);
+		['type'=>'bad', 'text'=>'La vecchia password non è corretta']);
 		
 		die();
 	}
@@ -56,7 +56,7 @@ else if ( !is_null( $_POST['NewPassword'] ) and !is_null( $_POST['OldPassword'] 
 	$db->close();
 	TemplatePage("AccountSettings",
 	['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1,
-	['type'=>'good', 'text'=>'Password cambiata con successo.']);
+	['type'=>'good', 'text'=>'Password cambiata con successo']);
 	die();
 }
 

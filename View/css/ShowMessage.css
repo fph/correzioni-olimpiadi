@@ -1,40 +1,26 @@
-div.ShowMessage {
-	display: table;
-
-	z-index: 1001;
+div#MessageList {
 	position: fixed;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	top: 30%;
-	
-	text-align: center;
-	
+	top: 50px;
+	right: 10px;
+	margin-right: 5%;
 	width: 25%;
-	min-width: 200px;
-	height: 5%;
-	min-height: 50px;
-	
-	background-color: green;
-	
-	border-radius: 10px;
 }
 
-div.ShowMessage span#ShowMessage_span {
-	display: table-cell;
-	vertical-align: middle;
+.bad_Message, .good_Message {
+	margin: 3px;
+	padding: 3px;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: bold;
 }
 
-#ShowMessage_bad {
+.bad_Message {
 	background-color: rgba(255,0,0,0.7);
 	color: white;
-	font-size: large;
-	font-weight: bold;
 }
 
-#ShowMessage_good {
+.good_Message {
 	background-color: rgba(0,255,0,0.7);
-	color: white;
-	font-size: large;
-	font-weight: bold;
+	color: black;
 }
