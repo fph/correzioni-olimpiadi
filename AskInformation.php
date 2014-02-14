@@ -73,6 +73,25 @@
 		return $query;
 	}
 	
+	function QueryInsert($tableName, $data) {
+		if( is_null($data) ) die( "EMPTY INSERT" );
+		$query='INSERT INTO '.$tableName.' ';
+		$queryField='';
+		$queryValue='VALUES(';
+		$first=0;
+		foreach ($data as $field => $value) {
+			if($first==0){
+				$queryField .= ',';
+				$queryValue .= ',';
+			}
+			$first=1;
+			$queryField .= $field;
+			$queryValue .= escape_input( $value );
+		}
+		$queryField .= ')';
+		return $query.' '.$queryField.' '.$queryValue;
+	}
+	
 	function OneResultQuery($db, $query) {
 		$result=$db->query($query) or die($db->error);
 		return mysqli_fetch_array($result);
