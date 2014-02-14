@@ -75,7 +75,7 @@ else {
 			}
 			?>
 			<td class='modifyColumn'> <div class='modifyButtonContainer' onclick=OnModification(this)>
-			<img class='modifyButtonImage' src='../View/Images/ModifyButtonImage.png'}>
+			<img class='modifyButtonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica'>
 			</div> </td>
 			</tr>
 			<?php

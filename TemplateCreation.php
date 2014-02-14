@@ -53,7 +53,6 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 		<?php
 	}
 	?>
-	</div>
 </body>
 
 	<?php
