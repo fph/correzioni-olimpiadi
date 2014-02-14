@@ -2,7 +2,7 @@
 require_once "../Utilities.php";
 SuperRequire_once("General","TemplateCreation.php");
 SuperRequire_once("General","SessionManager.php");
-SuperRequire_once("General","AskInformation.php");
+SuperRequire_once("General","sqlUtilities.php");
 
 if( !is_null( $_POST["NewUsername"] ) ) {
 	$db=OpenDbConnection();
