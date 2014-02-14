@@ -18,6 +18,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	?>
 <!DOCTYPE html>
 <head> 
+	<title> Correzioni Olimpiadi</title>
 	<link type='text/css' rel='stylesheet' href='../View/css/global.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/MainBar.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/ShowMessage.css'>

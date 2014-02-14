@@ -4,6 +4,7 @@
 	<tr>
 		<th> Username</th>
 		<th> Password</th>
+		<th> </th>
 	</tr>
 	<tr>
 		<td> <input type="text" name="username"> </td>
