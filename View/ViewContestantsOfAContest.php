@@ -9,14 +9,14 @@ global $v_contest, $v_contestants;
 </script>
 
 <h2 class="pageTitle">
-<?php
-	echo $v_contest['name'];
-?>
+<?=$v_contest['name'];?>
 </h2>
 
 <?php
 if (empty($v_contestants)) {
-	echo "<div class='emptyTable'> Ancora nessun partecipante inserito. </div>";
+	?>
+	<div class='emptyTable'> Ancora nessun partecipante inserito. </div>
+	<?php
 }
 else {
 ?>
@@ -30,10 +30,12 @@ else {
 	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
-			echo "<tr class='trlink' onclick=Redirect(".$v_contest['id'].",".$con['id'].")>";
-			echo "<td class='surnameColumn'>".$con['surname']."</td>";
-			echo "<td class='nameColumn'>".$con['name']."</td>";
-			echo "</tr>";
+			?>
+			<tr class='trlink' onclick=Redirect(<?=$v_contest['id']?>,<?=$con['id']?>)>
+			<td class='surnameColumn'><?=$con['surname']?></td>
+			<td class='nameColumn'><?=$con['name']?></td>
+			</tr>
+			<?php
 		}
 	?>
 	</tbody>

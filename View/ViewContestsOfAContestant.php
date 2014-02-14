@@ -9,14 +9,14 @@ global $v_contestant, $v_contests;
 </script>
 
 <h2 class="pageTitle">
-<?php
-	echo $v_contestant['surname']." ".$v_contestant['name'];
-?>
+	<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
 </h2>
 
 <?php
 if (empty($v_contests)) {
-	echo "<div class='emptyTable'> No contests yet. </div>";
+	?>
+	<div class='emptyTable'> No contests yet. </div>
+	<?php
 }
 else {
 ?>
@@ -30,11 +30,13 @@ else {
 	<tbody>
 	<?php
 		foreach($v_contests as $con) {
-			echo "<tr class='trlink' onclick=Redirect(".$con['id'].",".$v_contestant['id'].")>";
-			echo "<td class='contestColumn'>".$con['name']."</td>";
-			if (!is_null($con['date']))echo "<td class='dateColumn'>".$con['date']."</td>";
-			else echo "<td class='dateColumn'>-</td>";
-			echo "</tr>";
+			?>
+			<tr class='trlink' onclick=Redirect(<?=$con['id']?>,<?=$v_contestant['id']?>)>
+			<td class='contestColumn'><?=$con['name']?></td>
+			<?php if (!is_null($con['date'])) { ?> <td class='dateColumn'><?=$con['date']?></td> <?php }
+			else {?> <td class='dateColumn'>-</td> <?php } ?>
+			</tr>
+			<?php
 		}
 	?>
 	</tbody>

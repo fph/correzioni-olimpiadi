@@ -12,9 +12,7 @@ global $v_contest;
 </script>
 
 <h2 class="pageTitle">
-	<?php
-		echo $v_contest['name'];
-	?>
+	<?=$v_contest['name']?>
 </h2>
 
 <table class="TableLink">

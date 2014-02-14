@@ -9,14 +9,14 @@ global $v_contest, $v_problems;
 </script>
 
 <h2 class="pageTitle" id="contest">
-<?php
-	echo $v_contest['name'];
-?>
+<?=$v_contest['name']?>
 </h2>
 
 <?php
 if (empty($v_problems)) {
-	echo "<div class='emptyTable'> Ancora nessun problema inserito. </div>";
+	?>
+	<div class='emptyTable'> Ancora nessun problema inserito. </div>
+	<?php
 }
 else {
 ?>
@@ -29,9 +29,11 @@ else {
 	<tbody>
 	<?php
 		foreach($v_problems as $pro) {
-			echo "<tr class='trlink' onclick=Redirect(".$pro['id'].")>";
-			echo "<td class='problemColumn'>".$pro['name']."</td>";
-			echo "</tr>";
+			?>
+			<tr class='trlink' onclick=Redirect(<?=$pro['id']?>)>
+			<td class='problemColumn'><?=$pro['name']?></td>
+			</tr>
+			<?php
 		}
 	?>
 	</tbody>

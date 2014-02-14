@@ -14,7 +14,9 @@ global $v_contests;
 
 <?php
 if (empty($v_contests)) {
-	echo "<div class='emptyTable'> Ancora nessuna gara inserita. </div>";
+	?>
+	<div class='emptyTable'> Ancora nessuna gara inserita. </div>
+	<?php
 }
 else {
 ?>
@@ -28,11 +30,21 @@ else {
 	<tbody>
 	<?php
 		foreach($v_contests as $con) {
-			echo "<tr class='trlink' onclick=Redirect(".$con['id'].")>";
-			echo "<td class='contestColumn'>".$con['name']."</td>";
-			if (!is_null($con['date']))echo "<td class='dateColumn'>".$con['date']."</td>";
-			else echo "<td class='dateColumn'>-</td>";
-			echo "</tr>";
+			?>
+			<tr class='trlink' onclick=Redirect(<?=$con['id']?>)>
+			<td class='contestColumn'><?=$con['name']?></td>
+			<?php if (!is_null($con['date'])) { 
+				?> 
+				<td class='dateColumn'><?=$con['date']?></td> 
+				<?php 
+			}
+			else { 
+				?>
+				<td class='dateColumn'>-</td> 
+				<?php 
+			} ?>
+			</tr>
+			<?php
 		}
 	?>
 	</tbody>
