@@ -14,7 +14,7 @@ $ContestId=OneResultQuery($db, QuerySelect( 'Problems', ['id'=>$ProblemId], ['Co
 
 if( is_null( $ContestId ) ) {
 	$db->close();
-	echo json_encode( ['type'=>'bad', 'text'=>'Il contest scelto non esiste'] );
+	echo json_encode( ['type'=>'bad', 'text'=>'La gara scelta non esiste'] );
 	die();
 }
 
@@ -22,7 +22,7 @@ $Permission=VerifyPermission( $db, GetUserIdBySession() , $ContestId ) or IsAdmi
 
 if( $Permission==0 ) {
 	$db->close();
-	echo json_encode( ['type'=>'bad', 'text'=>'Non hai i permessi per correggere questo contest'] );
+	echo json_encode( ['type'=>'bad', 'text'=>'Non hai i permessi per correggere questa gara'] );
 	die();
 }
 
