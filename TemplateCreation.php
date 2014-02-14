@@ -23,14 +23,14 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<link type='text/css' rel='stylesheet' href='../View/css/ShowMessage.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
-	<link type='text/css' rel='stylesheet' href='../View/css/<?php echo $Content ?>.css'>
+	<link type='text/css' rel='stylesheet' href='../View/css/<?=$Content?>.css'>
 	<script type='text/javascript' src='../View/ShowMessage.js'> </script>
 	<script type='text/javascript' src='../View/AjaxManager.js'> </script>
 </head>
 
 <body> 
 	<?php SuperInclude("View","MainBar.php"); ?>
-	<div class="internalBody" id="<?php echo $Content; ?>_InternalBody">
+	<div class="internalBody" id="<?=$Content;?>_InternalBody">
 	
 	<?php
 		global $v_PathDescription;
@@ -47,7 +47,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	if( !is_null( $Message ) ){
 		?>
 		<script>
-			ShowMessage( <?php echo "'".$Message['type']."', '".$Message['text']."'"?> );
+			ShowMessage( '<?=$Message['type']?>' , '<?=$Message['text']?>' );
 		</script>
 		<?php
 	}

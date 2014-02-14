@@ -10,9 +10,7 @@
 			<div id="MainBar_UserList">
 				<a href="AccountSettings.php" id="UsernameLink"> 
 					<span id="UsernameInner">
-						<?php
-							echo $_SESSION['username'];
-						?>
+						<?=$_SESSION['username']?>
 					</span>
 				</a>
 				<a href="Logout.php" id="logout"> Logout </a>
