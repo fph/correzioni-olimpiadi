@@ -48,7 +48,9 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	if( !is_null( $Message ) ){
 		?>
 		<script>
+			var SessionUsername='<?=GetUsernameBySession()?>';
 			ShowMessage( '<?=$Message['type']?>' , '<?=$Message['text']?>' );
+			
 		</script>
 		<?php
 	}
