@@ -44,17 +44,15 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	</div>
 	
 	<div id='MessageList'> </div>
-	<?php
-	if( !is_null( $Message ) ){
-		?>
-		<script>
-			var SessionUsername='<?=GetUsernameBySession()?>';
-			ShowMessage( '<?=$Message['type']?>' , '<?=$Message['text']?>' );
-			
-		</script>
+	<script type='text/javascript'>
+		var SessionUsername='<?=GetUsernameBySession()?>';
 		<?php
-	}
-	?>
+		if( !is_null( $Message ) ){
+			?>
+			ShowMessage( '<?=$Message['type']?>' , '<?=$Message['text']?>' );
+			<?php
+		} ?>
+	</script>
 </body>
 
 	<?php
