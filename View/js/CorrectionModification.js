@@ -10,7 +10,7 @@ function Clear(element_this) {
 	commentChild.innerHTML=commentHTML;
 	
 	var modifyButtons=document.getElementsByClassName("modifyButtonImage");
-	for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style.display='initial';
+	for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style["display"]='inline';
 	
 	var modifyChild=parent_tr.getElementsByClassName('modifyColumn')[0];
 	newModifyHTML="<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>";
@@ -95,5 +95,5 @@ function OnModification(element_this) {
 	cancelChild.innerHTML=newCancelHTML;
 	
 	var modifyButtons=document.getElementsByClassName("modifyButtonImage");
-	for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style.display='none';
+	for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style["display"]='none';
 }
