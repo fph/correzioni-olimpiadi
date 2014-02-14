@@ -1,9 +1,10 @@
 <h1 class='PageTitle'> Configurazione account</h1>
 <h2 class='PageSubTitle'> <?php session_start(); echo $_SESSION['username']; ?> </h2>
-<form action="" method="POST" id="UsernameChange">
+<form action="AccountSettings.php" method="POST" id="UsernameChange">
 	<table>
 	<tr>
 		<th> Nuovo username </th>
+		<th> </th>
 	</tr>
 	<tr>
 		<td>
@@ -16,11 +17,12 @@
 	</table>
 </form>
 
-<form action="" method="POST" name="PasswordChange">
+<form action="AccountSettings.php" method="POST" name="PasswordChange">
 	<table>
 		<tr>
 			<th> Vecchia Password </th>
 			<th> Nuova Password</th>
+			<th> </th>
 		</tr>
 		<tr>
 			<td>
