@@ -3,15 +3,20 @@ global $v_corrections, $v_contestant, $v_contest;
 ?>
 
 <script>
-	function OnModification(elemento) {
-		var parent=elemento.parentNode.parentNode;
-		var markChild=parent.getElementsByClassName('markColumn')[0];
+	
+	function Confirm(element_this){
+		
+	}
+	
+	function OnModification(element_this) {
+		var parent_tr=element_this.parentNode.parentNode.parentNode;
+		var markChild=parent_tr.getElementsByClassName('markColumn')[0];
 		var previousMarkHTML=markChild.innerHTML;
 		
-		var commentChild=parent.getElementsByClassName('commentColumn')[0];
+		var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
 		var previousCommentHTML=commentChild.innerHTML;
 		
-		var confirmChild=parent.getElementsByClassName('modifyColumn')[0];
+		var confirmChild=parent_tr.getElementsByClassName('modifyColumn')[0];
 		
 		var newMarkHTML="<select><option name ='-'>-</option>";
 		for (i=0; i<=7; i++) {
@@ -23,7 +28,16 @@ global $v_corrections, $v_contestant, $v_contest;
 		
 		markChild.innerHTML=newMarkHTML;
 		
-		commentChild.innerHTML="<textarea class='modifyTextareaComment'>"+previousCommentHTML+"</textarea>"
+		if (previousCommentHTML=='-') commentChild.innerHTML="<div contentEditable='true' class='modifyComment'></div>"
+		else commentChild.innerHTML="<div contentEditable='true' class='modifyComment'>"+previousCommentHTML+"</div>"
+		
+		newConfirmHTML="<div class='confirmButtonContainer buttonContainer'>";
+		newConfirmHTML+="<img class='confirmButtonImage buttonImage' src='../View/Images/ConfirmButtonImage.png' alt='Conferma' onclick=Confirm(this)>";
+		newConfirmHTML+="</div>";
+		confirmChild.innerHTML=newConfirmHTML;
+		
+		var modifyButtons=document.getElementsByClassName("modifyButtonImage");
+		for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style.display='none';
 	}
 </script>
 
@@ -52,6 +66,7 @@ else {
 		<th class='commentColumn'>Commento</th>
 		<th class='userColumn'>Correttore</th>
 		<th class='modifyColumn'></th>
+		<th class='cancelColumn'></th>
 	</tr></thead>
 	
 	<tbody>
@@ -74,9 +89,10 @@ else {
 				<?php
 			}
 			?>
-			<td class='modifyColumn'> <div class='modifyButtonContainer' onclick=OnModification(this)>
-			<img class='modifyButtonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica'>
+			<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>
+			<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' onclick=OnModification(this)>
 			</div> </td>
+			<td class='cancelColumn'> <div class='cancelButtonContainer buttonContainer'> </div> </td>
 			</tr>
 			<?php
 		}

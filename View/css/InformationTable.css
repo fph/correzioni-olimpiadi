@@ -35,35 +35,35 @@ table.InformationTable tbody tr:hover {
 }
 
 /*
-	Modify button
+	Modify and cancel button border-button
 */
 
-table.InformationTable .modifyButtonImage {
-	width: 22px;
-	height: 22px;
-}
-
-table.InformationTable .modifyButtonContainer {
-	width: 22px;
-	heigth: 22px;
-}
-
-table.InformationTable .modifyButtonContainer:hover {
-	cursor: pointer;
-}
-
-table.InformationTable .modifyColumn {
-	width:25px;
-}
-
-table.InformationTable td.modifyColumn {
+table.InformationTable td.modifyColumn, table.InformationTable td.cancelColumn {
 	border-bottom: 1px #6678b1;
 	padding: 5px 5px;
 }
 
-table.InformationTable th.modifyColumn {
+table.InformationTable th.modifyColumn, table.InformationTable th.cancelColumn {
 	border-bottom: 2px #6678b1;
 	padding: 5px 5px;
+}
+
+/*
+	Button images
+*/
+
+table.InformationTable .buttonImage {
+	width: 22px;
+	height: 22px;
+}
+
+table.InformationTable .buttonImage:hover {
+	cursor: pointer;
+}
+
+table.InformationTable .buttonContainer {
+	width: 22px;
+	height: 22px;
 }
 
 
@@ -105,11 +105,22 @@ table.InformationTable .dateColumn {
 	min-width: 50px;
 }
 
+table.InformationTable .cancelColumn {
+	width:25px;
+}
+
+table.InformationTable .modifyColumn {
+	width:25px;
+}
+
 /*
 	OnModification
 */
 
-table.InformationTable .modifyTextareaComment {
+table.InformationTable .modifyComment {
 	width: 100%;
-	heigth: 100%;
+	height: 100%;
+	color: black;
+	outline: -webkit-focus-ring-color auto 5px;
+
 }
