@@ -1,7 +1,3 @@
-function showMessage( type , text ) {
-	alert(type+': '+text);
-}
-
 function MakeAjaxRequest( url, data ) {
 	var ajaxReq;
 	if (window.XMLHttpRequest)ajaxReq = new XMLHttpRequest();
@@ -13,7 +9,7 @@ function MakeAjaxRequest( url, data ) {
 	ajaxReq.onreadystatechange = function() {
 		if ( ajaxReq.readyState==4 && ajaxReq.status==200) {
 			var msg=JSON.parse( ajaxReq.responseText ); //Magari usare json!
-			showMessage(msg.type, msg.text);
+			ShowMessage(msg.type, msg.text);
 		}
 	};
 }

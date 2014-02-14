@@ -3,7 +3,6 @@ require_once "Utilities.php";
 
 SuperRequire_once("General","SessionManager.php");
 
-
 function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
@@ -25,26 +24,37 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/<?php echo $Content ?>.css'>
+	<script type='text/javascript' src='../View/ShowMessage.js'> </script>
+	<script type='text/javascript' src='../View/AjaxManager.js'> </script>
 </head>
 
-<body>
-<?php
+<body> 
+	<?php SuperInclude("View","MainBar.php"); ?>
+	<div class="internalBody" id="<?php echo $Content; ?>_InternalBody">
+	
+	<?php
+		global $v_PathDescription;
+		$v_PathDescription=$PathDescription;
+		SuperInclude("View","PagePath.php");
+	?>
+		<div id="ContentContainer">
+			<?php SuperInclude("View",$Content.".php"); ?>
+		</div>
+	</div>
+	
+	<div id='MessageList'> </div>
+	<?php
 	if( !is_null( $Message ) ){
-		global $v_Message;
-		$v_Message=$Message;
-		SuperInclude("View","ShowMessage.php");
+		?>
+		<script>
+			ShowMessage( <?php echo "'".$Message['type']."', '".$Message['text']."'"?> );
+		</script>
+		<?php
 	}
-	SuperInclude("View","MainBar.php");
-	
-	echo '<div class="internalBody" id="'.$Content.'_InternalBody">';
-	
-	global $v_PathDescription;
-	$v_PathDescription=$PathDescription;
-	SuperInclude("View","PagePath.php");
-	
-	echo '<div id="ContentContainer">';
-	SuperInclude("View",$Content.".php");
-	echo '</div></div></body>';
-}
+	?>
+	</div>
+</body>
 
+	<?php
+}
 ?>
