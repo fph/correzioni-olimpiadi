@@ -6,8 +6,13 @@ global $v_contest;
 	function RedirectContestants(contestId) {
 		document.location="ViewContestantsOfAContest.php?contestId="+contestId;
 	}
+	
 	function RedirectProblems(contestId) {
 		document.location="ViewProblemsOfAContest.php?contestId="+contestId;
+	}
+	
+	function RedirectStatistics(contestId){
+		document.location="ViewStatisticsOfAContest.php?contestId="+contestId;
 	}
 </script>
 
@@ -24,7 +29,7 @@ global $v_contest;
 	<td>Problemi</td>
 	</tr>
 	
-	<tr class="trlink" id="LinkToStatistics" onclick=RedirectContestants(<?php echo $v_contest['id']; ?>)>
+	<tr class="trlink" id="LinkToStatistics" onclick=RedirectStatistics(<?php echo $v_contest['id']; ?>)>
 	<td>Statistiche</td>
 	</tr>
 </table>
