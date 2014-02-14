@@ -3,11 +3,11 @@ require_once '../Utilities.php';
 SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','AskInformation.php');
 
-$data=json_decode( $_POST['data'] );
+$data=json_decode( $_POST['data'] , 1);
 $ContestantId=$data['ContestantId'];
 $ProblemId=$data['ProblemId'];
-$Mark=$data['mark'];
-$Comment=$data['comment'];
+$mark=$data['mark'];
+$comment=$data['comment'];
 
 $db=OpenDbConnection();
 $ContestId=OneResultQuery($db, QuerySelect( 'Problems', ['id'=>$ProblemId], ['ContestId'] ))['ContestId'];
@@ -18,7 +18,7 @@ if( is_null( $ContestId ) ) {
 	die();
 }
 
-$Permission=VerifyPermissions( $db, GetUserIdBySession() , $ContestId );
+$Permission=VerifyPermission( $db, GetUserIdBySession() , $ContestId ) or IsAdmin( $db, GetUserIdBySession() );
 
 if( $Permission==0 ) {
 	$db->close();
@@ -26,7 +26,7 @@ if( $Permission==0 ) {
 	die();
 }
 
-if( is_null( 'mark' ) ) {
+if( is_null( $mark ) ) { //TODO: Controllare che sia un voto numerico o quasi
 	$db->close();
 	echo json_encode( ['type'=>'bad', 'text'=>'Devi scegliere un voto prima di salvare la correzione'] );
 	die();
@@ -42,11 +42,14 @@ $Correction =OneResultQuery ( $db,QuerySelect('Corrections', ['ProblemId'=>$Prob
 
 if( is_null($Correction) ) {
 	Query( $db,QueryInsert('Corrections', 
-	['ProblemId'=>$ProblemId, 'ContestantId'=>$ContestantId, 'mark'=>$mark, 'comment'=>$comment, 'UserId'=>$GetUserIdBySession() ]) );
+	['ProblemId'=>$ProblemId, 'ContestantId'=>$ContestantId, 'mark'=>$mark, 'comment'=>$comment, 'UserId'=>GetUserIdBySession() ]) );
 }
 
 else {
 	if( $mark == $Correction['mark'] ) Query( $db,QueryUpdate('Corrections', ['id'=>$Correction['id']] , ['comment'=>$comment]) );
-	else Query( $db,QueryUpdate('Corrections', ['id'=>$Correction['id']] , ['mark'=>$mark, 'comment'=>$comment, 'UserId'=>$GetUserIdBySession() ]) );
+	else Query( $db,QueryUpdate('Corrections', ['id'=>$Correction['id']] , ['mark'=>$mark, 'comment'=>$comment, 'UserId'=>GetUserIdBySession() ]) );
 }
+
+$db->close();
+echo json_encode( ['type'=>'good', 'text'=>'Correzione salvata con successo'] );
 ?>

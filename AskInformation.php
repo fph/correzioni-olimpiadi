@@ -76,11 +76,11 @@
 	function QueryInsert($tableName, $data) {
 		if( is_null($data) ) die( "EMPTY INSERT" );
 		$query='INSERT INTO '.$tableName.' ';
-		$queryField='';
+		$queryField='(';
 		$queryValue='VALUES(';
 		$first=0;
 		foreach ($data as $field => $value) {
-			if($first==0){
+			if($first==1){
 				$queryField .= ',';
 				$queryValue .= ',';
 			}
@@ -89,6 +89,8 @@
 			$queryValue .= escape_input( $value );
 		}
 		$queryField .= ')';
+		$queryValue .=')';
+		
 		return $query.' '.$queryField.' '.$queryValue;
 	}
 	
