@@ -14,7 +14,9 @@ global $v_contestants;
 
 <?php
 if (empty($v_contestants)) {
-	echo "<div class='emptyTable'> Ancora nessun partecipante inserito. </div>";
+	?>
+	<div class='emptyTable'> Ancora nessun partecipante inserito. </div>
+	<?php
 }
 else {
 ?>
@@ -28,10 +30,12 @@ else {
 	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
-			echo "<tr class='trlink' onclick=Redirect(".$con['id'].")>";
-			echo "<td class='surnameColumn'>".$con['surname']."</td>";
-			echo "<td class='nameColumn'>".$con['name']."</td>";
-			echo "</tr>";
+			?>
+			<tr class='trlink' onclick=Redirect(<?=$con['id']?>)>
+			<td class='surnameColumn'><?=$con['surname']?></td>
+			<td class='nameColumn'><?=$con['name']?></td>
+			</tr>
+			<?php
 		}
 	?>
 	</tbody>
