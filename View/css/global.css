@@ -12,7 +12,7 @@ div.internalBody {
 }
 
 #ContentContainer {
-	margin: 35px 5% 20px 5%;
+	margin: 35px 5% 80px 5%;
 }
 
 html,body {
@@ -38,9 +38,7 @@ body {
 
 .TableLink {
 	font-size: 1.3em;
-/*
-	DEBUG
-*/
+	margin-left: 7%;
 }
 
 .TableLink td {
@@ -56,4 +54,16 @@ body {
 /*
 	DEBUG
 */
+}
+
+div.formContainer form {
+	margin-left: 8%;
+}
+
+div.formContainer form table td {
+	padding: 0px 5px;
+}
+
+thead, tbody {
+	color: #039;
 }

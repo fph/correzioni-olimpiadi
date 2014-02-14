@@ -33,6 +33,7 @@
 	}
 	
 	function SuperRedirect($type,$path) {
+		//~ echo GenerateUrl($type,$path);
 		header("location: ".GenerateUrl($type,$path) );
 	}
 ?>
