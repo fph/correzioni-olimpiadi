@@ -3,6 +3,9 @@ require_once "Utilities.php";
 
 SuperRequire_once("General","SessionManager.php");
 
+$jsInclude=['ViewParticipation'=>['CorrectionModification'], 'ViewProblem'=>['CorrectionModification'] ];
+$cssInclude=[];
+
 function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
@@ -24,9 +27,21 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<link type='text/css' rel='stylesheet' href='../View/css/ShowMessage.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
-	<link type='text/css' rel='stylesheet' href='../View/css/<?=$Content?>.css'>
+
+<?php foreach( $cssInclude['$Content'] as $cssName ) {
+		?>
+		<link type='text/css' rel='stylesheet' href='../View/css/<?=$cssName?>.css'>
+		<?php
+	} ?>	
+
 	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
+	
+<?php foreach( $jsInclude['$Content'] as $jsName ) {
+		?>
+		<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
+		<?php
+	} ?>
 </head>
 
 <body> 
