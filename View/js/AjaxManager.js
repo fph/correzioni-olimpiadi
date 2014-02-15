@@ -1,4 +1,4 @@
-function MakeAjaxRequest( url, data ) {
+function MakeAjaxRequest( url, data , exec ) {
 	var ajaxReq;
 	if (window.XMLHttpRequest)ajaxReq = new XMLHttpRequest();
 	else ajaxReq = new ActiveXObject("Microsoft.XMLHTTP");
@@ -10,6 +10,7 @@ function MakeAjaxRequest( url, data ) {
 		if ( ajaxReq.readyState==4 && ajaxReq.status==200) {
 			var msg=JSON.parse( ajaxReq.responseText ); //Magari usare json!
 			ShowMessage(msg.type, msg.text);
+			if (exec) exec( msg );
 		}
 	};
 }

@@ -47,6 +47,10 @@ function AddParticipation( $db , $ContestantId , $ContestId ) {
 	
 }
 
+function RemovePartecipation( $db , $ContestantId , $ContestId ) {
+	
+}
+
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
