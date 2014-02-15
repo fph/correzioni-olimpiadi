@@ -3,10 +3,17 @@
 	require_once "../Utilities.php";
 	SuperRequire_once("General","sqlUtilities.php");
 	SuperRequire_once("General", "TemplateCreation.php");
+	SuperRequire_once("General", "SessionManager.php");
 	
 	$db=OpenDbConnection();
 	
-	$v_contests=ManyResultQuery($db, QuerySelect('Contests',NULL,NULL,'date'));
+	$all_contests=ManyResultQuery($db, QuerySelect('Contests',NULL,NULL,'date'));
+	
+	$UserId=getUserIdBySession();
+	$v_contests=[];
+	foreach($all_contests as $con){
+		if (VerifyPermission($db, $UserId, $con['id'])) $v_contests[]=$con;
+	}
 	
 	$db->close();
 	
