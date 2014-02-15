@@ -4,6 +4,7 @@
 	SuperRequire_once("General","sqlUtilities.php");
 	SuperRequire_once("General", "TemplateCreation.php");
 	SuperRequire_once("General", "SessionManager.php");
+	SuperRequire_once("General", "PermissionManager.php");
 	
 	$db=OpenDbConnection();
 	
