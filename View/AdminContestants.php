@@ -8,10 +8,9 @@ global $v_contestants;
 	}
 	
 	function AddContestant() {
-		//~ DEBUG
-		var surname=document.getElementById('inputSurname');
-		var name=document.getElementById('inputName');
-		echo(surname);
+		var surname=document.getElementById('inputSurname').value;
+		var name=document.getElementById('inputName').value;
+		
 	}
 </script>
 
@@ -61,7 +60,7 @@ else {
 	Aggiungi un partecipante
 </h3>
 
-<div class='formContainer'>
+<div class='createContainer'>
 	<table>
 	<tr>
 		<th> Cognome </th>
@@ -69,9 +68,6 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-<!--
-	DEBUG	
--->
 		<td> <input type="text" name="surname" id="inputSurname"> </td>
 		<td> <input type="text" name="name" id="inputName"> </td>
 		<td> <input type="button" value="Aggiungi" onclick=AddContestant()> </td>
