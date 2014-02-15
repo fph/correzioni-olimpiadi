@@ -1,0 +1,34 @@
+Guide for usage, installation an developing
+
+1) 	To install correzioni-olimpiadi you must copy the whole project in a folder which is processed by apache webserver (using php and mysql).
+	Then you have to create a user in mysql with username X and pass Y, and insert X,Y in Constants.php as obvious.
+	In constants.php you have also to configure the various url (as described by variable names).
+	
+	Then execute InitDatabase.php and it will create the whole database and will also Populate it nearly randomly.
+	
+	Now you should have a properly working system.
+	
+2)	To use correzioni-problemi open with a browser the url .../Model/Login.php
+
+	The whole administration side has to be done directly on the database.
+	
+	
+Developing
+
+Constants.php : Configuration variables of the system.
+Utilities.php : Function used to include files of the project (to use instead of the classic include or require)
+sqlUtilities.php : A group of function used to create query, to make query, to open db connection and to manipulate the result. This function are the only way in which php-files should interact with the db.
+SessionManager.php : A php file to handle session.
+TemplateCreation.php : The file which creates all the html pages shown in the browser. It is based on the function TemplatePage which receive the $Content=View name, and various other optional parameters. This is the MUST in order to create the page for a Model file.
+
+Model folder:
+	In this folder there are the php which are called directly by the user. (and so those which appears in the url bar) 
+	These files have to parse user input, to check user's permissions and to make db query, to call TemplatePage.
+	In order to pass information to the View files you have to use a variable named $v_VARIABLENAME and to declare it global.
+
+View folder:
+	It contains the php pages which render the html to send to the user. Those must be nearly pure html, with the minimum needed php.
+	js,css, images folder obviously contain what their names say.
+	
+Modify Folder:
+	It contains the files which answers to request of the user to change the database.
