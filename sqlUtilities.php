@@ -153,4 +153,37 @@ function build_sorter($key) {
 	};
 }
 
+function getExtendedItalianDate($date){
+	if ($date==null) return $date;
+	$dividedDate=explode("-",$date);
+	$italianDate=$dividedDate[2]." ";
+	
+	$month=$dividedDate[1];
+	if ($month=='01') $italianDate.="gennaio";
+	if ($month=='02') $italianDate.="febbraio";
+	if ($month=='03') $italianDate.="marzo";
+	if ($month=='04') $italianDate.="aprile";
+	if ($month=='05') $italianDate.="maggio";
+	if ($month=='06') $italianDate.="giugno";
+	if ($month=='07') $italianDate.="luglio";
+	if ($month=='08') $italianDate.="agosto";
+	if ($month=='09') $italianDate.="settembre";
+	if ($month=='10') $italianDate.="ottobre";
+	if ($month=='11') $italianDate.="novembre";
+	if ($month=='12') $italianDate.="dicembre";
+	$italianDate.=" ".$dividedDate[0];
+	return $italianDate;
+}
+
+function getRestrictedItalianDate($date){
+	if ($date==null) return $date;
+	$dividedDate=explode("-",$date);
+	$italianDate=$dividedDate[2]."/".$dividedDate[1]."/".$dividedDate[0];
+	return $italianDate;
+}
+
+function getItalianDate($date){
+	return getExtendedItalianDate($date);
+}
+
 ?>
