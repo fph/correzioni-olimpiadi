@@ -142,6 +142,7 @@ function IsAdmin($db, $UserId) {
 }
 
 function VerifyPermission($db, $UserId,$ContestId) {
+	if( IsAdmin($db,$UserId) ) return 1;
 	$result=OneResultQuery( $db, QuerySelect('Permissions',['UserId'=>$UserId, 'ContestId'=>$ContestId],['id']) );
 	if( is_null( $result ) ) return 0;
 	else return 1;

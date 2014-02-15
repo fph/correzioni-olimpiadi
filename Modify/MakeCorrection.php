@@ -18,7 +18,7 @@ if( is_null( $ContestId ) ) {
 	die();
 }
 
-$Permission=VerifyPermission( $db, GetUserIdBySession() , $ContestId ) | IsAdmin( $db, GetUserIdBySession() );
+$Permission=VerifyPermission( $db, GetUserIdBySession() , $ContestId );
 
 if( $Permission==0 ) {
 	$db->close();
