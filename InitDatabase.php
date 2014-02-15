@@ -184,13 +184,13 @@ function PopulateContests() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query="INSERT INTO ".dbName.".`Contests` (`name`) VALUES
-		('Senior 2013'),
-		('WinterCamp 2011 Ammissione'),
-		('Preimo 2010 TST giorno 1'),
-		('Preimo 2010 TST giorno 2'),
-		('IMO 2013 day1'),
-		('Senior 2012 Test Iniziale');";
+	$query="INSERT INTO ".dbName.".`Contests` (`name`,`date`) VALUES
+		('Senior 2013','1994-04-29'),
+		('WinterCamp 2011 Ammissione','1994-04-29'),
+		('Preimo 2010 TST giorno 1','2013-12-25'),
+		('Preimo 2010 TST giorno 2','2010-08-15'),
+		('IMO 2013 day1',null),
+		('Senior 2012 Test Iniziale',null);";
 	$db->query($query) or die($db->error);
 	$db->close();
 
