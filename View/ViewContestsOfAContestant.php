@@ -33,7 +33,7 @@ else {
 			?>
 			<tr class='trlink' onclick=Redirect(<?=$con['id']?>,<?=$v_contestant['id']?>)>
 			<td class='contestColumn'><?=$con['name']?></td>
-			<?php if (!is_null($con['date'])) { ?> <td class='dateColumn'><?=$con['date']?></td> <?php }
+			<?php if (!is_null($con['date'])) { ?> <td class='dateColumn'><?=getItalianDate($con['date'])?></td> <?php }
 			else {?> <td class='dateColumn'>-</td> <?php } ?>
 			</tr>
 			<?php

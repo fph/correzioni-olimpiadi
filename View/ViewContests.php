@@ -35,7 +35,7 @@ else {
 			<td class='contestColumn'><?=$con['name']?></td>
 			<?php if (!is_null($con['date'])) { 
 				?> 
-				<td class='dateColumn'><?=$con['date']?></td> 
+				<td class='dateColumn'><?=getItalianDate($con['date'])?></td> 
 				<?php 
 			}
 			else { 

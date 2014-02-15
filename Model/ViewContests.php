@@ -8,11 +8,6 @@
 	
 	$v_contests=ManyResultQuery($db, QuerySelect('Contests',NULL,NULL,'date'));
 	
-	foreach($v_contests as &$con){
-		$dateAt=$con['date'];
-		$con['date']=getItalianDate($dateAt);
-	}
-	
 	$db->close();
 	
 	TemplatePage("ViewContests",['Index'=>'index.php','Gare'=>'ViewContests.php']);

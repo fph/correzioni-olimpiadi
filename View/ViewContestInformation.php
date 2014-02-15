@@ -17,7 +17,12 @@ global $v_contest;
 </script>
 
 <h2 class="pageTitle">
-	<?=$v_contest['name']?> - <?=getItalianDate($v_contest['date'])?>
+	<?=$v_contest['name']?>
+	<?php 
+	if (!is_null($v_contest['date'])) {?>
+		- <?=getItalianDate($v_contest['date'])?>
+		<?php
+	} ?>
 </h2>
 
 <table class="TableLink">
