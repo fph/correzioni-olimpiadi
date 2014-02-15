@@ -26,15 +26,15 @@ global $v_contest;
 </h2>
 
 <table class="TableLink">
-	<tr class="trlink" id="LinkToContestants" onclick=RedirectContestants(<?php echo $v_contest['id']; ?>)>
+	<tr class="trlink" id="LinkToContestants" onclick=RedirectContestants(<?=$v_contest['id']?>)>
 	<td>Partecipanti</td>
 	</tr>
 	
-	<tr class="trlink" id="LinkToProblems" onclick=RedirectProblems(<?php echo $v_contest['id']; ?>)>
+	<tr class="trlink" id="LinkToProblems" onclick=RedirectProblems(<?=$v_contest['id']?>)>
 	<td>Problemi</td>
 	</tr>
 	
-	<tr class="trlink" id="LinkToStatistics" onclick=RedirectStatistics(<?php echo $v_contest['id']; ?>)>
+	<tr class="trlink" id="LinkToStatistics" onclick=RedirectStatistics(<?=$v_contest['id']?>)>
 	<td>Statistiche</td>
 	</tr>
 </table>

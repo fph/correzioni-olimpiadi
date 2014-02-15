@@ -1,13 +1,13 @@
 <?php
-global $v_contest;
+global $v_admin;
 ?>
 
 <script>
 	function RedirectContests() {
 		document.location="ViewContests.php";
 	}
-	function RedirectContestants() {
-		document.location="ViewContestants.php";
+	function RedirectAdministration() {
+		document.location="AdminAdministration.php";
 	}
 </script>
 
@@ -20,7 +20,12 @@ global $v_contest;
 	<td>Gare</td>
 	</tr>
 	
-	<tr class="trlink" id="LinkToContestants" onclick=RedirectContestants()>
-	<td>Partecipanti</td>
-	</tr>
+	<?php 
+	if ($v_admin==1) { 
+		?>	
+		<tr class="trlink" id="LinkToAdministration" onclick=RedirectAdministration()>
+		<td>Amministrazione</td>
+		</tr>
+		<?php
+	} ?>
 </table>

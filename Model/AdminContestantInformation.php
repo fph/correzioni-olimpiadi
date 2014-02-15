@@ -3,10 +3,15 @@
 	require_once "../Utilities.php";
 	SuperRequire_once("General","sqlUtilities.php");
 	SuperRequire_once("General", "TemplateCreation.php");
-	
-	$contestantId=$_GET["contestantId"]; 
+	SuperRequire_once("General", "PermissionManager.php");
 	
 	$db=OpenDbConnection();
+	
+	CheckPagePermission($db,-1);
+	
+	//PermissionChecked	
+	
+	$contestantId=$_GET["contestantId"];
 	
 	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$contestantId]));
 	
@@ -20,7 +25,8 @@
 	
 	$db->close();
 	
-	TemplatePage("ViewContestsOfAContestant",[	'Index'=>'index.php',
-												'Partecipanti'=>'ViewContestants.php',
-												'Gare'=>'ViewContestsOfAContestant.php?contestantId='.$contestantId]);
+	TemplatePage("AdminContestantInformation",[	'Index'=>'index.php',
+												'Amministrazione'=>'AdminAdministration.php',
+												'Partecipanti'=>'AdminContestants.php',
+												$v_contestant['surname']." ".$v_contestant['name']=>'ViewContestsOfAContestant.php?contestantId='.$contestantId]);
 ?>
