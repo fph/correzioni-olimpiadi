@@ -8,13 +8,13 @@
 	$db=OpenDbConnection();
 	
 	$problemId=$_GET["problemId"];
+	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$problemId]));
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$v_problem['ContestId']]));
 	
 	CheckPagePermission($db,$v_contest['id']);
 	
 	//Permission checked
 	
-	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$problemId]));
 	$v_corrections=ManyResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problemId]));
 	
 	foreach($v_corrections as &$cor) {
