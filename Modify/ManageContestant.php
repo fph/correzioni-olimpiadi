@@ -25,6 +25,28 @@ function RemoveContestant( $db , $ContestantId ){
 	return json_encode( ['type'=>'good', 'text'=>'Partecipante eliminato con successo'] );
 }
 
+function AddParticipation( $db , $ContestantId , $ContestId ) {
+	
+	$Exist1=OneResultQuery($db,QuerySelect('Contestants',['id'=>$ContestantId]));
+	if( is_null( $Exist1 ) ) {
+		return ['type'=>'bad' ,'text'=>'Il partecipante selezionato non esiste'];
+	}
+	
+	$Exist2=OneResultQuery($db,QuerySelect('Contests',['id'=>$ContestId]));
+	if( is_null( $Exist2 ) ) {
+		return ['type'=>'bad' ,'text'=>'La gara selezionata non esiste'];
+	}
+	
+	$Exist3=OneResultQuery($db,QuerySelect('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	if( !is_null( $Exist3 ) ) {
+		return ['type'=>'bad' ,'text'=>'La partecipazione scelta è già presente'];
+	}
+	
+	Query($db, QueryInsert('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	return ['type'=>'good' ,'text'=>'La partecipazione è stata aggiunta con successo'];
+	
+}
+
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
