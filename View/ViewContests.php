@@ -9,7 +9,7 @@ global $v_contests;
 </script>
 
 <h2 class="pageTitle">
-	Tutte le gare
+	Lista delle gare
 </h2>
 
 <?php
