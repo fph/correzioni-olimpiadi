@@ -22,7 +22,7 @@ function CheckPagePermission($db, $ContestId) { //$ContestId==-1 means admin.
 		SuperRedirect('Model','index.php');
 		die();
 	}
-	else if( $ContestId == -1 and IsAdmin( $db , GetUserIdBySession() ) {
+	else if( $ContestId == -1 and IsAdmin($db , GetUserIdBySession())==0 ) {
 		SuperRedirect('Model','index.php');
 		die();
 	}

@@ -135,19 +135,6 @@ function Query($db, $query) {
 	$db->query($query) or die($db->error);
 }
 
-function IsAdmin($db, $UserId) {
-	$result=OneResultQuery( $db, QuerySelect('Administrators',['UserId'=>$UserId]) );
-	if( is_null( $result ) ) return 0;
-	else return 1;
-}
-
-function VerifyPermission($db, $UserId,$ContestId) {
-	if( IsAdmin($db,$UserId) ) return 1;
-	$result=OneResultQuery( $db, QuerySelect('Permissions',['UserId'=>$UserId, 'ContestId'=>$ContestId],['id']) );
-	if( is_null( $result ) ) return 0;
-	else return 1;
-}
-
 function build_sorter($key) {
 	return function ($a, $b) use ($key) {
 		return strcmp($a[$key], $b[$key]);
