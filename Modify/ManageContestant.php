@@ -4,9 +4,15 @@ SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
 
+//BUG: accenti e apostrofi non sono accettati (magari virgole per cognomi assurdi)
 function AddContestant( $db , $name, $surname ){
-
-	//TODO: Controllare che nome e cognome siano solo lettere (eventualmente con maiuscole?)
+	if( !is_string($name) or !is_string($surname) or !ctype_alpha($name) or !ctype_alpha($surname) ) {
+		return ['type'=>'bad', 'text'=>'Nome e cognome devono essere stringhe di sole lettere'];
+	}
+	
+	if( strlen($name)<2 or strlen($surname)<2) {
+		return ['type'=>'bad', 'text'=>'Nome e cognome devono avere almeno due lettere'];
+	}
 
 	Query( $db,QueryInsert('Contestants', ['name'=>$name,'surname'=>$surname]) );
 
@@ -22,7 +28,7 @@ function RemoveContestant( $db , $ContestantId ){
 
 	Query( $db,QueryDelete('Contestants', ['id'=>$ContestantId]) );
 
-	return json_encode( ['type'=>'good', 'text'=>'Partecipante eliminato con successo'] );
+	return ['type'=>'good', 'text'=>'Partecipante eliminato con successo'];
 }
 
 function AddParticipation( $db , $ContestantId , $ContestId ) {
@@ -47,8 +53,14 @@ function AddParticipation( $db , $ContestantId , $ContestId ) {
 	
 }
 
-function RemovePartecipation( $db , $ContestantId , $ContestId ) {
+function RemoveParticipation( $db , $ContestantId , $ContestId ) {
+	$Exist1=OneResultQuery($db,QuerySelect('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	if( is_null($Exist1) ){
+		return ['type'=>'bad' ,'text'=>'La partecipazione selezionata non esiste'];
+	}
 	
+	Query($db,QueryDelete('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	return ['type'=>'good' ,'text'=>'La partecipazione è stata eliminata con successo'];
 }
 
 $db= OpenDbConnection();
@@ -63,6 +75,8 @@ if( $data['type'] == 'add' ) echo json_encode( AddContestant( $db, $data['name']
 else if( $data['type'] == 'remove' ) echo json_encode( RemoveContestant( $db, $data['ContestantId'] ) );
 else if( $data['type'] == 'AddParticipation' ) echo json_encode( AddParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
 else if( $data['type'] == 'RemoveParticipation' ) echo json_encode( RemoveParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
+else echo json_encode( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
+
 
 $db -> close();
 ?>
