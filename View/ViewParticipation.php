@@ -48,7 +48,7 @@ else {
 	<?php
 		foreach($v_corrections as $cor) {
 		?>
-			<tr id='Participation<?=$cor['problem']['id']?>'><td class='problemColumn' id='<?=$cor['problem']['id']?>'><?=$cor['problem']['name']?></td>
+			<tr><td class='problemColumn' id='<?=$cor['problem']['id']?>'><?=$cor['problem']['name']?></td>
 			
 			<?php
 			if ($cor["done"]) {

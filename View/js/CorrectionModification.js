@@ -1,13 +1,11 @@
-var markHTML;
-var commentHTML;
-
-function Clear(element_this) {
-	var parent_tr=element_this.parentNode.parentNode.parentNode;
+function Clear() {
+	var parent_tr=document.getElementById('modifying');
+	parent_tr.removeAttribute('id');
 	var markChild=parent_tr.getElementsByClassName('markColumn')[0];
-	markChild.innerHTML=markHTML;
+	markChild.innerHTML=document.getElementById('hiddenMarkHTML').value;
 	
 	var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
-	commentChild.innerHTML=commentHTML;
+	commentChild.innerHTML=document.getElementById('hiddenCommentHTML').value;
 	
 	var modifyButtons=document.getElementsByClassName("modifyButtonImage");
 	for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style["display"]='inline';
@@ -24,6 +22,37 @@ function Clear(element_this) {
 }
 
 
+function MakeChanges(response){
+	if (response.type=='bad') {
+		var userHiddenDiv=document.getElementById('hiddenUserHTML');
+		userHiddenDiv.parentNode.removeChild(userHiddenDiv);
+		Clear();
+	}
+	else {
+		var parent_tr=document.getElementById('modifying');
+		
+		var markChild=parent_tr.getElementsByClassName('markColumn')[0];
+		var selectEl=markChild.getElementsByClassName('selectMark')[0];
+		var mark=selectEl.options[selectEl.selectedIndex].text;
+		
+		var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
+		var comment=commentChild.getElementsByClassName('modifyComment')[0].innerHTML;
+		
+		var hiddenMarkDiv=document.getElementById('hiddenMarkHTML');
+		var hiddenCommentDiv=document.getElementById('hiddenCommentHTML')
+		
+		var userHiddenDiv=document.getElementById('hiddenUserHTML');
+		if (hiddenMarkDiv.value!=mark) parent_tr.getElementsByClassName('userColumn')[0].innerHTML=userHiddenDiv.value;
+		else userHiddenDiv.parentNode.removeChild(userHiddenDiv);
+		
+		hiddenMarkDiv.value=mark;
+		hiddenCommentDiv.value=comment;
+		
+		Clear();
+	}
+}
+
+
 function Confirm(element_this){
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
 	
@@ -31,36 +60,36 @@ function Confirm(element_this){
 	var ProblemId=getProblemId(parent_tr);
 	
 	var markChild=parent_tr.getElementsByClassName('markColumn')[0];
-	
 	var selectEl=markChild.getElementsByClassName('selectMark')[0];
 	var mark=selectEl.options[selectEl.selectedIndex].text;
+	var previousMark=document.getElementById('hiddenMarkHTML').value;
 	
 	var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
-	
 	var comment=commentChild.getElementsByClassName('modifyComment')[0].innerHTML;
 	
-	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment});
+	var userChild=parent_tr.getElementsByClassName('userColumn')[0];
+	var user=userChild.innerHTML;
+	if (previousMark!=mark) userChild.innerHTML+="<input type='hidden' id='hiddenUserHTML' value='"+SessionUsername+"'>";
+	else userChild.innerHTML+="<input type='hidden' id='hiddenUserHTML' value='"+user+"'>";
 	
-	var changedMark;
-	if (markHTML!=mark) {
-		changedMark=true;
-	}
-	markHTML=mark;
-	commentHTML=comment;
-	Clear(element_this);
-	if (changedMark) {
-		var userChild=parent_tr.getElementsByClassName('userColumn')[0];
-		userChild.innerHTML=SessionUsername;
-	}
+	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 	
-}
-
-function Cancel(element_this) {
-	Clear(element_this);
+	//~ markHTML=mark;
+	//~ commentHTML=comment;
+	//~ Clear(element_this);
+	//~ if (changedMark) {
+		//~ var userChild=parent_tr.getElementsByClassName('userColumn')[0];
+		//~ userChild.innerHTML=SessionUsername;
+	//~ }
+	
 }
 
 function OnModification(element_this) {
+	var markHTML, commentHTML;
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
+	
+	parent_tr.id='modifying';
+	
 	var markChild=parent_tr.getElementsByClassName('markColumn')[0];
 	markHTML=markChild.innerHTML;
 	
@@ -75,14 +104,16 @@ function OnModification(element_this) {
 	for (i=0; i<=7; i++) {
 		if (i==markHTML) newMarkHTML+="<option name ='"+i+"' selected='selected'>"+i+"</option>";
 		else newMarkHTML+="<option name ='"+i+"'>"+i+"</option>";
-		
 	}
 	newMarkHTML+="</select>";
-	
+	newMarkHTML+="<input type='hidden' id='hiddenMarkHTML' value='"+markHTML+"'>";
 	markChild.innerHTML=newMarkHTML;
 	
-	if (commentHTML=='-') commentChild.innerHTML="<div contentEditable='true' class='modifyComment'></div>"
-	else commentChild.innerHTML="<div contentEditable='true' class='modifyComment'>"+commentHTML+"</div>"
+	var newCommentHTML;
+	if (commentHTML=='-') newCommentHTML="<div contentEditable='true' class='modifyComment'></div>"
+	else newCommentHTML="<div contentEditable='true' class='modifyComment'>"+commentHTML+"</div>"
+	newCommentHTML+="<input type='hidden' id='hiddenCommentHTML' value='"+commentHTML+"'>";
+	commentChild.innerHTML=newCommentHTML;
 	
 	newConfirmHTML="<div class='confirmButtonContainer buttonContainer'>";
 	newConfirmHTML+="<img class='confirmButtonImage buttonImage' src='../View/Images/ConfirmButtonImage.png' alt='Conferma' onclick=Confirm(this)>";
@@ -90,7 +121,7 @@ function OnModification(element_this) {
 	confirmChild.innerHTML=newConfirmHTML;
 	
 	newCancelHTML="<div class='cancelButtonContainer buttonContainer'>";
-	newCancelHTML+="<img class='cancelButtonImage buttonImage' src='../View/Images/CancelButtonImage.png' alt='Annulla' onclick=Cancel(this)>";
+	newCancelHTML+="<img class='cancelButtonImage buttonImage' src='../View/Images/CancelButtonImage.png' alt='Annulla' onclick=Clear()>";
 	newCancelHTML+="</div>";
 	cancelChild.innerHTML=newCancelHTML;
 	
