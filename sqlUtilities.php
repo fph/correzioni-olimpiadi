@@ -119,6 +119,20 @@ function QueryInsert($tableName, $data) {
 	return $query.' '.$queryField.' '.$queryValue;
 }
 
+function QueryDelete($tableName, $constraints) {
+	$query='DELETE FROM '.$tableName.' ';
+	if( !is_null( $constraints ) ){
+		$query .= 'WHERE ';
+		$first=0;
+		foreach ( $constraints as $field => $value ) {
+			if( $first==1 ) $query .= 'AND ';
+			$first=1;
+			$query .= $field.'='.escape_input($value).' ';
+		}
+	}
+	return $query;
+}
+
 function OneResultQuery($db, $query) {
 	$result=$db->query($query) or die($db->error);
 	return mysqli_fetch_array($result);
