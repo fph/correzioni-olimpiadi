@@ -3,13 +3,18 @@
 	require_once "../Utilities.php";
 	SuperRequire_once("General","sqlUtilities.php");
 	SuperRequire_once("General", "TemplateCreation.php");
-	
-	$problemId=$_GET["problemId"];
+	SuperRequire_once("General", "PermissionManager.php");
 	
 	$db=OpenDbConnection();
 	
-	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$problemId]));
+	$problemId=$_GET["problemId"];
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$v_problem['ContestId']]));
+	
+	CheckPagePermission($db,$v_contest['id']);
+	
+	//Permission checked
+	
+	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$problemId]));
 	$v_corrections=ManyResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problemId]));
 	
 	foreach($v_corrections as &$cor) {

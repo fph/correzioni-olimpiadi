@@ -3,11 +3,16 @@
 	require_once "../Utilities.php";
 	SuperRequire_once("General","sqlUtilities.php");
 	SuperRequire_once("General", "TemplateCreation.php");
+	SuperRequire_once("General", "PermissionManager.php");
+	
+	$db=OpenDbConnection();
 	
 	$contestId=$_GET["contestId"];
 	$contestantId=$_GET["contestantId"];
 	
-	$db=OpenDbConnection();
+	CheckPagePermission($db,$contestId);
+	
+	//PermissionChecked
 	
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$contestId]));
 	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$contestantId]));
