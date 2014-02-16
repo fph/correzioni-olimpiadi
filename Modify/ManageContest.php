@@ -7,8 +7,8 @@ SuperRequire_once('General','PermissionManager.php');
 function AddContest($db, $name, $date) {
 	//TODO: Checkare nome e data?
 	
-	Query($db, QueryInsert('Contests',['name'=>$name, 'date'=>$date]));
-	return ['type'=>'good', 'text'=>'La gara è stata creata con successo', $db->insert_id] ;
+	Query($db, QueryInsert('Contests',['name'=>$name, 'date'=>$date, 'blocked'=>0]));
+	return ['type'=>'good', 'text'=>'La gara è stata creata con successo', 'ContestId'=>$db->insert_id] ;
 }
 
 function RemoveContest($db, $ContestId) {

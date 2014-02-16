@@ -47,7 +47,7 @@ function CreateDatabase() {
 		`date` date,
 		`blocked` Boolean,
 		PRIMARY KEY (`id`),
-		UNIQUE KEY(`name`)
+		KEY(`name`)
 	) ENGINE=InnoDB;';
 	Query($db, $query);
 	echo "Table Contests created.\n";
@@ -76,7 +76,7 @@ function CreateDatabase() {
 		`name` varchar(31) NOT NULL,
 		`surname` varchar(31) NOT NULL,
 		PRIMARY KEY (`id`),
-		UNIQUE KEY(`surname`)
+		KEY(`surname`)
 	) ENGINE=InnoDB;';
 	Query($db, $query);
 	echo "Table Contestants created.\n";
