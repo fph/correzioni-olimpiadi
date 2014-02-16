@@ -2,18 +2,6 @@
 global $v_contestants;
 ?>
 
-<script>
-	function Redirect(contestantId) {
-		document.location="AdminContestantInformation.php?contestantId="+contestantId;
-	}
-	
-	function AddContestant() {
-		var surname=document.getElementById('inputSurname').value;
-		var name=document.getElementById('inputName').value;
-		
-	}
-</script>
-
 <h2 class="pageTitle">
 	Partecipanti
 </h2>
@@ -37,7 +25,7 @@ else {
 		<th class='nameColumn'>Nome</th>
 	</tr></thead>
 	
-	<tbody>
+	<tbody id='ContestantsTbody'>
 	<?php
 		foreach($v_contestants as $con) {
 			?>
@@ -70,7 +58,7 @@ else {
 	<tr>
 		<td> <input type="text" name="surname" id="inputSurname"> </td>
 		<td> <input type="text" name="name" id="inputName"> </td>
-		<td> <input type="button" value="Aggiungi" onclick=AddContestant()> </td>
+		<td> <input type="button" value="Aggiungi" onclick=AddContestantRequest()> </td>
 	</tr>
 	</table>
 </div>

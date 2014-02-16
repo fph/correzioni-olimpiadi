@@ -73,15 +73,6 @@ function Confirm(element_this){
 	else userChild.innerHTML+="<input type='hidden' id='hiddenUserHTML' value='"+user+"'>";
 	
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
-	
-	//~ markHTML=mark;
-	//~ commentHTML=comment;
-	//~ Clear(element_this);
-	//~ if (changedMark) {
-		//~ var userChild=parent_tr.getElementsByClassName('userColumn')[0];
-		//~ userChild.innerHTML=SessionUsername;
-	//~ }
-	
 }
 
 function OnModification(element_this) {
