@@ -13,7 +13,7 @@ $TableInformation=array(
 
 function escape_input($value)
 {
-	if (is_null($value)) $value="";
+	if (is_null($value)) return 'NULL';
 	if (get_magic_quotes_gpc()) $value = stripslashes($value);
 	if (!is_numeric($value)) {
 		$mysqli=new mysqli(dbServer, dbUser, dbPass);
