@@ -37,7 +37,8 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 		<link type='text/css' rel='stylesheet' href='../View/css/<?=$cssName?>.css'>
 		<?php
 	} ?>	
-
+	
+	<script type='text/javascript' src='../View/js/global.js'> </script>
 	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
 <?php foreach( $jsInclude[$Content] as $jsName ) {

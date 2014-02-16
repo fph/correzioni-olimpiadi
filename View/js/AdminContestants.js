@@ -1,12 +1,16 @@
-function Redirect(contestantId) {
-	document.location="AdminContestantInformation.php?contestantId="+contestantId;
+function AddRow(){
+	
 }
+
 
 function AddContestant(response){
 	if (response.type=='good') {
 		var tbodyElement=document.getElementsByClassName('InformationTableTbody')[0];
 		var surname=document.getElementById('inputSurname').value;
 		var name=document.getElementById('inputName').value;
+		
+		//~ AddRow('ContestantsTobdy',{surname:surname, name:name});
+		
 		var newRow="<tr class='trlink' onclick=Redirect("+response.ContestantId+")>";
 		newRow+="<td class='surnameColumn'>"+surname+"</td>";
 		newRow+="<td class='nameColumn'>"+name+"</td></tr>";
