@@ -16,7 +16,7 @@ function AddContestant( $db , $name, $surname ){
 
 	Query( $db,QueryInsert('Contestants', ['name'=>$name,'surname'=>$surname]) );
 
-	return ['type'=>'good', 'text'=>'Partecipante creato con successo'];
+	return ['type'=>'good', 'text'=>'Partecipante creato con successo', 'ContestantId'=> $db->insert_id];
 }
 
 function RemoveContestant( $db , $ContestantId ){

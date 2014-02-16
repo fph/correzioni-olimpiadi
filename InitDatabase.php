@@ -45,6 +45,7 @@ function CreateDatabase() {
 		`id` int NOT NULL AUTO_INCREMENT,
 		`name` varchar(31) NOT NULL,
 		`date` date,
+		`blocked` Boolean,
 		PRIMARY KEY (`id`),
 		UNIQUE KEY(`name`)
 	) ENGINE=InnoDB;';
@@ -141,14 +142,14 @@ function CreateDatabase() {
 }
 
 function PopulateUsers($db) {
-	$Users=['Xamog'=>'meraviglioso', 
-			'LudoP'=>'yochicco', 
-			'dario2994'=>'acca', 
-			'fph'=>'pizzica', 
-			'walypala23'=>'gamma', 
-			'SimoTheWolf'=>'vero o falso?'];
-	foreach($Users as $username => $password){
-		Query($db,QueryInsert('Users',['username'=>$username, 'passHash'=>passwordHash($password)]));
+	$Users=[['username'=>'Xamog', 		'password'=>'meraviglioso'], 
+			['username'=>'LudoP', 		'password'=>'yochicco'], 
+			['username'=>'dario2994', 	'password'=>'acca'], 
+			['username'=>'fph', 		'password'=>'pizzica'], 
+			['username'=>'walypala23', 	'password'=>'gamma'], 
+			['username'=>'SimoTheWolf', 'password'=>'vero o falso?']];
+	foreach($Users as $User){
+		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>passwordHash($User['password'])]));
 	}
 
 	echo "Table Users Populated.\n";
@@ -162,14 +163,14 @@ function PopulateAdministrators($db) {
 }
 
 function PopulateContests($db) {
-	$Contests=[	'Senior 2013'=>'1994-04-29',
-				'WinterCamp 2011 Ammissione'=>'1994-04-29',
-				'Preimo 2010 TST giorno 1'=>'2013-12-25',
-				'Preimo 2010 TST giorno 2'=>'2010-08-15',
-				'IMO 2013 day1'=> null,
-				'Senior 2012 Test Iniziale'=> null];
-	foreach($Contests as $name=>$date) {
-		Query($db,QueryInsert('Contests',['name'=>$name,'date'=>$date]));
+	$Contests=[	['name'=>'Senior 2013', 					'date'=>'1994-04-29', 	'blocked'=>1],
+				['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'1994-04-29', 	'blocked'=>1],
+				['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1],
+				['name'=>'Preimo 2010 TST giorno 2', 	'date'=>'2010-08-15', 	'blocked'=>0],
+				['name'=>'IMO 2013 day1', 				'date'=> null , 		'blocked'=>0],
+				['name'=>'Senior 2012 Test Iniziale', 	'date'=> null , 		'blocked'=>0]];
+	foreach($Contests as $Contest) {
+		Query($db,QueryInsert('Contests',['name'=>$Contest['name'], 'date'=>$Contest['date'], 'blocked'=>$Contest['blocked'] ]));
 	}
 
 	echo "Table Contests Populated.\n";
@@ -191,24 +192,24 @@ function PopulatePermissions($db){
 }
 
 function PopulateContestants($db) {
-	$Contestants=[	'Federico'=>'Glaudo',
-					'Giada'=>'Franz',
-					'Gioacchino'=>'Antonelli',
-					'Luca'=>'Minutillo Menga',
-					'Francesco'=>'Florian',
-					'Claudio'=>'Afeltra',
-					'Paolo'=>'Abiuso',
-					'Leonardo'=>'Fiore',
-					'Lorenzo'=>'Benedini',
-					'Davide'=>'Lofano',
-					'Alice'=>'Cortinovis',
-					'Emanuele'=>'Tron',
-					'Matteo'=>'Becchi',
-					'Filippo'=>'Revello',
-					'Fabio'=>'Ferri',
-					'Luigi'=>'Pagano'];
-	foreach($Contestants as $name=>$surname) {
-		Query($db,QueryInsert('Contestants',['name'=>$name,'surname'=>$surname]));
+	$Contestants=[	['name'=>'Federico', 	'surname'=>'Glaudo'],
+					['name'=>'Giada', 		'surname'=>'Franz'],
+					['name'=>'Gioacchino', 	'surname'=>'Antonelli'],
+					['name'=>'Luca', 		'surname'=>'Minutillo Menga'],
+					['name'=>'Francesco', 	'surname'=>'Florian'],
+					['name'=>'Claudio', 	'surname'=>'Afeltra'],
+					['name'=>'Paolo', 		'surname'=>'Abiuso'],
+					['name'=>'Leonardo', 	'surname'=>'Fiore'],
+					['name'=>'Lorenzo', 	'surname'=>'Benedini'],
+					['name'=>'Davide', 		'surname'=>'Lofano'],
+					['name'=>'Alice', 		'surname'=>'Cortinovis'],
+					['name'=>'Emanuele', 	'surname'=>'Tron'],
+					['name'=>'Matteo', 		'surname'=>'Becchi'],
+					['name'=>'Filippo', 	'surname'=>'Revello'],
+					['name'=>'Fabio', 		'surname'=>'Ferri'],
+					['name'=>'Luigi', 		'surname'=>'Pagano']];
+	foreach($Contestants as $Contestant) {
+		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname']]));
 	}
 	
 	echo "Table Contestants Populated.\n";

@@ -25,9 +25,8 @@ function AddUser( $db , $username, $password ){
 	}
 
 	Query( $db,QueryInsert('Users', ['username'=>$username,'passHash'=>passwordHash($password) ]) );
-
-	$db->close();
-	return ['type'=>'good', 'text'=>'Correttore creato con successo'];
+	
+	return ['type'=>'good', 'text'=>'Correttore creato con successo', 'UserId'=>$db->insert_id];
 }
 
 function RemoveUser( $db , $UserId ){
