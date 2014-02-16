@@ -4,7 +4,7 @@ SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
 
-//BUG: accenti e apostrofi non sono accettati (magari virgole per cognomi assurdi)
+//BUG: accenti e apostrofi e spazi non sono accettati (magari virgole per cognomi assurdi)
 function AddContestant( $db , $name, $surname ){
 	if( !is_string($name) or !is_string($surname) or !ctype_alpha($name) or !ctype_alpha($surname) ) {
 		return ['type'=>'bad', 'text'=>'Nome e cognome devono essere stringhe di sole lettere'];
