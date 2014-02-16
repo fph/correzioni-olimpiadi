@@ -2,11 +2,11 @@
 global $v_contestants;
 ?>
 
-<h2 class="pageTitle">
+<h2 class='pageTitle'>
 	Partecipanti
 </h2>
 
-<h3 class="pageSubtitle">
+<h3 class='pageSubtitle'>
 	Lista dei partecipanti
 </h3>
 
@@ -19,13 +19,13 @@ if (empty($v_contestants)) {
 else {
 ?>
 
-<table class="InformationTable">
+<table class='InformationTable'>
 	<thead><tr>
 		<th class='surnameColumn'>Cognome</th>
 		<th class='nameColumn'>Nome</th>
 	</tr></thead>
 	
-	<tbody id='ContestantsTbody'>
+	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
 			?>
