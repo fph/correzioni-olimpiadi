@@ -2,28 +2,20 @@
 global $v_admin;
 ?>
 
-<script>
-	function RedirectContests() {
-		document.location="ViewContests.php";
-	}
-	function RedirectAdministration() {
-		document.location="AdminAdministration.php";
-	}
-</script>
 
 <h2 class="pageTitle">
 	Benvenuti!
 </h2>
 
 <table class="TableLink">
-	<tr class="trlink" id="LinkToContests" onclick=RedirectContests()>
+	<tr class="trlink" id="LinkToContests" onclick="Redirect('ViewContests')">
 	<td>Gare</td>
 	</tr>
 	
 	<?php 
 	if ($v_admin==1) { 
 		?>	
-		<tr class="trlink" id="LinkToAdministration" onclick=RedirectAdministration()>
+		<tr class="trlink" id="LinkToAdministration" onclick="Redirect('AdminAdministration')">
 		<td>Amministrazione</td>
 		</tr>
 		<?php

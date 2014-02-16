@@ -2,12 +2,6 @@
 global $v_contests;
 ?>
 
-<script>
-	function Redirect(contestId) {
-		document.location="ViewContestInformation.php?contestId="+contestId;
-	}
-</script>
-
 <h2 class="pageTitle">
 	Lista delle gare
 </h2>
@@ -31,7 +25,7 @@ else {
 	<?php
 		foreach($v_contests as $con) {
 			?>
-			<tr class='trlink' onclick=Redirect(<?=$con['id']?>)>
+			<tr class='trlink' onclick="Redirect('ViewContestInformation', {contestId:<?=$con['id']?>})">
 			<td class='contestColumn'><?=$con['name']?></td>
 			<?php if (!is_null($con['date'])) { 
 				?> 

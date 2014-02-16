@@ -2,12 +2,6 @@
 global $v_contest, $v_problems;
 ?>
 
-<script>
-	function Redirect(problemId) {
-		document.location="ViewProblem.php?problemId="+problemId;
-	}
-</script>
-
 <h2 class="pageTitle" id="contest">
 <?=$v_contest['name']?> 
 <?php 
@@ -35,7 +29,7 @@ else {
 	<?php
 		foreach($v_problems as $pro) {
 			?>
-			<tr class='trlink' onclick=Redirect(<?=$pro['id']?>)>
+			<tr class='trlink' onclick="Redirect('ViewProblem', {problemId:<?=$pro['id']?>})">
 			<td class='problemColumn'><?=$pro['name']?></td>
 			</tr>
 			<?php

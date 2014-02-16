@@ -2,12 +2,6 @@
 global $v_contest, $v_contestants;
 ?>
 
-<script>
-	function Redirect(contestId, contestantId) {
-		document.location="ViewParticipation.php?contestId="+contestId+"&contestantId="+contestantId;
-	}
-</script>
-
 <h2 class="pageTitle">
 	<?=$v_contest['name']?>
 	<?php 
@@ -36,7 +30,7 @@ else {
 	<?php
 		foreach($v_contestants as $con) {
 			?>
-			<tr class='trlink' onclick=Redirect(<?=$v_contest['id']?>,<?=$con['id']?>)>
+			<tr class='trlink' onclick="Redirect('ViewParticipation', {contestId:<?=$v_contest['id']?>,contestantId:<?=$con['id']?>})">
 			<td class='surnameColumn'><?=$con['surname']?></td>
 			<td class='nameColumn'><?=$con['name']?></td>
 			</tr>
