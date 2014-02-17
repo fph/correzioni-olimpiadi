@@ -1,5 +1,5 @@
 <?php
-define('dbServer','192.168.15.168');
+define('dbServer','192.168.15.159');
 define('dbUser','Olimpiadi');
 define('dbPass','alfabeto');
 define('dbName','CorOli');
@@ -7,8 +7,11 @@ define('ServerRoot','/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-ol
 define('urlRoot','/~dario2994/correzioni-olimpiadi');
 
 define('ContestName_MAXLength',255);
+define('ContestName_MINLength',2);
 define('username_MAXLength', 31);
+define('username_MINLength', 3);
 define('password_MAXLength', 63);
+define('password_MINLength', 4);
 define('ContestantName_MAXLength', 63);
 define('ContestantSurname_MAXLength', 63);
 define('ProblemName_MAXLength', 31);
