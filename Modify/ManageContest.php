@@ -5,8 +5,8 @@ SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
 	
 function AddContest($db, $name, $date) {
-	if( !is_string( $name ) or strlen( $name )<=1 or strlen( $name )>ContestName_MAXLength ) {
-		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra 1 e '.ContestName_MAXLength];
+	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
+		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
 	}
 	
 	Query($db, QueryInsert('Contests',['name'=>$name, 'date'=>$date, 'blocked'=>0]));
@@ -50,8 +50,8 @@ function UnblockContest($db, $ContestId) {
 }
 
 function ChangeName($db, $ContestId, $name) {
-	if( !is_string( $name ) or strlen( $name )<=1 or strlen( $name )>ContestName_MAXLength ) {
-		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra 1 e '.ContestName_MAXLength];
+	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
+		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
 	}
 	
 	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));

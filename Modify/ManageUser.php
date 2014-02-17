@@ -6,19 +6,17 @@ SuperRequire_once('General','PermissionManager.php');
 
 //BUG: accenti e apostrofi non sono accettati (magari virgole per cognomi assurdi)
 function AddUser( $db , $username, $password ){
-	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<3 ) {
-		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra 3 e '.username_MAXLength];
+	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<username_MINLength ) {
+		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra '.username_MINLength.' e '.username_MAXLength];
 	}
 	
-	if( !is_string($password) or strlen( $password )>password_MAXLength or strlen( $username )<4 ) {
-		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra 4 e '.password_MAXLength];
+	if( !is_string($password) or strlen( $password )>password_MAXLength or strlen( $password )<password_MINLength ) {
+		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra '.password_MINLength.' e '.password_MAXLength];
 	}
 	
 	$UsernameDuplicate=OneResultQuery($db,QuerySelect('Users',['username'=>$username]));
 	if( !is_null( $UsernameDuplicate ) ) {
-		$db->close();
-		echo json_encode( ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'] );
-		die();
+		return ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'];
 	}
 
 	Query( $db,QueryInsert('Users', ['username'=>$username,'passHash'=>passwordHash($password) ]) );
@@ -80,15 +78,13 @@ function RemovePermission( $db , $UserId , $ContestId ) {
 }
 
 function ChangeUsername( $db , $UserId , $username ) {
-	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<3 ) {
-		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra 3 e '.username_MAXLength];
+	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<username_MINLength ) {
+		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra '.username_MINLength.' e '.username_MAXLength];
 	}
 	
 	$UsernameDuplicate=OneResultQuery($db,QuerySelect('Users',['username'=>$username]));
 	if( !is_null( $UsernameDuplicate ) ) {
-		$db->close();
-		echo json_encode( ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'] );
-		die();
+		return ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'];
 	}
 	
 	$Exist1=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
@@ -103,7 +99,7 @@ function ChangeUsername( $db , $UserId , $username ) {
 
 function ChangePassword( $db , $UserId, $password ){
 	if( !is_string($password) or strlen( $password )>password_MAXLength or strlen( $username )<4 ) {
-		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra 4 e '.password_MAXLength];
+		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra '.password_MINLength.' e '.password_MAXLength];
 	}
 	
 	$Exist1=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
