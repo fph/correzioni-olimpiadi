@@ -4,8 +4,7 @@ function MakeAjaxRequest( url, data , exec ) {
 	else ajaxReq = new ActiveXObject("Microsoft.XMLHTTP");
 	ajaxReq.open("POST", url, true);
 	ajaxReq.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	
-	ajaxReq.send( 'data='+JSON.stringify( data ) );
+	ajaxReq.send( 'data='+encodeURIComponent( JSON.stringify( data ) ) );
 	ajaxReq.onreadystatechange = function() {
 		if ( ajaxReq.readyState==4 && ajaxReq.status==200) {
 			var msg=JSON.parse( ajaxReq.responseText ); //Magari usare json!
