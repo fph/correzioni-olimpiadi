@@ -1,6 +1,6 @@
 function AddRow(columns, classes, RedirectUrl, getElements, orderBy){
 	var InformationTable=document.getElementsByClassName('InformationTable')[0];
-	var tbody=InformationTable.getElementsByTagName('tbody')[0];
+	var tbodyEl=InformationTable.getElementsByTagName('tbody')[0];
 	
 	var newRow=document.createElement('tr');
 	
@@ -13,7 +13,7 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderBy){
 	for (var co in columns) newRowHTML+="<td class='"+co+"Column'>"+columns[co]+"</td>";
 	newRow.innerHTML=newRowHTML;
 	
-	var childs=tbody.getElementsByTagName('tr');
+	var childs=tbodyEl.getElementsByTagName('tr');
 	
 	var compareEl;
 	for (var co in columns) if (co==orderBy) compareEl=columns[co];
@@ -22,56 +22,31 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderBy){
 	for (var i=0; i<childs.length; i++) {
 		var sortingColumn=childs[i].getElementsByClassName(orderBy+'Column')[0];
 		if (String(compareEl).localeCompare(String(sortingColumn.innerHTML))<0) {
-			alert(String(sortingColumn.innerHTML));
-			tbody.insertBefore(newRow,childs[i]); //DEBUG
+			tbodyEl.insertBefore(newRow,childs[i]);
 			aggiunto=true;
 			break;
 		}
 	}
-	if (aggiunto==false) tbody.appendChild(newRow);
-	
-	tbody.appendChild(newRow);
+	if (aggiunto==false) tbodyEl.appendChild(newRow);
+
+	//~ DEBUG
+	//~ 
+	//~ for (var co in columns) document.getElementById(columns[co]+'_input').value='';
 }
 
 
 function AddContestant(response){
 	if (response.type=='good') {
-		var tbodyElement=document.getElementsByClassName('InformationTableTbody')[0];
-		var surname=document.getElementById('inputSurname').value;
-		var name=document.getElementById('inputName').value;
+		var tbodyEl=document.getElementsByClassName('InformationTableTbody')[0];
+		var surname=document.getElementById('surname_input').value;
+		var name=document.getElementById('name_input').value;
 		
-		AddRow({surname:surname, name:name},{0:'trlink'},'AdminContestantInformation', {'contestantId':response.ContestantId});
-		
-		//~ var newRow="<tr class='trlink' onclick=Redirect("+response.ContestantId+")>";
-		//~ newRow+="<td class='surnameColumn'>"+surname+"</td>";
-		//~ newRow+="<td class='nameColumn'>"+name+"</td></tr>";
-		var tbodyElement=document.getElementById('ContestantsTbody');
-		var child=tbodyElement.getElementsByTagName('tr');
-		
-		var newRow=document.createElement('tr');
-		newRow.className='trlink';
-		newRow.onclick='Redirect(response.ContestantId)';
-		var newRowHTML="<td class='surnameColumn'>"+surname+"</td>";
-		newRowHTML+="<td class='nameColumn'>"+name+"</td>";
-		newRow.innerHTML=newRowHTML;
-		
-		var aggiunto=false;
-		for (var i=0; i<child.length; i++) {
-			surnameColumn=child[i].getElementsByClassName('surnameColumn')[0];
-			if (String(surname).localeCompare(String(surnameColumn.innerHTML))<0) {
-				tbodyElement.insertBefore(newRow,child[i]);
-				aggiunto=true;
-				break;
-			}
-		}
-		if (aggiunto==false) tbodyElement.appendChild(newRow);
+		AddRow({surname:surname, name:name},{0:'trlink'},'AdminContestantInformation', {'contestantId':response.ContestantId}, 'surname');
 	}
-	document.getElementById('inputSurname').value='';
-	document.getElementById('inputName').value='';
 }
 
 function AddContestantRequest() {
-	var surname=document.getElementById('inputSurname').value;
-	var name=document.getElementById('inputName').value;
+	var surname=document.getElementById('surname_input').value;
+	var name=document.getElementById('name_input').value;
 	MakeAjaxRequest('../Modify/ManageContestant.php', {surname:surname, name:name, type:'add'}, AddContestant);
 }

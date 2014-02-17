@@ -56,8 +56,8 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="surname" id="inputSurname"> </td>
-		<td> <input type="text" name="name" id="inputName"> </td>
+		<td> <input type="text" name="surname" id="surname_input"> </td>
+		<td> <input type="text" name="name" id="name_input"> </td>
 		<td> <input type="button" value="Aggiungi" onclick=AddContestantRequest()> </td>
 	</tr>
 	</table>
