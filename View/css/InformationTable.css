@@ -81,7 +81,7 @@ table.InformationTable .commentColumn {
 	width: 50%;
 }
 
-table.InformationTable .userColumn {
+table.InformationTable .usernameColumn {
 	min-width: 100px;
 }
 
