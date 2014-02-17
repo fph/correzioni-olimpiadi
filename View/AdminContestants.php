@@ -29,7 +29,7 @@ else {
 	<?php
 		foreach($v_contestants as $con) {
 			?>
-			<tr class='trlink' onclick=Redirect('AdminContestantInformation',{contestantId:<?=$con['id']?>})>
+			<tr class='trlink' value='<?=$con['surname']?>' onclick=Redirect('AdminContestantInformation',{contestantId:<?=$con['id']?>})>
 			<td class='surnameColumn'><?=$con['surname']?></td>
 			<td class='nameColumn'><?=$con['name']?></td>
 			</tr>

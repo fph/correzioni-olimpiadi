@@ -8,8 +8,8 @@ function AddContest(response){
 	}
 }
 
-function AddContestantRequest() {
+function AddContestRequest() {
 	var name=document.getElementById('name_input').value;
-	date=getElementById('date_input').value;
+	var date=document.getElementById('date_input').value;
 	MakeAjaxRequest('../Modify/ManageContest.php', {name:name, date:date, type:'add'}, AddContest);
 }

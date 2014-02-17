@@ -28,7 +28,7 @@ else {
 	<?php
 		foreach($v_users as $use) {
 			?>
-			<tr class='trlink' onclick=Redirect('AdminUserInformation',{userId:<?=$use['id']?>})>
+			<tr class='trlink' value='<?=$use['username']?>' onclick=Redirect('AdminUserInformation',{userId:<?=$use['id']?>})>
 			<td class='usernameColumn'><?=$use['username']?></td>
 			</tr>
 			<?php

@@ -29,7 +29,18 @@ else {
 	<?php
 		foreach($v_contests as $con) {
 			?>
-			<tr class='trlink' onclick=Redirect('AdminContestInformation',{contestId:<?=$con['id']?>})>
+			<tr class='trlink'
+			<?php if (!is_null($con['date']) ) {
+				?>
+				value='<?=$con['date']?>'
+				<?php
+			}
+			else {
+				?>
+				value='0000-00-00'
+				<?php
+			}?>
+			onclick=Redirect('AdminContestInformation',{contestId:<?=$con['id']?>})>
 			<td class='contestColumn'><?=$con['name']?>
 			<span class='blocked' >
 			<?php
