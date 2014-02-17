@@ -64,7 +64,7 @@ function AddPermission( $db , $UserId , $ContestId ) {
 }
 
 function RemovePermission( $db , $UserId , $ContestId ) {
-	if( IsAdmin($db, $UserId, $ContestId) == 1 ) {
+	if( IsAdmin($db, $UserId) == 1 ) {
 		return ['type'=>'bad', 'text'=>'Non puoi togliere permessi ad un admin'];
 	}
 	
@@ -87,6 +87,10 @@ function ChangeUsername( $db , $UserId , $username ) {
 		return ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'];
 	}
 	
+	if( IsAdmin($db,$UserId) ) {
+		return ['type'=>'bad' ,'text'=>'Non hai i permessi per cambiare username ad un admin'];
+	}
+	
 	$Exist1=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
 	if( is_null( $Exist1 ) ) {
 		return ['type'=>'bad' ,'text'=>'Il correttore selezionato non esiste'];
@@ -100,6 +104,10 @@ function ChangeUsername( $db , $UserId , $username ) {
 function ChangePassword( $db , $UserId, $password ){
 	if( !is_string($password) or strlen( $password )>password_MAXLength or strlen( $username )<4 ) {
 		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra '.password_MINLength.' e '.password_MAXLength];
+	}
+	
+	if( IsAdmin($db,$UserId) ) {
+		return ['type'=>'bad' ,'text'=>'Non hai i permessi per cambiare la password di un admin'];
 	}
 	
 	$Exist1=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
