@@ -122,3 +122,11 @@ table.InformationTable .modifyComment {
 	border-radius: 3px;
 	background-color: white;
 }
+
+/*
+	On creation
+*/
+
+table.InformationTable .new_row {
+	background-color: #CCFFCC;
+}
