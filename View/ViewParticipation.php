@@ -39,7 +39,7 @@ else {
 		<th class='problemColumn'>Problema</th>
 		<th class='markColumn'>Voto</th>
 		<th class='commentColumn'>Commento</th>
-		<th class='userColumn'>Correttore</th>
+		<th class='usernameColumn'>Correttore</th>
 		<?php
 			if (!$v_contest['blocked']) {
 			?>
@@ -60,12 +60,12 @@ else {
 				?>
 				<td class='markColumn'><?=$cor['mark']?></td>
 				<td class='commentColumn'><?=$cor['comment']?></td>
-				<td class='userColumn'><?=$cor['username']?></td>
+				<td class='usernameColumn'><?=$cor['username']?></td>
 				<?php
 			}
 			else {
 				?>
-				<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='userColumn'>-</td>
+				<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='usernameColumn'>-</td>
 				<?php
 			}
 			?>

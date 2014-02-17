@@ -42,7 +42,7 @@ function MakeChanges(response){
 		var hiddenCommentDiv=document.getElementById('hiddenCommentHTML')
 		
 		var userHiddenDiv=document.getElementById('hiddenUserHTML');
-		if (hiddenMarkDiv.value!=mark) parent_tr.getElementsByClassName('userColumn')[0].innerHTML=userHiddenDiv.value;
+		if (hiddenMarkDiv.value!=mark) parent_tr.getElementsByClassName('usernameColumn')[0].innerHTML=userHiddenDiv.value;
 		else userHiddenDiv.parentNode.removeChild(userHiddenDiv);
 		
 		hiddenMarkDiv.value=mark;
@@ -67,7 +67,7 @@ function Confirm(element_this){
 	var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
 	var comment=commentChild.getElementsByClassName('modifyComment')[0].innerHTML;
 	
-	var userChild=parent_tr.getElementsByClassName('userColumn')[0];
+	var userChild=parent_tr.getElementsByClassName('usernameColumn')[0];
 	var user=userChild.innerHTML;
 	if (previousMark!=mark) userChild.innerHTML+="<input type='hidden' id='hiddenUserHTML' value='"+SessionUsername+"'>";
 	else userChild.innerHTML+="<input type='hidden' id='hiddenUserHTML' value='"+user+"'>";
