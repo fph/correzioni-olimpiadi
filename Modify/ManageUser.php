@@ -6,21 +6,18 @@ SuperRequire_once('General','PermissionManager.php');
 
 //BUG: accenti e apostrofi non sono accettati (magari virgole per cognomi assurdi)
 function AddUser( $db , $username, $password ){
-	if( !is_string($username) or !is_string($password) ) {
-		return ['type'=>'bad', 'text'=>'Username e password devono essere stringhe'];
+	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<3 ) {
+		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra 3 e '.username_MAXLength];
 	}
 	
+	if( !is_string($password) or strlen( $password )>password_MAXLength or strlen( $username )<4 ) {
+		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra 4 e '.password_MAXLength];
+	}
 	
 	$UsernameDuplicate=OneResultQuery($db,QuerySelect('Users',['username'=>$username]));
 	if( !is_null( $UsernameDuplicate ) ) {
 		$db->close();
 		echo json_encode( ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'] );
-		die();
-	}
-
-	if( strlen( $password ) < 4 ) {
-		$db->close();
-		return ['type'=>'bad', 'text'=>'La password deve avere almeno 4 caratteri'];
 		die();
 	}
 
@@ -82,6 +79,43 @@ function RemovePermission( $db , $UserId , $ContestId ) {
 	return ['type'=>'good' ,'text'=>'Il permesso è stato eliminato con successo'];
 }
 
+function ChangeUsername( $db , $UserId , $username ) {
+	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<3 ) {
+		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra 3 e '.username_MAXLength];
+	}
+	
+	$UsernameDuplicate=OneResultQuery($db,QuerySelect('Users',['username'=>$username]));
+	if( !is_null( $UsernameDuplicate ) ) {
+		$db->close();
+		echo json_encode( ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'] );
+		die();
+	}
+	
+	$Exist1=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
+	if( is_null( $Exist1 ) ) {
+		return ['type'=>'bad' ,'text'=>'Il correttore selezionato non esiste'];
+	}
+
+	Query( $db,QueryUpdate('Users', ['id'=>$Userid] , ['username'=> $username ]) );
+	
+	return ['type'=>'good', 'text'=>'Lo username è stato cambiato con successo'];
+}
+
+function ChangePassword( $db , $UserId, $password ){
+	if( !is_string($password) or strlen( $password )>password_MAXLength or strlen( $username )<4 ) {
+		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra 4 e '.password_MAXLength];
+	}
+	
+	$Exist1=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
+	if( is_null( $Exist1 ) ) {
+		return ['type'=>'bad' ,'text'=>'Il correttore selezionato non esiste'];
+	}
+	
+	Query( $db,QueryUpdate('Users', ['id'=>$Userid] , ['passHash'=>passwordHash($password)]) );
+	
+	return ['type'=>'good', 'text'=>'Password cambiata con successo'];
+}
+
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
@@ -94,6 +128,8 @@ if( $data['type'] == 'add' ) echo json_encode( AddUser( $db, $data['username'], 
 else if( $data['type'] == 'remove' ) echo json_encode( RemoveUser( $db, $data['UserId'] ) );
 else if( $data['type'] == 'AddPermission' ) echo json_encode( AddPermission( $db, $data['UserId'], $data['ContestId'] ) );
 else if( $data['type'] == 'RemovePermission' ) echo json_encode( RemovePermission( $db, $data['UserId'], $data['ContestId'] ) );
+else if( $data['type'] == 'ChangeUsername' ) echo json_encode( ChangeUsername( $db, $data['UserId'], $data['username'] ) );
+else if( $data['type'] == 'ChangePassword' ) echo json_encode( ChangePassword( $db, $data['UserId'], $data['password'] ) );
 else echo json_encode( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
 
 

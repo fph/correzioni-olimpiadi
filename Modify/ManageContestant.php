@@ -4,14 +4,14 @@ SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
 
-//BUG: accenti e apostrofi e spazi non sono accettati (magari virgole per cognomi assurdi)
+
 function AddContestant( $db , $name, $surname ){
-	if( !is_string($name) or !is_string($surname) or !ctype_alpha($name) or !ctype_alpha($surname) ) {
-		return ['type'=>'bad', 'text'=>'Nome e cognome devono essere stringhe di sole lettere'];
+	if( !is_string($name) or strlen( $name ) > ContestName_MAXLength or strlen( $name ) == 0) {
+		return ['type'=>'bad', 'text'=>'Il nome deve essere una stringa di alpiù '.ContestantName_MAXLength];
 	}
 	
-	if( strlen($name)<2 or strlen($surname)<2) {
-		return ['type'=>'bad', 'text'=>'Nome e cognome devono avere almeno due lettere'];
+	if( !is_string($surname) or strlen( $surname ) > ContestSurname_MAXLength or strlen( $surname ) == 0 ) {
+		return ['type'=>'bad', 'text'=>'Il cognome deve essere una stringa di alpiù '.ContestantSurname_MAXLength];
 	}
 
 	Query( $db,QueryInsert('Contestants', ['name'=>$name,'surname'=>$surname]) );
@@ -63,6 +63,24 @@ function RemoveParticipation( $db , $ContestantId , $ContestId ) {
 	return ['type'=>'good' ,'text'=>'La partecipazione è stata eliminata con successo'];
 }
 
+function ChangeNameAndSurname($db , $ContestantId, $name, $surname) {
+	$Exist1=OneResultQuery($db,QuerySelect('Contestants',['id'=>$ContestantId]));
+	if( is_null( $Exist1 ) ) {
+		return ['type'=>'bad' ,'text'=>'Il partecipante selezionato non esiste'];
+	}
+	
+	if( !is_string($name) or strlen( $name ) > ContestantName_MAXLength or strlen( $name ) == 0) {
+		return ['type'=>'bad', 'text'=>'Il nome deve essere una stringa di alpiù '.ContestName_MAXLength];
+	}
+	
+	if( !is_string($surname) or strlen( $surname ) > ContestantSurname_MAXLength or strlen( $surname ) == 0 ) {
+		return ['type'=>'bad', 'text'=>'Il cognome deve essere una stringa di alpiù '.ContestSurname_MAXLength];
+	}
+	
+	Query( $db, QueryUpdate('Contestants', ['id'=>$ContestantId], ['name'=>$name, 'surname'=>$surname]));
+	return ['type'=>'good', 'text'=>'Nome e cognome del partecipanti sono stati modificati con successo'];
+}
+
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
@@ -75,6 +93,7 @@ if( $data['type'] == 'add' ) echo json_encode( AddContestant( $db, $data['name']
 else if( $data['type'] == 'remove' ) echo json_encode( RemoveContestant( $db, $data['ContestantId'] ) );
 else if( $data['type'] == 'AddParticipation' ) echo json_encode( AddParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
 else if( $data['type'] == 'RemoveParticipation' ) echo json_encode( RemoveParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
+else if( $data['type'] == 'AddParticipation' ) echo json_encode( ChangeNameAndSurname( $db, $data['ContestantId'], $data['name'], $data['surname'] ) );
 else echo json_encode( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
 
 

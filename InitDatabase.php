@@ -21,7 +21,7 @@ function CreateDatabase() {
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Users` (
 		`id` int NOT NULL AUTO_INCREMENT,
-		`username` varchar(31) NOT NULL,
+		`username` varchar('.username_MAXLength.') NOT NULL,
 		`passHash` varchar(255) NOT NULL,
 		PRIMARY KEY (`id`),
 		UNIQUE KEY(`username`)
@@ -43,7 +43,7 @@ function CreateDatabase() {
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Contests` (
 		`id` int NOT NULL AUTO_INCREMENT,
-		`name` varchar(31) NOT NULL,
+		`name` varchar('.ContestName_MAXLength.') NOT NULL,
 		`date` date,
 		`blocked` Boolean,
 		PRIMARY KEY (`id`),
@@ -73,8 +73,8 @@ function CreateDatabase() {
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Contestants` (
 		`id` int NOT NULL AUTO_INCREMENT,
-		`name` varchar(31) NOT NULL,
-		`surname` varchar(31) NOT NULL,
+		`name` varchar('.ContestantName_MAXLength.') NOT NULL,
+		`surname` varchar('.ContestantSurname_MAXLength.') NOT NULL,
 		PRIMARY KEY (`id`),
 		KEY(`surname`)
 	) ENGINE=InnoDB;';
@@ -103,7 +103,7 @@ function CreateDatabase() {
 	'CREATE TABLE IF NOT EXISTS `Problems` (
 		`id` int NOT NULL AUTO_INCREMENT,
 		`ContestId` int NOT NULL,
-		`name` varchar(31) NOT NULL,
+		`name` varchar('.ProblemName_MAXLength.') NOT NULL,
 		
 		PRIMARY KEY (`id`),
 		KEY(`ContestId`),
@@ -120,7 +120,7 @@ function CreateDatabase() {
 		`ProblemId` int NOT NULL,
 		`ContestantId` int NOT NULL,
 		`mark` int,
-		`comment` varchar(255),
+		`comment` varchar('.comment_MAXLength.'),
 		`UserId` int,
 		
 		PRIMARY KEY (`id`),

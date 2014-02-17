@@ -8,7 +8,7 @@
 	
 	$db=OpenDbConnection();
 	
-	$all_contests=ManyResultQuery($db, QuerySelect('Contests',NULL,NULL,'date'));
+	$all_contests=ManyResultQuery($db, QuerySelect('Contests',NULL,NULL,'date')); //All contests ordered by date
 	
 	$UserId=getUserIdBySession();
 	$v_contests=[];

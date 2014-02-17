@@ -8,6 +8,14 @@ function MakeCorrection($db, $ContestId, $ContestantId, $mark, $comment) {
 	if( is_null( $ContestId ) ) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
+	
+	if( is_null( $mark ) ) { //TODO: Controllare che sia un voto numerico o quasi
+		return ['type'=>'bad', 'text'=>'Devi scegliere un voto prima di salvare la correzione'];
+	}
+	
+	if( strlen( $comment ) > comment_MAXLength ) {
+		return ['type'=>'bad', 'text'=>'Il commento può avere alpiù '.comment_MAXLength.' caratteri, il tuo ne ha '.strlen( $comment )];
+	}
 
 	$Blocked=OneResultQuery($db, QuerySelect('Contests',['id'=>$ContestId],['blocked']))['blocked'];
 	if( $Blocked==1 ) {
@@ -18,11 +26,7 @@ function MakeCorrection($db, $ContestId, $ContestantId, $mark, $comment) {
 	if( $Permission==0 ) {
 		return ['type'=>'bad', 'text'=>'Non hai i permessi per correggere questa gara'] ;
 	}
-
-	if( is_null( $mark ) ) { //TODO: Controllare che sia un voto numerico o quasi
-		return ['type'=>'bad', 'text'=>'Devi scegliere un voto prima di salvare la correzione'];
-	}
-
+	
 	$ParticipationId= OneResultQuery ($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]) ) ;
 	if( is_null ( $ParticipationId ) ) {
 		return ['type'=>'bad', 'text'=>'Il partecipante selezionato non ha partecipato alla gara'] ;
