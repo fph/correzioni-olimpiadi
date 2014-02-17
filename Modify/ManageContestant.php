@@ -6,11 +6,11 @@ SuperRequire_once('General','PermissionManager.php');
 
 
 function AddContestant( $db , $name, $surname ){
-	if( !is_string($name) or strlen( $name ) > ContestName_MAXLength or strlen( $name ) == 0) {
+	if( !is_string($name) or strlen( $name ) > ContestantName_MAXLength or strlen( $name ) == 0) {
 		return ['type'=>'bad', 'text'=>'Il nome deve essere una stringa di alpiù '.ContestantName_MAXLength];
 	}
 	
-	if( !is_string($surname) or strlen( $surname ) > ContestSurname_MAXLength or strlen( $surname ) == 0 ) {
+	if( !is_string($surname) or strlen( $surname ) > ContestantSurname_MAXLength or strlen( $surname ) == 0 ) {
 		return ['type'=>'bad', 'text'=>'Il cognome deve essere una stringa di alpiù '.ContestantSurname_MAXLength];
 	}
 
