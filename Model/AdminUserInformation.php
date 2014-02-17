@@ -30,18 +30,10 @@
 		}
 	}
 	
-	//~ $v_contests=ManyResultQuery($db, QuerySelect('Participations', ['ContestantId'=>$contestantId]));
-	//~ 
-	//~ foreach($v_contests as &$con){
-		//~ $con=OneResultQuery($db, QuerySelect('Contests', ['id'=>$con['ContestId']]));
-	//~ }
-	
-	//~ usort($v_contests, build_sorter('date'));
-	
 	$db->close();
 	
 	TemplatePage("AdminUserInformation",[	'Index'=>'index.php',
 												'Amministrazione'=>'AdminAdministration.php',
 												'Correttori'=>'AdminUsers.php',
-												$v_user['username']=>'AdminUserInformation.php?contestantId='.$contestantId]);
+												$v_user['username']=>'AdminUserInformation.php?userId='.$userId]);
 ?>
