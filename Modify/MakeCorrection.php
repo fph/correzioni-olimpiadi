@@ -4,7 +4,7 @@ SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
 
-function MakeCorrection($db, $ContestId, $ContestantId, $mark, $comment) {
+function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comment) {
 	if( is_null( $ContestId ) ) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
@@ -56,7 +56,7 @@ $comment=$data['comment'];
 $db=OpenDbConnection();
 $ContestId=OneResultQuery($db, QuerySelect( 'Problems', ['id'=>$ProblemId], ['ContestId'] ))['ContestId'];
 
-echo json_encode( MakeCorrection($db, $ContestId, $ContestantId, $mark, $comment) );
+echo json_encode( MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comment) );
 
 $db->close();
 ?>
