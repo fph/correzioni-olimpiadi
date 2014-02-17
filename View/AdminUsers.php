@@ -50,10 +50,12 @@ else {
 	<table>
 	<tr>
 		<th> Username </th>
+		<th>Password</th>
 		<th> </th>
 	</tr>
 	<tr>
 		<td> <input type="text" name="username" id="username_input"> </td>
+		<td> <input type="text" name="password" id="password_input"> </td>
 		<td> <input type="button" value="Aggiungi" onclick=AddUserRequest()> </td>
 	</tr>
 	</table>

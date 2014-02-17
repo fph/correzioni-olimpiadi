@@ -28,5 +28,5 @@
 	TemplatePage("AdminContestantInformation",[	'Index'=>'index.php',
 												'Amministrazione'=>'AdminAdministration.php',
 												'Partecipanti'=>'AdminContestants.php',
-												$v_contestant['surname']." ".$v_contestant['name']=>'ViewContestsOfAContestant.php?contestantId='.$contestantId]);
+												$v_contestant['surname']." ".$v_contestant['name']=>'AdminContestantInformation.php?contestantId='.$contestantId]);
 ?>
