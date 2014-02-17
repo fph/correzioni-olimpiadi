@@ -109,6 +109,13 @@ table.InformationTable .modifyColumn {
 	width:25px;
 }
 
+table.InformationTable .blocked {
+	font-style: italic;
+	color: red;
+	float: right;
+	margin-right: 10%;
+}
+
 /*
 	OnModification
 */
@@ -128,5 +135,9 @@ table.InformationTable .modifyComment {
 */
 
 table.InformationTable .new_row {
+	background-color: #CCFFCC;
+}
+
+table.InformationTable .new_row:hover {
 	background-color: #CCFFCC;
 }

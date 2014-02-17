@@ -40,8 +40,13 @@ else {
 		<th class='markColumn'>Voto</th>
 		<th class='commentColumn'>Commento</th>
 		<th class='userColumn'>Correttore</th>
-		<th class='modifyColumn'></th>
-		<th class='cancelColumn'></th>
+		<?php
+			if (!$v_contest['blocked']) {
+			?>
+			<th class='modifyColumn'></th>
+			<th class='cancelColumn'></th>
+			<?php
+		}?>
 	</tr></thead>
 	
 	<tbody>
@@ -64,10 +69,15 @@ else {
 				<?php
 			}
 			?>
-			<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>
-			<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' onclick=OnModification(this)>
-			</div> </td>
-			<td class='cancelColumn'> <div class='cancelButtonContainer buttonContainer'> </div> </td>
+			<?php
+			if (!$v_contest['blocked']) {
+				?>
+				<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>
+				<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' onclick=OnModification(this)>
+				</div> </td>
+				<td class='cancelColumn'> <div class='cancelButtonContainer buttonContainer'> </div> </td>
+				<?php
+			}?>
 			</tr>
 			<?php
 		}

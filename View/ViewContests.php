@@ -26,7 +26,17 @@ else {
 		foreach($v_contests as $con) {
 			?>
 			<tr class='trlink' onclick="Redirect('ViewContestInformation', {contestId:<?=$con['id']?>})">
-			<td class='contestColumn'><?=$con['name']?></td>
+			<td class='contestColumn'><?=$con['name']?>
+			
+			<span class='blocked' >
+			<?php
+			if ($con['blocked']==1) {
+				?>
+				Correzioni terminate
+				<?php
+			}?>
+			</span>
+			</td>
 			<?php if (!is_null($con['date'])) { 
 				?> 
 				<td class='dateColumn'><?=getItalianDate($con['date'])?></td> 

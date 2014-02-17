@@ -42,8 +42,13 @@ else {
 		<th class='markColumn'>Voto</th>
 		<th class='commentColumn'>Commento</th>
 		<th class='userColumn'>Correttore</th>
-		<th class='modifyColumn'></th>
-		<th class='cancelColumn'></th>
+		<?php
+			if (!$v_contest['blocked']) {
+			?>
+			<th class='modifyColumn'></th>
+			<th class='cancelColumn'></th>
+			<?php
+		}?>
 	</tr></thead>
 	
 	<tbody>
@@ -53,13 +58,29 @@ else {
 			<tr>
 			<td class='surnameColumn' id='<?=$cor['contestant']['id']?>'><?=$cor['contestant']['surname']?></td>
 			<td class='nameColumn'><?=$cor['contestant']['name']?></td>
-			<td class='markColumn'><?=$cor['mark']?></td>
-			<td class='commentColumn'><?=$cor['comment']?></td>
-			<td class='userColumn'><?=$cor['username']?></td>
-			<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>
-			<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' onclick=OnModification(this)>
-			</div> </td>
-			<td class='cancelColumn'> <div class='cancelButtonContainer buttonContainer'> </div> </td>
+			<?php
+			if ($cor['done']) {
+				?>
+				<td class='markColumn'><?=$cor['mark']?></td>
+				<td class='commentColumn'><?=$cor['comment']?></td>
+				<td class='userColumn'><?=$cor['username']?></td>
+				<?php 
+			}
+			else {
+				?>
+				<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='userColumn'>-</td>
+				<?php
+			} ?>
+				
+			<?php
+			if (!$v_contest['blocked']) {
+				?>
+				<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>
+				<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' onclick=OnModification(this)>
+				</div> </td>
+				<td class='cancelColumn'> <div class='cancelButtonContainer buttonContainer'> </div> </td>
+				<?php
+			}?>
 			</tr>
 			<?php
 		}

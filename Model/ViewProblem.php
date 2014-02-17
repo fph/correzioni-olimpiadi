@@ -15,12 +15,18 @@
 	
 	//Permission checked
 	
-	$v_corrections=ManyResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problemId]));
+	$contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$v_contest['id']]));
 	
-	foreach($v_corrections as &$cor) {
-		$cor['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$cor['ContestantId']]));
-		$cor['surname']=$cor['contestant']['surname'];
-		$cor['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$cor['UserId']], ['username']))['username'];
+	$v_corrections=[];
+	
+	foreach ($contestants as $con) {
+		$newCor=OneResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problemId, 'ContestantId'=>$con['ContestantId']]));
+		if (!is_null($newCor)) $newCor['done']=true;
+		else $newCor['done']=false;
+		$newCor['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
+		$newCor['surname']=$newCor['contestant']['surname'];
+		$newCor['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$newCor['UserId']], ['username']))['username'];
+		$v_corrections[]=$newCor;
 	}
 	
 	usort($v_corrections, build_sorter('surname'));
