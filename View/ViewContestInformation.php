@@ -2,12 +2,6 @@
 global $v_contest;
 ?>
 
-<script>
-	function RedirectStatistics(contestId){
-		document.location="ViewStatisticsOfAContest.php?contestId="+contestId;
-	}
-</script>
-
 <h2 class="pageTitle">
 	<?=$v_contest['name']?>
 	<?php 
