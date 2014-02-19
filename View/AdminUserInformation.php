@@ -16,7 +16,7 @@ global $v_user, $v_admin, $v_contests;
 		</span>
 		
 		<span class='trashButtonContainer buttonContainer'>
-			<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Modifica' title='Elimina'>
+			<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Modifica' title='Elimina correttore' onclick=RemoveUserRequest(<?=$v_user['id']?>)>
 		</span>
 		</span>
 		<?php

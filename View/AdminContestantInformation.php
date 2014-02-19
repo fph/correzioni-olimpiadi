@@ -10,11 +10,11 @@ global $v_contestant, $v_contests;
 	
 	<span class='buttons_title'>
 	<span class='modifyButtonContainer buttonContainer'>
-		<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' title='Modifica'>
+		<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' title='Modifica partecipante' onclick=ModifyContestantName()>
 	</span>
 	
 	<span class='trashButtonContainer buttonContainer'>
-		<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Modifica' title='Elimina'>
+		<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Elimina' title='Elimina partecipante' onclick=RemoveContestantRequest(<?=$v_contestant['id']?>)>
 	</span>
 	</span>
 </h2>
