@@ -139,3 +139,11 @@ table.InformationTable .new_row {
 table.InformationTable .new_row:hover {
 	background-color: #CCFFCC;
 }
+
+/*
+	empty table
+*/
+
+.hiddenEmptyTable{
+	display:none;
+}

@@ -14,12 +14,14 @@ global $v_contestants;
 if (empty($v_contestants)) {
 	?>
 	<div class='emptyTable'> Ancora nessun partecipante inserito. </div>
+	<table class='InformationTable hiddenEmptyTable'>
 	<?php
 }
 else {
 ?>
-
-<table class='InformationTable'>
+	<table class='InformationTable'>
+	<?php
+}?>
 	<thead><tr>
 		<th class='surnameColumn'>Cognome</th>
 		<th class='nameColumn'>Nome</th>
@@ -39,10 +41,6 @@ else {
 	</tbody>
 	
 </table>
-
-<?php
-}
-?>
 
 <h3 class="pageSubtitle">
 	Aggiungi un partecipante

@@ -23,12 +23,14 @@ global $v_contest, $v_problems;
 if (empty($v_problems)) {
 	?>
 	<div class='emptyTable'> Ancora nessun problema inserito. </div>
+	<table class="InformationTable hiddenEmptyTable">
 	<?php
 }
 else {
-?>
-
-<table class="InformationTable">
+	?>
+	<table class="InformationTable">
+	<?php
+}?>
 	<thead><tr>
 		<th class='problemColumn'>Problemi</th>
 	</tr></thead>
@@ -47,9 +49,6 @@ else {
 	
 </table>
 
-<?php
-}
-?>
 
 <h3 class="pageSubtitle">
 	Aggiungi un problema

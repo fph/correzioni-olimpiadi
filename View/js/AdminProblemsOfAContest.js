@@ -10,6 +10,5 @@ function AddProblem(response){
 function AddProblemRequest() {
 	var name=document.getElementById('name_input').value;
 	var ContestId=document.getElementsByClassName('pageTitle')[0].getAttribute('value');
-	alert(name);
 	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId:ContestId, name:name, type:'AddProblem'}, AddProblem);
 }

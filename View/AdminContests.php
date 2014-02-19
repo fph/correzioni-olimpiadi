@@ -14,12 +14,14 @@ global $v_contests;
 if (empty($v_contests)) {
 	?>
 	<div class='emptyTable'> Ancora nessuna gara inserita. </div>
+	<table class='InformationTable hiddenEmptyTable'>
 	<?php
 }
 else {
 ?>
-
-<table class='InformationTable'>
+	<table class='InformationTable'>
+	<?php
+}?>
 	<thead><tr>
 		<th class='contestColumn'>Gara</th>
 		<th class='dateColumn'>Data</th>
@@ -68,10 +70,6 @@ else {
 	</tbody>
 	
 </table>
-
-<?php
-}
-?>
 
 <h3 class="pageSubtitle">
 	Aggiungi una gara

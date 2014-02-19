@@ -13,6 +13,13 @@ function Redirect(pageUrl, getElements) {
 }
 
 function AddRow(columns, classes, RedirectUrl, getElements, orderBy){
+	var emptyTable=document.getElementsByClassName('emptyTable')[0];
+	if (emptyTable!=null) {
+		emptyTable.parentNode.removeChild(emptyTable);
+		var InformationTable=document.getElementsByClassName('InformationTable')[0];
+		InformationTable.setAttribute('class','InformationTable');
+	}
+	
 	var InformationTable=document.getElementsByClassName('InformationTable')[0];
 	var tbodyEl=InformationTable.getElementsByTagName('tbody')[0];
 	

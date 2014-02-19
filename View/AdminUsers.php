@@ -14,12 +14,14 @@ global $v_users;
 if (empty($v_users)) {
 	?>
 	<div class='emptyTable'> Ancora nessun correttore inserito. </div>
+	<table class='InformationTable hiddenEmptyTable'>
 	<?php
 }
 else {
 ?>
-
-<table class='InformationTable'>
+	<table class='InformationTable'>
+	<?php
+}?>
 	<thead><tr>
 		<th class='usernameColumn'>Username</th>
 	</tr></thead>
@@ -37,10 +39,6 @@ else {
 	</tbody>
 	
 </table>
-
-<?php
-}
-?>
 
 <h3 class="pageSubtitle">
 	Aggiungi un correttore
