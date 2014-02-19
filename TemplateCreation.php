@@ -4,10 +4,16 @@ require_once "Utilities.php";
 SuperRequire_once("General","SessionManager.php");
 
 global $jsInclude, $cssInclude;
-$jsInclude=['ViewParticipation'=>['CorrectionModification'], 'ViewProblem'=>['CorrectionModification'], 
-			'AdminContestants'=>['AdminContestants'], 'AdminUsers'=>['AdminUsers'], 'AdminContests'=>['AdminContests'],
-			'AdminProblemsOfAContest'=>['AdminProblemsOfAContest'], 'AdminContestantInformation'=>['AdminContestantInformation'],
-			'AdminUserInformation'=>['AdminUserInformation'], 'AdminContestInformation'=>['AdminContestInformation']];
+$jsInclude=['ViewParticipation'=>['CorrectionModification'], 
+			'ViewProblem'=>['CorrectionModification'], 
+			'AdminContestants'=>['AdminContestants'], 
+			'AdminUsers'=>['AdminUsers'], 
+			'AdminContests'=>['AdminContests'],
+			'AdminProblemsOfAContest'=>['AdminProblemsOfAContest'], 
+			'AdminContestantInformation'=>['AdminContestantInformation'],
+			'AdminUserInformation'=>['AdminUserInformation'], 
+			'AdminContestInformation'=>['AdminContestInformation'],
+			'AdminContestantsOfAContest'=>['AdminContestantsOfAContest']];
 $cssInclude=[];
 
 function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){

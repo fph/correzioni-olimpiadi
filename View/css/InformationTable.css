@@ -34,12 +34,12 @@ table.InformationTable tbody tr:hover {
 	Modify and cancel button border-button
 */
 
-table.InformationTable td.modifyColumn, table.InformationTable td.cancelColumn {
+table.InformationTable td.modifyColumn, table.InformationTable td.cancelColumn, table.InformationTable td.trashColumn {
 	border-bottom: 1px #6678b1;
 	padding: 5px 5px;
 }
 
-table.InformationTable th.modifyColumn, table.InformationTable th.cancelColumn {
+table.InformationTable th.modifyColumn, table.InformationTable th.cancelColumn, table.InformationTable th.trashColumn {
 	border-bottom: 2px #6678b1;
 	padding: 5px 5px;
 }
@@ -106,6 +106,10 @@ table.InformationTable .cancelColumn {
 }
 
 table.InformationTable .modifyColumn {
+	width:25px;
+}
+
+table.InformationTable .trashColumn {
 	width:25px;
 }
 
