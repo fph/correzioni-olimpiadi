@@ -12,7 +12,7 @@ function Redirect(pageUrl, getElements) {
 	document.location=url;
 }
 
-function AddRow(columns, classes, RedirectUrl, getElements, orderBy){
+function AddRow(columns, classes, RedirectUrl, getElements, orderBy, buttons){
 	var emptyTable=document.getElementsByClassName('emptyTable')[0];
 	if (emptyTable!=null) {
 		emptyTable.parentNode.removeChild(emptyTable);
@@ -31,12 +31,17 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderBy){
 
 	newRow.setAttribute('value',columns[orderBy]);
 	
-	newRow.onclick=function(){Redirect(RedirectUrl, getElements)};
+	if (RedirectUrl!=null) newRow.onclick=function(){Redirect(RedirectUrl, getElements)};
 	
 	var newRowHTML='';
 	for (var co in columns) {
 		if (co=='date') newRowHTML+="<td class='"+co+"Column'>"+getItalianDate(columns[co])+"</td>";
 		else newRowHTML+="<td class='"+co+"Column'>"+columns[co]+"</td>";
+	}
+	for (var bu in buttons) {
+		newRowHTML+="<td class='"+bu+"Column'> <div class='"+bu+"ButtonContainer buttonContainer'>";
+		newRowHTML+="<img class='"+bu+"ButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Elimina' onclick="+buttons[bu]+">";
+		newRowHTML+="</div> </td>";
 	}
 	newRow.innerHTML=newRowHTML;
 	
