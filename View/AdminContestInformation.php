@@ -19,7 +19,7 @@ global $v_contest;
 	</span>
 	
 	<span class='trashButtonContainer buttonContainer'>
-		<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Modifica' title='Elimina gara' onclick=RemoveContestRequest(<?=$v_contest['id']?>)>
+		<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Elimina' title='Elimina gara' onclick=RemoveContestRequest(<?=$v_contest['id']?>)>
 	</span>
 	</span>
 </h2>

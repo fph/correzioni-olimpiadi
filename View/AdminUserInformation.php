@@ -12,11 +12,11 @@ global $v_user, $v_admin, $v_contests;
 		?>
 		<span class='buttons_title'>
 		<span class='modifyButtonContainer buttonContainer'>
-			<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' title='Modifica'>
+			<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' title='Modifica correttore'>
 		</span>
 		
 		<span class='trashButtonContainer buttonContainer'>
-			<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Modifica' title='Elimina correttore' onclick=RemoveUserRequest(<?=$v_user['id']?>)>
+			<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Elimina' title='Elimina correttore' onclick=RemoveUserRequest(<?=$v_user['id']?>)>
 		</span>
 		</span>
 		<?php
