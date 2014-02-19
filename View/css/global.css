@@ -25,38 +25,38 @@ body {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
-.pageTitle {
+.PageTitle {
 	font-size: 2em;
 	padding-left: 5%;
 }
 
 
-.pageSubtitle {
+.PageSubtitle {
 	font-size: 1.5em;
 	padding-left: 7%;
 }
 
 
 /*
-	TableLink css
+	LinkTable css
 */
 
-.TableLink {
+.LinkTable {
 	margin: 40px 0px 20px 0px;
 	font-size: 1.3em;
 	margin-left: 7%;
 }
 
-.TableLink td {
+.LinkTable td {
 	padding: 10px;
 }
 
-.TableLink .trlink:hover {
+.LinkTable .trlink:hover {
 	cursor:pointer;
 	color: green;
 }
 
-.emptyTable {
+.EmptyTable {
 /*
 	DEBUG
 */
@@ -115,12 +115,12 @@ thead, tbody {
 	color: #993399;
 }
 
-.correctionsCompleted {
+.CorrectionsCompleted {
 	font-style:italic;
 	color:red;
 }
 
-.correctionsInProgress {
+.CorrectionsInProgress {
 	font-style:italic;
 	color:#33CC33;
 }

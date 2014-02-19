@@ -155,7 +155,7 @@ function build_sorter($key) {
 	};
 }
 
-function getExtendedItalianDate($date){
+function GetExtendedItalianDate($date){
 	if ($date==null) return $date;
 	$dividedDate=explode("-",$date);
 	$italianDate=$dividedDate[2]." ";
@@ -177,15 +177,15 @@ function getExtendedItalianDate($date){
 	return $italianDate;
 }
 
-function getRestrictedItalianDate($date){
+function GetRestrictedItalianDate($date){
 	if ($date==null) return $date;
 	$dividedDate=explode("-",$date);
 	$italianDate=$dividedDate[2]."/".$dividedDate[1]."/".$dividedDate[0];
 	return $italianDate;
 }
 
-function getItalianDate($date){
-	return getExtendedItalianDate($date);
+function GetItalianDate($date){
+	return GetExtendedItalianDate($date);
 }
 
 ?>

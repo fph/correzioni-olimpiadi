@@ -7,15 +7,15 @@
 	
 	$db=OpenDbConnection();
 	
-	$contestId=$_GET["contestId"];
+	$ContestId=$_GET["ContestId"];
 	
-	CheckPagePermission($db,$contestId);
+	CheckPagePermission($db,$ContestId);
 	
 	//PermissionChecked	
 	
-	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$contestId]));
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	
-	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$contestId]));
+	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
 	
 	foreach($v_contestants as &$con){
 		$con=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
@@ -29,6 +29,6 @@
 	
 	TemplatePage("ViewContestantsOfAContest",[	'Index'=>'index.php',
 												'Gare'=>'ViewContests.php',
-												$v_contest['name']=>'ViewContestInformation.php?contestId='.$contestId,
-												'Partecipanti'=>'ViewContestantsOfAContest.php?contestId='.$contestId]);
+												$v_contest['name']=>'ViewContestInformation.php?ContestId='.$ContestId,
+												'Partecipanti'=>'ViewContestantsOfAContest.php?ContestId='.$ContestId]);
 ?>

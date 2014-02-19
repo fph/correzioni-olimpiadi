@@ -7,24 +7,24 @@
 	
 	$db=OpenDbConnection();
 	
-	$contestId=$_GET["contestId"];
-	$contestantId=$_GET["contestantId"];
+	$ContestId=$_GET["ContestId"];
+	$ContestantId=$_GET["ContestantId"];
 	
-	CheckPagePermission($db,$contestId);
+	CheckPagePermission($db,$ContestId);
 	
 	//PermissionChecked
 	
-	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$contestId]));
-	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$contestantId]));
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	
-	$problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$contestId], ['id']));
+	$problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], ['id']));
 	
 	$v_corrections=[];
 	
 	foreach($problems as $pro){
 		
 		$nn=OneResultQuery($db, QuerySelect('Corrections', 
-		['ProblemId'=>$pro['id'], 'ContestantId'=>$contestantId], 
+		['ProblemId'=>$pro['id'], 'ContestantId'=>$ContestantId], 
 		['mark','comment','UserId']
 		));
 		
@@ -40,7 +40,7 @@
 	
 	TemplatePage("ViewParticipation",[	'Index'=>'index.php',
 										'Gare'=>'ViewContests.php',
-										$v_contest['name']=>'ViewContestInformation.php?contestId='.$contestId,
-										'Partecipanti'=>'ViewContestantsOfAContest.php?contestId='.$contestId,
-										$v_contestant['name']." ".$v_contestant['surname']=>'ViewParticipation.php?contestId='.$contestId.'&contestantId='.$contestantId]);
+										$v_contest['name']=>'ViewContestInformation.php?ContestId='.$ContestId,
+										'Partecipanti'=>'ViewContestantsOfAContest.php?ContestId='.$ContestId,
+										$v_contestant['name']." ".$v_contestant['surname']=>'ViewParticipation.php?ContestId='.$ContestId.'&ContestantId='.$ContestantId]);
 ?>

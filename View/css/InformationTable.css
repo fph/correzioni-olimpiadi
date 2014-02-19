@@ -34,12 +34,12 @@ table.InformationTable tbody tr:hover {
 	Modify and cancel button border-button
 */
 
-table.InformationTable td.modifyColumn, table.InformationTable td.cancelColumn, table.InformationTable td.trashColumn {
+table.InformationTable td.modify_column, table.InformationTable td.cancel_column, table.InformationTable td.trash_column {
 	border-bottom: 1px #6678b1;
 	padding: 5px 5px;
 }
 
-table.InformationTable th.modifyColumn, table.InformationTable th.cancelColumn, table.InformationTable th.trashColumn {
+table.InformationTable th.modify_column, table.InformationTable th.cancel_column, table.InformationTable th.trash_column {
 	border-bottom: 2px #6678b1;
 	padding: 5px 5px;
 }
@@ -48,16 +48,16 @@ table.InformationTable th.modifyColumn, table.InformationTable th.cancelColumn, 
 	Button images
 */
 
-table.InformationTable .buttonImage {
+table.InformationTable .ButtonImage {
 	width: 22px;
 	height: 22px;
 }
 
-table.InformationTable .buttonImage:hover {
+table.InformationTable .ButtonImage:hover {
 	cursor: pointer;
 }
 
-table.InformationTable .buttonContainer {
+table.InformationTable .ButtonContainer {
 	width: 22px;
 	height: 22px;
 }
@@ -69,47 +69,47 @@ table.InformationTable .buttonContainer {
 */
 
 
-table.InformationTable .problemColumn {
+table.InformationTable .problem_column {
 	min-width: 100px;
 }
 
-table.InformationTable .markColumn {
+table.InformationTable .mark_column {
 	width: 5%;
 }
 
-table.InformationTable .commentColumn {
+table.InformationTable .comment_column {
 	width: 50%;
 }
 
-table.InformationTable .usernameColumn {
+table.InformationTable .username_column {
 	min-width: 100px;
 }
 
-table.InformationTable .nameColumn {
+table.InformationTable .name_column {
 	min-width: 100px;
 }
 
-table.InformationTable .surnameColumn {
+table.InformationTable .surname_column {
 	min-width: 100px;
 }
 
-table.InformationTable .contestColumn {
+table.InformationTable .contest_column {
 	min-width: 200px;
 }
 
-table.InformationTable .dateColumn {
+table.InformationTable .date_column {
 	min-width: 50px;
 }
 
-table.InformationTable .cancelColumn {
+table.InformationTable .cancel_column {
 	width:25px;
 }
 
-table.InformationTable .modifyColumn {
+table.InformationTable .modify_column {
 	width:25px;
 }
 
-table.InformationTable .trashColumn {
+table.InformationTable .trash_column {
 	width:25px;
 }
 
@@ -122,7 +122,7 @@ table.InformationTable .blocked {
 	OnModification
 */
 
-table.InformationTable .modifyComment {
+table.InformationTable .modify_comment {
 	width: 100%;
 	height: 100%;
 	min-height: 1em;
@@ -136,11 +136,11 @@ table.InformationTable .modifyComment {
 	On creation
 */
 
-table.InformationTable .new_row {
+table.InformationTable .NewRow {
 	background-color: #CCFFCC;
 }
 
-table.InformationTable .new_row:hover {
+table.InformationTable .NewRow:hover {
 	background-color: #CCFFCC;
 }
 
@@ -148,6 +148,6 @@ table.InformationTable .new_row:hover {
 	empty table
 */
 
-.hiddenEmptyTable{
+.HiddenEmptyTable{
 	display:none;
 }

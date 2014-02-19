@@ -2,17 +2,7 @@
 global $v_corrections, $v_contestant, $v_contest;
 ?>
 
-<script>
-	function getContestantId(element_this){
-		return document.getElementsByClassName('pageSubtitle')[0].id;
-	}
-	
-	function getProblemId(element_this){
-		return element_this.getElementsByClassName('problemColumn')[0].id;
-	}
-</script>
-
-<h2 class='pageTitle'>
+<h2 class='PageTitle'>
 	<span class='contest_title'>
 	<?=$v_contest['name']?>
 	</span>
@@ -25,7 +15,7 @@ global $v_corrections, $v_contestant, $v_contest;
 	</span>
 </h2>
 
-<h3 class="pageSubtitle" id="<?=$v_contestant['id']?>">
+<h3 class="PageSubtitle" id="<?=$v_contestant['id']?>">
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
 	</span>
@@ -34,23 +24,23 @@ global $v_corrections, $v_contestant, $v_contest;
 <?php
 if (empty($v_corrections)) {
 	?>
-	<div class='emptyTable'> Ancora nessuna correzione. </div>
+	<div class='EmptyTable'> Ancora nessuna correzione. </div>
 	<?php
 }
 else {
 ?>
 
-<table class="InformationTable" id="participationTable">
+<table class="InformationTable">
 	<thead><tr>
-		<th class='problemColumn'>Problema</th>
-		<th class='markColumn'>Voto</th>
-		<th class='commentColumn'>Commento</th>
-		<th class='usernameColumn'>Correttore</th>
+		<th class='problem_column'>Problema</th>
+		<th class='mark_column'>Voto</th>
+		<th class='comment_column'>Commento</th>
+		<th class='username_column'>Correttore</th>
 		<?php
 			if (!$v_contest['blocked']) {
 			?>
-			<th class='modifyColumn'></th>
-			<th class='cancelColumn'></th>
+			<th class='modify_column'></th>
+			<th class='cancel_column'></th>
 			<?php
 		}?>
 	</tr></thead>
@@ -59,29 +49,30 @@ else {
 	<?php
 		foreach($v_corrections as $cor) {
 		?>
-			<tr><td class='problemColumn' id='<?=$cor['problem']['id']?>'><?=$cor['problem']['name']?></td>
+			<tr data-id='<?=$cor['problem']['id']?>'>
+			<td class='problem_column'><?=$cor['problem']['name']?></td>
 			
 			<?php
-			if ($cor["done"]) {
+			if ($cor['done']) {
 				?>
-				<td class='markColumn'><?=$cor['mark']?></td>
-				<td class='commentColumn'><?=$cor['comment']?></td>
-				<td class='usernameColumn'><?=$cor['username']?></td>
+				<td class='mark_column'><?=$cor['mark']?></td>
+				<td class='comment_column'><?=$cor['comment']?></td>
+				<td class='username_column'><?=$cor['username']?></td>
 				<?php
 			}
 			else {
 				?>
-				<td class='markColumn'>-</td><td class='commentColumn'>-</td><td class='usernameColumn'>-</td>
+				<td class='mark_column'>-</td><td class='comment_column'>-</td><td class='username_column'>-</td>
 				<?php
 			}
 			?>
 			<?php
 			if (!$v_contest['blocked']) {
 				?>
-				<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>
-				<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' onclick=OnModification(this)>
+				<td class='modify_column'> <div class='ButtonContainer'>
+				<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' onclick=OnModification(this)>
 				</div> </td>
-				<td class='cancelColumn'> <div class='cancelButtonContainer buttonContainer'> </div> </td>
+				<td class='cancel_column'> <div class='ButtonContainer'> </div> </td>
 				<?php
 			}?>
 			</tr>
@@ -95,3 +86,8 @@ else {
 <?php
 }
 ?>
+
+<script>
+	var ContestantId=<?=$v_contestant['id']?>;
+	var ContestId=<?=$v_contest['id']?>;
+</script>
