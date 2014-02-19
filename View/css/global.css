@@ -107,6 +107,10 @@ thead, tbody {
 	padding-left:6%;
 }
 
+.generalInformation .adminInformation {
+	color: #993399;
+}
+
 .correctionsCompleted {
 	font-style:italic;
 	color:red;

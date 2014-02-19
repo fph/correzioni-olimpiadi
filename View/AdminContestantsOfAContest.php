@@ -34,7 +34,7 @@ else {
 	<?php
 		foreach($v_contestants as $con) {
 			?>
-			<tr class='trlink' onclick="Redirect('ViewParticipation', {contestId:<?=$v_contest['id']?>,contestantId:<?=$con['id']?>})">
+			<tr class='trlink' onclick="Redirect()">
 			<td class='surnameColumn'><?=$con['surname']?></td>
 			<td class='nameColumn'><?=$con['name']?></td>
 			</tr>
