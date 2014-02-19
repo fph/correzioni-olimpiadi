@@ -110,8 +110,6 @@ table.InformationTable .modifyColumn {
 }
 
 table.InformationTable .blocked {
-	font-style: italic;
-	color: red;
 	float: right;
 	margin-right: 10%;
 }

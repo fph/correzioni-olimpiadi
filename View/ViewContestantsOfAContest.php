@@ -2,13 +2,17 @@
 global $v_contest, $v_contestants;
 ?>
 
-<h2 class="pageTitle">
+<h2 class='pageTitle'>
+	<span class='contest_title'>
 	<?=$v_contest['name']?>
+	</span>
+	<span class='date_title'>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=getItalianDate($v_contest['date'])?>
 		<?php
 	} ?>
+	</span>
 </h2>
 
 <?php

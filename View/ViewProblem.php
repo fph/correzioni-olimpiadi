@@ -14,16 +14,21 @@ global $v_contest, $v_problem, $v_corrections;
 
 
 <h2 class='pageTitle'>
-	<?=$v_contest['name']?> 
+	<span class='contest_title'> <?=$v_contest['name']?>
+	</span>
+	<span class='date_title'>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=getItalianDate($v_contest['date'])?>
 		<?php
 	} ?>
+	</span>
 </h2>
 
 <h3 class='pageSubtitle' id='<?=$v_problem['id']?>'>
-	<?=$v_problem['name']?>
+	<span class='problem_title'>
+		<?=$v_problem['name']?>
+	</span>
 </h3>
 
 <?php

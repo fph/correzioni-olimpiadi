@@ -36,7 +36,13 @@ body {
 	padding-left: 7%;
 }
 
+
+/*
+	TableLink css
+*/
+
 .TableLink {
+	margin: 40px 0px 20px 0px;
 	font-size: 1.3em;
 	margin-left: 7%;
 }
@@ -66,4 +72,47 @@ div.formContainer form table td {
 
 thead, tbody {
 	color: #039;
+}
+
+
+/*
+	Buttons
+*/
+
+.buttonImage {
+	width: 22px;
+	height: 22px;
+}
+
+.buttonImage:hover {
+	cursor: pointer;
+}
+
+.buttonContainer {
+	width: 22px;
+	height: 22px;
+}
+
+.buttons_title {
+	margin-left:3%;
+}
+
+/*
+	General Information
+*/
+
+
+.generalInformation {
+	font-size:1.5em;
+	padding-left:6%;
+}
+
+.correctionsCompleted {
+	font-style:italic;
+	color:red;
+}
+
+.correctionsInProgress {
+	font-style:italic;
+	color:#33CC33;
 }

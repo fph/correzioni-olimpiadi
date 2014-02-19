@@ -3,16 +3,35 @@ global $v_user, $v_admin, $v_contests;
 ?>
 
 <h2 class="pageTitle">
-	<?=$v_user['username']?>
+	<span class='user_title'>
+		<?=$v_user['username']?>
+	</span>
+	
+	<?php
+	if (!$v_admin) {
+		?>
+		<span class='buttons_title'>
+		<span class='modifyButtonContainer buttonContainer'>
+			<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' title='Modifica'>
+		</span>
+		
+		<span class='trashButtonContainer buttonContainer'>
+			<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Modifica' title='Elimina'>
+		</span>
+		</span>
+		<?php
+	}?>
 </h2>
 
 
 <?php
 if ($v_admin) {
 	?>
-	<h3 class="pageSubtitle">
-		Amministratore
-	</h3>
+	<div class='generalInformation'>
+		<div class='adminInformation'>
+			Amministratore
+		</div>
+	</div>
 	<?php
 }?>
 

@@ -42,7 +42,7 @@ else {
 			}?>
 			onclick=Redirect('AdminContestInformation',{contestId:<?=$con['id']?>})>
 			<td class='contestColumn'><?=$con['name']?>
-			<span class='blocked' >
+			<span class='blocked correctionsCompleted' >
 			<?php
 			if ($con['blocked']==1) {
 				?>

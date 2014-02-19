@@ -2,8 +2,21 @@
 global $v_contestant, $v_contests;
 ?>
 
+
 <h2 class="pageTitle">
-	<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
+	<span class='contestant_title'>
+		<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
+	</span>
+	
+	<span class='buttons_title'>
+	<span class='modifyButtonContainer buttonContainer'>
+		<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' title='Modifica'>
+	</span>
+	
+	<span class='trashButtonContainer buttonContainer'>
+		<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Modifica' title='Elimina'>
+	</span>
+	</span>
 </h2>
 
 <?php
