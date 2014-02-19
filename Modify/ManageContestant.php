@@ -93,7 +93,7 @@ if( $data['type'] == 'add' ) echo json_encode( AddContestant( $db, $data['name']
 else if( $data['type'] == 'remove' ) echo json_encode( RemoveContestant( $db, $data['ContestantId'] ) );
 else if( $data['type'] == 'AddParticipation' ) echo json_encode( AddParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
 else if( $data['type'] == 'RemoveParticipation' ) echo json_encode( RemoveParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
-else if( $data['type'] == 'AddParticipation' ) echo json_encode( ChangeNameAndSurname( $db, $data['ContestantId'], $data['name'], $data['surname'] ) );
+else if( $data['type'] == 'ChangeNameAndSurname' ) echo json_encode( ChangeNameAndSurname( $db, $data['ContestantId'], $data['name'], $data['surname'] ) );
 else echo json_encode( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
 
 
