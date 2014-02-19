@@ -97,6 +97,10 @@ thead, tbody {
 	margin-left:3%;
 }
 
+.hiddenButtonContainer {
+	display: none;
+}
+
 /*
 	General Information
 */

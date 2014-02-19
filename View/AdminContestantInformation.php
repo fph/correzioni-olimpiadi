@@ -5,7 +5,8 @@ global $v_contestant, $v_contests;
 
 <h2 class="pageTitle">
 	<span class='contestant_title'>
-		<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
+		<span id='ContestantSurname'> <?=$v_contestant['surname']?> </span>
+		<span id='ContestantName'> <?=$v_contestant['name']?> </span>
 	</span>
 	
 	<span class='buttons_title'>
@@ -15,6 +16,14 @@ global $v_contestant, $v_contests;
 	
 	<span class='trashButtonContainer buttonContainer'>
 		<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Elimina' title='Elimina partecipante' onclick=RemoveContestantRequest(<?=$v_contestant['id']?>)>
+	</span>
+	
+	<span class='confirmButtonContainer buttonContainer hiddenButtonContainer'>
+		<img class='confirmButtonImage buttonImage' src='../View/Images/ConfirmButtonImage.png' alt='Modifica' title='Modifica partecipante' onclick=SendModification(<?=$v_contestant['id']?>)>
+	</span>
+	
+	<span class='cancelButtonContainer buttonContainer hiddenButtonContainer'>
+		<img class='cancelButtonImage buttonImage' src='../View/Images/CancelButtonImage.png' alt='Elimina' title='Elimina partecipante' onclick=CancelModification()>
 	</span>
 	</span>
 </h2>
