@@ -9,7 +9,7 @@ global $v_corrections, $v_contestant, $v_contest;
 	<span class='date_title'>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
-		- <?=getItalianDate($v_contest['date'])?>
+		- <?=GetItalianDate($v_contest['date'])?>
 		<?php
 	} ?>
 	</span>
