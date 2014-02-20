@@ -28,7 +28,7 @@ if (empty($v_problems)) {
 }
 else {
 	?>
-	<table class="InformationTable">
+	<table class='InformationTable'>
 	<?php
 }?>
 	<thead><tr>
@@ -39,8 +39,11 @@ else {
 	<?php
 		foreach($v_problems as $pro) {
 			?>
-			<tr class='trlink' data-orderby='<?=$pro['name']?>'>
+			<tr data-orderby='<?=$pro['name']?>' data-problem_id='<?=$pro['id']?>'>
 			<td class='problem_column'><?=$pro['name']?></td>
+			<td class='trash_column'> <div class='ButtonContainer'>
+				<img class='ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick=RemoveProblemRequest(this)>
+			</div> </td>
 			</tr>
 			<?php
 		}
@@ -50,7 +53,7 @@ else {
 </table>
 
 
-<h3 class="PageSubtitle">
+<h3 class='PageSubtitle'>
 	Aggiungi un problema
 </h3>
 
@@ -61,8 +64,8 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="name" id="name_input"> </td>
-		<td> <input type="button" value="Aggiungi" onclick=AddProblemRequest()> </td>
+		<td> <input type='text' name='name' id='name_input'> </td>
+		<td> <input type='button' value='Aggiungi' onclick=AddProblemRequest()> </td>
 	</tr>
 	</table>
 </div>

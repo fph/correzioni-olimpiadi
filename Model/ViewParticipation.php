@@ -17,7 +17,7 @@
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	
-	$problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], ['id']));
+	$problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], null, 'name'));
 	
 	$v_corrections=[];
 	
@@ -36,6 +36,9 @@
 		
 		$v_corrections[]= $nn;
 	}
+	
+	
+	
 	$db->close();
 	
 	TemplatePage("ViewParticipation",[	'Index'=>'index.php',

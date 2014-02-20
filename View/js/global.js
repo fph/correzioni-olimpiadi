@@ -38,12 +38,14 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons){
 		if (co=='date') NewRowHTML+="<td class='"+co+"_column'>"+GetItalianDate(columns[co])+"</td>";
 		else NewRowHTML+="<td class='"+co+"_column'>"+columns[co]+"</td>";
 	}
-	//~ DA RIVEDERE BENE
-	//~ for (var bu in buttons) {
-		//~ NewRowHTML+="<td class='"+bu+"_column'> <div class='ButtonContainer'>";
-		//~ NewRowHTML+="<img class='ButtonImage' src='../View/Images/"+bu+"_button_image.png' alt='Elimina' onclick="+buttons[bu]+">";
-		//~ NewRowHTML+="</div> </td>";
-	//~ }
+	
+	for (var bu in buttons) {
+		alert(bu);
+		alert(buttons[bu]);
+		NewRowHTML+="<td class='"+bu+"_column'> <div class='ButtonContainer'>";
+		NewRowHTML+="<img class='ButtonImage' src='../View/Images/"+bu+"_button_image.png' alt='Elimina' onclick="+buttons[bu]+">";
+		NewRowHTML+="</div> </td>";
+	}
 	
 	NewRow.innerHTML=NewRowHTML;
 	
