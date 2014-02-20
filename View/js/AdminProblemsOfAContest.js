@@ -13,8 +13,16 @@ function AddProblemRequest() {
 
 function RemoveProblem(response){
 	if (response.type=='good') {
-		parent_tr=document.getElementById('trashing'+response.id);
-		parent_tr.parentNode.removeChild(parent_tr);
+		parent_tr=document.getElementById('trashing'+response.ProblemId);
+		var tbodyEl=parent_tr.parentNode;
+		tbodyEl.removeChild(parent_tr);
+		var childs=tbodyEl.getElementsByTagName('tr');
+		if (childs.length<1) {
+			var EmptyTable=document.getElementsByClassName('EmptyTable')[0];
+			EmptyTable.classList.remove('HiddenEmptyTable');
+			var InformationTable=document.getElementsByClassName('InformationTable')[0];
+			InformationTable.classList.add('HiddenEmptyTable');
+		}
 	}
 }
 

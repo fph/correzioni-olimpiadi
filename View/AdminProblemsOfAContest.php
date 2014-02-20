@@ -23,11 +23,12 @@ global $v_contest, $v_problems;
 if (empty($v_problems)) {
 	?>
 	<div class='EmptyTable'> Ancora nessun problema inserito. </div>
-	<table class="InformationTable HiddenEmptyTable">
+	<table class='InformationTable HiddenEmptyTable'>
 	<?php
 }
 else {
 	?>
+	<div class='EmptyTable HiddenEmptyTable'>Ancora nessun problema inserito. </div>
 	<table class='InformationTable'>
 	<?php
 }?>

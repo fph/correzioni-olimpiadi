@@ -15,18 +15,18 @@ function Redirect(pageUrl, getElements) {
 function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons){
 	var EmptyTable=document.getElementsByClassName('EmptyTable')[0];
 	if (EmptyTable!=null) {
-		EmptyTable.parentNode.removeChild(EmptyTable);
+		EmptyTable.classList.add('HiddenEmptyTable');
 		var InformationTable=document.getElementsByClassName('InformationTable')[0];
-		InformationTable.setAttribute('class','InformationTable');
+		InformationTable.classList.add('InformationTable');
 	}
 	
 	var InformationTable=document.getElementsByClassName('InformationTable')[0];
 	var tbodyEl=InformationTable.getElementsByTagName('tbody')[0];
 	
 	var NewRow=document.createElement('tr');
-	
-	NewRow.className='NewRow';
-	for (var cl in classes) NewRow.className+=' '+classes[cl];
+
+	NewRow.classList.add('NewRow');
+	for (var cl in classes) NewRow.classList.add(classes[cl]);
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
 
 	NewRow.dataset.orderby=columns[orderby];
