@@ -10,7 +10,7 @@ global $v_user, $v_admin, $v_contests;
 	<?php
 	if (!$v_admin) {
 		?>
-		<span class='buttons_title'>
+		<span class='ButtonsTitle'>
 		<span class='modify_button_container ButtonContainer'>
 			<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica correttore'>
 		</span>

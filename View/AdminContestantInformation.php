@@ -1,23 +1,14 @@
 <?php
 global $v_contestant, $v_contests;
 ?>
-<style>
-	.ContentEditable {
-		border: 1px solid #A8A8A8;
-		border-radius: 3px;
-	}
-	span#ContestantSurname {
-		margin: 0 10px 0 0;
-	} 	
-</style>
 
 <h2 class='PageTitle'>
 	<span class='contestant_title'>
-		<span id='ContestantSurname'> <?=$v_contestant['surname']?> </span>
-		<span id='ContestantName'> <?=$v_contestant['name']?> </span>
+		<span id='ContestantSurname' style='margin:0 10px 0 0;'><?=$v_contestant['surname']?></span>
+		<span id='ContestantName'><?=$v_contestant['name']?></span>
 	</span>
 	
-	<span class='buttons_title'>
+	<span class='ButtonsTitle'>
 	<span class='modify_button_container ButtonContainer'>
 		<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica partecipante' onclick=ModifyContestantName()>
 	</span>

@@ -13,7 +13,7 @@ global $v_contest;
 	} ?>
 	</span>
 	
-	<span class='buttons_title'>
+	<span class='ButtonsTitle'>
 	<span class='modify_button_container ButtonContainer'>
 		<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica gara'>
 	</span>
