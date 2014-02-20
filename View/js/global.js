@@ -98,5 +98,5 @@ function GetRestrictedItalianDate(date){
 }
 
 function GetItalianDate(date){
-	return getExtendedItalianDate(date);
+	return GetExtendedItalianDate(date);
 }

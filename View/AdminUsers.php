@@ -2,19 +2,19 @@
 global $v_users;
 ?>
 
-<h2 class='pageTitle'>
+<h2 class='PageTitle'>
 	Correttori
 </h2>
 
-<h3 class='pageSubtitle'>
+<h3 class='PageSubtitle'>
 	Lista dei correttori
 </h3>
 
 <?php
 if (empty($v_users)) {
 	?>
-	<div class='emptyTable'> Ancora nessun correttore inserito. </div>
-	<table class='InformationTable hiddenEmptyTable'>
+	<div class='EmptyTable'> Ancora nessun correttore inserito. </div>
+	<table class='InformationTable HiddenEmptyTable'>
 	<?php
 }
 else {
@@ -23,15 +23,15 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='usernameColumn'>Username</th>
+		<th class='username_column'>Username</th>
 	</tr></thead>
 	
 	<tbody>
 	<?php
 		foreach($v_users as $use) {
 			?>
-			<tr class='trlink' value='<?=$use['username']?>' onclick=Redirect('AdminUserInformation',{userId:<?=$use['id']?>})>
-			<td class='usernameColumn'><?=$use['username']?></td>
+			<tr class='trlink' data-orderby='<?=$use['username']?>' onclick=Redirect('AdminUserInformation',{UserId:<?=$use['id']?>})>
+			<td class='username_column'><?=$use['username']?></td>
 			</tr>
 			<?php
 		}
@@ -40,7 +40,7 @@ else {
 	
 </table>
 
-<h3 class="pageSubtitle">
+<h3 class="PageSubtitle">
 	Aggiungi un correttore
 </h3>
 

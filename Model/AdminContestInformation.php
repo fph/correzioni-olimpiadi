@@ -11,8 +11,8 @@
 	
 	//PermissionChecked	
 
-	$contestId=$_GET['contestId'];
-	$v_contest=OneResultQuery($db, QuerySelect('Contests',['id'=>$contestId]));
+	$ContestId=$_GET['ContestId'];
+	$v_contest=OneResultQuery($db, QuerySelect('Contests',['id'=>$ContestId]));
 	
 	$db->close();
 
@@ -21,5 +21,5 @@
 	TemplatePage("AdminContestInformation",['Index'=>'index.php',
 											'Amministrazione'=>'AdminAdministration.php',
 											'Gare'=>'AdminContests.php',
-											$v_contest['name']=>'AdminContestInformation.php?contestId='.$contestId]);
+											$v_contest['name']=>'AdminContestInformation.php?ContestId='.$ContestId]);
 ?>

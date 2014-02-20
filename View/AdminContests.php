@@ -2,19 +2,19 @@
 global $v_contests;
 ?>
 
-<h2 class='pageTitle'>
+<h2 class='PageTitle'>
 	Gare
 </h2>
 
-<h3 class='pageSubtitle'>
+<h3 class='PageSubtitle'>
 	Lista delle gare
 </h3>
 
 <?php
 if (empty($v_contests)) {
 	?>
-	<div class='emptyTable'> Ancora nessuna gara inserita. </div>
-	<table class='InformationTable hiddenEmptyTable'>
+	<div class='EmptyTable'> Ancora nessuna gara inserita. </div>
+	<table class='InformationTable HiddenEmptyTable'>
 	<?php
 }
 else {
@@ -23,8 +23,8 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='contestColumn'>Gara</th>
-		<th class='dateColumn'>Data</th>
+		<th class='contest_column'>Gara</th>
+		<th class='date_column'>Data</th>
 	</tr></thead>
 	
 	<tbody>
@@ -34,17 +34,17 @@ else {
 			<tr class='trlink'
 			<?php if (!is_null($con['date']) ) {
 				?>
-				value='<?=$con['date']?>'
+				data-orderby='<?=$con['date']?>'
 				<?php
 			}
 			else {
 				?>
-				value='0000-00-00'
+				data-orderby='0000-00-00'
 				<?php
 			}?>
-			onclick=Redirect('AdminContestInformation',{contestId:<?=$con['id']?>})>
-			<td class='contestColumn'><?=$con['name']?>
-			<span class='blocked correctionsCompleted' >
+			onclick=Redirect('AdminContestInformation',{ContestId:<?=$con['id']?>})>
+			<td class='contest_column'><?=$con['name']?>
+			<span class='blocked CorrectionsCompleted' >
 			<?php
 			if ($con['blocked']==1) {
 				?>
@@ -55,12 +55,12 @@ else {
 			</td>			
 			<?php if (!is_null($con['date'])) { 
 				?> 
-				<td class='dateColumn'><?=getItalianDate($con['date'])?></td> 
+				<td class='date_column'><?=GetItalianDate($con['date'])?></td> 
 				<?php 
 			}
 			else { 
 				?>
-				<td class='dateColumn'>-</td> 
+				<td class='date_column'>-</td> 
 				<?php 
 			} ?>
 			</tr>
@@ -71,7 +71,7 @@ else {
 	
 </table>
 
-<h3 class="pageSubtitle">
+<h3 class="PageSubtitle">
 	Aggiungi una gara
 </h3>
 

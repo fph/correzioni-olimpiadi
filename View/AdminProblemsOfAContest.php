@@ -2,28 +2,28 @@
 global $v_contest, $v_problems;
 ?>
 
-<h2 class='pageTitle' value='<?=$v_contest['id']?>'>
+<h2 class='PageTitle'>
 	<span class='contest_title'>
 	<?=$v_contest['name']?>
 	</span>
 	<span class='date_title'>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
-		- <?=getItalianDate($v_contest['date'])?>
+		- <?=GetItalianDate($v_contest['date'])?>
 		<?php
 	} ?>
 	</span>
 </h2>
 
-<h3 class='pageSubtitle'>
+<h3 class='PageSubtitle'>
 	Lista dei problemi
 </h3>
 
 <?php
 if (empty($v_problems)) {
 	?>
-	<div class='emptyTable'> Ancora nessun problema inserito. </div>
-	<table class="InformationTable hiddenEmptyTable">
+	<div class='EmptyTable'> Ancora nessun problema inserito. </div>
+	<table class="InformationTable HiddenEmptyTable">
 	<?php
 }
 else {
@@ -32,15 +32,15 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='problemColumn'>Problemi</th>
+		<th class='problem_column'>Problemi</th>
 	</tr></thead>
 	
 	<tbody>
 	<?php
 		foreach($v_problems as $pro) {
 			?>
-			<tr class='trlink' value='<?=$pro['name']?>' onclick="Redirect()">
-			<td class='problemColumn'><?=$pro['name']?></td>
+			<tr class='trlink' data-orderby='<?=$pro['name']?>'>
+			<td class='problem_column'><?=$pro['name']?></td>
 			</tr>
 			<?php
 		}
@@ -50,7 +50,7 @@ else {
 </table>
 
 
-<h3 class="pageSubtitle">
+<h3 class="PageSubtitle">
 	Aggiungi un problema
 </h3>
 
@@ -66,3 +66,9 @@ else {
 	</tr>
 	</table>
 </div>
+
+
+<script>
+	var ContestId=<?=$v_contest['id']?>;
+
+</script>

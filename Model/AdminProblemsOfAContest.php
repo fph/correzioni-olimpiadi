@@ -11,19 +11,19 @@
 	
 	//PermissionChecked
 	
-	$contestId=$_GET["contestId"];
+	$ContestId=$_GET['ContestId'];
 	
-	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$contestId]));
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	
-	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$contestId], null, 'name'));
+	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], null, 'name'));
 	
 	
 	
 	$db->close();
 	
-	TemplatePage("AdminProblemsOfAContest",[	'Index'=>'index.php',
+	TemplatePage('AdminProblemsOfAContest',[	'Index'=>'index.php',
 												'Amministrazione'=>'AdminAdministration.php',
 												'Gare'=>'AdminContests.php',
-												$v_contest['name']=>'AdminContestInformation.php?contestId='.$contestId,
-												'Problemi'=>'AdminProblemsOfAContest.php?contestId='.$contestId]);
+												$v_contest['name']=>'AdminContestInformation.php?ContestId='.$ContestId,
+												'Problemi'=>'AdminProblemsOfAContest.php?ContestId='.$ContestId]);
 ?>

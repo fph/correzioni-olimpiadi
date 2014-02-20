@@ -2,28 +2,28 @@
 global $v_contest, $v_contestants;
 ?>
 
-<h2 class='pageTitle' value='<?=$v_contest['id']?>'>
+<h2 class='PageTitle'>
 	<span class='contest_title'>
 	<?=$v_contest['name']?>
 	</span>
 	<span class='date_title'>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
-		- <?=getItalianDate($v_contest['date'])?>
+		- <?=GetItalianDate($v_contest['date'])?>
 		<?php
 	} ?>
 	</span>
 </h2>
 
-<h3 class='pageSubtitle'>
+<h3 class='PageSubtitle'>
 	Lista dei partecipanti
 </h3>
 
 <?php
 if (empty($v_contestants)) {
 	?>
-	<div class='emptyTable'> Ancora nessun partecipante inserito. </div>
-	<table class="InformationTable hiddenEmptyTable">
+	<div class='EmptyTable'> Ancora nessun partecipante inserito. </div>
+	<table class="InformationTable HiddenEmptyTable">
 	<?php
 }
 else {
@@ -32,9 +32,9 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='surnameColumn'>Cognome</th>
-		<th class='nameColumn'>Nome</th>
-		<th class='trashColumn'></th>
+		<th class='surname_column'>Cognome</th>
+		<th class='name_column'>Nome</th>
+		<th class='trash_column'></th>
 	</tr></thead>
 	
 	<tbody>
@@ -42,10 +42,10 @@ else {
 		foreach($v_contestants as $con) {
 			?>
 			<tr value='<?=$con['id']?>'>
-			<td class='surnameColumn'><?=$con['surname']?></td>
-			<td class='nameColumn'><?=$con['name']?></td>
-			<td class='trashColumn'> <div class='trashButtonContainer buttonContainer'>
-				<img class='trashButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Elimina' onclick=RemoveParticipationRequest(this)>
+			<td class='surname_column'><?=$con['surname']?></td>
+			<td class='name_column'><?=$con['name']?></td>
+			<td class='trash_column'> <div class='trash_button_container ButtonContainer'>
+				<img class='trash_button_image ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick=RemoveParticipationRequest(this)>
 			</div> </td>
 			</tr>
 			<?php
@@ -55,7 +55,7 @@ else {
 	
 </table>
 
-<h3 class='pageSubtitle'>
+<h3 class='PageSubtitle'>
 	Aggiungi un partecipante
 </h3>
 
@@ -74,4 +74,6 @@ else {
 	</table>
 </div>
 
-
+<script>
+	var ContestId=<?=$v_contest['id']?>;
+</script>

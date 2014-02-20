@@ -11,11 +11,11 @@
 	
 	//PermissionChecked
 	
-	$contestId=$_GET["contestId"];
+	$ContestId=$_GET['ContestId'];
 	
-	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$contestId]));
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	
-	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$contestId]));
+	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
 	
 	foreach($v_contestants as &$con){
 		$con=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
@@ -27,9 +27,9 @@
 	
 	$db->close();
 	
-	TemplatePage("AdminContestantsOfAContest",[	'Index'=>'index.php',
+	TemplatePage('AdminContestantsOfAContest',[	'Index'=>'index.php',
 												'Amministrazione'=>'AdminAdministration.php',
 												'Gare'=>'AdminContests.php',
-												$v_contest['name']=>'AdminContestInformation.php?contestId='.$contestId,
-												'Partecipanti'=>'AdminContestantsOfAContest.php?contestId='.$contestId]);
+												$v_contest['name']=>'AdminContestInformation.php?ContestId='.$ContestId,
+												'Partecipanti'=>'AdminContestantsOfAContest.php?ContestId='.$ContestId]);
 ?>

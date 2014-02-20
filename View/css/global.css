@@ -106,12 +106,12 @@ thead, tbody {
 */
 
 
-.generalInformation {
+.GeneralInformation {
 	font-size:1.5em;
 	padding-left:6%;
 }
 
-.generalInformation .adminInformation {
+.GeneralInformation .AdminInformation {
 	color: #993399;
 }
 
