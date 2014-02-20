@@ -20,7 +20,7 @@ function RemoveContest($db, $ContestId) {
 	}
 	
 	Query($db, QueryDelete('Contests', ['id'=>$ContestId]));
-	return ['type'=>'good', 'text'=>'La gara è stata eliminata con successo'];
+	return ['type'=>'good', 'text'=>'La gara è stata eliminata con successo', 'ContestId'=>$ContestId];
 }
 
 function BlockContest($db, $ContestId) {
@@ -94,7 +94,7 @@ function RemoveProblem($db, $ProblemId) {
 	}
 	
 	Query( $db, QueryDelete( 'Problems', ['id'=>$ProblemId]) );
-	return ['type'=>'good', 'text'=>'Il problema è stato eliminato con successo'];
+	return ['type'=>'good', 'text'=>'Il problema è stato eliminato con successo', 'ProblemId'=>$ProblemId];
 }
 
 function ChangeProblemName( $db, $ProblemId, $name ){
@@ -104,7 +104,7 @@ function ChangeProblemName( $db, $ProblemId, $name ){
 	
 	$Problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
 	if( is_null( $Problem ) ) {
-		return ['type'=>'bad', 'text'=>'Il problema non esiste', 'ProblemId'=>$ProblemId];
+		return ['type'=>'bad', 'text'=>'Il problema non esiste'];
 	}
 	
 	$ContestId=$Problem['ContestId'];
