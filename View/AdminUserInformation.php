@@ -3,24 +3,12 @@ global $v_user, $v_admin, $v_contests;
 ?>
 
 <h2 class="PageTitle">
-	<span class='user_title'>
-		<?=$v_user['username']?>
-	</span>
+	<span id='UsernameTitle'><?=$v_user['username']?></span>
 	
 	<?php
-	if (!$v_admin) {
-		?>
-		<span class='ButtonsTitle'>
-		<span class='modify_button_container ButtonContainer'>
-			<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica correttore'>
-		</span>
+	if (!$v_admin) include 'ButtonsTitle.html';
+	?>
 		
-		<span class='trash_button_container ButtonContainer'>
-			<img class='trash_button_image ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' title='Elimina correttore' onclick=RemoveUserRequest(<?=$v_user['id']?>)>
-		</span>
-		</span>
-		<?php
-	}?>
 </h2>
 
 
@@ -69,3 +57,7 @@ else {
 <?php
 }
 ?>
+
+<script>
+	var UserId=<?=$v_user['id']?>;
+</script>

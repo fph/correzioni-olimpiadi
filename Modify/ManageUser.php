@@ -96,7 +96,7 @@ function ChangeUsername( $db , $UserId , $username ) {
 		return ['type'=>'bad' ,'text'=>'Il correttore selezionato non esiste'];
 	}
 
-	Query( $db,QueryUpdate('Users', ['id'=>$Userid] , ['username'=> $username ]) );
+	Query( $db,QueryUpdate('Users', ['id'=>$UserId] , ['username'=> $username ]) );
 	
 	return ['type'=>'good', 'text'=>'Lo username è stato cambiato con successo'];
 }
