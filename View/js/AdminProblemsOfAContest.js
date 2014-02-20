@@ -13,15 +13,14 @@ function AddProblemRequest() {
 
 function RemoveProblem(response){
 	if (response.type=='good') {
-		parent_tr=document.getElementsByClassName('trashing')[0];
-		alert(parent_tr);
+		parent_tr=document.getElementById('trashing'+response.id);
+		parent_tr.parentNode.removeChild(parent_tr);
 	}
 }
 
 function RemoveProblemRequest(element_this) {
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
-	parent_tr.classList.add('trashing');
-	alert(parent_tr);
 	var ProblemId=parent_tr.dataset.problem_id;
+	parent_tr.id='trashing'+ProblemId;
 	MakeAjaxRequest('../Modify/ManageContest.php', {ProblemId:ProblemId, type:'RemoveProblem'}, RemoveProblem);
 }
