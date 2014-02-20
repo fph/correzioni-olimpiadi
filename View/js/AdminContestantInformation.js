@@ -2,42 +2,24 @@ function RemoveContestant(){
 	setTimeout(function(){Redirect('AdminContestants');},2000);
 }
 
-function RemoveContestantRequest(ContestantId){
+function DeleteTitle(){
 	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId:ContestantId, type:'remove'}, RemoveContestant);
 }
 
-function StartModifyingTitle() {
-	var buttonsTitle=document.getElementsByClassName('ButtonsTitle')[0];
-	buttonsTitle.getElementsByClassName('modify_button_container')[0].classList.add('HiddenButtonContainer');
-	buttonsTitle.getElementsByClassName('trash_button_container')[0].classList.add('HiddenButtonContainer');
-	buttonsTitle.getElementsByClassName('confirm_button_container')[0].classList.remove('HiddenButtonContainer');
-	buttonsTitle.getElementsByClassName('cancel_button_container')[0].classList.remove('HiddenButtonContainer');
-}
-
-function EndModifyingTitle() {
-	var ButtonsTitle=document.getElementsByClassName('ButtonsTitle')[0];
-	ButtonsTitle.getElementsByClassName('modify_button_container')[0].classList.remove('HiddenButtonContainer');
-	ButtonsTitle.getElementsByClassName('trash_button_container')[0].classList.remove('HiddenButtonContainer');
-	ButtonsTitle.getElementsByClassName('confirm_button_container')[0].classList.add('HiddenButtonContainer');
-	ButtonsTitle.getElementsByClassName('cancel_button_container')[0].classList.add('HiddenButtonContainer');
-}
-
-function ModifyContestantName() {
-	StartModifying();
+function ModifyTitle() {
+	StartModifyingTitle();
 	var surname=document.getElementById('ContestantSurname');
 	var name=document.getElementById('ContestantName');
 	surname.classList.add('ContentEditable');
 	name.classList.add('ContentEditable');
 	surname.setAttribute('contenteditable','true');
 	name.setAttribute('contenteditable','true');
-	var surname=document.getElementById('ContestantSurname');
-	var name=document.getElementById('ContestantName');
 	surname.dataset.old_value=surname.innerHTML;
 	name.dataset.old_value=name.innerHTML;
 }
 
 function ProcessServerAnswer( Response ) {
-	if ( Response.type == 'bad' ) CancelModification();
+	if ( Response.type == 'bad' ) CancelTitleModification();
 	else if (Response.type == 'good' ) {
 		var surname=document.getElementById('ContestantSurname');
 		var name=document.getElementById('ContestantName');		
@@ -46,8 +28,8 @@ function ProcessServerAnswer( Response ) {
 	}
 }
 
-function SendModification(ContestantId){
-	EndModifying();
+function SendTitleModification(){
+	EndModifyingTitle();
 	
 	var surname=document.getElementById('ContestantSurname');
 	var name=document.getElementById('ContestantName');
@@ -60,8 +42,8 @@ function SendModification(ContestantId){
 	ProcessServerAnswer);
 }
 
-function CancelModification(){
-	EndModifying();
+function CancelTitleModification(){
+	EndModifyingTitle();
 	var surname=document.getElementById('ContestantSurname');
 	var name=document.getElementById('ContestantName');
 	surname.classList.remove('ContentEditable');

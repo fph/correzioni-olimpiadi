@@ -7,24 +7,7 @@ global $v_contestant, $v_contests;
 		<span id='ContestantSurname' style='margin:0 10px 0 0;'><?=$v_contestant['surname']?></span>
 		<span id='ContestantName'><?=$v_contestant['name']?></span>
 	</span>
-	
-	<span class='ButtonsTitle'>
-	<span class='modify_button_container ButtonContainer'>
-		<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica partecipante' onclick=ModifyContestantName()>
-	</span>
-	
-	<span class='trash_button_container ButtonContainer'>
-		<img class='trash_button_image ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' title='Elimina partecipante' onclick=RemoveContestantRequest(<?=$v_contestant['id']?>)>
-	</span>
-	
-	<span class='confirm_button_container ButtonContainer HiddenButtonContainer'>
-		<img class='confirm_button_image ButtonImage' src='../View/Images/confirm_button_image.png' alt='Modifica' title='Modifica partecipante' onclick=SendModification(<?=$v_contestant['id']?>)>
-	</span>
-	
-	<span class='cancel_button_container ButtonContainer HiddenButtonContainer'>
-		<img class='cancel_button_image ButtonImage' src='../View/Images/cancel_button_image.png' alt='Elimina' title='Elimina partecipante' onclick=CancelModification()>
-	</span>
-	</span>
+	<?php include 'ButtonsTitle.html' ?>
 </h2>
 
 <?php
@@ -61,3 +44,8 @@ else {
 <?php
 }
 ?>
+<script type='text/javascript'>
+	var ContestantId=<?=$v_contestant['id']?>;
+</script>
+
+

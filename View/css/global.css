@@ -25,6 +25,10 @@ body {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
+.hidden {
+	display: none;
+}
+
 .PageTitle {
 	font-size: 2em;
 	padding-left: 5%;
@@ -95,14 +99,6 @@ thead, tbody {
 
 .ButtonsTitle {
 	margin-left:3%;
-}
-
-.HiddenButtonContainer {
-	display: none;
-}
-
-.hidden {
-	display: none;
 }
 
 /*
