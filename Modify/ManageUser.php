@@ -37,7 +37,7 @@ function RemoveUser( $db , $UserId ){
 	
 	Query( $db,QueryDelete('Users', ['id'=>$UserId]) );
 
-	return ['type'=>'good', 'text'=>'Correttore eliminato con successo'];
+	return ['type'=>'good', 'text'=>'Correttore eliminato con successo', 'UserId'=>$UserId];
 	
 }
 

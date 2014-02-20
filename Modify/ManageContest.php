@@ -104,7 +104,7 @@ function ChangeProblemName( $db, $ProblemId, $name ){
 	
 	$Problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
 	if( is_null( $Problem ) ) {
-		return ['type'=>'bad', 'text'=>'Il problema non esiste'];
+		return ['type'=>'bad', 'text'=>'Il problema non esiste', 'ProblemId'=>$ProblemId];
 	}
 	
 	$ContestId=$Problem['ContestId'];
