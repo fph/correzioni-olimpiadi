@@ -79,16 +79,16 @@ thead, tbody {
 	Buttons
 */
 
-.buttonImage {
+.ButtonImage {
 	width: 22px;
 	height: 22px;
 }
 
-.buttonImage:hover {
+.ButtonImage:hover {
 	cursor: pointer;
 }
 
-.buttonContainer {
+.ButtonContainer {
 	width: 22px;
 	height: 22px;
 }
@@ -97,7 +97,7 @@ thead, tbody {
 	margin-left:3%;
 }
 
-.hiddenButtonContainer {
+.HiddenButtonContainer {
 	display: none;
 }
 

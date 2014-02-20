@@ -11,11 +11,11 @@
 	
 	//PermissionChecked	
 	
-	$contestantId=$_GET["contestantId"];
+	$ContestantId=$_GET['ContestantId'];
 	
-	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$contestantId]));
+	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	
-	$v_contests=ManyResultQuery($db, QuerySelect('Participations', ['ContestantId'=>$contestantId]));
+	$v_contests=ManyResultQuery($db, QuerySelect('Participations', ['ContestantId'=>$ContestantId]));
 	
 	foreach($v_contests as &$con){
 		$con=OneResultQuery($db, QuerySelect('Contests', ['id'=>$con['ContestId']]));
@@ -28,5 +28,5 @@
 	TemplatePage("AdminContestantInformation",[	'Index'=>'index.php',
 												'Amministrazione'=>'AdminAdministration.php',
 												'Partecipanti'=>'AdminContestants.php',
-												$v_contestant['surname']." ".$v_contestant['name']=>'AdminContestantInformation.php?contestantId='.$contestantId]);
+												$v_contestant['surname']." ".$v_contestant['name']=>'AdminContestantInformation.php?ContestantId='.$ContestantId]);
 ?>

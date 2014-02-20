@@ -7,8 +7,8 @@
 	
 	$db=OpenDbConnection();
 	
-	$problemId=$_GET["problemId"];
-	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$problemId]));
+	$ProblemId=$_GET['ProblemId'];
+	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$v_problem['ContestId']]));
 	
 	CheckPagePermission($db,$v_contest['id']);
@@ -20,13 +20,13 @@
 	$v_corrections=[];
 	
 	foreach ($contestants as $con) {
-		$newCor=OneResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problemId, 'ContestantId'=>$con['ContestantId']]));
-		if (!is_null($newCor)) $newCor['done']=true;
-		else $newCor['done']=false;
-		$newCor['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
-		$newCor['surname']=$newCor['contestant']['surname'];
-		$newCor['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$newCor['UserId']], ['username']))['username'];
-		$v_corrections[]=$newCor;
+		$nn=OneResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$ProblemId, 'ContestantId'=>$con['ContestantId']]));
+		if (!is_null($nn)) $nn['done']=true;
+		else $nn['done']=false;
+		$nn['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
+		$nn['surname']=$nn['contestant']['surname'];
+		$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
+		$v_corrections[]=$nn;
 	}
 	
 	usort($v_corrections, build_sorter('surname'));
@@ -35,7 +35,7 @@
 	
 	TemplatePage("ViewProblem",['Index'=>'index.php',
 								'Gare'=>'ViewContests.php',
-								$v_contest['name']=>'ViewContestInformation.php?contestId='.$v_contest['id'],
-								'Problemi'=>'ViewProblemsOfAContest.php?contestId='.$v_contest['id'],
-								$v_problem['name']=>'ViewProblem.php?problemId='.$problemId]);
+								$v_contest['name']=>'ViewContestInformation.php?ContestId='.$v_contest['id'],
+								'Problemi'=>'ViewProblemsOfAContest.php?ContestId='.$v_contest['id'],
+								$v_problem['name']=>'ViewProblem.php?ProblemId='.$ProblemId]);
 ?>

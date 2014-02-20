@@ -15,7 +15,7 @@ global $v_corrections, $v_contestant, $v_contest;
 	</span>
 </h2>
 
-<h3 class="PageSubtitle" id="<?=$v_contestant['id']?>">
+<h3 class="PageSubtitle">
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
 	</span>
@@ -49,7 +49,7 @@ else {
 	<?php
 		foreach($v_corrections as $cor) {
 		?>
-			<tr data-id='<?=$cor['problem']['id']?>'>
+			<tr data-problem_id='<?=$cor['problem']['id']?>'>
 			<td class='problem_column'><?=$cor['problem']['name']?></td>
 			
 			<?php
@@ -89,5 +89,12 @@ else {
 
 <script>
 	var ContestantId=<?=$v_contestant['id']?>;
-	var ContestId=<?=$v_contest['id']?>;
+	
+	function GetContestantId(element_this){
+		return ContestantId;
+	}
+	
+	function GetProblemId(element_this) {
+		return element_this.dataset.problem_id;
+	}
 </script>

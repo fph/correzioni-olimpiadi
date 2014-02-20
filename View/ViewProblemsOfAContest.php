@@ -2,13 +2,13 @@
 global $v_contest, $v_problems;
 ?>
 
-<h2 class='pageTitle'>
+<h2 class='PageTitle'>
 	<span class='contest_title'> <?=$v_contest['name']?>
 	</span>
 	<span class='date_title'>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
-		- <?=getItalianDate($v_contest['date'])?>
+		- <?=GetItalianDate($v_contest['date'])?>
 		<?php
 	} ?>
 	</span>
@@ -17,23 +17,23 @@ global $v_contest, $v_problems;
 <?php
 if (empty($v_problems)) {
 	?>
-	<div class='emptyTable'> Ancora nessun problema inserito. </div>
+	<div class='EmptyTable'> Ancora nessun problema inserito. </div>
 	<?php
 }
 else {
 ?>
 
-<table class="InformationTable" id="problemsOfAContestTable">
+<table class="InformationTable">
 	<thead><tr>
-		<th class='problemColumn'>Problemi</th>
+		<th class='problem_column'>Problemi</th>
 	</tr></thead>
 	
 	<tbody>
 	<?php
 		foreach($v_problems as $pro) {
 			?>
-			<tr class='trlink' onclick="Redirect('ViewProblem', {problemId:<?=$pro['id']?>})">
-			<td class='problemColumn'><?=$pro['name']?></td>
+			<tr class='trlink' onclick="Redirect('ViewProblem', {ProblemId:<?=$pro['id']?>})">
+			<td class='problem_column'><?=$pro['name']?></td>
 			</tr>
 			<?php
 		}

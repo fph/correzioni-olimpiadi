@@ -12,10 +12,10 @@ function Redirect(pageUrl, getElements) {
 	document.location=url;
 }
 
-function AddRow(columns, classes, RedirectUrl, getElements, orderBy, buttons){
-	var emptyTable=document.getElementsByClassName('emptyTable')[0];
-	if (emptyTable!=null) {
-		emptyTable.parentNode.removeChild(emptyTable);
+function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons){
+	var EmptyTable=document.getElementsByClassName('EmptyTable')[0];
+	if (EmptyTable!=null) {
+		EmptyTable.parentNode.removeChild(EmptyTable);
 		var InformationTable=document.getElementsByClassName('InformationTable')[0];
 		InformationTable.setAttribute('class','InformationTable');
 	}
@@ -23,48 +23,52 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderBy, buttons){
 	var InformationTable=document.getElementsByClassName('InformationTable')[0];
 	var tbodyEl=InformationTable.getElementsByTagName('tbody')[0];
 	
-	var newRow=document.createElement('tr');
+	var NewRow=document.createElement('tr');
 	
-	newRow.className='new_row';
-	for (var cl in classes) newRow.className+=' '+classes[cl];
-	setTimeout(function(){ newRow.classList.remove('new_row'); },5000);
+	NewRow.className='NewRow';
+	for (var cl in classes) NewRow.className+=' '+classes[cl];
+	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
 
-	newRow.setAttribute('value',columns[orderBy]);
+	NewRow.dataset.orderby=columns[orderby];
 	
-	if (RedirectUrl!=null) newRow.onclick=function(){Redirect(RedirectUrl, getElements)};
+	if (RedirectUrl!=null) NewRow.onclick=function(){Redirect(RedirectUrl, getElements)};
 	
-	var newRowHTML='';
+	var NewRowHTML='';
 	for (var co in columns) {
-		if (co=='date') newRowHTML+="<td class='"+co+"Column'>"+getItalianDate(columns[co])+"</td>";
-		else newRowHTML+="<td class='"+co+"Column'>"+columns[co]+"</td>";
+		if (co=='date') NewRowHTML+="<td class='"+co+"_column'>"+GetItalianDate(columns[co])+"</td>";
+		else NewRowHTML+="<td class='"+co+"_column'>"+columns[co]+"</td>";
 	}
-	for (var bu in buttons) {
-		newRowHTML+="<td class='"+bu+"Column'> <div class='"+bu+"ButtonContainer buttonContainer'>";
-		newRowHTML+="<img class='"+bu+"ButtonImage buttonImage' src='../View/Images/TrashButtonImage.png' alt='Elimina' onclick="+buttons[bu]+">";
-		newRowHTML+="</div> </td>";
-	}
-	newRow.innerHTML=newRowHTML;
+	//~ DA RIVEDERE BENE
+	//~ for (var bu in buttons) {
+		//~ NewRowHTML+="<td class='"+bu+"_column'> <div class='ButtonContainer'>";
+		//~ NewRowHTML+="<img class='ButtonImage' src='../View/Images/"+bu+"_button_image.png' alt='Elimina' onclick="+buttons[bu]+">";
+		//~ NewRowHTML+="</div> </td>";
+	//~ }
+	
+	NewRow.innerHTML=NewRowHTML;
 	
 	var childs=tbodyEl.getElementsByTagName('tr');
 	
-	var compareEl=newRow.getAttribute('value');
+	var compareEl=NewRow.dataset.orderby;
 	
 	var aggiunto=false;
 	for (var i=0; i<childs.length; i++) {
-		var sortingEl=childs[i].getAttribute('value');
+		var sortingEl=childs[i].dataset.orderby;
 		if (String(compareEl).localeCompare(String(sortingEl))<0) {
-			tbodyEl.insertBefore(newRow,childs[i]);
+			tbodyEl.insertBefore(NewRow,childs[i]);
 			aggiunto=true;
 			break;
 		}
 	}
-	if (aggiunto==false) tbodyEl.appendChild(newRow);
+	if (aggiunto==false) tbodyEl.appendChild(NewRow);
 	
+	
+	//~ PARTE PER RIPULIRE L'INPUT FORM DA RIVEDERE
 	//~ for (var co in columns) document.getElementById(co+'_input').value='';
 }
 
 
-function getExtendedItalianDate(date){
+function GetExtendedItalianDate(date){
 	if (date==null) return date;
 	dividedDate=date.split("-");
 	italianDate=dividedDate[2]+" ";
@@ -86,13 +90,13 @@ function getExtendedItalianDate(date){
 	return italianDate;
 }
 
-function getRestrictedItalianDate(date){
+function GetRestrictedItalianDate(date){
 	if (date==null) return date;
 	dividedDate=date.split("-");
 	italianDate=dividedDate[2]+"/"+dividedDate[1]+"/"+dividedDate[0];
 	return italianDate;
 }
 
-function getItalianDate(date){
+function GetItalianDate(date){
 	return getExtendedItalianDate(date);
 }

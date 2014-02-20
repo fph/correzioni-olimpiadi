@@ -1,52 +1,52 @@
 function Clear() {
 	var parent_tr=document.getElementById('modifying');
 	parent_tr.removeAttribute('id');
-	var markChild=parent_tr.getElementsByClassName('markColumn')[0];
-	markChild.innerHTML=document.getElementById('hiddenMarkHTML').value;
+	var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
+	mark_child.innerHTML=mark_child.dataset.old_value;
+	mark_child.dataset.old_value=null;
 	
-	var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
-	commentChild.innerHTML=document.getElementById('hiddenCommentHTML').value;
+	var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
+	comment_child.innerHTML=comment_child.dataset.old_value;
+	comment_child.dataset.old_value=null;
 	
-	var modifyButtons=document.getElementsByClassName("modifyButtonImage");
-	for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style["display"]='inline';
+	var modify_buttons=document.getElementsByClassName("modify_button_image");
+	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].style['display']='inline';
 	
-	var modifyChild=parent_tr.getElementsByClassName('modifyColumn')[0];
-	newModifyHTML="<td class='modifyColumn'> <div class='modifyButtonContainer buttonContainer'>";
-	newModifyHTML+="<img class='modifyButtonImage buttonImage' src='../View/Images/ModifyButtonImage.png' alt='Modifica' onclick=OnModification(this)>";
-	newModifyHTML+="</div> </td>";
-	modifyChild.innerHTML=newModifyHTML;
+	var modify_child=parent_tr.getElementsByClassName('modify_column')[0];
+	NewModifyHTML="<div class='ButtonContainer'>";
+	NewModifyHTML+="<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' onclick=OnModification(this)>";
+	NewModifyHTML+="</div>";
+	modify_child.innerHTML=NewModifyHTML;
 	
-	var cancelChild=parent_tr.getElementsByClassName('cancelColumn')[0];
-	newCancelHTML="<div class='cancelButtonContainer buttonContainer'> </div>";
-	cancelChild.innerHTML=newCancelHTML;
+	var cancel_child=parent_tr.getElementsByClassName('cancel_column')[0];
+	NewCancelHTML="<div class='ButtonContainer'> </div>";
+	cancel_child.innerHTML=NewCancelHTML;
 }
 
 
 function MakeChanges(response){
+	var parent_tr=document.getElementById('modifying');
 	if (response.type=='bad') {
-		var userHiddenDiv=document.getElementById('hiddenUserHTML');
-		userHiddenDiv.parentNode.removeChild(userHiddenDiv);
+		var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
+		var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
+		var user_child=parent_tr.getElementsByClassName('username_column')[0];
+		mark_child.dataset.new_value=null;
+		comment_child.dataset.new_value=null;
+		user_child.dataset.new_value=null;
 		Clear();
 	}
-	else {
-		var parent_tr=document.getElementById('modifying');
+	else {		
+		var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
+		mark_child.dataset.old_value=mark_child.dataset.new_value;
+		mark_child.dataset.new_value=null;
 		
-		var markChild=parent_tr.getElementsByClassName('markColumn')[0];
-		var selectEl=markChild.getElementsByClassName('selectMark')[0];
-		var mark=selectEl.options[selectEl.selectedIndex].text;
+		var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
+		comment_child.dataset.old_value=comment_child.dataset.new_value;
+		comment_child.dataset.new_value=null;
 		
-		var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
-		var comment=commentChild.getElementsByClassName('modifyComment')[0].innerHTML;
-		
-		var hiddenMarkDiv=document.getElementById('hiddenMarkHTML');
-		var hiddenCommentDiv=document.getElementById('hiddenCommentHTML')
-		
-		var userHiddenDiv=document.getElementById('hiddenUserHTML');
-		if (hiddenMarkDiv.value!=mark) parent_tr.getElementsByClassName('usernameColumn')[0].innerHTML=userHiddenDiv.value;
-		else userHiddenDiv.parentNode.removeChild(userHiddenDiv);
-		
-		hiddenMarkDiv.value=mark;
-		hiddenCommentDiv.value=comment;
+		var user_child=parent_tr.getElementsByClassName('username_column')[0];
+		user_child.innerHTML=user_child.dataset.new_value;
+		user_child.dataset.new_value=null;
 		
 		Clear();
 	}
@@ -56,66 +56,73 @@ function MakeChanges(response){
 function Confirm(element_this){
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
 	
-	var ContestantId=getContestantId(parent_tr);
-	var ProblemId=getProblemId(parent_tr);
+	var ContestantId=GetContestantId(parent_tr);
+	var ProblemId=GetProblemId(parent_tr);
 	
-	var markChild=parent_tr.getElementsByClassName('markColumn')[0];
-	var selectEl=markChild.getElementsByClassName('selectMark')[0];
+	var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
+	var selectEl=mark_child.getElementsByClassName('mark_select')[0];
 	var mark=selectEl.options[selectEl.selectedIndex].text;
-	var previousMark=document.getElementById('hiddenMarkHTML').value;
+	mark_child.dataset.new_value=mark;
+	//~ var previousMark=document.getElementById('hiddenMarkHTML').value;
 	
-	var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
-	var comment=commentChild.getElementsByClassName('modifyComment')[0].innerHTML;
+	var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
+	var comment=comment_child.getElementsByClassName('comment_modifying')[0].innerHTML;
+	comment_child.dataset.new_value=comment;
 	
-	var userChild=parent_tr.getElementsByClassName('usernameColumn')[0];
-	var user=userChild.innerHTML;
-	if (previousMark!=mark) userChild.innerHTML+="<input type='hidden' id='hiddenUserHTML' value='"+SessionUsername+"'>";
-	else userChild.innerHTML+="<input type='hidden' id='hiddenUserHTML' value='"+user+"'>";
+	var user_child=parent_tr.getElementsByClassName('username_column')[0];
+	if ((mark_child.dataset.old_value)!=mark) user_child.dataset.new_value=SessionUsername;
+	
+	else user_child.dataset.new_value=user_child.innerHTML;
+	
+	//~ alert(ContestantId);
+	//~ alert(ProblemId);
+	//~ alert(mark);
+	//~ alert(comment);
 	
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 }
 
 function OnModification(element_this) {
-	var markHTML, commentHTML;
+	var mark_HTML, comment_HTML;
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
 	
 	parent_tr.id='modifying';
 	
-	var markChild=parent_tr.getElementsByClassName('markColumn')[0];
-	markHTML=markChild.innerHTML;
+	var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
+	mark_HTML=mark_child.innerHTML;
 	
-	var commentChild=parent_tr.getElementsByClassName('commentColumn')[0];
-	commentHTML=commentChild.innerHTML;
+	var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
+	comment_HTML=comment_child.innerHTML;
 	
-	var confirmChild=parent_tr.getElementsByClassName('modifyColumn')[0];
+	var confirm_child=parent_tr.getElementsByClassName('modify_column')[0];
 	
-	var cancelChild=parent_tr.getElementsByClassName('cancelColumn')[0];
+	var cancel_child=parent_tr.getElementsByClassName('cancel_column')[0];
 	
-	var newMarkHTML="<select class='selectMark'>";
+	var NewMarkHTML="<select class='mark_select'>";
 	for (i=0; i<=7; i++) {
-		if (i==markHTML) newMarkHTML+="<option name ='"+i+"' selected='selected'>"+i+"</option>";
-		else newMarkHTML+="<option name ='"+i+"'>"+i+"</option>";
+		if (i==mark_HTML) NewMarkHTML+="<option name ='"+i+"' selected='selected'>"+i+"</option>";
+		else NewMarkHTML+="<option name ='"+i+"'>"+i+"</option>";
 	}
-	newMarkHTML+="</select>";
-	newMarkHTML+="<input type='hidden' id='hiddenMarkHTML' value='"+markHTML+"'>";
-	markChild.innerHTML=newMarkHTML;
+	NewMarkHTML+="</select>";
+	mark_child.innerHTML=NewMarkHTML;
+	mark_child.dataset.old_value=mark_HTML;
 	
-	var newCommentHTML;
-	if (commentHTML=='-') newCommentHTML="<div contentEditable='true' class='modifyComment'></div>"
-	else newCommentHTML="<div contentEditable='true' class='modifyComment'>"+commentHTML+"</div>"
-	newCommentHTML+="<input type='hidden' id='hiddenCommentHTML' value='"+commentHTML+"'>";
-	commentChild.innerHTML=newCommentHTML;
+	var NewCommentHTML;
+	if (comment_HTML=='-') NewCommentHTML="<div contentEditable='true' class='comment_modifying'></div>"
+	else NewCommentHTML="<div contentEditable='true' class='comment_modifying'>"+comment_HTML+"</div>"
+	comment_child.innerHTML=NewCommentHTML;
+	comment_child.dataset.old_value=comment_HTML;
 	
-	newConfirmHTML="<div class='confirmButtonContainer buttonContainer'>";
-	newConfirmHTML+="<img class='confirmButtonImage buttonImage' src='../View/Images/ConfirmButtonImage.png' alt='Conferma' onclick=Confirm(this)>";
-	newConfirmHTML+="</div>";
-	confirmChild.innerHTML=newConfirmHTML;
+	NewConfirmHTML="<div class='ButtonContainer'>";
+	NewConfirmHTML+="<img class='ButtonImage' src='../View/Images/confirm_button_image.png' alt='Conferma' onclick=Confirm(this)>";
+	NewConfirmHTML+="</div>";
+	confirm_child.innerHTML=NewConfirmHTML;
 	
-	newCancelHTML="<div class='cancelButtonContainer buttonContainer'>";
-	newCancelHTML+="<img class='cancelButtonImage buttonImage' src='../View/Images/CancelButtonImage.png' alt='Annulla' onclick=Clear()>";
-	newCancelHTML+="</div>";
-	cancelChild.innerHTML=newCancelHTML;
+	NewCancelHTML="<div class='ButtonContainer'>";
+	NewCancelHTML+="<img class='ButtonImage' src='../View/Images/cancel_button_image.png' alt='Annulla' onclick=Clear()>";
+	NewCancelHTML+="</div>";
+	cancel_child.innerHTML=NewCancelHTML;
 	
-	var modifyButtons=document.getElementsByClassName("modifyButtonImage");
-	for (i=0; i<modifyButtons.length; i++) modifyButtons[i].style["display"]='none';
+	var modify_buttons=document.getElementsByClassName('modify_button_image');
+	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].style['display']='none';
 }

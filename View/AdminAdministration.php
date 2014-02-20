@@ -1,9 +1,9 @@
 
-<h2 class="pageTitle">
+<h2 class="PageTitle">
 	Amministrazione
 </h2>
 
-<table class="TableLink">
+<table class="LinkTable">
 	<tr class="trlink" onclick=Redirect('AdminContestants')>
 	<td>Partecipanti</td>
 	</tr>

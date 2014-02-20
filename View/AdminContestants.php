@@ -2,19 +2,19 @@
 global $v_contestants;
 ?>
 
-<h2 class='pageTitle'>
+<h2 class='PageTitle'>
 	Partecipanti
 </h2>
 
-<h3 class='pageSubtitle'>
+<h3 class='PageSubtitle'>
 	Lista dei partecipanti
 </h3>
 
 <?php
 if (empty($v_contestants)) {
 	?>
-	<div class='emptyTable'> Ancora nessun partecipante inserito. </div>
-	<table class='InformationTable hiddenEmptyTable'>
+	<div class='EmptyTable'> Ancora nessun partecipante inserito. </div>
+	<table class='InformationTable HiddenEmptyTable'>
 	<?php
 }
 else {
@@ -23,17 +23,17 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='surnameColumn'>Cognome</th>
-		<th class='nameColumn'>Nome</th>
+		<th class='surname_column'>Cognome</th>
+		<th class='name_column'>Nome</th>
 	</tr></thead>
 	
 	<tbody>
 	<?php
 		foreach($v_contestants as $con) {
 			?>
-			<tr class='trlink' value='<?=$con['surname']?>' onclick=Redirect('AdminContestantInformation',{contestantId:<?=$con['id']?>})>
-			<td class='surnameColumn'><?=$con['surname']?></td>
-			<td class='nameColumn'><?=$con['name']?></td>
+			<tr class='trlink' data-orderby='<?=$con['surname']?>' onclick=Redirect('AdminContestantInformation',{ContestantId:<?=$con['id']?>})>
+			<td class='surname_column'><?=$con['surname']?></td>
+			<td class='name_column'><?=$con['name']?></td>
 			</tr>
 			<?php
 		}
@@ -42,7 +42,7 @@ else {
 	
 </table>
 
-<h3 class="pageSubtitle">
+<h3 class="PageSubtitle">
 	Aggiungi un partecipante
 </h3>
 
