@@ -15,7 +15,6 @@ function RemoveParticipationRequest(element_this){
 
 function AddParticipation(){
 	if (response.type=='good') {
-		var tbodyEl=document.getElementsByClassName('InformationTableTbody')[0];
 		var surname=document.getElementById('surname_input').value;
 		var name=document.getElementById('name_input').value;
 		 
@@ -25,8 +24,7 @@ function AddParticipation(){
 
 function AddParticipationRequest(){ 
 	//~ DEBUG, non è così ovvio aggiungere una partecipazione, perchè il partecipante non è identificato da nome e cognome
-	var ContestantId=document.getElementsByClassName('pageTitle')[0].getAttribute('value');
 	var surname=document.getElementById('surname_input').value;
 	var name=document.getElementById('name_input').value;
-	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId:ContestantId, surname:surname, name:name, type:'AddParticipation'}, AddParticipation);
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, surname:surname, name:name, type:'AddParticipation'}, AddParticipation);
 }

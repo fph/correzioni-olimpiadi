@@ -45,8 +45,8 @@ else {
 			<tr data-orderby='<?=$con['id']?>'>
 			<td class='surname_column'><?=$con['surname']?></td>
 			<td class='name_column'><?=$con['name']?></td>
-			<td class='trash_column'> <div class='trash_button_container ButtonContainer'>
-				<img class='trash_button_image ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick=RemoveParticipationRequest(this)>
+			<td class='trash_column'> <div class='ButtonContainer'>
+				<img class='ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick="RemoveParticipationRequest(this)">
 			</div> </td>
 			</tr>
 			<?php
@@ -68,9 +68,9 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="surname" id="surname_input"> </td>
-		<td> <input type="text" name="name" id="name_input"> </td>
-		<td> <input type="button" value="Aggiungi" onclick=AddParticipationRequest()> </td>
+		<td> <input type='text' name='surname' id='surname_input'> </td>
+		<td> <input type='text' name='name' id='name_input'> </td>
+		<td> <input type='button' value='Aggiungi' onclick="AddParticipationRequest()"> </td>
 	</tr>
 	</table>
 </div>
