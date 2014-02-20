@@ -41,7 +41,7 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons, da
 	
 	for (var bu in buttons) {
 		NewRowHTML+="<td class='"+bu+"_column'> <div class='ButtonContainer'>";
-		NewRowHTML+="<img class='ButtonImage' src='../View/Images/"+bu+"_button_image.png' alt='Elimina' onclick="+buttons[bu]+">";
+		NewRowHTML+="<img class='"+bu+"_button_image ButtonImage' src='../View/Images/"+bu+"_button_image.png' alt='Elimina' onclick="+buttons[bu]+">";
 		NewRowHTML+="</div> </td>";
 	}
 	

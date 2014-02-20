@@ -63,7 +63,6 @@ function Confirm(element_this){
 	var selectEl=mark_child.getElementsByClassName('mark_select')[0];
 	var mark=selectEl.options[selectEl.selectedIndex].text;
 	mark_child.dataset.new_value=mark;
-	//~ var previousMark=document.getElementById('hiddenMarkHTML').value;
 	
 	var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
 	var comment=comment_child.getElementsByClassName('comment_modifying')[0].innerHTML;
@@ -73,11 +72,6 @@ function Confirm(element_this){
 	if ((mark_child.dataset.old_value)!=mark) user_child.dataset.new_value=SessionUsername;
 	
 	else user_child.dataset.new_value=user_child.innerHTML;
-	
-	//~ alert(ContestantId);
-	//~ alert(ProblemId);
-	//~ alert(mark);
-	//~ alert(comment);
 	
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 }

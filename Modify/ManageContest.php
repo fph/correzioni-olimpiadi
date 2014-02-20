@@ -98,7 +98,7 @@ function RemoveProblem($db, $ProblemId) {
 }
 
 function ChangeProblemName( $db, $ProblemId, $name ){
-	if( !is_string($name) or strlen( $name )<ProblemName_MAXLength ) {
+	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength ) {
 		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa di alpiù '.ProblemName_MAXLength];
 	}
 	
