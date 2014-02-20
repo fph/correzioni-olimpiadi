@@ -12,15 +12,14 @@ function Redirect(pageUrl, getElements) {
 	document.location=url;
 }
 
-function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons){
+function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons, datas){
+	var InformationTable=document.getElementsByClassName('InformationTable')[0];
 	var EmptyTable=document.getElementsByClassName('EmptyTable')[0];
-	if (EmptyTable!=null) {
-		EmptyTable.classList.add('HiddenEmptyTable');
-		var InformationTable=document.getElementsByClassName('InformationTable')[0];
-		InformationTable.classList.add('InformationTable');
+	if (InformationTable.classList.contains('hidden')) {
+		EmptyTable.classList.add('hidden');
+		InformationTable.classList.remove('hidden');
 	}
 	
-	var InformationTable=document.getElementsByClassName('InformationTable')[0];
 	var tbodyEl=InformationTable.getElementsByTagName('tbody')[0];
 	
 	var NewRow=document.createElement('tr');
@@ -30,6 +29,7 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons){
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
 
 	NewRow.dataset.orderby=columns[orderby];
+	for (var da in datas) NewRow.setAttribute('data-'+da,datas[da]);
 	
 	if (RedirectUrl!=null) NewRow.onclick=function(){Redirect(RedirectUrl, getElements)};
 	

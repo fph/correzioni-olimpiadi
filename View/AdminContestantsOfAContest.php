@@ -23,12 +23,13 @@ global $v_contest, $v_contestants;
 if (empty($v_contestants)) {
 	?>
 	<div class='EmptyTable'> Ancora nessun partecipante inserito. </div>
-	<table class="InformationTable HiddenEmptyTable">
+	<table class='InformationTable hidden'>
 	<?php
 }
 else {
 ?>
-	<table class="InformationTable">
+	<div class='EmptyTable hidden'> Ancora nessun partecipante inserito. </div>
+	<table class='InformationTable'>
 	<?php
 }?>
 	<thead><tr>

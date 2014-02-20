@@ -14,11 +14,12 @@ global $v_contestants;
 if (empty($v_contestants)) {
 	?>
 	<div class='EmptyTable'> Ancora nessun partecipante inserito. </div>
-	<table class='InformationTable HiddenEmptyTable'>
+	<table class='InformationTable hidden'>
 	<?php
 }
 else {
 ?>
+	<div class='EmptyTable hidden'> Ancora nessun partecipante inserito. </div>
 	<table class='InformationTable'>
 	<?php
 }?>

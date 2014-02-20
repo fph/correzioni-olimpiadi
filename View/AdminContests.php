@@ -14,11 +14,12 @@ global $v_contests;
 if (empty($v_contests)) {
 	?>
 	<div class='EmptyTable'> Ancora nessuna gara inserita. </div>
-	<table class='InformationTable HiddenEmptyTable'>
+	<table class='InformationTable hidden'>
 	<?php
 }
 else {
 ?>
+	<div class='EmptyTable hidden'> Ancora nessuna gara inserita. </div>
 	<table class='InformationTable'>
 	<?php
 }?>
@@ -42,7 +43,7 @@ else {
 				data-orderby='0000-00-00'
 				<?php
 			}?>
-			onclick=Redirect('AdminContestInformation',{ContestId:<?=$con['id']?>})>
+			onclick="Redirect('AdminContestInformation',{ContestId:<?=$con['id']?>})">
 			<td class='contest_column'><?=$con['name']?>
 			<span class='blocked CorrectionsCompleted' >
 			<?php

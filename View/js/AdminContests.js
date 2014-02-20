@@ -4,7 +4,7 @@ function AddContest(response){
 		var name=document.getElementById('name_input').value;
 		var date=document.getElementById('date_input').value;
 		
-		AddRow({name:name, date:date},{0:'trlink'},'AdminContestInformation', {'contestId':response.ContestId}, 'date');
+		AddRow({name:name, date:date},{0:'trlink'},'AdminContestInformation', {'ContestId':response.ContestId}, 'date');
 	}
 }
 

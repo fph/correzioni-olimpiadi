@@ -2,7 +2,7 @@ function AddProblem(response){
 	if (response.type=='good') {
 		var name=document.getElementById('name_input').value;
 		
-		AddRow({name:name},null, null, null, 'name', {'trash':'RemoveProblemRequest(this)'});
+		AddRow({name:name},null, null, null, 'name', {'trash':'RemoveProblemRequest(this)'}, {'problem_id':response.ProblemId});
 	}
 }
 
@@ -19,9 +19,9 @@ function RemoveProblem(response){
 		var childs=tbodyEl.getElementsByTagName('tr');
 		if (childs.length<1) {
 			var EmptyTable=document.getElementsByClassName('EmptyTable')[0];
-			EmptyTable.classList.remove('HiddenEmptyTable');
+			EmptyTable.classList.remove('hidden');
 			var InformationTable=document.getElementsByClassName('InformationTable')[0];
-			InformationTable.classList.add('HiddenEmptyTable');
+			InformationTable.classList.add('hidden');
 		}
 	}
 }

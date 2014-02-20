@@ -14,11 +14,12 @@ global $v_users;
 if (empty($v_users)) {
 	?>
 	<div class='EmptyTable'> Ancora nessun correttore inserito. </div>
-	<table class='InformationTable HiddenEmptyTable'>
+	<table class='InformationTable hidden'>
 	<?php
 }
 else {
 ?>
+	<div class='EmptyTable hidden'> Ancora nessun correttore inserito. </div>
 	<table class='InformationTable'>
 	<?php
 }?>
