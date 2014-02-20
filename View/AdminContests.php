@@ -86,7 +86,8 @@ else {
 	<tr>
 		<td> <input type="text" name="name" id="name_input"> </td>
 		<td> 
-		<input type="text" name="date" id="date_input" value="aaaa-mm-gg"> </td>
+			<?php include 'DateInput.html' ?>
+		</td>
 		<td> <input type="button" value="Aggiungi" onclick=AddContestRequest()> </td>
 	</tr>
 	</table>

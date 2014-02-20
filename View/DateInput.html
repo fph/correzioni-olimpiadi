@@ -1,0 +1,52 @@
+<span class='DateInputContainer'>
+<input type='hidden' name='date' value='0000-00-00' id='date_DateInput'>
+<select id='day_DateInput' onchange='RecalculateDate()'></select>
+<select id='month_DateInput' onchange='RecalculateDate()'>
+	<option value='01'>Gennaio</option>
+	<option value='02'>Febbraio</option>
+	<option value='03'>Marzo</option>
+	<option value='04'>Aprile</option>
+	<option value='05'>Maggio</option>
+	<option value='06'>Giugno</option>
+	<option value='07'>Luglio</option>
+	<option value='08'>Agosto</option>
+	<option value='09'>Settembre</option>
+	<option value='10'>Ottobre</option>
+	<option value='11'>Novembre</option>
+	<option value='12'>Dicembre</option>
+</select>
+<select id='year_DateInput' onchange='RecalculateDate()'></select>
+
+<script type='text/javascript'>
+	var day=document.getElementById('day_DateInput');
+	var month=document.getElementById('month_DateInput');
+	var year=document.getElementById('year_DateInput');
+	var date=document.getElementById('date_DateInput');
+	
+	year.innerHTML='';
+	for(var i=1994;i<2020;i++) {
+		var OptionItem=document.createElement('option');
+		OptionItem.value=i.toString();
+		OptionItem.innerHTML=i.toString();
+		year.appendChild(OptionItem);
+	}
+	
+	var MonthDays=[0,31,29,31,30,31,30,31,31,30,31,30,31];
+	function UpdateDaysNumber () {
+		day.innerHTML='';
+		for(var i=1;i<=MonthDays[parseInt(month.value)] ;i++) {
+			var OptionItem=document.createElement('option');
+			var DayNumber=i.toString();
+			if(DayNumber.length==1)DayNumber='0'+DayNumber;
+			OptionItem.value=DayNumber;
+			OptionItem.innerHTML=i.toString();
+			day.appendChild(OptionItem);
+		}
+	}
+	UpdateDaysNumber();
+	
+	function RecalculateDate() {
+		date.value=year.value+'-'+month.value+'-'+day.value;
+	}
+</script>
+</span>

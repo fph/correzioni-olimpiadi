@@ -3,25 +3,21 @@ global $v_contest;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'> <?=$v_contest['name']?>
-	</span>
+	<span id='name_title'><?=$v_contest['name']?></span>
 	<span class='date_title'>
-	<?php 
-	if (!is_null($v_contest['date'])) {?>
-		- <?=GetItalianDate($v_contest['date'])?>
-		<?php
-	} ?>
+		<span id='ItalianDate' data-raw_date='<?=$v_contest['date']?>'>
+			<?php 
+			if (!is_null($v_contest['date'])) {?>
+				- <?=GetItalianDate($v_contest['date'])?>
+				<?php
+			} ?>
+		</span>
+		<span class='hidden' id='DateModificationContainer'>
+			<?php include 'DateInput.html' ?>
+		</span>
 	</span>
 	
-	<span class='ButtonsTitle'>
-	<span class='modify_button_container ButtonContainer'>
-		<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica gara'>
-	</span>
-	
-	<span class='trash_button_container ButtonContainer'>
-		<img class='trash_button_image ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' title='Elimina gara' onclick=RemoveContestRequest(<?=$v_contest['id']?>)>
-	</span>
-	</span>
+	<?php include 'ButtonsTitle.html'?>
 </h2>
 
 <div class='GeneralInformation'>
@@ -55,3 +51,7 @@ global $v_contest;
 	<td>Statistiche</td>
 	</tr>
 </table>
+
+<script>
+	var ContestId=<?=$v_contest['id']?>;
+</script>

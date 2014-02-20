@@ -15,8 +15,6 @@
 	$v_contest=OneResultQuery($db, QuerySelect('Contests',['id'=>$ContestId]));
 	
 	$db->close();
-
-	echo 1;
 	
 	TemplatePage("AdminContestInformation",['Index'=>'index.php',
 											'Amministrazione'=>'AdminAdministration.php',
