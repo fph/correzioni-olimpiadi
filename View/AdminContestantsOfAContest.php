@@ -42,7 +42,7 @@ else {
 	<?php
 		foreach($v_contestants as $con) {
 			?>
-			<tr data-orderby='<?=$con['id']?>'>
+			<tr data-orderby='<?=$con['surname']?>' data-contestant_id='<?=$con['id']?>'>
 			<td class='surname_column'><?=$con['surname']?></td>
 			<td class='name_column'><?=$con['name']?></td>
 			<td class='trash_column'> <div class='ButtonContainer'>

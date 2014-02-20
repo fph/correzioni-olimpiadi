@@ -1,29 +1,34 @@
 function RemoveParticipation(response){
 	if (response.type=='good') {
-		var parent_tr=document.getElementById('modifying');
-		parent_tr.parentNode.removeChild(parent_tr);
+		parent_tr=document.getElementById('trashing'+response.ContestantId);
+		var tbodyEl=parent_tr.parentNode;
+		tbodyEl.removeChild(parent_tr);
+		var childs=tbodyEl.getElementsByTagName('tr');
+		if (childs.length<1) {
+			var EmptyTable=document.getElementsByClassName('EmptyTable')[0];
+			EmptyTable.classList.remove('hidden');
+			var InformationTable=document.getElementsByClassName('InformationTable')[0];
+			InformationTable.classList.add('hidden');
+		}
 	}
 }
 
 function RemoveParticipationRequest(element_this){
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
-	parent_tr.id='modifying';
-	var ContestantId=parent_tr.getAttribute('value');
-	var ContestId=document.getElementsByClassName('pageTitle')[0].getAttribute('value');
+	var ContestantId=parent_tr.dataset.contestant_id;
+	parent_tr.id='trashing'+ContestantId;
 	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, ContestantId:ContestantId, type:'RemoveParticipation'}, RemoveParticipation);
 }
 
-function AddParticipation(){
+function AddParticipation(response){
 	if (response.type=='good') {
 		var surname=document.getElementById('surname_input').value;
 		var name=document.getElementById('name_input').value;
-		 
-		AddRow({surname:surname, name:name}, {0:'trlink'}, null, null, 'surname', {'trash':'RemoveParticipationRequest(this)'});
+		AddRow({surname:surname, name:name}, null, null, null, 'surname', {'trash':'RemoveParticipationRequest(this)'}, {'contestant_id':response.ContestantId});
 	}
 }
 
 function AddParticipationRequest(){ 
-	//~ DEBUG, non è così ovvio aggiungere una partecipazione, perchè il partecipante non è identificato da nome e cognome
 	var surname=document.getElementById('surname_input').value;
 	var name=document.getElementById('name_input').value;
 	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, surname:surname, name:name, type:'AddParticipation'}, AddParticipation);
