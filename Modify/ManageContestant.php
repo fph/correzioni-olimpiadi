@@ -31,12 +31,15 @@ function RemoveContestant( $db , $ContestantId ){
 	return ['type'=>'good', 'text'=>'Partecipante eliminato con successo'];
 }
 
-function AddParticipation( $db , $ContestantId , $ContestId ) {
+//TODO: Implementare che si faccia l'aggiunta via id e non nome e cognome
+function AddParticipation( $db , $name , $surname , $ContestId ) {
 	
-	$Exist1=OneResultQuery($db,QuerySelect('Contestants',['id'=>$ContestantId]));
+	$Exist1=OneResultQuery($db,QuerySelect('Contestants',['name'=>$name, 'surname'=>$surname]));
 	if( is_null( $Exist1 ) ) {
 		return ['type'=>'bad' ,'text'=>'Il partecipante selezionato non esiste'];
 	}
+	
+	$ContestantId=$Exist1['id'];
 	
 	$Exist2=OneResultQuery($db,QuerySelect('Contests',['id'=>$ContestId]));
 	if( is_null( $Exist2 ) ) {
@@ -49,7 +52,7 @@ function AddParticipation( $db , $ContestantId , $ContestId ) {
 	}
 	
 	Query($db, QueryInsert('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
-	return ['type'=>'good' ,'text'=>'La partecipazione è stata aggiunta con successo'];
+	return ['type'=>'good' ,'text'=>'La partecipazione è stata aggiunta con successo', 'ContestantId'=> $ContestantId];
 	
 }
 
