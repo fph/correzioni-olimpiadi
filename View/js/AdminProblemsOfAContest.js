@@ -58,6 +58,9 @@ function Clear(){
 	NewTrashHTML+="<img class='trash_button_image ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick='RemoveProblemRequest(this)'>";
 	NewTrashHTML+="</div>";
 	trash_child.innerHTML=NewTrashHTML;
+
+	var add_button=document.getElementById('button_input');
+	add_button.removeAttribute('disabled');
 }
 
 function MakeChanges(response){
@@ -117,4 +120,7 @@ function OnModification(element_this){
 	
 	var trash_buttons=document.getElementsByClassName('trash_button_image');
 	for (i=0; i<trash_buttons.length; i++) trash_buttons[i].classList.add('hidden');
+
+	var add_button=document.getElementById('button_input');
+	add_button.setAttribute('disabled');
 }
