@@ -37,8 +37,8 @@
 	$db->close();
 	
 	TemplatePage('AdminUsersOfAContest',[	'Index'=>'index.php',
-												'Amministrazione'=>'AdminAdministration.php',
-												'Gare'=>'AdminContests.php',
-												$v_contest['name']=>'AdminContestInformation.php?ContestId='.$ContestId,
-												'Correttori'=>'AdminUsersOfAContest.php?ContestId='.$ContestId]);
+											'Amministrazione'=>'AdminAdministration.php',
+											'Gare'=>'AdminContests.php',
+											$v_contest['name']=>'AdminContestInformation.php?ContestId='.$ContestId,
+											'Correttori'=>'AdminUsersOfAContest.php?ContestId='.$ContestId]);
 ?>

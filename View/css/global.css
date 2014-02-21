@@ -101,6 +101,10 @@ thead, tbody {
 	margin-left:3%;
 }
 
+.ButtonsSubtitle {
+	margin-left:3%;
+}
+
 /*
 	General Information
 */
@@ -137,9 +141,9 @@ thead, tbody {
 }
 
 /*
-	DateInput
+	SelectInput
 */
 
-.DateInputContainer select {
+select {
 	font: inherit;
 }

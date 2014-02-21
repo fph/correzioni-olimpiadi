@@ -21,28 +21,35 @@ global $v_contest;
 </h2>
 
 <div class='GeneralInformation'>
-	<div class='CorrectionsInformation'>
+	<div id='CorrectionsInformationContainer'>
 	<?php
 	if ($v_contest['blocked']) {
 		?>
-		<div class='CorrectionsCompleted'>
+		<span class='CorrectionsState CorrectionsCompleted'>
 			Correzioni terminate
-		</div>
-<!--
-		<input type="button" value="Riapri" onclick=UnblockContestRequest()>
--->
+		</span>
 		<?php
 	}
 	else {
 		?>
-		<div class='CorrectionsInProgress'>
+		<span class='CorrectionsState CorrectionsInProgress'>
 			Correzioni in corso
-		</div>
-<!--
-		<input type="button" value="Termina" onclick=BlockContestRequest()>
--->
+		</span>
 		<?php
 	}?>
+	<span class='ButtonsSubtitle'>
+	<span class='modify_button_container ButtonContainer'>
+		<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica' onclick='OnModificationCorrectionsState()'>
+		</span>
+		
+	<span class='confirm_button_container ButtonContainer hidden'>
+		<img class='confirm_button_image ButtonImage' src='../View/Images/confirm_button_image.png' alt='Conferma' title='Conferma' onclick='ConfirmCorrectionsState()'>
+	</span>
+
+	<span class='cancel_button_container ButtonContainer hidden'>
+		<img class='cancel_button_image ButtonImage' src='../View/Images/cancel_button_image.png' alt='Annulla' title='Annulla' onclick='ClearCorrectionsState()'>
+	</span>
+	</span>
 	</div>
 </div>
 

@@ -64,18 +64,79 @@ function CancelTitleModification(){
 	DateModificationContainer.classList.add('hidden');
 }
 
-function BlockContest() {
+function ClearCorrectionsState(){
+	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
+	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
 
+	if (GetDataAttribute(CorrectionsState, 'old_value')=='unblock') {
+		CorrectionsState.innerHTML='Correzioni in corso';
+		CorrectionsState.classList.add('CorrectionsInProgress');
+	}
+	else {
+		CorrectionsState.innerHTML='Correzioni terminate';
+		CorrectionsState.classList.add('CorrectionsCompleted');
+	}
+
+	SetDataAttribute(CorrectionsState, 'old_value', null);
+
+	var modify_button=CorrectionsInformationContainer.getElementsByClassName('modify_button_container')[0];
+	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('confirm_button_container')[0];
+	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('cancel_button_container')[0];
+
+	modify_button.classList.remove('hidden');
+	confirm_button.classList.add('hidden');
+	cancel_button.classList.add('hidden');
 }
 
-function BlockContestRequest(){
-	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:block}, BlockContest);
+function MakeChangesCorrectionsState(response){
+	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
+	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
+	if (response.type=='good') {
+		SetDataAttribute(CorrectionsState, 'old_value', GetDataAttribute(CorrectionsState, 'new_value'));
+	}
+	SetDataAttribute(CorrectionsState, 'new_value', null);
+	ClearCorrectionsState();
 }
 
-function UnblockContest() {
+function ConfirmCorrectionsState(){
+	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
+	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
 
+	var selectEl=CorrectionsState.getElementsByClassName('corrections_state_select')[0];
+	var NewCorrectionsState=selectEl.options[selectEl.selectedIndex].value;
+
+	SetDataAttribute(CorrectionsState, 'new_value', NewCorrectionsState);
+
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:NewCorrectionsState}, MakeChangesCorrectionsState);
 }
 
-function UnblockContestRequest(){
-	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:unblock}, UnblockContest);
+
+function OnModificationCorrectionsState(){
+	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
+	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
+	var NewStateHTML="<select class='corrections_state_select'>";
+	if (CorrectionsState.classList.contains('CorrectionsInProgress')) {
+		NewStateHTML+="<option value='unblock' selected='selected'> Correzioni in corso";
+		NewStateHTML+="<option value='block'> Correzioni terminate";
+		CorrectionsState.classList.remove('CorrectionsInProgress');
+		SetDataAttribute(CorrectionsState, 'old_value', 'unblock');
+	}
+	else {
+		NewStateHTML+="<option value='unblock'> Correzioni in corso";
+		NewStateHTML+="<option value='block' selected='selected'> Correzioni terminate";
+		CorrectionsState.classList.remove('CorrectionsCompleted');
+		SetDataAttribute(CorrectionsState, 'old-value', 'block');
+	}
+	NewStateHTML+="</select>";
+
+	CorrectionsState.innerHTML=NewStateHTML;
+
+	var modify_button=CorrectionsInformationContainer.getElementsByClassName('modify_button_container')[0];
+	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('confirm_button_container')[0];
+	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('cancel_button_container')[0];
+
+	modify_button.classList.add('hidden');
+	confirm_button.classList.remove('hidden');
+	cancel_button.classList.remove('hidden');
+	//~ MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:unblock}, UnblockContest);
 }
