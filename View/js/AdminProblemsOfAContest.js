@@ -60,7 +60,7 @@ function Clear(){
 	trash_child.innerHTML=NewTrashHTML;
 
 	var add_button=document.getElementById('button_input');
-	add_button.removeAttribute('disabled');
+	add_button.removeAttribute('disabled','disabled');
 }
 
 function MakeChanges(response){
@@ -122,5 +122,5 @@ function OnModification(element_this){
 	for (i=0; i<trash_buttons.length; i++) trash_buttons[i].classList.add('hidden');
 
 	var add_button=document.getElementById('button_input');
-	add_button.setAttribute('disabled');
+	add_button.setAttribute('disabled','disabled');
 }
