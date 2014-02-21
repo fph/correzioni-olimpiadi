@@ -44,31 +44,6 @@ table.InformationTable th.modify_column, table.InformationTable th.cancel_column
 	padding: 5px 5px;
 }
 
-/*
-	Button images
-*/
-
-/*
-CI STANNO GIÀ IN GLOBAL.CSS
-*/
-
-/*
-table.InformationTable .ButtonImage {
-	width: 22px;
-	height: 22px;
-}
-
-table.InformationTable .ButtonImage:hover {
-	cursor: pointer;
-}
-
-table.InformationTable .ButtonContainer {
-	width: 22px;
-	height: 22px;
-}
-*/
-
-
 
 /*
 	Columns' widths
