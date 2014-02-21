@@ -63,3 +63,19 @@ function CancelTitleModification(){
 	ItalianDate.classList.remove('hidden');
 	DateModificationContainer.classList.add('hidden');
 }
+
+function BlockContest() {
+
+}
+
+function BlockContestRequest(){
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:block}, BlockContest);
+}
+
+function UnblockContest() {
+
+}
+
+function UnblockContestRequest(){
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:unblock}, UnblockContest);
+}
