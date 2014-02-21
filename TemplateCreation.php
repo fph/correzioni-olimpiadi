@@ -13,7 +13,8 @@ $jsInclude=['ViewParticipation'=>['CorrectionModification'],
 			'AdminContestantInformation'=>['AdminContestantInformation'],
 			'AdminUserInformation'=>['AdminUserInformation'], 
 			'AdminContestInformation'=>['AdminContestInformation'],
-			'AdminContestantsOfAContest'=>['AdminContestantsOfAContest']];
+			'AdminContestantsOfAContest'=>['AdminContestantsOfAContest'],
+			'AdminUsersOfAContest'=>['AdminUsersOfAContest']];
 $cssInclude=[];
 
 function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){

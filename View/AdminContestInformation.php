@@ -54,6 +54,10 @@ global $v_contest;
 	<tr class='trlink' onclick="Redirect('AdminProblemsOfAContest', {ContestId:<?=$v_contest['id']?>})">
 	<td>Problemi</td>
 	</tr>
+
+	<tr class='trlink' onclick="Redirect('AdminUsersOfAContest', {ContestId:<?=$v_contest['id']?>})">
+	<td>Correttori</td>
+	</tr>
 	
 	<tr class='trlink' onclick="Redirect('AdminStatisticsOfAContest', {ContestId:<?=$v_contest['id']?>})">
 	<td>Statistiche</td>

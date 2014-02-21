@@ -41,12 +41,13 @@ function RemoveUser( $db , $UserId ){
 	
 }
 
-function AddPermission( $db , $UserId , $ContestId ) {
+function AddPermission( $db , $username , $ContestId ) {
 	
-	$Exist1=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
+	$Exist1=OneResultQuery($db,QuerySelect('Users',['username'=>$username]));
 	if( is_null( $Exist1 ) ) {
 		return ['type'=>'bad' ,'text'=>'Il correttore selezionato non esiste'];
 	}
+	$UserId=$Exist1['id'];
 	
 	$Exist2=OneResultQuery($db,QuerySelect('Contests',['id'=>$ContestId]));
 	if( is_null( $Exist2 ) ) {
@@ -59,7 +60,7 @@ function AddPermission( $db , $UserId , $ContestId ) {
 	}
 	
 	Query($db, QueryInsert('Permissions',['ContestId'=>$ContestId, 'UserId'=>$UserId]));
-	return ['type'=>'good' ,'text'=>'Il permesso è stato aggiunto con successo'];
+	return ['type'=>'good' ,'text'=>'Il permesso è stato aggiunto con successo', 'UserId'=>$UserId];
 	
 }
 
@@ -74,7 +75,7 @@ function RemovePermission( $db , $UserId , $ContestId ) {
 	}
 	
 	Query($db,QueryDelete('Permissions',['ContestId'=>$ContestId, 'UserId'=>$UserId]));
-	return ['type'=>'good' ,'text'=>'Il permesso è stato eliminato con successo'];
+	return ['type'=>'good' ,'text'=>'Il permesso è stato eliminato con successo', 'UserId'=>$UserId];
 }
 
 function ChangeUsername( $db , $UserId , $username ) {
@@ -130,7 +131,7 @@ if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 $data=json_decode( $_POST['data'] , 1);
 if( $data['type'] == 'add' ) echo json_encode( AddUser( $db, $data['username'], $data['password'] ) );
 else if( $data['type'] == 'remove' ) echo json_encode( RemoveUser( $db, $data['UserId'] ) );
-else if( $data['type'] == 'AddPermission' ) echo json_encode( AddPermission( $db, $data['UserId'], $data['ContestId'] ) );
+else if( $data['type'] == 'AddPermission' ) echo json_encode( AddPermission( $db, $data['username'], $data['ContestId'] ) );
 else if( $data['type'] == 'RemovePermission' ) echo json_encode( RemovePermission( $db, $data['UserId'], $data['ContestId'] ) );
 else if( $data['type'] == 'ChangeUsername' ) echo json_encode( ChangeUsername( $db, $data['UserId'], $data['username'] ) );
 else if( $data['type'] == 'ChangePassword' ) echo json_encode( ChangePassword( $db, $data['UserId'], $data['password'] ) );
