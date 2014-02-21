@@ -12,9 +12,9 @@
 	
 	//Permission checked
 	
-	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));	
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	
-	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId]));
+	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], null, 'name'));
 	
 	$db->close();
 		
