@@ -17,7 +17,9 @@
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	
-	$problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], null, 'name'));
+	$problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId]));
+
+	usort($problems,build_sorter('name'));
 	
 	$v_corrections=[];
 	

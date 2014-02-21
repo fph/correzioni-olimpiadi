@@ -12,6 +12,8 @@
 	//PermissionChecked	
 	
 	$v_users=ManyResultQuery($db, QuerySelect('Users',NULL,NULL,'username'));
+
+	usort($v_users, build_sorter('username'));
 		
 	$db->close();
 	

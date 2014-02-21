@@ -20,7 +20,8 @@
 	
 	if(!is_null(OneResultQuery($db, QuerySelect('Administrators', ['UserId'=>$UserId]))) ) {
 		$v_admin=true;
-		$v_contests=ManyResultQuery($db, QuerySelect('Contests', null, null, 'date'));
+		$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
+		usort($v_contests, build_sorter('date'));
 	}
 	else {
 		$contests=ManyResultQuery($db, QuerySelect('Permissions', ['UserId'=>$UserId]));

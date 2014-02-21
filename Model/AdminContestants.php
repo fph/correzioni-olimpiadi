@@ -11,7 +11,9 @@
 	
 	//PermissionChecked	
 	
-	$v_contestants=ManyResultQuery($db, QuerySelect('Contestants',NULL,NULL,'surname'));
+	$v_contestants=ManyResultQuery($db, QuerySelect('Contestants'));
+
+	usort($v_contestants, build_sorter('surname'));
 		
 	$db->close();
 	

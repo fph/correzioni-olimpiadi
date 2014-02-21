@@ -11,8 +11,9 @@
 	
 	//PermissionChecked	
 	
-	$v_contests=ManyResultQuery($db, QuerySelect('Contests',NULL,NULL,'date'));
-		
+	$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
+	usort($v_contests,build_sorter('date'));
+	
 	$db->close();
 	
 	TemplatePage("AdminContests",[	'Index'=>'index.php',
