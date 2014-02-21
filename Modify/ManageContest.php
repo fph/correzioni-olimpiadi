@@ -112,8 +112,8 @@ function RemoveProblem($db, $ProblemId) {
 }
 
 function ChangeProblemName( $db, $ProblemId, $name ){
-	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength ) {
-		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa di al più '.ProblemName_MAXLength.' caratteri'];
+	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength or strlen( $name )==0) {
+		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa non vuota di al più '.ProblemName_MAXLength.' caratteri'];
 	}
 	
 	$Problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
