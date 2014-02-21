@@ -100,3 +100,12 @@ function GetRestrictedItalianDate(date){
 function GetItalianDate(date){
 	return GetExtendedItalianDate(date);
 }
+
+function SetDataAttribute( DomObject, Attribute, Value ) {
+	DomObject.setAttribute('data-'+Attribute, Value);
+}
+
+function GetDataAttribute( DomObject, Attribute ) {
+	DomObject.getAttribute('data-'+Attribute);
+}
+
