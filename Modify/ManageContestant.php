@@ -13,6 +13,11 @@ function AddContestant( $db , $name, $surname ){
 	if( !is_string($surname) or strlen( $surname ) > ContestantSurname_MAXLength or strlen( $surname ) == 0 ) {
 		return ['type'=>'bad', 'text'=>'Il cognome deve essere una stringa di al più '.ContestantSurname_MAXLength.' caratteri'];
 	}
+	
+	$Exist1=OneResultQuery($db,QuerySelect('Contestants', ['name'=>$name, 'surname'=>$surname]));
+	if( !is_null($Exist1) ) {
+		return ['type'=>'bad', 'text'=>'È già presente un partecipante con lo stesso nome e cognome'];
+	}
 
 	Query( $db,QueryInsert('Contestants', ['name'=>$name,'surname'=>$surname]) );
 
@@ -78,6 +83,11 @@ function ChangeNameAndSurname($db , $ContestantId, $name, $surname) {
 	
 	if( !is_string($surname) or strlen( $surname ) > ContestantSurname_MAXLength or strlen( $surname ) == 0 ) {
 		return ['type'=>'bad', 'text'=>'Il cognome deve essere una stringa non vuota di al più '.ContestantSurname_MAXLength.' caratteri'];
+	}
+	
+	$Exist1=OneResultQuery($db,QuerySelect('Contestants', ['name'=>$name, 'surname'=>$surname]));
+	if( !is_null($Exist1) ) {
+		return ['type'=>'bad', 'text'=>'È già presente un partecipante con lo stesso nome e cognome'];
 	}
 	
 	Query( $db, QueryUpdate('Contestants', ['id'=>$ContestantId], ['name'=>$name, 'surname'=>$surname]));
