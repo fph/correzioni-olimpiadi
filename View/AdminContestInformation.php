@@ -4,7 +4,7 @@ global $v_contest;
 
 <h2 class='PageTitle'>
 	<span id='name_title'><?=$v_contest['name']?></span>
-	<span class='date_title'>
+	<span id='date_title'>
 		<span id='ItalianDate' data-raw_date='<?=$v_contest['date']?>'>
 			<?php 
 			if (!is_null($v_contest['date'])) {?>

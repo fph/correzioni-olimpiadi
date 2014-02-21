@@ -1,20 +1,7 @@
 <span class='DateInputContainer'>
-<input type='hidden' name='date' value='0000-00-00' id='date_DateInput'>
+<input type='hidden' name='date' id='date_DateInput'>
 <select id='day_DateInput' onchange='RecalculateDate()'></select>
-<select id='month_DateInput' onchange='RecalculateDate()'>
-	<option value='01'>Gennaio</option>
-	<option value='02'>Febbraio</option>
-	<option value='03'>Marzo</option>
-	<option value='04'>Aprile</option>
-	<option value='05'>Maggio</option>
-	<option value='06'>Giugno</option>
-	<option value='07'>Luglio</option>
-	<option value='08'>Agosto</option>
-	<option value='09'>Settembre</option>
-	<option value='10'>Ottobre</option>
-	<option value='11'>Novembre</option>
-	<option value='12'>Dicembre</option>
-</select>
+<select id='month_DateInput' onchange='RecalculateDate()'></select>
 <select id='year_DateInput' onchange='RecalculateDate()'></select>
 
 <script type='text/javascript'>
@@ -22,17 +9,36 @@
 	var month=document.getElementById('month_DateInput');
 	var year=document.getElementById('year_DateInput');
 	var date=document.getElementById('date_DateInput');
+	var MonthDays=[0,31,29,31,30,31,30,31,31,30,31,30,31];
+	var MonthsNames=['','gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+	var FirstYear=1994;
 	
-	year.innerHTML='';
-	for(var i=1994;i<2020;i++) {
-		var OptionItem=document.createElement('option');
-		OptionItem.value=i.toString();
-		OptionItem.innerHTML=i.toString();
-		year.appendChild(OptionItem);
+	function RecalculateDate() {
+		date.value=year.value+'-'+month.value+'-'+day.value;
 	}
 	
-	var MonthDays=[0,31,29,31,30,31,30,31,31,30,31,30,31];
-	function UpdateDaysNumber () {
+	function ParseDate(DateString) {
+		var parts = DateString.split('-');
+		var yearX=parseInt(parts[0]);
+		var monthX=parseInt(parts[1]);
+		var dayX=parseInt(parts[2]);
+		return {day:dayX, month:monthX, year:yearX};
+	}
+	
+	function GenerateItalianDate( DateString ) {
+		var DateObj=ParseDate(DateString);
+		return DateObj.day+' '+MonthsNames[DateObj.month]+' '+DateObj.year;
+	}
+	
+	function SetDate( DateString ) {
+		var DateObj=ParseDate(DateString);
+		day.selectedIndex=DateObj.day-1;
+		month.selectedIndex=DateObj.month-1;
+		year.selectedIndex=DateObj.year-FirstYear;
+	}
+	
+	
+	function UpdateDaysNumber () { //Attualmente non viene chiamato per questioni di funzionamento
 		day.innerHTML='';
 		for(var i=1;i<=MonthDays[parseInt(month.value)] ;i++) {
 			var OptionItem=document.createElement('option');
@@ -43,10 +49,25 @@
 			day.appendChild(OptionItem);
 		}
 	}
-	UpdateDaysNumber();
 	
-	function RecalculateDate() {
-		date.value=year.value+'-'+month.value+'-'+day.value;
+	year.innerHTML='';
+	for(var i=FirstYear;i<FirstYear+20;i++) {
+		var OptionItem=document.createElement('option');
+		OptionItem.value=i.toString();
+		OptionItem.innerHTML=i.toString();
+		year.appendChild(OptionItem);
 	}
+	
+	month.innerHTML='';
+	for(var i=1;i<=12;i++) {
+		var OptionItem=document.createElement('option');
+		var MonthNumber=i.toString();
+		if(MonthNumber.length==1)MonthNumber='0'+MonthNumber;
+		OptionItem.value=MonthNumber;
+		OptionItem.innerHTML=MonthsNames[i];
+		month.appendChild(OptionItem);
+	}
+	UpdateDaysNumber();
+	RecalculateDate();
 </script>
 </span>

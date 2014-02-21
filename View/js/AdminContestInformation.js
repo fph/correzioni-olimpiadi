@@ -9,36 +9,57 @@ function DeleteTitle(){
 function ModifyTitle() {
 	StartModifyingTitle();
 	var NameTitle=document.getElementById('name_title');
-	var DateTitle=document.getElementById();
-	UsernameTitle.classList.add('ContentEditable');
-	UsernameTitle.setAttribute('contenteditable','true');
-	UsernameTitle.dataset.old_value=UsernameTitle.innerHTML;
+	var ItalianDate=document.getElementById('ItalianDate');
+	var DateModificationContainer=document.getElementById('DateModificationContainer');
+	NameTitle.classList.add('ContentEditable');
+	NameTitle.setAttribute('contenteditable','true');
+	NameTitle.dataset.old_value=NameTitle.innerHTML;
+	ItalianDate.classList.add('hidden');
+	DateModificationContainer.classList.remove('hidden');
+	SetDate(ItalianDate.dataset.raw_date);
 }
 
 function ProcessServerAnswer( Response ) {
 	if ( Response.type == 'bad' ) CancelTitleModification();
 	else if (Response.type == 'good' ) {
-		var UsernameTitle=document.getElementById('UsernameTitle');	
+		var NameTitle=document.getElementById('name_title');
 		var path=document.getElementsByClassName('PathElement');
-		path[path.length-1].innerHTML = UsernameTitle.innerHTML;
+		path[path.length-1].innerHTML = NameTitle.innerHTML;
+		var ItalianDate=document.getElementById('ItalianDate');
+		var RawDate=document.getElementById('date_DateInput');
+		ItalianDate.dataset.raw_date=RawDate.value;
 	}
 }
 
 function SendTitleModification(){
 	EndModifyingTitle();
-	var UsernameTitle=document.getElementById('UsernameTitle');	
-	UsernameTitle.classList.remove('ContentEditable');
-	UsernameTitle.setAttribute('contenteditable','false');
-	MakeAjaxRequest('../Modify/ManageUser.php', 
-	{UserId: UserId, username:UsernameTitle.innerHTML, type:'ChangeUsername'} , 
+	var NameTitle=document.getElementById('name_title');
+	NameTitle.classList.remove('ContentEditable');
+	NameTitle.setAttribute('contenteditable','false');
+	
+	var ItalianDate=document.getElementById('ItalianDate');
+	var RawDate=document.getElementById('date_DateInput');
+	var DateModificationContainer=document.getElementById('DateModificationContainer');
+	ItalianDate.innerHTML= '- '+GenerateItalianDate(RawDate.value);
+	ItalianDate.classList.remove('hidden');
+	DateModificationContainer.classList.add('hidden');
+	
+	MakeAjaxRequest('../Modify/ManageContest.php', 
+	{ContestId: ContestId, name:NameTitle.innerHTML, date:RawDate.value, type:'ChangeNameAndDate'} , 
 	ProcessServerAnswer);
 }
 
 function CancelTitleModification(){
 	EndModifyingTitle();
-	var UsernameTitle=document.getElementById('UsernameTitle');	
-	UsernameTitle.classList.remove('ContentEditable');
-	UsernameTitle.setAttribute('contenteditable','false');
-	UsernameTitle.innerHTML=UsernameTitle.dataset.old_value;
-	UsernameTitle.dataset.old_value=null;
+	var NameTitle=document.getElementById('name_title');	
+	NameTitle.classList.remove('ContentEditable');
+	NameTitle.setAttribute('contenteditable','false');
+	NameTitle.innerHTML=NameTitle.dataset.old_value;
+	NameTitle.dataset.old_value=null;
+	
+	var ItalianDate=document.getElementById('ItalianDate');
+	var DateModificationContainer=document.getElementById('DateModificationContainer');
+	ItalianDate.innerHTML= '- '+GenerateItalianDate(ItalianDate.dataset.raw_date);
+	ItalianDate.classList.remove('hidden');
+	DateModificationContainer.classList.add('hidden');
 }

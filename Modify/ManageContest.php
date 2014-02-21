@@ -73,6 +73,20 @@ function ChangeDate($db, $ContestId, $date) {
 	return ['type'=>'good', 'text'=>'La data è stata cambiata con successo'];
 }
 
+function ChangeNameAndDate($db, $ContestId, $name, $date) {
+	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
+		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
+	}
+	
+	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if( is_null($Exist1) ) {
+		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
+	}
+	
+	Query( $db, QueryUpdate('Contests', ['id'=>$ContestId], ['name'=>$name, 'date'=>$date]));
+	return ['type'=>'good', 'text'=>'Il nome e la data sono stati cambiati con successo'];
+}
+
 function AddProblem($db, $ContestId, $name) {
 	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength ) {
 		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa di alpiù '.ProblemName_MAXLength];
@@ -134,6 +148,7 @@ else if( $data['type'] == 'block' ) echo json_encode( BlockContest( $db, $data['
 else if( $data['type'] == 'unblock' ) echo json_encode( UnblockContest( $db, $data['ContestId'] ) );
 else if( $data['type'] == 'ChangeName' ) echo json_encode( ChangeName( $db, $data['ContestId'] , $data['name']) );
 else if( $data['type'] == 'ChangeDate' ) echo json_encode( ChangeDate( $db, $data['ContestId'] , $data['date']) );
+else if( $data['type'] == 'ChangeNameAndDate' ) echo json_encode( ChangeNameAndDate( $db, $data['ContestId'] , $data['name'], $data['date']) );
 else if( $data['type'] == 'AddProblem' ) echo json_encode( AddProblem( $db, $data['ContestId'] , $data['name']) );
 else if( $data['type'] == 'RemoveProblem' ) echo json_encode( RemoveProblem( $db, $data['ProblemId'] ) );
 else if( $data['type'] == 'ChangeProblemName' ) echo json_encode( ChangeProblemName( $db, $data['ProblemId'] , $data['name']) );
