@@ -14,7 +14,7 @@ function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comm
 	}
 	
 	if( strlen( $comment ) > comment_MAXLength ) {
-		return ['type'=>'bad', 'text'=>'Il commento può avere alpiù '.comment_MAXLength.' caratteri, il tuo ne ha '.strlen( $comment )];
+		return ['type'=>'bad', 'text'=>'Il commento può avere al più '.comment_MAXLength.' caratteri, il tuo ne ha '.strlen( $comment )];
 	}
 
 	$Blocked=OneResultQuery($db, QuerySelect('Contests',['id'=>$ContestId],['blocked']))['blocked'];

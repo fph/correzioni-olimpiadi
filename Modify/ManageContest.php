@@ -89,11 +89,11 @@ function ChangeNameAndDate($db, $ContestId, $name, $date) {
 
 function AddProblem($db, $ContestId, $name) {
 	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength ) {
-		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa di alpiù '.ProblemName_MAXLength];
+		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa di al più '.ProblemName_MAXLength.' caratteri'];
 	}
 	
 	$Exist1=OneResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId, 'name'=>$name] ));
-	if( !is_null( $Esist1 ) ){
+	if( !is_null( $Exist1 ) ){
 		return ['type'=>'bad', 'text'=>'La gara scelta ha già un problema con lo stesso nome'];
 	}
 	
@@ -113,7 +113,7 @@ function RemoveProblem($db, $ProblemId) {
 
 function ChangeProblemName( $db, $ProblemId, $name ){
 	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength ) {
-		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa di alpiù '.ProblemName_MAXLength];
+		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa di al più '.ProblemName_MAXLength.' caratteri'];
 	}
 	
 	$Problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
