@@ -158,7 +158,7 @@ function build_sorter($key) {
 function GetExtendedItalianDate($date){
 	if ($date==null) return $date;
 	$dividedDate=explode("-",$date);
-	$italianDate=$dividedDate[2]." ";
+	$italianDate=strval(intval($dividedDate[2]))." ";
 	
 	$month=$dividedDate[1];
 	if ($month=='01') $italianDate.="gennaio";
