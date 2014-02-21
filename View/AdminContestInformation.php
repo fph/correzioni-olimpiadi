@@ -21,21 +21,29 @@ global $v_contest;
 </h2>
 
 <div class='GeneralInformation'>
+	<div class='CorrectionsInformation'>
 	<?php
 	if ($v_contest['blocked']) {
 		?>
-		<div class='CorrectionsInformation CorrectionsCompleted'>
+		<div class='CorrectionsCompleted'>
 			Correzioni terminate
 		</div>
+<!--
+		<input type="button" value="Riapri" onclick=UnblockContestRequest()>
+-->
 		<?php
 	}
 	else {
 		?>
-		<div class='CorrectionsInformation CorrectionsInProgress'>
+		<div class='CorrectionsInProgress'>
 			Correzioni in corso
 		</div>
+<!--
+		<input type="button" value="Termina" onclick=BlockContestRequest()>
+-->
 		<?php
 	}?>
+	</div>
 </div>
 
 <table class='LinkTable'>
