@@ -11,7 +11,7 @@ function ModifyTitle() {
 	var UsernameTitle=document.getElementById('UsernameTitle');
 	UsernameTitle.classList.add('ContentEditable');
 	UsernameTitle.setAttribute('contenteditable','true');
-	UsernameTitle.dataset.old_value=UsernameTitle.innerHTML;
+	SetDataAttribute(UsernameTitle, "old_value", UsernameTitle.innerHTML);
 }
 
 function ProcessServerAnswer( Response ) {
@@ -38,6 +38,6 @@ function CancelTitleModification(){
 	var UsernameTitle=document.getElementById('UsernameTitle');	
 	UsernameTitle.classList.remove('ContentEditable');
 	UsernameTitle.setAttribute('contenteditable','false');
-	UsernameTitle.innerHTML=UsernameTitle.dataset.old_value;
-	UsernameTitle.dataset.old_value=null;
+	UsernameTitle.innerHTML=GetDataAttribute(UsernameTitle, "old_value");
+	SetDataAttribute(UsernameTitle, "old_value", null);
 }

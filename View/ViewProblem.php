@@ -93,7 +93,7 @@ else {
 	
 	
 	function GetContestantId(element_this){
-		return element_this.dataset.contestant_id;
+		return GetDataAttribute(element_this, "contestant_id");
 	}
 	
 	function GetProblemId(element_this){

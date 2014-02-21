@@ -15,7 +15,7 @@ function RemoveParticipation(response){
 
 function RemoveParticipationRequest(element_this){
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
-	var ContestantId=parent_tr.dataset.contestant_id;
+	var ContestantId=GetDataAttribute(parent_tr, "contestant_id");
 	parent_tr.id='trashing'+ContestantId;
 	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, ContestantId:ContestantId, type:'RemoveParticipation'}, RemoveParticipation);
 }

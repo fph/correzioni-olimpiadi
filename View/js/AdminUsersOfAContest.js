@@ -15,7 +15,7 @@ function RemovePermission(response){
 
 function RemovePermissionRequest(element_this){
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
-	var UserId=parent_tr.dataset.user_id;
+	var UserId=GetDataAttribute(parent_tr, "user_id");
 	parent_tr.id='trashing'+UserId;
 	MakeAjaxRequest('../Modify/ManageUser.php', {ContestId:ContestId, UserId:UserId, type:'RemovePermission'}, RemovePermission);
 }

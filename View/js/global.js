@@ -28,7 +28,7 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons, da
 	for (var cl in classes) NewRow.classList.add(classes[cl]);
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
 
-	NewRow.dataset.orderby=columns[orderby];
+	SetDataAttribute(NewRow, "orderby", columns[orderby]);
 	for (var da in datas) NewRow.setAttribute('data-'+da,datas[da]);
 	
 	if (RedirectUrl!=null) NewRow.onclick=function(){Redirect(RedirectUrl, getElements)};
@@ -49,11 +49,11 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons, da
 	
 	var childs=tbodyEl.getElementsByTagName('tr');
 	
-	var compareEl=NewRow.dataset.orderby;
+	var compareEl=GetDataAttribute(NewRow, "orderby");
 	
 	var aggiunto=false;
 	for (var i=0; i<childs.length; i++) {
-		var sortingEl=childs[i].dataset.orderby;
+		var sortingEl=GetDataAttribute( childs[i], "orderby");
 		if (String(compareEl).localeCompare(String(sortingEl))<0) {
 			tbodyEl.insertBefore(NewRow,childs[i]);
 			aggiunto=true;

@@ -95,6 +95,6 @@ else {
 	}
 	
 	function GetProblemId(element_this) {
-		return element_this.dataset.problem_id;
+		return GetDataAttribute(element_this, "problem_id");
 	}
 </script>

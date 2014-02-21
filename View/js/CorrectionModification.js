@@ -2,12 +2,12 @@ function Clear() {
 	var parent_tr=document.getElementById('modifying');
 	parent_tr.removeAttribute('id');
 	var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
-	mark_child.innerHTML=mark_child.dataset.old_value;
-	mark_child.dataset.old_value=null;
+	mark_child.innerHTML=GetDataAttribute(mark_child, "old_value");
+	SetDataAttribute(mark_child, "old_value", null);
 	
 	var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
-	comment_child.innerHTML=comment_child.dataset.old_value;
-	comment_child.dataset.old_value=null;
+	comment_child.innerHTML=GetDataAttribute(comment_child, "old_value");
+	SetDataAttribute(comment_child, "old_value", null);
 	
 	var modify_buttons=document.getElementsByClassName("modify_button_image");
 	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].style['display']='inline';
@@ -30,23 +30,23 @@ function MakeChanges(response){
 		var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
 		var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
 		var user_child=parent_tr.getElementsByClassName('username_column')[0];
-		mark_child.dataset.new_value=null;
-		comment_child.dataset.new_value=null;
-		user_child.dataset.new_value=null;
+		SetDataAttribute(mark_child, "new_value", null);
+		SetDataAttribute(comment_child, "new_value", null);
+		SetDataAttribute(user_child, "new_value", null);
 		Clear();
 	}
 	else {		
 		var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
-		mark_child.dataset.old_value=mark_child.dataset.new_value;
-		mark_child.dataset.new_value=null;
+		SetDataAttribute(mark_child, "old_value", GetDataAttribute(mark_child, "new_value"));
+		SetDataAttribute(mark_child, "new_value", null);
 		
 		var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
-		comment_child.dataset.old_value=comment_child.dataset.new_value;
-		comment_child.dataset.new_value=null;
+		SetDataAttribute(comment_child, "old_value", GetDataAttribute(comment_child, "new_value"));
+		SetDataAttribute(comment_child, "new_value", null);
 		
 		var user_child=parent_tr.getElementsByClassName('username_column')[0];
-		user_child.innerHTML=user_child.dataset.new_value;
-		user_child.dataset.new_value=null;
+		user_child.innerHTML=GetDataAttribute(user_child, "new_value");
+		SetDataAttribute(user_child, "new_value", null);
 		
 		Clear();
 	}
@@ -62,16 +62,16 @@ function Confirm(element_this){
 	var mark_child=parent_tr.getElementsByClassName('mark_column')[0];
 	var selectEl=mark_child.getElementsByClassName('mark_select')[0];
 	var mark=selectEl.options[selectEl.selectedIndex].text;
-	mark_child.dataset.new_value=mark;
+	SetDataAttribute(mark_child, "new_value", mark);
 	
 	var comment_child=parent_tr.getElementsByClassName('comment_column')[0];
 	var comment=comment_child.getElementsByClassName('comment_modifying')[0].innerHTML;
-	comment_child.dataset.new_value=comment;
+	SetDataAttribute(comment_child, "new_value", comment);
 	
 	var user_child=parent_tr.getElementsByClassName('username_column')[0];
-	if ((mark_child.dataset.old_value)!=mark) user_child.dataset.new_value=SessionUsername;
+	if ((GetDataAttribute(mark_child, "old_value"))!=mark) SetDataAttribute(user_child, "new_value", SessionUsername);
 	
-	else user_child.dataset.new_value=user_child.innerHTML;
+	else SetDataAttribute(user_child, "new_value", user_child.innerHTML);
 	
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 }
@@ -99,13 +99,13 @@ function OnModification(element_this) {
 	}
 	NewMarkHTML+="</select>";
 	mark_child.innerHTML=NewMarkHTML;
-	mark_child.dataset.old_value=mark_HTML;
+	SetDataAttribute(mark_child, "old_value", mark_HTML);
 	
 	var NewCommentHTML;
 	if (comment_HTML=='-') NewCommentHTML="<div contentEditable='true' class='comment_modifying'></div>"
 	else NewCommentHTML="<div contentEditable='true' class='comment_modifying'>"+comment_HTML+"</div>"
 	comment_child.innerHTML=NewCommentHTML;
-	comment_child.dataset.old_value=comment_HTML;
+	SetDataAttribute(comment_child, "old_value", comment_HTML);
 	
 	NewConfirmHTML="<div class='ButtonContainer'>";
 	NewConfirmHTML+="<img class='ButtonImage' src='../View/Images/confirm_button_image.png' alt='Conferma' onclick=Confirm(this)>";

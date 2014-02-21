@@ -28,7 +28,7 @@ function RemoveProblem(response){
 
 function RemoveProblemRequest(element_this) {
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
-	var ProblemId=parent_tr.dataset.problem_id;
+	var ProblemId=GetDataAttribute(parent_tr, "problem_id");
 	parent_tr.id='trashing'+ProblemId;
 	MakeAjaxRequest('../Modify/ManageContest.php', {ProblemId:ProblemId, type:'RemoveProblem'}, RemoveProblem);
 }
@@ -38,8 +38,8 @@ function Clear(){
 	parent_tr.removeAttribute('id');
 
 	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
-	problem_child.innerHTML=problem_child.dataset.old_value;
-	problem_child.dataset.old_value=null;
+	problem_child.innerHTML=GetDataAttribute(problem_child, "old_value");
+	SetDataAttribute(problem_child, "old_value", null);
 
 	var modify_buttons=document.getElementsByClassName('modify_button_image');
 	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].classList.remove('hidden');
@@ -67,12 +67,12 @@ function MakeChanges(response){
 	var parent_tr=document.getElementById('modifying');
 	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
 	if (response.type=='bad') {
-		problem_child.dataset.new_value=null;
+		SetDataAttribute(problem_child, "new_value", null);
 		Clear();
 	}
 	else {
-		problem_child.dataset.old_value=problem_child.dataset.new_value;
-		problem_child.dataset.new_value=null;
+		SetDataAttribute(problem_child, "old_value", GetDataAttribute(problem_child, "new_value"));
+		SetDataAttribute(problem_child, "new_value", null);
 		
 		Clear();
 	}
@@ -84,9 +84,9 @@ function Confirm(element_this) {
 	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
 	
 	var problem_name=problem_child.getElementsByClassName('ContentEditable')[0].innerHTML;
-	problem_child.dataset.new_value=problem_name;
+	SetDataAttribute(problem_child, "new_value", problem_name);
 
-	var ProblemId=parent_tr.dataset.problem_id;
+	var ProblemId=GetDataAttribute(parent_tr, "problem_id");
 	
 	MakeAjaxRequest('../Modify/ManageContest.php', {type:'ChangeProblemName', name:problem_name, ProblemId:ProblemId}, MakeChanges);
 }
@@ -99,7 +99,7 @@ function OnModification(element_this){
 
 	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
 
-	problem_child.dataset.old_value=problem_child.innerHTML;
+	SetDataAttribute(problem_child, "old_value", problem_child.innerHTML);
 	problem_child.innerHTML="<div contentEditable='true' class='ContentEditable'>"+problem_child.innerHTML+"</div>"
 
 	var confirm_child=parent_tr.getElementsByClassName('modify_column')[0];

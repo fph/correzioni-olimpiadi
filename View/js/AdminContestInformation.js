@@ -13,10 +13,10 @@ function ModifyTitle() {
 	var DateModificationContainer=document.getElementById('DateModificationContainer');
 	NameTitle.classList.add('ContentEditable');
 	NameTitle.setAttribute('contenteditable','true');
-	NameTitle.dataset.old_value=NameTitle.innerHTML;
+	SetDataAttribute(NameTitle, "old_value", NameTitle.innerHTML);
 	ItalianDate.classList.add('hidden');
 	DateModificationContainer.classList.remove('hidden');
-	SetDate(ItalianDate.dataset.raw_date);
+	SetDate(GetDataAttribute(ItalianDate, "raw_date"));
 }
 
 function ProcessServerAnswer( Response ) {
@@ -27,7 +27,7 @@ function ProcessServerAnswer( Response ) {
 		path[path.length-1].innerHTML = NameTitle.innerHTML;
 		var ItalianDate=document.getElementById('ItalianDate');
 		var RawDate=document.getElementById('date_DateInput');
-		ItalianDate.dataset.raw_date=RawDate.value;
+		SetDataAttribute(ItalianDate, "raw_date", RawDate.value);
 	}
 }
 
@@ -54,12 +54,12 @@ function CancelTitleModification(){
 	var NameTitle=document.getElementById('name_title');	
 	NameTitle.classList.remove('ContentEditable');
 	NameTitle.setAttribute('contenteditable','false');
-	NameTitle.innerHTML=NameTitle.dataset.old_value;
-	NameTitle.dataset.old_value=null;
+	NameTitle.innerHTML=GetDataAttribute(NameTitle, "old_value");
+	SetDataAttribute(NameTitle, "old_value", null);
 	
 	var ItalianDate=document.getElementById('ItalianDate');
 	var DateModificationContainer=document.getElementById('DateModificationContainer');
-	ItalianDate.innerHTML= '- '+GenerateItalianDate(ItalianDate.dataset.raw_date);
+	ItalianDate.innerHTML= '- '+GenerateItalianDate(GetDataAttribute(ItalianDate, "raw_date"));
 	ItalianDate.classList.remove('hidden');
 	DateModificationContainer.classList.add('hidden');
 }
