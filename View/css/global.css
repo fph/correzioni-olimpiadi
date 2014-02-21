@@ -135,3 +135,11 @@ thead, tbody {
 	border-radius: 3px;
 	background-color: white;
 }
+
+/*
+	DateInput
+*/
+
+.DateInputContainer select {
+	font: inherit;
+}

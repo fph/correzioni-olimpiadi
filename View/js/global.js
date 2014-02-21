@@ -106,6 +106,6 @@ function SetDataAttribute( DomObject, Attribute, Value ) {
 }
 
 function GetDataAttribute( DomObject, Attribute ) {
-	DomObject.getAttribute('data-'+Attribute);
+	return DomObject.getAttribute('data-'+Attribute);
 }
 
