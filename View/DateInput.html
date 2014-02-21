@@ -11,7 +11,9 @@
 	var date=document.getElementById('date_DateInput');
 	var MonthDays=[0,31,29,31,30,31,30,31,31,30,31,30,31];
 	var MonthsNames=['','gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-	var FirstYear=1994;
+	
+	var FirstYear=2000;
+	var LastYear =2020;
 	
 	function RecalculateDate() {
 		date.value=year.value+'-'+month.value+'-'+day.value;
@@ -51,7 +53,7 @@
 	}
 	
 	year.innerHTML='';
-	for(var i=FirstYear;i<FirstYear+20;i++) {
+	for(var i=FirstYear;i<=LastYear;i++) {
 		var OptionItem=document.createElement('option');
 		OptionItem.value=i.toString();
 		OptionItem.innerHTML=i.toString();
