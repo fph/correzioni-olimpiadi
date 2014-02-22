@@ -1,24 +1,22 @@
 Guide for usage, installation an developing
 
 1) 	To install correzioni-olimpiadi you must copy the whole project in a folder which is processed by apache webserver (using php and mysql).
-	Then you have to create a user in mysql with username X and pass Y, and insert X,Y in Constants.php as obvious.
+	Rename the file Constants.php.backup as Constants.php
+	Then you have to create a user in mysql with username XXX and pass YYY:
 	
-		CREATE USER 'Olimpiadi'@'localhost' IDENTIFIED BY 'alfabeto';
-		GRANT ALL PRIVILEGES ON CorOli.* TO 'Olimpiadi'@'localhost' WITH GRANT OPTION;
+		CREATE USER 'XXX'@'localhost' IDENTIFIED BY 'YYY';
+		GRANT ALL PRIVILEGES ON CorOli.* TO 'XXX'@'localhost' WITH GRANT OPTION;
 
-		CREATE USER 'Olimpiadi'@'%' IDENTIFIED BY 'alfabeto';
-		GRANT ALL PRIVILEGES ON CorOli.* TO 'Olimpiadi'@'%' WITH GRANT OPTION;
+		CREATE USER 'XXX'@'%' IDENTIFIED BY 'YYY';
+		GRANT ALL PRIVILEGES ON CorOli.* TO 'XXX'@'%' WITH GRANT OPTION;
 	
-	In constants.php you have also to configure the various url (as described by variable names).
+	Now you have to configure Constants.php with the user and password just created, some urls refering to you server structure and some other options.
 	
-	Then execute InitDatabase.php and it will create the whole database and will also Populate it nearly randomly.
+	Then execute InitDatabase.php and it will create the whole database and populating it nearly randomly.
 	
 	Now you should have a properly working system.
 	
 2)	To use correzioni-problemi open with a browser the url .../Model/Login.php
-
-	The whole administration side has to be done directly on the database.
-	
 	
 Developing
 
