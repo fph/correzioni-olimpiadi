@@ -9,7 +9,7 @@
 	var month=document.getElementById('month_DateInput');
 	var year=document.getElementById('year_DateInput');
 	var date=document.getElementById('date_DateInput');
-	var MonthDays=[0,31,29,31,30,31,30,31,31,30,31,30,31];
+	var MonthDays=[0,31,28,31,30,31,30,31,31,30,31,30,31];
 	var MonthsNames=['','gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
 	
 	var FirstYear=2000;
@@ -17,6 +17,8 @@
 	
 	function RecalculateDate() {
 		date.value=year.value+'-'+month.value+'-'+day.value;
+		UpdateDaysNumber();
+		SetDate(date.value);
 	}
 	
 	function ParseDate(DateString) {
@@ -34,7 +36,8 @@
 	
 	function SetDate( DateString ) {
 		var DateObj=ParseDate(DateString);
-		day.selectedIndex=DateObj.day-1;
+		if (MonthDays[DateObj.month]>=DateObj.day) day.selectedIndex=DateObj.day-1;
+		else day.selectIndex=0;
 		month.selectedIndex=DateObj.month-1;
 		year.selectedIndex=DateObj.year-FirstYear;
 	}
@@ -42,7 +45,9 @@
 	
 	function UpdateDaysNumber () { //Attualmente non viene chiamato per questioni di funzionamento
 		day.innerHTML='';
-		for(var i=1;i<=MonthDays[parseInt(month.value)] ;i++) {
+		var num=MonthDays[parseInt(month.value)];
+		if (parseInt(month.value)==2 && parseInt(year.value)%4==0) num++;
+		for(var i=1;i<=num;i++) {
 			var OptionItem=document.createElement('option');
 			var DayNumber=i.toString();
 			if(DayNumber.length==1)DayNumber='0'+DayNumber;
