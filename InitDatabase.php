@@ -158,8 +158,10 @@ function PopulateUsers($db) {
 function PopulateAdministrators($db) {
 	$dario2994_id=OneResultQuery($db,QuerySelect('Users',['username'=>'dario2994'],['id']))['id'];
 	Query($db,QueryInsert('Administrators',['UserId'=>$dario2994_id]));
+	$Xamog_id=OneResultQuery($db,QuerySelect('Users',['username'=>'Xamog'],['id']))['id'];
+	Query($db,QueryInsert('Administrators',['UserId'=>$Xamog_id]));
 
-	echo "Table Users Populated.\n";
+	echo "Table Administrators Populated.\n";
 }
 
 function PopulateContests($db) {
@@ -267,7 +269,12 @@ function PopulateProblems($db) {
 				['name'=>'3','ContestId'=>4],
 				['name'=>'Problem 1','ContestId'=>5],
 				['name'=>'Problem 2','ContestId'=>5],
-				['name'=>'Problem 3','ContestId'=>5]];
+				['name'=>'Problem 3','ContestId'=>5],
+				['name'=>'Algebra pomeriggio','ContestId'=>6],
+				['name'=>'Algebra mattina','ContestId'=>6],
+				['name'=>'Geometria 2','ContestId'=>6],
+				['name'=>'Geometria contosa','ContestId'=>6],
+				['name'=>'Problema difficile','ContestId'=>6]];
 	
 	foreach($Problems as $Problem) {
 		Query($db,QueryInsert('Problems',['name'=>$Problem['name'], 'ContestId'=>$Problem['ContestId']]));
@@ -278,7 +285,6 @@ function PopulateProblems($db) {
 
 function PopulateCorrections($db){
 	$Users=ManyResultQuery($db, QuerySelect('Users',null,['id']));
-	$UsersNumber=count($Users);
 	$Contests=ManyResultQuery($db, QuerySelect('Contests',null,['id']));
 	
 	$CharactersList='abcdefghilmnopqrstuvzabcdefghilmnopqrstuvz        1234567890';
@@ -287,15 +293,22 @@ function PopulateCorrections($db){
 	foreach($Contests as $Contest) {
 		$Problems=ManyResultQuery($db,QuerySelect('Problems',['ContestId'=>$Contest['id']],['id']));
 		$Contestants=ManyResultQuery($db,QuerySelect('Participations',['ContestId'=>$Contest['id']],['ContestantId']));
+		$Correctors=[];
+		foreach($Users as $user) {
+			if (VerifyPermission($db, $user['id'], $Contest['id'])==1) {
+				$Correctors[]=$user;
+			}
+		}
+		$CorrectorsNumber=count($Correctors);
 		foreach($Problems as $Problem) {
 			foreach($Contestants as $Contestant) {
 				if( mt_rand(0,1)==1 ) {
 					$CommentLength=mt_rand(0,200);
 					$Comment='';
-					for($j=0;$j<$CommentLength;$j++) $Comment .= $CharactersList[mt_rand(0,$CharactersNumber)];
-					$UserId=$Users[mt_rand(0,$UsersNumber-1)]['id'];
+					for($j=0;$j<$CommentLength;$j++) $Comment .= $CharactersList[mt_rand(0,$CharactersNumber-1)];
+					$CorrectorId=$Correctors[mt_rand(0,$CorrectorsNumber-1)]['id'];
 					Query($db,QueryInsert('Corrections', 
-					['ProblemId'=>$Problem['id'], 'ContestantId'=>$Contestant['ContestantId'], 'mark'=>mt_rand(0,7), 'comment'=>$Comment, 'UserId'=>$UserId]
+					['ProblemId'=>$Problem['id'], 'ContestantId'=>$Contestant['ContestantId'], 'mark'=>mt_rand(0,7), 'comment'=>$Comment, 'UserId'=>$CorrectorId]
 					));
 				}
 			}
