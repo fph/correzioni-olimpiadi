@@ -164,7 +164,7 @@ function PopulateAdministrators($db) {
 
 function PopulateContests($db) {
 	$Contests=[	['name'=>'Senior 2013', 				'date'=>'2006-04-29', 	'blocked'=>1],
-				['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-29', 	'blocked'=>1],
+				['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-26', 	'blocked'=>1],
 				['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1],
 				['name'=>'Preimo 2010 TST giorno 2', 	'date'=>'2010-08-15', 	'blocked'=>0],
 				['name'=>'IMO 2013 day1', 				'date'=>'2012-07-15',	'blocked'=>0],
