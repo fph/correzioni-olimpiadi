@@ -75,6 +75,7 @@ function CreateDatabase() {
 		`id` int NOT NULL AUTO_INCREMENT,
 		`name` varchar('.ContestantName_MAXLength.') NOT NULL,
 		`surname` varchar('.ContestantSurname_MAXLength.') NOT NULL,
+		`school` varchar('.ContestantSchool_MAXLength.') NOT NULL,
 		PRIMARY KEY (`id`),
 		KEY(`surname`)
 	) ENGINE=InnoDB;';
