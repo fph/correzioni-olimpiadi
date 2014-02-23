@@ -10,5 +10,6 @@ function AddContestant(response){
 function AddContestantRequest() {
 	var surname=document.getElementById('surname_input').value;
 	var name=document.getElementById('name_input').value;
-	MakeAjaxRequest('../Modify/ManageContestant.php', {surname:surname, name:name, type:'add'}, AddContestant);
+	var school=document.getElementById('school_input').value;
+	MakeAjaxRequest('../Modify/ManageContestant.php', {surname:surname, name:name, school:school, type:'add'}, AddContestant);
 }

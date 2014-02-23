@@ -52,11 +52,13 @@ else {
 	<tr>
 		<th> Cognome </th>
 		<th> Nome </th>
+		<th> Scuola </th>
 		<th> </th>
 	</tr>
 	<tr>
 		<td> <input type="text" name="surname" id="surname_input"> </td>
 		<td> <input type="text" name="name" id="name_input"> </td>
+		<td> <input type="text" name="school" id="school_input"> </td>
 		<td> <input type="button" value="Aggiungi" onclick=AddContestantRequest()> </td>
 	</tr>
 	</table>
