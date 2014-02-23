@@ -195,22 +195,22 @@ function PopulatePermissions($db){
 }
 
 function PopulateContestants($db) {
-	$Contestants=[	['name'=>'Federico', 	'surname'=>'Glaudo'],
-					['name'=>'Giada', 		'surname'=>'Franz'],
-					['name'=>'Gioacchino', 	'surname'=>'Antonelli'],
-					['name'=>'Luca', 		'surname'=>'Minutillo Menga'],
-					['name'=>'Francesco', 	'surname'=>'Florian'],
-					['name'=>'Claudio', 	'surname'=>'Afeltra'],
-					['name'=>'Paolo', 		'surname'=>'Abiuso'],
-					['name'=>'Leonardo', 	'surname'=>'Fiore'],
-					['name'=>'Lorenzo', 	'surname'=>'Benedini'],
-					['name'=>'Davide', 		'surname'=>'Lofano'],
-					['name'=>'Alice', 		'surname'=>'Cortinovis'],
-					['name'=>'Emanuele', 	'surname'=>'Tron'],
-					['name'=>'Matteo', 		'surname'=>'Becchi'],
-					['name'=>'Filippo', 	'surname'=>'Revello'],
-					['name'=>'Fabio', 		'surname'=>'Ferri'],
-					['name'=>'Luigi', 		'surname'=>'Pagano']];
+	$Contestants=[	['name'=>'Federico', 	'surname'=>'Glaudo',			'school'=>'L.S. Righi'],
+					['name'=>'Giada', 		'surname'=>'Franz',				'school'=>'L.S. Marinelli'],			
+					['name'=>'Gioacchino', 	'surname'=>'Antonelli',			'school'=>'L.S. Tedone'],
+					['name'=>'Luca', 		'surname'=>'Minutillo Menga',	'school'=>'L.S. Staminchia'],
+					['name'=>'Francesco', 	'surname'=>'Florian',			'school'=>'L.S. Copernico'],
+					['name'=>'Claudio', 	'surname'=>'Afeltra',			'school'=>'L.S. Sambuca'],
+					['name'=>'Paolo', 		'surname'=>'Abiuso',			'school'=>'L.S. Lambada'],
+					['name'=>'Leonardo', 	'surname'=>'Fiore',				'school'=>'L.S. Cotoletta'],
+					['name'=>'Lorenzo', 	'surname'=>'Benedini',			'school'=>'L.S. Figus'],
+					['name'=>'Davide', 		'surname'=>'Lofano',			'school'=>'Lungo Nome di scuola'],
+					['name'=>'Alice', 		'surname'=>'Cortinovis',		'school'=>'L.S. Assurbanipal'],
+					['name'=>'Emanuele', 	'surname'=>'Tron',				'school'=>'L.S. Anzianotto'],
+					['name'=>'Matteo', 		'surname'=>'Becchi',			'school'=>'L.C. Calasi'],
+					['name'=>'Filippo', 	'surname'=>'Revello',			'school'=>'L.C. Anselmo'],
+					['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid'],
+					['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli']];
 	foreach($Contestants as $Contestant) {
 		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname']]));
 	}
