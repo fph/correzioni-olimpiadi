@@ -7,54 +7,17 @@ global $v_contests;
 </h2>
 
 <?php
-if (empty($v_contests)) {
-	?>
-	<div class='EmptyTable'> Ancora nessuna gara inserita. </div>
-	<?php
-}
-else {
-?>
-
-<table class="InformationTable">
-	<thead><tr>
-		<th class='contest_column'>Gare</th>
-		<th class='date_column'>Data</th>
-	</tr></thead>
+	$columns=[];
+	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['contest_column']];
+	$columns[]= ['id'=>'blocked', 'name'=>'', 'order'=>0, 'class'=>['CorrectionsCompleted']];
+	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['date_column']];
 	
-	<tbody>
-	<?php
-		foreach($v_contests as $con) {
-			?>
-			<tr class='trlink' onclick="Redirect('ViewContestInformation', {ContestId:<?=$con['id']?>})">
-			<td class='contestColumn'><?=$con['name']?>
-			
-			<span class='blocked CorrectionsCompleted' >
-			<?php
-			if ($con['blocked']==1) {
-				?>
-				Correzioni terminate
-				<?php
-			}?>
-			</span>
-			</td>
-			<?php if (!is_null($con['date'])) { 
-				?> 
-				<td class='date_column'><?=GetItalianDate($con['date'])?></td> 
-				<?php 
-			}
-			else { 
-				?>
-				<td class='date_column'>-</td> 
-				<?php 
-			} ?>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
-
-<?php
-}
+	$rows=[];
+	foreach( $v_contests as $contest ) {
+		$row=['redirect'=>['ContestId'=>$contest['id']], 'name'=> $contest['name'], 'blocked'=>'', 'date'=>GetItalianDate($contest['date'])];
+		if( $contest['blocked']==1 ) $row['blocked'] = 'Correzioni terminate';
+		$rows[]=$row;
+	}
+	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> ['presence'=>1, 'url'=>'ViewContestInformation'], 'buttons'=> ['presence'=>0]];
+	InsertTable( $Table );
 ?>

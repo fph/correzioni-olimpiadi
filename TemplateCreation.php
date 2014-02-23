@@ -17,6 +17,13 @@ $jsInclude=['ViewParticipation'=>['CorrectionModification'],
 			'AdminUsersOfAContest'=>['AdminUsersOfAContest']];
 $cssInclude=[];
 
+function InsertTable( $table ) {
+	?>
+	<div class='DivToTable'>
+	<?=json_encode( $table )?>
+	</div>
+<?php }
+
 function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
@@ -82,6 +89,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 			<?php
 		} ?>
 	</script>
+	<script type='text/javascript' src='../View/js/TableRenderer.js'> </script>
 </body>
 </html>
 	<?php
