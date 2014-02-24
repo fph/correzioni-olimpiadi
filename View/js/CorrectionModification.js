@@ -68,7 +68,6 @@ function Confirm( parent_tr ){
 }
 
 function OnModification( row ) {
-	//~ var MarkHtml, CommentHtml;
 	
 	row.id='modifying';
 	
@@ -101,6 +100,6 @@ function OnModification( row ) {
 	row.getElementsByClassName('ConfirmButton')[0].classList.remove('hidden');
 	row.getElementsByClassName('CancelButton')[0].classList.remove('hidden');
 	
-	var modify_buttons=document.getElementsByClassName('modify_button_image');
-	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].classList.add( 'hidden' );
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.add('hidden');
 }

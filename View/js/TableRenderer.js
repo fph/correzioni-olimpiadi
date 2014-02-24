@@ -1,7 +1,7 @@
 function CreateButtonsTd( buttons ) {
 	var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
 	ButtonsTd=document.createElement('td');
-	ButtonsTd.id='ButtonsTd';
+	ButtonsTd.classList.add('ButtonsTd');
 	for(var i=0; i<buttons.images.length; i++) {
 		var button=buttons.images[i];
 		var name=button.name;
@@ -11,7 +11,7 @@ function CreateButtonsTd( buttons ) {
 		image.setAttribute('title',ItalianTranslation[name]);
 		SetDataAttribute(image,'name',name);
 		image.classList.add('ButtonImage');
-		image.classList.add(CFL(name)+'Button');
+		image.classList.add(CFL(name)+'ButtonImage');
 		if( button.hidden == 1 ) image.classList.add('hidden');
 		image.addEventListener('click',function(e) {
 			var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
@@ -61,6 +61,7 @@ function RenderTable( obj ) {
 	}
 	if( buttoning ) {
 		var ButtonContainerTh=document.createElement('th');
+		ButtonContainerTh.classList.add('ButtonsTh');
 		TableHeaderTr.appendChild( ButtonContainerTh );
 	}
 	TableHeader.appendChild(TableHeaderTr);

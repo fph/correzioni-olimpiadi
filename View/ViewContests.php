@@ -8,9 +8,9 @@ global $v_contests;
 
 <?php
 	$columns=[];
-	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['contest_column']];
+	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['ContestColumn']];
 	$columns[]= ['id'=>'blocked', 'name'=>'', 'order'=>0, 'class'=>['CorrectionsCompleted']];
-	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['date_column']];
+	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn']];
 	
 	$rows=[];
 	foreach( $v_contests as $contest ) {

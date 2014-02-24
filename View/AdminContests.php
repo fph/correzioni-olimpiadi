@@ -24,8 +24,8 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='contest_column'>Gara</th>
-		<th class='date_column'>Data</th>
+		<th class='ContestColumn'>Gara</th>
+		<th class='DateColumn'>Data</th>
 	</tr></thead>
 	
 	<tbody>
@@ -44,7 +44,7 @@ else {
 				<?php
 			}?>
 			onclick="Redirect('AdminContestInformation',{ContestId:<?=$con['id']?>})">
-			<td class='contest_column'><?=$con['name']?>
+			<td class='ContestColumn'><?=$con['name']?>
 			<span class='blocked CorrectionsCompleted' >
 			<?php
 			if ($con['blocked']==1) {
@@ -56,12 +56,12 @@ else {
 			</td>			
 			<?php if (!is_null($con['date'])) { 
 				?> 
-				<td class='date_column'><?=GetItalianDate($con['date'])?></td> 
+				<td class='DateColumn'><?=GetItalianDate($con['date'])?></td> 
 				<?php 
 			}
 			else { 
 				?>
-				<td class='date_column'>-</td> 
+				<td class='DateColumn'>-</td> 
 				<?php 
 			} ?>
 			</tr>

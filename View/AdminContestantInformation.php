@@ -21,8 +21,8 @@ else {
 
 <table class="InformationTable">
 	<thead><tr>
-		<th class='contest_column'>Gara</th>
-		<th class='date_column'>Data</th>
+		<th class='ContestColumn'>Gara</th>
+		<th class='DateColumn'>Data</th>
 	</tr></thead>
 	
 	<tbody>
@@ -30,9 +30,9 @@ else {
 		foreach($v_contests as $con) {
 			?>
 			<tr class='trlink' onclick="Redirect('ViewParticipation', {ContestId:<?=$con['id']?>, ContestantId:<?=$v_contestant['id']?>})">
-			<td class='contest_column'><?=$con['name']?></td>
-			<?php if (!is_null($con['date'])) { ?> <td class='date_column'><?=GetItalianDate($con['date'])?></td> <?php }
-			else {?> <td class='date_column'>-</td> <?php } ?>
+			<td class='ContestColumn'><?=$con['name']?></td>
+			<?php if (!is_null($con['date'])) { ?> <td class='DateColumn'><?=GetItalianDate($con['date'])?></td> <?php }
+			else {?> <td class='DateColumn'>-</td> <?php } ?>
 			</tr>
 			<?php
 		}

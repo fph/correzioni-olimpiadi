@@ -34,14 +34,13 @@ table.InformationTable tbody tr:hover {
 	Modify and cancel button border-button
 */
 
-table.InformationTable td.modify_column, table.InformationTable td.cancel_column, table.InformationTable td.trash_column {
-	border-bottom: 1px #6678b1;
-	padding: 5px 5px;
+
+table.InformationTable th.ButtonsTh {
+	border-bottom: 2px #6678b1;
 }
 
-table.InformationTable th.modify_column, table.InformationTable th.cancel_column, table.InformationTable th.trash_column {
-	border-bottom: 2px #6678b1;
-	padding: 5px 5px;
+table.InformationTable td.ButtonsTd {
+	border-bottom: 1px #ECF3FA;
 }
 
 
@@ -74,11 +73,11 @@ table.InformationTable .SurnameColumn {
 	min-width: 100px;
 }
 
-table.InformationTable .contest_column {
+table.InformationTable .ContestColumn {
 	min-width: 200px;
 }
 
-table.InformationTable .date_column {
+table.InformationTable .DateColumn {
 	min-width: 50px;
 }
 
