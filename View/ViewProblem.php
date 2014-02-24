@@ -56,11 +56,11 @@ InsertTable($table);
 	var ProblemId=<?=$v_problem['id']?>;
 	
 	
-	function GetContestantId(element_this){
-		return GetDataAttribute(element_this, "contestant_id");
+	function GetContestantId(row){
+		return GetDataAttribute(row, "contestant_id");
 	}
 	
-	function GetProblemId(element_this){
+	function GetProblemId(row){
 		return ProblemId;
 	}
 </script>
