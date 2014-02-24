@@ -79,9 +79,9 @@ function ClearCorrectionsState(){
 
 	SetDataAttribute(CorrectionsState, 'old_value', null);
 
-	var modify_button=CorrectionsInformationContainer.getElementsByClassName('modify_button_container')[0];
-	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('confirm_button_container')[0];
-	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('cancel_button_container')[0];
+	var modify_button=CorrectionsInformationContainer.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('CancelButtonContainer')[0];
 
 	modify_button.classList.remove('hidden');
 	confirm_button.classList.add('hidden');
@@ -131,9 +131,9 @@ function OnModificationCorrectionsState(){
 
 	CorrectionsState.innerHTML=NewStateHTML;
 
-	var modify_button=CorrectionsInformationContainer.getElementsByClassName('modify_button_container')[0];
-	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('confirm_button_container')[0];
-	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('cancel_button_container')[0];
+	var modify_button=CorrectionsInformationContainer.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('CancelButtonContainer')[0];
 
 	modify_button.classList.add('hidden');
 	confirm_button.classList.remove('hidden');

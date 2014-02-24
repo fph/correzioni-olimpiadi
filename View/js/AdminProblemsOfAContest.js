@@ -41,21 +41,21 @@ function Clear(){
 	problem_child.innerHTML=GetDataAttribute(problem_child, "old_value");
 	SetDataAttribute(problem_child, "old_value", null);
 
-	var modify_buttons=document.getElementsByClassName('modify_button_image');
+	var modify_buttons=document.getElementsByClassName('ModifyButtonImage');
 	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].classList.remove('hidden');
 	
-	var trash_buttons=document.getElementsByClassName('trash_button_image');
+	var trash_buttons=document.getElementsByClassName('TrashButtonImage');
 	for (i=0; i<trash_buttons.length; i++) trash_buttons[i].classList.remove('hidden');
 	
 	var modify_child=parent_tr.getElementsByClassName('modify_column')[0];
 	NewModifyHTML="<div class='ButtonContainer'>";
-	NewModifyHTML+="<img class='modify_button_image ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick='OnModification(this)'>";
+	NewModifyHTML+="<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick='OnModification(this)'>";
 	NewModifyHTML+="</div>";
 	modify_child.innerHTML=NewModifyHTML;
 
 	var trash_child=parent_tr.getElementsByClassName('trash_column')[0];
 	NewTrashHTML="<div class='ButtonContainer'>";
-	NewTrashHTML+="<img class='trash_button_image ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick='RemoveProblemRequest(this)'>";
+	NewTrashHTML+="<img class='TrashButtonImage ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick='RemoveProblemRequest(this)'>";
 	NewTrashHTML+="</div>";
 	trash_child.innerHTML=NewTrashHTML;
 
@@ -115,10 +115,10 @@ function OnModification(element_this){
 	NewCancelHTML+="</div>";
 	cancel_child.innerHTML=NewCancelHTML;
 
-	var modify_buttons=document.getElementsByClassName('modify_button_image');
+	var modify_buttons=document.getElementsByClassName('ModifyButtonImage');
 	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].classList.add('hidden');
 	
-	var trash_buttons=document.getElementsByClassName('trash_button_image');
+	var trash_buttons=document.getElementsByClassName('TrashButtonImage');
 	for (i=0; i<trash_buttons.length; i++) trash_buttons[i].classList.add('hidden');
 
 	var add_button=document.getElementById('button_input');

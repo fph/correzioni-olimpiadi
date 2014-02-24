@@ -43,10 +43,10 @@ else {
 			<tr data-orderby='<?=$pro['name']?>' data-problem_id='<?=$pro['id']?>'>
 			<td class='ProblemColumn'><?=$pro['name']?></td>
 			<td class='modify_column'> <div class='ButtonContainer'>
-				<img class='modify_button_image ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick="OnModification(this)">
+				<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick="OnModification(this)">
 			</div> </td>
 			<td class='trash_column'> <div class='ButtonContainer'>
-				<img class='trash_button_image ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick="RemoveProblemRequest(this)">
+				<img class='TrashButtonImage ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick="RemoveProblemRequest(this)">
 			</div> </td>
 			</tr>
 			<?php

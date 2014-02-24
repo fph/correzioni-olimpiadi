@@ -1,35 +1,35 @@
 <script type='text/javascript'>
 function StartModifyingTitle() {
 	var ButtonsTitle=document.getElementsByClassName('ButtonsTitle')[0];
-	ButtonsTitle.getElementsByClassName('modify_button_container')[0].classList.add('hidden');
-	ButtonsTitle.getElementsByClassName('trash_button_container')[0].classList.add('hidden');
-	ButtonsTitle.getElementsByClassName('confirm_button_container')[0].classList.remove('hidden');
-	ButtonsTitle.getElementsByClassName('cancel_button_container')[0].classList.remove('hidden');
+	ButtonsTitle.getElementsByClassName('ModifyButtonContainer')[0].classList.add('hidden');
+	ButtonsTitle.getElementsByClassName('TrashButtonContainer')[0].classList.add('hidden');
+	ButtonsTitle.getElementsByClassName('ConfirmButtonContainer')[0].classList.remove('hidden');
+	ButtonsTitle.getElementsByClassName('CancelButtonContainer')[0].classList.remove('hidden');
 }
 
 function EndModifyingTitle() {
 	var ButtonsTitle=document.getElementsByClassName('ButtonsTitle')[0];
-	ButtonsTitle.getElementsByClassName('modify_button_container')[0].classList.remove('hidden');
-	ButtonsTitle.getElementsByClassName('trash_button_container')[0].classList.remove('hidden');
-	ButtonsTitle.getElementsByClassName('confirm_button_container')[0].classList.add('hidden');
-	ButtonsTitle.getElementsByClassName('cancel_button_container')[0].classList.add('hidden');
+	ButtonsTitle.getElementsByClassName('ModifyButtonContainer')[0].classList.remove('hidden');
+	ButtonsTitle.getElementsByClassName('TrashButtonContainer')[0].classList.remove('hidden');
+	ButtonsTitle.getElementsByClassName('ConfirmButtonContainer')[0].classList.add('hidden');
+	ButtonsTitle.getElementsByClassName('CancelButtonContainer')[0].classList.add('hidden');
 }
 </script>
 
 <span class='ButtonsTitle'>
-	<span class='modify_button_container ButtonContainer'>
-		<img class='modify_button_image ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='ModifyTitle()'>
+	<span class='ModifyButtonContainer ButtonContainer'>
+		<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='ModifyTitle()'>
 	</span>
 
-	<span class='trash_button_container ButtonContainer'>
-		<img class='trash_button_image ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' title='Elimina' onclick='DeleteTitle()'>
+	<span class='TrashButtonContainer ButtonContainer'>
+		<img class='TrashButtonImage ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' title='Elimina' onclick='DeleteTitle()'>
 	</span>
 
-	<span class='confirm_button_container ButtonContainer hidden'>
-		<img class='confirm_button_image ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='SendTitleModification()'>
+	<span class='ConfirmButtonContainer ButtonContainer hidden'>
+		<img class='ConfirmButtonImage ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='SendTitleModification()'>
 	</span>
 
-	<span class='cancel_button_container ButtonContainer hidden'>
-		<img class='cancel_button_image ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='CancelTitleModification()'>
+	<span class='CancelButtonContainer ButtonContainer hidden'>
+		<img class='CancelButtonImage ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='CancelTitleModification()'>
 	</span>
 </span>

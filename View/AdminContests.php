@@ -11,68 +11,24 @@ global $v_contests;
 </h3>
 
 <?php
-if (empty($v_contests)) {
-	?>
-	<div class='EmptyTable'> Ancora nessuna gara inserita. </div>
-	<table class='InformationTable hidden'>
-	<?php
-}
-else {
+	$columns=[];
+	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['ContestColumn']];
+	$columns[]= ['id'=>'blocked', 'name'=>'', 'class'=>['CorrectionsCompleted']];
+	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn']];
+	
+	$rows=[];
+	foreach( $v_contests as $contest ) {
+		$row=['redirect'=>['ContestId'=>$contest['id']], 'values'=>[
+			'name'=> $contest['name'], 'blocked'=>'', 'date'=>GetItalianDate($contest['date'])]
+		];
+		if( $contest['blocked']==1 ) $row['values']['blocked'] = 'Correzioni terminate';
+		$rows[]=$row;
+	}
+	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'AdminContestInformation'];
+	InsertTable( $Table );
 ?>
-	<div class='EmptyTable hidden'> Ancora nessuna gara inserita. </div>
-	<table class='InformationTable'>
-	<?php
-}?>
-	<thead><tr>
-		<th class='ContestColumn'>Gara</th>
-		<th class='DateColumn'>Data</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_contests as $con) {
-			?>
-			<tr class='trlink'
-			<?php if (!is_null($con['date']) ) {
-				?>
-				data-orderby='<?=$con['date']?>'
-				<?php
-			}
-			else {
-				?>
-				data-orderby='0000-00-00'
-				<?php
-			}?>
-			onclick="Redirect('AdminContestInformation',{ContestId:<?=$con['id']?>})">
-			<td class='ContestColumn'><?=$con['name']?>
-			<span class='blocked CorrectionsCompleted' >
-			<?php
-			if ($con['blocked']==1) {
-				?>
-				Correzioni terminate
-				<?php
-			}?>
-			</span>
-			</td>			
-			<?php if (!is_null($con['date'])) { 
-				?> 
-				<td class='DateColumn'><?=GetItalianDate($con['date'])?></td> 
-				<?php 
-			}
-			else { 
-				?>
-				<td class='DateColumn'>-</td> 
-				<?php 
-			} ?>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
 
-<h3 class="PageSubtitle">
+<h3 class='PageSubtitle'>
 	Aggiungi una gara
 </h3>
 
