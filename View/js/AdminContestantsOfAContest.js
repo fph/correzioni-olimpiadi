@@ -1,7 +1,7 @@
 function RemoveParticipation(response){
 	if (response.type=='good') {
 		row=document.getElementById('trashing'+response.ContestantId);
-		row.parentNode.removeChild(row);
+		RemoveRow(document.getElementById('AdminContestantsOfAContestTable'), row);
 	}
 }
 

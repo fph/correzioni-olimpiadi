@@ -1,3 +1,16 @@
+function RemoveProblem(response){
+	if (response.type=='good') {
+		row=document.getElementById('trashing'+response.ProblemId);
+		RemoveRow(document.getElementById('AdminProblemsOfAContestTable'), row);
+	}
+}
+
+function RemoveProblemRequest(row) {
+	var ProblemId=GetDataAttribute(row, "problem_id");
+	row.id='trashing'+ProblemId;
+	MakeAjaxRequest('../Modify/ManageContest.php', {ProblemId:ProblemId, type:'RemoveProblem'}, RemoveProblem);
+}
+
 function AddProblem(response){
 	if (response.type=='good') {
 		var problem=document.getElementById('ProblemInput').value;
@@ -11,19 +24,6 @@ function AddProblem(response){
 function AddProblemRequest() {
 	var problem=document.getElementById('ProblemInput').value;
 	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId:ContestId, name:problem, type:'AddProblem'}, AddProblem);
-}
-
-function RemoveProblem(response){
-	if (response.type=='good') {
-		row=document.getElementById('trashing'+response.ProblemId);
-		row.parentNode.removeChild(row);
-	}
-}
-
-function RemoveProblemRequest(row) {
-	var ProblemId=GetDataAttribute(row, "problem_id");
-	row.id='trashing'+ProblemId;
-	MakeAjaxRequest('../Modify/ManageContest.php', {ProblemId:ProblemId, type:'RemoveProblem'}, RemoveProblem);
 }
 
 function Clear(row){
