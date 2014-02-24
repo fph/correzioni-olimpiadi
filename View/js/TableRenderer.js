@@ -93,7 +93,8 @@ function RenderTable( obj ) {
 			if( column.class != null ) {
 				for( var k=0; k<column.class.length; k++ ) td.classList.add( column.class[k] );
 			}
-			td.innerHTML=row.values[column.id];
+			if( row.values[column.id] ) td.innerHTML='-';
+			else td.innerHTML=row.values[column.id];
 			tr.appendChild(td);
 		}
 		if( buttoning==1 ) {
