@@ -1,5 +1,5 @@
 <h2 class='pageTitle'> Configurazione account</h2>
-<div id='UsernameChange_container' class='formContainer'>
+<div id='UsernameChange_container' class='FormContainer'>
 	<h3 class='pageSubtitle'> Cambio Username </h3>
 	<form action="AccountSettings.php" method="POST" id="UsernameChange">
 		<input type='hidden' name='type' value='ChangeUsername'>
@@ -20,7 +20,7 @@
 	</form>
 </div>
 
-<div id='PasswordChange_container' class='formContainer'>
+<div id='PasswordChange_container' class='FormContainer'>
 	<h3 class='pageSubtitle'> Cambio Password </h3>
 	<form action="AccountSettings.php" method="POST" name="PasswordChange">
 		<input type='hidden' name='type' value='ChangePassword'>
