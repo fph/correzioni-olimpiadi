@@ -27,15 +27,15 @@ $columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
 $rows=[];
 foreach($v_contestants as $contestant) {
 	$row=[
-	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name']], 
-	'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ] ];
+	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name']],
+	'data'=>['contestant_id'=>$contestant['id']] ];
 	$rows[]=$row;
 }
 
 $buttons=[];
 $buttons[]=['name'=>'trash', 'onclick'=>'RemoveParticipationRequest'];
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons];
+$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminContestantsOfAContestTable'];
 
 InsertTable( $table );
 ?>
