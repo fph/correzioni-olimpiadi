@@ -46,7 +46,7 @@ else {
 			<td class='SurnameColumn'><?=$con['surname']?></td>
 			<td class='NameColumn'><?=$con['name']?></td>
 			<td class='trash_column'> <div class='ButtonContainer'>
-				<img class='ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick="RemoveParticipationRequest(this)">
+				<img class='ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick="RemoveParticipationRequest(this)">
 			</div> </td>
 			</tr>
 			<?php

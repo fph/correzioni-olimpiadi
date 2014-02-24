@@ -39,15 +39,15 @@ global $v_contest;
 	}?>
 	<span class='ButtonsSubtitle'>
 	<span class='modify_button_container ButtonContainer'>
-		<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' title='Modifica' onclick='OnModificationCorrectionsState()'>
+		<img class='modify_button_image ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='OnModificationCorrectionsState()'>
 		</span>
 		
 	<span class='confirm_button_container ButtonContainer hidden'>
-		<img class='confirm_button_image ButtonImage' src='../View/Images/confirm_button_image.png' alt='Conferma' title='Conferma' onclick='ConfirmCorrectionsState()'>
+		<img class='confirm_button_image ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='ConfirmCorrectionsState()'>
 	</span>
 
 	<span class='cancel_button_container ButtonContainer hidden'>
-		<img class='cancel_button_image ButtonImage' src='../View/Images/cancel_button_image.png' alt='Annulla' title='Annulla' onclick='ClearCorrectionsState()'>
+		<img class='cancel_button_image ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='ClearCorrectionsState()'>
 	</span>
 	</span>
 	</div>

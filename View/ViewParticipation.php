@@ -70,7 +70,7 @@ else {
 			if (!$v_contest['blocked']) {
 				?>
 				<td class='modify_column'> <div class='ButtonContainer'>
-				<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' onclick=OnModification(this)>
+				<img class='modify_button_image ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick=OnModification(this)>
 				</div> </td>
 				<td class='cancel_column'> <div class='ButtonContainer'> </div> </td>
 				<?php

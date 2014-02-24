@@ -91,15 +91,15 @@ function OnModification( row ) {
 	MarkSelect.selectedIndex=parseInt(MarkValue);
 
 	MarkTd.replaceChild(MarkSelect,MarkTd.childNodes[0]);
+
+	var CommentEditable=document.createElement('div');
+	CommentEditable.setAttribute('contenteditable', 'true');
+	CommentEditable.classList.add('ContentEditable');
+	if (CommentValue!='-') CommentEditable.innerHTML=CommentValue;
+	CommentTd.replaceChild(CommentEditable, CommentTd.childNodes[0]);
 	
-	var NewCommentHTML;
-	if (comment_HTML=='-') NewCommentHTML="<div contentEditable='true' class='comment_modifying'></div>"
-	else NewCommentHTML="<div contentEditable='true' class='comment_modifying'>"+comment_HTML+"</div>"
-	comment_child.innerHTML=NewCommentHTML;
-	SetDataAttribute(comment_child, "old_value", comment_HTML);
-	
-	parent_tr.getElementsByClassName('confirm_button_image')[0].classList.remove('hidden');
-	parent_tr.getElementsByClassName('cancel_button_image')[0].classList.remove('hidden');
+	row.getElementsByClassName('ConfirmButton')[0].classList.remove('hidden');
+	row.getElementsByClassName('CancelButton')[0].classList.remove('hidden');
 	
 	var modify_buttons=document.getElementsByClassName('modify_button_image');
 	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].classList.add( 'hidden' );

@@ -47,7 +47,7 @@ else {
 				<?php
 				if (!$use['admin']) {
 					?>
-					<img class='ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick="RemovePermissionRequest(this)">
+					<img class='ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick="RemovePermissionRequest(this)">
 					<?php
 				}?>
 			</div> </td>

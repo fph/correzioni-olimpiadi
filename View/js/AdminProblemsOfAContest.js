@@ -49,13 +49,13 @@ function Clear(){
 	
 	var modify_child=parent_tr.getElementsByClassName('modify_column')[0];
 	NewModifyHTML="<div class='ButtonContainer'>";
-	NewModifyHTML+="<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' onclick='OnModification(this)'>";
+	NewModifyHTML+="<img class='modify_button_image ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick='OnModification(this)'>";
 	NewModifyHTML+="</div>";
 	modify_child.innerHTML=NewModifyHTML;
 
 	var trash_child=parent_tr.getElementsByClassName('trash_column')[0];
 	NewTrashHTML="<div class='ButtonContainer'>";
-	NewTrashHTML+="<img class='trash_button_image ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick='RemoveProblemRequest(this)'>";
+	NewTrashHTML+="<img class='trash_button_image ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick='RemoveProblemRequest(this)'>";
 	NewTrashHTML+="</div>";
 	trash_child.innerHTML=NewTrashHTML;
 
@@ -106,12 +106,12 @@ function OnModification(element_this){
 	var cancel_child=parent_tr.getElementsByClassName('trash_column')[0];
 
 	NewConfirmHTML="<div class='ButtonContainer'>";
-	NewConfirmHTML+="<img class='ButtonImage' src='../View/Images/confirm_button_image.png' alt='Conferma' onclick=Confirm(this)>";
+	NewConfirmHTML+="<img class='ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' onclick=Confirm(this)>";
 	NewConfirmHTML+="</div>";
 	confirm_child.innerHTML=NewConfirmHTML;
 
 	NewCancelHTML="<div class='ButtonContainer'>";
-	NewCancelHTML+="<img class='ButtonImage' src='../View/Images/cancel_button_image.png' alt='Annulla' onclick=Clear()>";
+	NewCancelHTML+="<img class='ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' onclick=Clear()>";
 	NewCancelHTML+="</div>";
 	cancel_child.innerHTML=NewCancelHTML;
 
