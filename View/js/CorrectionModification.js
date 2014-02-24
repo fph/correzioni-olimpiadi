@@ -67,26 +67,30 @@ function Confirm( parent_tr ){
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 }
 
-function OnModification( parent_tr ) {
-	alert( parent_tr );
-	var mark_HTML, comment_HTML;
+function OnModification( row ) {
+	//~ var MarkHtml, CommentHtml;
 	
-	parent_tr.id='modifying';
+	row.id='modifying';
 	
-	var mark_child=parent_tr.getElementsByClassName('MarkColumn')[0];
-	mark_HTML=mark_child.innerHTML;
+	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
+	var MarkValue=MarkTd.innerHTML;
+	SetDataAttribute(MarkTd, "old_value", MarkValue);
 	
-	var comment_child=parent_tr.getElementsByClassName('CommentColumn')[0];
-	comment_HTML=comment_child.innerHTML;
-	
-	var NewMarkHTML="<select class='mark_select'>";
+	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
+	var CommentValue=CommentTd.innerHTML;
+	SetDataAttribute(CommentTd, "old_value", CommentValue);
+
+	var MarkSelect=document.createElement('select');
+	MarkSelect.classList.add('MarkSelect');
 	for (i=0; i<=7; i++) {
-		if (i==mark_HTML) NewMarkHTML+="<option name ='"+i+"' selected='selected'>"+i+"</option>";
-		else NewMarkHTML+="<option name ='"+i+"'>"+i+"</option>";
+		var OptionItem=document.createElement('option');
+		OptionItem.value=i.toString();
+		OptionItem.innerHTML=i.toString();
+		MarkSelect.appendChild(OptionItem);
 	}
-	NewMarkHTML+="</select>";
-	mark_child.innerHTML=NewMarkHTML;
-	SetDataAttribute(mark_child, "old_value", mark_HTML);
+	MarkSelect.selectedIndex=parseInt(MarkValue);
+
+	MarkTd.replaceChild(MarkSelect,MarkTd.childNodes[0]);
 	
 	var NewCommentHTML;
 	if (comment_HTML=='-') NewCommentHTML="<div contentEditable='true' class='comment_modifying'></div>"

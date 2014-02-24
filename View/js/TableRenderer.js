@@ -6,15 +6,14 @@ function CreateButtonsTd( buttons ) {
 		var button=buttons.images[i];
 		var name=button.name;
 		image=document.createElement('img');
-		image.setAttribute('src','../View/Images/'+name+'_button_image.png');
+		image.setAttribute('src','../View/Images/'+CFL(name)+'Button.png');
 		image.setAttribute('alt',ItalianTranslation[name]);
 		image.setAttribute('title',ItalianTranslation[name]);
 		SetDataAttribute(image,'name',name);
 		image.classList.add('ButtonImage');
-		image.classList.add(name+'_button_image');
+		image.classList.add(CFL(name)+'Button');
 		if( button.hidden == 1 ) image.classList.add('hidden');
 		image.addEventListener('click',function(e) {
-			//~ alert('ciao');
 			var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
 			eval( GetDataAttribute(ParentTable, GetDataAttribute(this,'name')+'_function')+'(this.parentNode.parentNode);' );
 		} );
