@@ -1,3 +1,4 @@
+//Takes url and Get Parameters (as an object) and redirect the page as requested
 function Redirect(pageUrl, getElements) {
 	var url=pageUrl+'.php';
 	if (getElements!=null) {
@@ -67,7 +68,7 @@ function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons, da
 	//~ for (var co in columns) document.getElementById(co+'_input').value='';
 }
 
-
+//Transform the date in an italian style long date
 function GetExtendedItalianDate(date){
 	if (date==null) return date;
 	dividedDate=date.split("-");
@@ -90,6 +91,7 @@ function GetExtendedItalianDate(date){
 	return italianDate;
 }
 
+//Transform date in an italian short date
 function GetRestrictedItalianDate(date){
 	if (date==null) return date;
 	dividedDate=date.split("-");
@@ -97,10 +99,13 @@ function GetRestrictedItalianDate(date){
 	return italianDate;
 }
 
+
+//Wrapper for one of the two function
 function GetItalianDate(date){
 	return GetExtendedItalianDate(date);
 }
 
+//Simple functions written for compatibility with ie10 (which doesn't implement dataList)
 function SetDataAttribute( DomObject, Attribute, Value ) {
 	DomObject.setAttribute('data-'+Attribute, Value);
 }
@@ -109,6 +114,7 @@ function GetDataAttribute( DomObject, Attribute ) {
 	return DomObject.getAttribute('data-'+Attribute);
 }
 
+//CapitaliseFirstLetter
 function CFL( str ) {
 	return str.charAt(0).toUpperCase()+str.slice(1);
 }
