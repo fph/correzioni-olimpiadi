@@ -58,7 +58,7 @@ function RenderTable( obj ) {
 		if( column.class != null ) {
 			for( var j=0; j<column.class.length; j++ ) th.classList.add( column.class[j] );
 		}
-		if( columns.order != null && column.order == 1 ) {
+		if( column.order != null && column.order == 1 ) {
 			//Qui dovrei implementare il fatto che si possa ordinare in base a questa riga...
 		}
 		th.innerHTML=column.name;

@@ -1,68 +1,56 @@
-function Clear( parent_tr ) {
-	parent_tr.removeAttribute('id');
-	var mark_child=parent_tr.getElementsByClassName('MarkColumn')[0];
-	mark_child.innerHTML=GetDataAttribute(mark_child, "old_value");
-	SetDataAttribute(mark_child, "old_value", null);
+function Clear(row) {
+	row.removeAttribute('id');
+	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
+	MarkTd.innerHTML=GetDataAttribute(MarkTd, "old_value");
+	SetDataAttribute(MarkTd, "old_value", null);
 	
-	var comment_child=parent_tr.getElementsByClassName('CommentColumn')[0];
-	comment_child.innerHTML=GetDataAttribute(comment_child, "old_value");
-	SetDataAttribute(comment_child, "old_value", null);
+	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
+	CommentTd.innerHTML=GetDataAttribute(CommentTd, "old_value");
+	SetDataAttribute(CommentTd, "old_value", null);
 	
-	parent_tr.getElementsByClassName('confirm_button_image')[0].classList.add('hidden');
-	parent_tr.getElementsByClassName('cancel_button_image')[0].classList.add('hidden');
+	row.getElementsByClassName('ConfirmButtonImage')[0].classList.add('hidden');
+	row.getElementsByClassName('CancelButtonImage')[0].classList.add('hidden');
 	
-	var modify_buttons=document.getElementsByClassName("modify_button_image");
-	for (i=0; i<modify_buttons.length; i++) modify_buttons[i].classList.remove('inline');
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.remove('hidden');
 }
 
 
 function MakeChanges(response){
-	var parent_tr=document.getElementById('modifying');
-	if (response.type=='bad') {
-		var mark_child=parent_tr.getElementsByClassName('MarkColumn')[0];
-		var comment_child=parent_tr.getElementsByClassName('CommentColumn')[0];
-		var user_child=parent_tr.getElementsByClassName('UsernameColumn')[0];
-		SetDataAttribute(mark_child, "new_value", null);
-		SetDataAttribute(comment_child, "new_value", null);
-		SetDataAttribute(user_child, "new_value", null);
-		Clear();
+	var row=document.getElementById('modifying');
+	
+	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
+	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
+	var UserTd=row.getElementsByClassName('UsernameColumn')[0];
+	
+	if (response.type=='good') {
+		SetDataAttribute(MarkTd, "old_value", GetDataAttribute(MarkTd, "new_value"));
+		SetDataAttribute(CommentTd, "old_value", GetDataAttribute(CommentTd, "new_value"));
+		UserTd.innerHTML=GetDataAttribute(UserTd, "new_value");
 	}
-	else {		
-		var mark_child=parent_tr.getElementsByClassName('MarkColumn')[0];
-		SetDataAttribute(mark_child, "old_value", GetDataAttribute(mark_child, "new_value"));
-		SetDataAttribute(mark_child, "new_value", null);
-		
-		var comment_child=parent_tr.getElementsByClassName('CommentColumn')[0];
-		SetDataAttribute(comment_child, "old_value", GetDataAttribute(comment_child, "new_value"));
-		SetDataAttribute(comment_child, "new_value", null);
-		
-		var user_child=parent_tr.getElementsByClassName('UsernameColumn')[0];
-		user_child.innerHTML=GetDataAttribute(user_child, "new_value");
-		SetDataAttribute(user_child, "new_value", null);
-		
-		Clear();
-	}
+	SetDataAttribute(MarkTd, "new_value", null);
+	SetDataAttribute(CommentTd, "new_value", null);
+	SetDataAttribute(UserTd, "new_value", null);
+	Clear(row);
 }
 
 
-function Confirm( parent_tr ){
+function Confirm(row){
+	var ContestantId=GetContestantId(row);
+	var ProblemId=GetProblemId(row);
 	
-	var ContestantId=GetContestantId(parent_tr);
-	var ProblemId=GetProblemId(parent_tr);
+	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
+	var MarkSelect=MarkTd.getElementsByClassName('MarkSelect')[0];
+	var mark=MarkSelect.value;
+	SetDataAttribute(MarkTd, "new_value", mark);
 	
-	var mark_child=parent_tr.getElementsByClassName('MarkColumn')[0];
-	var selectEl=mark_child.getElementsByClassName('mark_select')[0];
-	var mark=selectEl.options[selectEl.selectedIndex].text;
-	SetDataAttribute(mark_child, "new_value", mark);
+	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
+	var comment=CommentTd.getElementsByClassName('ContentEditable')[0].innerHTML;
+	SetDataAttribute(CommentTd, "new_value", comment);
 	
-	var comment_child=parent_tr.getElementsByClassName('CommentColumn')[0];
-	var comment=comment_child.getElementsByClassName('comment_modifying')[0].innerHTML;
-	SetDataAttribute(comment_child, "new_value", comment);
-	
-	var user_child=parent_tr.getElementsByClassName('UsernameColumn')[0];
-	if ((GetDataAttribute(mark_child, "old_value"))!=mark) SetDataAttribute(user_child, "new_value", SessionUsername);
-	
-	else SetDataAttribute(user_child, "new_value", user_child.innerHTML);
+	var UserTd=row.getElementsByClassName('UsernameColumn')[0];
+	if ((GetDataAttribute(MarkTd, "old_value"))!=mark) SetDataAttribute(UserTd, "new_value", SessionUsername);
+	else SetDataAttribute(UserTd, "new_value", UserTd.innerHTML);
 	
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 }
@@ -97,8 +85,8 @@ function OnModification( row ) {
 	if (CommentValue!='-') CommentEditable.innerHTML=CommentValue;
 	CommentTd.replaceChild(CommentEditable, CommentTd.childNodes[0]);
 	
-	row.getElementsByClassName('ConfirmButton')[0].classList.remove('hidden');
-	row.getElementsByClassName('CancelButton')[0].classList.remove('hidden');
+	row.getElementsByClassName('ConfirmButtonImage')[0].classList.remove('hidden');
+	row.getElementsByClassName('CancelButtonImage')[0].classList.remove('hidden');
 	
 	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
 	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.add('hidden');

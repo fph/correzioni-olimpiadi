@@ -23,10 +23,10 @@ global $v_contest, $v_problem, $v_corrections;
 <?php
 $columns=[];
 $columns[]=['id'=>'surname','name'=>'Cognome','class'=>['SurnameColumn'],'order'=>1];
-$columns[]=['id'=>'name','name'=>'Nome','class'=>['NameColumn'],'order'=>0];
+$columns[]=['id'=>'name','name'=>'Nome','class'=>['NameColumn']];
 $columns[]=['id'=>'mark','name'=>'Voto','class'=>['MarkColumn'],'order'=>1];
-$columns[]=['id'=>'comment','name'=>'Commento','class'=>['CommentColumn'],'order'=>0];
-$columns[]=['id'=>'user','name'=>'Correttore','class'=>['UsernameColumn'],'order'=>0];
+$columns[]=['id'=>'comment','name'=>'Commento','class'=>['CommentColumn']];
+$columns[]=['id'=>'user','name'=>'Correttore','class'=>['UsernameColumn']];
 
 $rows=[];
 foreach($v_corrections as $correction) {
@@ -40,14 +40,13 @@ foreach($v_corrections as $correction) {
 	$rows[]=$row;
 }
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>['presence'=>0], 'buttons'=>['presence'=>0] ];
+$table=['columns'=>$columns, 'rows'=>$rows ];
 if( $v_contest['blocked']==0 ) {
-	$table['buttons']['presence']=1;
 	$images=[];
-	$images[]=['name'=>'modify', 'onclick'=>'OnModification', 'hidden'=>0];
+	$images[]=['name'=>'modify', 'onclick'=>'OnModification'];
 	$images[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
 	$images[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
-	$table['buttons']['images']=$images;
+	$table['buttons']=$images;
 }
 
 InsertTable($table);

@@ -81,6 +81,7 @@ table.InformationTable .DateColumn {
 	min-width: 50px;
 }
 
+/*
 table.InformationTable .cancel_column {
 	width:25px;
 }
@@ -92,11 +93,14 @@ table.InformationTable .modify_column {
 table.InformationTable .trash_column {
 	width:25px;
 }
+*/
 
+/*
 table.InformationTable .blocked {
 	float: right;
 	margin-right: 10%;
 }
+*/
 
 /*
 	OnModification
