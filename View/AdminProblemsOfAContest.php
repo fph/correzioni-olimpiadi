@@ -20,41 +20,28 @@ global $v_contest, $v_problems;
 </h3>
 
 <?php
-if (empty($v_problems)) {
-	?>
-	<div class='EmptyTable'> Ancora nessun problema inserito. </div>
-	<table class='InformationTable hidden'>
-	<?php
+$columns=[];
+$columns[]=['id'=>'problem','name'=>'Problema','class'=>['ProblemColumn'],'order'=>1];
+
+$rows=[];
+foreach($v_problems as $problem) {
+	$row=['values'=>[
+		'problem'=>$problem['name']
+		], 'data'=>['problem_id'=>$problem['id'] ] ];
+	$rows[]=$row;
 }
-else {
-	?>
-	<div class='EmptyTable hidden'>Ancora nessun problema inserito. </div>
-	<table class='InformationTable'>
-	<?php
-}?>
-	<thead><tr>
-		<th class='ProblemColumn'>Problemi</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_problems as $pro) {
-			?>
-			<tr data-orderby='<?=$pro['name']?>' data-problem_id='<?=$pro['id']?>'>
-			<td class='ProblemColumn'><?=$pro['name']?></td>
-			<td class='modify_column'> <div class='ButtonContainer'>
-				<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick="OnModification(this)">
-			</div> </td>
-			<td class='trash_column'> <div class='ButtonContainer'>
-				<img class='TrashButtonImage ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick="RemoveProblemRequest(this)">
-			</div> </td>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
+
+$buttons=[];
+$buttons[]=['name'=>'modify', 'onclick'=>'OnModification'];
+$buttons[]=['name'=>'trash', 'onclick'=>'RemoveProblemRequest'];
+$buttons[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
+$buttons[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminProblemsOfAContestTable' ];
+
+InsertTable($table);
+?>
+
 
 
 <h3 class='PageSubtitle'>
@@ -69,7 +56,7 @@ else {
 	</tr>
 	<tr>
 		<td> <input type='text' name='name' id='ProblemInput'> </td>
-		<td> <input type='button' value='Aggiungi' onclick=AddProblemRequest()> </td>
+		<td> <input type='button' id='InputButton' value='Aggiungi' onclick=AddProblemRequest()> </td>
 	</tr>
 	</table>
 </div>
