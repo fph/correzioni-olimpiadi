@@ -9,8 +9,6 @@
 	var month=document.getElementById('month_DateInput');
 	var year=document.getElementById('year_DateInput');
 	var date=document.getElementById('date_DateInput');
-	var MonthDays=[0,31,28,31,30,31,30,31,31,30,31,30,31];
-	var MonthsNames=['','gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
 	
 	var FirstYear=2000;
 	var LastYear =2020;
@@ -21,31 +19,18 @@
 		SetDate(date.value);
 	}
 	
-	function ParseDate(DateString) {
-		var parts = DateString.split('-');
-		var yearX=parseInt(parts[0]);
-		var monthX=parseInt(parts[1]);
-		var dayX=parseInt(parts[2]);
-		return {day:dayX, month:monthX, year:yearX};
-	}
-	
-	function GenerateItalianDate( DateString ) {
-		var DateObj=ParseDate(DateString);
-		return DateObj.day+' '+MonthsNames[DateObj.month]+' '+DateObj.year;
-	}
-	
 	function SetDate( DateString ) {
 		var DateObj=ParseDate(DateString);
-		if (MonthDays[DateObj.month]>=DateObj.day) day.selectedIndex=DateObj.day-1;
+		if (MonthDaysNumber[DateObj.month]>=DateObj.day) day.selectedIndex=DateObj.day-1;
 		else day.selectIndex=0;
 		month.selectedIndex=DateObj.month-1;
 		year.selectedIndex=DateObj.year-FirstYear;
 	}
 	
 	
-	function UpdateDaysNumber () { //Attualmente non viene chiamato per questioni di funzionamento
+	function UpdateDaysNumber () {
 		day.innerHTML='';
-		var num=MonthDays[parseInt(month.value)];
+		var num=MonthDaysNumber[parseInt(month.value)];
 		if (parseInt(month.value)==2 && parseInt(year.value)%4==0) num++;
 		for(var i=1;i<=num;i++) {
 			var OptionItem=document.createElement('option');
@@ -71,7 +56,7 @@
 		var MonthNumber=i.toString();
 		if(MonthNumber.length==1)MonthNumber='0'+MonthNumber;
 		OptionItem.value=MonthNumber;
-		OptionItem.innerHTML=MonthsNames[i];
+		OptionItem.innerHTML=MonthName[i];
 		month.appendChild(OptionItem);
 	}
 	UpdateDaysNumber();

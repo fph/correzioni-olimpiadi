@@ -40,7 +40,7 @@ function SendTitleModification(){
 	var ItalianDate=document.getElementById('ItalianDate');
 	var RawDate=document.getElementById('date_DateInput');
 	var DateModificationContainer=document.getElementById('DateModificationContainer');
-	ItalianDate.innerHTML= '- '+GenerateItalianDate(RawDate.value);
+	ItalianDate.innerHTML= '- '+GetItalianDate(RawDate.value);
 	ItalianDate.classList.remove('hidden');
 	DateModificationContainer.classList.add('hidden');
 	
@@ -59,7 +59,7 @@ function CancelTitleModification(){
 	
 	var ItalianDate=document.getElementById('ItalianDate');
 	var DateModificationContainer=document.getElementById('DateModificationContainer');
-	ItalianDate.innerHTML= '- '+GenerateItalianDate(GetDataAttribute(ItalianDate, "raw_date"));
+	ItalianDate.innerHTML= '- '+GetItalianDate(GetDataAttribute(ItalianDate, "raw_date"));
 	ItalianDate.classList.remove('hidden');
 	DateModificationContainer.classList.add('hidden');
 }

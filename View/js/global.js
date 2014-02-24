@@ -13,35 +13,29 @@ function Redirect(pageUrl, getElements) {
 	document.location=url;
 }
 
+
+var MonthDaysNumber=[0,31,28,31,30,31,30,31,31,30,31,30,31];
+var MonthName=['','gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+function ParseDate(DateString) {
+	var parts = DateString.split('-');
+	var yearX=parseInt(parts[0]);
+	var monthX=parseInt(parts[1]);
+	var dayX=parseInt(parts[2]);
+	return {day:dayX, month:monthX, year:yearX};
+}
+
 //Transform the date in an italian style long date
-function GetExtendedItalianDate(date){
-	if (date==null) return date;
-	dividedDate=date.split("-");
-	italianDate=dividedDate[2]+" ";
-	
-	month=dividedDate[1];
-	if (month=='01') italianDate+="gennaio";
-	if (month=='02') italianDate+="febbraio";
-	if (month=='03') italianDate+="marzo";
-	if (month=='04') italianDate+="aprile";
-	if (month=='05') italianDate+="maggio";
-	if (month=='06') italianDate+="giugno";
-	if (month=='07') italianDate+="luglio";
-	if (month=='08') italianDate+="agosto";
-	if (month=='09') italianDate+="settembre";
-	if (month=='10') italianDate+="ottobre";
-	if (month=='11') italianDate+="novembre";
-	if (month=='12') italianDate+="dicembre";
-	italianDate+=" "+dividedDate[0];
-	return italianDate;
+function GetExtendedItalianDate( DateString ){
+	if( DateString == null ) return null;
+	var DateObj=ParseDate( DateString );
+	return DateObj.day+' '+MonthName[DateObj.month]+' '+DateObj.year;
 }
 
 //Transform date in an italian short date
 function GetRestrictedItalianDate(date){
-	if (date==null) return date;
-	dividedDate=date.split("-");
-	italianDate=dividedDate[2]+"/"+dividedDate[1]+"/"+dividedDate[0];
-	return italianDate;
+	if( DateString == null ) return null;
+	var DateObj=ParseDate( DateString );
+	return DateObj.day+'/'+DateObj.month+'/'+DateObj.year;
 }
 
 
