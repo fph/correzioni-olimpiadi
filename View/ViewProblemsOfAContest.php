@@ -3,9 +3,9 @@ global $v_contest, $v_problems;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'> <?=$v_contest['name']?>
+	<span> <?=$v_contest['name']?>
 	</span>
-	<span class='date_title'>
+	<span>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=GetItalianDate($v_contest['date'])?>

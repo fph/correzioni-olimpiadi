@@ -24,7 +24,7 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='username_column'>Username</th>
+		<th class='UsernameColumn'>Username</th>
 	</tr></thead>
 	
 	<tbody>
@@ -32,7 +32,7 @@ else {
 		foreach($v_users as $use) {
 			?>
 			<tr class='trlink' data-orderby='<?=$use['username']?>' onclick=Redirect('AdminUserInformation',{UserId:<?=$use['id']?>})>
-			<td class='username_column'><?=$use['username']?></td>
+			<td class='UsernameColumn'><?=$use['username']?></td>
 			</tr>
 			<?php
 		}

@@ -54,23 +54,23 @@ table.InformationTable .problem_column {
 	min-width: 100px;
 }
 
-table.InformationTable .mark_column {
+table.InformationTable .MarkColumn {
 	width: 5%;
 }
 
-table.InformationTable .comment_column {
+table.InformationTable .CommentColumn {
 	width: 50%;
 }
 
-table.InformationTable .username_column {
+table.InformationTable .UsernameColumn {
 	min-width: 100px;
 }
 
-table.InformationTable .name_column {
+table.InformationTable .NameColumn {
 	min-width: 100px;
 }
 
-table.InformationTable .surname_column {
+table.InformationTable .SurnameColumn {
 	min-width: 100px;
 }
 

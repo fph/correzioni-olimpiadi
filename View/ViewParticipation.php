@@ -3,10 +3,10 @@ global $v_corrections, $v_contestant, $v_contest;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'>
+	<span>
 	<?=$v_contest['name']?>
 	</span>
-	<span class='date_title'>
+	<span>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=GetItalianDate($v_contest['date'])?>
@@ -33,9 +33,9 @@ else {
 <table class="InformationTable">
 	<thead><tr>
 		<th class='problem_column'>Problema</th>
-		<th class='mark_column'>Voto</th>
-		<th class='comment_column'>Commento</th>
-		<th class='username_column'>Correttore</th>
+		<th class='MarkColumn'>Voto</th>
+		<th class='CommentColumn'>Commento</th>
+		<th class='UsernameColumn'>Correttore</th>
 		<?php
 			if (!$v_contest['blocked']) {
 			?>
@@ -55,14 +55,14 @@ else {
 			<?php
 			if ($cor['done']) {
 				?>
-				<td class='mark_column'><?=$cor['mark']?></td>
-				<td class='comment_column'><?=$cor['comment']?></td>
-				<td class='username_column'><?=$cor['username']?></td>
+				<td class='MarkColumn'><?=$cor['mark']?></td>
+				<td class='CommentColumn'><?=$cor['comment']?></td>
+				<td class='UsernameColumn'><?=$cor['username']?></td>
 				<?php
 			}
 			else {
 				?>
-				<td class='mark_column'>-</td><td class='comment_column'>-</td><td class='username_column'>-</td>
+				<td class='MarkColumn'>-</td><td class='CommentColumn'>-</td><td class='UsernameColumn'>-</td>
 				<?php
 			}
 			?>

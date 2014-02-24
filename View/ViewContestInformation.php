@@ -3,10 +3,10 @@ global $v_contest;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'>
+	<span>
 	<?=$v_contest['name']?>
 	</span>
-	<span class='date_title'>
+	<span>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=GetItalianDate($v_contest['date'])?>

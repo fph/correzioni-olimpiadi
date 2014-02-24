@@ -3,9 +3,9 @@ global $v_contest, $v_problem, $v_corrections;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'> <?=$v_contest['name']?>
+	<span> <?=$v_contest['name']?>
 	</span>
-	<span class='date_title'>
+	<span>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=GetItalianDate($v_contest['date'])?>
@@ -14,19 +14,19 @@ global $v_contest, $v_problem, $v_corrections;
 	</span>
 </h2>
 
-<h3 class='PageSubtitle' id='<?=$v_problem['id']?>'>
-	<span class='problem_title'>
+<h3 class='PageSubtitle'>
+	<span>
 		<?=$v_problem['name']?>
 	</span>
 </h3>
 
 <?php
 $columns=[];
-$columns[]=['id'=>'surname','name'=>'Cognome','class'=>['surname_column'],'order'=>1];
-$columns[]=['id'=>'name','name'=>'Nome','class'=>['name_column'],'order'=>0];
-$columns[]=['id'=>'mark','name'=>'Voto','class'=>['mark_column'],'order'=>1];
-$columns[]=['id'=>'comment','name'=>'Commento','class'=>['comment_column'],'order'=>0];
-$columns[]=['id'=>'user','name'=>'Correttore','class'=>['username_column'],'order'=>0];
+$columns[]=['id'=>'surname','name'=>'Cognome','class'=>['SurnameColumn'],'order'=>1];
+$columns[]=['id'=>'name','name'=>'Nome','class'=>['NameColumn'],'order'=>0];
+$columns[]=['id'=>'mark','name'=>'Voto','class'=>['MarkColumn'],'order'=>1];
+$columns[]=['id'=>'comment','name'=>'Commento','class'=>['CommentColumn'],'order'=>0];
+$columns[]=['id'=>'user','name'=>'Correttore','class'=>['UsernameColumn'],'order'=>0];
 
 $rows=[];
 foreach($v_corrections as $correction) {

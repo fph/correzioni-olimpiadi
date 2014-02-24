@@ -3,10 +3,10 @@ global $v_contest, $v_contestants;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'>
+	<span>
 	<?=$v_contest['name']?>
 	</span>
-	<span class='date_title'>
+	<span>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=GetItalianDate($v_contest['date'])?>
@@ -26,8 +26,8 @@ else {
 
 <table class="InformationTable">
 	<thead><tr>
-		<th class='surname_column'>Cognome</th>
-		<th class='name_column'>Nome</th>
+		<th class='SurnameColumn'>Cognome</th>
+		<th class='NameColumn'>Nome</th>
 	</tr></thead>
 	
 	<tbody>
@@ -35,8 +35,8 @@ else {
 		foreach($v_contestants as $con) {
 			?>
 			<tr class='trlink' onclick="Redirect('ViewParticipation', {ContestId:<?=$v_contest['id']?>,ContestantId:<?=$con['id']?>})">
-			<td class='surname_column'><?=$con['surname']?></td>
-			<td class='name_column'><?=$con['name']?></td>
+			<td class='SurnameColumn'><?=$con['surname']?></td>
+			<td class='NameColumn'><?=$con['name']?></td>
 			</tr>
 			<?php
 		}

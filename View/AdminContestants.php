@@ -24,8 +24,8 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='surname_column'>Cognome</th>
-		<th class='name_column'>Nome</th>
+		<th class='SurnameColumn'>Cognome</th>
+		<th class='NameColumn'>Nome</th>
 	</tr></thead>
 	
 	<tbody>
@@ -33,8 +33,8 @@ else {
 		foreach($v_contestants as $con) {
 			?>
 			<tr class='trlink' data-orderby='<?=$con['surname']?>' onclick=Redirect('AdminContestantInformation',{ContestantId:<?=$con['id']?>})>
-			<td class='surname_column'><?=$con['surname']?></td>
-			<td class='name_column'><?=$con['name']?></td>
+			<td class='SurnameColumn'><?=$con['surname']?></td>
+			<td class='NameColumn'><?=$con['name']?></td>
 			</tr>
 			<?php
 		}

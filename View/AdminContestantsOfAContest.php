@@ -3,10 +3,10 @@ global $v_contest, $v_contestants;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'>
+	<span>
 	<?=$v_contest['name']?>
 	</span>
-	<span class='date_title'>
+	<span>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=GetItalianDate($v_contest['date'])?>
@@ -33,8 +33,8 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='surname_column'>Cognome</th>
-		<th class='name_column'>Nome</th>
+		<th class='SurnameColumn'>Cognome</th>
+		<th class='NameColumn'>Nome</th>
 		<th class='trash_column'></th>
 	</tr></thead>
 	
@@ -43,8 +43,8 @@ else {
 		foreach($v_contestants as $con) {
 			?>
 			<tr data-orderby='<?=$con['surname']?>' data-contestant_id='<?=$con['id']?>'>
-			<td class='surname_column'><?=$con['surname']?></td>
-			<td class='name_column'><?=$con['name']?></td>
+			<td class='SurnameColumn'><?=$con['surname']?></td>
+			<td class='NameColumn'><?=$con['name']?></td>
 			<td class='trash_column'> <div class='ButtonContainer'>
 				<img class='ButtonImage' src='../View/Images/trash_button_image.png' alt='Elimina' onclick="RemoveParticipationRequest(this)">
 			</div> </td>

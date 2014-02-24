@@ -3,10 +3,10 @@ global $v_contest, $v_users;
 ?>
 
 <h2 class='PageTitle'>
-	<span class='contest_title'>
+	<span>
 	<?=$v_contest['name']?>
 	</span>
-	<span class='date_title'>
+	<span>
 	<?php 
 	if (!is_null($v_contest['date'])) {?>
 		- <?=GetItalianDate($v_contest['date'])?>
@@ -33,7 +33,7 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='username_column'>Correttori</th>
+		<th class='UsernameColumn'>Correttori</th>
 		<th class='trash_column'></th>
 	</tr></thead>
 	
@@ -42,7 +42,7 @@ else {
 		foreach($v_users as $use) {
 			?>
 			<tr data-orderby='<?=$use['username']?>' data-user_id='<?=$use['id']?>'>
-			<td class='username_column'><?=$use['username']?></td>
+			<td class='UsernameColumn'><?=$use['username']?></td>
 			<td class='trash_column'> <div class='ButtonContainer'>
 				<?php
 				if (!$use['admin']) {
