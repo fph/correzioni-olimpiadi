@@ -6,7 +6,27 @@ function RenderTable( obj ) {
 	var buttoning=obj.buttons.presence;
 	var ButtonsTd;
 	if( buttoning == 1 ){
-		//Creo ButtonsTd
+		var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
+		ButtonsTd=document.createElement('td');
+		ButtonsTd.id='ButtonsTd';
+		for(var i=0; i<obj.buttons.images.length; i++) {
+			var button=obj.buttons.images[i];
+			var name=button.name;
+			SetDataAttribute(table,name+'_function',button.onclick);
+			image=document.createElement('img');
+			image.setAttribute('src','../View/Images/'+name+'_button_image.jpg');
+			image.setAttribute('alt',ItalianTranslation(name));
+			image.setAttribute('title',ItalianTranslation(name));
+			SetDataAttribute(image,'name',name);
+			image.classList.add('ButtonImage');
+			image.classList.add(name+'_button_image');
+			if( button.hidden == 1 ) image.classList.add('hidden');
+			image.addEventListener('click',function(e) {
+				var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
+				eval( getDataAttribute(ParentTable, getDataAttribute(this,'name')+'_function')+'(this);' );
+			} );
+			ButtonsTd.appendChild(image);
+		}
 	}
 	if( obj.class != null ) {
 		for( var i=0; i<obj.class.length; i++ ) table.classList.add( obj.class[i] );
@@ -14,7 +34,7 @@ function RenderTable( obj ) {
 	if( obj.id != null ) table.id=obj.id;
 	
 	if( obj.data != null ) {
-		// Qui devo piazzare i data della tabella
+		for( var key in obj.data ) SetDataAttribute(table, key, obj.data[key]);
 	}
 	var TableHeader=document.createElement('thead');
 	var TableHeaderTr=document.createElement('tr');
@@ -32,7 +52,6 @@ function RenderTable( obj ) {
 	}
 	if( buttoning ) {
 		var ButtonContainerTh=document.createElement('th');
-		//Qua dovrei metterci tutte le classi del caso...
 		TableHeaderTr.appendChild( ButtonContainerTh );
 	}
 	TableHeader.appendChild(TableHeaderTr);
@@ -54,7 +73,9 @@ function RenderTable( obj ) {
 			for(var j=0;j<row.class.length;j++) tr.classList.add(row.class[j]);
 		}
 		
-		//Qui dovrei mettere tutti i data del caso
+		if( row.data != null ) {
+			for( var key in row.data ) SetDataAttribute(tr, key, row.data[key]);
+		}
 		
 		for(var j=0;j<obj.columns.length;j++) {
 			var column=obj.columns[j];
@@ -66,7 +87,7 @@ function RenderTable( obj ) {
 			tr.appendChild(td);
 		}
 		if( buttoning==1 ) {
-			tr.appendChild(ButtonsTd);
+			tr.appendChild(ButtonsTd.cloneNode(true));
 		}
 		tbody.appendChild(tr);
 	}
@@ -76,7 +97,6 @@ function RenderTable( obj ) {
 
 var DivToTable=document.getElementsByClassName('DivToTable');
 for(var i=0;i<DivToTable.length;i++) {
-	//~ alert(DivToTable[i].innerHTML);
 	var table=JSON.parse(DivToTable[i].innerHTML);
 	DivToTable[i].parentNode.replaceChild( RenderTable(table), DivToTable[i]);
 }
