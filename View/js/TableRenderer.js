@@ -2,8 +2,8 @@ function CreateButtonsTd( buttons ) {
 	var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
 	ButtonsTd=document.createElement('td');
 	ButtonsTd.classList.add('ButtonsTd');
-	for(var i=0; i<buttons.images.length; i++) {
-		var button=buttons.images[i];
+	for(var i=0; i<buttons.length; i++) {
+		var button=buttons[i];
 		var name=button.name;
 		image=document.createElement('img');
 		image.setAttribute('src','../View/Images/'+CFL(name)+'Button.png');
@@ -12,7 +12,7 @@ function CreateButtonsTd( buttons ) {
 		SetDataAttribute(image,'name',name);
 		image.classList.add('ButtonImage');
 		image.classList.add(CFL(name)+'ButtonImage');
-		if( button.hidden == 1 ) image.classList.add('hidden');
+		if( button.hidden != null && button.hidden == 1 ) image.classList.add('hidden');
 		image.addEventListener('click',function(e) {
 			var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
 			eval( GetDataAttribute(ParentTable, GetDataAttribute(this,'name')+'_function')+'(this.parentNode.parentNode);' );
@@ -25,13 +25,18 @@ function CreateButtonsTd( buttons ) {
 function RenderTable( obj ) {
 	var table=document.createElement('table');
 	table.classList.add('InformationTable');
-	var redirecting=obj.redirect.presence;
-	var url=obj.redirect.url;
-	var buttoning=obj.buttons.presence;
+	var redirecting=0;
+	var url='';
+	if( obj.redirect != null ) {
+		redirecting=1;
+		url=obj.redirect;
+	}
+	var buttoning=0;
 	
-	if( buttoning==1 ) {
-		for(var i=0; i<obj.buttons.images.length; i++) {
-			var button=obj.buttons.images[i];
+	if( obj.buttons != null ) {
+		buttoning=1;
+		for(var i=0; i<obj.buttons.length; i++) {
+			var button=obj.buttons[i];
 			var name=button.name;
 			SetDataAttribute(table,name+'_function',button.onclick);
 		}
@@ -53,7 +58,7 @@ function RenderTable( obj ) {
 		if( column.class != null ) {
 			for( var j=0; j<column.class.length; j++ ) th.classList.add( column.class[j] );
 		}
-		if( column.order == 1 ) {
+		if( columns.order != null && column.order == 1 ) {
 			//Qui dovrei implementare il fatto che si possa ordinare in base a questa riga...
 		}
 		th.innerHTML=column.name;

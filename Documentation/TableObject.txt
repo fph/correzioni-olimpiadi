@@ -1,0 +1,28 @@
+table
+	columns = [column]
+	rows = [row]
+	redirect = string
+	buttons = [button]
+	data
+		lower_case_string => string
+	class = [string]
+	id = string
+
+column
+	id => string
+	name => string
+	redirect => string
+	order => boolean
+	class => [string]
+
+row
+	values 
+		string => string
+	redirect = object
+	data
+		lower_case_string => string
+	class = [string]
+
+button
+	name => string
+	hidden => boolean
