@@ -61,7 +61,7 @@ else {
 	Aggiungi un problema
 </h3>
 
-<div class='createContainer'>
+<div class='FormContainer'>
 	<table>
 	<tr>
 		<th> Nome </th>

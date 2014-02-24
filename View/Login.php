@@ -1,5 +1,5 @@
 <h2 class='pageTitle'> Login </h2>
-<div class='formContainer'>
+<div class='FormContainer'>
 	<form class='UserForm' id='LoginForm' method="POST" action="Login.php">
 		<table>
 		<tr>

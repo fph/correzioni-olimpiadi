@@ -66,11 +66,11 @@ body {
 */
 }
 
-div.formContainer form {
+div.FormContainer form {
 	margin-left: 8%;
 }
 
-div.formContainer form table td {
+div.FormContainer form table td {
 	padding: 0px 5px;
 }
 
