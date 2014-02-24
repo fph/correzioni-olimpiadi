@@ -22,9 +22,44 @@ function CreateButtonsTd( buttons ) {
 	return ButtonsTd;
 }
 
+function CreateRow( obj , row) {
+	var tr=document.createElement('tr');
+	if( obj.redirect != null ) {
+		SetDataAttribute(tr, 'redirect_url', obj.redirect);
+		SetDataAttribute(tr, 'redirect_obj', JSON.stringify( row.redirect ) );
+		tr.addEventListener('click', function(e){ 
+			Redirect( GetDataAttribute(this,'redirect_url'), JSON.parse(GetDataAttribute(this,'redirect_obj')) ); 
+		} );
+		tr.classList.add('trlink');
+	}
+	if( row.class != null ) {
+		for(var j=0;j<row.class.length;j++) tr.classList.add(row.class[j]);
+	}
+	
+	if( row.data != null ) {
+		for( var key in row.data ) SetDataAttribute(tr, key, row.data[key]);
+	}
+	
+	for(var j=0;j<obj.columns.length;j++) {
+		var column=obj.columns[j];
+		var td=document.createElement('td');
+		if( column.class != null ) {
+			for( var k=0; k<column.class.length; k++ ) td.classList.add( column.class[k] );
+		}
+		if( row.values[column.id]==null ) td.innerHTML='-';
+		else td.innerHTML=row.values[column.id];
+		tr.appendChild(td);
+	}
+	if( obj.buttons !=null ) {
+		tr.appendChild( CreateButtonsTd(obj.buttons) );
+	}
+	return tr;
+}
+
 function RenderTable( obj ) {
 	var table=document.createElement('table');
 	table.classList.add('InformationTable');
+	SetDataAttribute(table,'table_object',JSON.stringify(obj));
 	var redirecting=0;
 	var url='';
 	if( obj.redirect != null ) {
@@ -75,40 +110,32 @@ function RenderTable( obj ) {
 	var tbody=document.createElement('tbody');
 	for(var i=0;i<obj.rows.length;i++) {
 		var row=obj.rows[i];
-		var tr=document.createElement('tr');
-		if( redirecting==1 ) {
-			SetDataAttribute(tr, 'redirect_url', url);
-			SetDataAttribute(tr, 'redirect_obj', JSON.stringify( row.redirect ) );
-			tr.addEventListener('click', function(e){ 
-				Redirect( GetDataAttribute(this,'redirect_url'), JSON.parse(GetDataAttribute(this,'redirect_obj')) ); 
-			} );
-			tr.classList.add('trlink');
-		}
-		if( row.class != null ) {
-			for(var j=0;j<row.class.length;j++) tr.classList.add(row.class[j]);
-		}
-		
-		if( row.data != null ) {
-			for( var key in row.data ) SetDataAttribute(tr, key, row.data[key]);
-		}
-		
-		for(var j=0;j<obj.columns.length;j++) {
-			var column=obj.columns[j];
-			var td=document.createElement('td');
-			if( column.class != null ) {
-				for( var k=0; k<column.class.length; k++ ) td.classList.add( column.class[k] );
-			}
-			if( row.values[column.id]==null ) td.innerHTML='-';
-			else td.innerHTML=row.values[column.id];
-			tr.appendChild(td);
-		}
-		if( buttoning==1 ) {
-			tr.appendChild( CreateButtonsTd(obj.buttons) );
-		}
-		tbody.appendChild(tr);
+		tbody.appendChild( CreateRow(obj,row) );
 	}
 	table.appendChild(tbody);
 	return table;
+}
+
+function AddRow( table , row , OrderBy ) {
+	var obj=JSON.parse(GetDataAttribute(table,'table_object'));
+	var NewRow=CreateRow( obj , row );
+	NewRow.classList.add('NewRow');
+	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
+	if( OrderBy == null ) {
+		obj.rows.push(row);
+		table.childNodes[1].appendChild(NewRow);
+	}
+	else {
+		var i=0;
+		for(;i<obj.rows.length;i++) {
+			if(obj.rows.values[OrderBy] > row.values[OrderBy]) break;
+		}
+		obj.rows.splice(i,0,row);
+		if( i==obj.rows.length ) table.childNodes[1].appendChild(NewRow);
+		else table.childNodes[1].childNodes[i].insertBefore(NewRow);
+	}
+	
+	SetDataAttribute( table, 'table_object', JSON.stringify(obj) );
 }
 
 var DivToTable=document.getElementsByClassName('DivToTable');
