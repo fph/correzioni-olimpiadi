@@ -9,7 +9,7 @@ global $v_contests;
 <?php
 	$columns=[];
 	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['ContestColumn']];
-	$columns[]= ['id'=>'blocked', 'name'=>'', 'order'=>0, 'class'=>['CorrectionsCompleted']];
+	$columns[]= ['id'=>'blocked', 'name'=>'', 'class'=>['CorrectionsCompleted']];
 	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn']];
 	
 	$rows=[];
@@ -20,6 +20,6 @@ global $v_contests;
 		if( $contest['blocked']==1 ) $row['values']['blocked'] = 'Correzioni terminate';
 		$rows[]=$row;
 	}
-	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> ['presence'=>1, 'url'=>'ViewContestInformation'], 'buttons'=> ['presence'=>0]];
+	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation'];
 	InsertTable( $Table );
 ?>

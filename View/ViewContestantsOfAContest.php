@@ -16,35 +16,18 @@ global $v_contest, $v_contestants;
 </h2>
 
 <?php
-if (empty($v_contestants)) {
-	?>
-	<div class='EmptyTable'> Ancora nessun partecipante inserito. </div>
-	<?php
-}
-else {
-?>
+$columns=[];
+$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$rows=[];
+foreach($v_contestants as $contestant) {
+	$row=[
+	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name']], 
+	'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ] ];
+	$rows[]=$row;
+} 
 
-<table class="InformationTable">
-	<thead><tr>
-		<th class='SurnameColumn'>Cognome</th>
-		<th class='NameColumn'>Nome</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_contestants as $con) {
-			?>
-			<tr class='trlink' onclick="Redirect('ViewParticipation', {ContestId:<?=$v_contest['id']?>,ContestantId:<?=$con['id']?>})">
-			<td class='SurnameColumn'><?=$con['surname']?></td>
-			<td class='NameColumn'><?=$con['name']?></td>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation'];
 
-<?php
-}
+InsertTable( $table );
 ?>

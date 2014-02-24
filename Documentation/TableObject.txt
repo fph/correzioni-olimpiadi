@@ -1,6 +1,6 @@
 table
-	columns = [column]
-	rows = [row]
+	columns = [column] !
+	rows = [row] !
 	redirect = string
 	buttons = [button]
 	data
@@ -9,14 +9,14 @@ table
 	id = string
 
 column
-	id => string
-	name => string
+	id => string !
+	name => string !
 	redirect => string
 	order => boolean
 	class => [string]
 
 row
-	values 
+	values !
 		string => string
 	redirect = object
 	data
@@ -24,5 +24,5 @@ row
 	class = [string]
 
 button
-	name => string
+	name => string !
 	hidden => boolean
