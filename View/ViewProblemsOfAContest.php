@@ -15,33 +15,18 @@ global $v_contest, $v_problems;
 </h2>
 
 <?php
-if (empty($v_problems)) {
-	?>
-	<div class='EmptyTable'> Ancora nessun problema inserito. </div>
-	<?php
-}
-else {
-?>
+$columns=[];
+$columns[]=['id'=>'problem', 'name'=>'Problema', 'class'=>['ProblemColumn'], 'order'=>1];
 
-<table class="InformationTable">
-	<thead><tr>
-		<th class='problem_column'>Problemi</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_problems as $pro) {
-			?>
-			<tr class='trlink' onclick="Redirect('ViewProblem', {ProblemId:<?=$pro['id']?>})">
-			<td class='problem_column'><?=$pro['name']?></td>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
-
-<?php
+$rows=[];
+foreach ($v_problems as $problem) {
+	$row=[
+	'values'=>['problem'=>$problem['name']], 
+	'redirect'=>['ContestId'=>$v_contest['id'], 'ProblemId'=>$problem['id'] ] ];
+	$rows[]=$row;
 }
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewProblem'];
+
+InsertTable($table);
 ?>
