@@ -13,57 +13,6 @@ function Redirect(pageUrl, getElements) {
 	document.location=url;
 }
 
-//~ function AddRow(columns, classes, RedirectUrl, getElements, orderby, buttons, datas){
-	//~ var InformationTable=document.getElementsByClassName('InformationTable')[0];
-	//~ var EmptyTable=document.getElementsByClassName('EmptyTable')[0];
-	//~ if (InformationTable.classList.contains('hidden')) {
-		//~ EmptyTable.classList.add('hidden');
-		//~ InformationTable.classList.remove('hidden');
-	//~ }
-	//~ 
-	//~ var tbodyEl=InformationTable.getElementsByTagName('tbody')[0];
-	//~ 
-	//~ var NewRow=document.createElement('tr');
-//~ 
-	//~ NewRow.classList.add('NewRow');
-	//~ for (var cl in classes) NewRow.classList.add(classes[cl]);
-	//~ setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
-//~ 
-	//~ SetDataAttribute(NewRow, "orderby", columns[orderby]);
-	//~ for (var da in datas) NewRow.setAttribute('data-'+da,datas[da]);
-	//~ 
-	//~ if (RedirectUrl!=null) NewRow.onclick=function(){Redirect(RedirectUrl, getElements)};
-	//~ 
-	//~ var NewRowHTML='';
-	//~ for (var co in columns) {
-		//~ if (co=='date') NewRowHTML+="<td class='"+co+"_column'>"+GetItalianDate(columns[co])+"</td>";
-		//~ else NewRowHTML+="<td class='"+co+"_column'>"+columns[co]+"</td>";
-	//~ }
-	//~ 
-	//~ for (var bu in buttons) {
-		//~ NewRowHTML+="<td class='"+bu+"_column'> <div class='ButtonContainer'>";
-		//~ NewRowHTML+="<img class='"+bu+"_button_image ButtonImage' src='../View/Images/"+bu+"_button_image.png' alt='Elimina' onclick="+buttons[bu]+">";
-		//~ NewRowHTML+="</div> </td>";
-	//~ }
-	//~ 
-	//~ NewRow.innerHTML=NewRowHTML;
-	//~ 
-	//~ var childs=tbodyEl.getElementsByTagName('tr');
-	//~ 
-	//~ var compareEl=GetDataAttribute(NewRow, "orderby");
-	//~ 
-	//~ var aggiunto=false;
-	//~ for (var i=0; i<childs.length; i++) {
-		//~ var sortingEl=GetDataAttribute( childs[i], "orderby");
-		//~ if (String(compareEl).localeCompare(String(sortingEl))<0) {
-			//~ tbodyEl.insertBefore(NewRow,childs[i]);
-			//~ aggiunto=true;
-			//~ break;
-		//~ }
-	//~ }
-	//~ if (aggiunto==false) tbodyEl.appendChild(NewRow);
-//~ }
-
 //Transform the date in an italian style long date
 function GetExtendedItalianDate(date){
 	if (date==null) return date;

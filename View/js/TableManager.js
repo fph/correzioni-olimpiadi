@@ -129,8 +129,6 @@ function AddRow( table , row , OrderBy ) {
 	else {
 		var i=0;
 		for(;i<obj.rows.length;i++) {
-			//~ alert(obj.rows.values);
-			//~ alert(row.values);
 			if(obj.rows[i].values[OrderBy] > row.values[OrderBy]) break;
 		}
 		obj.rows.splice(i,0,row);

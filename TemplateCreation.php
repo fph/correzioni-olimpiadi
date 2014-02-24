@@ -89,7 +89,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 			<?php
 		} ?>
 	</script>
-	<script type='text/javascript' src='../View/js/TableRenderer.js'> </script>
+	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 </body>
 </html>
 	<?php
