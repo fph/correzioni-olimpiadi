@@ -22,14 +22,14 @@ function RemoveParticipationRequest(element_this){
 
 function AddParticipation(response){
 	if (response.type=='good') {
-		var surname=document.getElementById('surname_input').value;
-		var name=document.getElementById('name_input').value;
+		var surname=document.getElementById('SurnameInput').value;
+		var name=document.getElementById('NameInput').value;
 		AddRow({surname:surname, name:name}, null, null, null, 'surname', {'trash':'RemoveParticipationRequest(this)'}, {'contestant_id':response.ContestantId});
 	}
 }
 
 function AddParticipationRequest(){ 
-	var surname=document.getElementById('surname_input').value;
-	var name=document.getElementById('name_input').value;
+	var surname=document.getElementById('SurnameInput').value;
+	var name=document.getElementById('NameInput').value;
 	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, surname:surname, name:name, type:'AddParticipation'}, AddParticipation);
 }

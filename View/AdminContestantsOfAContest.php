@@ -68,8 +68,8 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type='text' name='surname' id='surname_input'> </td>
-		<td> <input type='text' name='name' id='name_input'> </td>
+		<td> <input type='text' name='surname' id='SurnameInput'> </td>
+		<td> <input type='text' name='name' id='NameInput'> </td>
 		<td> <input type='button' value='Aggiungi' onclick="AddParticipationRequest()"> </td>
 	</tr>
 	</table>

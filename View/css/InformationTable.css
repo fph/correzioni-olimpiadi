@@ -49,7 +49,7 @@ table.InformationTable td.ButtonsTd {
 */
 
 
-table.InformationTable .problem_column {
+table.InformationTable .ProblemColumn {
 	min-width: 100px;
 }
 
@@ -79,6 +79,10 @@ table.InformationTable .ContestColumn {
 
 table.InformationTable .DateColumn {
 	min-width: 50px;
+}
+
+table.InformationTable .SchoolColumn {
+	min-width: 100px;
 }
 
 /*

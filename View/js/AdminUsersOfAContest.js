@@ -22,12 +22,12 @@ function RemovePermissionRequest(element_this){
 
 function AddPermission(response){
 	if (response.type=='good') {
-		var username=document.getElementById('username_input').value;
+		var username=document.getElementById('UsernameInput').value;
 		AddRow({username:username}, null, null, null, 'username', {'trash':'RemovePermissionRequest(this)'}, {'user_id':response.UserId});
 	}
 }
 
 function AddPermissionRequest(){ 
-	var username=document.getElementById('username_input').value;
+	var username=document.getElementById('UsernameInput').value;
 	MakeAjaxRequest('../Modify/ManageUser.php', {ContestId:ContestId, username:username, type:'AddPermission'}, AddPermission);
 }

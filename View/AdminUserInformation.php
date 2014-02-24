@@ -2,7 +2,7 @@
 global $v_user, $v_admin, $v_contests;
 ?>
 
-<h2 class="PageTitle">
+<h2 class='PageTitle'>
 	<span id='UsernameTitle'><?=$v_user['username']?></span>
 	
 	<?php
@@ -24,38 +24,21 @@ if ($v_admin) {
 }?>
 
 <?php
-if (empty($v_contests)) {
-	?>
-	<div class='EmptyTable'> Ancora nessuna gara. </div>
-	<?php
-}
-else {
-?>
+$columns=[];
+$columns[]=['id'=>'contest', 'name'=>'Gara', 'class'=>['ContestColumn']];
+$columns[]=['id'=>'date', 'name'=>'Data', 'class'=>['DateColumn']];
 
-<table class="InformationTable">
-	<thead><tr>
-		<th class='ContestColumn'>Gara</th>
-		<th class='DateColumn'>Data</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_contests as $con) {
-			?>
-			<tr class='trlink' onclick="Redirect('ViewContestInformation', {ContestId:<?=$con['id']?>})">
-			<td class='ContestColumn'><?=$con['name']?></td>
-			<?php if (!is_null($con['date'])) { ?> <td class='DateColumn'><?=GetItalianDate($con['date'])?></td> <?php }
-			else {?> <td class='DateColumn'>-</td> <?php } ?>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
+$rows=[];
+foreach($v_contests as $contest) {
+	$row=[
+	'values'=>['contest'=>$contest['name'], 'date'=>GetItalianDate($contest['date'])], 
+	'redirect'=>['ContestId'=>$contest['id'] ] ];
+	$rows[]=$row;
+} 
 
-<?php
-}
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewContestInformation'];
+
+InsertTable( $table );
 ?>
 
 <script>

@@ -1,13 +1,13 @@
 function AddProblem(response){
 	if (response.type=='good') {
-		var problem=document.getElementById('problem_input').value;
+		var problem=document.getElementById('ProblemInput').value;
 		
 		AddRow({problem:problem},null, null, null, 'problem', {'modify':'OnModification(this)','trash':'RemoveProblemRequest(this)'}, {'problem_id':response.ProblemId});
 	}
 }
 
 function AddProblemRequest() {
-	var problem=document.getElementById('problem_input').value;
+	var problem=document.getElementById('ProblemInput').value;
 	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId:ContestId, name:problem, type:'AddProblem'}, AddProblem);
 }
 
@@ -37,7 +37,7 @@ function Clear(){
 	var parent_tr=document.getElementById('modifying');
 	parent_tr.removeAttribute('id');
 
-	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
+	var problem_child=parent_tr.getElementsByClassName('ProblemColumn')[0];
 	problem_child.innerHTML=GetDataAttribute(problem_child, "old_value");
 	SetDataAttribute(problem_child, "old_value", null);
 
@@ -65,7 +65,7 @@ function Clear(){
 
 function MakeChanges(response){
 	var parent_tr=document.getElementById('modifying');
-	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
+	var problem_child=parent_tr.getElementsByClassName('ProblemColumn')[0];
 	if (response.type=='bad') {
 		SetDataAttribute(problem_child, "new_value", null);
 		Clear();
@@ -81,7 +81,7 @@ function MakeChanges(response){
 function Confirm(element_this) {
 	var parent_tr=element_this.parentNode.parentNode.parentNode;
 	
-	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
+	var problem_child=parent_tr.getElementsByClassName('ProblemColumn')[0];
 	
 	var problem_name=problem_child.getElementsByClassName('ContentEditable')[0].innerHTML;
 	SetDataAttribute(problem_child, "new_value", problem_name);
@@ -97,7 +97,7 @@ function OnModification(element_this){
 
 	parent_tr.id='modifying';
 
-	var problem_child=parent_tr.getElementsByClassName('problem_column')[0];
+	var problem_child=parent_tr.getElementsByClassName('ProblemColumn')[0];
 
 	SetDataAttribute(problem_child, "old_value", problem_child.innerHTML);
 	problem_child.innerHTML="<div contentEditable='true' class='ContentEditable'>"+problem_child.innerHTML+"</div>"

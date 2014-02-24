@@ -84,7 +84,7 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="name" id="name_input"> </td>
+		<td> <input type="text" name="name" id="NameInput"> </td>
 		<td> 
 			<?php include 'DateInput.html' ?>
 		</td>

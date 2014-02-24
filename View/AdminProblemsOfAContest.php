@@ -33,7 +33,7 @@ else {
 	<?php
 }?>
 	<thead><tr>
-		<th class='problem_column'>Problemi</th>
+		<th class='ProblemColumn'>Problemi</th>
 	</tr></thead>
 	
 	<tbody>
@@ -41,7 +41,7 @@ else {
 		foreach($v_problems as $pro) {
 			?>
 			<tr data-orderby='<?=$pro['name']?>' data-problem_id='<?=$pro['id']?>'>
-			<td class='problem_column'><?=$pro['name']?></td>
+			<td class='ProblemColumn'><?=$pro['name']?></td>
 			<td class='modify_column'> <div class='ButtonContainer'>
 				<img class='modify_button_image ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' onclick="OnModification(this)">
 			</div> </td>
@@ -68,7 +68,7 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type='text' name='name' id='problem_input'> </td>
+		<td> <input type='text' name='name' id='ProblemInput'> </td>
 		<td> <input type='button' id='button_input' value='Aggiungi' onclick=AddProblemRequest()> </td>
 	</tr>
 	</table>

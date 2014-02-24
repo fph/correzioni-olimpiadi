@@ -10,40 +10,29 @@ global $v_contestants;
 	Lista dei partecipanti
 </h3>
 
-<?php
-if (empty($v_contestants)) {
-	?>
-	<div class='EmptyTable'> Ancora nessun partecipante inserito. </div>
-	<table class='InformationTable hidden'>
-	<?php
-}
-else {
-?>
-	<div class='EmptyTable hidden'> Ancora nessun partecipante inserito. </div>
-	<table class='InformationTable'>
-	<?php
-}?>
-	<thead><tr>
-		<th class='SurnameColumn'>Cognome</th>
-		<th class='NameColumn'>Nome</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_contestants as $con) {
-			?>
-			<tr class='trlink' data-orderby='<?=$con['surname']?>' onclick=Redirect('AdminContestantInformation',{ContestantId:<?=$con['id']?>})>
-			<td class='SurnameColumn'><?=$con['surname']?></td>
-			<td class='NameColumn'><?=$con['name']?></td>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
 
-<h3 class="PageSubtitle">
+<?php
+
+$columns=[];
+$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns[]=['id'=>'school', 'name'=>'Scuola', 'class'=>['SchoolColumn']];
+
+$rows=[];
+foreach($v_contestants as $contestant) {
+	$row=[
+	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name'], 'school'=>$contestant['school']], 
+	'redirect'=>['ContestantId'=>$contestant['id'] ] ];
+	$rows[]=$row;
+} 
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminContestantInformation'];
+
+InsertTable( $table );
+?>
+
+
+<h3 class='PageSubtitle'>
 	Aggiungi un partecipante
 </h3>
 
@@ -56,9 +45,9 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="surname" id="surname_input"> </td>
-		<td> <input type="text" name="name" id="name_input"> </td>
-		<td> <input type="text" name="school" id="school_input"> </td>
+		<td> <input type="text" name="surname" id="SurnameInput"> </td>
+		<td> <input type="text" name="name" id="NameInput"> </td>
+		<td> <input type="text" name="school" id="SchoolInput"> </td>
 		<td> <input type="button" value="Aggiungi" onclick=AddContestantRequest()> </td>
 	</tr>
 	</table>

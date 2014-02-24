@@ -10,40 +10,26 @@ global $v_contestant, $v_contests;
 	<?php include 'ButtonsTitle.html' ?>
 </h2>
 
-<?php
-if (empty($v_contests)) {
-	?>
-	<div class='EmptyTable'> Ancora nessuna gara. </div>
-	<?php
-}
-else {
-?>
-
-<table class="InformationTable">
-	<thead><tr>
-		<th class='ContestColumn'>Gara</th>
-		<th class='DateColumn'>Data</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_contests as $con) {
-			?>
-			<tr class='trlink' onclick="Redirect('ViewParticipation', {ContestId:<?=$con['id']?>, ContestantId:<?=$v_contestant['id']?>})">
-			<td class='ContestColumn'><?=$con['name']?></td>
-			<?php if (!is_null($con['date'])) { ?> <td class='DateColumn'><?=GetItalianDate($con['date'])?></td> <?php }
-			else {?> <td class='DateColumn'>-</td> <?php } ?>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
 
 <?php
-}
+$columns=[];
+$columns[]=['id'=>'contest', 'name'=>'Gara', 'class'=>['ContestColumn']];
+$columns[]=['id'=>'date', 'name'=>'Data', 'class'=>['DateColumn']];
+
+$rows=[];
+foreach($v_contests as $contest) {
+	$row=[
+	'values'=>['contest'=>$contest['name'], 'date'=>GetItalianDate($contest['date'])], 
+	'redirect'=>['ContestId'=>$contest['id'], 'ContestantId'=>$v_contestant['id'] ] ];
+	$rows[]=$row;
+} 
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation'];
+
+InsertTable( $table );
 ?>
+
+
 <script type='text/javascript'>
 	var ContestantId=<?=$v_contestant['id']?>;
 </script>

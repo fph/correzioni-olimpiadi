@@ -11,35 +11,22 @@ global $v_users;
 </h3>
 
 <?php
-if (empty($v_users)) {
-	?>
-	<div class='EmptyTable'> Ancora nessun correttore inserito. </div>
-	<table class='InformationTable hidden'>
-	<?php
-}
-else {
+
+$columns=[];
+$columns[]=['id'=>'username', 'name'=>'Correttore', 'class'=>['UsernameColumn'], 'order'=>1];
+
+$rows=[];
+foreach($v_users as $user) {
+	$row=[
+	'values'=>['username'=>$user['username']], 
+	'redirect'=>['UserId'=>$user['id'] ] ];
+	$rows[]=$row;
+} 
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminUserInformation'];
+
+InsertTable( $table );
 ?>
-	<div class='EmptyTable hidden'> Ancora nessun correttore inserito. </div>
-	<table class='InformationTable'>
-	<?php
-}?>
-	<thead><tr>
-		<th class='UsernameColumn'>Username</th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_users as $use) {
-			?>
-			<tr class='trlink' data-orderby='<?=$use['username']?>' onclick=Redirect('AdminUserInformation',{UserId:<?=$use['id']?>})>
-			<td class='UsernameColumn'><?=$use['username']?></td>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
 
 <h3 class="PageSubtitle">
 	Aggiungi un correttore
@@ -53,8 +40,8 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="username" id="username_input"> </td>
-		<td> <input type="text" name="password" id="password_input"> </td>
+		<td> <input type="text" name="username" id="UsernameInput"> </td>
+		<td> <input type="text" name="password" id="PasswordInput"> </td>
 		<td> <input type="button" value="Aggiungi" onclick=AddUserRequest()> </td>
 	</tr>
 	</table>

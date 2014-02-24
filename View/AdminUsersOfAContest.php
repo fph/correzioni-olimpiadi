@@ -70,7 +70,7 @@ else {
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type='text' name='username' id='username_input'> </td>
+		<td> <input type='text' name='username' id='UsernameInput'> </td>
 		<td> <input type='button' value='Aggiungi' onclick="AddPermissionRequest()"> </td>
 	</tr>
 	</table>

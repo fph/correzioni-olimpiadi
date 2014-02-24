@@ -212,7 +212,7 @@ function PopulateContestants($db) {
 					['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid'],
 					['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli']];
 	foreach($Contestants as $Contestant) {
-		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname']]));
+		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school']]));
 	}
 	
 	echo "Table Contestants Populated.\n";
