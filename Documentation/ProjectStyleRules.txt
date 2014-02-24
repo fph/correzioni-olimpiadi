@@ -1,0 +1,8 @@
+Single-word variable: lowercase
+Multiple-words variable: CamelCase
+Variable passed to the View by the Model: v_VariableNameFollowingPrecedingRules
+
+This rules applied also to id and className in html and to all variables both in javascrit and in php.
+For data attributes snake_case should be used instead, as Uppercase isn't supported.
+
+FileNames: Always CamelCase, also single-word names, apart from index which must be written this way.
