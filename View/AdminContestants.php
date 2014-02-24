@@ -26,7 +26,7 @@ foreach($v_contestants as $contestant) {
 	$rows[]=$row;
 } 
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminContestantInformation'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminContestantInformation', 'id'=>'AdminContestantsTable'];
 
 InsertTable( $table );
 ?>
