@@ -1,10 +1,13 @@
-function AddContest(response){
+function AddContest(response){ //TODO: Non va bene prendere i dati dal form, che intanto potrebbe essere cambiato
 	if (response.type=='good') {
 		var tbodyEl=document.getElementsByClassName('InformationTableTbody')[0];
 		var name=document.getElementById('NameInput').value;
 		var date=document.getElementById('date_DateInput').value;
 		
-		AddRow({name:name, date:date},{0:'trlink'},'AdminContestInformation', {'ContestId':response.ContestId}, 'date');
+		AddRow( document.getElementById('AdminContestsTable'),{
+			redirect:{'ContestId':response.ContestId},
+			values:{'name':name, 'date':GetItalianDate(date), 'RawDate':date}
+		}, 'RawDate');
 	}
 }
 

@@ -19,12 +19,12 @@ global $v_contests;
 	$rows=[];
 	foreach( $v_contests as $contest ) {
 		$row=['redirect'=>['ContestId'=>$contest['id']], 'values'=>[
-			'name'=> $contest['name'], 'blocked'=>'', 'date'=>GetItalianDate($contest['date'])]
+			'name'=> $contest['name'], 'blocked'=>'', 'date'=>GetItalianDate($contest['date']), 'RawDate'=>$contest['date']]
 		];
 		if( $contest['blocked']==1 ) $row['values']['blocked'] = 'Correzioni terminate';
 		$rows[]=$row;
 	}
-	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'AdminContestInformation'];
+	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'AdminContestInformation', 'id'=> 'AdminContestsTable'];
 	InsertTable( $Table );
 ?>
 
