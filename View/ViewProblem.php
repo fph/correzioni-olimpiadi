@@ -2,7 +2,6 @@
 global $v_contest, $v_problem, $v_corrections;
 ?>
 
-
 <h2 class='PageTitle'>
 	<span class='contest_title'> <?=$v_contest['name']?>
 	</span>
@@ -22,70 +21,36 @@ global $v_contest, $v_problem, $v_corrections;
 </h3>
 
 <?php
-if (empty($v_corrections)) {
-	?>
-	<div class='EmptyTable'> Ancora nessuna correzione. </div>
-	<?php
-}
-else {
-?>
+$columns=[];
+$columns[]=['id'=>'surname','name'=>'Cognome','class'=>['surname_column'],'order'=>1];
+$columns[]=['id'=>'name','name'=>'Nome','class'=>['name_column'],'order'=>0];
+$columns[]=['id'=>'mark','name'=>'Voto','class'=>['mark_column'],'order'=>1];
+$columns[]=['id'=>'comment','name'=>'Commento','class'=>['comment_column'],'order'=>0];
+$columns[]=['id'=>'user','name'=>'Correttore','class'=>['username_column'],'order'=>0];
 
-<table class="InformationTable">
-	<thead><tr>
-		<th class='surname_column'>Cognome</th>
-		<th class='name_column'>Nome</th>
-		<th class='mark_column'>Voto</th>
-		<th class='comment_column'>Commento</th>
-		<th class='username_column'>Correttore</th>
-		<?php
-			if (!$v_contest['blocked']) {
-			?>
-			<th class='modify_column'></th>
-			<th class='cancel_column'></th>
-			<?php
-		}?>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_corrections as $cor) {
-			?>
-			<tr data-contestant_id='<?=$cor['contestant']['id']?>'>
-			<td class='surname_column'><?=$cor['contestant']['surname']?></td>
-			<td class='name_column'><?=$cor['contestant']['name']?></td>
-			<?php
-			if ($cor['done']) {
-				?>
-				<td class='mark_column'><?=$cor['mark']?></td>
-				<td class='comment_column'><?=$cor['comment']?></td>
-				<td class='username_column'><?=$cor['username']?></td>
-				<?php 
-			}
-			else {
-				?>
-				<td class='mark_column'>-</td><td class='comment_column'>-</td><td class='username_column'>-</td>
-				<?php
-			} ?>
-				
-			<?php
-			if (!$v_contest['blocked']) {
-				?>
-				<td class='modify_column'> <div class='ButtonContainer'>
-				<img class='modify_button_image ButtonImage' src='../View/Images/modify_button_image.png' alt='Modifica' onclick=OnModification(this)>
-				</div> </td>
-				<td class='cancel_column'> <div class='ButtonContainer'> </div> </td>
-				<?php
-			}?>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
-
-<?php
+$rows=[];
+foreach($v_corrections as $correction) {
+	$row=['values'=>[
+		'surname'=>$correction['contestant']['surname'],
+		'name'=>$correction['contestant']['name'],
+		'mark'=>$correction['mark'],
+		'comment'=>$correction['comment'],
+		'user'=>$correction['username']
+		], 'data'=>['contestant_id'=>$correction['contestant']['id'] ] ];
+	$rows[]=$row;
 }
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>['presence'=>0], 'buttons'=>['presence'=>0] ];
+if( $v_contest['blocked']==0 ) {
+	$table['buttons']['presence']=1;
+	$images=[];
+	$images[]=['name'=>'modify', 'onclick'=>'OnModification', 'hidden'=>0];
+	$images[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
+	$images[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
+	$table['buttons']['images']=$images;
+}
+
+InsertTable($table);
 ?>
 
 <script>

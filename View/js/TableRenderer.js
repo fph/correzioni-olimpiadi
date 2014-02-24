@@ -1,33 +1,43 @@
+function CreateButtonsTd( buttons ) {
+	var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
+	ButtonsTd=document.createElement('td');
+	ButtonsTd.id='ButtonsTd';
+	for(var i=0; i<buttons.images.length; i++) {
+		var button=buttons.images[i];
+		var name=button.name;
+		image=document.createElement('img');
+		image.setAttribute('src','../View/Images/'+name+'_button_image.png');
+		image.setAttribute('alt',ItalianTranslation[name]);
+		image.setAttribute('title',ItalianTranslation[name]);
+		SetDataAttribute(image,'name',name);
+		image.classList.add('ButtonImage');
+		image.classList.add(name+'_button_image');
+		if( button.hidden == 1 ) image.classList.add('hidden');
+		image.addEventListener('click',function(e) {
+			//~ alert('ciao');
+			var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
+			eval( GetDataAttribute(ParentTable, GetDataAttribute(this,'name')+'_function')+'(this.parentNode.parentNode);' );
+		} );
+		ButtonsTd.appendChild(image);
+	}
+	return ButtonsTd;
+}
+
 function RenderTable( obj ) {
 	var table=document.createElement('table');
 	table.classList.add('InformationTable');
 	var redirecting=obj.redirect.presence;
 	var url=obj.redirect.url;
 	var buttoning=obj.buttons.presence;
-	var ButtonsTd;
-	if( buttoning == 1 ){
-		var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
-		ButtonsTd=document.createElement('td');
-		ButtonsTd.id='ButtonsTd';
+	
+	if( buttoning==1 ) {
 		for(var i=0; i<obj.buttons.images.length; i++) {
 			var button=obj.buttons.images[i];
 			var name=button.name;
 			SetDataAttribute(table,name+'_function',button.onclick);
-			image=document.createElement('img');
-			image.setAttribute('src','../View/Images/'+name+'_button_image.jpg');
-			image.setAttribute('alt',ItalianTranslation(name));
-			image.setAttribute('title',ItalianTranslation(name));
-			SetDataAttribute(image,'name',name);
-			image.classList.add('ButtonImage');
-			image.classList.add(name+'_button_image');
-			if( button.hidden == 1 ) image.classList.add('hidden');
-			image.addEventListener('click',function(e) {
-				var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
-				eval( getDataAttribute(ParentTable, getDataAttribute(this,'name')+'_function')+'(this);' );
-			} );
-			ButtonsTd.appendChild(image);
 		}
 	}
+	
 	if( obj.class != null ) {
 		for( var i=0; i<obj.class.length; i++ ) table.classList.add( obj.class[i] );
 	}
@@ -87,7 +97,7 @@ function RenderTable( obj ) {
 			tr.appendChild(td);
 		}
 		if( buttoning==1 ) {
-			tr.appendChild(ButtonsTd.cloneNode(true));
+			tr.appendChild( CreateButtonsTd(obj.buttons) );
 		}
 		tbody.appendChild(tr);
 	}
