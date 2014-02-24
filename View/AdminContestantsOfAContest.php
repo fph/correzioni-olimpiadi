@@ -20,41 +20,25 @@ global $v_contest, $v_contestants;
 </h3>
 
 <?php
-if (empty($v_contestants)) {
-	?>
-	<div class='EmptyTable'> Ancora nessun partecipante inserito. </div>
-	<table class='InformationTable hidden'>
-	<?php
+$columns=[];
+$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+
+$rows=[];
+foreach($v_contestants as $contestant) {
+	$row=[
+	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name']], 
+	'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ] ];
+	$rows[]=$row;
 }
-else {
+
+$buttons=[];
+$buttons[]=['name'=>'trash', 'onclick'=>'RemoveParticipationRequest'];
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons];
+
+InsertTable( $table );
 ?>
-	<div class='EmptyTable hidden'> Ancora nessun partecipante inserito. </div>
-	<table class='InformationTable'>
-	<?php
-}?>
-	<thead><tr>
-		<th class='SurnameColumn'>Cognome</th>
-		<th class='NameColumn'>Nome</th>
-		<th class='trash_column'></th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_contestants as $con) {
-			?>
-			<tr data-orderby='<?=$con['surname']?>' data-contestant_id='<?=$con['id']?>'>
-			<td class='SurnameColumn'><?=$con['surname']?></td>
-			<td class='NameColumn'><?=$con['name']?></td>
-			<td class='trash_column'> <div class='ButtonContainer'>
-				<img class='ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick="RemoveParticipationRequest(this)">
-			</div> </td>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
 
 <h3 class='PageSubtitle'>
 	Aggiungi un partecipante

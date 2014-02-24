@@ -69,7 +69,7 @@ else {
 	</tr>
 	<tr>
 		<td> <input type='text' name='name' id='ProblemInput'> </td>
-		<td> <input type='button' id='button_input' value='Aggiungi' onclick=AddProblemRequest()> </td>
+		<td> <input type='button' value='Aggiungi' onclick=AddProblemRequest()> </td>
 	</tr>
 	</table>
 </div>
