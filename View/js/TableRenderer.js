@@ -121,18 +121,21 @@ function AddRow( table , row , OrderBy ) {
 	var NewRow=CreateRow( obj , row );
 	NewRow.classList.add('NewRow');
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
+	var tbody=table.childNodes[1];
 	if( OrderBy == null ) {
 		obj.rows.push(row);
-		table.childNodes[1].appendChild(NewRow);
+		tbody.appendChild(NewRow);
 	}
 	else {
 		var i=0;
 		for(;i<obj.rows.length;i++) {
-			if(obj.rows.values[OrderBy] > row.values[OrderBy]) break;
+			//~ alert(obj.rows.values);
+			//~ alert(row.values);
+			if(obj.rows[i].values[OrderBy] > row.values[OrderBy]) break;
 		}
 		obj.rows.splice(i,0,row);
-		if( i==obj.rows.length ) table.childNodes[1].appendChild(NewRow);
-		else table.childNodes[1].childNodes[i].insertBefore(NewRow);
+		if( i==obj.rows.length ) tbody.appendChild(NewRow);
+		else tbody.insertBefore(NewRow, tbody.childNodes[i]);
 	}
 	
 	SetDataAttribute( table, 'table_object', JSON.stringify(obj) );

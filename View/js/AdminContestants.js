@@ -1,10 +1,13 @@
 function AddContestant(response){
-	if (response.type=='good') {
+	if (response.type=='good') { //TODO
 		var surname=document.getElementById('SurnameInput').value;
 		var name=document.getElementById('NameInput').value;
 		var school=document.getElementById('SchoolInput').value;
 		
-		AddRow({surname:surname, name:name, school:school},{0:'trlink'},'AdminContestantInformation', {'ContestantId':response.ContestantId}, 'surname');
+		AddRow( document.getElementById('AdminContestantsTable'),
+		{	redirect:{'ContestantId':response.ContestantId},
+			values:{'surname':surname,'name':name,'school':school} },
+			'surname');
 	}
 }
 
