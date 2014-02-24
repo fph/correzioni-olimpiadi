@@ -1,8 +1,11 @@
 function AddUser(response){
 	if (response.type=='good') {
 		var username=document.getElementById('UsernameInput').value;
-		
-		AddRow({username:username},{0:'trlink'},'AdminUserInformation', {'UserId':response.UserId}, 'username');
+
+		AddRow( document.getElementById('AdminUsersTable'),
+		{	redirect:{'UserId':response.UserId},
+			values:{'username':username} },
+			'username');
 	}
 }
 
