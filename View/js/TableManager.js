@@ -139,6 +139,18 @@ function AddRow( table , row , OrderBy ) {
 	SetDataAttribute( table, 'table_object', JSON.stringify(obj) );
 }
 
+function RemoveRow( table , row ) {
+	var obj=JSON.parse(GetDataAttribute(table,'table_object'));
+	var tbody=table.childNodes[1];
+	var i=0;
+	for(;i<tbody.childNodes.length;i++) {
+		if( tbody.childNodes[i]==row ) break;
+	}
+	tbody.removeChild(row);
+	obj.rows.splice(i,1);
+	SetDataAttribute( table, 'table_object', JSON.stringify(obj) );
+}
+
 var DivToTable=document.getElementsByClassName('DivToTable');
 for(var i=0;i<DivToTable.length;i++) {
 	var table=JSON.parse(DivToTable[i].innerHTML);

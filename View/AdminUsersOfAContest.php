@@ -20,44 +20,24 @@ global $v_contest, $v_users;
 </h3>
 
 <?php
-if (empty($v_users)) {
-	?>
-	<div class='EmptyTable'> Ancora nessun correttore inserito. </div>
-	<table class='InformationTable hidden'>
-	<?php
+$columns=[];
+$columns[]=['id'=>'username', 'name'=>'Correttore', 'class'=>['UsernameColumn'], 'order'=>1];
+
+$rows=[];
+foreach($v_users as $user) {
+	$row=[
+	'values'=>['username'=>$user['username'] ],
+	'data'=>['user_id'=>$user['id']] ];
+	$rows[]=$row;
 }
-else {
+
+$buttons=[];
+$buttons[]=['name'=>'trash', 'onclick'=>'RemovePermissionRequest'];
+
+$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminUsersOfAContestTable'];
+
+InsertTable( $table );
 ?>
-	<div class='EmptyTable hidden'> Ancora nessun correttore inserito. </div>
-	<table class='InformationTable'>
-	<?php
-}?>
-	<thead><tr>
-		<th class='UsernameColumn'>Correttori</th>
-		<th class='trash_column'></th>
-	</tr></thead>
-	
-	<tbody>
-	<?php
-		foreach($v_users as $use) {
-			?>
-			<tr data-orderby='<?=$use['username']?>' data-user_id='<?=$use['id']?>'>
-			<td class='UsernameColumn'><?=$use['username']?></td>
-			<td class='trash_column'> <div class='ButtonContainer'>
-				<?php
-				if (!$use['admin']) {
-					?>
-					<img class='ButtonImage' src='../View/Images/TrashButton.png' alt='Elimina' onclick="RemovePermissionRequest(this)">
-					<?php
-				}?>
-			</div> </td>
-			</tr>
-			<?php
-		}
-	?>
-	</tbody>
-	
-</table>
 
 <h3 class='PageSubtitle'>
 	Aggiungi un correttore
