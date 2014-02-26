@@ -47,6 +47,7 @@ function CreateRow( obj , row) {
 			for( var k=0; k<column.class.length; k++ ) td.classList.add( column.class[k] );
 		}
 		if( row.values[column.id]==null ) td.innerHTML='-';
+		else if( column.type != null && column.type=='date' ) td.innerHTML=GetItalianDate( row.values[column.id] );
 		else td.innerHTML=row.values[column.id];
 		tr.appendChild(td);
 	}
@@ -56,7 +57,60 @@ function CreateRow( obj , row) {
 	return tr;
 }
 
+function SortRows( obj , ColumnId, ascending) {
+	var type='string'; //Default type
+	for(var i=0;i<obj.columns.length;i++) {
+		if( obj.columns[i].id == ColumnId ){
+			if( obj.columns[i].type != null ) type=obj.columns[i].type;
+			break;
+		}
+	}
+	
+	if( type == 'string' ){
+		obj.rows.sort( function(a,b) {
+			if( a.values[ColumnId] == null && b.values[ColumnId] == null ) return 0;
+			else if(a.values[ColumnId]==null) return -1;
+			else if(b.values[ColumnId]==null) return 1;
+			var x=a.values[ColumnId].toLowerCase();
+			var y=b.values[ColumnId].toLowerCase();
+			if( x==y ) return 0;
+			return ((x<y)?-1:1);
+		} );
+	}
+	else if( type == 'number' ){
+		obj.rows.sort( function(a,b) {
+			if( a.values[ColumnId] == null && b.values[ColumnId] == null ) return 0;
+			else if(a.values[ColumnId]==null) return -1;
+			else if(b.values[ColumnId]==null) return 1;
+			var x=parseInt(a.values[ColumnId]);
+			var y=parseInt(b.values[ColumnId]);
+			if( x==y ) return 0;
+			return ((x<y)?-1:1);
+		} );
+	}
+	else if( type == 'date' ){
+		obj.rows.sort( function(a,b) {
+			if( a.values[ColumnId] == null && b.values[ColumnId] == null ) return 0;
+			else if(a.values[ColumnId]==null) return -1;
+			else if(b.values[ColumnId]==null) return 1;
+			var x=a.values[ColumnId];
+			var y=b.values[ColumnId];
+			if( x==y ) return 0;
+			return ((x<y)?-1:1);
+		} );
+	}
+	
+	if( ascending ) obj.rows.reverse();
+}
+
 function RenderTable( obj ) {
+	//Initial rows ordering
+	if( obj.InitialOrder != null ){
+		var ascending = 0;
+		if( obj.InitialOrder.ascending != null ) ascending=obj.InitialOrder.ascending;
+		SortRows( obj , obj.InitialOrder.ColumnId, ascending );
+		obj.InitialOrder=null;
+	}
 	var table=document.createElement('table');
 	table.classList.add('InformationTable');
 	SetDataAttribute(table,'table_object',JSON.stringify(obj));
@@ -149,6 +203,12 @@ function RemoveRow( table , row ) {
 	tbody.removeChild(row);
 	obj.rows.splice(i,1);
 	SetDataAttribute( table, 'table_object', JSON.stringify(obj) );
+}
+
+function SortTableRows( table , ColumnId , ascending ) {
+	var obj=JSON.parse(GetDataAttribute(table,'table_object'));
+	obj.InitialOrder={ColumnId:ColumnId, ascending: ascending};
+	table.parentNode.replaceChild( RenderTable(obj), table );
 }
 
 var DivToTable=document.getElementsByClassName('DivToTable');

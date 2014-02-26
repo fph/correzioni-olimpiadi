@@ -12,11 +12,11 @@
 	
 	$UserId=getUserIdBySession();
 	$v_contests=[];
-	foreach($all_contests as $con){
-		if (VerifyPermission($db, $UserId, $con['id'])) $v_contests[]=$con;
+	foreach($all_contests as $contest){
+		if (VerifyPermission($db, $UserId, $contest['id'])) $v_contests[]=$contest;
 	}
 
-	usort($v_contests, build_sorter('date'));
+	//~ usort($v_contests, build_sorter('date'));
 	
 	$db->close();
 	

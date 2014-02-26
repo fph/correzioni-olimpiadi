@@ -14,17 +14,17 @@ global $v_contestant, $v_contests;
 <?php
 $columns=[];
 $columns[]=['id'=>'contest', 'name'=>'Gara', 'class'=>['ContestColumn']];
-$columns[]=['id'=>'date', 'name'=>'Data', 'class'=>['DateColumn']];
+$columns[]=['id'=>'date', 'name'=>'Data', 'class'=>['DateColumn'], 'order'=>1, 'type'=>'date'];
 
 $rows=[];
 foreach($v_contests as $contest) {
 	$row=[
-	'values'=>['contest'=>$contest['name'], 'date'=>GetItalianDate($contest['date'])], 
+	'values'=>['contest'=>$contest['name'], 'date'=>$contest['date'] ], 
 	'redirect'=>['ContestId'=>$contest['id'], 'ContestantId'=>$v_contestant['id'] ] ];
 	$rows[]=$row;
 } 
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'InitialOrder'=>['ColumnId'=>'date'] ];
 
 InsertTable( $table );
 ?>

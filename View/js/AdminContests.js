@@ -6,8 +6,8 @@ function AddContest(response){ //TODO: Non va bene prendere i dati dal form, che
 		
 		AddRow( document.getElementById('AdminContestsTable'),{
 			redirect:{'ContestId':response.ContestId},
-			values:{'name':name, 'date':GetItalianDate(date), 'RawDate':date}
-		}, 'RawDate');
+			values:{'name':name, 'blocked':'', 'date':date}
+		}, 'date');
 	}
 }
 

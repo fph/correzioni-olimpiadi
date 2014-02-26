@@ -11,13 +11,13 @@ global $v_contest, $v_problems, $v_contestants;
 
 <?php
 	$columns=[];
-	$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>'SurnameAndNameColumn', 'order'=>1];
+	$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>'SurnameAndNameColumn', 'order'=>1, 'type'=>'string'];
 	
 	usort($v_problems, build_sorter('name'));
 	foreach($v_problems as $problem) {
-		$columns[]=['id'=>strval( $problem['id']), 'name'=>$problem['name'], 'class'=>'ProblemColumn', 'order'=>1];
+		$columns[]=['id'=>strval( $problem['id']), 'name'=>$problem['name'], 'class'=>'ProblemColumn', 'order'=>1, 'type'=>'number'];
 	}
-	$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>'ScoreColumn', 'order'=>1]; 
+	$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>'ScoreColumn', 'order'=>1, 'type'=>'number']; 
 	
 	$rows=[];
 	foreach( $v_contestants as $contestant ) {
@@ -33,7 +33,7 @@ global $v_contest, $v_problems, $v_contestants;
 		$rows[]=['values'=>$values];
 	}
 	
-	$table=['columns'=>$columns, 'rows'=>$rows, 'id'=> 'ContestRankingTable', 'InitialOrder'=>'score'];
+	$table=['columns'=>$columns, 'rows'=>$rows, 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
 	InsertTable($table);
 	
 ?>

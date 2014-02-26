@@ -15,19 +15,19 @@
 	
 	$v_user=OneResultQuery($db, QuerySelect('Users', ['id'=>$UserId]));
 	
-	$v_admin=false;
 	$v_contests=[];
 	
-	if(!is_null(OneResultQuery($db, QuerySelect('Administrators', ['UserId'=>$UserId]))) ) {
-		$v_admin=true;
+	//The query is different if admin or not
+	$v_admin=IsAdmin($db, $UserId);
+	if( $v_admin == 1) {
 		$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
-		usort($v_contests, build_sorter('date'));
+		//~ usort($v_contests, build_sorter('date'));
 	}
 	else {
 		$contests=ManyResultQuery($db, QuerySelect('Permissions', ['UserId'=>$UserId]));
 		foreach($contests as $con) {
 			$v_contests[]=OneResultQuery($db, QuerySelect('Contests', ['id'=>$con['ContestId']]));
-			usort($v_contests, build_sorter('date'));
+			//~ usort($v_contests, build_sorter('date'));
 		}
 	}
 	

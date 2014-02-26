@@ -10,16 +10,16 @@ global $v_contests;
 	$columns=[];
 	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['ContestColumn']];
 	$columns[]= ['id'=>'blocked', 'name'=>'', 'class'=>['CorrectionsCompleted']];
-	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn']];
+	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn'], 'order'=>1, 'type'=>'date'];
 	
 	$rows=[];
 	foreach( $v_contests as $contest ) {
 		$row=['redirect'=>['ContestId'=>$contest['id']], 'values'=>[
-			'name'=> $contest['name'], 'blocked'=>'', 'date'=>GetItalianDate($contest['date'])]
+			'name'=> $contest['name'], 'blocked'=>'', 'date'=>$contest['date'] ]
 		];
 		if( $contest['blocked']==1 ) $row['values']['blocked'] = 'Correzioni terminate';
 		$rows[]=$row;
 	}
-	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation'];
+	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date'] ];
 	InsertTable( $Table );
 ?>

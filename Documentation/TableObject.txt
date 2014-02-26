@@ -1,27 +1,31 @@
 table
-	columns = [column] !
-	rows = [row] !
-	redirect = string
-	buttons = [button]
-	data
+	columns => [column] !
+	rows => [row] !
+	redirect => string
+	InitialOrder => object
+					ColumnId => string !
+					ascending => boolean
+	buttons => [button]
+	data => object
 		lower_case_string => string
-	class = [string]
-	id = string
+	class => [string]
+	id => string
 
 column
 	id => string !
 	name => string !
 	redirect => string
 	order => boolean
+	type => 'string', 'number', 'date'
 	class => [string]
 
 row
-	values !
+	values => object !
 		string => string
-	redirect = object
-	data
+	redirect => object
+	data => object
 		lower_case_string => string
-	class = [string]
+	class => [string]
 
 button
 	name => string !

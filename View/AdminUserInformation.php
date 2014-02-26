@@ -26,17 +26,17 @@ if ($v_admin) {
 <?php
 $columns=[];
 $columns[]=['id'=>'contest', 'name'=>'Gara', 'class'=>['ContestColumn']];
-$columns[]=['id'=>'date', 'name'=>'Data', 'class'=>['DateColumn']];
+$columns[]=['id'=>'date', 'name'=>'Data', 'class'=>['DateColumn'], 'order'=>1, 'type'=>'date'];
 
 $rows=[];
 foreach($v_contests as $contest) {
 	$row=[
-	'values'=>['contest'=>$contest['name'], 'date'=>GetItalianDate($contest['date'])], 
+	'values'=>['contest'=>$contest['name'], 'date'=>$contest['date']], 
 	'redirect'=>['ContestId'=>$contest['id'] ] ];
 	$rows[]=$row;
 } 
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewContestInformation'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date']];
 
 InsertTable( $table );
 ?>
