@@ -142,3 +142,11 @@ table.InformationTable .NewRow:hover {
 .NoTrashButton .TrashButtonImage {
 	display: none;
 }
+
+/*
+  Th with ordering
+*/
+
+th.ColumnWithOrder:hover {
+	cursor:pointer
+}

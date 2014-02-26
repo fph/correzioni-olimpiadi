@@ -1,3 +1,11 @@
+function GetTableObject( table ) {
+	return JSON.parse( GetDataAttribute( table, 'table_object' ) );
+}
+
+function SetTableObject( table , obj ) {
+	SetDataAttribute( table, 'table_object', JSON.stringify( obj ) );
+}
+
 function CreateButtonsTd( buttons ) {
 	var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
 	ButtonsTd=document.createElement('td');
@@ -113,7 +121,7 @@ function RenderTable( obj ) {
 	}
 	var table=document.createElement('table');
 	table.classList.add('InformationTable');
-	SetDataAttribute(table,'table_object',JSON.stringify(obj));
+	SetTableObject(table,obj);
 	var redirecting=0;
 	var url='';
 	if( obj.redirect != null ) {
@@ -142,13 +150,30 @@ function RenderTable( obj ) {
 	var TableHeader=document.createElement('thead');
 	var TableHeaderTr=document.createElement('tr');
 	for( var i=0;i<obj.columns.length;i++) {
-		var th=document.createElement('th');
 		var column=obj.columns[i];
+		var th=document.createElement('th');
+		SetDataAttribute(th,'column_id',column['id']);
 		if( column.class != null ) {
 			for( var j=0; j<column.class.length; j++ ) th.classList.add( column.class[j] );
 		}
 		if( column.order != null && column.order == 1 ) {
-			//Qui dovrei implementare il fatto che si possa ordinare in base a questa riga...
+			if( column.last_order==null ) obj.columns[i].last_order = 0;
+			th.classList.add('ColumnWithOrder');
+			th.addEventListener('click', function() {
+				var tableX=this.parentNode.parentNode.parentNode;
+				var ColumnId=GetDataAttribute(this,'column_id');
+				var ascending;
+				var objX=GetTableObject(tableX);
+				for(var i=0 ; i<objX.columns.length ; i++){
+					if( objX.columns[i].id==ColumnId ) {
+						ascending=(objX.columns[i].last_order==0)?1:0;
+						objX.columns[i].last_order=ascending;
+						break;
+					}
+				}
+				SetTableObject(tableX,objX);
+				SortTableRows( tableX, ColumnId, ascending );
+			});
 		}
 		th.innerHTML=column.name;
 		TableHeaderTr.appendChild(th);
@@ -171,7 +196,7 @@ function RenderTable( obj ) {
 }
 
 function AddRow( table , row , OrderBy ) {
-	var obj=JSON.parse(GetDataAttribute(table,'table_object'));
+	var obj=GetTableObject(table);
 	var NewRow=CreateRow( obj , row );
 	NewRow.classList.add('NewRow');
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
@@ -190,11 +215,11 @@ function AddRow( table , row , OrderBy ) {
 		else tbody.insertBefore(NewRow, tbody.childNodes[i]);
 	}
 	
-	SetDataAttribute( table, 'table_object', JSON.stringify(obj) );
+	SetTableObject(table, obj);
 }
 
 function RemoveRow( table , row ) {
-	var obj=JSON.parse(GetDataAttribute(table,'table_object'));
+	var obj=GetTableObject(table);
 	var tbody=table.childNodes[1];
 	var i=0;
 	for(;i<tbody.childNodes.length;i++) {
@@ -202,11 +227,11 @@ function RemoveRow( table , row ) {
 	}
 	tbody.removeChild(row);
 	obj.rows.splice(i,1);
-	SetDataAttribute( table, 'table_object', JSON.stringify(obj) );
+	SetTableObject(table, obj);
 }
 
 function SortTableRows( table , ColumnId , ascending ) {
-	var obj=JSON.parse(GetDataAttribute(table,'table_object'));
+	var obj=GetTableObject(table);
 	obj.InitialOrder={ColumnId:ColumnId, ascending: ascending};
 	table.parentNode.replaceChild( RenderTable(obj), table );
 }
