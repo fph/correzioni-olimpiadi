@@ -13,7 +13,7 @@ global $v_contestant, $v_contests;
 
 <?php
 $columns=[];
-$columns[]=['id'=>'contest', 'name'=>'Gara', 'class'=>['ContestColumn']];
+$columns[]=['id'=>'contest', 'name'=>'Gara', 'class'=>['ContestColumn'], 'order'=>1, 'type'=>'string'];
 $columns[]=['id'=>'date', 'name'=>'Data', 'class'=>['DateColumn'], 'order'=>1, 'type'=>'date'];
 
 $rows=[];
