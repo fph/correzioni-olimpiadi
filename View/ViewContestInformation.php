@@ -24,7 +24,7 @@ global $v_contest;
 	<td>Problemi</td>
 	</tr>
 	
-	<tr class="trlink" onclick="Redirect('ViewStatisticsOfAContest', {ContestId:<?=$v_contest['id']?>})">
-	<td>Statistiche</td>
+	<tr class="trlink" onclick="Redirect('ViewRankingOfAContest', {ContestId:<?=$v_contest['id']?>})">
+	<td>Classifica</td>
 	</tr>
 </table>
