@@ -124,7 +124,7 @@ function ChangePassword( $db , $UserId, $password ){
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
-	echo json_encode( ['type'=>'good', 'text'=>'Non hai i permessi per gestire i correttori'] );
+	echo json_encode( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire i correttori'] );
 	die();
 }
 
