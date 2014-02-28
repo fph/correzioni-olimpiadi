@@ -13,4 +13,7 @@
 	<tr class="trlink" onclick=Redirect('AdminContests')>
 	<td>Gare</td>
 	</tr>
+	<tr class='trlink' onclick="Redirect('AdminStatistics')">
+	<td>Statistiche</td>
+	</tr>
 </table>
