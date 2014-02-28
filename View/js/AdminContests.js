@@ -1,6 +1,5 @@
 function AddContest(response){ //TODO: Non va bene prendere i dati dal form, che intanto potrebbe essere cambiato
 	if (response.type=='good') {
-		var tbodyEl=document.getElementsByClassName('InformationTableTbody')[0];
 		var name=document.getElementById('NameInput').value;
 		var date=document.getElementById('date_DateInput').value;
 		
