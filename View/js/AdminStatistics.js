@@ -4,7 +4,7 @@ function AddContestToStatistics(){
 	//~ Check if the contest exists
 	var contest=document.getElementById('ContestInput').value;
 	var weight=document.getElementById('WeightInput').value;
-	var ContestId=1;
+	var ContestId=1; //TODEBUG sarà da uniformare al nuovo input
 	
 	AddRow( document.getElementById('AdminContestWeightTable'),{
 		values:{'contest':contest, 'weight':weight},
@@ -78,33 +78,32 @@ function RemoveContest(row){
 
 function ViewStatistics(response){
 	if (response.type=='good') {
-		
+		var MultipleRankingTable=RenderTable(response);
+		var ContentContainer=document.getElementById('ContentContainer');
+		ContentContainer.appendChild(MultipleRankingTable);
 	} 
 }
 
 function ViewStatisticsRequest(){
 	var tables=document.getElementsByClassName('InformationTable');
 	for (var table in tables) {
-		if (table.id=='ViewStatisticsTable') table.parentNode.removeChild(table);
+		if (table.id=='MultipleRankingTable') table.parentNode.removeChild(table);
 	}
 	var ContestWeightTable=document.getElementById('AdminContestWeightTable');
 	var tbody=ContestWeightTable.getElementsByTagName('tbody')[0];
 	var childs=tbody.getElementsByTagName('tr');
-	//~ var childs=tbody.childNodes;
-	for (var child in childs) console.log(child);
 
-	//~ var data=[];
-	//~ for (var child in childs) {
-		//~ alert(child);
-		//~ var ContestId=GetDataAttribute(child, 'contest_id');
-		//~ var WeightTd=child.getElementsByClassName('WeightColumn')[0];
-		//~ var weight=parseFloat(WeightTd.innerHTML);
-		//~ var nn={'ContestId':ContestId,'weight':weight}
-		//~ data.push(nn);
-	//~ }
-//~ 
-	//~ for (var info in data) {
-		//~ alert(info);
-	//~ }
-	//~ MakeAjaxRequest('../Modify/ManageStatistics.php', data, ViewStatistics);
+	var data=[];
+	for (var i=0; i<childs.length; i++) {
+		child=childs[i];
+		var ContestId=GetDataAttribute(child, 'contest_id');
+		var WeightTd=child.getElementsByClassName('WeightColumn')[0];
+		var weight=parseFloat(WeightTd.innerHTML);
+		var nn={'ContestId':ContestId,'weight':weight};
+		data.push(nn);
+	}
+
+	for (var i=0; i<data.length; i++) console.log(data[i]);
+
+	MakeAjaxRequest('../Modify/ManageStatistics.php', data, ViewStatistics);
 }

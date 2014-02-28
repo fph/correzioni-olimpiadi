@@ -50,14 +50,14 @@
 		
 		//Here I build the table using only $contests and $AllContestants
 		$columns=[];
-		$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>'SurnameAndNameColumn', 'order'=>1, 'type'=>'string'];
+		$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>['SurnameAndNameColumn'], 'order'=>1, 'type'=>'string'];
 		foreach($contests as $contest) {
 			foreach($contest['problems'] as $problem) {
-				$columns[]=['id'=>'Problem'.strval($problem['id']), 'name'=>$problem['name'], 'class'=>'ProblemColumn', 'order'=>1, 'type'=>'number'];
+				$columns[]=['id'=>'Problem'.strval($problem['id']), 'name'=>$problem['name'], 'class'=>['ProblemColumn'], 'order'=>1, 'type'=>'number'];
 			}
-			$columns[]=['id'=>'Contest'.strval($contest['id']), 'name'=>$contest['name'], 'class'=>'ContestColumn', 'order'=>1, 'type'=>'number'];
+			$columns[]=['id'=>'Contest'.strval($contest['id']), 'name'=>$contest['name'], 'class'=>['ContestColumn'], 'order'=>1, 'type'=>'number'];
 		}
-		$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>'ScoreColumn', 'order'=>1, 'type'=>'number'];
+		$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>['ScoreColumn'], 'order'=>1, 'type'=>'number'];
 		
 		$rows=[];
 		foreach( $AllContestants as $contestant ) {
