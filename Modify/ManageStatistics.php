@@ -48,7 +48,7 @@
 			$contests[]=$contest;
 		}
 		
-		//Here I build the table using only $contests and AllContestants
+		//Here I build the table using only $contests and $AllContestants
 		$columns=[];
 		$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>'SurnameAndNameColumn', 'order'=>1, 'type'=>'string'];
 		foreach($contests as $contest) {
