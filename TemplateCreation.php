@@ -14,7 +14,8 @@ $jsInclude=['ViewParticipation'=>['CorrectionModification'],
 			'AdminUserInformation'=>['AdminUserInformation'], 
 			'AdminContestInformation'=>['AdminContestInformation'],
 			'AdminContestantsOfAContest'=>['AdminContestantsOfAContest'],
-			'AdminUsersOfAContest'=>['AdminUsersOfAContest'] ];
+			'AdminUsersOfAContest'=>['AdminUsersOfAContest'],
+			'AdminStatistics'=>['AdminStatistics'] ];
 $cssInclude=[];
 
 function InsertTable( $table ) {
