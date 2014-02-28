@@ -59,7 +59,7 @@ table.InformationTable .ProblemColumn {
 }
 
 table.InformationTable .MarkColumn {
-	width: 5%;
+	width: 7%;
 }
 
 table.InformationTable .CommentColumn {
@@ -125,4 +125,14 @@ table.InformationTable .NewRow:hover {
 
 th.ColumnWithOrder:hover {
 	cursor:pointer
+}
+
+/*
+	Sort column image
+*/
+
+table.InformationTable .SortColumnImage {
+	width: 10px;
+	height: 10px;
+	margin-left: 3px;
 }

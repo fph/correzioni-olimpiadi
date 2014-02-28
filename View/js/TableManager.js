@@ -156,6 +156,8 @@ function RenderTable( obj ) {
 		if( column.class != null ) {
 			for( var j=0; j<column.class.length; j++ ) th.classList.add( column.class[j] );
 		}
+		
+		th.innerHTML=column.name;
 		if( column.order != null && column.order == 1 ) {
 			if( column.last_order==null ) obj.columns[i].last_order = 0;
 			th.classList.add('ColumnWithOrder');
@@ -174,8 +176,15 @@ function RenderTable( obj ) {
 				SetTableObject(tableX,objX);
 				SortTableRows( tableX, ColumnId, ascending );
 			});
+			
+			var SortImage=document.createElement('img');
+			SortImage.setAttribute('src','../View/Images/SortColumn.png');
+			SortImage.setAttribute('alt','Ordina');
+			SortImage.setAttribute('title','Ordina');
+			SortImage.classList.add('SortColumnImage');
+			
+			th.appendChild(SortImage);
 		}
-		th.innerHTML=column.name;
 		TableHeaderTr.appendChild(th);
 	}
 	if( buttoning ) {
