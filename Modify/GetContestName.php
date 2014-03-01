@@ -13,7 +13,7 @@
 			$option=$PartialResult[$i];
 			$item['value']=$option['id'];
 			$item['InputText']=$option['name'];
-			$item['OptionText']=$option['name'].' '.GetItalianDate($option['date']);
+			$item['OptionText']=$option['name'].' - '.GetItalianDate($option['date']);
 			$result[]=$item;
 		}
 		return $result;

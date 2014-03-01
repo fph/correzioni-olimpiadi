@@ -21,13 +21,17 @@
 	top: -1px;
 	max-height: 200px;
 	overflow: auto;
+	white-space: nowrap;
 }
 
 .AjaxSelectOption {
 	border: 0px;
 	width: 10em;
+	font-size: 0.8em;
 }
 
 .AjaxSelectOption:hover {
 	cursor: pointer;
+	background-color: aliceblue;
+	color:#000066;
 }
