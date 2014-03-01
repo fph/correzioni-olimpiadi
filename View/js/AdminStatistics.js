@@ -1,6 +1,12 @@
-
+function DeletePreviousStatistics() {
+	var tables=document.getElementsByClassName('InformationTable');
+	for (var i=0; i<tables.length; i++) {
+		if (tables[i].id=='MultipleRankingTable') tables[i].parentNode.removeChild(tables[i]);
+	}
+}
 
 function AddContestToStatistics(){
+	
 	//~ Check if the contest exists
 	var contest=document.getElementById('ContestInput').value;
 	var weight=document.getElementById('WeightInput').value;
@@ -85,10 +91,8 @@ function ViewStatistics(response){
 }
 
 function ViewStatisticsRequest(){
-	var tables=document.getElementsByClassName('InformationTable');
-	for (var table in tables) {
-		if (table.id=='MultipleRankingTable') table.parentNode.removeChild(table);
-	}
+	DeletePreviousStatistics();
+	
 	var ContestWeightTable=document.getElementById('AdminContestWeightTable');
 	var tbody=ContestWeightTable.getElementsByTagName('tbody')[0];
 	var childs=tbody.getElementsByTagName('tr');
@@ -102,8 +106,6 @@ function ViewStatisticsRequest(){
 		var nn={'ContestId':ContestId,'weight':weight};
 		data.push(nn);
 	}
-
-	for (var i=0; i<data.length; i++) console.log(data[i]);
 
 	MakeAjaxRequest('../Modify/ManageStatistics.php', data, ViewStatistics);
 }
