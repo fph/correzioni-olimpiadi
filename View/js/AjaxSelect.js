@@ -15,14 +15,15 @@ function ListOptions( obj ) {
 	for( var i=0; i<options.length; i++ ) {
 		var option=options[i];
 		var OptionDiv=document.createElement('div');
-		OptionDiv.innerHTML=option.text;
+		OptionDiv.innerHTML=option.OptionText;
 		SetDataAttribute(OptionDiv,'value',option.value);
+		SetDataAttribute(OptionDiv,'InputText', option.InputText);
 		OptionDiv.classList.add('AjaxSelectOption');
 		
 		OptionDiv.addEventListener('click', function(e) {
 			var container=this.parentNode.parentNode;
-			var text=this.innerHTML;
 			var value=GetDataAttribute(this,'value');
+			var text=GetDataAttribute(this,'InputText');
 			container.getElementsByClassName('AjaxSelectValue')[0].value=value;
 			container.getElementsByClassName('AjaxSelectText')[0].value=text;
 			CleanOptions( container.id );
