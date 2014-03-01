@@ -54,18 +54,17 @@ table.InformationTable td.ButtonsTd {
 */
 
 
+/*
 table.InformationTable .ProblemColumn {
 	min-width: 100px;
 }
-
-table.InformationTable .MarkColumn {
-	width: 7%;
-}
+*/
 
 table.InformationTable .CommentColumn {
 	width: 50%;
 }
 
+/*
 table.InformationTable .UsernameColumn {
 	min-width: 100px;
 }
@@ -73,9 +72,16 @@ table.InformationTable .UsernameColumn {
 table.InformationTable .NameColumn {
 	min-width: 100px;
 }
+*/
 
+/*
 table.InformationTable .SurnameColumn {
 	min-width: 100px;
+}
+
+table.InformationTable .SurnameAndNameColumn {
+	min-width: 7em;
+	max-width: 11em;
 }
 
 table.InformationTable .ContestColumn {
@@ -88,6 +94,15 @@ table.InformationTable .DateColumn {
 
 table.InformationTable .SchoolColumn {
 	min-width: 100px;
+}
+*/
+
+/*
+	Particular columns styles
+*/
+
+table.InformationTable .MarkColumn {
+	text-align: center;
 }
 
 /*
@@ -120,16 +135,12 @@ table.InformationTable .NewRow:hover {
 }
 
 /*
-  Th with ordering
+  Th with ordering (and order icon)
 */
 
 th.ColumnWithOrder:hover {
 	cursor:pointer
 }
-
-/*
-	Sort column image
-*/
 
 table.InformationTable .SortColumnImage {
 	width: 10px;
