@@ -36,7 +36,7 @@ function OpenDbConnection() {
 }
 
 function QuerySelect($tableName, $constraints=NULL, $data=NULL, $order=NULL) {
-	$query="SELECT ";
+	$query='SELECT ';
 	if( !is_null($data) ) {
 		$first=0;
 		foreach ( $data as $x ) {
@@ -130,6 +130,40 @@ function QueryDelete($tableName, $constraints) {
 			$query .= $field.'='.escape_input($value).' ';
 		}
 	}
+	return $query;
+}
+
+function QueryCompletion($tableName, $constraints, $data, $RowsNumber) {
+	$query='SELECT ';
+	if( !is_null($data) ) {
+		$first=0;
+		foreach ( $data as $x ) {
+			if( $first==0 ){
+				$query .=$x.' '; 
+				$first=1;
+			}
+			else $query .=', '.$x.' ';
+		}
+	}
+	else $query.='* ';
+	$query.=' FROM '.$tableName.' ';
+	
+	if( !is_null( $constraints ) ) {
+		$query .='WHERE ';
+		$first=0;
+		foreach ( $constraints as $field => $value ) {
+			if( $first==0 ) {
+				$query .= $field.' LIKE '.escape_input($value.'%').' ';
+				$first=1;
+			}
+			else $query .= 'AND '.$field.' LIKE '.escape_input($value.'%').' ';
+		}
+	}
+	
+	$query .= 'LIMIT 0,';
+	if( !is_null( $RowsNumber ) and is_int($RowsNumber) and $RowsNumber>0 ) $query .= strval($RowsNumber);
+	else $query .= '10';
+	
 	return $query;
 }
 
