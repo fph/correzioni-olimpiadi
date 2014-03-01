@@ -37,3 +37,14 @@
 	background-color: aliceblue;
 	color:#000066;
 }
+
+/*
+	Feedback about the option selected
+*/
+.AjaxSelectOptionGood {
+	border-color: green;
+}
+
+.AjaxSelectOptionBad {
+	border-color: red;
+}
