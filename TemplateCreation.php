@@ -50,6 +50,9 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/AjaxSelect.css'>
+<!--
+	<link rel="shortcut icon" href="../View/Images/Favicon.ico" title="Favicon">
+-->
 
 <?php foreach( $cssInclude[$Content] as $cssName ) {
 		?>
