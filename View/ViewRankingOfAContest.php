@@ -15,9 +15,9 @@ global $v_contest, $v_problems, $v_contestants;
 	
 	usort($v_problems, build_sorter('name'));
 	foreach($v_problems as $problem) {
-		$columns[]=['id'=>strval( $problem['id']), 'name'=>$problem['name'], 'class'=>['ProblemColumn'], 'order'=>1, 'type'=>'number'];
+		$columns[]=['id'=>strval( $problem['id']), 'name'=>$problem['name'], 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
 	}
-	$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>['ScoreColumn'], 'order'=>1, 'type'=>'number']; 
+	$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number']; 
 	
 	$rows=[];
 	foreach( $v_contestants as $contestant ) {
