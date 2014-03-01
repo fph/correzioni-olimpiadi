@@ -4,7 +4,7 @@
 	SuperRequire_once('General','sqlUtilities.php');
 	SuperRequire_once('General','PermissionManager.php');
 
-	function GetContestNameFromDb( $db, $str ) {
+	function GetContestName( $db, $str ) {
 		if( !is_string($str) ) return [];
 		$query=QueryCompletion('Contests',['name'=>$str]);
 		$PartialResult=ManyResultQuery($db,$query);
@@ -32,9 +32,12 @@
 		echo json_encode( [] );
 		die();
 	}
+	$type=$data['type'];
 	$str=$data['str'];
 	$id=$data['id'];
 	
-	echo json_encode( ['id'=>$id, 'list'=> GetContestNameFromDb( $db, $str)] );
+	if( $type == 'ContestName' ) echo json_encode( ['id'=>$id, 'list'=> GetContestName($db, $str)] );
+	else echo json_encode( ['id'=>$id, 'list'=> [] ] );
+	
 	$db -> close();
 ?>
