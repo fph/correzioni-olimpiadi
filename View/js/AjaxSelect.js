@@ -95,8 +95,12 @@ function RenderSelect( id , type ) {
 	return ContainerDiv;
 }
 
+function GetSelectText( id ) {
+	return document.getElementById(id).getElementsByClassName('AjaxSelectText')[0].value;
+}
+
 function GetSelectValue( id ) {
-	return document.getElementById('id').getElementsByClassName('AjaxSelectValue')[0].value;
+	return document.getElementById(id).getElementsByClassName('AjaxSelectValue')[0].value;
 }
 
 var DivToSelect=document.getElementsByClassName('DivToSelect');

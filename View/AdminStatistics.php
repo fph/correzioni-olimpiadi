@@ -15,7 +15,7 @@
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type='text' name='name' id='ContestInput'> </td>
+		<td> <div class='DivToSelect'><?=json_encode(['id'=>'ContestInput','type'=>'ContestName'])?></div> </td>
 		<td> <input type='number' step='0.01' name='weight' id='WeightInput'> </td>
 		<td> <input type='button' value='Aggiungi' id='AddContestButton' onclick=AddContestToStatistics()> </td>
 	</tr>
