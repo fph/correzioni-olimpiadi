@@ -94,3 +94,13 @@ function RenderSelect( id , type ) {
 	ContainerDiv.appendChild( OptionsDiv );
 	return ContainerDiv;
 }
+
+function GetSelectValue( id ) {
+	return document.getElementById('id').getElementsByClassName('AjaxSelectValue')[0].value;
+}
+
+var DivToSelect=document.getElementsByClassName('DivToSelect');
+for(var i=0;i<DivToSelect.length;i++) {
+	var select=JSON.parse(DivToSelect[i].innerHTML);
+	DivToSelect[i].parentNode.replaceChild( RenderSelect( select.id, select.type ), DivToSelect[i]);
+}

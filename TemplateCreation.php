@@ -63,7 +63,6 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<script type='text/javascript' src='../View/js/global.js'> </script>
 	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
-	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 <?php foreach( $jsInclude[$Content] as $jsName ) {
 		?>
 		<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
@@ -96,6 +95,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 		} ?>
 	</script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
+	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 </body>
 </html>
 	<?php

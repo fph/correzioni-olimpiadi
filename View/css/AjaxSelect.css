@@ -3,7 +3,8 @@
 }
 
 .AjaxSelectText {
-	border-width:1px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
@@ -16,6 +17,9 @@
 .AjaxSelectOptionsDiv {
 	background-color: white;
 	border-top: 0px;
+	border-radius:5px;
+	border-top-right-radius:0px;
+	border-top-left-radius:0px;
 	box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
 	position: absolute;
 	max-height: 200px;
@@ -29,7 +33,7 @@
 .AjaxSelectOption {
 	font-size: 0.8em;
 	border-bottom: 1px solid #ECF3FA;
-	padding: 1px;
+	padding: 2px 4px 2px 3px;
 }
 
 .AjaxSelectOption:hover {
