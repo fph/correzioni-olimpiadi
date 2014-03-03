@@ -18,13 +18,13 @@ function ModifyTitle() {
 	SetDataAttribute(name, "old_value", name.innerHTML);
 }
 
-function ProcessServerAnswer( Response ) {
-	if ( Response.type == 'bad' ) CancelTitleModification();
-	else if (Response.type == 'good' ) {
+function ProcessServerAnswer( response ) {
+	if ( response.type == 'bad' ) CancelTitleModification();
+	else if (response.type == 'good' ) {
 		var surname=response.data['surname'];
 		var name=response.data['name'];		
 		var path=document.getElementsByClassName('PathElement');
-		path[path.length-1].innerHTML = surname.innerHTML +' '+ name.innerHTML;
+		path[path.length-1].innerHTML = surname +' '+ name;
 	}
 }
 

@@ -65,6 +65,43 @@ function CreateRow( obj , row) {
 	return tr;
 }
 
+function StringCompare(a,b) {
+	if(a==null && b==null) return 0;
+	else if(a==null) return -1;
+	else if(b==null) return 1;
+	var x=a.toLowerCase();
+	var y=b.toLowerCase();
+	if( x==y ) return 0;
+	return ((x<y)?-1:1);
+}
+
+function NumberCompare(a,b) {
+	if(a==null && b==null) return 0;
+	else if(a==null) return -1;
+	else if(b==null) return 1;
+	var x=parseInt(a);
+	var y=parseInt(b);
+	if( x==y ) return 0;
+	return ((x<y)?-1:1);
+}
+
+function DateCompare(a,b) {
+	if(a==null && b==null) return 0;
+	else if(a==null) return -1;
+	else if(b==null) return 1;
+	var x=a;
+	var y=b;
+	if( x==y ) return 0;
+	return ((x<y)?-1:1);
+}
+
+function SuperCompare(a,b,type) {
+	if( type == 'String' ) return StringCompare(a,b);
+	else if( type == 'number' ) return NumberCompare(a,b);
+	else if( type == 'date' ) return DateCompare(a,b);
+	else return StringCompare(a,b);
+}
+
 function SortRows( obj , ColumnId, ascending) {
 	var type='string'; //Default type
 	for(var i=0;i<obj.columns.length;i++) {
@@ -74,39 +111,9 @@ function SortRows( obj , ColumnId, ascending) {
 		}
 	}
 	
-	if( type == 'string' ){
-		obj.rows.sort( function(a,b) {
-			if( a.values[ColumnId] == null && b.values[ColumnId] == null ) return 0;
-			else if(a.values[ColumnId]==null) return -1;
-			else if(b.values[ColumnId]==null) return 1;
-			var x=a.values[ColumnId].toLowerCase();
-			var y=b.values[ColumnId].toLowerCase();
-			if( x==y ) return 0;
-			return ((x<y)?-1:1);
-		} );
-	}
-	else if( type == 'number' ){
-		obj.rows.sort( function(a,b) {
-			if( a.values[ColumnId] == null && b.values[ColumnId] == null ) return 0;
-			else if(a.values[ColumnId]==null) return -1;
-			else if(b.values[ColumnId]==null) return 1;
-			var x=parseInt(a.values[ColumnId]);
-			var y=parseInt(b.values[ColumnId]);
-			if( x==y ) return 0;
-			return ((x<y)?-1:1);
-		} );
-	}
-	else if( type == 'date' ){
-		obj.rows.sort( function(a,b) {
-			if( a.values[ColumnId] == null && b.values[ColumnId] == null ) return 0;
-			else if(a.values[ColumnId]==null) return -1;
-			else if(b.values[ColumnId]==null) return 1;
-			var x=a.values[ColumnId];
-			var y=b.values[ColumnId];
-			if( x==y ) return 0;
-			return ((x<y)?-1:1);
-		} );
-	}
+	obj.rows.sort( function(a,b) {
+		return SuperCompare( a.values[ColumnId] , b.values[ColumnId] , type);
+	} );
 	
 	if( ascending ) obj.rows.reverse();
 }
@@ -215,9 +222,17 @@ function AddRow( table , row , OrderBy ) {
 		tbody.appendChild(NewRow);
 	}
 	else {
+		var type=null;
+		for(var j=0;j<obj.columns.length;j++) {
+			if( obj.columns[j].id==OrderBy ){
+				type=obj.columns[j].type;
+				break;
+			}
+		}
+		alert( type );
 		var i=0;
 		for(;i<obj.rows.length;i++) {
-			if(obj.rows[i].values[OrderBy] > row.values[OrderBy]) break;
+			if( SuperCompare( obj.rows[i].values[OrderBy], row.values[OrderBy] , type ) == 1) break;
 		}
 		obj.rows.splice(i,0,row);
 		if( i==obj.rows.length ) tbody.appendChild(NewRow);

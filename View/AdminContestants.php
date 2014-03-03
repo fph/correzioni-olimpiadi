@@ -14,7 +14,7 @@ global $v_contestants;
 <?php
 
 $columns=[];
-$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1, 'type'=>'string'];
 $columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
 $columns[]=['id'=>'school', 'name'=>'Scuola', 'class'=>['SchoolColumn']];
 
