@@ -11,10 +11,12 @@ function RemoveParticipationRequest(row){
 	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, ContestantId:ContestantId, type:'RemoveParticipation'}, RemoveParticipation);
 }
 
-function AddParticipation(response){
+function AddParticipation(response){ // qui diventa tutto buggato!
 	if (response.type=='good') {
-		var surname=document.getElementById('SurnameInput').value;
-		var name=document.getElementById('NameInput').value;
+		//~ var surname=document.getElementById('SurnameInput').value;
+		//~ var name=document.getElementById('NameInput').value;
+		var surname='Cognomme';
+		var name='Nomme';
 		
 		AddRow( document.getElementById('AdminContestantsOfAContestTable'),
 		{	values:{'surname':surname,'name':name},
@@ -24,7 +26,6 @@ function AddParticipation(response){
 }
 
 function AddParticipationRequest(){ 
-	var surname=document.getElementById('SurnameInput').value;
-	var name=document.getElementById('NameInput').value;
-	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, surname:surname, name:name, type:'AddParticipation'}, AddParticipation);
+	var ContestantId=GetSelectValue('ContestantInput');
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, ContestantId:ContestantId, type:'AddParticipation'}, AddParticipation);
 }

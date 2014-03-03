@@ -41,14 +41,12 @@ function RemoveContestant( $db , $ContestantId ){
 }
 
 //TODO: Implementare che si faccia l'aggiunta via id e non nome e cognome
-function AddParticipation( $db , $name , $surname , $ContestId ) {
+function AddParticipation( $db , $ContestantId , $ContestId ) {
 	
-	$Exist1=OneResultQuery($db,QuerySelect('Contestants',['name'=>$name, 'surname'=>$surname]));
+	$Exist1=OneResultQuery($db,QuerySelect('Contestants',['id'=>$ContestantId]));
 	if( is_null( $Exist1 ) ) {
 		return ['type'=>'bad' ,'text'=>'Il partecipante selezionato non esiste'];
 	}
-	
-	$ContestantId=$Exist1['id'];
 	
 	$Exist2=OneResultQuery($db,QuerySelect('Contests',['id'=>$ContestId]));
 	if( is_null( $Exist2 ) ) {
@@ -122,7 +120,7 @@ if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 $data=json_decode( $_POST['data'] , 1);
 if( $data['type'] == 'add' ) echo json_encode( AddContestant( $db, $data['name'], $data['surname'], $data['school'] ) );
 else if( $data['type'] == 'remove' ) echo json_encode( RemoveContestant( $db, $data['ContestantId'] ) );
-else if( $data['type'] == 'AddParticipation' ) echo json_encode( AddParticipation( $db, $data['name'], $data['surname'], $data['ContestId'] ) );
+else if( $data['type'] == 'AddParticipation' ) echo json_encode( AddParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
 else if( $data['type'] == 'RemoveParticipation' ) echo json_encode( RemoveParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
 else if( $data['type'] == 'ChangeNameAndSurname' ) echo json_encode( ChangeNameAndSurname( $db, $data['ContestantId'], $data['name'], $data['surname'] ) );
 else if( $data['type'] == 'ChangeSchool') echo json_encode( ChangeSchool( $db, $data['ContestantId'], $data['school'] ) );

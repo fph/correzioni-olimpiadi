@@ -47,13 +47,11 @@ InsertTable( $table );
 <div class='FormContainer'>
 	<table>
 	<tr>
-		<th> Cognome </th>
-		<th> Nome </th>
+		<th> Partecipante </th>
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type='text' name='surname' id='SurnameInput'> </td>
-		<td> <input type='text' name='name' id='NameInput'> </td>
+		<td> <div class='DivToSelect'><?=json_encode(['id'=>'ContestantInput', 'type'=>'contestant'])?></div> </td>
 		<td> <input type='button' value='Aggiungi' onclick="AddParticipationRequest()"> </td>
 	</tr>
 	</table>
