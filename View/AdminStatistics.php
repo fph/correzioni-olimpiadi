@@ -16,7 +16,7 @@
 	</tr>
 	<tr>
 		<td> <div class='DivToSelect'><?=json_encode(['id'=>'ContestInput','type'=>'ContestName'])?></div> </td>
-		<td> <input type='number' step='0.01' name='weight' id='WeightInput'> </td>
+		<td> <input type='number' step='0.01' name='weight' id='WeightInput' placeholder='0.5'> </td>
 		<td> <input type='button' value='Aggiungi' id='AddContestButton' onclick=AddContestToStatistics()> </td>
 	</tr>
 	</table>
