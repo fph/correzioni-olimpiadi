@@ -51,7 +51,7 @@ InsertTable( $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type='text' name='username' id='UsernameInput'> </td>
+		<td> <div class='DivToSelect'><?=json_encode(['id'=>'UserInput','type'=>'user'])?></div> </td>
 		<td> <input type='button' value='Aggiungi' onclick="AddPermissionRequest()"> </td>
 	</tr>
 	</table>

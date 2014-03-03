@@ -1,9 +1,10 @@
 function AddUser(response){
 	if (response.type=='good') {
-		var username=document.getElementById('UsernameInput').value;
+		var username=response.data['username'];
+		var UserId=response.data['UserId'];
 
 		AddRow( document.getElementById('AdminUsersTable'),
-		{	redirect:{'UserId':response.UserId},
+		{	redirect:{'UserId':UserId},
 			values:{'username':username} },
 			'username');
 	}

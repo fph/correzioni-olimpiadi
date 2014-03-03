@@ -21,8 +21,8 @@ function ModifyTitle() {
 function ProcessServerAnswer( Response ) {
 	if ( Response.type == 'bad' ) CancelTitleModification();
 	else if (Response.type == 'good' ) {
-		var surname=document.getElementById('ContestantSurname');
-		var name=document.getElementById('ContestantName');		
+		var surname=response.data['surname'];
+		var name=response.data['name'];		
 		var path=document.getElementsByClassName('PathElement');
 		path[path.length-1].innerHTML = surname.innerHTML +' '+ name.innerHTML;
 	}

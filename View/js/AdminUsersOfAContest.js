@@ -1,6 +1,7 @@
 function RemovePermission(response){
 	if (response.type=='good') {
-		row=document.getElementById('trashing'+response.UserId);
+		var UserId=response.data['UserId'];
+		var row=document.getElementById('trashing'+UserId); //Questa storia della riga non è pulitissima
 		RemoveRow(document.getElementById('AdminUsersOfAContestTable'), row);
 	}
 }
@@ -13,15 +14,16 @@ function RemovePermissionRequest(row){
 
 function AddPermission(response){
 	if (response.type=='good') {
-		var username=document.getElementById('UsernameInput').value;
+		var username=response.data['username'];
+		var UserId=response.data['UserId'];
 		AddRow(document.getElementById('AdminUsersOfAContestTable'),{
-			data:{'user_id':response.UserId},
+			data:{'user_id':UserId},
 			values:{'username':username}
 		},'username');
 	}
 }
 
 function AddPermissionRequest(){ 
-	var username=document.getElementById('UsernameInput').value;
-	MakeAjaxRequest('../Modify/ManageUser.php', {ContestId:ContestId, username:username, type:'AddPermission'}, AddPermission);
+	var UserId=GetSelectValue('UserInput');
+	MakeAjaxRequest('../Modify/ManageUser.php', {ContestId:ContestId, UserId:UserId, type:'AddPermission'}, AddPermission);
 }

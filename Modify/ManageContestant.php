@@ -17,15 +17,11 @@ function AddContestant( $db , $name, $surname, $school ){
 	if( !is_string($school) or strlen( $school) > ContestantSchool_MAXLength ) {
 		return ['type'=>'bad', 'text'=>'La scuola deve essere una stringa di al più '.ContestantSchool_MAXLength.' caratteri'];
 	}
-	
-	$Exist1=OneResultQuery($db,QuerySelect('Contestants', ['name'=>$name, 'surname'=>$surname]));
-	if( !is_null($Exist1) ) {
-		return ['type'=>'bad', 'text'=>'È già presente un partecipante con lo stesso nome e cognome']; //TODO: Non ammetto nomi uguali!
-	}
 
 	Query( $db,QueryInsert('Contestants', ['name'=>$name,'surname'=>$surname, 'school'=>$school]) );
 
-	return ['type'=>'good', 'text'=>'Partecipante creato con successo', 'ContestantId'=> $db->insert_id];
+	return ['type'=>'good', 'text'=>'Partecipante creato con successo', 'data'=>[
+	'ContestantId'=> $db->insert_id, 'surname'=>$surname, 'name'=>$name, 'school'=>$school]];
 }
 
 function RemoveContestant( $db , $ContestantId ){
@@ -40,11 +36,10 @@ function RemoveContestant( $db , $ContestantId ){
 	return ['type'=>'good', 'text'=>'Partecipante eliminato con successo'];
 }
 
-//TODO: Implementare che si faccia l'aggiunta via id e non nome e cognome
 function AddParticipation( $db , $ContestantId , $ContestId ) {
 	
-	$Exist1=OneResultQuery($db,QuerySelect('Contestants',['id'=>$ContestantId]));
-	if( is_null( $Exist1 ) ) {
+	$contestant=OneResultQuery($db,QuerySelect('Contestants',['id'=>$ContestantId]));
+	if( is_null( $contestant ) ) {
 		return ['type'=>'bad' ,'text'=>'Il partecipante selezionato non esiste'];
 	}
 	
@@ -59,18 +54,19 @@ function AddParticipation( $db , $ContestantId , $ContestId ) {
 	}
 	
 	Query($db, QueryInsert('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
-	return ['type'=>'good' ,'text'=>'La partecipazione è stata aggiunta con successo', 'ContestantId'=> $ContestantId];
+	return ['type'=>'good' ,'text'=>'La partecipazione è stata aggiunta con successo', 'data'=> 
+	['ContestantId'=>$ContestantId, 'surname'=>$contestant['surname'], 'name'=>$contestant['name'] ]];
 	
 }
 
 function RemoveParticipation( $db , $ContestantId , $ContestId ) {
-	$Exist1=OneResultQuery($db,QuerySelect('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
-	if( is_null($Exist1) ){
+	$contestant=OneResultQuery($db,QuerySelect('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	if( is_null($contestant) ){
 		return ['type'=>'bad' ,'text'=>'La partecipazione selezionata non esiste'];
 	}
 	
 	Query($db,QueryDelete('Participations',['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
-	return ['type'=>'good' ,'text'=>'La partecipazione è stata eliminata con successo', 'ContestantId'=>$ContestantId];
+	return ['type'=>'good' ,'text'=>'La partecipazione è stata eliminata con successo', 'data'=>['ContestantId'=>$ContestantId] ];
 }
 
 function ChangeNameAndSurname($db , $ContestantId, $name, $surname) {
@@ -87,13 +83,10 @@ function ChangeNameAndSurname($db , $ContestantId, $name, $surname) {
 		return ['type'=>'bad', 'text'=>'Il cognome deve essere una stringa non vuota di al più '.ContestantSurname_MAXLength.' caratteri'];
 	}
 	
-	$Exist1=OneResultQuery($db,QuerySelect('Contestants', ['name'=>$name, 'surname'=>$surname]));
-	if( !is_null($Exist1) ) {
-		return ['type'=>'bad', 'text'=>'È già presente un partecipante con lo stesso nome e cognome']; //TODO: Contestant distinti solo per nome e cognome
-	}
-	
 	Query( $db, QueryUpdate('Contestants', ['id'=>$ContestantId], ['name'=>$name, 'surname'=>$surname]));
-	return ['type'=>'good', 'text'=>'Nome e cognome del partecipanti sono stati modificati con successo'];
+	return ['type'=>'good', 'text'=>'Nome e cognome del partecipanti sono stati modificati con successo', 'data'=>[
+		'Contestantid'=>$ContestantId, 'name'=>$name, 'surname'=>$surname
+	]];
 }
 
 function ChangeSchool($db, $ContestantId, $school) {

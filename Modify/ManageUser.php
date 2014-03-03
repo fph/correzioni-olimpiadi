@@ -21,7 +21,7 @@ function AddUser( $db , $username, $password ){
 
 	Query( $db,QueryInsert('Users', ['username'=>$username,'passHash'=>passwordHash($password) ]) );
 	
-	return ['type'=>'good', 'text'=>'Correttore creato con successo', 'UserId'=>$db->insert_id];
+	return ['type'=>'good', 'text'=>'Correttore creato con successo', 'data'=>['UserId'=>$db->insert_id, 'username'=>$username] ];
 }
 
 function RemoveUser( $db , $UserId ){
@@ -41,13 +41,12 @@ function RemoveUser( $db , $UserId ){
 	
 }
 
-function AddPermission( $db , $username , $ContestId ) {
+function AddPermission( $db , $UserId , $ContestId ) {
 	
-	$Exist1=OneResultQuery($db,QuerySelect('Users',['username'=>$username]));
-	if( is_null( $Exist1 ) ) {
+	$user=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
+	if( is_null( $user ) ) {
 		return ['type'=>'bad' ,'text'=>'Il correttore selezionato non esiste'];
 	}
-	$UserId=$Exist1['id'];
 	
 	$Exist2=OneResultQuery($db,QuerySelect('Contests',['id'=>$ContestId]));
 	if( is_null( $Exist2 ) ) {
@@ -60,7 +59,7 @@ function AddPermission( $db , $username , $ContestId ) {
 	}
 	
 	Query($db, QueryInsert('Permissions',['ContestId'=>$ContestId, 'UserId'=>$UserId]));
-	return ['type'=>'good' ,'text'=>'Il permesso è stato aggiunto con successo', 'UserId'=>$UserId];
+	return ['type'=>'good' ,'text'=>'Il permesso è stato aggiunto con successo', 'data'=>['UserId'=>$UserId,'username'=>$user['username']] ];
 	
 }
 
@@ -75,7 +74,7 @@ function RemovePermission( $db , $UserId , $ContestId ) {
 	}
 	
 	Query($db,QueryDelete('Permissions',['ContestId'=>$ContestId, 'UserId'=>$UserId]));
-	return ['type'=>'good' ,'text'=>'Il permesso è stato eliminato con successo', 'UserId'=>$UserId];
+	return ['type'=>'good' ,'text'=>'Il permesso è stato eliminato con successo', 'data'=>['UserId'=>$UserId]];
 }
 
 function ChangeUsername( $db , $UserId , $username ) {
@@ -131,7 +130,7 @@ if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 $data=json_decode( $_POST['data'] , 1);
 if( $data['type'] == 'add' ) echo json_encode( AddUser( $db, $data['username'], $data['password'] ) );
 else if( $data['type'] == 'remove' ) echo json_encode( RemoveUser( $db, $data['UserId'] ) );
-else if( $data['type'] == 'AddPermission' ) echo json_encode( AddPermission( $db, $data['username'], $data['ContestId'] ) );
+else if( $data['type'] == 'AddPermission' ) echo json_encode( AddPermission( $db, $data['UserId'], $data['ContestId'] ) );
 else if( $data['type'] == 'RemovePermission' ) echo json_encode( RemovePermission( $db, $data['UserId'], $data['ContestId'] ) );
 else if( $data['type'] == 'ChangeUsername' ) echo json_encode( ChangeUsername( $db, $data['UserId'], $data['username'] ) );
 else if( $data['type'] == 'ChangePassword' ) echo json_encode( ChangePassword( $db, $data['UserId'], $data['password'] ) );
