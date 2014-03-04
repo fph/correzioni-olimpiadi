@@ -2,10 +2,11 @@
 	Table .InformationTable css
 */
 
-.InformationTable {
+table.InformationTable {
 	border-collapse: collapse;
 	margin: 40px 0px 20px 0px;
 	font-size: 15px;
+	color: #039;
 	text-align: left;
 	vertical-align:baseline;
 	width: 100%;

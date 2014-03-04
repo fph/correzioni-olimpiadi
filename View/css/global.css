@@ -12,10 +12,6 @@ body {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
-thead, tbody {
-	color: #039;
-}
-
 /*
 	Page structure
 */
@@ -83,7 +79,7 @@ div.FormContainer td {
 div.FormContainer table {
 	margin: 0 auto; /* Centering horizontally */
 	
-	background-color: #ECFFEC;
+	background-color: #F3F3F3;
 	border: 1px solid gray;
 	border-radius: 5px;
 	padding: 10px;
