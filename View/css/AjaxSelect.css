@@ -4,10 +4,21 @@
 
 .AjaxSelectText {
 	border: 2px solid #ccc;
+/*
 	border-radius: 4px;
+*/
+	box-sizing: border-box;
+	
+	
+	outline: 0px;
 	margin: 0px;
 	padding: 0px;
+	padding-left: 2px;
 	width: 100%;
+}
+
+.AjaxSelectText:focus {
+	border: 2px solid black;
 }
 
 .AjaxSelectValue {
@@ -16,13 +27,17 @@
 
 .AjaxSelectOptionsDiv {
 	background-color: white;
+	
 	border-top: 0px;
 	border-bottom-right-radius:5px;
 	border-left: 1px solid green;
+	box-sizing: border-box;
+	
 	position: absolute;
 	max-height: 200px;
 	white-space: nowrap; /* Options on one line */
 	
+	min-width: 10em;
 	
 	overflow-x: hidden;
 	overflow-y: auto; /* This might cover the content with the scrollbar */

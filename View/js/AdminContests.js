@@ -1,10 +1,11 @@
 function AddContest(response){ //TODO: Non va bene prendere i dati dal form, che intanto potrebbe essere cambiato
 	if (response.type=='good') {
-		var name=document.getElementById('NameInput').value;
-		var date=document.getElementById('date_DateInput').value;
+		var name=response.data['name'];
+		var date=response.data['date'];
+		var ContestId=response.data['ContestId'];
 		
 		AddRow( document.getElementById('AdminContestsTable'),{
-			redirect:{'ContestId':response.ContestId},
+			redirect:{'ContestId':ContestId},
 			values:{'name':name, 'blocked':'', 'date':date}
 		}, 'date');
 	}

@@ -4,7 +4,8 @@ SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
 
-//BUG: accenti e apostrofi non sono accettati (magari virgole per cognomi assurdi)
+//Receive the request to create a user, check whether the username is already used and if both password an username satisfy some rules.
+//If all is ok create the user.
 function AddUser( $db , $username, $password ){
 	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<username_MINLength ) {
 		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra '.username_MINLength.' e '.username_MAXLength];
@@ -24,6 +25,8 @@ function AddUser( $db , $username, $password ){
 	return ['type'=>'good', 'text'=>'Correttore creato con successo', 'data'=>['UserId'=>$db->insert_id, 'username'=>$username] ];
 }
 
+//Check whether the user exists and it is not admin.
+//If all it's okay remove the user.
 function RemoveUser( $db , $UserId ){
 	
 	$result=OneResultQuery($db, QuerySelect('Users', ['id'=>$UserId]) );
@@ -41,6 +44,8 @@ function RemoveUser( $db , $UserId ){
 	
 }
 
+//Check whether the User and Contest exist, then if the user doesn't already have the permission.
+//If all it's ok add the permission.
 function AddPermission( $db , $UserId , $ContestId ) {
 	
 	$user=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId]));
@@ -63,6 +68,8 @@ function AddPermission( $db , $UserId , $ContestId ) {
 	
 }
 
+//Check whether the permission exists and the user isn't an admin.
+//If all it's ok remove the permission.
 function RemovePermission( $db , $UserId , $ContestId ) {
 	if( IsAdmin($db, $UserId) == 1 ) {
 		return ['type'=>'bad', 'text'=>'Non puoi togliere permessi ad un admin'];
@@ -77,6 +84,8 @@ function RemovePermission( $db , $UserId , $ContestId ) {
 	return ['type'=>'good' ,'text'=>'Il permesso è stato eliminato con successo', 'data'=>['UserId'=>$UserId]];
 }
 
+//Check whether the user exists and he's not an admin, the username isn't already used and it satisfies some standards.
+//If all it's ok change the username of the user.
 function ChangeUsername( $db , $UserId , $username ) {
 	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<username_MINLength ) {
 		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra '.username_MINLength.' e '.username_MAXLength];
@@ -101,6 +110,8 @@ function ChangeUsername( $db , $UserId , $username ) {
 	return ['type'=>'good', 'text'=>'Lo username è stato cambiato con successo'];
 }
 
+//Check whether the user exists and he's not an admin and whether the password satisfies some standards.
+//If all it's ok change the password of the user.
 function ChangePassword( $db , $UserId, $password ){
 	if( !is_string($password) or strlen( $password )>password_MAXLength or strlen( $username )<4 ) {
 		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra '.password_MINLength.' e '.password_MAXLength];

@@ -10,7 +10,8 @@ function AddContest($db, $name, $date) {
 	}
 	
 	Query($db, QueryInsert('Contests',['name'=>$name, 'date'=>$date, 'blocked'=>0]));
-	return ['type'=>'good', 'text'=>'La gara è stata creata con successo', 'ContestId'=>$db->insert_id] ;
+	return ['type'=>'good', 'text'=>'La gara è stata creata con successo', 'data'=>[
+	'ContestId'=>$db->insert_id, 'name'=>$name, 'date'=>$date] ] ;
 }
 
 function RemoveContest($db, $ContestId) {

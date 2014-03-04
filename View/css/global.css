@@ -1,3 +1,25 @@
+/*
+	General styles
+*/
+
+html,body {
+	min-height:100%;
+}
+
+body {
+	background: #F6F4F0;
+	margin: 0;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+}
+
+thead, tbody {
+	color: #039;
+}
+
+/*
+	Page structure
+*/
+
 div.internalBody {
     width: 80%;
     background: white;
@@ -15,20 +37,6 @@ div.internalBody {
 	margin: 35px 5% 80px 5%;
 }
 
-html,body {
-	min-height:100%;
-}
-
-body {
-	background: #F6F4F0;
-	margin: 0;
-	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-}
-
-.hidden {
-	display: none;
-}
-
 .PageTitle {
 	font-size: 2em;
 	padding-left: 5%;
@@ -38,6 +46,10 @@ body {
 .PageSubtitle {
 	font-size: 1.5em;
 	padding-left: 7%;
+}
+
+.hidden {
+	display: none;
 }
 
 
@@ -60,24 +72,22 @@ body {
 	color: green;
 }
 
-.EmptyTable {
 /*
-	DEBUG
+	Form table css
 */
-}
 
-div.FormContainer form {
-	margin-left: 8%;
-}
-
-div.FormContainer form table td {
+div.FormContainer td {
 	padding: 0px 5px;
 }
 
-thead, tbody {
-	color: #039;
+div.FormContainer table {
+	margin: 0 auto; /* Centering horizontally */
+	
+	background-color: #ECFFEC;
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 10px;
 }
-
 
 /*
 	Buttons

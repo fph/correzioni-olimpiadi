@@ -229,7 +229,6 @@ function AddRow( table , row , OrderBy ) {
 				break;
 			}
 		}
-		alert( type );
 		var i=0;
 		for(;i<obj.rows.length;i++) {
 			if( SuperCompare( obj.rows[i].values[OrderBy], row.values[OrderBy] , type ) == 1) break;
