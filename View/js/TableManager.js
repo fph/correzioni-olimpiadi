@@ -218,8 +218,8 @@ function AddRow( table , row , OrderBy ) {
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
 	var tbody=table.childNodes[1];
 	if( OrderBy == null ) {
-		obj.rows.push(row);
 		tbody.appendChild(NewRow);
+		obj.rows.push(row);
 	}
 	else {
 		var type=null;
@@ -233,9 +233,9 @@ function AddRow( table , row , OrderBy ) {
 		for(;i<obj.rows.length;i++) {
 			if( SuperCompare( obj.rows[i].values[OrderBy], row.values[OrderBy] , type ) == 1) break;
 		}
-		obj.rows.splice(i,0,row);
 		if( i==obj.rows.length ) tbody.appendChild(NewRow);
 		else tbody.insertBefore(NewRow, tbody.childNodes[i]);
+		obj.rows.splice(i,0,row);
 	}
 	
 	SetTableObject(table, obj);
