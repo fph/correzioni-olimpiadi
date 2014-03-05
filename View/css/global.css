@@ -12,7 +12,7 @@ body {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
-input:not([type='button']) {
+input {
 	background-color: white;
 	color: black;
 
@@ -28,7 +28,17 @@ input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
-input:not([type='button']):focus {
+input:focus {
+	border-color: gray;
+}
+
+input[type='button'], input[type='submit'] {
+	font-weight:bold;
+	border-radius:3px;
+}
+
+input[type='button']:hover, input[type='submit']:hover {
+	background-color:white;
 	border-color: gray;
 }
 
