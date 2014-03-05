@@ -8,11 +8,11 @@ html,body {
 
 body {
 	background: #F6F4F0;
-	margin: 0;
+	margin: 0px;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
-input {
+input:not([type='button']) {
 	background-color: white;
 	color: black;
 
@@ -28,7 +28,7 @@ input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
-input:focus {
+input:not([type='button']):focus {
 	border-color: gray;
 }
 

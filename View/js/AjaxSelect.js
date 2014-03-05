@@ -51,6 +51,9 @@ function RenderSelect( id , type ) {
 	TextSelect.setAttribute('type','text');
 	SetDataAttribute(TextSelect,'request_type',type);
 	SetDataAttribute(TextSelect,'last_string','');
+	
+	if( type == 'contestant' ) TextSelect.setAttribute('placeholder','Cognome Nome');
+	
 	TextSelect.addEventListener('keyup', function(e){
 		GetSelectSuggestions(this);
 		var ValueInput=this.nextSibling;
