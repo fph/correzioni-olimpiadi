@@ -20,13 +20,13 @@ function ListOptions( obj ) {
 		SetDataAttribute(OptionDiv,'InputText', option.InputText);
 		OptionDiv.classList.add('AjaxSelectOption');
 		
-		OptionDiv.addEventListener('click', function(e) {
+		// Here the event is mousedown instead of click, as click is fired after blur whereas mousedown is fired before.
+		OptionDiv.addEventListener('mousedown', function(e) {
 			var container=this.parentNode.parentNode;
 			var value=GetDataAttribute(this,'value');
 			var text=GetDataAttribute(this,'InputText');
 			container.getElementsByClassName('AjaxSelectValue')[0].value=value;
 			container.getElementsByClassName('AjaxSelectText')[0].value=text;
-			OptionsDiv.classList.add('hidden');
 		});
 		
 		OptionsDiv.appendChild( OptionDiv );
@@ -59,16 +59,12 @@ function RenderSelect( id , type ) {
 	});
 	
 	TextSelect.addEventListener('blur',function(e) {
-		var input=this;
-		
-		//This setTimeout is used to let click event fire and be executed, and only then to execute blur (otherwise everything gets bugged)
-		setTimeout(function(){
-			var el=input.parentNode.getElementsByClassName('AjaxSelectOptionsDiv')[0];
-			el.classList.add('hidden');
-			var ValueInput=input.nextSibling;
-			if( ValueInput.value != '' ) input.classList.add('AjaxSelectOptionGood');
-			else if( input.value != '' ) input.classList.add('AjaxSelectOptionBad'); 
-		},100);
+		var TextInput=this;
+		var ValueInput=this.nextSibling;
+		var OptionsDiv=this.parentNode.getElementsByClassName('AjaxSelectOptionsDiv')[0];
+		OptionsDiv.classList.add('hidden');
+		if( ValueInput.value != '' ) TextInput.classList.add('AjaxSelectOptionGood');
+		else if( TextInput.value != '' ) TextInput.classList.add('AjaxSelectOptionBad'); 
 	});
 	
 	TextSelect.addEventListener('focus',function(e) {
