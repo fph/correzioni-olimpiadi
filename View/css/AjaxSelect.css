@@ -3,25 +3,14 @@
 }
 
 .AjaxSelectText {
-	border: 1px solid #ccc;
-	box-sizing: border-box;
-	
-	
-	outline: 0px;
-	margin: 0px;
-	padding: 0px;
-	padding-left: 2px;
 	width: 100%;
-}
-
-.AjaxSelectText:focus {
-	border-color: gray;
 }
 
 .AjaxSelectValue {
 	display: none;
 }
 
+/* Styles about the div containing all options */
 .AjaxSelectOptionsDiv {
 	background-color: white;
 	border-bottom-right-radius:5px;
@@ -38,6 +27,7 @@
 	overflow-y: auto; /* This might cover the content with the scrollbar */
 }
 
+/* Styles about the single option div */
 .AjaxSelectOption {
 	font-size: 0.8em;
 	border-bottom: 1px solid #ECF3FA;
@@ -73,10 +63,10 @@
 /*
 	Feedback about the option selected
 */
-.AjaxSelectOptionGood {
+input.AjaxSelectTextGood {
 	border-color: green;
 }
 
-.AjaxSelectOptionBad {
+input.AjaxSelectTextBad {
 	border-color: red;
 }

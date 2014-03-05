@@ -48,14 +48,15 @@ function GetSelectSuggestions( input ){
 function RenderSelect( id , type ) {
 	var TextSelect = document.createElement('input');
 	TextSelect.classList.add('AjaxSelectText');
+	TextSelect.setAttribute('type','text');
 	SetDataAttribute(TextSelect,'request_type',type);
 	SetDataAttribute(TextSelect,'last_string','');
 	TextSelect.addEventListener('keyup', function(e){
 		GetSelectSuggestions(this);
 		var ValueInput=this.nextSibling;
 		ValueInput.value='';
-		this.classList.remove('AjaxSelectOptionGood');
-		this.classList.remove('AjaxSelectOptionBad');
+		this.classList.remove('AjaxSelectTextGood');
+		this.classList.remove('AjaxSelectTextBad');
 	});
 	
 	TextSelect.addEventListener('blur',function(e) {
@@ -63,16 +64,16 @@ function RenderSelect( id , type ) {
 		var ValueInput=this.nextSibling;
 		var OptionsDiv=this.parentNode.getElementsByClassName('AjaxSelectOptionsDiv')[0];
 		OptionsDiv.classList.add('hidden');
-		if( ValueInput.value != '' ) TextInput.classList.add('AjaxSelectOptionGood');
-		else if( TextInput.value != '' ) TextInput.classList.add('AjaxSelectOptionBad'); 
+		if( ValueInput.value != '' ) TextInput.classList.add('AjaxSelectTextGood');
+		else if( TextInput.value != '' ) TextInput.classList.add('AjaxSelectTextBad'); 
 	});
 	
 	TextSelect.addEventListener('focus',function(e) {
 		GetSelectSuggestions(this);
 		var OptionsDiv=this.parentNode.getElementsByClassName('AjaxSelectOptionsDiv')[0];
 		OptionsDiv.classList.remove('hidden');
-		this.classList.remove('AjaxSelectOptionGood');
-		this.classList.remove('AjaxSelectOptionBad');
+		this.classList.remove('AjaxSelectTextGood');
+		this.classList.remove('AjaxSelectTextBad');
 	});
 	
 	var ValueSelect= document.createElement('input');

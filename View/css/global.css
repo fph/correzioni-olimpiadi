@@ -12,6 +12,31 @@ body {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
+input {
+	background-color: white;
+	color: black;
+
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	outline: 0px;
+	
+	margin: 0px;
+}
+
+/* To avoid yellow background in autocompleted input in chrome. */
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+input:focus {
+	border-color: gray;
+}
+
+
+select {
+	font: inherit;
+}
+
 /*
 	Page structure
 */
@@ -145,12 +170,4 @@ div.FormContainer table {
 	border-radius: 3px;
 	background-color: white;
 	min-height: 1em;
-}
-
-/*
-	SelectInput
-*/
-
-select {
-	font: inherit;
 }
