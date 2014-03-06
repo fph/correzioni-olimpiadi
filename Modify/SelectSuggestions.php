@@ -21,10 +21,11 @@
 	function GetContestant( $db, $str ) {
 		$AllWords=explode(' ', $str);
 		$ResultUnformatted=ManyResultQuery( $db, QueryCompletion('Contestants',['surname'=>$str]) );
+		
+		//This is used in order to parse Surname Name in $str and not only surname
 		for($i=1;$i<count($AllWords);$i++) {
 			$surname=implode(' ',array_slice($AllWords, 0, $i) );
 			$name=implode(' ', array_slice($AllWords, $i));
-			//~ echo $surname.' / '.$name.' XXX ';
 			$PartialResult=ManyResultQuery( $db, QueryCompletion('Contestants',['name'=>$name],['surname'=>$surname]) );
 			$ResultUnformatted=array_merge($ResultUnformatted, $PartialResult);
 		}
