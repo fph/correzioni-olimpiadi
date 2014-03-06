@@ -6,10 +6,10 @@
 
 	function GetContest( $db, $str ) {
 		$query=QueryCompletion('Contests',['name'=>$str]);
-		$PartialResult=ManyResultQuery($db,$query);
+		$ResultUnformatted=ManyResultQuery($db,$query);
 		$result=[];
-		for($i=0;$i<count($PartialResult);$i++) {
-			$option=$PartialResult[$i];
+		for($i=0;$i<count($ResultUnformatted);$i++) {
+			$option=$ResultUnformatted[$i];
 			$item['value']=$option['id'];
 			$item['InputText']=$option['name'];
 			$item['OptionText']=$option['name'].' - '.GetItalianDate($option['date']);
@@ -19,11 +19,19 @@
 	}
 	
 	function GetContestant( $db, $str ) {
-		$query=QueryCompletion('Contestants',['surname'=>$str]);
-		$PartialResult=ManyResultQuery($db,$query);
+		$AllWords=explode(' ', $str);
+		$ResultUnformatted=ManyResultQuery( $db, QueryCompletion('Contestants',['surname'=>$str]) );
+		for($i=1;$i<count($AllWords);$i++) {
+			$surname=implode(' ',array_slice($AllWords, 0, $i) );
+			$name=implode(' ', array_slice($AllWords, $i));
+			//~ echo $surname.' / '.$name.' XXX ';
+			$PartialResult=ManyResultQuery( $db, QueryCompletion('Contestants',['name'=>$name],['surname'=>$surname]) );
+			$ResultUnformatted=array_merge($ResultUnformatted, $PartialResult);
+		}
+		
 		$result=[];
-		for($i=0;$i<count($PartialResult);$i++) {
-			$option=$PartialResult[$i];
+		for($i=0;$i<count($ResultUnformatted);$i++) {
+			$option=$ResultUnformatted[$i];
 			$item['value']=$option['id'];
 			$item['InputText']=$option['surname'].' '.$option['name'];
 			$item['OptionText']=$option['surname'].' '.$option['name'].' - '.$option['school'];
@@ -34,10 +42,10 @@
 	
 	function GetUser( $db, $str ) {
 		$query=QueryCompletion('Users',['username'=>$str]);
-		$PartialResult=ManyResultQuery($db,$query);
+		$ResultUnformatted=ManyResultQuery($db,$query);
 		$result=[];
-		for($i=0;$i<count($PartialResult);$i++) {
-			$option=$PartialResult[$i];
+		for($i=0;$i<count($ResultUnformatted);$i++) {
+			$option=$ResultUnformatted[$i];
 			$item['value']=$option['id'];
 			$item['InputText']=$option['username'];
 			$item['OptionText']=$option['username'];
@@ -63,11 +71,11 @@
 	$str=$data['str'];
 	$id=$data['id'];
 	
-	//~ if( !is_string($str) ) {
-		//~ $db->close();
-		//~ echo json_encode( ['id'=>$id, 'list'=> [] ]);
-		//~ die();
-	//~ }
+	if( !is_string($str) or strlen($str)==0 ) { //Do not give suggestions if string is empty
+		$db->close();
+		echo json_encode( ['id'=>$id, 'list'=> [] ]);
+		die();
+	}
 	
 	if( $type == 'contest' ) echo json_encode( ['id'=>$id, 'list'=> GetContest($db, $str)] );
 	else if( $type == 'contestant' ) echo json_encode( ['id'=>$id, 'list'=> GetContestant($db, $str)] );

@@ -133,7 +133,7 @@ function QueryDelete($tableName, $constraints) {
 	return $query;
 }
 
-function QueryCompletion($tableName, $constraints, $data, $RowsNumber) {
+function QueryCompletion($tableName, $constraintsLike, $constraintsEqual, $data, $RowsNumber) {
 	$query='SELECT ';
 	if( !is_null($data) ) {
 		$first=0;
@@ -148,12 +148,20 @@ function QueryCompletion($tableName, $constraints, $data, $RowsNumber) {
 	else $query.='* ';
 	$query.=' FROM '.$tableName.' ';
 	
-	if( !is_null( $constraints ) ) {
-		$query .='WHERE ';
-		$first=0;
-		foreach ( $constraints as $field => $value ) {
+	$first=0;
+	if( !is_null( $constraintsEqual ) ) {
+		foreach ( $constraintsEqual as $field => $value ) {
 			if( $first==0 ) {
-				$query .= $field.' LIKE '.escape_input($value.'%').' ';
+				$query .= 'WHERE '.$field.'='.escape_input($value).' ';
+				$first=1;
+			}
+			else $query .= 'AND '.$field.'='.escape_input($value).' ';
+		}
+	}
+	if( !is_null( $constraintsLike ) ) {
+		foreach ( $constraintsLike as $field => $value ) {
+			if( $first==0 ) {
+				$query .= 'WHERE '.$field.' LIKE '.escape_input($value.'%').' ';
 				$first=1;
 			}
 			else $query .= 'AND '.$field.' LIKE '.escape_input($value.'%').' ';
@@ -163,7 +171,6 @@ function QueryCompletion($tableName, $constraints, $data, $RowsNumber) {
 	$query .= 'LIMIT 0,';
 	if( !is_null( $RowsNumber ) and is_int($RowsNumber) and $RowsNumber>0 ) $query .= strval($RowsNumber);
 	else $query .= '10';
-	
 	return $query;
 }
 
