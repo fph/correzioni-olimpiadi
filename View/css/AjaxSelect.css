@@ -64,9 +64,9 @@
 	Feedback about the option selected
 */
 input.AjaxSelectTextGood {
-	border-color: green;
+	border-color: green!important;
 }
 
 input.AjaxSelectTextBad {
-	border-color: red;
+	border-color: red!important;
 }

@@ -12,36 +12,10 @@ body {
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
 
-input {
-	background-color: white;
-	color: black;
-
-	border: 1px solid #ccc;
-	box-sizing: border-box;
-	outline: 0px;
-	
-	margin: 0px;
-}
-
 /* To avoid yellow background in autocompleted input in chrome. */
 input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }
-
-input:focus {
-	border-color: gray;
-}
-
-input[type='button'], input[type='submit'] {
-	font-weight:bold;
-	border-radius:3px;
-}
-
-input[type='button']:hover, input[type='submit']:hover {
-	background-color:white;
-	border-color: gray;
-}
-
 
 select {
 	font: inherit;
@@ -118,6 +92,37 @@ div.FormContainer table {
 	border: 1px solid gray;
 	border-radius: 5px;
 	padding: 10px;
+}
+
+.FormContainer input:not([type='submit']):not([type='button']) {
+	background-color: white;
+	color: black;
+
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	outline: 0px;
+	
+	margin: 0px;
+}
+
+.FormContainer input:not([type='submit']):not([type='button']):focus {
+	border-color: gray;
+}
+
+.FormContainer input[type='button'], .FormContainer input[type='submit'] {
+	font-weight:bold;
+/*
+	border-radius:3px;
+*/
+}
+
+.FormContainer input[type='button']:hover, .FormContainer input[type='submit']:hover{
+/*
+	background-color:white;
+*/
+/*
+	border-color: gray;
+*/
 }
 
 /*
