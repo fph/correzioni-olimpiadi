@@ -1,4 +1,6 @@
-table
+Lines ending with ! are NOT optional.
+
+TableObject
 	columns => [column] !
 	rows => [row] !
 	redirect => string

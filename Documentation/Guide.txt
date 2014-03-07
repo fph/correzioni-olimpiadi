@@ -1,6 +1,8 @@
 Guide for usage, installation an developing
 
-1) 	To install correzioni-olimpiadi you must copy the whole project in a folder which is processed by apache webserver (using php and mysql).
+INSTALLATION
+
+1) 	To install correzioni-olimpiadi you must copy the whole project in a folder which is processed by an apache webserver (using php and mysql).
 	Rename the file Constants.php.backup as Constants.php
 	Then you have to create a user in mysql with username XXX and pass YYY:
 	
@@ -10,21 +12,29 @@ Guide for usage, installation an developing
 		CREATE USER 'XXX'@'%' IDENTIFIED BY 'YYY';
 		GRANT ALL PRIVILEGES ON CorOli.* TO 'XXX'@'%' WITH GRANT OPTION;
 	
-	Now you have to configure Constants.php with the user and password just created, some urls refering to you server structure and some other options.
+	Now you have to configure Constants.php with the user and password just created, some urls referring to you server structure and some other options.
 	
-	Then execute InitDatabase.php and it will create the whole database and populating it nearly randomly.
+	Then execute InitDatabase.php and which will create the whole database populating it nearly randomly.
 	
 	Now you should have a properly working system.
 	
 2)	To use correzioni-problemi open with a browser the url .../Model/Login.php
 	
-Developing
+DEVELOPING
 
-Constants.php : Configuration variables of the system.
-Utilities.php : Function used to include files of the project (to use instead of the classic include or require)
-sqlUtilities.php : A group of function used to create query, to make query, to open db connection and to manipulate the result. This function are the only way in which php-files should interact with the db.
-SessionManager.php : A php file to handle session.
-TemplateCreation.php : The file which creates all the html pages shown in the browser. It is based on the function TemplatePage which receive the $Content=View name, and various other optional parameters. This is the MUST in order to create the page for a Model file.
+Constants.php : 
+	Configuration variables of the system.
+Utilities.php : 
+	Functions used to include files of the project (to use instead of the classic include or require)
+sqlUtilities.php : 
+	A group of function used to create query, to make query, to open db connection and to manipulate the result. This function are the only way in which php-files should interact with the db.
+PermissionManager.php :
+	A php file to handle permissions.
+SessionManager.php : 
+	A php file to handle session.
+TemplateCreation.php : 
+	The file which creates all the html pages shown in the browser. It is based on the function TemplatePage which receive the $Content=View name, and various other optional parameters. This is the MUST in order to create the page for a Model file.
+	It automatically builds the template of the page, includes some css and js and then put the content in the right position.
 
 Model folder:
 	In this folder there are the php which are called directly by the user. (and so those which appears in the url bar) 
@@ -37,3 +47,18 @@ View folder:
 	
 Modify Folder:
 	It contains the files which answers to request of the user to change the database.
+
+JS IMPORTANT FILES
+TableManager.js : 	
+	It is the manager of all the tables with class InformationTables which appears in the site.
+	In order to add one of those tables to the html just create a div with class='DivToTable' and with innerHTML= json of the corresponding table object.
+	The structure of table object is described in the file Documentation/TableObject.txt.
+
+Other js works in a similar way of TableManager: DateInput.js and AjaxSelect.js
+DateInput.js:
+	Renders forms for getting dates. Works as TableManager but the class of the div is 'DivToDate' and its innerHTML is the json of an object containing as only property id, which is the identifier id of the dateinput.
+AjaxSelect.js:
+	Renders combobox implementing ajax. The div class have to be 'DivToSelect' and innerHTML has to be an object containing two property: id, type.
+	id is just the identifier of the dom, instead type is the type of content to suggest to the user.
+	The type can assume these values: 'contest', 'contestant', 'user'.
+	The corresponding server-side of AjaxSelect is the file Modify/SelectSuggestions.php. It receives the string written by the user (and the type of the select) and returns all possible options.

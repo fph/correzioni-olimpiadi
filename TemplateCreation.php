@@ -4,6 +4,8 @@ require_once "Utilities.php";
 SuperRequire_once("General","SessionManager.php");
 
 global $jsInclude, $cssInclude;
+//$jsInclude, $cssInclude contain the css and js which should be included in the page apart from the standard ones (as global.css)
+
 $jsInclude=['ViewParticipation'=>['CorrectionModification'], 
 			'ViewProblem'=>['CorrectionModification'], 
 			'AdminContestants'=>['AdminContestants'], 

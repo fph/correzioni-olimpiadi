@@ -6,3 +6,4 @@ This rules applied also to id and className in html and to all variables both in
 For data attributes snake_case should be used instead, as Uppercase isn't supported.
 
 FileNames: Always CamelCase, also single-word names, apart from index which must be written this way.
+Database Tables: Always CamelCase, also single-word names.
