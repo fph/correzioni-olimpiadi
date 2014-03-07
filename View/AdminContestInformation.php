@@ -38,17 +38,17 @@ global $v_contest;
 		<?php
 	}?>
 	<span class='ButtonsSubtitle'>
-	<span class='ModifyButtonContainer ButtonContainer'>
-		<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='OnModificationCorrectionsState()'>
+		<span class='ModifyButtonContainer ButtonContainer'>
+			<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='ModifyCorrectionsState()'>
 		</span>
-		
-	<span class='ConfirmButtonContainer ButtonContainer hidden'>
-		<img class='ConfirmButtonImage ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='ConfirmCorrectionsState()'>
-	</span>
+			
+		<span class='ConfirmButtonContainer ButtonContainer hidden'>
+			<img class='ConfirmButtonImage ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='ConfirmCorrectionsState()'>
+		</span>
 
-	<span class='CancelButtonContainer ButtonContainer hidden'>
-		<img class='CancelButtonImage ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='ClearCorrectionsState()'>
-	</span>
+		<span class='CancelButtonContainer ButtonContainer hidden'>
+			<img class='CancelButtonImage ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='CancelCorrectionsState()'>
+		</span>
 	</span>
 	</div>
 </div>

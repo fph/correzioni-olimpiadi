@@ -64,7 +64,7 @@ function CancelTitleModification(){
 	DateModificationContainer.classList.add('hidden');
 }
 
-function ClearCorrectionsState(){
+function CancelCorrectionsState(){
 	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
 	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
 
@@ -95,7 +95,7 @@ function MakeChangesCorrectionsState(response){
 		SetDataAttribute(CorrectionsState, 'old_value', GetDataAttribute(CorrectionsState, 'new_value'));
 	}
 	SetDataAttribute(CorrectionsState, 'new_value', null);
-	ClearCorrectionsState();
+	CancelCorrectionsState();
 }
 
 function ConfirmCorrectionsState(){
@@ -111,7 +111,7 @@ function ConfirmCorrectionsState(){
 }
 
 
-function OnModificationCorrectionsState(){
+function ModifyCorrectionsState(){
 	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
 	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
 	var NewStateHTML="<select class='corrections_state_select'>";
@@ -138,5 +138,4 @@ function OnModificationCorrectionsState(){
 	modify_button.classList.add('hidden');
 	confirm_button.classList.remove('hidden');
 	cancel_button.classList.remove('hidden');
-	//~ MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:unblock}, UnblockContest);
 }

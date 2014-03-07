@@ -55,3 +55,56 @@ function CancelTitleModification(){
 	SetDataAttribute(surname, "old_value", null);
 	SetDataAttribute(name, "old_value", null);
 }
+
+function EndSchoolModification() {
+	var subtitle=document.getElementsByClassName('PageSubtitle')[0];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.remove('hidden');
+	confirm_button.classList.add('hidden');
+	cancel_button.classList.add('hidden');
+	
+	var SchoolSpan=document.getElementById('ContestantSchool');
+	SchoolSpan.classList.remove('ContentEditable');
+	SchoolSpan.setAttribute('contenteditable','false');
+}
+
+function CancelSchool(){
+	EndSchoolModification();
+	var SchoolSpan=document.getElementById('ContestantSchool');
+	SchoolSpan.innerHTML=GetDataAttribute(SchoolSpan, 'old_value');
+	SetDataAttribute(SchoolSpan, 'old_value', null);
+}
+
+function MakeChangesSchool(response){
+	if( response.type=='bad' ) {
+		CancelSchool();
+	}
+}
+
+function ConfirmSchool(){
+	EndSchoolModification();
+	var SchoolSpan=document.getElementById('ContestantSchool');
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, school: SchoolSpan.innerHTML, type:'ChangeSchool'}, MakeChangesSchool);
+}
+
+
+function ModifySchool(){
+	var SchoolSpan=document.getElementById('ContestantSchool');
+	SetDataAttribute(SchoolSpan, 'old_value', SchoolSpan.innerHTML);
+	SchoolSpan.classList.add('ContentEditable');
+	SchoolSpan.setAttribute('contenteditable','true');
+	
+	var subtitle=document.getElementsByClassName('PageSubtitle')[0];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.add('hidden');
+	confirm_button.classList.remove('hidden');
+	cancel_button.classList.remove('hidden');
+}

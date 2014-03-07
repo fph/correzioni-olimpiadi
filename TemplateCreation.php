@@ -41,6 +41,10 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	?>
 <!DOCTYPE html>
 <html lang='it'>
+<!-- 	
+	Correzioni Olimpiadi - Written By walypala23 (Giada Franz) and dario2994 (Federico Glaudo)
+	Git repository : https://github.com/walypala23/correzioni-olimpiadi
+-->
 <head> 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title> Correzioni Olimpiadi</title>
@@ -50,9 +54,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/AjaxSelect.css'>
-<!--
-	<link rel="shortcut icon" href="../View/Images/Favicon.ico" title="Favicon">
--->
+<!-- <link rel="shortcut icon" href="../View/Images/Favicon.ico" title="Favicon"> -->
 
 <?php foreach( $cssInclude[$Content] as $cssName ) {
 		?>
