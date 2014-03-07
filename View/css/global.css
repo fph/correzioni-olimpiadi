@@ -21,6 +21,10 @@ select {
 	font: inherit;
 }
 
+button {
+	font-weight:bold;
+}
+
 /*
 	Page structure
 */
