@@ -47,5 +47,5 @@
 										'Gare'=>'ViewContests.php',
 										$v_contest['name']=>'ViewContestInformation.php?ContestId='.$ContestId,
 										'Partecipanti'=>'ViewContestantsOfAContest.php?ContestId='.$ContestId,
-										$v_contestant['name']." ".$v_contestant['surname']=>'ViewParticipation.php?ContestId='.$ContestId.'&ContestantId='.$ContestantId]);
+										$v_contestant['name']." ".$v_contestant['surname']=>'ViewParticipation.php?ContestId='.$ContestId.'&amp;ContestantId='.$ContestantId]);
 ?>

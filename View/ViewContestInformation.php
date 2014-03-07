@@ -20,7 +20,7 @@ global $v_contest;
 	<td>Partecipanti</td>
 	</tr>
 	
-	<tr class="trlink"onclick="Redirect('ViewProblemsOfAContest', {ContestId:<?=$v_contest['id']?>})">
+	<tr class="trlink" onclick="Redirect('ViewProblemsOfAContest', {ContestId:<?=$v_contest['id']?>})">
 	<td>Problemi</td>
 	</tr>
 	
