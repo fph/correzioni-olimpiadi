@@ -42,7 +42,7 @@ InsertTable( $table );
 	<tr>
 		<td> <input type="text" name="username" id="UsernameInput"> </td>
 		<td> <input type="text" name="password" id="PasswordInput"> </td>
-		<td> <input type="button" value="Aggiungi" onclick=AddUserRequest()> </td>
+		<td> <input type="button" value="Aggiungi" onclick="AddUserRequest()"> </td>
 	</tr>
 	</table>
 </div>

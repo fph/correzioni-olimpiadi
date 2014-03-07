@@ -44,7 +44,7 @@ global $v_contests;
 		<td> 
 			<div class='DivToDate'> <?=json_encode(['id'=>'ContestInputDate'])?></div>
 		</td>
-		<td> <input type="button" value="Aggiungi" onclick=AddContestRequest()> </td>
+		<td> <input type="button" value="Aggiungi" onclick="AddContestRequest()"> </td>
 	</tr>
 	</table>
 </div>
