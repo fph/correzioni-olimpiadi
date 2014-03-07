@@ -96,6 +96,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	</script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
+	<script type='text/javascript' src='../View/js/DateInput.js'> </script>
 </body>
 </html>
 	<?php

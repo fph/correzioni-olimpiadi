@@ -16,7 +16,7 @@ function ModifyTitle() {
 	SetDataAttribute(NameTitle, "old_value", NameTitle.innerHTML);
 	ItalianDate.classList.add('hidden');
 	DateModificationContainer.classList.remove('hidden');
-	SetDate(GetDataAttribute(ItalianDate, "raw_date"));
+	SetDate( GetDataAttribute(ItalianDate, "raw_date") , document.getElementById('TitleDateModification'));
 }
 
 function ProcessServerAnswer( Response ) {
@@ -26,8 +26,8 @@ function ProcessServerAnswer( Response ) {
 		var path=document.getElementsByClassName('PathElement');
 		path[path.length-1].innerHTML = NameTitle.innerHTML;
 		var ItalianDate=document.getElementById('ItalianDate');
-		var RawDate=document.getElementById('date_DateInput');
-		SetDataAttribute(ItalianDate, "raw_date", RawDate.value);
+		var RawDate=GetDateValue('TitleDateModification');
+		SetDataAttribute(ItalianDate, "raw_date", RawDate);
 	}
 }
 
@@ -38,14 +38,14 @@ function SendTitleModification(){
 	NameTitle.setAttribute('contenteditable','false');
 	
 	var ItalianDate=document.getElementById('ItalianDate');
-	var RawDate=document.getElementById('date_DateInput');
+	var RawDate=GetDateValue('TitleDateModification');
 	var DateModificationContainer=document.getElementById('DateModificationContainer');
-	ItalianDate.innerHTML= '- '+GetItalianDate(RawDate.value);
+	ItalianDate.innerHTML= '- '+GetItalianDate(RawDate);
 	ItalianDate.classList.remove('hidden');
 	DateModificationContainer.classList.add('hidden');
 	
 	MakeAjaxRequest('../Modify/ManageContest.php', 
-	{ContestId: ContestId, name:NameTitle.innerHTML, date:RawDate.value, type:'ChangeNameAndDate'} , 
+	{ContestId: ContestId, name:NameTitle.innerHTML, date:RawDate, type:'ChangeNameAndDate'} , 
 	ProcessServerAnswer);
 }
 

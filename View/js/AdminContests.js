@@ -12,7 +12,7 @@ function AddContest(response){ //TODO: Non va bene prendere i dati dal form, che
 }
 
 function AddContestRequest() {
-	var name=document.getElementById('NameInput').value;
-	var date=document.getElementById('date_DateInput').value;
+	var name=document.getElementById('ContestInputName').value;
+	var date=GetDateValue('ContestInputDate');
 	MakeAjaxRequest('../Modify/ManageContest.php', {name:name, date:date, type:'add'}, AddContest);
 }

@@ -40,9 +40,9 @@ global $v_contests;
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="name" id="NameInput"> </td>
+		<td> <input type="text" id="ContestInputName"> </td>
 		<td> 
-			<?php include 'DateInput.html' ?>
+			<div class='DivToDate'> <?=json_encode(['id'=>'ContestInputDate'])?></div>
 		</td>
 		<td> <input type="button" value="Aggiungi" onclick=AddContestRequest()> </td>
 	</tr>

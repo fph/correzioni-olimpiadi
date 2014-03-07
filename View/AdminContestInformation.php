@@ -13,7 +13,7 @@ global $v_contest;
 			} ?>
 		</span>
 		<span class='hidden' id='DateModificationContainer'>
-			<?php include 'DateInput.html' ?>
+			<div class='DivToDate'> <?=json_encode(['id'=>'TitleDateModification'])?></div>
 		</span>
 	</span>
 	
