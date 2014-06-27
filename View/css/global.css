@@ -189,4 +189,8 @@ div.FormContainer table {
 	border-radius: 3px;
 	background-color: white;
 	min-height: 1em;
+/*
+	box-sizing: border-box;
+	padding: 0px 5px;
+*/
 }
