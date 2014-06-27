@@ -9,7 +9,7 @@ function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comm
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 	
-	if( is_null( $mark ) ) { //TODO: Controllare che sia un voto numerico o quasi
+	if( is_null( $mark ) ) { //TODO: Controllare che sia un voto numerico o quasi... attualmente può essere qualunque cosa.
 		return ['type'=>'bad', 'text'=>'Devi scegliere un voto prima di salvare la correzione'];
 	}
 	

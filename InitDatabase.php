@@ -121,7 +121,7 @@ function CreateDatabase() {
 		`ProblemId` int NOT NULL,
 		`ContestantId` int NOT NULL,
 		`mark` int,
-		`comment` varchar('.comment_MAXLength.'),
+		`comment` varchar('.comment_MAXLength.') DEFAULT \'\',
 		`UserId` int,
 		
 		PRIMARY KEY (`id`),

@@ -22,7 +22,7 @@ $cssInclude=['AdminStatistics'=>['AdminStatistics']];
 
 function InsertTable( $table ) {
 	?>
-	<div class='DivToTable'>
+	<div class='DivToTable hidden'>
 	<?=json_encode( $table )?>
 	</div>
 <?php }

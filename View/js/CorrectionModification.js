@@ -82,8 +82,9 @@ function OnModification( row ) {
 	var CommentEditable=document.createElement('div');
 	CommentEditable.setAttribute('contenteditable', 'true');
 	CommentEditable.classList.add('ContentEditable');
-	if (CommentValue!='-') CommentEditable.innerHTML=CommentValue;
-	CommentTd.replaceChild(CommentEditable, CommentTd.childNodes[0]);
+	CommentEditable.innerHTML=CommentValue;
+	CommentTd.innerHTML='';
+	CommentTd.appendChild(CommentEditable);
 	
 	row.getElementsByClassName('ConfirmButtonImage')[0].classList.remove('hidden');
 	row.getElementsByClassName('CancelButtonImage')[0].classList.remove('hidden');

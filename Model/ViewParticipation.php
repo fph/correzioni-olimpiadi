@@ -24,17 +24,21 @@
 	$v_corrections=[];
 	
 	foreach($problems as $pro){
-		
 		$nn=OneResultQuery($db, QuerySelect('Corrections', 
 		['ProblemId'=>$pro['id'], 'ContestantId'=>$ContestantId], 
 		['mark','comment','UserId']
 		));
 		
-		if (is_null($nn)) $nn['done']=false;
-		else $nn['done']=true;
-		
+		if (is_null($nn)) {
+			$nn['done']=false;
+			$nn['mark']=$nn['UserId']=$nn['problem']=$nn['username']=null;
+			$nn['comment']='';
+		}
+		else {
+			$nn['done']=true;
+			$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
+		}
 		$nn['problem']=OneResultQuery($db, QuerySelect('Problems', ['id'=>$pro['id']]));
-		$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
 		
 		$v_corrections[]= $nn;
 	}
