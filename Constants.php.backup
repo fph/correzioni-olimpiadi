@@ -4,7 +4,7 @@ define('dbServer','localhost');
 define('dbUser','Olimpiadi');
 define('dbPass','alfabeto');
 define('dbName','CorOli');
-define('ServerRoot','/var/www/correzioni-olimpiadi');
+define('ServerRoot','/var/www/html/correzioni-olimpiadi');
 define('urlRoot','/correzioni-olimpiadi');
 //~ define('ServerRoot','/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-olimpiadi');
 //~ define('urlRoot','/~dario2994/correzioni-olimpiadi');
