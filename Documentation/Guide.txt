@@ -12,7 +12,7 @@ INSTALLATION
 		CREATE USER 'XXX'@'%' IDENTIFIED BY 'YYY';
 		GRANT ALL PRIVILEGES ON CorOli.* TO 'XXX'@'%' WITH GRANT OPTION;
 	
-	Now you have to configure Constants.php with the user and password just created, some urls referring to you server structure and some other options.
+	Now you have to configure Constants.php with the user and password just created, some urls referring to your server structure and some other options.
 	
 	Then execute InitDatabase.php which will create the whole database populating it nearly randomly.
 	
