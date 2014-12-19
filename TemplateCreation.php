@@ -24,7 +24,7 @@ $tablesInformation=[];
 function InsertTable( $table ) {
 	global $tablesInformation;
 ?>
-	<div class='divToTable hidden' id='divToTable<?=count($tablesInformation)?>'></div>
+	<div class='DivToTable hidden' id='DivToTable<?=count($tablesInformation)?>'></div>
 <?php 
 	$tablesInformation[]=$table;
 }
