@@ -260,8 +260,10 @@ function SortTableRows( table , ColumnId , ascending ) {
 }
 
 //The variable tablesInformation is defined server-side
-for(var i=0;i<tablesInformation.length;i++) {
-	var table=tablesInformation[i];
-	var DivToTable=document.getElementById('DivToTable'+i);
-	DivToTable.parentNode.replaceChild( RenderTable(table), DivToTable);
+if( tablesInformation != null ){
+	for(var i=0;i<tablesInformation.length;i++) {
+		var table=tablesInformation[i];
+		var DivToTable=document.getElementById('DivToTable'+i);
+		DivToTable.parentNode.replaceChild( RenderTable(table), DivToTable);
+	}
 }
