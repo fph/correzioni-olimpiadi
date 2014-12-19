@@ -18,10 +18,15 @@ function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comm
 	}
 	$mark=intval($mark);
 	
-	if( strlen( $comment ) > comment_MAXLength ) {
-		return ['type'=>'bad', 'text'=>'Il commento può avere al più '.comment_MAXLength.' caratteri, il tuo ne ha '.strlen( $comment )];
+	if( !is_string( $comment ) ) {
+		return ['type'=>'bad', 'text'=>'Il commento deve essere una stringa'];
 	}
-
+	
+	$comment=htmlentities($comment, ENT_QUOTES); //Escaping user comment
+	if( strlen( $comment ) > comment_MAXLength ) {
+		return ['type'=>'bad', 'text'=>'Il commento può avere al più '.comment_MAXLength.' caratteri, il tuo ne ha '.strlen( $comment ).' (i caratteri speciali valgono più degli altri)'];
+	}
+	
 	$Blocked=OneResultQuery($db, QuerySelect('Contests',['id'=>$ContestId],['blocked']))['blocked'];
 	if( $Blocked==1 ) {
 		return ['type'=>'bad', 'text'=>'Le correzioni della gara scelta sono terminate'];

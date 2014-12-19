@@ -5,8 +5,9 @@ SuperRequire_once("General","SessionManager.php");
 SuperRequire_once("General","sqlUtilities.php");
 
 function ChangeUsername ( $db , $UserId , $username ) {
+	$username=htmlentities($username,ENT_QUOTES);
 	if( !is_string($username) or strlen( $username )>username_MAXLength or strlen( $username )<username_MINLength ) {
-		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra '.username_MINLength.' e '.username_MAXLength];
+		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra '.username_MINLength.' e '.username_MAXLength.' (i caratteri speciali valgono più degli altri)'];
 	}
 	
 	$UsernameDuplicate=OneResultQuery($db,QuerySelect('Users',['username'=>$username]));
