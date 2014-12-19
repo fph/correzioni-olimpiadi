@@ -7,7 +7,7 @@ function RemoveParticipation(response){
 }
 
 function RemoveParticipationRequest(row){
-	var ContestantId=GetDataAttribute(row, "contestant_id");
+	var ContestantId=GetDataAttribute(row, 'contestant_id');
 	row.id='trashing'+ContestantId; //non è molto pulito
 	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId:ContestId, ContestantId:ContestantId, type:'RemoveParticipation'}, RemoveParticipation);
 }

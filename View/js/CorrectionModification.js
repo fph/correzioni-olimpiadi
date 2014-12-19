@@ -1,12 +1,12 @@
 function Clear(row) {
 	row.removeAttribute('id');
 	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
-	MarkTd.innerHTML=GetDataAttribute(MarkTd, "old_value");
-	SetDataAttribute(MarkTd, "old_value", null);
+	MarkTd.innerHTML=GetDataAttribute(MarkTd, 'old_value');
+	SetDataAttribute(MarkTd, 'old_value', null);
 	
 	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
-	CommentTd.innerHTML=GetDataAttribute(CommentTd, "old_value");
-	SetDataAttribute(CommentTd, "old_value", null);
+	CommentTd.innerHTML=GetDataAttribute(CommentTd, 'old_value');
+	SetDataAttribute(CommentTd, 'old_value', null);
 	
 	row.getElementsByClassName('ConfirmButtonImage')[0].classList.add('hidden');
 	row.getElementsByClassName('CancelButtonImage')[0].classList.add('hidden');
@@ -24,13 +24,13 @@ function MakeChanges(response){
 	var UserTd=row.getElementsByClassName('UsernameColumn')[0];
 	
 	if (response.type=='good') {
-		SetDataAttribute(MarkTd, "old_value", GetDataAttribute(MarkTd, "new_value"));
-		SetDataAttribute(CommentTd, "old_value", GetDataAttribute(CommentTd, "new_value"));
-		UserTd.innerHTML=GetDataAttribute(UserTd, "new_value");
+		SetDataAttribute(MarkTd, 'old_value', GetDataAttribute(MarkTd, 'new_value'));
+		SetDataAttribute(CommentTd, 'old_value', GetDataAttribute(CommentTd, 'new_value'));
+		UserTd.innerHTML=GetDataAttribute(UserTd, 'new_value');
 	}
-	SetDataAttribute(MarkTd, "new_value", null);
-	SetDataAttribute(CommentTd, "new_value", null);
-	SetDataAttribute(UserTd, "new_value", null);
+	SetDataAttribute(MarkTd, 'new_value', null);
+	SetDataAttribute(CommentTd, 'new_value', null);
+	SetDataAttribute(UserTd, 'new_value', null);
 	Clear(row);
 }
 
@@ -42,15 +42,15 @@ function Confirm(row){
 	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
 	var MarkSelect=MarkTd.getElementsByClassName('MarkSelect')[0];
 	var mark=MarkSelect.value;
-	SetDataAttribute(MarkTd, "new_value", mark);
+	SetDataAttribute(MarkTd, 'new_value', mark);
 	
 	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
 	var comment=CommentTd.getElementsByClassName('ContentEditable')[0].innerHTML;
-	SetDataAttribute(CommentTd, "new_value", comment);
+	SetDataAttribute(CommentTd, 'new_value', comment);
 	
 	var UserTd=row.getElementsByClassName('UsernameColumn')[0];
-	if ((GetDataAttribute(MarkTd, "old_value"))!=mark) SetDataAttribute(UserTd, "new_value", SessionUsername);
-	else SetDataAttribute(UserTd, "new_value", UserTd.innerHTML);
+	if ((GetDataAttribute(MarkTd, 'old_value'))!=mark) SetDataAttribute(UserTd, 'new_value', SessionUsername);
+	else SetDataAttribute(UserTd, 'new_value', UserTd.innerHTML);
 	
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 }
@@ -61,11 +61,11 @@ function OnModification( row ) {
 	
 	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
 	var MarkValue=MarkTd.innerHTML;
-	SetDataAttribute(MarkTd, "old_value", MarkValue);
+	SetDataAttribute(MarkTd, 'old_value', MarkValue);
 	
 	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
 	var CommentValue=CommentTd.innerHTML;
-	SetDataAttribute(CommentTd, "old_value", CommentValue);
+	SetDataAttribute(CommentTd, 'old_value', CommentValue);
 
 	var MarkSelect=document.createElement('select');
 	MarkSelect.classList.add('MarkSelect');

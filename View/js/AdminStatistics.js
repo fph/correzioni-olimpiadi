@@ -21,8 +21,8 @@ function AddContestToStatistics(){
 function Clear(row){
 	var WeightTd=row.getElementsByClassName('WeightColumn')[0];
 
-	WeightTd.innerHTML=GetDataAttribute(WeightTd, "old_value");
-	SetDataAttribute(WeightTd, "old_value", null);
+	WeightTd.innerHTML=GetDataAttribute(WeightTd, 'old_value');
+	SetDataAttribute(WeightTd, 'old_value', null);
 
 	row.getElementsByClassName('ConfirmButtonImage')[0].classList.add('hidden');
 	row.getElementsByClassName('CancelButtonImage')[0].classList.add('hidden');
@@ -44,7 +44,7 @@ function Confirm(row){
 	var WeightTd=row.getElementsByClassName('WeightColumn')[0];
 
 	var WeightValue=WeightTd.getElementsByClassName('ContentEditable')[0].innerHTML;
-	SetDataAttribute(WeightTd, "old_value", WeightValue);
+	SetDataAttribute(WeightTd, 'old_value', WeightValue);
 
 	Clear(row);
 }
@@ -53,7 +53,7 @@ function OnModification(row){
 
 	var WeightTd=row.getElementsByClassName('WeightColumn')[0];
 	var WeightValue=WeightTd.innerHTML;
-	SetDataAttribute(WeightTd, "old_value", WeightValue);
+	SetDataAttribute(WeightTd, 'old_value', WeightValue);
 
 
 	var WeightEditable=document.createElement('div');

@@ -6,7 +6,7 @@ function RemoveProblem(response){
 }
 
 function RemoveProblemRequest(row) {
-	var ProblemId=GetDataAttribute(row, "problem_id");
+	var ProblemId=GetDataAttribute(row, 'problem_id');
 	row.id='trashing'+ProblemId;
 	MakeAjaxRequest('../Modify/ManageContest.php', {ProblemId:ProblemId, type:'RemoveProblem'}, RemoveProblem);
 }
@@ -30,8 +30,8 @@ function Clear(row){
 	row.removeAttribute('id');
 
 	var ProblemTd=row.getElementsByClassName('ProblemColumn')[0];
-	ProblemTd.innerHTML=GetDataAttribute(ProblemTd, "old_value");
-	SetDataAttribute(ProblemTd, "old_value", null);
+	ProblemTd.innerHTML=GetDataAttribute(ProblemTd, 'old_value');
+	SetDataAttribute(ProblemTd, 'old_value', null);
 
 	row.getElementsByClassName('ConfirmButtonImage')[0].classList.add('hidden');
 	row.getElementsByClassName('CancelButtonImage')[0].classList.add('hidden');
@@ -50,9 +50,9 @@ function MakeChanges(response){
 	var row=document.getElementById('modifying');
 	var ProblemTd=row.getElementsByClassName('ProblemColumn')[0];
 	if (response.type=='good') {
-		SetDataAttribute(ProblemTd, "old_value", GetDataAttribute(ProblemTd, "new_value"));
+		SetDataAttribute(ProblemTd, 'old_value', GetDataAttribute(ProblemTd, 'new_value'));
 	}
-	SetDataAttribute(ProblemTd, "new_value", null);
+	SetDataAttribute(ProblemTd, 'new_value', null);
 	Clear(row);
 }
 
@@ -60,9 +60,9 @@ function Confirm(row) {
 	var ProblemTd=row.getElementsByClassName('ProblemColumn')[0];
 	
 	var ProblemName=ProblemTd.getElementsByClassName('ContentEditable')[0].innerHTML;
-	SetDataAttribute(ProblemTd, "new_value", ProblemName);
+	SetDataAttribute(ProblemTd, 'new_value', ProblemName);
 
-	var ProblemId=GetDataAttribute(row, "problem_id");
+	var ProblemId=GetDataAttribute(row, 'problem_id');
 	
 	MakeAjaxRequest('../Modify/ManageContest.php', {type:'ChangeProblemName', name:ProblemName, ProblemId:ProblemId}, MakeChanges);
 }
@@ -73,7 +73,7 @@ function OnModification(row){
 
 	var ProblemTd=row.getElementsByClassName('ProblemColumn')[0];
 	var ProblemValue=ProblemTd.innerHTML;
-	SetDataAttribute(ProblemTd, "old_value", ProblemValue);
+	SetDataAttribute(ProblemTd, 'old_value', ProblemValue);
 
 
 	var ProblemEditable=document.createElement('div');

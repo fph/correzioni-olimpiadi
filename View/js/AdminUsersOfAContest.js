@@ -7,7 +7,7 @@ function RemovePermission(response){
 }
 
 function RemovePermissionRequest(row){
-	var UserId=GetDataAttribute(row, "user_id");
+	var UserId=GetDataAttribute(row, 'user_id');
 	row.id='trashing'+UserId;
 	MakeAjaxRequest('../Modify/ManageUser.php', {ContestId:ContestId, UserId:UserId, type:'RemovePermission'}, RemovePermission);
 }
