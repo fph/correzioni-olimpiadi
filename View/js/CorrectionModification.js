@@ -45,7 +45,7 @@ function Confirm(row){
 	SetDataAttribute(MarkTd, 'new_value', mark);
 	
 	var CommentTd=row.getElementsByClassName('CommentColumn')[0];
-	var comment=CommentTd.getElementsByClassName('ContentEditable')[0].innerHTML;
+	var comment=CommentTd.getElementsByClassName('ContentEditable')[0].textContent; //textContent instead of innerHTML because browsers behaves differently with newlines in contentEditable
 	SetDataAttribute(CommentTd, 'new_value', comment);
 	
 	var UserTd=row.getElementsByClassName('UsernameColumn')[0];
