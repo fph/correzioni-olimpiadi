@@ -259,8 +259,9 @@ function SortTableRows( table , ColumnId , ascending ) {
 	table.parentNode.replaceChild( RenderTable(obj), table );
 }
 
-var DivToTable=document.getElementsByClassName('DivToTable');
-for(var i=0;i<DivToTable.length;i++) {
-	var table=JSON.parse(DivToTable[i].innerHTML);
-	DivToTable[i].parentNode.replaceChild( RenderTable(table), DivToTable[i]);
+//The variable tablesInformation is defined server-side
+for(var i=0;i<tablesInformation.length;i++) {
+	var table=tablesInformation[i];
+	var divToTable=document.getElementById('divToTable'+i);
+	divToTable.parentNode.replaceChild( RenderTable(table), divToTable);
 }

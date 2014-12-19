@@ -51,7 +51,7 @@ Modify Folder:
 JS IMPORTANT FILES
 TableManager.js : 	
 	It is the manager of all the tables with class InformationTables which appears in the site.
-	In order to add one of those tables to the html just create a div with class='DivToTable' and with innerHTML= json of the corresponding table object.
+	In order to add one of those tables to the html just use the function InsertTable (in TemplateCreation.php).
 	The structure of table object is described in the file Documentation/TableObject.txt.
 
 Other js works in a similar way of TableManager: DateInput.js and AjaxSelect.js

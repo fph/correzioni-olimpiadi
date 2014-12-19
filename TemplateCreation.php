@@ -20,12 +20,14 @@ $jsInclude=['ViewParticipation'=>['CorrectionModification'],
 			'AdminStatistics'=>['AdminStatistics'] ];
 $cssInclude=['AdminStatistics'=>['AdminStatistics']];
 
+$tablesInformation=[];
 function InsertTable( $table ) {
-	?>
-	<div class='DivToTable hidden'>
-	<?=json_encode( $table )?>
-	</div>
-<?php }
+	global $tablesInformation;
+?>
+	<div class='divToTable hidden' id='divToTable<?=count($tablesInformation)?>'></div>
+<?php 
+	$tablesInformation[]=$table;
+}
 
 function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){
 	if( $IsSessionToBeChecked ){
@@ -39,7 +41,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 			die();
 		}
 	}
-	global $jsInclude, $cssInclude;
+	global $jsInclude, $cssInclude, $tablesInformation;
 	?>
 <!DOCTYPE html>
 <html lang='it'>
@@ -97,6 +99,9 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 			ShowMessage( '<?=$Message['type']?>' , '<?=$Message['text']?>' );
 			<?php
 		} ?>
+	</script>
+	<script type='text/javascript'>
+		var tablesInformation=<?=json_encode( $tablesInformation )?>;
 	</script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
