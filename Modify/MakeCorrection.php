@@ -9,9 +9,14 @@ function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comm
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 	
-	if( is_null( $mark ) ) { //TODO: Controllare che sia un voto numerico o quasi... attualmente può essere qualunque cosa.
+	if( is_null( $mark ) ) {
 		return ['type'=>'bad', 'text'=>'Devi scegliere un voto prima di salvare la correzione'];
 	}
+	
+	if( !is_numeric( $mark ) or intval($mark)<0 or 7<intval($mark) ) {
+		return ['type'=>'bad', 'text'=>'Il voto deve essere un numero intero compreso tra 0 e 7'];
+	}
+	$mark=intval($mark);
 	
 	if( strlen( $comment ) > comment_MAXLength ) {
 		return ['type'=>'bad', 'text'=>'Il commento può avere al più '.comment_MAXLength.' caratteri, il tuo ne ha '.strlen( $comment )];
