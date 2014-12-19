@@ -17,7 +17,8 @@ global $v_corrections, $v_contestant, $v_contest;
 
 <h3 class="PageSubtitle">
 	<span class='contestant_title'>
-		<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
+		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
+		(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>)
 	</span>
 </h3>
 
@@ -50,9 +51,6 @@ if( $v_contest['blocked']==0 ) {
 
 InsertTable($table);
 ?>
-
-<!-- TODO: Fare uno stile decente per questo linkino del cazzo -->
-<a href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">Verbale di correzione</a>
 
 <script>
 	var ContestantId=<?=$v_contestant['id']?>;

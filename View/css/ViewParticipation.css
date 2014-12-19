@@ -1,0 +1,10 @@
+#CorrectionRecord {
+	text-decoration: none;
+	color: green;
+	font-weight:normal;
+}
+
+#CorrectionRecord:hover{
+	text-decoration: underline;
+	color: green;
+}
