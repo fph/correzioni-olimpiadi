@@ -20,6 +20,6 @@ global $v_contests;
 		if( $contest['blocked']==1 ) $row['values']['blocked'] = 'Correzioni terminate';
 		$rows[]=$row;
 	}
-	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date'] ];
-	InsertTable( $Table );
+	$table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date'] ];
+	InsertTable( $table );
 ?>

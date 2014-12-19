@@ -24,8 +24,8 @@ global $v_contests;
 		if( $contest['blocked']==1 ) $row['values']['blocked'] = 'Correzioni terminate';
 		$rows[]=$row;
 	}
-	$Table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'AdminContestInformation', 'id'=> 'AdminContestsTable', 'InitialOrder'=>['ColumnId'=>'date'] ];
-	InsertTable( $Table );
+	$table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'AdminContestInformation', 'id'=> 'AdminContestsTable', 'InitialOrder'=>['ColumnId'=>'date'] ];
+	InsertTable( $table );
 ?>
 
 <h3 class='PageSubtitle'>

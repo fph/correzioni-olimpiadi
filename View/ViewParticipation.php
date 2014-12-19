@@ -51,7 +51,7 @@ if( $v_contest['blocked']==0 ) {
 InsertTable($table);
 ?>
 
-<!-- Fare uno stile decente per questo linkino del cazzo -->
+<!-- TODO: Fare uno stile decente per questo linkino del cazzo -->
 <a href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">Verbale di correzione</a>
 
 <script>
