@@ -7,8 +7,8 @@ function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query='DROP DATABASE IF EXISTS `'.dbName.'`;'; //DEBUG
-	Query($db, $query);
+	//~ $query='DROP DATABASE IF EXISTS `'.dbName.'`;'; //DEBUG
+	//~ Query($db, $query);
 
 	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`;';
 	Query($db, $query);
