@@ -15,7 +15,7 @@
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <div class='DivToSelect'><?=json_encode(['id'=>'ContestInput','type'=>'contest'])?></div> </td>
+		<td> <?php InsertSelect(['id'=>'ContestInput','type'=>'contest']); ?> </td>
 		<td> <input type='number' step='0.01' name='weight' id='WeightInput' placeholder='0.5'> </td>
 		<td> <input type='button' value='Aggiungi' id='AddContestButton' onclick="AddContestToStatistics()"> </td>
 	</tr>

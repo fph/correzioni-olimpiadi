@@ -106,8 +106,11 @@ function RenderDate ( obj ) {
 	return ContainerSpan;
 }
 
-var DivToDate=document.getElementsByClassName('DivToDate');
-for(var i=0;i<DivToDate.length;i++) {
-	var date=JSON.parse(DivToDate[i].innerHTML);
-	DivToDate[i].parentNode.replaceChild( RenderDate(date), DivToDate[i]);
+//The variable datesInformation is defined server-side
+if( datesInformation != null ){
+	for(var i=0;i<datesInformation.length;i++) {
+		var date=datesInformation[i];
+		var DivToDate=document.getElementById('DivToDate'+i);
+		DivToDate.parentNode.replaceChild( RenderDate(date), DivToDate);
+	}
 }

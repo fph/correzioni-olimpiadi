@@ -45,7 +45,9 @@ function GetSelectSuggestions( input ){
 	else MakeAjaxRequest('../Modify/SelectSuggestions.php',{id: id, str:val,type: type},ListOptions,1);
 }
 
-function RenderSelect( id , type ) {
+function RenderSelect( obj ) {
+	var id=obj.id;
+	var type=obj.type;
 	var TextSelect = document.createElement('input');
 	TextSelect.classList.add('AjaxSelectText');
 	TextSelect.setAttribute('type','text');
@@ -103,8 +105,11 @@ function GetSelectValue( id ) {
 	return document.getElementById(id).getElementsByClassName('AjaxSelectValue')[0].value;
 }
 
-var DivToSelect=document.getElementsByClassName('DivToSelect');
-for(var i=0;i<DivToSelect.length;i++) {
-	var select=JSON.parse(DivToSelect[i].innerHTML);
-	DivToSelect[i].parentNode.replaceChild( RenderSelect( select.id, select.type ), DivToSelect[i]);
+//The variable selectsInformation is defined server-side
+if( selectsInformation != null ){
+	for(var i=0;i<selectsInformation.length;i++) {
+		var select=selectsInformation[i];
+		var DivToSelect=document.getElementById('DivToSelect'+i);
+		DivToSelect.parentNode.replaceChild( RenderSelect(select), DivToSelect);
+	}
 }

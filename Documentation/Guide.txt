@@ -56,9 +56,9 @@ TableManager.js :
 
 Other js works in a similar way of TableManager: DateInput.js and AjaxSelect.js
 DateInput.js:
-	Renders forms for getting dates. Works as TableManager but the class of the div is 'DivToDate' and its innerHTML is the json of an object containing as only property id, which is the identifier id of the dateinput.
+	Renders forms for getting dates. Works as TableManager but the date object is an object containing as only property id, which is the identifier id of the dateinput.
 AjaxSelect.js:
-	Renders combobox implementing ajax. The div class have to be 'DivToSelect' and innerHTML has to be an object containing two property: id, type.
+	Renders combobox implementing ajax. Works as TableManager but the select object is an object containing two property: id, type.
 	id is just the identifier of the dom, instead type is the type of content to suggest to the user.
 	The type can assume these values: 'contest', 'contestant', 'user'.
 	The corresponding server-side of AjaxSelect is the file Modify/SelectSuggestions.php. It receives the string written by the user (and the type of the select) and returns all possible options.

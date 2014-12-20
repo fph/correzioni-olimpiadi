@@ -22,12 +22,30 @@ $cssInclude=['AdminStatistics'=>['AdminStatistics'],
 			'ViewParticipation'=>['ViewParticipation'] ];
 
 $tablesInformation=[];
+$datesInformation=[];
+$selectsInformation=[];
 function InsertTable( $table ) {
 	global $tablesInformation;
 ?>
 	<div class='DivToTable hidden' id='DivToTable<?=count($tablesInformation)?>'></div>
 <?php 
 	$tablesInformation[]=$table;
+}
+
+function InsertDate( $date ) {
+	global $datesInformation;
+?>
+	<div class='DivToDate hidden' id='DivToDate<?=count($datesInformation)?>'></div>
+<?php 
+	$datesInformation[]=$date;
+}
+
+function InsertSelect( $select ) {
+	global $selectsInformation;
+?>
+	<div class='DivToSelect hidden' id='DivToSelect<?=count($selectsInformation)?>'></div>
+<?php 
+	$selectsInformation[]=$select;
 }
 
 function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){
@@ -42,7 +60,8 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 			die();
 		}
 	}
-	global $jsInclude, $cssInclude, $tablesInformation;
+	global $jsInclude, $cssInclude;
+	global $tablesInformation, $datesInformation, $selectsInformation;
 	?>
 <!DOCTYPE html>
 <html lang='it'>
@@ -103,6 +122,8 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	</script>
 	<script type='text/javascript'>
 		var tablesInformation=<?=json_encode( $tablesInformation )?>;
+		var datesInformation=<?=json_encode( $datesInformation )?>;
+		var selectsInformation=<?=json_encode( $selectsInformation )?>;
 	</script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>

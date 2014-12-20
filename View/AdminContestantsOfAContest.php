@@ -51,7 +51,7 @@ InsertTable( $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <div class='DivToSelect'><?=json_encode(['id'=>'ContestantInput', 'type'=>'contestant'])?></div> </td>
+		<td> <?php InsertSelect(['id'=>'ContestantInput', 'type'=>'contestant']); ?></td>
 		<td> <input type='button' value='Aggiungi' onclick="AddParticipationRequest()"> </td>
 	</tr>
 	</table>
