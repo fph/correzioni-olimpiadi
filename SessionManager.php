@@ -1,34 +1,40 @@
 <?php
 	require_once "Utilities.php";
 	
+	
+	//TODO: Un po' lento forse
+	function LoadSession() { //If you just call session_start instead of this function, a notice might be raised.
+		if( session_status()==PHP_SESSION_NONE ) session_start();
+	}
+	
 	function StartSession($UserId, $username){
-		session_start();
+		LoadSession();
 		$_SESSION["UserId"]=$UserId;
 		$_SESSION['username']=$username;
 		$_SESSION["LoginTimestamp"]=time();
 	}
 	
 	function EndSession(){
-		session_start();
+		LoadSession();
 		session_unset();
 		session_destroy();
 	}
 	
 	function CheckSession() {
-		session_start();
+		LoadSession();
 		if ( !isset($_SESSION["UserId"]) ) return 0;
 		if ( time()-$_SESSION["LoginTimestamp"]>3600 ) return -1;
 		return 1;
 	}
 	
 	function GetUserIdBySession() {
-		session_start();
+		LoadSession();
 		if( isset($_SESSION['UserId']) ) return $_SESSION['UserId'];
 		else return -1;
 	}
 	
 	function GetUsernameBySession() {
-		session_start();
+		LoadSession();
 		if( isset($_SESSION['username']) ) return $_SESSION['username'];
 		else return '';
 	}

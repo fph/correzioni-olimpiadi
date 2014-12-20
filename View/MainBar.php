@@ -4,13 +4,13 @@
 			<h1 id="MainBar_title"> Olimpiadi di Matematica - Correzioni</h1>
 			
 			<?php
-				session_start();
-				if( isset($_SESSION['UserId']) ) {
+				global $MainBarUserId, $MainBarUsername;
+				if( $MainBarUserId!=-1 ) {
 			?>
 			<div id="MainBar_UserList">
 				<a href="AccountSettings.php" id="UsernameLink"> 
 					<span id="UsernameInner">
-						<?=$_SESSION['username']?>
+						<?=$MainBarUsername?>
 					</span>
 				</a>
 				<a href="Logout.php" id="logout"> Logout </a>

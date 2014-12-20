@@ -80,24 +80,34 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<link type='text/css' rel='stylesheet' href='../View/css/AjaxSelect.css'>
 <!-- <link rel="shortcut icon" href="../View/Images/Favicon.ico" title="Favicon"> -->
 
-<?php foreach( $cssInclude[$Content] as $cssName ) {
-		?>
-		<link type='text/css' rel='stylesheet' href='../View/css/<?=$cssName?>.css'>
-		<?php
-	} ?>	
-	
+<?php 
+	if( isset($cssInclude[$Content]) ) {
+		foreach( $cssInclude[$Content] as $cssName ) {
+			?>
+			<link type='text/css' rel='stylesheet' href='../View/css/<?=$cssName?>.css'>
+			<?php
+		} 	
+	} ?>
 	<script type='text/javascript' src='../View/js/global.js'> </script>
 	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
-<?php foreach( $jsInclude[$Content] as $jsName ) {
-		?>
-		<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
-		<?php
+<?php 
+	if( isset($cssInclude[$Content]) ) {
+		foreach( $jsInclude[$Content] as $jsName ) {
+			?>
+			<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
+			<?php
+		}
 	} ?>
 </head>
 
 <body> 
-	<?php SuperInclude("View","MainBar.php"); ?>
+	<?php 
+		global $MainBarUserId, $MainBarUsername;
+		$MainBarUserId=GetUserIdBySession();
+		$MainBarUsername=GetUsernameBySession();
+		SuperInclude("View","MainBar.php"); 
+	?>
 	<div class="internalBody" id="<?=$Content;?>_InternalBody">
 	
 	<?php

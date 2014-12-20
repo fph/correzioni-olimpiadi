@@ -7,16 +7,16 @@ SuperRequire_once("General", "TemplateCreation.php");
 
 $SessionStatus=CheckSession();
 
-if( CheckSession() == -1 ) {
+if( $SessionStatus == -1 ) {
 	EndSession();
 	TemplatePage("Login",[],0,['type'=>'bad', 'text'=>"La sessione è scaduta, fai login di nuovo"]);
 	die();
 }
-else if( CheckSession() == 1 ) {
+else if( $SessionStatus == 1 ) {
 	SuperRedirect("Model","index.php");
 	die();
 }
-else if ( CheckSession()==0 and !is_null($_POST["username"]) ) {
+else if ( $SessionStatus==0 and isset($_POST["username"]) ) {
 	$db=OpenDbConnection();
 	$UserId=OneResultQuery($db, QuerySelect('Users',
 	['username'=>$_POST['username'],'passHash'=>passwordHash( $_POST['password'] )],
@@ -35,5 +35,5 @@ else if ( CheckSession()==0 and !is_null($_POST["username"]) ) {
 		die();
 	}
 }
-else if( CheckSession()==0 ) TemplatePage("Login",[],0);
+else if( $SessionStatus==0 ) TemplatePage("Login",[],0);
 ?>
