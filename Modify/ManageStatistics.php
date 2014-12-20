@@ -9,6 +9,7 @@
 		// $contests as an array (an element has id, name, weight, problems array)
 		// AllContestant= associative array AllContestants[ContestantId] has id, surname, name, marks=associative array (ProblemId=>mark)
 		
+		//~ TODO: Si dà per scontato che i dati passati dall'utente siano ben formati (non è una falla di sicurezza, ma potrebbe generare warning)
 		$ContestNumber=count($list);
 		$contests=[];
 		$AllContestants=[];

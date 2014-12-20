@@ -133,7 +133,7 @@ function QueryDelete($tableName, $constraints) {
 	return $query;
 }
 
-function QueryCompletion($tableName, $constraintsLike, $constraintsEqual, $data, $RowsNumber) {
+function QueryCompletion($tableName, $constraintsLike=null, $constraintsEqual=null, $data=null, $RowsNumber=null) {
 	$query='SELECT ';
 	if( !is_null($data) ) {
 		$first=0;
