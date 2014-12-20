@@ -33,9 +33,9 @@ foreach($v_corrections as $correction) {
 	$row=['values'=>[
 		'surname'=>$correction['contestant']['surname'],
 		'name'=>$correction['contestant']['name'],
-		'mark'=>$correction['mark'],
-		'comment'=>$correction['comment'],
-		'user'=>$correction['username']
+		'mark'=>( isset($correction['mark']) )? $correction['mark'] : null,
+		'comment'=>( isset($correction['comment']) )? $correction['comment'] : null,
+		'user'=>( isset($correction['username']) )? $correction['username'] : null
 		], 'data'=>['contestant_id'=>$correction['contestant']['id'] ] ];
 	$rows[]=$row;
 }

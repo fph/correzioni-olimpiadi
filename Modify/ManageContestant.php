@@ -84,7 +84,7 @@ function ChangeNameAndSurname($db , $ContestantId, $name, $surname) {
 	}
 	
 	Query( $db, QueryUpdate('Contestants', ['id'=>$ContestantId], ['name'=>$name, 'surname'=>$surname]));
-	return ['type'=>'good', 'text'=>'Nome e cognome del partecipanti sono stati modificati con successo', 'data'=>[
+	return ['type'=>'good', 'text'=>'Nome e cognome del partecipante sono stati modificati con successo', 'data'=>[
 		'ContestantId'=>$ContestantId, 'name'=>$name, 'surname'=>$surname
 	]];
 }

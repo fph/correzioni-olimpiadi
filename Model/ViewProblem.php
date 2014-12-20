@@ -24,8 +24,8 @@
 		if (!is_null($nn)) $nn['done']=true;
 		else $nn['done']=false;
 		$nn['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
-		$nn['surname']=$nn['contestant']['surname'];
-		$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
+		$nn['surname']=$nn['contestant']['surname']; //Used for sorting
+		if( $nn['done'] ) $nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
 		$v_corrections[]=$nn;
 	}
 	

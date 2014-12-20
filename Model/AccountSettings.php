@@ -46,7 +46,8 @@ $db=OpenDbConnection();
 
 $Message;
 
-if( $_POST['type'] == 'ChangeUsername' ) $Message=ChangeUsername( $db , GetUserIdBySession(), $_POST['NewUsername'] );
+if ( !isset($_POST['type']) ) $Message=null;
+else if( $_POST['type'] == 'ChangeUsername' ) $Message=ChangeUsername( $db , GetUserIdBySession(), $_POST['NewUsername'] );
 else if ( $_POST['type'] == 'ChangePassword' ) $Message=ChangePassword( $db , GetUserIdBySession() , $_POST['OldPassword'] , $_POST['NewPassword']);
 else  $Message=null;
 

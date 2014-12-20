@@ -28,7 +28,7 @@
 			$ContestParticipations=ManyResultQuery($db, QuerySelect('Participations',['ContestId'=>$id]) );
 			foreach( $ContestParticipations as $participation ) {
 				$ContestantId=$participation['ContestantId'];
-				if( is_null($AllContestants[$ContestantId]) ){
+				if( !isset($AllContestants[$ContestantId]) ){
 					$contestant=OneResultQuery($db,QuerySelect('Contestants',['id'=>$ContestantId]));
 					$AllContestants[$ContestantId]=$contestant;
 				}
@@ -67,7 +67,7 @@
 			foreach($contests as $contest) {
 				$SubTotal=0;
 				foreach($contest['problems'] as $problem) {
-					if( !is_null( $contestant['marks'][$problem['id']] ) ) {
+					if( isset( $contestant['marks'][$problem['id']] ) ) {
 						$values['Problem'.$problem['id']]=$contestant['marks'][$problem['id']];
 						$mark=intval($contestant['marks'][$problem['id']]);
 						$SubTotal+=$mark;
