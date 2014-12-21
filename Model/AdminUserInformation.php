@@ -21,13 +21,11 @@
 	$v_admin=IsAdmin($db, $UserId);
 	if( $v_admin == 1) {
 		$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
-		//~ usort($v_contests, build_sorter('date'));
 	}
 	else {
 		$contests=ManyResultQuery($db, QuerySelect('Permissions', ['UserId'=>$UserId]));
 		foreach($contests as $con) {
 			$v_contests[]=OneResultQuery($db, QuerySelect('Contests', ['id'=>$con['ContestId']]));
-			//~ usort($v_contests, build_sorter('date'));
 		}
 	}
 	

@@ -15,8 +15,6 @@
 	foreach($all_contests as $contest){
 		if (VerifyPermission($db, $UserId, $contest['id'])) $v_contests[]=$contest;
 	}
-
-	//~ usort($v_contests, build_sorter('date'));
 	
 	$db->close();
 	
