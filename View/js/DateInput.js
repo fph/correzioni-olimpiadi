@@ -74,6 +74,7 @@ function RenderDate ( obj ) {
 	var InputHidden=document.createElement('input');
 	InputHidden.setAttribute('type','hidden');
 	InputHidden.classList.add('DateInputDate');
+	InputHidden.value='2000-01-01';
 	ContainerSpan.appendChild(InputHidden);
 	var select=[];
 	var XYZ=['day','month','year'];

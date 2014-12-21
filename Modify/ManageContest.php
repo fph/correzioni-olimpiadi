@@ -5,9 +5,21 @@ SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
 SuperRequire_once('Modify','ObjectSender.php');
 	
+function ValidateDate( $date ) {
+	if( !is_string($date) ) return false;
+	$d=DateTime::createFromFormat('Y-m-d', $date);
+	if( $d==null or $d->format('Y-m-d')!=$date ) return false;
+	if( intval($d->format('Y'))<2000 or 2020<intval($d->format('Y')) ) return false;
+	return true;
+}
+	
 function AddContest($db, $name, $date) {
 	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
 		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
+	}
+	
+	if( !ValidateDate( $date ) ) {
+		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
 	}
 	
 	Query($db, QueryInsert('Contests',['name'=>$name, 'date'=>$date, 'blocked'=>0]));
@@ -66,6 +78,10 @@ function ChangeName($db, $ContestId, $name) {
 }
 
 function ChangeDate($db, $ContestId, $date) {
+	if( !ValidateDate( $date ) ) {
+		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
+	}
+	
 	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	if( is_null($Exist1) ) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
@@ -78,6 +94,10 @@ function ChangeDate($db, $ContestId, $date) {
 function ChangeNameAndDate($db, $ContestId, $name, $date) {
 	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
 		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
+	}
+	
+	if( !ValidateDate( $date ) ) {
+		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
 	}
 	
 	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
