@@ -21,7 +21,7 @@ function AddUser( $db , $username, $password ){
 		return ['type'=>'bad', 'text'=>'È già presente un correttore con lo stesso username'];
 	}
 
-	Query( $db,QueryInsert('Users', ['username'=>$username,'passHash'=>passwordHash($password) ]) );
+	Query( $db,QueryInsert('Users', ['username'=>$username,'passHash'=>PasswordHash($password) ]) );
 	
 	return ['type'=>'good', 'text'=>'Correttore creato con successo', 'data'=>['UserId'=>$db->insert_id, 'username'=>$username] ];
 }
@@ -127,7 +127,7 @@ function ChangePassword( $db , $UserId, $password ){
 		return ['type'=>'bad' ,'text'=>'Il correttore selezionato non esiste'];
 	}
 	
-	Query( $db,QueryUpdate('Users', ['id'=>$Userid] , ['passHash'=>passwordHash($password)]) );
+	Query( $db,QueryUpdate('Users', ['id'=>$Userid] , ['passHash'=>PasswordHash($password)]) );
 	
 	return ['type'=>'good', 'text'=>'Password cambiata con successo'];
 }

@@ -150,7 +150,7 @@ function PopulateUsers($db) {
 			['username'=>'walypala23', 	'password'=>'gamma'], 
 			['username'=>'SimoTheWolf', 'password'=>'vero o falso?']];
 	foreach($Users as $User){
-		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>passwordHash($User['password'])]));
+		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>PasswordHash($User['password'])]));
 	}
 
 	echo "Table Users Populated.\n";

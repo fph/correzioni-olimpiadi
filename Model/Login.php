@@ -19,7 +19,7 @@ else if( $SessionStatus == 1 ) {
 else if ( $SessionStatus==0 and isset($_POST["username"]) ) {
 	$db=OpenDbConnection();
 	$UserId=OneResultQuery($db, QuerySelect('Users',
-	['username'=>$_POST['username'],'passHash'=>passwordHash( $_POST['password'] )],
+	['username'=>$_POST['username'],'passHash'=>PasswordHash( $_POST['password'] )],
 	['id']
 	) ) ['id'];
 	

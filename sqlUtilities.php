@@ -22,7 +22,7 @@ function EscapeInput($value) {
 	return $value;
 }
 
-function passwordHash($pass) {
+function PasswordHash($pass) {
 	$salt="trecentoquarantaseidue";
 	return crypt($pass,$salt);
 }
@@ -35,7 +35,7 @@ function OpenDbConnection() {
 	return $db;
 }
 
-function QuerySelect($tableName, $constraints=NULL, $data=NULL, $order=NULL) {
+function QuerySelect($TableName, $constraints=NULL, $data=NULL, $order=NULL) {
 	$query='SELECT ';
 	if( !is_null($data) ) {
 		$first=0;
@@ -48,7 +48,7 @@ function QuerySelect($tableName, $constraints=NULL, $data=NULL, $order=NULL) {
 		}
 	}
 	else $query.='* ';
-	$query.=' FROM '.$tableName.' ';
+	$query.=' FROM '.$TableName.' ';
 	
 	if( !is_null( $constraints ) ) {
 		$query .='WHERE ';
@@ -69,8 +69,8 @@ function QuerySelect($tableName, $constraints=NULL, $data=NULL, $order=NULL) {
 	return $query;
 }
 
-function QueryUpdate($tableName, $constraints, $data) {
-	$query="UPDATE ".$tableName." SET ";
+function QueryUpdate($TableName, $constraints, $data) {
+	$query="UPDATE ".$TableName." SET ";
 	if( !is_null($data) ) {
 		$first=0;
 		foreach ( $data as $field => $value ) {
@@ -98,29 +98,29 @@ function QueryUpdate($tableName, $constraints, $data) {
 	return $query;
 }
 
-function QueryInsert($tableName, $data) {
+function QueryInsert($TableName, $data) {
 	if( is_null($data) ) die( "EMPTY INSERT" );
-	$query='INSERT INTO '.$tableName.' ';
-	$queryField='(';
-	$queryValue='VALUES(';
+	$query='INSERT INTO '.$TableName.' ';
+	$QueryField='(';
+	$QueryValue='VALUES(';
 	$first=0;
 	foreach ($data as $field => $value) {
 		if($first==1){
-			$queryField .= ',';
-			$queryValue .= ',';
+			$QueryField .= ',';
+			$QueryValue .= ',';
 		}
 		$first=1;
-		$queryField .= $field;
-		$queryValue .= EscapeInput( $value );
+		$QueryField .= $field;
+		$QueryValue .= EscapeInput( $value );
 	}
-	$queryField .= ')';
-	$queryValue .=')';
+	$QueryField .= ')';
+	$QueryValue .=')';
 	
-	return $query.' '.$queryField.' '.$queryValue;
+	return $query.' '.$QueryField.' '.$QueryValue;
 }
 
-function QueryDelete($tableName, $constraints) {
-	$query='DELETE FROM '.$tableName.' ';
+function QueryDelete($TableName, $constraints) {
+	$query='DELETE FROM '.$TableName.' ';
 	if( !is_null( $constraints ) ){
 		$query .= 'WHERE ';
 		$first=0;
@@ -133,7 +133,7 @@ function QueryDelete($tableName, $constraints) {
 	return $query;
 }
 
-function QueryCompletion($tableName, $constraintsLike=null, $constraintsEqual=null, $data=null, $RowsNumber=null) {
+function QueryCompletion($TableName, $ConstraintsLike=null, $ConstraintsEqual=null, $data=null, $RowsNumber=null) {
 	$query='SELECT ';
 	if( !is_null($data) ) {
 		$first=0;
@@ -146,11 +146,11 @@ function QueryCompletion($tableName, $constraintsLike=null, $constraintsEqual=nu
 		}
 	}
 	else $query.='* ';
-	$query.=' FROM '.$tableName.' ';
+	$query.=' FROM '.$TableName.' ';
 	
 	$first=0;
-	if( !is_null( $constraintsEqual ) ) {
-		foreach ( $constraintsEqual as $field => $value ) {
+	if( !is_null( $ConstraintsEqual ) ) {
+		foreach ( $ConstraintsEqual as $field => $value ) {
 			if( $first==0 ) {
 				$query .= 'WHERE '.$field.'='.EscapeInput($value).' ';
 				$first=1;
@@ -158,8 +158,8 @@ function QueryCompletion($tableName, $constraintsLike=null, $constraintsEqual=nu
 			else $query .= 'AND '.$field.'='.EscapeInput($value).' ';
 		}
 	}
-	if( !is_null( $constraintsLike ) ) {
-		foreach ( $constraintsLike as $field => $value ) {
+	if( !is_null( $ConstraintsLike ) ) {
+		foreach ( $ConstraintsLike as $field => $value ) {
 			if( $first==0 ) {
 				$query .= 'WHERE '.$field.' LIKE '.EscapeInput($value.'%').' ';
 				$first=1;
@@ -199,31 +199,31 @@ function BuildSorter($key) {
 
 function GetExtendedItalianDate($date){
 	if ($date==null) return $date;
-	$dividedDate=explode("-",$date);
-	$italianDate=strval(intval($dividedDate[2]))." ";
+	$DividedDate=explode("-",$date);
+	$ItalianDate=strval(intval($DividedDate[2]))." ";
 	
 	$month=$dividedDate[1];
-	if ($month=='01') $italianDate.="gennaio";
-	if ($month=='02') $italianDate.="febbraio";
-	if ($month=='03') $italianDate.="marzo";
-	if ($month=='04') $italianDate.="aprile";
-	if ($month=='05') $italianDate.="maggio";
-	if ($month=='06') $italianDate.="giugno";
-	if ($month=='07') $italianDate.="luglio";
-	if ($month=='08') $italianDate.="agosto";
-	if ($month=='09') $italianDate.="settembre";
-	if ($month=='10') $italianDate.="ottobre";
-	if ($month=='11') $italianDate.="novembre";
-	if ($month=='12') $italianDate.="dicembre";
-	$italianDate.=" ".$dividedDate[0];
-	return $italianDate;
+	if ($month=='01') $ItalianDate.="gennaio";
+	if ($month=='02') $ItalianDate.="febbraio";
+	if ($month=='03') $ItalianDate.="marzo";
+	if ($month=='04') $ItalianDate.="aprile";
+	if ($month=='05') $ItalianDate.="maggio";
+	if ($month=='06') $ItalianDate.="giugno";
+	if ($month=='07') $ItalianDate.="luglio";
+	if ($month=='08') $ItalianDate.="agosto";
+	if ($month=='09') $ItalianDate.="settembre";
+	if ($month=='10') $ItalianDate.="ottobre";
+	if ($month=='11') $ItalianDate.="novembre";
+	if ($month=='12') $ItalianDate.="dicembre";
+	$ItalianDate.=" ".$dividedDate[0];
+	return $ItalianDate;
 }
 
 function GetRestrictedItalianDate($date){
 	if ($date==null) return $date;
-	$dividedDate=explode("-",$date);
-	$italianDate=$dividedDate[2]."/".$dividedDate[1]."/".$dividedDate[0];
-	return $italianDate;
+	$DividedDate=explode("-",$date);
+	$ItalianDate=$DividedDate[2]."/".$DividedDate[1]."/".$DividedDate[0];
+	return $ItalianDate;
 }
 
 function GetItalianDate($date){

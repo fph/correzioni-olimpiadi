@@ -32,12 +32,12 @@ function ChangePassword( $db , $UserId , $OldPassword , $NewPassword ) {
 		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra '.password_MINLength.' e '.password_MAXLength];
 	}
 	
-	$CorrectOldPass=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId,'passHash'=>passwordHash($OldPassword) ] ) );
+	$CorrectOldPass=OneResultQuery($db,QuerySelect('Users',['id'=>$UserId,'passHash'=>PasswordHash($OldPassword) ] ) );
 	if( is_null($CorrectOldPass) ) {
 		return ['type'=>'bad', 'text'=>'La vecchia password non è corretta'];
 	}
 	
-	Query($db,QueryUpdate('Users',['id'=>$UserId],['passHash'=>passwordHash($NewPassword)]));
+	Query($db,QueryUpdate('Users',['id'=>$UserId],['passHash'=>PasswordHash($NewPassword)]));
 	
 	return ['type'=>'good', 'text'=>'Password cambiata con successo'];
 }

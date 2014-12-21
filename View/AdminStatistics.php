@@ -34,9 +34,9 @@
 	$buttons[]=['name'=>'trash', 'onclick'=>'RemoveContest'];
 	$buttons[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
 	$buttons[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
-	
-	$Table=['columns'=>$columns, 'rows'=> $rows, 'buttons'=>$buttons, 'InitialOrder'=>['ColumnId'=>'contest'], 'id'=>'AdminContestWeightTable' ];
-	InsertTable( $Table );
+	//TODO: Spostare id prima, per uniformare allo standard
+	$table=['columns'=>$columns, 'rows'=> $rows, 'buttons'=>$buttons, 'InitialOrder'=>['ColumnId'=>'contest'], 'id'=>'AdminContestWeightTable' ];
+	InsertTable( $table );
 ?>
 
 <button id='ViewStatisticsButton' onclick='ViewStatisticsRequest()'>Vedi statistiche</button>
