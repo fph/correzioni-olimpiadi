@@ -27,7 +27,7 @@ foreach($v_contestants as $contestant) {
 	$rows[]=$row;
 } 
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'InitialOrder'=>['ColumnId'=>'surname'] ];
 
 InsertTable( $table );
 ?>

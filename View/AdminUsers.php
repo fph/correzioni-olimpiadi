@@ -23,7 +23,7 @@ foreach($v_users as $user) {
 	$rows[]=$row;
 } 
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminUserInformation', 'id'=>'AdminUsersTable'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminUserInformation', 'id'=>'AdminUsersTable', 'InitialOrder'=>['ColumnId'=>'username'] ];
 
 InsertTable( $table );
 ?>

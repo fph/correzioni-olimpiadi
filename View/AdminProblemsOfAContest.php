@@ -37,7 +37,7 @@ $buttons[]=['name'=>'trash', 'onclick'=>'RemoveProblemRequest'];
 $buttons[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
 $buttons[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminProblemsOfAContestTable' ];
+$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminProblemsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'problem'] ];
 
 InsertTable($table);
 ?>

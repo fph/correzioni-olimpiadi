@@ -40,7 +40,7 @@ foreach($v_corrections as $correction) {
 	$rows[]=$row;
 }
 
-$table=['columns'=>$columns, 'rows'=>$rows ];
+$table=['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'problem'] ];
 if( $v_contest['blocked']==0 ) {
 	$images=[];
 	$images[]=['name'=>'modify', 'onclick'=>'OnModification'];

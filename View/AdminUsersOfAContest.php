@@ -35,7 +35,7 @@ foreach($v_users as $user) {
 $buttons=[];
 $buttons[]=['name'=>'trash', 'onclick'=>'RemovePermissionRequest'];
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminUsersOfAContestTable'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminUsersOfAContestTable', 'InitialOrder'=>['ColumnId'=>'username'] ];
 
 InsertTable( $table );
 ?>

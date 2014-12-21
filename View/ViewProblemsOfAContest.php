@@ -26,7 +26,7 @@ foreach ($v_problems as $problem) {
 	$rows[]=$row;
 }
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewProblem'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewProblem', 'InitialOrder'=>['ColumnId'=>'problem'] ];
 
 InsertTable($table);
 ?>

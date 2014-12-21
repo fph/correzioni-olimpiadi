@@ -15,8 +15,6 @@
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	
 	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], null));
-
-	usort($v_problems,BuildSorter('name'));
 	
 	$db->close();
 		

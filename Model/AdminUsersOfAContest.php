@@ -30,9 +30,6 @@
 		$v_users[]=$nn;
 	}
 	
-	usort($v_users, BuildSorter('username'));
-	
-	
 	
 	$db->close();
 	

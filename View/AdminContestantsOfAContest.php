@@ -35,7 +35,7 @@ foreach($v_contestants as $contestant) {
 $buttons=[];
 $buttons[]=['name'=>'trash', 'onclick'=>'RemoveParticipationRequest'];
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminContestantsOfAContestTable'];
+$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminContestantsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'surname']];
 
 InsertTable( $table );
 ?>

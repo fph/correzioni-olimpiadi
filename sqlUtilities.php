@@ -193,7 +193,7 @@ function Query($db, $query) {
 //Compare function to pass to usort for sorting an array of object, using the property $key
 function BuildSorter($key) {
 	return function ($a, $b) use ($key) {
-		return strcasecmp($a[$key], $b[$key]);
+		return strnatcasecmp($a[$key], $b[$key]);
 	};
 }
 
@@ -202,7 +202,7 @@ function GetExtendedItalianDate($date){
 	$DividedDate=explode("-",$date);
 	$ItalianDate=strval(intval($DividedDate[2]))." ";
 	
-	$month=$dividedDate[1];
+	$month=$DividedDate[1];
 	if ($month=='01') $ItalianDate.="gennaio";
 	if ($month=='02') $ItalianDate.="febbraio";
 	if ($month=='03') $ItalianDate.="marzo";
@@ -215,7 +215,7 @@ function GetExtendedItalianDate($date){
 	if ($month=='10') $ItalianDate.="ottobre";
 	if ($month=='11') $ItalianDate.="novembre";
 	if ($month=='12') $ItalianDate.="dicembre";
-	$ItalianDate.=" ".$dividedDate[0];
+	$ItalianDate.=" ".$DividedDate[0];
 	return $ItalianDate;
 }
 
