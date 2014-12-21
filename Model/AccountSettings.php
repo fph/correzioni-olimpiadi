@@ -26,7 +26,7 @@ function ChangeUsername ( $db , $UserId , $username ) {
 	
 	return ['type'=>'good', 'text'=>'Username cambiato con successo'];
 }
-//~ 
+
 function ChangePassword( $db , $UserId , $OldPassword , $NewPassword ) {
 	if( !is_string($NewPassword) or strlen( $NewPassword )>password_MAXLength or strlen( $NewPassword )<password_MINLength ) {
 		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra '.password_MINLength.' e '.password_MAXLength];
@@ -39,7 +39,7 @@ function ChangePassword( $db , $UserId , $OldPassword , $NewPassword ) {
 	
 	Query($db,QueryUpdate('Users',['id'=>$UserId],['passHash'=>passwordHash($NewPassword)]));
 	
-	return['type'=>'good', 'text'=>'Password cambiata con successo'];
+	return ['type'=>'good', 'text'=>'Password cambiata con successo'];
 }
 
 $db=OpenDbConnection();
