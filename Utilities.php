@@ -5,6 +5,7 @@
 		if( $type == "Model" ) return "/Model/$path";
 		else if( $type=="View" ) return "/View/$path";
 		else if( $type=="General" ) return "/$path";
+		else if( $type=="Modify" ) return "/Modify/$path";
 	}
 	
 	function GenerateIncludePath($type,$path){

@@ -3,6 +3,7 @@ require_once '../Utilities.php';
 SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
+SuperRequire_once('Modify','ObjectSender.php');
 
 //Receive the request to create a user, check whether the username is already used and if both password an username satisfy some rules.
 //If all is ok create the user.
@@ -134,18 +135,18 @@ function ChangePassword( $db , $UserId, $password ){
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
-	echo json_encode( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire i correttori'] );
+	SendObject( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire i correttori'] );
 	die();
 }
 
 $data=json_decode( $_POST['data'] , 1);
-if( $data['type'] == 'add' ) echo json_encode( AddUser( $db, $data['username'], $data['password'] ) );
-else if( $data['type'] == 'remove' ) echo json_encode( RemoveUser( $db, $data['UserId'] ) );
-else if( $data['type'] == 'AddPermission' ) echo json_encode( AddPermission( $db, $data['UserId'], $data['ContestId'] ) );
-else if( $data['type'] == 'RemovePermission' ) echo json_encode( RemovePermission( $db, $data['UserId'], $data['ContestId'] ) );
-else if( $data['type'] == 'ChangeUsername' ) echo json_encode( ChangeUsername( $db, $data['UserId'], $data['username'] ) );
-else if( $data['type'] == 'ChangePassword' ) echo json_encode( ChangePassword( $db, $data['UserId'], $data['password'] ) );
-else echo json_encode( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
+if( $data['type'] == 'add' ) SendObject( AddUser( $db, $data['username'], $data['password'] ) );
+else if( $data['type'] == 'remove' ) SendObject( RemoveUser( $db, $data['UserId'] ) );
+else if( $data['type'] == 'AddPermission' ) SendObject( AddPermission( $db, $data['UserId'], $data['ContestId'] ) );
+else if( $data['type'] == 'RemovePermission' ) SendObject( RemovePermission( $db, $data['UserId'], $data['ContestId'] ) );
+else if( $data['type'] == 'ChangeUsername' ) SendObject( ChangeUsername( $db, $data['UserId'], $data['username'] ) );
+else if( $data['type'] == 'ChangePassword' ) SendObject( ChangePassword( $db, $data['UserId'], $data['password'] ) );
+else SendObject( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
 
 
 $db -> close();

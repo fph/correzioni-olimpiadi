@@ -3,6 +3,7 @@ require_once '../Utilities.php';
 SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
+SuperRequire_once('Modify','ObjectSender.php');
 
 function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comment) {
 	if( is_null( $ContestId ) ) {
@@ -66,7 +67,7 @@ $comment=$data['comment'];
 $db=OpenDbConnection();
 $ContestId=OneResultQuery($db, QuerySelect( 'Problems', ['id'=>$ProblemId], ['ContestId'] ))['ContestId'];
 
-echo json_encode( MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comment) );
+SendObject( MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comment) );
 
 $db->close();
 ?>

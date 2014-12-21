@@ -3,6 +3,7 @@ require_once '../Utilities.php';
 SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
+SuperRequire_once('Modify','ObjectSender.php');
 	
 function AddContest($db, $name, $date) {
 	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
@@ -138,22 +139,22 @@ function ChangeProblemName( $db, $ProblemId, $name ){
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
-	echo json_encode( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire i partecipanti'] );
+	SendObject( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire le gare o i problemi'] );
 	die();
 }
 
 $data=json_decode( $_POST['data'] , 1);
-if( $data['type'] == 'add' ) echo json_encode( AddContest( $db, $data['name'], $data['date'] ) );
-else if( $data['type'] == 'remove' ) echo json_encode( RemoveContest( $db, $data['ContestId'] ) );
-else if( $data['type'] == 'block' ) echo json_encode( BlockContest( $db, $data['ContestId'] ) );
-else if( $data['type'] == 'unblock' ) echo json_encode( UnblockContest( $db, $data['ContestId'] ) );
-else if( $data['type'] == 'ChangeName' ) echo json_encode( ChangeName( $db, $data['ContestId'] , $data['name']) );
-else if( $data['type'] == 'ChangeDate' ) echo json_encode( ChangeDate( $db, $data['ContestId'] , $data['date']) );
-else if( $data['type'] == 'ChangeNameAndDate' ) echo json_encode( ChangeNameAndDate( $db, $data['ContestId'] , $data['name'], $data['date']) );
-else if( $data['type'] == 'AddProblem' ) echo json_encode( AddProblem( $db, $data['ContestId'] , $data['name']) );
-else if( $data['type'] == 'RemoveProblem' ) echo json_encode( RemoveProblem( $db, $data['ProblemId'] ) );
-else if( $data['type'] == 'ChangeProblemName' ) echo json_encode( ChangeProblemName( $db, $data['ProblemId'] , $data['name']) );
-else echo json_encode( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
+if( $data['type'] == 'add' ) SendObject( AddContest( $db, $data['name'], $data['date'] ) );
+else if( $data['type'] == 'remove' ) SendObject( RemoveContest( $db, $data['ContestId'] ) );
+else if( $data['type'] == 'block' ) SendObject( BlockContest( $db, $data['ContestId'] ) );
+else if( $data['type'] == 'unblock' ) SendObject( UnblockContest( $db, $data['ContestId'] ) );
+else if( $data['type'] == 'ChangeName' ) SendObject( ChangeName( $db, $data['ContestId'] , $data['name']) );
+else if( $data['type'] == 'ChangeDate' ) SendObject( ChangeDate( $db, $data['ContestId'] , $data['date']) );
+else if( $data['type'] == 'ChangeNameAndDate' ) SendObject( ChangeNameAndDate( $db, $data['ContestId'] , $data['name'], $data['date']) );
+else if( $data['type'] == 'AddProblem' ) SendObject( AddProblem( $db, $data['ContestId'] , $data['name']) );
+else if( $data['type'] == 'RemoveProblem' ) SendObject( RemoveProblem( $db, $data['ProblemId'] ) );
+else if( $data['type'] == 'ChangeProblemName' ) SendObject( ChangeProblemName( $db, $data['ProblemId'] , $data['name']) );
+else SendObject( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
 
 $db -> close();
 ?>

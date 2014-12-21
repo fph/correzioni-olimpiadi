@@ -3,6 +3,7 @@ require_once '../Utilities.php';
 SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','PermissionManager.php');
+SuperRequire_once('Modify','ObjectSender.php');
 
 
 function AddContestant( $db , $name, $surname, $school ){
@@ -106,18 +107,18 @@ function ChangeSchool($db, $ContestantId, $school) {
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
-	echo json_encode( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire i partecipanti'] );
+	SendObject( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire i partecipanti'] );
 	die();
 }
 
 $data=json_decode( $_POST['data'] , 1);
-if( $data['type'] == 'add' ) echo json_encode( AddContestant( $db, $data['name'], $data['surname'], $data['school'] ) );
-else if( $data['type'] == 'remove' ) echo json_encode( RemoveContestant( $db, $data['ContestantId'] ) );
-else if( $data['type'] == 'AddParticipation' ) echo json_encode( AddParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
-else if( $data['type'] == 'RemoveParticipation' ) echo json_encode( RemoveParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
-else if( $data['type'] == 'ChangeNameAndSurname' ) echo json_encode( ChangeNameAndSurname( $db, $data['ContestantId'], $data['name'], $data['surname'] ) );
-else if( $data['type'] == 'ChangeSchool') echo json_encode( ChangeSchool( $db, $data['ContestantId'], $data['school'] ) );
-else echo json_encode( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
+if( $data['type'] == 'add' ) SendObject( AddContestant( $db, $data['name'], $data['surname'], $data['school'] ) );
+else if( $data['type'] == 'remove' ) SendObject( RemoveContestant( $db, $data['ContestantId'] ) );
+else if( $data['type'] == 'AddParticipation' ) SendObject( AddParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
+else if( $data['type'] == 'RemoveParticipation' ) SendObject( RemoveParticipation( $db, $data['ContestantId'], $data['ContestId'] ) );
+else if( $data['type'] == 'ChangeNameAndSurname' ) SendObject( ChangeNameAndSurname( $db, $data['ContestantId'], $data['name'], $data['surname'] ) );
+else if( $data['type'] == 'ChangeSchool') SendObject( ChangeSchool( $db, $data['ContestantId'], $data['school'] ) );
+else SendObject( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
 
 
 $db -> close();

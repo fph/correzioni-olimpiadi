@@ -3,6 +3,7 @@
 	SuperRequire_once('General','SessionManager.php');
 	SuperRequire_once('General','sqlUtilities.php');
 	SuperRequire_once('General','PermissionManager.php');
+	SuperRequire_once('Modify','ObjectSender.php');
 
 	function MultipleRanking( $db, $list ) { //Returns the table containing weighted result (using list[i]['ContestId'] and list[i]['weight'])
 		//This first part makes query to db and keeps information in: 
@@ -91,11 +92,11 @@
 	$db= OpenDbConnection();
 	if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 		$db -> close();
-		echo json_encode( ['type'=>'good', 'text'=>'Non hai i permessi per gestire i partecipanti'] );
+		SendObject( ['type'=>'bad', 'text'=>'Non hai i permessi per vedere le statistiche'] );
 		die();
 	}
 	
 	$data=json_decode( $_POST['data'] , 1);
 	
-	echo json_encode( MultipleRanking( $db, $data ) );
+	SendObject( MultipleRanking( $db, $data ) );
 ?>

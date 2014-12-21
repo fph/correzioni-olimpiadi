@@ -3,6 +3,7 @@
 	SuperRequire_once('General','SessionManager.php');
 	SuperRequire_once('General','sqlUtilities.php');
 	SuperRequire_once('General','PermissionManager.php');
+	SuperRequire_once('Modify','ObjectSender.php');
 
 	function GetContest( $db, $str ) {
 		$query=QueryCompletion('Contests',['name'=>$str]);
@@ -58,14 +59,14 @@
 	$db= OpenDbConnection();
 	if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 		$db -> close();
-		echo json_encode( [] );
+		SendObject( [] );
 		die();
 	}
 	
 	$data=json_decode($_POST['data'],1);
 	if(is_null($data)) {
 		$db -> close();
-		echo json_encode( [] );
+		SendObject( [] );
 		die();
 	}
 	$type=$data['type'];
@@ -74,14 +75,14 @@
 	
 	if( !is_string($str) or strlen($str)==0 ) { //Do not give suggestions if string is empty
 		$db->close();
-		echo json_encode( ['id'=>$id, 'list'=> [] ]);
+		SendObject( ['id'=>$id, 'list'=> [] ]);
 		die();
 	}
 	
-	if( $type == 'contest' ) echo json_encode( ['id'=>$id, 'list'=> GetContest($db, $str)] );
-	else if( $type == 'contestant' ) echo json_encode( ['id'=>$id, 'list'=> GetContestant($db, $str)] );
-	else if( $type == 'user' ) echo json_encode( ['id'=>$id, 'list'=> GetUser($db, $str)] );
-	else echo json_encode( ['id'=>$id, 'list'=> [] ] );
+	if( $type == 'contest' ) SendObject( ['id'=>$id, 'list'=> GetContest($db, $str)] );
+	else if( $type == 'contestant' ) SendObject( ['id'=>$id, 'list'=> GetContestant($db, $str)] );
+	else if( $type == 'user' ) SendObject( ['id'=>$id, 'list'=> GetUser($db, $str)] );
+	else SendObject( ['id'=>$id, 'list'=> [] ] );
 	
 	$db -> close();
 ?>
