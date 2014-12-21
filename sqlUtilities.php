@@ -35,7 +35,7 @@ function OpenDbConnection() {
 	return $db;
 }
 
-function QuerySelect($TableName, $constraints=NULL, $data=NULL, $order=NULL) {
+function QuerySelect($TableName, $constraints=null, $data=null, $order=null) {
 	$query='SELECT ';
 	if( !is_null($data) ) {
 		$first=0;

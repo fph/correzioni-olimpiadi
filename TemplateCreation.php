@@ -48,7 +48,7 @@ function InsertSelect( $select ) {
 	$selectsInformation[]=$select;
 }
 
-function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=NULL ){
+function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=null ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
 		if( $SessionSituation==-1 ) {
