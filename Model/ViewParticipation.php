@@ -19,7 +19,7 @@
 	
 	$problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId]));
 
-	usort($problems,build_sorter('name'));
+	usort($problems,BuildSorter('name'));
 	
 	$v_corrections=[];
 	

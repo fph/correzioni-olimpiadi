@@ -191,7 +191,7 @@ function Query($db, $query) {
 }
 
 //Compare function to pass to usort for sorting an array of object, using the property $key
-function build_sorter($key) {
+function BuildSorter($key) {
 	return function ($a, $b) use ($key) {
 		return strcasecmp($a[$key], $b[$key]);
 	};

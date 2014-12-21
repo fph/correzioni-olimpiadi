@@ -13,7 +13,7 @@ global $v_contest, $v_problems, $v_contestants;
 	$columns=[];
 	$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>['SurnameAndNameColumn'], 'order'=>1, 'type'=>'string'];
 	
-	usort($v_problems, build_sorter('name'));
+	usort($v_problems, BuildSorter('name'));
 	foreach($v_problems as $problem) {
 		$columns[]=['id'=>strval( $problem['id']), 'name'=>$problem['name'], 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
 	}

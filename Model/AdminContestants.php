@@ -13,7 +13,7 @@
 	
 	$v_contestants=ManyResultQuery($db, QuerySelect('Contestants'));
 
-	usort($v_contestants, build_sorter('surname'));
+	usort($v_contestants, BuildSorter('surname'));
 		
 	$db->close();
 	

@@ -30,7 +30,7 @@
 		$v_users[]=$nn;
 	}
 	
-	usort($v_users, build_sorter('username'));
+	usort($v_users, BuildSorter('username'));
 	
 	
 	

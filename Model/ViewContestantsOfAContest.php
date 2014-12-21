@@ -21,7 +21,7 @@
 		$con=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
 	}
 	
-	usort($v_contestants, build_sorter('surname'));
+	usort($v_contestants, BuildSorter('surname'));
 	
 	
 	

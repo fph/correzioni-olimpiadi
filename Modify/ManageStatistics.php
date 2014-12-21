@@ -36,7 +36,7 @@
 			}
 			
 			$contest['problems']=ManyResultQuery($db, QuerySelect('Problems',['ContestId'=>$id]) );
-			usort($contest['problems'], build_sorter('name'));
+			usort($contest['problems'], BuildSorter('name'));
 			$ProbNum=count($contest['problems']);
 			
 			for($j=0;$j<$ProbNum;$j++) {

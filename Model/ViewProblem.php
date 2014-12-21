@@ -29,7 +29,7 @@
 		$v_corrections[]=$nn;
 	}
 	
-	usort($v_corrections, build_sorter('surname'));
+	usort($v_corrections, BuildSorter('surname'));
 	
 	$db->close();
 	
