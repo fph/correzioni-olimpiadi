@@ -115,8 +115,8 @@ function NumberCompare(a,b) {
 	if(a==null && b==null) return 0;
 	else if(a==null) return -1;
 	else if(b==null) return 1;
-	var x=parseInt(a);
-	var y=parseInt(b);
+	var x=parseFloat(a);
+	var y=parseFloat(b);
 	if( x==y ) return 0;
 	return ((x<y)?-1:1);
 }
