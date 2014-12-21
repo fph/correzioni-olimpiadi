@@ -65,14 +65,51 @@ function CreateRow( obj , row) {
 	return tr;
 }
 
+//Splits a string for natural sorting ( AB120.txt -> 'AB', 120, '.txt' )
+function SplitString( s ) {
+	var res=[];
+	var num=0;
+	var str="";
+	var ChunkType="null";
+	for( var i=0; i<s.length; i++ ) {
+		console.log(res);
+		if( '0'<=s[i] && s[i]<='9' ) {
+			if( ChunkType=="string" ) {
+				res.push(str);
+				str="";
+			}
+			ChunkType="number";
+			num=10*num+parseInt(s[i]);
+		}
+		else {
+			if( ChunkType=="number" ) {
+				res.push(num);
+				num=0;
+			}
+			ChunkType="string";
+			str+=s[i];
+		}
+	}
+	if( ChunkType=="number" ) res.push(num);
+	if( ChunkType=="string" ) res.push(str);
+	
+	return res;
+}
+
 function StringCompare(a,b) {
 	if(a==null && b==null) return 0;
 	else if(a==null) return -1;
 	else if(b==null) return 1;
-	var x=a.toLowerCase();
-	var y=b.toLowerCase();
-	if( x==y ) return 0;
-	return ((x<y)?-1:1);
+	var x=SplitString( a.toLowerCase() );
+	var y=SplitString( b.toLowerCase() );
+	for( var i=0; i<Math.min(x.length, y.length); i++ ) {
+		if( typeof(x[i])==typeof(y[i]) ) {
+			if( x[i]!=y[i] ) return ((x[i]<y[i])?-1:1);
+		}
+		else return ( (typeof(x[i])=='number')?-1:1 );
+	}
+	if( x.length==y.length ) return 0;
+	return ((x.length<y.length)?-1:1); //DA AGGIUSTARE!
 }
 
 function NumberCompare(a,b) {
