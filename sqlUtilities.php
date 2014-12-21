@@ -11,9 +11,9 @@ $TableInformation=array(
 	'Users' => array('id','username','passHash'),
 );
 
-function escape_input($value) {
+function EscapeInput($value) {
 	if (is_null($value)) return 'NULL';
-	if ( !is_string($value) and !is_int($value) ) die("The value passed to escape_input is not a string nor an integer.");
+	if ( !is_string($value) and !is_int($value) ) die("The value passed to EscapeInput is not a string nor an integer.");
 	if (get_magic_quotes_gpc()) $value = stripslashes($value);
 	if ( is_string($value) ) {
 		$mysqli=new mysqli(dbServer, dbUser, dbPass);
@@ -55,10 +55,10 @@ function QuerySelect($tableName, $constraints=NULL, $data=NULL, $order=NULL) {
 		$first=0;
 		foreach ( $constraints as $field => $value ) {
 			if( $first==0 ) {
-				$query .= $field.'='.escape_input($value).' ';
+				$query .= $field.'='.EscapeInput($value).' ';
 				$first=1;
 			}
-			else $query .= 'AND '.$field.'='.escape_input($value).' ';
+			else $query .= 'AND '.$field.'='.EscapeInput($value).' ';
 		}
 	} 
 	
@@ -75,10 +75,10 @@ function QueryUpdate($tableName, $constraints, $data) {
 		$first=0;
 		foreach ( $data as $field => $value ) {
 			if( $first==0 ){
-				$query .= $field.' = '.escape_input($value).' '; 
+				$query .= $field.' = '.EscapeInput($value).' '; 
 				$first=1;
 			}
-			else $query .=', '.$field.' = '.escape_input($value).' ';
+			else $query .=', '.$field.' = '.EscapeInput($value).' ';
 		}
 	}
 	else die( "EMPTY UPDATE" );
@@ -88,10 +88,10 @@ function QueryUpdate($tableName, $constraints, $data) {
 		$first=0;
 		foreach ( $constraints as $field => $value ) {
 			if( $first==0 ) {
-				$query .= $field.'='.escape_input($value).' ';
+				$query .= $field.'='.EscapeInput($value).' ';
 				$first=1;
 			}
-			else $query .= 'AND '.$field.'='.escape_input($value).' ';
+			else $query .= 'AND '.$field.'='.EscapeInput($value).' ';
 		}
 	}
 	
@@ -111,7 +111,7 @@ function QueryInsert($tableName, $data) {
 		}
 		$first=1;
 		$queryField .= $field;
-		$queryValue .= escape_input( $value );
+		$queryValue .= EscapeInput( $value );
 	}
 	$queryField .= ')';
 	$queryValue .=')';
@@ -127,7 +127,7 @@ function QueryDelete($tableName, $constraints) {
 		foreach ( $constraints as $field => $value ) {
 			if( $first==1 ) $query .= 'AND ';
 			$first=1;
-			$query .= $field.'='.escape_input($value).' ';
+			$query .= $field.'='.EscapeInput($value).' ';
 		}
 	}
 	return $query;
@@ -152,19 +152,19 @@ function QueryCompletion($tableName, $constraintsLike=null, $constraintsEqual=nu
 	if( !is_null( $constraintsEqual ) ) {
 		foreach ( $constraintsEqual as $field => $value ) {
 			if( $first==0 ) {
-				$query .= 'WHERE '.$field.'='.escape_input($value).' ';
+				$query .= 'WHERE '.$field.'='.EscapeInput($value).' ';
 				$first=1;
 			}
-			else $query .= 'AND '.$field.'='.escape_input($value).' ';
+			else $query .= 'AND '.$field.'='.EscapeInput($value).' ';
 		}
 	}
 	if( !is_null( $constraintsLike ) ) {
 		foreach ( $constraintsLike as $field => $value ) {
 			if( $first==0 ) {
-				$query .= 'WHERE '.$field.' LIKE '.escape_input($value.'%').' ';
+				$query .= 'WHERE '.$field.' LIKE '.EscapeInput($value.'%').' ';
 				$first=1;
 			}
-			else $query .= 'AND '.$field.' LIKE '.escape_input($value.'%').' ';
+			else $query .= 'AND '.$field.' LIKE '.EscapeInput($value.'%').' ';
 		}
 	}
 	

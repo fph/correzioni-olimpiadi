@@ -72,7 +72,6 @@ function SplitString( s ) {
 	var str="";
 	var ChunkType="null";
 	for( var i=0; i<s.length; i++ ) {
-		console.log(res);
 		if( '0'<=s[i] && s[i]<='9' ) {
 			if( ChunkType=="string" ) {
 				res.push(str);
