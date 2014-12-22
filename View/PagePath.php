@@ -5,7 +5,7 @@
 		foreach($v_PathDescription as $name => $link) {
 			if( $first==1 ) { 
 				?>
-				<strong class='PathSeparator'> &lt; </strong>
+				<strong class='PathSeparator'> &gt; </strong>
 				<?php 
 			} ?>
 			<a class='PathElement' href='<?=$link?>'>
