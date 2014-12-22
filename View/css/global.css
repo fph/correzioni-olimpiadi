@@ -33,8 +33,8 @@ div.internalBody {
     width: 80%;
     background: white;
     margin: 0 auto;
-    border-left: solid 1px black;
-    border-right:solid 1px black;
+    border-left: solid 1px gray;
+    border-right:solid 1px gray;
     position: absolute;
     top: 0px;
     left:0px;
@@ -171,12 +171,12 @@ div.FormContainer table {
 
 .CorrectionsCompleted {
 	font-style:italic;
-	color:red;
+	color:#33CC33;
 }
 
 .CorrectionsInProgress {
 	font-style:italic;
-	color:#33CC33;
+	color:gray;
 }
 
 /*

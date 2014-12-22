@@ -1,7 +1,7 @@
 <div id="MainBar_container">
 	<div id="MainBar_floater">
 		<div id="MainBar_inner">
-			<h1 id="MainBar_title"> Olimpiadi di Matematica - Correzioni</h1>
+			<a href='index.php'> <h1 id="MainBar_title"> Olimpiadi di Matematica - Correzioni </h1> </a>
 			
 			<?php
 				global $MainBarUserId, $MainBarUsername;
