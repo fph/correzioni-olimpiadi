@@ -21,11 +21,14 @@
 	
 	foreach ($contestants as $con) {
 		$nn=OneResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$ProblemId, 'ContestantId'=>$con['ContestantId']]));
-		if (!is_null($nn)) $nn['done']=true;
-		else $nn['done']=false;
+		if ( is_null($nn) ) {
+			$nn['mark']=$nn['username']=null;
+			$nn['comment']='';
+		}
+		else {
+			$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
+		}
 		$nn['contestant']=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
-		$nn['surname']=$nn['contestant']['surname']; //Used for sorting
-		if( $nn['done'] ) $nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
 		$v_corrections[]=$nn;
 	}
 	

@@ -28,12 +28,10 @@
 		));
 		
 		if (is_null($nn)) {
-			$nn['done']=false;
-			$nn['mark']=$nn['UserId']=$nn['problem']=$nn['username']=null;
+			$nn['mark']=$nn['UserId']=$nn['username']=null; //UserId is defined only to have the same object structure in both cases.
 			$nn['comment']='';
 		}
 		else {
-			$nn['done']=true;
 			$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
 		}
 		$nn['problem']=OneResultQuery($db, QuerySelect('Problems', ['id'=>$pro['id']]));
