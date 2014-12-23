@@ -1,8 +1,8 @@
 function ShowMessage( type , text ) {
-	var Message=document.createElement('div');
-	Message.className=type+'_Message';
-	Message.innerHTML=text;
-	document.getElementById('MessageList').appendChild(Message);
-	if( type=='good' ) setTimeout(function(){ document.getElementById('MessageList').removeChild(Message); },3000);
-	if( type=='bad'  ) setTimeout(function(){ document.getElementById('MessageList').removeChild(Message); },5000);
+	var message=document.createElement('div');
+	message.className=CFL(type)+'Message';
+	message.innerHTML=text;
+	document.getElementById('MessageList').appendChild(message);
+	if( type=='good' ) setTimeout(function(){ document.getElementById('MessageList').removeChild(message); },3000);
+	if( type=='bad'  ) setTimeout(function(){ document.getElementById('MessageList').removeChild(message); },5000);
 }
