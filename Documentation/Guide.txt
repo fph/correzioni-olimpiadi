@@ -33,7 +33,7 @@ PermissionManager.php :
 SessionManager.php : 
 	A php file to handle session.
 TemplateCreation.php : 
-	The file which creates all the html pages shown in the browser. It is based on the function TemplatePage which receive the $Content=View name, and various other optional parameters. This is the MUST in order to create the page for a Model file.
+	The file which creates all the html pages shown in the browser. It is based on the function TemplatePage which receive the $content=View name, and various other optional parameters. This is the MUST in order to create the page for a Model file.
 	It automatically builds the template of the page, includes some css and js and then put the content in the right position.
 
 Model folder:

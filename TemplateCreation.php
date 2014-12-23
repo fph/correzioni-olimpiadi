@@ -48,7 +48,7 @@ function InsertSelect( $select ) {
 	$selectsInformation[]=$select;
 }
 
-function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Message=null ){
+function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $Message=null ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
 		if( $SessionSituation==-1 ) {
@@ -81,8 +81,8 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 <!-- <link rel="shortcut icon" href="../View/Images/Favicon.ico" title="Favicon"> -->
 
 <?php 
-	if( isset($cssInclude[$Content]) ) {
-		foreach( $cssInclude[$Content] as $cssName ) {
+	if( isset($cssInclude[$content]) ) {
+		foreach( $cssInclude[$content] as $cssName ) {
 			?>
 			<link type='text/css' rel='stylesheet' href='../View/css/<?=$cssName?>.css'>
 			<?php
@@ -92,8 +92,8 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
 <?php 
-	if( isset($jsInclude[$Content]) ) {
-		foreach( $jsInclude[$Content] as $jsName ) {
+	if( isset($jsInclude[$content]) ) {
+		foreach( $jsInclude[$content] as $jsName ) {
 			?>
 			<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
 			<?php
@@ -108,7 +108,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 		$MainBarUsername=GetUsernameBySession();
 		SuperInclude("View","MainBar.php"); 
 	?>
-	<div class="internalBody" id="<?=$Content;?>_InternalBody">
+	<div class="internalBody" id="<?=$content?>_InternalBody">
 	
 	<?php
 		global $v_PathDescription;
@@ -116,7 +116,7 @@ function TemplatePage($Content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 		SuperInclude("View","PagePath.php");
 	?>
 		<div id="ContentContainer">
-			<?php SuperInclude("View",$Content.".php"); ?>
+			<?php SuperInclude("View",$content.".php"); ?>
 		</div>
 	</div>
 	

@@ -8,11 +8,11 @@
 	
 	$db=OpenDbConnection();
 	
-	$all_contests=ManyResultQuery($db, QuerySelect('Contests'));
+	$allContests=ManyResultQuery($db, QuerySelect('Contests'));
 	
 	$UserId=getUserIdBySession();
 	$v_contests=[];
-	foreach($all_contests as $contest){
+	foreach($allContests as $contest){
 		if (VerifyPermission($db, $UserId, $contest['id'])) $v_contests[]=$contest;
 	}
 	
