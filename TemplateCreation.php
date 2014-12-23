@@ -48,7 +48,7 @@ function InsertSelect( $select ) {
 	$selectsInformation[]=$select;
 }
 
-function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $Message=null ){
+function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $message=null ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
 		if( $SessionSituation==-1 ) {
@@ -124,9 +124,9 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $Mess
 	<script type='text/javascript'>
 		var SessionUsername='<?=GetUsernameBySession()?>';
 		<?php
-		if( !is_null( $Message ) ){
+		if( !is_null( $message ) ){
 			?>
-			ShowMessage( '<?=$Message['type']?>' , '<?=$Message['text']?>' );
+			ShowMessage( '<?=$message['type']?>' , '<?=$message['text']?>' );
 			<?php
 		} ?>
 	</script>

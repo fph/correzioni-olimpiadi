@@ -44,14 +44,14 @@ function ChangePassword( $db , $UserId , $OldPassword , $NewPassword ) {
 
 $db=OpenDbConnection();
 
-$Message;
+$message;
 
-if ( !isset($_POST['type']) ) $Message=null;
-else if( $_POST['type'] == 'ChangeUsername' ) $Message=ChangeUsername( $db , GetUserIdBySession(), $_POST['NewUsername'] );
-else if ( $_POST['type'] == 'ChangePassword' ) $Message=ChangePassword( $db , GetUserIdBySession() , $_POST['OldPassword'] , $_POST['NewPassword']);
-else  $Message=null;
+if ( !isset($_POST['type']) ) $message=null;
+else if( $_POST['type'] == 'ChangeUsername' ) $message=ChangeUsername( $db , GetUserIdBySession(), $_POST['NewUsername'] );
+else if ( $_POST['type'] == 'ChangePassword' ) $message=ChangePassword( $db , GetUserIdBySession() , $_POST['OldPassword'] , $_POST['NewPassword']);
+else  $message=null;
 
 $db->close();
-TemplatePage("AccountSettings",['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1, $Message);
+TemplatePage("AccountSettings",['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1, $message);
 
 ?>
