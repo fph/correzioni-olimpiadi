@@ -1,4 +1,4 @@
 correzioni-olimpiadi
 ====================
 
-Creazione di un'interfaccia per le correzioni degli elaborati delle olimpiadi di matematica
+Un'applicazione web per la correzione degli elaborati delle olimpiadi di matematica.

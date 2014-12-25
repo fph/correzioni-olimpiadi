@@ -66,7 +66,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 <!DOCTYPE html>
 <html lang='it'>
 <!-- 	
-	Correzioni Olimpiadi - Written By walypala23 (Giada Franz) and dario2994 (Federico Glaudo)
+	Correzioni Olimpiadi - Written by walypala23 (Giada Franz) and dario2994 (Federico Glaudo)
 	Git repository : https://github.com/walypala23/correzioni-olimpiadi
 -->
 <head> 
