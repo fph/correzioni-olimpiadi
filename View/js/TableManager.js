@@ -162,15 +162,21 @@ function RenderTable( obj ) {
 		SortRows( obj , obj.InitialOrder.ColumnId, ascending );
 		obj.InitialOrder=null;
 	}
+	
+	//Table creating
 	var table=document.createElement('table');
 	table.classList.add('InformationTable');
 	SetTableObject(table,obj);
+	
+	//Redirect table-property
 	var redirecting=0;
 	var url='';
 	if( obj.redirect != null ) {
 		redirecting=1;
 		url=obj.redirect;
 	}
+	
+	//Buttons
 	var buttoning=0;
 	
 	if( obj.buttons != null ) {
@@ -182,6 +188,7 @@ function RenderTable( obj ) {
 		}
 	}
 	
+	//Class, Id and Data attributes
 	if( obj.class != null ) {
 		for( var i=0; i<obj.class.length; i++ ) table.classList.add( obj.class[i] );
 	}
@@ -190,6 +197,8 @@ function RenderTable( obj ) {
 	if( obj.data != null ) {
 		for( var key in obj.data ) SetDataAttribute(table, key, obj.data[key]);
 	}
+	
+	//Table header
 	var TableHeader=document.createElement('thead');
 	var TableHeaderTr=document.createElement('tr');
 	for( var i=0;i<obj.columns.length;i++) {
@@ -238,12 +247,34 @@ function RenderTable( obj ) {
 	TableHeader.appendChild(TableHeaderTr);
 	table.appendChild(TableHeader);
 	
+	
+	//Export in csv button
+	var tfoot=document.createElement('tfoot');
+	var ExportCsvTr=document.createElement('tr');
+	ExportCsvTr.classList.add('ExportCsv');
+	
+	var ExportCsvTd=document.createElement('td');
+	ExportCsvTd.setAttribute('colspan',obj.columns.length);
+	ExportCsvTd.classList.add('ExportCsv');
+	
+	var ExportCsvSpan=document.createElement('span');
+	ExportCsvSpan.classList.add('ExportCsv');
+	ExportCsvSpan.innerHTML='Esporta in csv';
+	
+	ExportCsvTd.appendChild(ExportCsvSpan);
+	ExportCsvTr.appendChild(ExportCsvTd);
+	tfoot.appendChild(ExportCsvTr);
+	
+	table.appendChild(tfoot); //tfoot must be appended BEFORE tbody
+	
+	//Table body
 	var tbody=document.createElement('tbody');
 	for(var i=0;i<obj.rows.length;i++) {
 		var row=obj.rows[i];
 		tbody.appendChild( CreateRow(obj,row) );
 	}
 	table.appendChild(tbody);
+	
 	return table;
 }
 

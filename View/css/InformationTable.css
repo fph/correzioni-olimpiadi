@@ -21,7 +21,7 @@ table.InformationTable th {
 	padding: 5px 5px;
 }
 
-table.InformationTable td {
+table.InformationTable > theader td, table.InformationTable > tbody td {
 	border-bottom: 1px solid #ECF3FA;
 	padding: 5px 5px;
 }
@@ -30,7 +30,7 @@ table.InformationTable .trlink:hover {
 	cursor:pointer;
 }
 
-table.InformationTable tbody tr:hover {
+table.InformationTable > tbody > tr:hover {
 	background-color: aliceblue;
 	color:#000066;
 }
@@ -49,61 +49,16 @@ table.InformationTable td.ButtonsTd {
 	width: 50px;
 }
 
-
-/*
-	Columns' widths
-*/
-
-
-/*
-table.InformationTable .ProblemColumn {
-	min-width: 100px;
-}
-*/
-
-table.InformationTable .CommentColumn {
-	width: 50%;
-}
-
-/*
-table.InformationTable .UsernameColumn {
-	min-width: 100px;
-}
-
-table.InformationTable .NameColumn {
-	min-width: 100px;
-}
-*/
-
-/*
-table.InformationTable .SurnameColumn {
-	min-width: 100px;
-}
-
-table.InformationTable .SurnameAndNameColumn {
-	min-width: 7em;
-	max-width: 11em;
-}
-
-table.InformationTable .ContestColumn {
-	min-width: 200px;
-}
-
-table.InformationTable .DateColumn {
-	min-width: 50px;
-}
-
-table.InformationTable .SchoolColumn {
-	min-width: 100px;
-}
-*/
-
 /*
 	Particular columns styles
 */
 
 table.InformationTable .MarkColumn {
 	text-align: center;
+}
+
+table.InformationTable .CommentColumn {
+	width: 50%;
 }
 
 /*
@@ -148,3 +103,26 @@ table.InformationTable .SortColumnImage {
 	height: 10px;
 	margin-left: 3px;
 }
+
+/*
+  Export in csv button
+*/
+
+td.ExportCsv {
+	padding: 0px;
+	vertical-align: top;
+	text-align: right;
+}
+
+span.ExportCsv {
+	padding: 0px 4px 2px 4px;
+	border: 1px solid #ECF3FA;
+	border-top: none!important;
+	border-radius: 0px 0px 5px 5px;
+	font-weight: bold;
+}
+
+span.ExportCsv:hover {
+	cursor: pointer;
+	background-color: #ECF3FA;
+}	
