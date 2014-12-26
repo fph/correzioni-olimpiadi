@@ -372,10 +372,10 @@ function SortTableRows( table , ColumnId , ascending ) {
 	table.parentNode.replaceChild( RenderTable(obj), table );
 }
 
-//The variable tablesInformation is defined server-side
-if( tablesInformation != null ){
-	for(var i=0;i<tablesInformation.length;i++) {
-		var table=tablesInformation[i];
+//The variable TablesInformation is defined server-side
+if( TablesInformation != null ){
+	for(var i=0;i<TablesInformation.length;i++) {
+		var table=TablesInformation[i];
 		var DivToTable=document.getElementById('DivToTable'+i);
 		DivToTable.parentNode.replaceChild( RenderTable(table), DivToTable);
 	}

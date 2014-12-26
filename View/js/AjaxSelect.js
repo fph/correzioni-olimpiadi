@@ -105,10 +105,10 @@ function GetSelectValue( id ) {
 	return document.getElementById(id).getElementsByClassName('AjaxSelectValue')[0].value;
 }
 
-//The variable selectsInformation is defined server-side
-if( selectsInformation != null ){
-	for(var i=0;i<selectsInformation.length;i++) {
-		var select=selectsInformation[i];
+//The variable SelectsInformation is defined server-side
+if( SelectsInformation != null ){
+	for(var i=0;i<SelectsInformation.length;i++) {
+		var select=SelectsInformation[i];
 		var DivToSelect=document.getElementById('DivToSelect'+i);
 		DivToSelect.parentNode.replaceChild( RenderSelect(select), DivToSelect);
 	}

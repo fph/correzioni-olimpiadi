@@ -107,10 +107,10 @@ function RenderDate ( obj ) {
 	return ContainerSpan;
 }
 
-//The variable datesInformation is defined server-side
-if( datesInformation != null ){
-	for(var i=0;i<datesInformation.length;i++) {
-		var date=datesInformation[i];
+//The variable DatesInformation is defined server-side
+if( DatesInformation != null ){
+	for(var i=0;i<DatesInformation.length;i++) {
+		var date=DatesInformation[i];
 		var DivToDate=document.getElementById('DivToDate'+i);
 		DivToDate.parentNode.replaceChild( RenderDate(date), DivToDate);
 	}

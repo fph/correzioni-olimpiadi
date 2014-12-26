@@ -21,31 +21,31 @@ $jsInclude=['ViewParticipation'=>['CorrectionModification'],
 $cssInclude=['AdminStatistics'=>['AdminStatistics'],
 			'ViewParticipation'=>['ViewParticipation'] ];
 
-$tablesInformation=[];
-$datesInformation=[];
-$selectsInformation=[];
+$TablesInformation=[];
+$DatesInformation=[];
+$SelectsInformation=[];
 function InsertTable( $table ) {
-	global $tablesInformation;
+	global $TablesInformation;
 ?>
-	<div class='DivToTable hidden' id='DivToTable<?=count($tablesInformation)?>'></div>
+	<div class='DivToTable hidden' id='DivToTable<?=count($TablesInformation)?>'></div>
 <?php 
-	$tablesInformation[]=$table;
+	$TablesInformation[]=$table;
 }
 
 function InsertDate( $date ) {
-	global $datesInformation;
+	global $DatesInformation;
 ?>
-	<div class='DivToDate hidden' id='DivToDate<?=count($datesInformation)?>'></div>
+	<div class='DivToDate hidden' id='DivToDate<?=count($DatesInformation)?>'></div>
 <?php 
-	$datesInformation[]=$date;
+	$DatesInformation[]=$date;
 }
 
 function InsertSelect( $select ) {
-	global $selectsInformation;
+	global $SelectsInformation;
 ?>
-	<div class='DivToSelect hidden' id='DivToSelect<?=count($selectsInformation)?>'></div>
+	<div class='DivToSelect hidden' id='DivToSelect<?=count($SelectsInformation)?>'></div>
 <?php 
-	$selectsInformation[]=$select;
+	$SelectsInformation[]=$select;
 }
 
 function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $message=null ){
@@ -61,7 +61,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		}
 	}
 	global $jsInclude, $cssInclude;
-	global $tablesInformation, $datesInformation, $selectsInformation;
+	global $TablesInformation, $DatesInformation, $SelectsInformation;
 	?>
 <!DOCTYPE html>
 <html lang='it'>
@@ -131,9 +131,9 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		} ?>
 	</script>
 	<script type='text/javascript'>
-		var tablesInformation=<?=json_encode( $tablesInformation )?>;
-		var datesInformation=<?=json_encode( $datesInformation )?>;
-		var selectsInformation=<?=json_encode( $selectsInformation )?>;
+		var TablesInformation=<?=json_encode( $TablesInformation )?>;
+		var DatesInformation=<?=json_encode( $DatesInformation )?>;
+		var SelectsInformation=<?=json_encode( $SelectsInformation )?>;
 	</script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
