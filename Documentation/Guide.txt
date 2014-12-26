@@ -54,11 +54,19 @@ TableManager.js :
 	In order to add one of those tables to the html just use the function InsertTable (in TemplateCreation.php).
 	The structure of table object is described in the file Documentation/TableObject.txt.
 
-Other js works in a similar way of TableManager: DateInput.js and AjaxSelect.js
+Other js works in a similar way of TableManager: DateInput.js and AjaxSelect.js LinkTable.js
+
 DateInput.js:
 	Renders forms for getting dates. Works as TableManager but the date object is an object containing as only property id, which is the identifier id of the dateinput.
+
 AjaxSelect.js:
 	Renders combobox implementing ajax. Works as TableManager but the select object is an object containing two property: id, type.
 	id is just the identifier of the dom, instead type is the type of content to suggest to the user.
 	The type can assume these values: 'contest', 'contestant', 'user'.
 	The corresponding server-side of AjaxSelect is the file Modify/SelectSuggestions.php. It receives the string written by the user (and the type of the select) and returns all possible options.
+
+LinkTable.js:
+	Renders a list of links. Works as TableManager but the LinkTable object is an array of objects with this properties:
+		name => string
+		redirect => [ url => string, parameters => object ]
+	
