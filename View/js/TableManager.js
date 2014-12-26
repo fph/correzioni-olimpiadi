@@ -77,7 +77,7 @@ function CreateRow( obj , row) {
 		tr.addEventListener('click', function(e){ 
 			Redirect( GetDataAttribute(this,'redirect_url'), JSON.parse(GetDataAttribute(this,'redirect_obj')) ); 
 		} );
-		tr.classList.add('trlink');
+		tr.classList.add('CursorPointer');
 	}
 	if( row.class != null ) {
 		for(var j=0;j<row.class.length;j++) tr.classList.add(row.class[j]);
@@ -299,11 +299,11 @@ function RenderTable( obj ) {
 		
 		var ExportCsvSpan=document.createElement('span');
 		ExportCsvSpan.classList.add('ExportCsv');
+		ExportCsvSpan.classList.add('CursorPointer');
 		ExportCsvSpan.innerHTML='Esporta in csv';
 		ExportCsvSpan.addEventListener('click',function(e) {
 			var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
 			ExportTableToCsv( GetTableObject(ParentTable) );
-			eval( GetDataAttribute(ParentTable, GetDataAttribute(this,'name')+'_function')+'(this.parentNode.parentNode);' );
 		} );
 		
 		ExportCsvTd.appendChild(ExportCsvSpan);

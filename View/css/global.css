@@ -61,6 +61,10 @@ div.internalBody {
 	display: none;
 }
 
+.CursorPointer {
+	cursor: pointer;
+}
+
 
 /*
 	LinkTable css
@@ -76,8 +80,7 @@ div.internalBody {
 	padding: 10px;
 }
 
-.LinkTable .trlink:hover {
-	cursor:pointer;
+.LinkTable span:hover {
 	color: green;
 }
 

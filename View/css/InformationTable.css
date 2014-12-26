@@ -26,10 +26,6 @@ table.InformationTable > theader td, table.InformationTable > tbody td {
 	padding: 5px 5px;
 }
 
-table.InformationTable .trlink:hover {
-	cursor:pointer;
-}
-
 table.InformationTable > tbody > tr:hover {
 	background-color: aliceblue;
 	color:#000066;
@@ -123,6 +119,5 @@ span.ExportCsv {
 }
 
 span.ExportCsv:hover {
-	cursor: pointer;
 	background-color: #ECF3FA;
 }	

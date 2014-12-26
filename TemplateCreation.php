@@ -24,6 +24,7 @@ $cssInclude=['AdminStatistics'=>['AdminStatistics'],
 $TablesInformation=[];
 $DatesInformation=[];
 $SelectsInformation=[];
+$LinkTablesInformation=[];
 function InsertTable( $table ) {
 	global $TablesInformation;
 ?>
@@ -48,6 +49,14 @@ function InsertSelect( $select ) {
 	$SelectsInformation[]=$select;
 }
 
+function InsertLinkTable( $LinkTable ) {
+	global $LinkTablesInformation;
+?>
+	<div class='DivToLinkTable hidden' id='DivToLinkTable<?=count($LinkTablesInformation)?>'></div>
+<?php 
+	$LinkTablesInformation[]=$LinkTable;
+}
+
 function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $message=null ){
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
@@ -61,7 +70,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		}
 	}
 	global $jsInclude, $cssInclude;
-	global $TablesInformation, $DatesInformation, $SelectsInformation;
+	global $TablesInformation, $DatesInformation, $SelectsInformation, $LinkTablesInformation;
 	?>
 <!DOCTYPE html>
 <html lang='it'>
@@ -134,10 +143,15 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		var TablesInformation=<?=json_encode( $TablesInformation )?>;
 		var DatesInformation=<?=json_encode( $DatesInformation )?>;
 		var SelectsInformation=<?=json_encode( $SelectsInformation )?>;
+		var LinkTablesInformation=<?=json_encode( $LinkTablesInformation )?>;
 	</script>
+<!--
+	TODO: Si potrebbe evitare di includere questi quando non necessari
+-->
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 	<script type='text/javascript' src='../View/js/DateInput.js'> </script>
+	<script type='text/javascript' src='../View/js/LinkTable.js'> </script>
 </body>
 </html>
 	<?php
