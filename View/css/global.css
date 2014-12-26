@@ -77,11 +77,19 @@ div.internalBody {
 }
 
 .LinkTable td {
-	padding: 10px;
+	padding: 5px 0px;
 }
 
+.LinkTable span {
+	padding: 5px 30px 5px 5px;
+	border-radius: 0px 10px 10px 0px;
+	border: 1px solid #ECF3FA;
+	color: #039;
+	font-weight: bold;
+	display: block;
+}
 .LinkTable span:hover {
-	color: green;
+	background-color: #ECF3FA;
 }
 
 /*
