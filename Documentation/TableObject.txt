@@ -8,6 +8,7 @@ TableObject
 					ColumnId => string !
 					ascending => boolean
 	buttons => [button]
+	ExportCsv => boolean
 	data => object
 		lower_case_string => string
 	class => [string]

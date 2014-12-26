@@ -43,8 +43,6 @@ function ExportTableToCsv( obj ) {
 		link.click();
 		document.body.removeChild(link);
 	}
-	//~ var EncodedUri = encodeURI(csv);
-	//~ window.open(EncodedUri);
 }
 
 function CreateButtonsTd( buttons ) {
@@ -290,28 +288,30 @@ function RenderTable( obj ) {
 	
 	
 	//Export in csv button
-	var tfoot=document.createElement('tfoot');
-	var ExportCsvTr=document.createElement('tr');
-	ExportCsvTr.classList.add('ExportCsv');
-	
-	var ExportCsvTd=document.createElement('td');
-	ExportCsvTd.setAttribute('colspan',obj.columns.length);
-	ExportCsvTd.classList.add('ExportCsv');
-	
-	var ExportCsvSpan=document.createElement('span');
-	ExportCsvSpan.classList.add('ExportCsv');
-	ExportCsvSpan.innerHTML='Esporta in csv';
-	ExportCsvSpan.addEventListener('click',function(e) {
-		var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
-		ExportTableToCsv( GetTableObject(ParentTable) );
-		eval( GetDataAttribute(ParentTable, GetDataAttribute(this,'name')+'_function')+'(this.parentNode.parentNode);' );
-	} );
-	
-	ExportCsvTd.appendChild(ExportCsvSpan);
-	ExportCsvTr.appendChild(ExportCsvTd);
-	tfoot.appendChild(ExportCsvTr);
-	
-	table.appendChild(tfoot); //tfoot must be appended BEFORE tbody
+	if( obj.ExportCsv==null || obj.ExportCsv==true ) {
+		var tfoot=document.createElement('tfoot');
+		var ExportCsvTr=document.createElement('tr');
+		ExportCsvTr.classList.add('ExportCsv');
+		
+		var ExportCsvTd=document.createElement('td');
+		ExportCsvTd.setAttribute('colspan',obj.columns.length);
+		ExportCsvTd.classList.add('ExportCsv');
+		
+		var ExportCsvSpan=document.createElement('span');
+		ExportCsvSpan.classList.add('ExportCsv');
+		ExportCsvSpan.innerHTML='Esporta in csv';
+		ExportCsvSpan.addEventListener('click',function(e) {
+			var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
+			ExportTableToCsv( GetTableObject(ParentTable) );
+			eval( GetDataAttribute(ParentTable, GetDataAttribute(this,'name')+'_function')+'(this.parentNode.parentNode);' );
+		} );
+		
+		ExportCsvTd.appendChild(ExportCsvSpan);
+		ExportCsvTr.appendChild(ExportCsvTd);
+		tfoot.appendChild(ExportCsvTr);
+		
+		table.appendChild(tfoot); //tfoot must be appended BEFORE tbody
+	}
 	
 	//Table body
 	var tbody=document.createElement('tbody');
