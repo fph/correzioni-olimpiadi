@@ -53,19 +53,13 @@ global $v_contest;
 	</div>
 </div>
 
-<table class='LinkTable'>
-	<tr class='trlink' onclick="Redirect('AdminContestantsOfAContest', {ContestId:<?=$v_contest['id']?>})">
-	<td>Partecipanti</td>
-	</tr>
-	
-	<tr class='trlink' onclick="Redirect('AdminProblemsOfAContest', {ContestId:<?=$v_contest['id']?>})">
-	<td>Problemi</td>
-	</tr>
-
-	<tr class='trlink' onclick="Redirect('AdminUsersOfAContest', {ContestId:<?=$v_contest['id']?>})">
-	<td>Correttori</td>
-	</tr>
-</table>
+<?php
+InsertLinkTable([
+	['name'=>'Partecipanti', 'redirect'=>['url'=>'AdminContestantsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
+	['name'=>'Problemi', 'redirect'=>['url'=>'AdminProblemsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
+	['name'=>'Correttori', 'redirect'=>['url'=>'AdminUsersOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]]
+]);
+?>
 
 <script>
 	var ContestId=<?=$v_contest['id']?>;

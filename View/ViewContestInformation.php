@@ -15,16 +15,10 @@ global $v_contest;
 	</span>
 </h2>
 
-<table class="LinkTable">
-	<tr class="trlink" onclick="Redirect('ViewContestantsOfAContest', {ContestId:<?=$v_contest['id']?>})">
-	<td>Partecipanti</td>
-	</tr>
-	
-	<tr class="trlink" onclick="Redirect('ViewProblemsOfAContest', {ContestId:<?=$v_contest['id']?>})">
-	<td>Problemi</td>
-	</tr>
-	
-	<tr class="trlink" onclick="Redirect('ViewRankingOfAContest', {ContestId:<?=$v_contest['id']?>})">
-	<td>Classifica</td>
-	</tr>
-</table>
+<?php
+InsertLinkTable([
+	['name'=>'Partecipanti', 'redirect'=>['url'=>'ViewContestantsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
+	['name'=>'Problemi', 'redirect'=>['url'=>'ViewProblemsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
+	['name'=>'Classifica', 'redirect'=>['url'=>'ViewRankingOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]]
+]);
+?>
