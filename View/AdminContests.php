@@ -3,11 +3,11 @@ global $v_contests;
 ?>
 
 <h2 class='PageTitle'>
-	Gare
+	Amministrazione
 </h2>
 
 <h3 class='PageSubtitle'>
-	Lista delle gare
+	Gare
 </h3>
 
 <?php

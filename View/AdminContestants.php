@@ -3,11 +3,11 @@ global $v_contestants;
 ?>
 
 <h2 class='PageTitle'>
-	Partecipanti
+	Amministrazione
 </h2>
 
 <h3 class='PageSubtitle'>
-	Lista dei partecipanti
+	Partecipanti
 </h3>
 
 

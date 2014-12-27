@@ -3,11 +3,11 @@ global $v_users;
 ?>
 
 <h2 class='PageTitle'>
-	Correttori
+	Amministrazione
 </h2>
 
 <h3 class='PageSubtitle'>
-	Lista dei correttori
+	Correttori
 </h3>
 
 <?php
