@@ -87,7 +87,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/AjaxSelect.css'>
-<!-- <link rel="shortcut icon" href="../View/Images/Favicon.ico" title="Favicon"> -->
+	<link rel="shortcut icon" href="../View/Images/FaviconV4.ico" title="Favicon">
 
 <?php 
 	if( isset($cssInclude[$content]) ) {
