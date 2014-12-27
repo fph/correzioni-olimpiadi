@@ -329,7 +329,7 @@ function AddRow( table , row , OrderBy ) {
 	var NewRow=CreateRow( obj , row );
 	NewRow.classList.add('NewRow');
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
-	var tbody=table.childNodes[1];
+	var tbody=table.getElementsByTagName('tbody')[0];
 	if( OrderBy == null ) {
 		tbody.appendChild(NewRow);
 		obj.rows.push(row);
@@ -356,7 +356,7 @@ function AddRow( table , row , OrderBy ) {
 
 function RemoveRow( table , row ) {
 	var obj=GetTableObject(table);
-	var tbody=table.childNodes[1];
+	var tbody=table.getElementsByTagName('tbody')[0];
 	var i=0;
 	for(;i<tbody.childNodes.length;i++) {
 		if( tbody.childNodes[i]==row ) break;
