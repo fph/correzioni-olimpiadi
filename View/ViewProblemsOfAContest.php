@@ -13,6 +13,9 @@ global $v_contest, $v_problems;
 	} ?>
 	</span>
 </h2>
+<h3 class='PageSubtitle'>
+	Problemi
+</h3>
 
 <?php
 $columns=[];

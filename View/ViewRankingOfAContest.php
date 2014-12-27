@@ -3,10 +3,19 @@ global $v_contest, $v_problems, $v_contestants;
 ?>
 
 <h2 class='PageTitle'>
-	Classifica
+	<span>
+	<?=$v_contest['name']?>
+	</span>
+	<span>
+	<?php 
+	if (!is_null($v_contest['date'])) {?>
+		- <?=GetItalianDate($v_contest['date'])?>
+		<?php
+	} ?>
+	</span>
 </h2>
 <h3 class='PageSubtitle'>
-	<?=$v_contest['name']?>
+	Classifica
 </h3>
 
 <?php

@@ -14,6 +14,9 @@ global $v_contest, $v_contestants;
 	} ?>
 	</span>
 </h2>
+<h3 class='PageSubtitle'>
+	Partecipanti
+</h3>
 
 <?php
 $columns=[];
