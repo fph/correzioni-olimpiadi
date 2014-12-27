@@ -88,7 +88,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/AjaxSelect.css'>
 	<link rel="shortcut icon" href="../View/Images/FaviconV4.ico" title="Favicon">
-
+	
 <?php 
 	if( isset($cssInclude[$content]) ) {
 		foreach( $cssInclude[$content] as $cssName ) {
@@ -97,9 +97,11 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 			<?php
 		} 	
 	} ?>
+	
 	<script type='text/javascript' src='../View/js/global.js'> </script>
 	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
+
 <?php 
 	if( isset($jsInclude[$content]) ) {
 		foreach( $jsInclude[$content] as $jsName ) {
@@ -108,6 +110,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 			<?php
 		}
 	} ?>
+	
 </head>
 
 <body> 
@@ -156,4 +159,3 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 </html>
 	<?php
 }
-?>

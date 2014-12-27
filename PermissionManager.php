@@ -4,6 +4,7 @@ SuperRequire_once('General','SessionManager.php');
 SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','TemplateCreation.php');
 
+
 function IsAdmin($db, $UserId) {
 	$result=OneResultQuery( $db, QuerySelect('Administrators',['UserId'=>$UserId]) );
 	if( is_null( $result ) ) return 0;
@@ -27,4 +28,3 @@ function CheckPagePermission($db, $ContestId) { //$ContestId==-1 means admin.
 		die();
 	}
 }
-?>

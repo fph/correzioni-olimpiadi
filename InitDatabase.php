@@ -334,6 +334,4 @@ PopulateCorrections($db);
 
 $db->close();
 
-echo "THE DATABASE IS COMPLETELY INITIALIZED!\n";
-
-?>
+echo "THE DATABASE HAS BEEN COMPLETELY INITIALIZED!\n";
