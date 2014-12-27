@@ -134,7 +134,7 @@ function SplitString( s ) {
 	return res;
 }
 
-function StringCompare(a,b) {
+function StringCompare(a,b) { //Natural sorting
 	if(a==null && b==null) return 0;
 	else if(a==null) return -1;
 	else if(b==null) return 1;
@@ -147,7 +147,7 @@ function StringCompare(a,b) {
 		else return ( (typeof(x[i])=='number')?-1:1 );
 	}
 	if( x.length==y.length ) return 0;
-	return ((x.length<y.length)?-1:1); //DA AGGIUSTARE!
+	return ((x.length<y.length)?-1:1);
 }
 
 function NumberCompare(a,b) {
