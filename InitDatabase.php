@@ -3,6 +3,14 @@ require_once "Utilities.php";
 SuperRequire_once("General","sqlUtilities.php");
 SuperRequire_once("General","PermissionManager.php");
 
+
+function NewLine() {
+	static $SapiType = 'EMPTY';
+	if( $SapiType=='EMPTY') $SapiType=php_sapi_name();
+	if( $SapiType=='apache' or $SapiType=='apache2filter' or $SapiType=='apache2handler' ) return '<br>'; //browser
+	else return PHP_EOL; //terminal
+}
+
 function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
@@ -13,7 +21,7 @@ function CreateDatabase() {
 	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`;';
 	Query($db, $query);
 
-	echo "Database ".dbName." created.\n";
+	echo "Database ".dbName." created.".NewLine().NewLine();
 	$db->close();
 	
 	$db=OpenDbConnection();
@@ -27,7 +35,7 @@ function CreateDatabase() {
 		UNIQUE KEY(`username`)
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Users created.\n";
+	echo "Table Users created.".NewLine();
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Administrators` (
@@ -38,7 +46,7 @@ function CreateDatabase() {
 			ON DELETE CASCADE ON UPDATE CASCADE
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Administrators created.\n";
+	echo "Table Administrators created.".NewLine();
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Contests` (
@@ -50,7 +58,7 @@ function CreateDatabase() {
 		KEY(`name`)
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Contests created.\n";
+	echo "Table Contests created.".NewLine();
 
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Permissions` (
@@ -68,7 +76,7 @@ function CreateDatabase() {
 			ON DELETE CASCADE ON UPDATE CASCADE
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Permissions created.\n";
+	echo "Table Permissions created.".NewLine();
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Contestants` (
@@ -80,7 +88,7 @@ function CreateDatabase() {
 		KEY(`surname`)
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Contestants created.\n";
+	echo "Table Contestants created.".NewLine();
 
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Participations` (
@@ -98,7 +106,7 @@ function CreateDatabase() {
 			ON DELETE CASCADE ON UPDATE CASCADE
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Participations created.\n";
+	echo "Table Participations created.".NewLine();
 
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Problems` (
@@ -113,7 +121,7 @@ function CreateDatabase() {
 			ON DELETE CASCADE ON UPDATE CASCADE
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Problems created.\n";
+	echo "Table Problems created.".NewLine();
 
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Corrections` (
@@ -136,9 +144,9 @@ function CreateDatabase() {
 			ON DELETE SET NULL ON UPDATE CASCADE
 	) ENGINE=InnoDB;';
 	Query($db, $query);
-	echo "Table Corrections created.\n";
+	echo "Table Corrections created.".NewLine();
 
-	echo "All tables have been created.\n\n";
+	echo "All tables have been created".NewLine().NewLine();
 	$db->close();
 }
 
@@ -153,7 +161,7 @@ function PopulateUsers($db) {
 		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>PasswordHash($User['password'])]));
 	}
 
-	echo "Table Users Populated.\n";
+	echo "Table Users Populated.".NewLine();
 }
 
 function PopulateAdministrators($db) {
@@ -162,7 +170,7 @@ function PopulateAdministrators($db) {
 	$Xamog_id=OneResultQuery($db,QuerySelect('Users',['username'=>'Xamog'],['id']))['id'];
 	Query($db,QueryInsert('Administrators',['UserId'=>$Xamog_id]));
 
-	echo "Table Administrators Populated.\n";
+	echo "Table Administrators Populated.".NewLine();
 }
 
 function PopulateContests($db) {
@@ -176,7 +184,7 @@ function PopulateContests($db) {
 		Query($db,QueryInsert('Contests',['name'=>$Contest['name'], 'date'=>$Contest['date'], 'blocked'=>$Contest['blocked'] ]));
 	}
 
-	echo "Table Contests Populated.\n";
+	echo "Table Contests Populated.".NewLine();
 }
 
 function PopulatePermissions($db){
@@ -191,7 +199,7 @@ function PopulatePermissions($db){
 		}
 	}
 
-	echo "Table Permissions Populated.\n";
+	echo "Table Permissions Populated.".NewLine();
 }
 
 function PopulateContestants($db) {
@@ -215,7 +223,7 @@ function PopulateContestants($db) {
 		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school']]));
 	}
 	
-	echo "Table Contestants Populated.\n";
+	echo "Table Contestants Populated.".NewLine();
 }
 
 function PopulateParticipations($db){
@@ -230,7 +238,7 @@ function PopulateParticipations($db){
 		}
 	}
 	
-	echo "Table Participations Populated.\n";
+	echo "Table Participations Populated.".NewLine();
 }
 
 function PopulateProblems($db) {
@@ -281,7 +289,7 @@ function PopulateProblems($db) {
 		Query($db,QueryInsert('Problems',['name'=>$Problem['name'], 'ContestId'=>$Problem['ContestId']]));
 	}
 
-	echo "Table Problems Populated.\n";
+	echo "Table Problems Populated.".NewLine();
 }
 
 function PopulateCorrections($db){
@@ -316,7 +324,7 @@ function PopulateCorrections($db){
 		}
 	}
 
-	echo "Table Corrections Populated.\n";
+	echo "Table Corrections Populated.".NewLine();
 }
 
 CreateDatabase();
@@ -330,8 +338,9 @@ PopulatePermissions($db);
 PopulateContestants($db);
 PopulateParticipations($db);
 PopulateProblems($db);
-PopulateCorrections($db);
+PopulateCorrections($db); //It's slow... it's not a problem.
+echo "All tables have been populated.".NewLine().NewLine();
 
 $db->close();
 
-echo "THE DATABASE HAS BEEN COMPLETELY INITIALIZED!\n";
+echo "THE DATABASE HAS BEEN COMPLETELY INITIALIZED!".NewLine();
