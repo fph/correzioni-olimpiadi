@@ -39,10 +39,13 @@ global $v_contest, $v_problems, $v_contestants;
 			}
 		}
 		$values['score']=$total;
-		$rows[]=['values'=>$values];
+		$rows[]=[
+			'values'=>$values,
+			'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ]
+		];
 	}
 	
-	$table=['columns'=>$columns, 'rows'=>$rows, 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
+	$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
 	InsertTable($table);
 	
 ?>
