@@ -7,7 +7,7 @@ html,body {
 }
 
 body {
-	background: #F6F4F0;
+	background: aliceblue;
 	margin: 0px;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 }
@@ -89,7 +89,8 @@ div.internalBody {
 	display: block;
 }
 .LinkTable span:hover {
-	background-color: #ECF3FA;
+	background-color: aliceblue;
+	color: #000066;
 }
 
 /*
