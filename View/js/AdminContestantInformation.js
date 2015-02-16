@@ -56,6 +56,7 @@ function CancelTitleModification(){
 	SetDataAttribute(name, 'old_value', null);
 }
 
+//~ School
 function EndSchoolModification() {
 	var subtitle=document.getElementsByClassName('PageSubtitle')[0];
 
@@ -99,6 +100,60 @@ function ModifySchool(){
 	SchoolSpan.setAttribute('contenteditable','true');
 	
 	var subtitle=document.getElementsByClassName('PageSubtitle')[0];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.add('hidden');
+	confirm_button.classList.remove('hidden');
+	cancel_button.classList.remove('hidden');
+}
+
+//~ Email
+function EndEmailModification() {
+	var subtitle=document.getElementsByClassName('PageSubtitle')[1];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.remove('hidden');
+	confirm_button.classList.add('hidden');
+	cancel_button.classList.add('hidden');
+	
+	var EmailSpan=document.getElementById('ContestantEmail');
+	EmailSpan.classList.remove('ContentEditable');
+	EmailSpan.setAttribute('contenteditable','false');
+}
+
+function CancelEmail(){
+	EndEmailModification();
+	var EmailSpan=document.getElementById('ContestantEmail');
+	EmailSpan.innerHTML=GetDataAttribute(EmailSpan, 'old_value');
+	SetDataAttribute(EmailSpan, 'old_value', null);
+}
+
+function MakeChangesEmail(response){
+	if( response.type=='bad' ) {
+		CancelEmail();
+	}
+}
+
+function ConfirmEmail(){
+	EndEmailModification();
+	var EmailSpan=document.getElementById('ContestantEmail');
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, email: EmailSpan.innerHTML, type:'ChangeEmail'}, MakeChangesEmail);
+}
+
+
+function ModifyEmail(){
+	var EmailSpan=document.getElementById('ContestantEmail');
+	SetDataAttribute(EmailSpan, 'old_value', EmailSpan.innerHTML);
+	EmailSpan.classList.add('ContentEditable');
+	EmailSpan.setAttribute('contenteditable','true');
+	
+	var subtitle=document.getElementsByClassName('PageSubtitle')[1];
 
 	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
 	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
