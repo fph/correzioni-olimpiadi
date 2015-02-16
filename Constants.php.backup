@@ -18,6 +18,7 @@ define('password_MINLength', 4);
 define('ContestantName_MAXLength', 31);
 define('ContestantSurname_MAXLength', 63);
 define('ContestantSchool_MAXLength', 128);
+define('ContestantEmail_MAXLength', 63);
 define('ProblemName_MAXLength', 31);
 define('comment_MAXLength', 1023);
 ?>

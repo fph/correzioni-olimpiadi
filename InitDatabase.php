@@ -84,6 +84,7 @@ function CreateDatabase() {
 		`name` varchar('.ContestantName_MAXLength.') NOT NULL,
 		`surname` varchar('.ContestantSurname_MAXLength.') NOT NULL,
 		`school` varchar('.ContestantSchool_MAXLength.') NOT NULL,
+		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
 		PRIMARY KEY (`id`),
 		KEY(`surname`)
 	) ENGINE=InnoDB;';
@@ -203,24 +204,24 @@ function PopulatePermissions($db){
 }
 
 function PopulateContestants($db) {
-	$Contestants=[	['name'=>'Federico', 	'surname'=>'Glaudo',			'school'=>'L.S. Righi'],
-					['name'=>'Giada', 		'surname'=>'Franz',				'school'=>'L.S. Marinelli'],			
-					['name'=>'Gioacchino', 	'surname'=>'Antonelli',			'school'=>'L.S. Tedone'],
-					['name'=>'Luca', 		'surname'=>'Minutillo Menga',	'school'=>'L.S. Staminchia'],
-					['name'=>'Francesco', 	'surname'=>'Florian',			'school'=>'L.S. Copernico'],
-					['name'=>'Claudio', 	'surname'=>'Afeltra',			'school'=>'L.S. Sambuca'],
-					['name'=>'Paolo', 		'surname'=>'Abiuso',			'school'=>'L.S. Lambada'],
-					['name'=>'Leonardo', 	'surname'=>'Fiore',				'school'=>'L.S. Cotoletta'],
-					['name'=>'Lorenzo', 	'surname'=>'Benedini',			'school'=>'L.S. Figus'],
-					['name'=>'Davide', 		'surname'=>'Lofano',			'school'=>'Lungo Nome di scuola'],
-					['name'=>'Alice', 		'surname'=>'Cortinovis',		'school'=>'L.S. Assurbanipal'],
-					['name'=>'Emanuele', 	'surname'=>'Tron',				'school'=>'L.S. Anzianotto'],
-					['name'=>'Matteo', 		'surname'=>'Becchi',			'school'=>'L.C. Calasi'],
-					['name'=>'Filippo', 	'surname'=>'Revello',			'school'=>'L.C. Anselmo'],
-					['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid'],
-					['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli']];
+	$Contestants=[	['name'=>'Federico', 	'surname'=>'Glaudo',			'school'=>'L.S. Righi',				'email'=>'dario2994@gmail.com'],
+					['name'=>'Giada', 		'surname'=>'Franz',				'school'=>'L.S. Marinelli',			'email'=>'walypala23@gmail.com'],			
+					['name'=>'Gioacchino', 	'surname'=>'Antonelli',			'school'=>'L.S. Tedone',			'email'=>'genius@figus.it'],
+					['name'=>'Luca', 		'surname'=>'Minutillo Menga',	'school'=>'L.S. Staminchia',		'email'=>'porno@star.pr'],
+					['name'=>'Francesco', 	'surname'=>'Florian',			'school'=>'L.S. Copernico',			'email'=>'fraflo@gmail.com'],
+					['name'=>'Claudio', 	'surname'=>'Afeltra',			'school'=>'L.S. Sambuca',			'email'=>'tarvisio@forever.it'],
+					['name'=>'Paolo', 		'surname'=>'Abiuso',			'school'=>'L.S. Lambada',			'email'=>'peppapaolo@pig.en'],
+					['name'=>'Leonardo', 	'surname'=>'Fiore',				'school'=>'L.S. Cotoletta',			'email'=>'leonardinho@libero.it'],
+					['name'=>'Lorenzo', 	'surname'=>'Benedini',			'school'=>'L.S. Figus',				'email'=>'benzodine@tiscali.it'],
+					['name'=>'Davide', 		'surname'=>'Lofano',			'school'=>'Lungo Nome di scuola',	'email'=>'d.lofano@gmail.com'],
+					['name'=>'Alice', 		'surname'=>'Cortinovis',		'school'=>'L.S. Assurbanipal',		'email'=>'corti.alice@tiscali.it'],
+					['name'=>'Emanuele', 	'surname'=>'Tron',				'school'=>'L.S. Anzianotto',		'email'=>'trontolino@amoroso.com'],
+					['name'=>'Matteo', 		'surname'=>'Becchi',			'school'=>'L.C. Calasi',			'email'=>'matteo.bec@chi.it'],
+					['name'=>'Filippo', 	'surname'=>'Revello',			'school'=>'L.C. Anselmo',			'email'=>'fifaloser@gmail.com'],
+					['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid',			'email'=>'fabio.ferri@libero.com'],
+					['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli',		'email'=>'gigi@gigi.it']];
 	foreach($Contestants as $Contestant) {
-		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school']]));
+		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'email'=>$contestant['email']]));
 	}
 	
 	echo "Table Contestants Populated.".NewLine();
