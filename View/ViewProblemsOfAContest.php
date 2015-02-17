@@ -31,5 +31,5 @@ foreach ($v_problems as $problem) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewProblem', 'InitialOrder'=>['ColumnId'=>'problem'] ];
 
-InsertTable($table);
+InsertDom( 'table', $table);
 ?>

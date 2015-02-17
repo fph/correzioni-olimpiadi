@@ -39,7 +39,7 @@ $buttons[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminProblemsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'problem'] ];
 
-InsertTable($table);
+InsertDom( 'table', $table);
 ?>
 
 

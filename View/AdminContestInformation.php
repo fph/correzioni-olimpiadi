@@ -13,7 +13,7 @@ global $v_contest;
 			} ?>
 		</span>
 		<span class='hidden' id='DateModificationContainer'>
-			<?php InsertDate(['id'=>'TitleDateModification']); ?>
+			<?php InsertDom( 'date', ['id'=>'TitleDateModification']); ?>
 		</span>
 	</span>
 	
@@ -54,7 +54,7 @@ global $v_contest;
 </div>
 
 <?php
-InsertLinkTable([
+InsertDom( 'LinkTable', [
 	['name'=>'Partecipanti', 'redirect'=>['url'=>'AdminContestantsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
 	['name'=>'Problemi', 'redirect'=>['url'=>'AdminProblemsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
 	['name'=>'Correttori', 'redirect'=>['url'=>'AdminUsersOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]]

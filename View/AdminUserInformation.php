@@ -38,7 +38,7 @@ foreach($v_contests as $contest) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date']];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>
 
 <script>

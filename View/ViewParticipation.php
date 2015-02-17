@@ -51,7 +51,7 @@ if( $v_contest['blocked']==0 ) {
 	$table['buttons']=$images;
 }
 
-InsertTable($table);
+InsertDom( 'table', $table);
 ?>
 
 <script>

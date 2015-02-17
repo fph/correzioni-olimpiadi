@@ -25,7 +25,7 @@ global $v_contests;
 		$rows[]=$row;
 	}
 	$table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'AdminContestInformation', 'id'=> 'AdminContestsTable', 'InitialOrder'=>['ColumnId'=>'date'] ];
-	InsertTable( $table );
+	InsertDom( 'table',  $table );
 ?>
 
 <h3 class='PageSubtitle'>
@@ -42,7 +42,7 @@ global $v_contests;
 	<tr>
 		<td> <input type="text" id="ContestInputName"> </td>
 		<td> 
-			<?php InsertDate(['id'=>'ContestInputDate']); ?>
+			<?php InsertDom( 'date', ['id'=>'ContestInputDate']); ?>
 		</td>
 		<td> <input type="button" value="Aggiungi" onclick="AddContestRequest()"> </td>
 	</tr>

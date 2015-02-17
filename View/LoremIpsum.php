@@ -1,11 +1,11 @@
 <h1 class='pageTitle'> Lorem Ipsum </h1>
 
-<?php InsertLinkTable([
+<?php InsertDom( 'LinkTable', [
 	['name'=>'Primo link', 'redirect'=>['url'=>'index']], 
 	['name'=>'Secondo link', 'redirect'=>['url'=>'ViewContestantsOfAContest', 'parameters'=>['ContestId' => 15] ] ] 
 	]); ?>
 
-<?php InsertSelect(['id'=>'staminchia', 'type'=>'contest']); ?>
+<?php InsertDom( 'select', ['id'=>'staminchia', 'type'=>'contest']); ?>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pulvinar, odio placerat mollis vulputate, metus ligula auctor nulla, ac tempus odio lectus ac eros. Ut nec libero purus. Suspendisse et justo ut metus vestibulum auctor eu adipiscing neque. Pellentesque sed dui quis nisi laoreet pellentesque. Vestibulum ut orci imperdiet, tincidunt dui eu, pulvinar purus. Cras vitae odio euismod dolor pellentesque porttitor. Aenean bibendum venenatis congue. Vestibulum pulvinar ultrices scelerisque. Quisque sodales a sem in scelerisque. Etiam blandit auctor sollicitudin. Nullam eu nibh vitae velit iaculis consectetur. Phasellus ligula eros, condimentum ac tortor id, mollis ultricies diam. Cras ut dui ligula.
 
 Fusce tincidunt mattis neque id eleifend. Aliquam placerat tortor neque, vitae lacinia ante hendrerit in. Sed auctor fringilla justo, quis fermentum nulla consequat quis. Integer id sodales ligula. Nullam purus urna, hendrerit eget dignissim sed, sodales vel tellus. Integer pharetra arcu pharetra ante tincidunt, id consequat enim interdum. Praesent a erat vitae sem sodales malesuada. Sed vestibulum condimentum suscipit.

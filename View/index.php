@@ -10,5 +10,5 @@ global $v_admin;
 <?php 
 $links=[ ['name'=>'Gare', 'redirect'=>['url'=>'ViewContests']] ];
 if ($v_admin==1) $links[]=['name'=>'Amministrazione', 'redirect'=>['url'=>'AdminAdministration']];
-InsertLinkTable( $links ); 
+InsertDom( 'LinkTable',  $links ); 
 ?>
