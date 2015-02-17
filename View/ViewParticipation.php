@@ -18,7 +18,9 @@ global $v_corrections, $v_contestant, $v_contest;
 <h3 class="PageSubtitle">
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
-		(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>)
+		(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
+		<img src='../View/Images/MailButton.png' alt='Invia email' title='Invia email' class='ButtonImage MailButtonImage' onclick='SendMail(<?=$v_contest['id']?>, <?=$v_contestant['id']?>)'>
+		)
 	</span>
 </h3>
 

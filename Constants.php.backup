@@ -1,16 +1,17 @@
 <?php
-define('dbServer','localhost');
-//~ define('dbServer','192.168.15.159');
-define('dbUser','Olimpiadi');
-define('dbPass','alfabeto');
-define('dbName','CorOli');
-define('ServerRoot','/var/www/html/correzioni-olimpiadi');
-define('urlRoot','/correzioni-olimpiadi');
-//~ define('ServerRoot','/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-olimpiadi');
-//~ define('urlRoot','/~dario2994/correzioni-olimpiadi');
+define('dbServer', 'localhost');
+//~ define('dbServer', '192.168.15.159');
+define('dbUser', 'Olimpiadi');
+define('dbPass', 'alfabeto');
+define('dbName', 'CorOli');
+define('ServerRoot', '/var/www/html/correzioni-olimpiadi');
+define('urlRoot', '/correzioni-olimpiadi');
+//~ define('ServerRoot', '/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-olimpiadi');
+//~ define('urlRoot', '/~dario2994/correzioni-olimpiadi');
+define('EmailAddress', 'correzioni@olimat.it'); //This is the mail used to send corrections to the participants. Should be the same used for (/usr/bin/)sendmail configuration.
 
-define('ContestName_MAXLength',255);
-define('ContestName_MINLength',2);
+define('ContestName_MAXLength', 255);
+define('ContestName_MINLength', 2);
 define('username_MAXLength', 31);
 define('username_MINLength', 3);
 define('password_MAXLength', 63);
@@ -21,4 +22,3 @@ define('ContestantSchool_MAXLength', 128);
 define('ContestantEmail_MAXLength', 63);
 define('ProblemName_MAXLength', 31);
 define('comment_MAXLength', 1023);
-?>
