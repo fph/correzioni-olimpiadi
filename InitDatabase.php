@@ -15,8 +15,8 @@ function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	//~ $query='DROP DATABASE IF EXISTS `'.dbName.'`;'; //DEBUG
-	//~ Query($db, $query);
+	$query='DROP DATABASE IF EXISTS `'.dbName.'`;'; //DEBUG
+	Query($db, $query);
 
 	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`;';
 	Query($db, $query);
@@ -221,7 +221,7 @@ function PopulateContestants($db) {
 					['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid',			'email'=>'fabio.ferri@libero.com'],
 					['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli',		'email'=>'gigi@gigi.it']];
 	foreach($Contestants as $Contestant) {
-		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'email'=>$contestant['email']]));
+		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'email'=>$Contestant['email']]));
 	}
 	
 	echo "Table Contestants Populated.".NewLine();
