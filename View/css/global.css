@@ -65,6 +65,9 @@ div.internalBody {
 	cursor: pointer;
 }
 
+.CursorWait, .CursorWait * {
+	cursor: wait !important;
+}
 
 /*
 	LinkTable css
