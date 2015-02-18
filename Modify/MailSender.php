@@ -66,7 +66,7 @@
 	$db= OpenDbConnection();
 	if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 		$db -> close();
-		SendObject( ['type'=>'bad', 'text'=>'Non hai i permessi per vedere le mandare l\'email'] );
+		SendObject( ['type'=>'bad', 'text'=>'Non hai i permessi per mandare l\'email'] );
 		die();
 	}
 	
