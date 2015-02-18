@@ -33,13 +33,10 @@ function Clear(row){
 	ProblemTd.innerHTML=GetDataAttribute(ProblemTd, 'old_value');
 	SetDataAttribute(ProblemTd, 'old_value', null);
 
-	row.getElementsByClassName('ConfirmButtonImage')[0].classList.add('hidden');
-	row.getElementsByClassName('CancelButtonImage')[0].classList.add('hidden');
-
-	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonContainer');
 	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.remove('hidden');
 
-	var TrashButtons=document.getElementsByClassName('TrashButtonImage');
+	var TrashButtons=document.getElementsByClassName('TrashButtonContainer');
 	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.remove('hidden');
 
 	var InputButton=document.getElementById('InputButton');
@@ -82,13 +79,10 @@ function OnModification(row){
 	ProblemEditable.innerHTML=ProblemValue;
 	ProblemTd.replaceChild(ProblemEditable, ProblemTd.childNodes[0]);
 
-	row.getElementsByClassName('ConfirmButtonImage')[0].classList.remove('hidden');
-	row.getElementsByClassName('CancelButtonImage')[0].classList.remove('hidden');
-
-	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonContainer');
 	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.add('hidden');
 
-	var TrashButtons=document.getElementsByClassName('TrashButtonImage');
+	var TrashButtons=document.getElementsByClassName('TrashButtonContainer');
 	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.add('hidden');
 
 	var InputButton=document.getElementById('InputButton');

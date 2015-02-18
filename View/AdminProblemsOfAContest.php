@@ -32,10 +32,10 @@ foreach($v_problems as $problem) {
 }
 
 $buttons=[];
-$buttons[]=['name'=>'modify', 'onclick'=>'OnModification'];
-$buttons[]=['name'=>'trash', 'onclick'=>'RemoveProblemRequest'];
-$buttons[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
-$buttons[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
+$buttons['modify']=['onclick'=>'OnModification'];
+$buttons['trash']=['onclick'=>'RemoveProblemRequest'];
+$buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>1];
+$buttons['cancel']=['onclick'=>'Clear', 'hidden'=>1];
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminProblemsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'problem'] ];
 

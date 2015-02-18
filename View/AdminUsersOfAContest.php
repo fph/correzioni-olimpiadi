@@ -32,8 +32,7 @@ foreach($v_users as $user) {
 	$rows[]=$row;
 }
 
-$buttons=[];
-$buttons[]=['name'=>'trash', 'onclick'=>'RemovePermissionRequest'];
+$buttons=['trash'=>['onclick'=>'RemovePermissionRequest']];
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminUsersOfAContestTable', 'InitialOrder'=>['ColumnId'=>'username'] ];
 

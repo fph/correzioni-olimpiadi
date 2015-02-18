@@ -8,10 +8,7 @@ function Clear(row) {
 	CommentTd.innerHTML=GetDataAttribute(CommentTd, 'old_value');
 	SetDataAttribute(CommentTd, 'old_value', null);
 	
-	row.getElementsByClassName('ConfirmButtonImage')[0].classList.add('hidden');
-	row.getElementsByClassName('CancelButtonImage')[0].classList.add('hidden');
-	
-	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonContainer');
 	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.remove('hidden');
 }
 
@@ -56,7 +53,6 @@ function Confirm(row){
 }
 
 function OnModification( row ) {
-	
 	row.id='modifying';
 	
 	var MarkTd=row.getElementsByClassName('MarkColumn')[0];
@@ -86,9 +82,6 @@ function OnModification( row ) {
 	CommentTd.innerHTML='';
 	CommentTd.appendChild(CommentEditable);
 	
-	row.getElementsByClassName('ConfirmButtonImage')[0].classList.remove('hidden');
-	row.getElementsByClassName('CancelButtonImage')[0].classList.remove('hidden');
-	
-	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonContainer');
 	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.add('hidden');
 }

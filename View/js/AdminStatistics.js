@@ -24,13 +24,10 @@ function Clear(row){
 	WeightTd.innerHTML=GetDataAttribute(WeightTd, 'old_value');
 	SetDataAttribute(WeightTd, 'old_value', null);
 
-	row.getElementsByClassName('ConfirmButtonImage')[0].classList.add('hidden');
-	row.getElementsByClassName('CancelButtonImage')[0].classList.add('hidden');
-
-	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonContainer');
 	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.remove('hidden');
 
-	var TrashButtons=document.getElementsByClassName('TrashButtonImage');
+	var TrashButtons=document.getElementsByClassName('TrashButtonContainer');
 	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.remove('hidden');
 
 	var ViewStatisticsButton=document.getElementById('ViewStatisticsButton');
@@ -62,13 +59,10 @@ function OnModification(row){
 	WeightEditable.innerHTML=WeightValue;
 	WeightTd.replaceChild(WeightEditable, WeightTd.childNodes[0]);
 
-	row.getElementsByClassName('ConfirmButtonImage')[0].classList.remove('hidden');
-	row.getElementsByClassName('CancelButtonImage')[0].classList.remove('hidden');
-
-	var ModifyButtons=document.getElementsByClassName('ModifyButtonImage');
+	var ModifyButtons=document.getElementsByClassName('ModifyButtonContainer');
 	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.add('hidden');
 
-	var TrashButtons=document.getElementsByClassName('TrashButtonImage');
+	var TrashButtons=document.getElementsByClassName('TrashButtonContainer');
 	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.add('hidden');
 
 	var ViewStatisticsButton=document.getElementById('ViewStatisticsButton');
