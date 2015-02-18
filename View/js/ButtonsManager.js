@@ -59,13 +59,16 @@ function RenderButtons ( obj ) {
 	ContainerSpan.classList.add('ButtonsContainer');
 	if( obj.id!= null ) ContainerSpan.id=obj.id; //TODO: Classi
 	
-	if( obj.title==true ) { //TODO: Questo forse andrebbe rivisto meglio!
+	if( obj.title==true ) {
 		obj.buttons={
 			modify: {onclick: 'ModifyTitle()'},
 			trash: {onclick: 'DeleteTitle()'},
 			confirm: {hidden: true, onclick: 'SendTitleModification()'},
 			cancel: {hidden: true, onclick: 'CancelTitleModification()'}
 		};
+	}
+	else if( obj.table==true ) {
+		for( var type in obj.buttons ) obj.buttons[type].onclick+='(this.parentNode.parentNode.parentNode.parentNode)';
 	}
 	
 	for( var type in obj.buttons ) {
@@ -81,18 +84,18 @@ function RenderButtons ( obj ) {
 		
 		if( type=='modify' ) {
 			button.childNodes[0].addEventListener('click', function(e) {
-				ShowHideButton(this.parentNode, 'modify', false);
-				ShowHideButton(this.parentNode, 'trash', false);
-				ShowHideButton(this.parentNode, 'confirm', true);
-				ShowHideButton(this.parentNode, 'cancel', true);
+				ShowHideButton(this.parentNode.parentNode, 'modify', false);
+				ShowHideButton(this.parentNode.parentNode, 'trash', false);
+				ShowHideButton(this.parentNode.parentNode, 'confirm', true);
+				ShowHideButton(this.parentNode.parentNode, 'cancel', true);
 			} );
 		}
 		else if( type=='confirm' || type=='cancel' ) {
 			button.childNodes[0].addEventListener('click', function(e) {
-				ShowHideButton(this.parentNode, 'modify', true);
-				ShowHideButton(this.parentNode, 'trash', true);
-				ShowHideButton(this.parentNode, 'confirm', false);
-				ShowHideButton(this.parentNode, 'cancel', false);
+				ShowHideButton(this.parentNode.parentNode, 'modify', true);
+				ShowHideButton(this.parentNode.parentNode, 'trash', true);
+				ShowHideButton(this.parentNode.parentNode, 'confirm', false);
+				ShowHideButton(this.parentNode.parentNode, 'cancel', false);
 			} );
 		}
 		

@@ -133,11 +133,11 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 <!--
 	TODO: Si potrebbe evitare di includere questi quando non necessari
 -->
+	<script type='text/javascript' src='../View/js/ButtonsManager.js'> </script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 	<script type='text/javascript' src='../View/js/DateInput.js'> </script>
 	<script type='text/javascript' src='../View/js/LinkTable.js'> </script>
-	<script type='text/javascript' src='../View/js/ButtonsManager.js'> </script>
 </body>
 </html>
 	<?php

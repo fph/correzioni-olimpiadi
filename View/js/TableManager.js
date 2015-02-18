@@ -45,30 +45,6 @@ function ExportTableToCsv( obj ) {
 	}
 }
 
-function CreateButtonsTd( buttons ) {
-	var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
-	ButtonsTd=document.createElement('td');
-	ButtonsTd.classList.add('ButtonsTd');
-	for(var i=0; i<buttons.length; i++) {
-		var button=buttons[i];
-		var name=button.name;
-		image=document.createElement('img');
-		image.setAttribute('src','../View/Images/'+CFL(name)+'Button.png');
-		image.setAttribute('alt',ItalianTranslation[name]);
-		image.setAttribute('title',ItalianTranslation[name]);
-		SetDataAttribute(image,'name',name);
-		image.classList.add('ButtonImage');
-		image.classList.add(CFL(name)+'ButtonImage');
-		if( button.hidden != null && button.hidden == 1 ) image.classList.add('hidden');
-		image.addEventListener('click',function(e) {
-			var ParentTable=this.parentNode.parentNode.parentNode.parentNode;
-			eval( GetDataAttribute(ParentTable, GetDataAttribute(this,'name')+'_function')+'(this.parentNode.parentNode);' );
-		} );
-		ButtonsTd.appendChild(image);
-	}
-	return ButtonsTd;
-}
-
 function CreateRow( obj , row) {
 	var tr=document.createElement('tr');
 	if( obj.redirect != null ) {
@@ -99,7 +75,11 @@ function CreateRow( obj , row) {
 		tr.appendChild(td);
 	}
 	if( obj.buttons !=null ) {
-		tr.appendChild( CreateButtonsTd(obj.buttons) );
+		ButtonsTd=document.createElement('td');
+		ButtonsTd.classList.add('ButtonsTd');
+		ButtonsObj={table: true, buttons: obj.buttons};
+		ButtonsTd.appendChild( RenderButtons(ButtonsObj) );
+		tr.appendChild( ButtonsTd );
 	}
 	return tr;
 }
@@ -215,18 +195,6 @@ function RenderTable( obj ) {
 		url=obj.redirect;
 	}
 	
-	//Buttons
-	var buttoning=0;
-	
-	if( obj.buttons != null ) {
-		buttoning=1;
-		for(var i=0; i<obj.buttons.length; i++) {
-			var button=obj.buttons[i];
-			var name=button.name;
-			SetDataAttribute(table,name+'_function',button.onclick);
-		}
-	}
-	
 	//Class, Id and Data attributes
 	if( obj.class != null ) {
 		for( var i=0; i<obj.class.length; i++ ) table.classList.add( obj.class[i] );
@@ -278,7 +246,7 @@ function RenderTable( obj ) {
 		}
 		TableHeaderTr.appendChild(th);
 	}
-	if( buttoning ) {
+	if( obj.buttons ) {
 		var ButtonContainerTh=document.createElement('th');
 		ButtonContainerTh.classList.add('ButtonsTh');
 		TableHeaderTr.appendChild( ButtonContainerTh );

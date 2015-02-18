@@ -7,7 +7,7 @@ TableObject
 	InitialOrder => object
 					ColumnId => string !
 					ascending => boolean
-	buttons => [button]
+	buttons => [ ButtonType=> button]
 	ExportCsv => boolean
 	data => object
 		lower_case_string => string
@@ -31,5 +31,5 @@ row
 	class => [string]
 
 button
-	name => string !
 	hidden => boolean
+	onclick => string !
