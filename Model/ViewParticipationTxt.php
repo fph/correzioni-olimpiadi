@@ -10,7 +10,7 @@
 	$ContestId=$_GET["ContestId"];
 	$ContestantId=$_GET["ContestantId"];
 	
-	CheckPagePermission($db,$ContestId);
+	CheckPagePermission($db,-1);
 	
 	//PermissionChecked
 	

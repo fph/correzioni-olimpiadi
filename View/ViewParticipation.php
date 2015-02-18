@@ -1,5 +1,5 @@
 <?php
-global $v_corrections, $v_contestant, $v_contest;
+global $v_admin, $v_corrections, $v_contestant, $v_contest;
 ?>
 
 <h2 class='PageTitle'>
@@ -18,9 +18,11 @@ global $v_corrections, $v_contestant, $v_contest;
 <h3 class="PageSubtitle">
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
-		(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
-		<img src='../View/Images/MailButton.png' alt='Invia email' title='Invia email' class='ButtonImage MailButtonImage' onclick='SendMail(<?=$v_contest['id']?>, <?=$v_contestant['id']?>)'>
-		)
+<?php	if( $v_admin==1 ) { ?>
+			(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
+			<img src='../View/Images/MailButton.png' alt='Invia email' title='Invia email' class='ButtonImage MailButtonImage' onclick='SendMail(<?=$v_contest['id']?>, <?=$v_contestant['id']?>)'>
+			)
+<?php   } ?>
 	</span>
 </h3>
 

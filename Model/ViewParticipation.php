@@ -14,6 +14,10 @@
 	
 	//PermissionChecked
 	
+	$v_admin=0;
+	if (IsAdmin($db,getUserIdBySession())) $v_admin=1;
+	else $v_admin=0;
+
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	
