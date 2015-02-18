@@ -22,7 +22,7 @@ global $v_admin, $v_corrections, $v_contestant, $v_contest;
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
 <?php	if( $v_admin==1 ) { ?>
 			(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
-			<img src='../View/Images/MailButton.png' alt='Invia email' title='Invia email' class='ButtonImage MailButtonImage' onclick='SendMail(<?=$v_contest['id']?>, <?=$v_contestant['id']?>)'>
+			<?php InsertDom('buttons', ['buttons'=>['SendMail'=>['onclick'=>'SendMail('.$v_contest['id'].', '.$v_contestant['id'].')']]]); ?>
 			)
 <?php   } ?>
 	</span>

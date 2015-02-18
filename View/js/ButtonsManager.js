@@ -1,10 +1,17 @@
-var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla', SendMail='Invia email'};
+var ItalianTranslation={
+	modify:'Modifica',
+	trash:'Elimina', 
+	confirm:'Conferma', 
+	cancel:'Annulla', 
+	SendMail:'Invia email'
+};
+
 var ImageSrc={
 	modify	:'../View/Images/ModifyButton.png',
 	trash	:'../View/Images/TrashButton.png',
 	confirm	:'../View/Images/ConfirmButton.png',
 	cancel	:'../View/Images/CancelButton.png',
-	SendMail:'../View/Images/SendMail.png'
+	SendMail:'../View/Images/MailButton.png'
 };
 
 var ButtonClass={
@@ -25,10 +32,10 @@ var ButtonContainerClass={
 
 function CreateButton( type ) {
 	var ButtonSpan=document.createElement('span');
-	ButtonSpan.classlist.add('ButtonContainer');
-	ButtonSpan.classlist.add(ButtonContainerClass[type]);
+	ButtonSpan.classList.add('ButtonContainer');
+	ButtonSpan.classList.add(ButtonContainerClass[type]);
 	
-	var button=document.createElement('image');
+	var button=document.createElement('img');
 	button.classList.add('ButtonImage');
 	button.classList.add(ButtonClass[type]);
 	button.setAttribute('src', ImageSrc[type]);
@@ -50,7 +57,7 @@ function ShowHideButton( container, type, show ) {
 function RenderButtons ( obj ) {
 	var ContainerSpan=document.createElement('span');
 	ContainerSpan.classList.add('ButtonsContainer');
-	ContainerSpan.id=obj.id; //è necessario?
+	if( obj.id!= null ) ContainerSpan.id=obj.id; //TODO: Classi
 	
 	if( obj.title==true ) { //TODO: Questo forse andrebbe rivisto meglio!
 		obj.buttons={
@@ -69,7 +76,7 @@ function RenderButtons ( obj ) {
 		
 		SetDataAttribute(button, 'onclick', ButtonObj.onclick);
 		button.childNodes[0].addEventListener('click', function(e) {
-			eval( GetDataAttribute( this, 'onclick' ) );
+			eval( GetDataAttribute( this.parentNode, 'onclick' ) );
 		} );
 		
 		if( type=='modify' ) {
@@ -98,8 +105,8 @@ function RenderButtons ( obj ) {
 //The variable ButtonsInformation is defined server-side
 if( ButtonsInformation != null ){
 	for(var i=0;i<ButtonsInformation.length;i++) {
-		var button=DatesInformation[i];
-		var DivToButton=document.getElementById('DivToButton'+i);
-		DivToButton.parentNode.replaceChild( RenderButtons(button), DivToButton);
+		var button=ButtonsInformation[i];
+		var DivToButtons=document.getElementById('DivToButtons'+i);
+		DivToButtons.parentNode.replaceChild( RenderButtons(button), DivToButtons);
 	}
 }
