@@ -1,4 +1,4 @@
-var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla'};
+var ItalianTranslation={modify:'Modifica', trash:'Elimina', confirm:'Conferma', cancel:'Annulla', SendMail='Invia email'};
 var ImageSrc={
 	modify	:'../View/Images/ModifyButton.png',
 	trash	:'../View/Images/TrashButton.png',
@@ -41,32 +41,16 @@ function CreateButton( type ) {
 }
 
 function ShowHideButton( container, type, show ) {
-	if( show==true ) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.remove('hidden');
-	if( show==false ) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.add('hidden');
+	if( container.getElementsByClassName(ButtonContainerClass[type]).length != 0 ) {
+		if( show==true ) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.remove('hidden');
+		if( show==false ) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.add('hidden');
+	}
 }
-
-function StartModifyingTitle() { //TODO: Queste due funzioni andrebbero riviste (forse anche spostare in alto
-	var ButtonsTitle=document.getElementsByClassName('ButtonsTitle')[0];
-	ShowHideButton(ButtonsTitle, 'modify', false);
-	ShowHideButton(ButtonsTitle, 'trash', false);
-	ShowHideButton(ButtonsTitle, 'confirm', true);
-	ShowHideButton(ButtonsTitle, 'cancel', true);
-}
-
-function EndModifyingTitle() {
-	var ButtonsTitle=document.getElementsByClassName('ButtonsTitle')[0];
-	ShowHideButton(ButtonsTitle, 'modify', true);
-	ShowHideButton(ButtonsTitle, 'trash', true);
-	ShowHideButton(ButtonsTitle, 'confirm', false);
-	ShowHideButton(ButtonsTitle, 'cancel', false);
-}
-
 
 function RenderButtons ( obj ) {
-	var id=obj.id;
 	var ContainerSpan=document.createElement('span');
 	ContainerSpan.classList.add('ButtonsContainer');
-	ContainerSpan.id=id;
+	ContainerSpan.id=obj.id; //è necessario?
 	
 	if( obj.title==true ) { //TODO: Questo forse andrebbe rivisto meglio!
 		obj.buttons={
@@ -82,10 +66,29 @@ function RenderButtons ( obj ) {
 		var button=CreateButton(type); //TODO: Tutto quello che segue andrebbe spostato in CreateButton?
 		if( ButtonObj.hidden==true ) button.classList.add('hidden');
 		
+		
 		SetDataAttribute(button, 'onclick', ButtonObj.onclick);
 		button.childNodes[0].addEventListener('click', function(e) {
 			eval( GetDataAttribute( this, 'onclick' ) );
 		} );
+		
+		if( type=='modify' ) {
+			button.childNodes[0].addEventListener('click', function(e) {
+				ShowHideButton(this.parentNode, 'modify', false);
+				ShowHideButton(this.parentNode, 'trash', false);
+				ShowHideButton(this.parentNode, 'confirm', true);
+				ShowHideButton(this.parentNode, 'cancel', true);
+			} );
+		}
+		else if( type=='confirm' || type=='cancel' ) {
+			button.childNodes[0].addEventListener('click', function(e) {
+				ShowHideButton(this.parentNode, 'modify', true);
+				ShowHideButton(this.parentNode, 'trash', true);
+				ShowHideButton(this.parentNode, 'confirm', false);
+				ShowHideButton(this.parentNode, 'cancel', false);
+			} );
+		}
+		
 		ContainerSpan.appendChild(button);
 	}
 	

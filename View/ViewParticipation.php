@@ -14,7 +14,9 @@ global $v_corrections, $v_contestant, $v_contest;
 	} ?>
 	</span>
 </h2>
-
+<!--
+	TODO: Il bottone della mail dovrebbe essere visibile solo agli admin
+-->
 <h3 class="PageSubtitle">
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
