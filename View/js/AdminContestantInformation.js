@@ -7,7 +7,6 @@ function DeleteTitle(){
 }
 
 function ModifyTitle() {
-	StartModifyingTitle();
 	var surname=document.getElementById('ContestantSurname');
 	var name=document.getElementById('ContestantName');
 	surname.classList.add('ContentEditable');
@@ -29,8 +28,6 @@ function ProcessServerAnswer( response ) {
 }
 
 function SendTitleModification(){
-	EndModifyingTitle();
-	
 	var surname=document.getElementById('ContestantSurname');
 	var name=document.getElementById('ContestantName');
 	surname.classList.remove('ContentEditable');
@@ -43,7 +40,6 @@ function SendTitleModification(){
 }
 
 function CancelTitleModification(){
-	EndModifyingTitle();
 	var surname=document.getElementById('ContestantSurname');
 	var name=document.getElementById('ContestantName');
 	surname.classList.remove('ContentEditable');
@@ -59,14 +55,6 @@ function CancelTitleModification(){
 //~ School
 function EndSchoolModification() {
 	var subtitle=document.getElementsByClassName('PageSubtitle')[0];
-
-	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
-	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
-	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
-
-	modify_button.classList.remove('hidden');
-	confirm_button.classList.add('hidden');
-	cancel_button.classList.add('hidden');
 	
 	var SchoolSpan=document.getElementById('ContestantSchool');
 	SchoolSpan.classList.remove('ContentEditable');
@@ -100,14 +88,6 @@ function ModifySchool(){
 	SchoolSpan.setAttribute('contenteditable','true');
 	
 	var subtitle=document.getElementsByClassName('PageSubtitle')[0];
-
-	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
-	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
-	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
-
-	modify_button.classList.add('hidden');
-	confirm_button.classList.remove('hidden');
-	cancel_button.classList.remove('hidden');
 }
 
 //~ Email

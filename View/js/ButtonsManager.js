@@ -55,11 +55,8 @@ function ShowHideButton( container, type, show ) {
 }
 
 function RenderButtons ( obj ) {
-	var ContainerSpan=document.createElement('span');
-	ContainerSpan.classList.add('ButtonsContainer');
-	if( obj.id!= null ) ContainerSpan.id=obj.id; //TODO: Classi
-	
 	if( obj.title==true ) {
+		obj.class=['ButtonsTitle'];
 		obj.buttons={
 			modify: {onclick: 'ModifyTitle()'},
 			trash: {onclick: 'DeleteTitle()'},
@@ -69,6 +66,13 @@ function RenderButtons ( obj ) {
 	}
 	else if( obj.table==true ) {
 		for( var type in obj.buttons ) obj.buttons[type].onclick+='(this.parentNode.parentNode.parentNode.parentNode)';
+	}
+	
+	var ContainerSpan=document.createElement('span');
+	ContainerSpan.classList.add('ButtonsContainer');
+	if( obj.id!= null ) ContainerSpan.id=obj.id;
+	if( obj.class!=null ) {
+		for(var i=0; i<obj.class.length; i++) ContainerSpan.classList.add(obj.class[i]);
 	}
 	
 	for( var type in obj.buttons ) {

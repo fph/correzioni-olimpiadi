@@ -6,7 +6,7 @@ global $v_user, $v_admin, $v_contests;
 	<span id='UsernameTitle'><?=$v_user['username']?></span>
 	
 	<?php
-	if (!$v_admin) include 'ButtonsTitle.html';
+	if (!$v_admin) InsertDom('buttons', ['title'=>true]);
 	?>
 		
 </h2>

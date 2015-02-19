@@ -7,7 +7,6 @@ function DeleteTitle(){
 }
 
 function ModifyTitle() {
-	StartModifyingTitle();
 	var NameTitle=document.getElementById('name_title');
 	var ItalianDate=document.getElementById('ItalianDate');
 	var DateModificationContainer=document.getElementById('DateModificationContainer');
@@ -32,7 +31,6 @@ function ProcessServerAnswer( Response ) {
 }
 
 function SendTitleModification(){
-	EndModifyingTitle();
 	var NameTitle=document.getElementById('name_title');
 	NameTitle.classList.remove('ContentEditable');
 	NameTitle.setAttribute('contenteditable','false');
@@ -50,7 +48,6 @@ function SendTitleModification(){
 }
 
 function CancelTitleModification(){
-	EndModifyingTitle();
 	var NameTitle=document.getElementById('name_title');	
 	NameTitle.classList.remove('ContentEditable');
 	NameTitle.setAttribute('contenteditable','false');
@@ -78,14 +75,6 @@ function CancelCorrectionsState(){
 	}
 
 	SetDataAttribute(CorrectionsState, 'old_value', null);
-
-	var modify_button=CorrectionsInformationContainer.getElementsByClassName('ModifyButtonContainer')[0];
-	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('ConfirmButtonContainer')[0];
-	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('CancelButtonContainer')[0];
-
-	modify_button.classList.remove('hidden');
-	confirm_button.classList.add('hidden');
-	cancel_button.classList.add('hidden');
 }
 
 function MakeChangesCorrectionsState(response){
@@ -110,7 +99,7 @@ function ConfirmCorrectionsState(){
 	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:NewCorrectionsState}, MakeChangesCorrectionsState);
 }
 
-
+//TODO: Perché non è gestito via dom?
 function ModifyCorrectionsState(){
 	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
 	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
@@ -130,12 +119,4 @@ function ModifyCorrectionsState(){
 	NewStateHTML+="</select>";
 
 	CorrectionsState.innerHTML=NewStateHTML;
-
-	var modify_button=CorrectionsInformationContainer.getElementsByClassName('ModifyButtonContainer')[0];
-	var confirm_button=CorrectionsInformationContainer.getElementsByClassName('ConfirmButtonContainer')[0];
-	var cancel_button=CorrectionsInformationContainer.getElementsByClassName('CancelButtonContainer')[0];
-
-	modify_button.classList.add('hidden');
-	confirm_button.classList.remove('hidden');
-	cancel_button.classList.remove('hidden');
 }
