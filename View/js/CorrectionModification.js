@@ -49,8 +49,10 @@ function Confirm(row){
 	SetDataAttribute(CommentTd, 'new_value', comment);
 	
 	var UserTd=row.getElementsByClassName('UsernameColumn')[0];
-	if ((GetDataAttribute(MarkTd, 'old_value'))!=mark) SetDataAttribute(UserTd, 'new_value', SessionUsername);
+	if ((GetDataAttribute(MarkTd, 'old_value'))!=mark || UserTd.innerHTML=='-') SetDataAttribute(UserTd, 'new_value', SessionUsername);
 	else SetDataAttribute(UserTd, 'new_value', UserTd.innerHTML);
+
+	if (mark=='-') mark=null;
 	
 	MakeAjaxRequest('../Modify/MakeCorrection.php', {ContestantId:ContestantId, ProblemId:ProblemId, mark:mark, comment:comment}, MakeChanges);
 }
@@ -69,13 +71,19 @@ function OnModification( row ) {
 
 	var MarkSelect=document.createElement('select');
 	MarkSelect.classList.add('MarkSelect');
+	
+	var OptionItem=document.createElement('option');
+	OptionItem.value='-';
+	OptionItem.innerHTML='-';
+	MarkSelect.appendChild(OptionItem);
 	for (i=0; i<=7; i++) {
 		var OptionItem=document.createElement('option');
 		OptionItem.value=i.toString();
 		OptionItem.innerHTML=i.toString();
 		MarkSelect.appendChild(OptionItem);
 	}
-	MarkSelect.selectedIndex=parseInt(MarkValue);
+	if (MarkValue=='-') MarkSelect.selectedIndex=0;
+	else MarkSelect.selectedIndex=parseInt(MarkValue)+1;
 
 	MarkTd.replaceChild(MarkSelect,MarkTd.childNodes[0]);
 
