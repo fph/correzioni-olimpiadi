@@ -1,6 +1,8 @@
 <?php
 require_once "Constants.php";
 
+date_default_timezone_set('Europe/Rome');
+
 function GenerateAbsolutePath($type,$path) {
 	if( $type == "Model" ) return "/Model/$path";
 	else if( $type=="View" ) return "/View/$path";
