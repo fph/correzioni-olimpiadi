@@ -13,11 +13,11 @@ global $v_contest;
 			} ?>
 		</span>
 		<span class='hidden' id='DateModificationContainer'>
-			<?php InsertDate(['id'=>'TitleDateModification']); ?>
+			<?php InsertDom( 'date', ['id'=>'TitleDateModification']); ?>
 		</span>
 	</span>
 	
-	<?php include 'ButtonsTitle.html'?>
+	<?php InsertDom('buttons', ['title'=>true]); ?>
 </h2>
 
 <div class='GeneralInformation'>
@@ -37,24 +37,20 @@ global $v_contest;
 		</span>
 		<?php
 	}?>
-	<span class='ButtonsSubtitle'>
-		<span class='ModifyButtonContainer ButtonContainer'>
-			<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='ModifyCorrectionsState()'>
-		</span>
-			
-		<span class='ConfirmButtonContainer ButtonContainer hidden'>
-			<img class='ConfirmButtonImage ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='ConfirmCorrectionsState()'>
-		</span>
-
-		<span class='CancelButtonContainer ButtonContainer hidden'>
-			<img class='CancelButtonImage ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='CancelCorrectionsState()'>
-		</span>
-	</span>
+	
+<?php
+	$buttons=[ 'class'=> ['ButtonsSubtitle'], 'buttons'=>[
+		'modify'=>['onclick'=>'ModifyCorrectionsState()'], 
+		'confirm'=>['onclick'=>'ConfirmCorrectionsState()', 'hidden'=>true], 
+		'cancel'=>['onclick'=>'CancelCorrectionsState()', 'hidden'=>true]
+	] ];
+	InsertDom('buttons', $buttons);
+?>
 	</div>
 </div>
 
 <?php
-InsertLinkTable([
+InsertDom( 'LinkTable', [
 	['name'=>'Partecipanti', 'redirect'=>['url'=>'AdminContestantsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
 	['name'=>'Problemi', 'redirect'=>['url'=>'AdminProblemsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
 	['name'=>'Correttori', 'redirect'=>['url'=>'AdminUsersOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]]

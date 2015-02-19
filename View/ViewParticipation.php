@@ -14,13 +14,15 @@ global $v_admin, $v_corrections, $v_contestant, $v_contest;
 	} ?>
 	</span>
 </h2>
-
+<!--
+	TODO: Il bottone della mail dovrebbe essere visibile solo agli admin
+-->
 <h3 class="PageSubtitle">
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
 <?php	if( $v_admin==1 ) { ?>
 			(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
-			<img src='../View/Images/MailButton.png' alt='Invia email' title='Invia email' class='ButtonImage MailButtonImage' onclick='SendMail(<?=$v_contest['id']?>, <?=$v_contestant['id']?>)'>
+			<?php InsertDom('buttons', ['buttons'=>['SendMail'=>['onclick'=>'SendMail('.$v_contest['id'].', '.$v_contestant['id'].')']]]); ?>
 			)
 <?php   } ?>
 	</span>
@@ -46,14 +48,14 @@ foreach($v_corrections as $correction) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'problem'] ];
 if( $v_contest['blocked']==0 ) {
-	$images=[];
-	$images[]=['name'=>'modify', 'onclick'=>'OnModification'];
-	$images[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
-	$images[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
-	$table['buttons']=$images;
+	$buttons=[];
+	$buttons['modify']=['onclick'=>'OnModification'];
+	$buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>true];
+	$buttons['cancel']=['onclick'=>'Clear', 'hidden'=>true];
+	$table['buttons']=$buttons;
 }
 
-InsertTable($table);
+InsertDom( 'table', $table);
 ?>
 
 <script>

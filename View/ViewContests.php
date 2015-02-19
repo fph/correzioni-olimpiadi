@@ -21,5 +21,5 @@ global $v_contests;
 		$rows[]=$row;
 	}
 	$table=['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date'] ];
-	InsertTable( $table );
+	InsertDom( 'table',  $table );
 ?>

@@ -46,6 +46,6 @@ global $v_contest, $v_problems, $v_contestants;
 	}
 	
 	$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
-	InsertTable($table);
+	InsertDom( 'table', $table);
 	
 ?>

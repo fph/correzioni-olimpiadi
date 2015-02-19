@@ -6,7 +6,7 @@ global $v_user, $v_admin, $v_contests;
 	<span id='UsernameTitle'><?=$v_user['username']?></span>
 	
 	<?php
-	if (!$v_admin) include 'ButtonsTitle.html';
+	if (!$v_admin) InsertDom('buttons', ['title'=>true]);
 	?>
 		
 </h2>
@@ -38,7 +38,7 @@ foreach($v_contests as $contest) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date']];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>
 
 <script>

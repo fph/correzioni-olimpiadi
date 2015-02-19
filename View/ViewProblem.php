@@ -42,14 +42,14 @@ foreach($v_corrections as $correction) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'surname'] ];
 if( $v_contest['blocked']==0 ) {
-	$images=[];
-	$images[]=['name'=>'modify', 'onclick'=>'OnModification'];
-	$images[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
-	$images[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
-	$table['buttons']=$images;
+	$buttons=[];
+	$buttons['modify']=['onclick'=>'OnModification'];
+	$buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>true];
+	$buttons['cancel']=['onclick'=>'Clear', 'hidden'=>true];
+	$table['buttons']=$buttons;
 }
 
-InsertTable($table);
+InsertDom( 'table', $table);
 ?>
 
 <script>

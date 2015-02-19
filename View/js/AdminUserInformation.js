@@ -7,7 +7,6 @@ function DeleteTitle(){
 }
 
 function ModifyTitle() {
-	StartModifyingTitle();
 	var UsernameTitle=document.getElementById('UsernameTitle');
 	UsernameTitle.classList.add('ContentEditable');
 	UsernameTitle.setAttribute('contenteditable','true');
@@ -24,7 +23,6 @@ function ProcessServerAnswer( Response ) {
 }
 
 function SendTitleModification(){
-	EndModifyingTitle();
 	var UsernameTitle=document.getElementById('UsernameTitle');	
 	UsernameTitle.classList.remove('ContentEditable');
 	UsernameTitle.setAttribute('contenteditable','false');
@@ -34,7 +32,6 @@ function SendTitleModification(){
 }
 
 function CancelTitleModification(){
-	EndModifyingTitle();
 	var UsernameTitle=document.getElementById('UsernameTitle');	
 	UsernameTitle.classList.remove('ContentEditable');
 	UsernameTitle.setAttribute('contenteditable','false');

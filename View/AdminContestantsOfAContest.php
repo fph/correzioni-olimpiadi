@@ -32,12 +32,11 @@ foreach($v_contestants as $contestant) {
 	$rows[]=$row;
 }
 
-$buttons=[];
-$buttons[]=['name'=>'trash', 'onclick'=>'RemoveParticipationRequest'];
+$buttons=['trash'=>['onclick'=>'RemoveParticipationRequest']];
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminContestantsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'surname']];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>
 
 <h3 class='PageSubtitle'>
@@ -51,7 +50,7 @@ InsertTable( $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <?php InsertSelect(['id'=>'ContestantInput', 'type'=>'contestant']); ?></td>
+		<td> <?php InsertDom( 'select', ['id'=>'ContestantInput', 'type'=>'contestant']); ?></td>
 		<td> <input type='button' value='Aggiungi' onclick="AddParticipationRequest()"> </td>
 	</tr>
 	</table>

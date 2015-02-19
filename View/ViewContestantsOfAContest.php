@@ -32,5 +32,5 @@ foreach($v_contestants as $contestant) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'InitialOrder'=>['ColumnId'=>'surname'] ];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>

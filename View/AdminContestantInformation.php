@@ -7,45 +7,35 @@ global $v_contestant, $v_contests;
 		<span id='ContestantSurname' style='margin:0 10px 0 0;'><?=$v_contestant['surname']?></span>
 		<span id='ContestantName'><?=$v_contestant['name']?></span>
 	</span>
-	<?php include 'ButtonsTitle.html' ?>
+	<?php InsertDom('buttons', ['title'=>true]) ?>
 </h2>
 
 <h3 class='PageSubtitle'>
 	<span id='ContestantSchool'>
 		<?=$v_contestant['school']?>
 	</span>
-	<span class='ButtonsSubtitle'>
-		<span class='ModifyButtonContainer ButtonContainer'>
-			<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='ModifySchool()'>
-		</span>
-			
-		<span class='ConfirmButtonContainer ButtonContainer hidden'>
-			<img class='ConfirmButtonImage ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='ConfirmSchool()'>
-		</span>
-
-		<span class='CancelButtonContainer ButtonContainer hidden'>
-			<img class='CancelButtonImage ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='CancelSchool()'>
-		</span>
-	</span>
+<?php
+	$ButtonsSubtitle1=['class'=>['ButtonsSubtitle'], 'buttons'=>[
+		'modify'=>['onclick'=>'ModifySchool()'], 
+		'confirm'=>['onclick'=>'ConfirmSchool()', 'hidden'=>true], 
+		'cancel'=>['onclick'=>'CancelSchool()', 'hidden'=>true] 
+	]];
+	InsertDom('buttons', $ButtonsSubtitle1);
+?>
 </h3>
 
 <h3 class='PageSubtitle'>
 	<span id='ContestantEmail'>
 		<?=$v_contestant['email']?>
 	</span>
-	<span class='ButtonsSubtitle'>
-		<span class='ModifyButtonContainer ButtonContainer'>
-			<img class='ModifyButtonImage ButtonImage' src='../View/Images/ModifyButton.png' alt='Modifica' title='Modifica' onclick='ModifyEmail()'>
-		</span>
-			
-		<span class='ConfirmButtonContainer ButtonContainer hidden'>
-			<img class='ConfirmButtonImage ButtonImage' src='../View/Images/ConfirmButton.png' alt='Conferma' title='Conferma' onclick='ConfirmEmail()'>
-		</span>
-
-		<span class='CancelButtonContainer ButtonContainer hidden'>
-			<img class='CancelButtonImage ButtonImage' src='../View/Images/CancelButton.png' alt='Annulla' title='Annulla' onclick='CancelEmail()'>
-		</span>
-	</span>
+<?php
+	$ButtonsSubtitle2=['class'=>['ButtonsSubtitle'], 'buttons'=>[
+		'modify'=>['onclick'=>'ModifyEmail()'], 
+		'confirm'=>['onclick'=>'ConfirmEmail()', 'hidden'=>true], 
+		'cancel'=>['onclick'=>'CancelEmail()', 'hidden'=>true] 
+	]];
+	InsertDom('buttons', $ButtonsSubtitle2);
+?>
 </h3>
 
 <?php
@@ -63,7 +53,7 @@ foreach($v_contests as $contest) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'InitialOrder'=>['ColumnId'=>'date'] ];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>
 
 

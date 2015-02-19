@@ -15,7 +15,7 @@
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <?php InsertSelect(['id'=>'ContestInput','type'=>'contest']); ?> </td>
+		<td> <?php InsertDom( 'select', ['id'=>'ContestInput','type'=>'contest']); ?> </td>
 		<td> <input type='number' step='0.01' name='weight' id='WeightInput' placeholder='0.5'> </td>
 		<td> <input type='button' value='Aggiungi' id='AddContestButton' onclick="AddContestToStatistics()"> </td>
 	</tr>
@@ -30,13 +30,13 @@
 	$rows=[];
 
 	$buttons=[];
-	$buttons[]=['name'=>'modify', 'onclick'=>'OnModification'];
-	$buttons[]=['name'=>'trash', 'onclick'=>'RemoveContest'];
-	$buttons[]=['name'=>'confirm', 'onclick'=>'Confirm', 'hidden'=>1];
-	$buttons[]=['name'=>'cancel', 'onclick'=>'Clear', 'hidden'=>1];
-	
+	$buttons['modify']=['onclick'=>'OnModification'];
+	$buttons['trash']=['onclick'=>'RemoveContest'];
+	$buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>1];
+	$buttons['cancel']=['onclick'=>'Clear', 'hidden'=>1];
+
 	$table=['columns'=>$columns, 'rows'=> $rows, 'buttons'=>$buttons, 'id'=>'AdminContestWeightTable', 'InitialOrder'=>['ColumnId'=>'contest'] ];
-	InsertTable( $table );
+	InsertDom( 'table',  $table );
 ?>
 
 <button id='ViewStatisticsButton' onclick='ViewStatisticsRequest()'>Vedi statistiche</button>

@@ -32,12 +32,11 @@ foreach($v_users as $user) {
 	$rows[]=$row;
 }
 
-$buttons=[];
-$buttons[]=['name'=>'trash', 'onclick'=>'RemovePermissionRequest'];
+$buttons=['trash'=>['onclick'=>'RemovePermissionRequest']];
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminUsersOfAContestTable', 'InitialOrder'=>['ColumnId'=>'username'] ];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>
 
 <h3 class='PageSubtitle'>
@@ -51,7 +50,7 @@ InsertTable( $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <?php InsertSelect(['id'=>'UserInput','type'=>'user']); ?> </td>
+		<td> <?php InsertDom( 'select', ['id'=>'UserInput','type'=>'user']); ?> </td>
 		<td> <input type='button' value='Aggiungi' onclick="AddPermissionRequest()"> </td>
 	</tr>
 	</table>

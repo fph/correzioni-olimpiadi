@@ -67,6 +67,13 @@ AjaxSelect.js:
 
 LinkTable.js:
 	Renders a list of links. Works as TableManager but the LinkTable object is an array of objects with this properties:
-		name => string
+		name => string,
 		redirect => [ url => string, parameters => object ]
+		
+ButtonsManager.js:
+	Renders buttons (small clickable icons). Works as TableManager but the buttons object has the following structure:
+		title => boolean,
+		table => boolean,
+		buttons => [ ButtonType=>[ hidden=>boolean, onclick=>string] ]
+		
 	

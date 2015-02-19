@@ -21,40 +21,21 @@ $jsInclude=['ViewParticipation'=>['CorrectionModification', 'MailSender'],
 $cssInclude=['AdminStatistics'=>['AdminStatistics'],
 			'ViewParticipation'=>['ViewParticipation'] ];
 
-$TablesInformation=[];
-$DatesInformation=[];
-$SelectsInformation=[];
-$LinkTablesInformation=[];
-function InsertTable( $table ) {
-	global $TablesInformation;
-?>
-	<div class='DivToTable hidden' id='DivToTable<?=count($TablesInformation)?>'></div>
-<?php 
-	$TablesInformation[]=$table;
-}
+global $DomInformation;
+$DomInformation=[
+	'table'=>[], 
+	'date'=>[], 
+	'select'=>[], 
+	'LinkTable'=>[], 
+	'buttons'=>[] 
+];
 
-function InsertDate( $date ) {
-	global $DatesInformation;
+function InsertDom( $type, $obj ) {
+	global $DomInformation;
 ?>
-	<div class='DivToDate hidden' id='DivToDate<?=count($DatesInformation)?>'></div>
-<?php 
-	$DatesInformation[]=$date;
-}
-
-function InsertSelect( $select ) {
-	global $SelectsInformation;
-?>
-	<div class='DivToSelect hidden' id='DivToSelect<?=count($SelectsInformation)?>'></div>
-<?php 
-	$SelectsInformation[]=$select;
-}
-
-function InsertLinkTable( $LinkTable ) {
-	global $LinkTablesInformation;
-?>
-	<div class='DivToLinkTable hidden' id='DivToLinkTable<?=count($LinkTablesInformation)?>'></div>
-<?php 
-	$LinkTablesInformation[]=$LinkTable;
+	<div class='DivTo<?=ucfirst($type)?> hidden' id='DivTo<?=ucfirst($type)?><?=count($DomInformation[$type])?>'></div>
+<?php
+	$DomInformation[$type][]=$obj;
 }
 
 function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $message=null ){
@@ -70,7 +51,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		}
 	}
 	global $jsInclude, $cssInclude;
-	global $TablesInformation, $DatesInformation, $SelectsInformation, $LinkTablesInformation;
+	global $DomInformation;
 	?>
 <!DOCTYPE html>
 <html lang='it'>
@@ -143,14 +124,16 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		} ?>
 	</script>
 	<script type='text/javascript'>
-		var TablesInformation=<?=json_encode( $TablesInformation )?>;
-		var DatesInformation=<?=json_encode( $DatesInformation )?>;
-		var SelectsInformation=<?=json_encode( $SelectsInformation )?>;
-		var LinkTablesInformation=<?=json_encode( $LinkTablesInformation )?>;
+		var TablesInformation=<?=json_encode( $DomInformation['table'] )?>;
+		var DatesInformation=<?=json_encode( $DomInformation['date'] )?>;
+		var SelectsInformation=<?=json_encode( $DomInformation['select'] )?>;
+		var LinkTablesInformation=<?=json_encode( $DomInformation['LinkTable'] )?>;
+		var ButtonsInformation=<?=json_encode( $DomInformation['buttons'] )?>;
 	</script>
 <!--
 	TODO: Si potrebbe evitare di includere questi quando non necessari
 -->
+	<script type='text/javascript' src='../View/js/ButtonsManager.js'> </script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 	<script type='text/javascript' src='../View/js/DateInput.js'> </script>

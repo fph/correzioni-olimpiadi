@@ -25,7 +25,7 @@ foreach($v_users as $user) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminUserInformation', 'id'=>'AdminUsersTable', 'InitialOrder'=>['ColumnId'=>'username'] ];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>
 
 <h3 class="PageSubtitle">

@@ -29,7 +29,7 @@ foreach($v_contestants as $contestant) {
 
 $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminContestantInformation', 'id'=>'AdminContestantsTable', 'InitialOrder'=>['ColumnId'=>'surname'] ];
 
-InsertTable( $table );
+InsertDom( 'table',  $table );
 ?>
 
 
