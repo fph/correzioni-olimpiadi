@@ -18,7 +18,7 @@
 		if( is_null($participation) ) {
 			return ['type'=>'bad', 'text'=>'Il partecipante selezionato non ha preso parte alla gara scelta'];
 		}
-		if( !is_string($contestant['email']) or strlen($contestant['email'])<5 ) {
+		if( !is_string($contestant['email']) or !filter_var($contestant['email'], FILTER_VALIDATE_EMAIL) ) {
 			return ['type'=>'bad', 'text'=>'L\'indirizzo email del partecipante selezionato non è stato inserito oppure è malformato'];
 		}
 	
@@ -60,7 +60,11 @@
 		$MailObject='Verbale di correzione - Ammissione a '.$contest['name'];
 		mail($contestant['email'], $MailObject, $MailText, 'From: correzioni-olimpiadi <'.EmailAddress.'>');
 		
-		return ['type'=>'good', 'text'=>'Email inviata con successo'];
+		//~ Set the email field to true (even if it was already)
+		Query($db, QueryUpdate('Participations', ['id'=>$participation['id']], ['email'=>1]) );
+		
+		if( $participation['email']==0 ) return ['type'=>'good', 'text'=>'Email inviata con successo'];
+		else return ['type'=>'good', 'text'=>'Email reinviata con successo'];
 	}
 
 	$db= OpenDbConnection();
