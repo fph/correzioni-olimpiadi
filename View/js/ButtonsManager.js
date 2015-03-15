@@ -64,9 +64,6 @@ function RenderButtons ( obj ) {
 			cancel: {hidden: true, onclick: 'CancelTitleModification()'}
 		};
 	}
-	else if( obj.table==true ) {
-		for( var type in obj.buttons ) obj.buttons[type].onclick+='(this.parentNode.parentNode.parentNode.parentNode)';
-	}
 	
 	var ContainerSpan=document.createElement('span');
 	ContainerSpan.classList.add('ButtonsContainer');
