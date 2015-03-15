@@ -1,5 +1,5 @@
 <?php
-global $v_admin, $v_corrections, $v_contestant, $v_contest;
+global $v_admin, $v_corrections, $v_contestant, $v_contest, $v_MailSent;
 ?>
 
 <h2 class='PageTitle'>
@@ -19,7 +19,10 @@ global $v_admin, $v_corrections, $v_contestant, $v_contest;
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
 <?php	if( $v_admin==1 ) { ?>
 			(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
-			<?php InsertDom('buttons', ['buttons'=>['SendMail'=>['onclick'=>'SendMail('.$v_contest['id'].', '.$v_contestant['id'].')']]]); ?>
+			<?php 
+				if( $v_MailSent==0 ) InsertDom('buttons', ['buttons'=>['mail'=>['onclick'=>'SendMail('.$v_contest['id'].', '.$v_contestant['id'].')']]]); 
+				else InsertDom('buttons', ['buttons'=>['remail'=>['onclick'=>'SendMail('.$v_contest['id'].', '.$v_contestant['id'].')']]]);
+			?>
 			)
 <?php   } ?>
 	</span>
@@ -54,6 +57,7 @@ if( $v_contest['blocked']==0 ) {
 
 InsertDom( 'table', $table);
 ?>
+
 
 <script>
 	var ContestantId=<?=$v_contestant['id']?>;

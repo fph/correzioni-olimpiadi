@@ -14,6 +14,8 @@
 	
 	//PermissionChecked
 	
+	$v_MailSent=OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId], ['email'] ) )['email'];
+	
 	$v_admin=0;
 	if (IsAdmin($db,getUserIdBySession())) $v_admin=1;
 	else $v_admin=0;
