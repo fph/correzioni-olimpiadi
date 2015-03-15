@@ -1,5 +1,5 @@
 <?php
-global $v_contest, $v_problems, $v_contestants;
+global $v_admin, $v_contest, $v_problems, $v_contestants;
 ?>
 
 <h2 class='PageTitle'>
@@ -46,7 +46,8 @@ global $v_contest, $v_problems, $v_contestants;
 		];
 	}
 	
-	$buttons=['SendMail'=>['onclick'=>'SendMailContestant']];
+	$buttons=null;
+	if( $v_admin==1 ) $buttons=['SendMail'=>['onclick'=>'SendMailContestant']];
 	
 	$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1], 'buttons'=>$buttons ];
 	InsertDom( 'table', $table);
