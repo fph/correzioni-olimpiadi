@@ -39,15 +39,19 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 			}
 		}
 		$values['score']=$total;
-		$rows[]=[
+		
+		$row=[
 			'values'=>$values,
 			'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ],
 			'data'=>['ContestantId'=>$contestant['id']]
 		];
+		if( $contestant['email']==1 ) $row['class']=['ContestantWithRemail'];
+		
+		$rows[]=$row;
 	}
 	
 	$buttons=null;
-	if( $v_admin==1 ) $buttons=['SendMail'=>['onclick'=>'SendMailContestant']];
+	if( $v_admin==1 ) $buttons=['mail'=>['onclick'=>'SendMail']];
 	
 	$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1], 'buttons'=>$buttons ];
 	InsertDom( 'table', $table);

@@ -79,20 +79,6 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 			<?php
 		} 	
 	} ?>
-	
-	<script type='text/javascript' src='../View/js/global.js'> </script>
-	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
-	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
-
-<?php 
-	if( isset($jsInclude[$content]) ) {
-		foreach( $jsInclude[$content] as $jsName ) {
-			?>
-			<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
-			<?php
-		}
-	} ?>
-	
 </head>
 
 <body> 
@@ -134,11 +120,24 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 <!--
 	TODO: Si potrebbe evitare di includere questi quando non necessari
 -->
+	<script type='text/javascript' src='../View/js/global.js'> </script>
+	<script type='text/javascript' src='../View/js/ShowMessage.js'> </script>
+	<script type='text/javascript' src='../View/js/AjaxManager.js'> </script>
+	
 	<script type='text/javascript' src='../View/js/ButtonsManager.js'> </script>
 	<script type='text/javascript' src='../View/js/TableManager.js'> </script>
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 	<script type='text/javascript' src='../View/js/DateInput.js'> </script>
 	<script type='text/javascript' src='../View/js/LinkTable.js'> </script>
+	
+	<?php 
+	if( isset($jsInclude[$content]) ) {
+		foreach( $jsInclude[$content] as $jsName ) {
+			?>
+			<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
+			<?php
+		}
+	} ?>
 </body>
 </html>
 	<?php

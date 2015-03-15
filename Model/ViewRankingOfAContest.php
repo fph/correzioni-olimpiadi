@@ -20,12 +20,13 @@
 	
 	$v_contest=OneResultQuery($db, QuerySelect('Contests',['id'=>$ContestId]));
 	$v_problems=ManyResultQuery($db, QuerySelect('Problems',['ContestId'=>$ContestId]));
-	$participations=ManyResultQuery($db, QuerySelect('Participations',['ContestId'=>$ContestId],['ContestantId']));
+	$participations=ManyResultQuery($db, QuerySelect('Participations',['ContestId'=>$ContestId],['ContestantId', 'email']));
 	$v_contestants=[];
-	foreach($participations as $X) {
-		$contestant=OneResultQuery($db, QuerySelect('Contestants',['id'=>$X['ContestantId']]));
+	foreach($participations as $participation) {
+		$contestant=OneResultQuery($db, QuerySelect('Contestants',['id'=>$participation['ContestantId']]));
 		$contestant['marks']=[];
-		$v_contestants[$X['ContestantId']]=$contestant;
+		$contestant['email']=$participation['email'];
+		$v_contestants[$participation['ContestantId']]=$contestant;
 	}
 	foreach($v_problems as $problem) {
 		$ProblemCorrections=ManyResultQuery($db, QuerySelect('Corrections',['ProblemId'=>$problem['id']]));
