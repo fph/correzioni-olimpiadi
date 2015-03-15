@@ -1,33 +1,37 @@
 var ItalianTranslation={
-	modify:'Modifica',
-	trash:'Elimina', 
-	confirm:'Conferma', 
-	cancel:'Annulla', 
-	SendMail:'Invia email'
+	modify	: 'Modifica',
+	trash	: 'Elimina', 
+	confirm	: 'Conferma', 
+	cancel	: 'Annulla', 
+	mail	: 'Invia email',
+	remail	: 'Reinvia email'
 };
 
 var ImageSrc={
-	modify	:'../View/Images/ModifyButton.png',
-	trash	:'../View/Images/TrashButton.png',
-	confirm	:'../View/Images/ConfirmButton.png',
-	cancel	:'../View/Images/CancelButton.png',
-	SendMail:'../View/Images/MailButton.png'
+	modify	: '../View/Images/ModifyButton.png',
+	trash	: '../View/Images/TrashButton.png',
+	confirm	: '../View/Images/ConfirmButton.png',
+	cancel	: '../View/Images/CancelButton.png',
+	mail	: '../View/Images/MailButton.png',
+	remail	: '../View/Images/RemailButton.png'
 };
 
 var ButtonClass={
-	modify	:'ModifyButtonImage',
-	trash	:'TrashButtonImage',
-	confirm	:'ConfirmButtonImage',
-	cancel	:'CancelButtonImage',
-	SendMail:'SendMailButtonImage',
+	modify	: 'ModifyButtonImage',
+	trash	: 'TrashButtonImage',
+	confirm	: 'ConfirmButtonImage',
+	cancel	: 'CancelButtonImage',
+	mail	: 'MailButtonImage',
+	remail	: 'RemailButtonImage'
 };
 
 var ButtonContainerClass={
-	modify	:'ModifyButtonContainer',
-	trash	:'TrashButtonContainer',
-	confirm	:'ConfirmButtonContainer',
-	cancel	:'CancelButtonContainer',
-	SendMail:'SendMailButtonContainer',
+	modify	: 'ModifyButtonContainer',
+	trash	: 'TrashButtonContainer',
+	confirm	: 'ConfirmButtonContainer',
+	cancel	: 'CancelButtonContainer',
+	mail	: 'MailButtonContainer',
+	remail	: 'RemailButtonContainer'
 };
 
 function CreateButton( type ) {
@@ -104,6 +108,16 @@ function RenderButtons ( obj ) {
 	}
 	
 	return ContainerSpan;
+}
+
+function ChangeMailToRemail( ButtonSpan ) {
+	ButtonSpan.classList.add(ButtonContainerClass['remail']);
+	
+	var button=ButtonSpan.getElementsByTagName('img')[0]
+	button.classList.add(ButtonClass['remail']);
+	button.setAttribute('src', ImageSrc['remail']);
+	button.setAttribute('alt', ItalianTranslation['remail']);
+	button.setAttribute('title', ItalianTranslation['remail']);
 }
 
 //The variable ButtonsInformation is defined server-side

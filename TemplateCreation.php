@@ -6,9 +6,9 @@ SuperRequire_once("General","SessionManager.php");
 global $jsInclude, $cssInclude;
 //$jsInclude, $cssInclude contain the css and js which should be included in the page apart from the standard ones (as global.css)
 
-$jsInclude=['ViewParticipation'=>['CorrectionModification', 'MailSender'], 
+$jsInclude=['ViewParticipation'=>['CorrectionModification', 'ViewParticipation'], 
 			'ViewProblem'=>['CorrectionModification'],
-			'ViewRankingOfAContest'=>['ViewRankingOfAContest', 'MailSender'], 
+			'ViewRankingOfAContest'=>['ViewRankingOfAContest'], 
 			'AdminContestants'=>['AdminContestants'], 
 			'AdminUsers'=>['AdminUsers'], 
 			'AdminContests'=>['AdminContests'],
