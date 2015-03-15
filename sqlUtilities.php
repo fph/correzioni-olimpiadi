@@ -2,13 +2,13 @@
 
 $TableInformation=array(
 	'Administrators' => array('UserId'),
-	'Contestants' => array('id','name','surname'),
-	'Contests' => array('id','name','date'),
-	'Corrections' => array('id','ProblemId','ContestantId','mark','comment','UserId'),
-	'Participations' => array('id','ContestId','ContestantId'),
-	'Permissions' => array('id','UserId','ContestId'),
-	'Problems' => array('id','ContestId','name'),
-	'Users' => array('id','username','passHash'),
+	'Contestants' => array('id', 'name', 'surname', 'email'),
+	'Contests' => array('id', 'name', 'date'),
+	'Corrections' => array('id', 'ProblemId', 'ContestantId', 'mark', 'comment', 'UserId'),
+	'Participations' => array('id', 'ContestId', 'ContestantId', 'email'),
+	'Permissions' => array('id', 'UserId', 'ContestId'),
+	'Problems' => array('id', 'ContestId', 'name'),
+	'Users' => array('id', 'username', 'passHash'),
 );
 
 function EscapeInput($value) {
