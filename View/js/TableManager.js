@@ -79,6 +79,9 @@ function CreateRow( obj , row) {
 		ButtonsTd.classList.add('ButtonsTd');
 		ButtonsObj={table: true, buttons: obj.buttons};
 		ButtonsTd.appendChild( RenderButtons(ButtonsObj) );
+		ButtonsTd.addEventListener('click', function() {
+			event.stopPropagation();
+		});
 		tr.appendChild( ButtonsTd );
 	}
 	return tr;
