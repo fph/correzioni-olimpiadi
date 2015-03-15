@@ -96,6 +96,7 @@ function CreateDatabase() {
 		`id` int NOT NULL AUTO_INCREMENT,
 		`ContestId` int NOT NULL,
 		`ContestantId` int NOT NULL,
+		`email` Boolean NOT NULL DEFAULT false,
 
 		PRIMARY KEY (`id`),
 		KEY(`ContestId`),
@@ -234,7 +235,7 @@ function PopulateParticipations($db){
 	foreach($Contests as $Contest) {
 		foreach($Contestants as $Contestant){
 			if( mt_rand(0,1)==1 ) {
-				Query($db, QueryInsert('Participations',['ContestId'=>$Contest['id'],'ContestantId'=>$Contestant['id']]));
+				Query($db, QueryInsert('Participations',['ContestId'=>$Contest['id'],'ContestantId'=>$Contestant['id'], 'email'=>mt_rand(0,1)]));
 			}
 		}
 	}
