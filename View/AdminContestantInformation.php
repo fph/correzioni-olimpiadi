@@ -11,9 +11,7 @@ global $v_contestant, $v_contests;
 </h2>
 
 <h3 class='PageSubtitle'>
-	<span id='ContestantSchool'>
-		<?=$v_contestant['school']?>
-	</span>
+	<span id='ContestantSchool'><?=$v_contestant['school']?></span>
 <?php
 	$ButtonsSubtitle1=['class'=>['ButtonsSubtitle'], 'buttons'=>[
 		'modify'=>['onclick'=>'ModifySchool()'], 
@@ -25,9 +23,7 @@ global $v_contestant, $v_contests;
 </h3>
 
 <h3 class='PageSubtitle'>
-	<span id='ContestantEmail'>
-		<?=$v_contestant['email']?>
-	</span>
+	<span id='ContestantEmail'><?=$v_contestant['email']?></span>
 <?php
 	$ButtonsSubtitle2=['class'=>['ButtonsSubtitle'], 'buttons'=>[
 		'modify'=>['onclick'=>'ModifyEmail()'], 
