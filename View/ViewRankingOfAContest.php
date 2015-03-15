@@ -41,11 +41,17 @@ global $v_contest, $v_problems, $v_contestants;
 		$values['score']=$total;
 		$rows[]=[
 			'values'=>$values,
-			'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ]
+			'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ],
+			'data'=>['ContestantId'=>$contestant['id']]
 		];
 	}
 	
-	$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
-	InsertDom( 'table', $table);
+	$buttons=['SendMail'=>['onclick'=>'SendMailContestant']];
 	
+	$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1], 'buttons'=>$buttons ];
+	InsertDom( 'table', $table);
 ?>
+
+<script>
+	var ContestId=<?=$v_contest['id']?>;
+</script>
