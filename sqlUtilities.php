@@ -16,6 +16,7 @@ function EscapeInput($value) {
 	if ( !is_string($value) and !is_int($value) ) die('The value passed to EscapeInput is not a string nor an integer.');
 	if (get_magic_quotes_gpc()) $value = stripslashes($value);
 	if ( is_string($value) ) {
+		$value=trim($value);
 		$mysqli=new mysqli(dbServer, dbUser, dbPass);
 		$value = "'" . $mysqli->real_escape_string($value) . "'";
 	}
