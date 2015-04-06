@@ -58,7 +58,11 @@
 			$MailText.="\n";
 		}
 		$MailObject='Verbale di correzione - Ammissione a '.$contest['name'];
-		mail($contestant['email'], $MailObject, $MailText, 'From: correzioni-olimpiadi <'.EmailAddress.'>');
+		$MailSent=mail($contestant['email'], $MailObject, $MailText, 'From: correzioni-olimpiadi <'.EmailAddress.'>');
+		
+		if( $MailSent==false ) {
+			return ['type'=>'bad', 'text'=>'L\'email non è stata inviata a causa di un errore del server'];
+		}
 		
 		//~ Set the email field to true (even if it was already)
 		Query($db, QueryUpdate('Participations', ['id'=>$participation['id']], ['email'=>1]) );

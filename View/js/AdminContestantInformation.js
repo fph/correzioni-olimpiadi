@@ -123,7 +123,7 @@ function MakeChangesEmail(response){
 function ConfirmEmail(){
 	EndEmailModification();
 	var EmailSpan=document.getElementById('ContestantEmail');
-	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, email: EmailSpan.innerHTML, type:'ChangeEmail'}, MakeChangesEmail);
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, email: EmailSpan.textContent, type:'ChangeEmail'}, MakeChangesEmail);
 }
 
 
