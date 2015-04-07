@@ -2,7 +2,7 @@
 global $v_contests;
 ?>
 
-<h2 class="PageTitle">
+<h2 class='PageTitle'>
 	Lista delle gare
 </h2>
 

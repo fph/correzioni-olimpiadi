@@ -9,7 +9,7 @@ html,body {
 body {
 	background: #F6F4F0;
 	margin: 0px;
-	font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Sans-Serif';
 }
 
 /* To avoid yellow background in autocompleted input in chrome. */

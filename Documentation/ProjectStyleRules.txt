@@ -7,3 +7,5 @@ For data attributes snake_case should be used instead, as Uppercase isn't suppor
 
 FileNames: Always CamelCase, also single-word names, apart from index which must be written this way.
 Database Tables: Always CamelCase, also single-word names.
+
+Strings should always be delimited by single quotes. Possible exceptions include: strings containing \n (in php), strings containing single quotes.

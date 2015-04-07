@@ -14,7 +14,7 @@ global $v_admin, $v_corrections, $v_contestant, $v_contest, $v_MailSent;
 	} ?>
 	</span>
 </h2>
-<h3 class="PageSubtitle">
+<h3 class='PageSubtitle'>
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
 <?php	if( $v_admin==1 ) { ?>
@@ -67,6 +67,6 @@ InsertDom( 'table', $table);
 	}
 	
 	function GetProblemId(row) {
-		return GetDataAttribute(row, "problem_id");
+		return GetDataAttribute(row, 'problem_id');
 	}
 </script>

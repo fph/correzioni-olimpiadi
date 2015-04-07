@@ -16,7 +16,7 @@ global $v_corrections, $v_contestant, $v_contest;
 	</span>
 </h2>
 
-<h3 class="PageSubtitle">
+<h3 class='PageSubtitle'>
 	<span class='contestant_title'>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?>
 	</span>

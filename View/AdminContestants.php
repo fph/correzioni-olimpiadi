@@ -47,11 +47,11 @@ InsertDom( 'table',  $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="surname" id="SurnameInput"> </td>
-		<td> <input type="text" name="name" id="NameInput"> </td>
-		<td> <input type="text" name="school" id="SchoolInput"> </td>
-		<td> <input type="text" name="email" id="EmailInput"> </td>
-		<td> <input type="button" value="Aggiungi" onclick="AddContestantRequest()"> </td>
+		<td> <input type='text' name='surname' id='SurnameInput'> </td>
+		<td> <input type='text' name='name' id='NameInput'> </td>
+		<td> <input type='text' name='school' id='SchoolInput'> </td>
+		<td> <input type='text' name='email' id='EmailInput'> </td>
+		<td> <input type='button' value='Aggiungi' onclick='AddContestantRequest()'> </td>
 	</tr>
 	</table>
 </div>

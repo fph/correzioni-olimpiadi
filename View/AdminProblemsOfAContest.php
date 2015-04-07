@@ -56,7 +56,7 @@ InsertDom( 'table', $table);
 	</tr>
 	<tr>
 		<td> <input type='text' name='name' id='ProblemInput'> </td>
-		<td> <input type='button' id='InputButton' value='Aggiungi' onclick="AddProblemRequest()"> </td>
+		<td> <input type='button' id='InputButton' value='Aggiungi' onclick='AddProblemRequest()'> </td>
 	</tr>
 	</table>
 </div>

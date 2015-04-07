@@ -1,7 +1,7 @@
 <?php
-require_once "Utilities.php";
+require_once 'Utilities.php';
 
-SuperRequire_once("General","SessionManager.php");
+SuperRequire_once('General','SessionManager.php');
 
 global $jsInclude, $cssInclude;
 //$jsInclude, $cssInclude contain the css and js which should be included in the page apart from the standard ones (as global.css)
@@ -43,11 +43,11 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	if( $IsSessionToBeChecked ){
 		$SessionSituation=CheckSession();
 		if( $SessionSituation==-1 ) {
-			SuperRedirect("Model","Login.php");
+			SuperRedirect('Model','Login.php');
 			die();
 		}
 		else if( $SessionSituation==0 ) {
-			SuperRedirect("Model","Login.php");
+			SuperRedirect('Model','Login.php');
 			die();
 		}
 	}
@@ -61,7 +61,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	Git repository : https://github.com/walypala23/correzioni-olimpiadi
 -->
 <head> 
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
 	<title> Correzioni Olimpiadi</title>
 	<link type='text/css' rel='stylesheet' href='../View/css/global.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/MainBar.css'>
@@ -69,7 +69,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	<link type='text/css' rel='stylesheet' href='../View/css/PagePath.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/InformationTable.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/AjaxSelect.css'>
-	<link rel="shortcut icon" href="../View/Images/FaviconV4.ico" title="Favicon">
+	<link rel='shortcut icon' href='../View/Images/FaviconV4.ico' title='Favicon'>
 	
 <?php 
 	if( isset($cssInclude[$content]) ) {
@@ -86,17 +86,17 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		global $MainBarUserId, $MainBarUsername;
 		$MainBarUserId=GetUserIdBySession();
 		$MainBarUsername=GetUsernameBySession();
-		SuperInclude("View","MainBar.php"); 
+		SuperInclude('View','MainBar.php'); 
 	?>
-	<div class="internalBody" id="<?=$content?>_InternalBody">
+	<div class='internalBody' id='<?=$content?>_InternalBody'>
 	
 	<?php
 		global $v_PathDescription;
 		$v_PathDescription=$PathDescription;
-		SuperInclude("View","PagePath.php");
+		SuperInclude('View','PagePath.php');
 	?>
-		<div id="ContentContainer">
-			<?php SuperInclude("View",$content.".php"); ?>
+		<div id='ContentContainer'>
+			<?php SuperInclude('View',$content.'.php'); ?>
 		</div>
 	</div>
 	

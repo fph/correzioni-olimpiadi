@@ -1,9 +1,9 @@
 <?php
 	
-	require_once "../Utilities.php";
-	SuperRequire_once("General","sqlUtilities.php");
-	SuperRequire_once("General", "TemplateCreation.php");
-	SuperRequire_once("General", "PermissionManager.php");
+	require_once '../Utilities.php';
+	SuperRequire_once('General','sqlUtilities.php');
+	SuperRequire_once('General', 'TemplateCreation.php');
+	SuperRequire_once('General', 'PermissionManager.php');
 	
 	$db=OpenDbConnection();
 	
@@ -16,7 +16,7 @@
 	
 	$db->close();
 	
-	TemplatePage("AdminContestInformation",['Index'=>'index.php',
+	TemplatePage('AdminContestInformation',['Index'=>'index.php',
 											'Amministrazione'=>'AdminAdministration.php',
 											'Gare'=>'AdminContests.php',
 											$v_contest['name']=>'AdminContestInformation.php?ContestId='.$ContestId]);

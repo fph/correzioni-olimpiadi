@@ -1,8 +1,8 @@
 <?php
-require_once "../Utilities.php";
-SuperRequire_once("General","TemplateCreation.php");
-SuperRequire_once("General","SessionManager.php");
-SuperRequire_once("General","sqlUtilities.php");
+require_once '../Utilities.php';
+SuperRequire_once('General','TemplateCreation.php');
+SuperRequire_once('General','SessionManager.php');
+SuperRequire_once('General','sqlUtilities.php');
 
 function ChangeUsername ( $db , $UserId , $username ) {
 	$username=htmlentities($username,ENT_QUOTES);
@@ -52,6 +52,6 @@ else if ( $_POST['type'] == 'ChangePassword' ) $message=ChangePassword( $db , Ge
 else  $message=null;
 
 $db->close();
-TemplatePage("AccountSettings",['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1, $message);
+TemplatePage('AccountSettings',['Index'=>'index.php','Configurazione Account'=>'AccountSettings.php'],1, $message);
 
 ?>

@@ -14,7 +14,7 @@ function EntryInCsvStandard( value ) {
 }
 
 function ExportTableToCsv( obj ) {
-	var csv="";
+	var csv='';
 	
 	for(var i=0;i<obj.columns.length;i++) {
 		csv+=EntryInCsvStandard( obj.columns[i].name );
@@ -29,7 +29,7 @@ function ExportTableToCsv( obj ) {
 		csv+='\n';
 	}
 	
-	var FileName="table.csv";
+	var FileName='table.csv';
 	var blob = new Blob( [csv], {type:'text/csv;charset=utf8;'} );
 	
 	if(navigator.msSaveBlob) { // IE 10+
@@ -37,8 +37,8 @@ function ExportTableToCsv( obj ) {
 	}
 	else {
 		var link=document.createElement('a');
-		link.setAttribute("href", window.URL.createObjectURL(blob));
-		link.setAttribute("download", FileName);
+		link.setAttribute('href', window.URL.createObjectURL(blob));
+		link.setAttribute('download', FileName);
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
@@ -91,28 +91,28 @@ function CreateRow( obj , row) {
 function SplitString( s ) {
 	var res=[];
 	var num=0;
-	var str="";
-	var ChunkType="null";
+	var str='';
+	var ChunkType='null';
 	for( var i=0; i<s.length; i++ ) {
 		if( '0'<=s[i] && s[i]<='9' ) {
-			if( ChunkType=="string" ) {
+			if( ChunkType=='string' ) {
 				res.push(str);
-				str="";
+				str='';
 			}
-			ChunkType="number";
+			ChunkType='number';
 			num=10*num+parseInt(s[i]);
 		}
 		else {
-			if( ChunkType=="number" ) {
+			if( ChunkType=='number' ) {
 				res.push(num);
 				num=0;
 			}
-			ChunkType="string";
+			ChunkType='string';
 			str+=s[i];
 		}
 	}
-	if( ChunkType=="number" ) res.push(num);
-	if( ChunkType=="string" ) res.push(str);
+	if( ChunkType=='number' ) res.push(num);
+	if( ChunkType=='string' ) res.push(str);
 	
 	return res;
 }

@@ -28,7 +28,7 @@ $table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'AdminUserInformation', 
 InsertDom( 'table',  $table );
 ?>
 
-<h3 class="PageSubtitle">
+<h3 class='PageSubtitle'>
 	Aggiungi un correttore
 </h3>
 
@@ -40,9 +40,9 @@ InsertDom( 'table',  $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name="username" id="UsernameInput"> </td>
-		<td> <input type="text" name="password" id="PasswordInput"> </td>
-		<td> <input type="button" value="Aggiungi" onclick="AddUserRequest()"> </td>
+		<td> <input type='text' name='username' id='UsernameInput'> </td>
+		<td> <input type='text' name='password' id='PasswordInput'> </td>
+		<td> <input type='button' value='Aggiungi' onclick='AddUserRequest()'> </td>
 	</tr>
 	</table>
 </div>

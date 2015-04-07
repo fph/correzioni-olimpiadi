@@ -1,5 +1,5 @@
 
-<h2 class="PageTitle">
+<h2 class='PageTitle'>
 	Amministrazione
 </h2>
 

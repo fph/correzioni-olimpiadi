@@ -17,7 +17,7 @@
 	<tr>
 		<td> <?php InsertDom( 'select', ['id'=>'ContestInput','type'=>'contest']); ?> </td>
 		<td> <input type='number' step='0.01' name='weight' id='WeightInput' placeholder='0.5'> </td>
-		<td> <input type='button' value='Aggiungi' id='AddContestButton' onclick="AddContestToStatistics()"> </td>
+		<td> <input type='button' value='Aggiungi' id='AddContestButton' onclick='AddContestToStatistics()'> </td>
 	</tr>
 	</table>
 </div>

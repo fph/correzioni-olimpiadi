@@ -57,7 +57,7 @@ InsertDom( 'table', $table);
 	
 	
 	function GetContestantId(row){
-		return GetDataAttribute(row, "contestant_id");
+		return GetDataAttribute(row, 'contestant_id');
 	}
 	
 	function GetProblemId(row){

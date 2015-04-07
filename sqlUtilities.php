@@ -13,7 +13,7 @@ $TableInformation=array(
 
 function EscapeInput($value) {
 	if (is_null($value)) return 'NULL';
-	if ( !is_string($value) and !is_int($value) ) die("The value passed to EscapeInput is not a string nor an integer.");
+	if ( !is_string($value) and !is_int($value) ) die('The value passed to EscapeInput is not a string nor an integer.');
 	if (get_magic_quotes_gpc()) $value = stripslashes($value);
 	if ( is_string($value) ) {
 		$mysqli=new mysqli(dbServer, dbUser, dbPass);
@@ -23,7 +23,7 @@ function EscapeInput($value) {
 }
 
 function PasswordHash($pass) {
-	$salt="trecentoquarantaseidue";
+	$salt='trecentoquarantaseidue';
 	return crypt($pass,$salt);
 }
 
@@ -70,7 +70,7 @@ function QuerySelect($TableName, $constraints=null, $data=null, $order=null) {
 }
 
 function QueryUpdate($TableName, $constraints, $data) {
-	$query="UPDATE ".$TableName." SET ";
+	$query='UPDATE '.$TableName.' SET ';
 	if( !is_null($data) ) {
 		$first=0;
 		foreach ( $data as $field => $value ) {
@@ -81,7 +81,7 @@ function QueryUpdate($TableName, $constraints, $data) {
 			else $query .=', '.$field.' = '.EscapeInput($value).' ';
 		}
 	}
-	else die( "EMPTY UPDATE" );
+	else die( 'EMPTY UPDATE' );
 	
 	if( !is_null( $constraints ) ) {
 		$query .='WHERE ';
@@ -99,7 +99,7 @@ function QueryUpdate($TableName, $constraints, $data) {
 }
 
 function QueryInsert($TableName, $data) {
-	if( is_null($data) ) die( "EMPTY INSERT" );
+	if( is_null($data) ) die( 'EMPTY INSERT' );
 	$query='INSERT INTO '.$TableName.' ';
 	$QueryField='(';
 	$QueryValue='VALUES(';

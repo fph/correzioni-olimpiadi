@@ -51,7 +51,7 @@ InsertDom( 'table',  $table );
 	</tr>
 	<tr>
 		<td> <?php InsertDom( 'select', ['id'=>'UserInput','type'=>'user']); ?> </td>
-		<td> <input type='button' value='Aggiungi' onclick="AddPermissionRequest()"> </td>
+		<td> <input type='button' value='Aggiungi' onclick='AddPermissionRequest()'> </td>
 	</tr>
 	</table>
 </div>

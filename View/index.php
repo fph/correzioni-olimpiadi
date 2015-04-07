@@ -3,7 +3,7 @@ global $v_admin;
 ?>
 
 
-<h2 class="PageTitle">
+<h2 class='PageTitle'>
 	Benvenuti!
 </h2>
 

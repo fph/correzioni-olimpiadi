@@ -1,14 +1,14 @@
 <?php
 	
-	require_once "../Utilities.php";
-	SuperRequire_once("General","sqlUtilities.php");
-	SuperRequire_once("General", "TemplateCreation.php");
-	SuperRequire_once("General", "PermissionManager.php");
+	require_once '../Utilities.php';
+	SuperRequire_once('General','sqlUtilities.php');
+	SuperRequire_once('General', 'TemplateCreation.php');
+	SuperRequire_once('General', 'PermissionManager.php');
 	
 	$db=OpenDbConnection();
 	
-	$ContestId=$_GET["ContestId"];
-	$ContestantId=$_GET["ContestantId"];
+	$ContestId=$_GET['ContestId'];
+	$ContestantId=$_GET['ContestantId'];
 	
 	CheckPagePermission($db,-1);
 	
@@ -45,10 +45,10 @@
 	
 	$db->close();
 	
-	TemplatePage("ViewParticipationTxt",[	'Index'=>'index.php',
+	TemplatePage('ViewParticipationTxt',[	'Index'=>'index.php',
 										'Gare'=>'ViewContests.php',
 										$v_contest['name']=>'ViewContestInformation.php?ContestId='.$ContestId,
 										'Partecipanti'=>'ViewContestantsOfAContest.php?ContestId='.$ContestId,
-										$v_contestant['name']." ".$v_contestant['surname']=>'ViewParticipation.php?ContestId='.$ContestId.'&amp;ContestantId='.$ContestantId,
-										"Verbale di correzione"=>'ViewParticipationTxt.php?ContestId='.$ContestId.'&amp;ContestantId='.$ContestantId]);
+										$v_contestant['name'].' '.$v_contestant['surname']=>'ViewParticipation.php?ContestId='.$ContestId.'&amp;ContestantId='.$ContestantId,
+										'Verbale di correzione'=>'ViewParticipationTxt.php?ContestId='.$ContestId.'&amp;ContestantId='.$ContestantId]);
 ?>

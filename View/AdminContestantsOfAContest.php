@@ -51,7 +51,7 @@ InsertDom( 'table',  $table );
 	</tr>
 	<tr>
 		<td> <?php InsertDom( 'select', ['id'=>'ContestantInput', 'type'=>'contestant']); ?></td>
-		<td> <input type='button' value='Aggiungi' onclick="AddParticipationRequest()"> </td>
+		<td> <input type='button' value='Aggiungi' onclick='AddParticipationRequest()'> </td>
 	</tr>
 	</table>
 </div>

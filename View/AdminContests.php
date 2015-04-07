@@ -40,11 +40,11 @@ global $v_contests;
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <input type="text" id="ContestInputName"> </td>
+		<td> <input type='text' id='ContestInputName'> </td>
 		<td> 
 			<?php InsertDom( 'date', ['id'=>'ContestInputDate']); ?>
 		</td>
-		<td> <input type="button" value="Aggiungi" onclick="AddContestRequest()"> </td>
+		<td> <input type='button' value='Aggiungi' onclick='AddContestRequest()'> </td>
 	</tr>
 	</table>
 </div>
