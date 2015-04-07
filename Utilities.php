@@ -77,3 +77,11 @@ function GetRestrictedItalianDate($date){
 function GetItalianDate($date){
 	return GetExtendedItalianDate($date);
 }
+
+// Returns '<br>' if executed via browser, '\n' otherwise.
+function NewLine() {
+	static $SapiType = 'EMPTY';
+	if( $SapiType=='EMPTY') $SapiType=php_sapi_name();
+	if( $SapiType=='apache' or $SapiType=='apache2filter' or $SapiType=='apache2handler' ) return '<br>'; //browser
+	else return PHP_EOL; //terminal
+}

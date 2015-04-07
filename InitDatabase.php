@@ -4,13 +4,6 @@ SuperRequire_once("General","sqlUtilities.php");
 SuperRequire_once("General","PermissionManager.php");
 
 
-function NewLine() {
-	static $SapiType = 'EMPTY';
-	if( $SapiType=='EMPTY') $SapiType=php_sapi_name();
-	if( $SapiType=='apache' or $SapiType=='apache2filter' or $SapiType=='apache2handler' ) return '<br>'; //browser
-	else return PHP_EOL; //terminal
-}
-
 function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
@@ -345,4 +338,4 @@ echo "All tables have been populated.".NewLine().NewLine();
 
 $db->close();
 
-echo "THE DATABASE HAS BEEN COMPLETELY INITIALIZED!".NewLine();
+echo "The database has been completely initialized!".NewLine();
