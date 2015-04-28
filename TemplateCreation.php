@@ -103,14 +103,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	<div id='MessageList'> </div>
 	<script type='text/javascript'>
 		var SessionUsername='<?=GetUsernameBySession()?>';
-		<?php
-		if( !is_null( $message ) ){
-			?>
-			ShowMessage( '<?=$message['type']?>' , '<?=$message['text']?>' );
-			<?php
-		} ?>
-	</script>
-	<script type='text/javascript'>
+		
 		var TablesInformation=<?=json_encode( $DomInformation['table'] )?>;
 		var DatesInformation=<?=json_encode( $DomInformation['date'] )?>;
 		var SelectsInformation=<?=json_encode( $DomInformation['select'] )?>;
@@ -129,6 +122,15 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 	<script type='text/javascript' src='../View/js/DateInput.js'> </script>
 	<script type='text/javascript' src='../View/js/LinkTable.js'> </script>
+	
+	<script>
+		<?php
+		if( !is_null( $message ) ){
+			?>
+			ShowMessage( '<?=$message['type']?>' , '<?=$message['text']?>' );
+			<?php
+		} ?>
+	</script>
 	
 	<?php 
 	if( isset($jsInclude[$content]) ) {
