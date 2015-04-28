@@ -21,22 +21,15 @@ global $v_contest;
 </h2>
 
 <div class='GeneralInformation'>
-	<div id='CorrectionsInformationContainer'>
-	<?php
-	if ($v_contest['blocked']) {
-		?>
-		<span class='CorrectionsState CorrectionsCompleted'>
-			Correzioni terminate
+	<div id='CorrectionsInformationContainer' data-value='<?=($v_contest['blocked'])?'block':'unblock'?>'>
+		<span id='CorrectionsStateSpan' class='<?= ($v_contest['blocked'])?'CorrectionsCompleted':'CorrectionsInProgress'?>'>
+			<?= ($v_contest['blocked'])?'Correzioni terminate':'Correzioni in corso'?>
 		</span>
-		<?php
-	}
-	else {
-		?>
-		<span class='CorrectionsState CorrectionsInProgress'>
-			Correzioni in corso
-		</span>
-		<?php
-	}?>
+		
+		<select id='CorrectionsStateSelect' class='hidden'>
+			<option value='block'>Correzioni terminate</option>
+			<option value='unblock'>Correzioni in corso</option>
+		</select>
 	
 <?php
 	$buttons=[ 'class'=> ['ButtonsSubtitle'], 'buttons'=>[

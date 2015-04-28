@@ -62,61 +62,55 @@ function CancelTitleModification(){
 }
 
 function CancelCorrectionsState(){
-	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
-	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
-
-	if (GetDataAttribute(CorrectionsState, 'old_value')=='unblock') {
-		CorrectionsState.innerHTML='Correzioni in corso';
-		CorrectionsState.classList.add('CorrectionsInProgress');
-	}
-	else {
-		CorrectionsState.innerHTML='Correzioni terminate';
-		CorrectionsState.classList.add('CorrectionsCompleted');
-	}
-
-	SetDataAttribute(CorrectionsState, 'old_value', null);
+	var container=document.getElementById('CorrectionsInformationContainer');
+	var span=document.getElementById('CorrectionsStateSpan');
+	var select=document.getElementById('CorrectionsStateSelect');
+	
+	span.classList.remove('hidden');
+	select.classList.add('hidden');
+	
+	SetDataAttribute(container, 'old_value', null);
 }
 
 function MakeChangesCorrectionsState(response){
-	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
-	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
+	var container=document.getElementById('CorrectionsInformationContainer');
+	var span=document.getElementById('CorrectionsStateSpan');
+	var select=document.getElementById('CorrectionsStateSelect');
+	
 	if (response.type=='good') {
-		SetDataAttribute(CorrectionsState, 'old_value', GetDataAttribute(CorrectionsState, 'new_value'));
+		var value=GetDataAttribute(container, 'new_value');
+		SetDataAttribute(container, 'value', value);
+		SetDataAttribute(container, 'new_value', null);
+		SetDataAttribute(container, 'old_value', null);
+		select.classList.add('hidden');
+		
+		span.classList.remove('CorrectionsInProgress');
+		span.classList.remove('CorrectionsCompleted');
+		span.classList.add((value=='block')?'CorrectionsCompleted':'CorrectionsInProgress');
+		span.textContent=(value=='block')?'Correzioni terminate':'Correzioni in corso';
+		span.classList.remove('hidden');
 	}
-	SetDataAttribute(CorrectionsState, 'new_value', null);
-	CancelCorrectionsState();
+	else {
+		CancelCorrectionsState();
+	}
 }
 
 function ConfirmCorrectionsState(){
-	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
-	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
-
-	var selectEl=CorrectionsState.getElementsByClassName('corrections_state_select')[0];
-	var NewCorrectionsState=selectEl.options[selectEl.selectedIndex].value;
-
-	SetDataAttribute(CorrectionsState, 'new_value', NewCorrectionsState);
-
-	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:NewCorrectionsState}, MakeChangesCorrectionsState);
+	var container=document.getElementById('CorrectionsInformationContainer');
+	var span=document.getElementById('CorrectionsStateSpan');
+	var select=document.getElementById('CorrectionsStateSelect');
+	
+	var NewValue=select.options[select.selectedIndex].value;
+	SetDataAttribute(container, 'new_value', NewValue);
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:NewValue}, MakeChangesCorrectionsState);
 }
 
-//TODO: Perché non è gestito via dom?
 function ModifyCorrectionsState(){
-	var CorrectionsInformationContainer=document.getElementById('CorrectionsInformationContainer');
-	var CorrectionsState=CorrectionsInformationContainer.getElementsByClassName('CorrectionsState')[0];
-	var NewStateHTML="<select class='corrections_state_select'>";
-	if (CorrectionsState.classList.contains('CorrectionsInProgress')) {
-		NewStateHTML+="<option value='unblock' selected='selected'> Correzioni in corso";
-		NewStateHTML+="<option value='block'> Correzioni terminate";
-		CorrectionsState.classList.remove('CorrectionsInProgress');
-		SetDataAttribute(CorrectionsState, 'old_value', 'unblock');
-	}
-	else {
-		NewStateHTML+="<option value='unblock'> Correzioni in corso";
-		NewStateHTML+="<option value='block' selected='selected'> Correzioni terminate";
-		CorrectionsState.classList.remove('CorrectionsCompleted');
-		SetDataAttribute(CorrectionsState, 'old-value', 'block');
-	}
-	NewStateHTML+="</select>";
-
-	CorrectionsState.innerHTML=NewStateHTML;
+	var container=document.getElementById('CorrectionsInformationContainer');
+	var span=document.getElementById('CorrectionsStateSpan');
+	var select=document.getElementById('CorrectionsStateSelect');
+	span.classList.add('hidden');
+	
+	select.selectedIndex=(GetDataAttribute(container, 'value')=='block')?0:1;
+	select.classList.remove('hidden');
 }
