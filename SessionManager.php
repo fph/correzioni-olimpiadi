@@ -22,7 +22,7 @@ function EndSession(){
 function CheckSession() {
 	LoadSession();
 	if ( !isset($_SESSION['UserId']) ) return 0;
-	if ( time()-$_SESSION['LoginTimestamp']>3600 ) return -1;
+	if ( time()-$_SESSION['LoginTimestamp']>SessionDuration ) return -1;
 	return 1;
 }
 
