@@ -15,19 +15,23 @@
 	
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 
-	$admins=ManyResultQuery($db, QuerySelect('Administrators'));
-	$other_users=ManyResultQuery($db, QuerySelect('Permissions', ['ContestId'=>$ContestId]));
+	$admins=ManyResultQuery($db, QuerySelect('Users', ['role'=>1]));
+	$SuperAdmins=ManyResultQuery($db, QuerySelect('Users', ['role'=>2]));
+	$permissions=ManyResultQuery($db, QuerySelect('Permissions', ['ContestId'=>$ContestId]));
+	
 	$v_users=[];
 	
-	foreach($admins as &$adm){
-		$nn=OneResultQuery($db, QuerySelect('Users', ['id'=>$adm['UserId']]));
-		$nn['admin']=true;
-		$v_users[]=$nn;
+	foreach($admins as &$user){
+		$v_users[]=$user;
 	}
-	foreach($other_users as &$oth){
-		$nn=OneResultQuery($db, QuerySelect('Users', ['id'=>$oth['UserId']]));
-		$nn['admin']=false;
-		$v_users[]=$nn;
+	foreach($SuperAdmins as &$user){
+		$v_users[]=$user;
+	}
+	foreach($permissions as &$permission){
+		$user=OneResultQuery($db, QuerySelect('Users', ['id'=>$permission['UserId']]));
+		if( $user['role']==0 ) {
+			$v_users[]=$user;
+		}
 	}
 	
 	

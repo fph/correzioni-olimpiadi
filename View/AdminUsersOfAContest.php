@@ -28,7 +28,7 @@ foreach($v_users as $user) {
 	$row=[
 	'values'=>['username'=>$user['username'] ],
 	'data'=>['user_id'=>$user['id']] ];
-	if( $user['admin'] ) $row['class']=['NoTrashButton'];
+	if( $user['role']!=0 ) $row['class']=['NoTrashButton'];
 	$rows[]=$row;
 }
 
