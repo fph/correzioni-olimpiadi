@@ -1,27 +1,53 @@
 <?php
-global $v_user, $v_admin, $v_contests;
+global $v_user, $v_contests, $v_role;
 ?>
 
 <h2 class='PageTitle'>
 	<span id='UsernameTitle'><?=$v_user['username']?></span>
 	
 	<?php
-	if (!$v_admin) InsertDom('buttons', ['title'=>true]);
+	if ($v_user['role']==0) InsertDom('buttons', ['title'=>true]);
 	?>
 		
 </h2>
-
+<?php
+$UserRoleValue='user';
+$UserRoleText='Correttore';
+if( $v_user['role']==1 ) {
+	$UserRoleValue='admin';
+	$UserRoleText='Amministratore';
+}
+else if($v_user['role']==2) {
+	$UserRoleValue='SuperAdmin';
+	$UserRoleText='Super amministratore';
+}
+?>
+<div class='GeneralInformation'>
+	<div id='UserRoleContainer' data-value='<?=$UserRoleValue?>'>
+		<span id='UserRoleSpan' class='UserRole'>
+			<?=$UserRoleText?>
+		</span>
 
 <?php
-if ($v_admin) {
-	?>
-	<div class='GeneralInformation'>
-		<div class='AdminInformation'>
-			Amministratore
-		</div>
+if( $v_role==2 and $v_user['role']!=2 ) {
+?> 
+		<select id='UserRoleSelect' class='hidden'>
+			<option value='user'>Correttore</option>
+			<option value='admin'>Amministratore</option>
+			<option value='SuperAdmin'>Super amministratore</option>
+		</select>
+	
+<?php
+	$buttons=[ 'class'=> ['ButtonsSubtitle'], 'buttons'=>[
+		'modify'=>['onclick'=>'ModifyUserRole()'], 
+		'confirm'=>['onclick'=>'ConfirmUserRole()', 'hidden'=>true], 
+		'cancel'=>['onclick'=>'CancelUserRole()', 'hidden'=>true]
+	] ];
+	InsertDom('buttons', $buttons);
+}
+?>
 	</div>
-	<?php
-}?>
+</div>
 
 <?php
 $columns=[];

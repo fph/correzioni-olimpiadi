@@ -13,20 +13,20 @@
 	
 	$UserId=$_GET['UserId'];
 	
+	$v_role=UserRole($db, GetUserIdBySession());
 	$v_user=OneResultQuery($db, QuerySelect('Users', ['id'=>$UserId]));
 	
 	$v_contests=[];
 	
 	//The query is different if admin or not
-	$v_admin=IsAdmin($db, $UserId);
-	if( $v_admin == 1) {
-		$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
-	}
-	else {
+	if( $v_user['role'] == 0) {
 		$contests=ManyResultQuery($db, QuerySelect('Permissions', ['UserId'=>$UserId]));
 		foreach($contests as $con) {
 			$v_contests[]=OneResultQuery($db, QuerySelect('Contests', ['id'=>$con['ContestId']]));
 		}
+	}
+	else {
+		$v_contests=ManyResultQuery($db, QuerySelect('Contests'));
 	}
 	
 	$db->close();

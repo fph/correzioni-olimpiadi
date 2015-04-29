@@ -132,6 +132,34 @@ function ChangePassword( $db , $UserId, $password ){
 	return ['type'=>'good', 'text'=>'Password cambiata con successo'];
 }
 
+function ChangeRole( $db, $UserId, $UserRole ){
+	if( IsSuperAdmin( $db, GetUserIdBySession() ) == 0 ) {
+		return ['type'=>'bad', 'text'=>'Non hai i permessi per cambiare il ruolo di un utente'];
+	}
+	
+	$UserRoleNum=0;
+	if( $UserRole=='user' ) $UserRoleNum=0;
+	else if( $UserRole=='admin' ) $UserRoleNum=1;
+	else if( $UserRole=='SuperAdmin' ) $UserRoleNum=2;
+	else {
+		return ['type'=>'bad', 'text'=>'Il ruolo scelto non esiste'];
+	}
+	
+	$user=OneResultQuery($db, QuerySelect('Users', ['id'=>$UserId], ['role']));
+	if( is_null( $user ) ) {
+		return ['type'=>'bad', 'text'=>'Il correttore selezionato non esiste'];
+	}
+	if( $user['role']==2 ) {
+		return ['type'=>'bad', 'text'=>'Non hai i permessi per cambiare il ruolo di un super amministratore'];
+	}
+	if( $user['role']==$UserRoleNum ) {
+		return ['type'=>'bad', 'text'=>'Il correttore ricopre già il ruolo scelto'];
+	}
+	Query($db, QueryUpdate('Users', ['id'=>$UserId], ['role'=>$UserRoleNum]));
+	
+	return ['type'=>'good', 'text'=>'Il ruolo del correttore è stato cambiato con successo'];
+}
+
 $db= OpenDbConnection();
 if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
 	$db -> close();
@@ -146,6 +174,7 @@ else if( $data['type'] == 'AddPermission' ) SendObject( AddPermission( $db, $dat
 else if( $data['type'] == 'RemovePermission' ) SendObject( RemovePermission( $db, $data['UserId'], $data['ContestId'] ) );
 else if( $data['type'] == 'ChangeUsername' ) SendObject( ChangeUsername( $db, $data['UserId'], $data['username'] ) );
 else if( $data['type'] == 'ChangePassword' ) SendObject( ChangePassword( $db, $data['UserId'], $data['password'] ) );
+else if( $data['type'] == 'ChangeRole' ) SendObject( ChangeRole( $db, $data['UserId'], $data['UserRole'] ) );
 else SendObject( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
 
 
