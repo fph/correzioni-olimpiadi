@@ -43,8 +43,42 @@ function AddParticipationEmailBoolean(){
 	return true;
 }
 
+function AddUserRoleColumn(){
+	$db=OpenDbConnection();
+	
+	$ColumnExists=OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>'CorOli', 'TABLE_NAME'=>'Users', 'COLUMN_NAME'=>'role']));
+	
+	if( is_null($ColumnExists) ) {
+		$query='ALTER TABLE `Users` ADD COLUMN `role` int NOT NULL DEFAULT 0';
+		Query($db, $query);
+		echo 'The \'role\' column has been added in the \'Users\' table.'.NewLine();
+		
+		$AllAdministrators=ManyResultQuery($db, QuerySelect('Administrators'));
+		foreach($AllAdministrators as $admin) {
+			Query($db, QueryUpdate('Users', ['id'=>$admin['UserId']], ['role'=>1]));
+		}
+		echo 'All administrators have been imported in the \'role\' column.'.NewLine();
+		
+		//At least a SuperAdmin must exist
+		Query($db, QueryUpdate('Users', ['username'=>'dario2994'], ['role'=>2]));
+		
+		Query($db, 'DROP TABLE `Administrators`');
+		echo 'The old \'Administrators\' table has been deleted.'.NewLine();
+	}
+	else {
+		echo 'The \'role\' column already exists in the \'Users\' table.'.NewLine();
+	}
+	
+	$db->close();
+	
+	return true;
+}
+
 if( AddContestantsEmailColumn() ) {
 	if( AddParticipationEmailBoolean() ) {
-		echo 'Database has been updated successfully!'.NewLine();
+		if( AddUserRoleColumn() ) {
+			echo 'Database has been updated successfully!'.NewLine();
+		}
 	}
 }
+

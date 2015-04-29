@@ -5,9 +5,21 @@ SuperRequire_once('General','sqlUtilities.php');
 SuperRequire_once('General','TemplateCreation.php');
 
 
-function IsAdmin($db, $UserId) {
-	$result=OneResultQuery( $db, QuerySelect('Administrators',['UserId'=>$UserId]) );
-	if( is_null( $result ) ) return 0;
+function UserRole($db, $UserId) {
+	$user=OneResultQuery( $db, QuerySelect('Users', ['id'=>$UserId]), ['role'] );
+	if( is_null( $user ) ) return -1;
+	return $user['role']; 
+}
+
+function IsAdmin($db, $UserId) {//Return true if user is admin or superadmin
+	$user=OneResultQuery( $db, QuerySelect('Users', ['id'=>$UserId]) );
+	if( is_null( $user ) or $user['role']==0 ) return 0;
+	else return 1;
+}
+
+function IsSuperAdmin($db, $UserId) {
+	$user=OneResultQuery( $db, QuerySelect('Users', ['id'=>$UserId]) );
+	if( is_null( $user ) or $user['role']!=2 ) return 0;
 	else return 1;
 }
 

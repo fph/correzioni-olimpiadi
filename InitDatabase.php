@@ -24,22 +24,12 @@ function CreateDatabase() {
 		`id` int NOT NULL AUTO_INCREMENT,
 		`username` varchar('.username_MAXLength.') NOT NULL,
 		`passHash` varchar(255) NOT NULL,
+		`role` int NOT NULL DEFAULT 0,
 		PRIMARY KEY (`id`),
 		UNIQUE KEY(`username`)
 	) ENGINE=InnoDB;';
 	Query($db, $query);
 	echo 'Table Users created.'.NewLine();
-	
-	$query=
-	'CREATE TABLE IF NOT EXISTS `Administrators` (
-		`UserId` int NOT NULL,
-		PRIMARY KEY (`UserId`),
-		
-		FOREIGN KEY (`UserId`) REFERENCES Users(`id`)
-			ON DELETE CASCADE ON UPDATE CASCADE
-	) ENGINE=InnoDB;';
-	Query($db, $query);
-	echo 'Table Administrators created.'.NewLine();
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Contests` (
@@ -146,26 +136,17 @@ function CreateDatabase() {
 }
 
 function PopulateUsers($db) {
-	$Users=[['username'=>'Xamog', 		'password'=>'meraviglioso'], 
-			['username'=>'LudoP', 		'password'=>'yochicco'], 
-			['username'=>'dario2994', 	'password'=>'acca'], 
-			['username'=>'fph', 		'password'=>'pizzica'], 
-			['username'=>'walypala23', 	'password'=>'gamma'], 
-			['username'=>'SimoTheWolf', 'password'=>'vero o falso?']];
+	$Users=[['username'=>'Xamog', 		'password'=>'meraviglioso', 'role'=>1], 
+			['username'=>'LudoP', 		'password'=>'yochicco', 'role'=>0], 
+			['username'=>'dario2994', 	'password'=>'acca', 'role'=>2], 
+			['username'=>'fph', 		'password'=>'pizzica', 'role'=>0], 
+			['username'=>'walypala23', 	'password'=>'gamma', 'role'=>0], 
+			['username'=>'SimoTheWolf', 'password'=>'vero o falso?', 'role'=>0]];
 	foreach($Users as $User){
-		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>PasswordHash($User['password'])]));
+		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>PasswordHash($User['password']), 'role'=>$User['role']]));
 	}
 
 	echo 'Table Users Populated.'.NewLine();
-}
-
-function PopulateAdministrators($db) {
-	$dario2994_id=OneResultQuery($db,QuerySelect('Users',['username'=>'dario2994'],['id']))['id'];
-	Query($db,QueryInsert('Administrators',['UserId'=>$dario2994_id]));
-	$Xamog_id=OneResultQuery($db,QuerySelect('Users',['username'=>'Xamog'],['id']))['id'];
-	Query($db,QueryInsert('Administrators',['UserId'=>$Xamog_id]));
-
-	echo 'Table Administrators Populated.'.NewLine();
 }
 
 function PopulateContests($db) {
@@ -183,12 +164,12 @@ function PopulateContests($db) {
 }
 
 function PopulatePermissions($db){
-	$Users=ManyResultQuery($db, QuerySelect('Users',null,['id']));
+	$Users=ManyResultQuery($db, QuerySelect('Users',null,['id', 'role']));
 	$Contests=ManyResultQuery($db, QuerySelect('Contests',null,['id']));
 	
 	foreach($Contests as $Contest){
 		foreach($Users as $User) {
-			if( mt_rand(0,1)==1 and IsAdmin($db,$User['id'])==0 ){
+			if( mt_rand(0,1)==1 and $User['role']==0 ){
 				Query($db,QueryInsert('Permissions',['UserId'=>$User['id'],'ContestId'=>$Contest['id']]));
 			}
 		}
@@ -327,7 +308,6 @@ CreateDatabase();
 $db=OpenDbConnection();
 
 PopulateUsers($db);
-PopulateAdministrators($db);
 PopulateContests($db);
 PopulatePermissions($db);
 PopulateContestants($db);
