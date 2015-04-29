@@ -102,7 +102,7 @@ function ConfirmCorrectionsState(){
 	
 	var NewValue=select.options[select.selectedIndex].value;
 	SetDataAttribute(container, 'new_value', NewValue);
-	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:NewValue}, MakeChangesCorrectionsState);
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type: NewValue}, MakeChangesCorrectionsState);
 }
 
 function ModifyCorrectionsState(){
