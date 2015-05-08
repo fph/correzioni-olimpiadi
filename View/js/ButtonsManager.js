@@ -58,6 +58,7 @@ function ShowHideButton( container, type, show ) {
 	}
 }
 
+// obj might change in the function
 function RenderButtons ( obj ) {
 	if( obj.title==true ) {
 		obj.class=['ButtonsTitle'];
@@ -67,6 +68,18 @@ function RenderButtons ( obj ) {
 			confirm: {hidden: true, onclick: 'SendTitleModification()'},
 			cancel: {hidden: true, onclick: 'CancelTitleModification()'}
 		};
+	}
+	
+	if( obj.table==true ) {
+		for( var type in obj.buttons ) {
+			// The code is this as way in order to avoid repeated append of (this.parent...)
+			// to onclick. 'TableModification' must be saved in obj.buttons[type]
+			// as if it was saved in obj.buttons it would have broken the following lines.
+			if( obj.buttons[type].TableModification==null ) {
+				obj.buttons[type].TableModification=true;
+				obj.buttons[type].onclick+='(this.parentNode.parentNode.parentNode.parentNode)';
+			}
+		}
 	}
 	
 	var ContainerSpan=document.createElement('span');

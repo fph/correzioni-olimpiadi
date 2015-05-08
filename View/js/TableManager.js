@@ -284,9 +284,6 @@ function RenderTable( obj ) {
 		table.appendChild(tfoot); //tfoot must be appended BEFORE tbody
 	}
 	
-	//Fixing buttons onclick
-	for( var type in obj.buttons ) obj.buttons[type].onclick+='(this.parentNode.parentNode.parentNode.parentNode)';
-	
 	//Table body
 	var tbody=document.createElement('tbody');
 	for(var i=0;i<obj.rows.length;i++) {
@@ -303,6 +300,8 @@ function AddRow( table , row , OrderBy ) {
 	var NewRow=CreateRow( obj , row );
 	NewRow.classList.add('NewRow');
 	setTimeout(function(){ NewRow.classList.remove('NewRow'); },5000);
+	
+	// Inserting the row respecting the order
 	var tbody=table.getElementsByTagName('tbody')[0];
 	if( OrderBy == null ) {
 		tbody.appendChild(NewRow);
