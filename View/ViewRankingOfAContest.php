@@ -35,7 +35,7 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 		foreach( $v_problems as $problem ) {
 			if( isset( $contestant['marks'][$problem['id']] ) ) {
 				$values[$problem['id']]=$contestant['marks'][$problem['id']];
-				$total+=intval($contestant['marks'][$problem['id']]);
+				$total+=$contestant['marks'][$problem['id']];
 			}
 		}
 		$values['score']=$total;

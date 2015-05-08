@@ -12,7 +12,9 @@ $TableInformation=array(
 
 function EscapeInput($value) {
 	if (is_null($value)) return 'NULL';
-	if ( !is_string($value) and !is_int($value) ) die('The value passed to EscapeInput is not a string nor an integer.');
+	if ( !is_string($value) and !is_int($value) and !is_float($value) ) {
+		die('The value passed to EscapeInput is not a string nor an integer nor a floating number.');
+	}
 	if (get_magic_quotes_gpc()) $value = stripslashes($value);
 	if ( is_string($value) ) {
 		$value=trim($value);
@@ -176,13 +178,31 @@ function QueryCompletion($TableName, $ConstraintsLike=null, $ConstraintsEqual=nu
 
 function OneResultQuery($db, $query) { //TODO... si potrebbe in qualche modo ottimizzare la query per avere un unico risultato...
 	$result=$db->query($query) or die($db->error);
-	return mysqli_fetch_array($result);
+	
+	$row=mysqli_fetch_array($result);
+	// floatval is used to convert `mark` column to float (otherwise it would be string)
+	// That is not clean, but it works (until another column is named mark)
+	// isset returns false if mark==null 
+	if( isset($row['mark']) ) {
+		$row['mark']=floatval($row['mark']);
+	}
+	
+	return $row;
 }
 
 function ManyResultQuery($db, $query) {
 	$result=$db->query($query) or die($db->error);
 	$arr=[];
-	while($x=mysqli_fetch_array($result)) $arr[]=$x;
+	while($row=mysqli_fetch_array($result)) {
+		// floatval is used to convert `mark` column to float (otherwise it would be string)
+		// That is not clean, but it works (until another column is named mark)
+		// isset returns false if mark==null 
+		if( isset($row['mark']) ) {
+			$row['mark']=floatval($row['mark']);
+		}
+		$arr[]=$row;
+	}
+	
 	return $arr;
 }
 

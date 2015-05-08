@@ -113,7 +113,7 @@ function CreateDatabase() {
 		`id` int NOT NULL AUTO_INCREMENT,
 		`ProblemId` int NOT NULL,
 		`ContestantId` int NOT NULL,
-		`mark` int,
+		`mark` decimal(3,1),
 		`comment` varchar('.comment_MAXLength.') DEFAULT \'\',
 		`UserId` int,
 		
@@ -293,7 +293,7 @@ function PopulateCorrections($db){
 					for($j=0;$j<$CommentLength;$j++) $Comment .= $CharactersList[mt_rand(0,$CharactersNumber-1)];
 					$CorrectorId=$Correctors[mt_rand(0,$CorrectorsNumber-1)]['id'];
 					Query($db,QueryInsert('Corrections', 
-					['ProblemId'=>$Problem['id'], 'ContestantId'=>$Contestant['ContestantId'], 'mark'=>mt_rand(0,7), 'comment'=>$Comment, 'UserId'=>$CorrectorId]
+					['ProblemId'=>$Problem['id'], 'ContestantId'=>$Contestant['ContestantId'], 'mark'=>mt_rand(0, 14)/2, 'comment'=>$Comment, 'UserId'=>$CorrectorId]
 					));
 				}
 			}

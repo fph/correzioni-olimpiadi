@@ -74,10 +74,44 @@ function AddUserRoleColumn(){
 	return true;
 }
 
+function ChangeMarkToFloat(){
+	$db=OpenDbConnection();
+	
+	$query='SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name=\'Corrections\' AND COLUMN_NAME=\'mark\'';
+	$DataType=OneResultQuery($db, $query)['DATA_TYPE'];
+	
+	if($DataType!='decimal') {
+		$query='ALTER TABLE `Corrections` CHANGE COLUMN mark OldMark int';
+		Query($db, $query);
+
+		// decimal(3,1) means numbers as 23.2, 7.3 etc...
+		// For sums, decimal is better than float (it is exact).
+		$query='ALTER TABLE `Corrections` ADD COLUMN mark decimal(3,1)';
+		Query($db, $query);
+
+		$query='UPDATE `Corrections` SET mark=OldMark';
+		Query($db, $query);
+
+		$query='ALTER TABLE `Corrections` DROP COLUMN OldMark';
+		Query($db, $query);
+
+		$db->close();
+
+		echo 'Now mark is a floating number.'.NewLine();
+	}
+	else {
+		echo 'The mark is already a floating number.'.NewLine();
+	}
+	
+	return true;
+}
+
 if( AddContestantsEmailColumn() ) {
 	if( AddParticipationEmailBoolean() ) {
 		if( AddUserRoleColumn() ) {
-			echo 'Database has been updated successfully!'.NewLine();
+			if( ChangeMarkToFloat() ) {
+				echo 'Database has been updated successfully!'.NewLine();
+			}
 		}
 	}
 }

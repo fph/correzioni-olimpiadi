@@ -70,7 +70,7 @@
 				foreach($contest['problems'] as $problem) {
 					if( isset( $contestant['marks'][$problem['id']] ) ) {
 						$values['Problem'.$problem['id']]=$contestant['marks'][$problem['id']];
-						$mark=intval($contestant['marks'][$problem['id']]);
+						$mark=$contestant['marks'][$problem['id']];
 						$SubTotal+=$mark;
 					}
 				}
@@ -81,7 +81,7 @@
 			$rows[]=['values'=>$values];
 		}
 		
-		$table=['columns'=>$columns, 'rows'=>$rows, 'id'=> 'MultipleRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
+		$table=['columns'=>$columns, 'rows'=>$rows, 'id'=>'MultipleRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
 		
 		$table['type']='good';
 		$table['text']='Creato le statistiche con successo';

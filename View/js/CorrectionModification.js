@@ -72,14 +72,14 @@ function OnModification( row ) {
 	OptionItem.value='-';
 	OptionItem.innerHTML='-';
 	MarkSelect.appendChild(OptionItem);
-	for (i=0; i<=7; i++) {
+	for (i=0.0; i<=7.0; i+=0.5) {
 		var OptionItem=document.createElement('option');
 		OptionItem.value=i.toString();
 		OptionItem.innerHTML=i.toString();
 		MarkSelect.appendChild(OptionItem);
 	}
 	if (MarkValue=='-') MarkSelect.selectedIndex=0;
-	else MarkSelect.selectedIndex=parseInt(MarkValue)+1;
+	else MarkSelect.selectedIndex=parseInt(parseFloat(MarkValue)*2+1);
 
 	MarkTd.replaceChild(MarkSelect,MarkTd.childNodes[0]);
 

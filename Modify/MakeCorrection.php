@@ -10,10 +10,10 @@ function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comm
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 
-	if( ( !is_null( $mark ) ) and ( !is_numeric( $mark ) or intval($mark)<0 or 7<intval($mark) ) ) {
-		return ['type'=>'bad', 'text'=>'Il voto deve essere un numero intero compreso tra 0 e 7 o deve essere vuoto'];
+	if( ( !is_null( $mark ) ) and ( !is_numeric( $mark ) or floatval($mark)<0.0 or 7.0<floatval($mark) ) ) {
+		return ['type'=>'bad', 'text'=>'Il voto deve essere un numero compreso tra 0 e 7 o deve essere vuoto'];
 	}
-	else if (!is_null( $mark )) $mark=intval($mark);
+	else if (!is_null( $mark )) $mark=floatval($mark);
 	
 	if( !is_string( $comment ) ) {
 		return ['type'=>'bad', 'text'=>'Il commento deve essere una stringa'];
