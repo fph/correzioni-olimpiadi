@@ -8,10 +8,10 @@ function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	// $query='DROP DATABASE IF EXISTS `'.dbName.'`;'; //DEBUG
-	// Query($db, $query);
+	$query='DROP DATABASE IF EXISTS `'.dbName.'`'; //DEBUG
+	Query($db, $query);
 
-	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`;';
+	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`';
 	Query($db, $query);
 
 	echo 'Database '.dbName.' created.'.NewLine().NewLine();
@@ -27,7 +27,7 @@ function CreateDatabase() {
 		`role` int NOT NULL DEFAULT 0,
 		PRIMARY KEY (`id`),
 		UNIQUE KEY(`username`)
-	) ENGINE=InnoDB;';
+	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Users created.'.NewLine();
 	
@@ -39,7 +39,7 @@ function CreateDatabase() {
 		`blocked` Boolean,
 		PRIMARY KEY (`id`),
 		KEY(`name`)
-	) ENGINE=InnoDB;';
+	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Contests created.'.NewLine();
 
@@ -57,7 +57,7 @@ function CreateDatabase() {
 			ON DELETE CASCADE ON UPDATE CASCADE,
 		FOREIGN KEY (`ContestId`) REFERENCES Contests(`id`)
 			ON DELETE CASCADE ON UPDATE CASCADE
-	) ENGINE=InnoDB;';
+	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Permissions created.'.NewLine();
 	
@@ -70,7 +70,7 @@ function CreateDatabase() {
 		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
 		PRIMARY KEY (`id`),
 		KEY(`surname`)
-	) ENGINE=InnoDB;';
+	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Contestants created.'.NewLine();
 
@@ -89,7 +89,7 @@ function CreateDatabase() {
 			ON DELETE CASCADE ON UPDATE CASCADE,
 		FOREIGN KEY (`ContestantId`) REFERENCES Contestants(`id`)
 			ON DELETE CASCADE ON UPDATE CASCADE
-	) ENGINE=InnoDB;';
+	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Participations created.'.NewLine();
 
@@ -104,7 +104,7 @@ function CreateDatabase() {
 
 		FOREIGN KEY (`ContestId`) REFERENCES Contests(`id`)
 			ON DELETE CASCADE ON UPDATE CASCADE
-	) ENGINE=InnoDB;';
+	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Problems created.'.NewLine();
 
@@ -127,7 +127,7 @@ function CreateDatabase() {
 			ON DELETE CASCADE ON UPDATE CASCADE,
 		FOREIGN KEY (`UserId`) REFERENCES Users(`id`)
 			ON DELETE SET NULL ON UPDATE CASCADE
-	) ENGINE=InnoDB;';
+	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Corrections created.'.NewLine();
 
