@@ -8,8 +8,8 @@ function CreateDatabase() {
 	$db=new mysqli (dbServer, dbUser, dbPass);
 	if($db->connect_errno) die ($db->connect_error);
 	
-	$query='DROP DATABASE IF EXISTS `'.dbName.'`'; //DEBUG
-	Query($db, $query);
+	// $query='DROP DATABASE IF EXISTS `'.dbName.'`'; //DEBUG
+	// Query($db, $query);
 
 	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`';
 	Query($db, $query);
@@ -136,12 +136,15 @@ function CreateDatabase() {
 }
 
 function PopulateUsers($db) {
-	$Users=[['username'=>'Xamog', 		'password'=>'meraviglioso', 'role'=>1], 
-			['username'=>'LudoP', 		'password'=>'yochicco', 'role'=>0], 
-			['username'=>'dario2994', 	'password'=>'acca', 'role'=>2], 
-			['username'=>'fph', 		'password'=>'pizzica', 'role'=>0], 
-			['username'=>'walypala23', 	'password'=>'gamma', 'role'=>0], 
-			['username'=>'SimoTheWolf', 'password'=>'vero o falso?', 'role'=>0]];
+	$Users=[
+		['username'=>'Xamog', 		'password'=>'meraviglioso', 'role'=>1], 
+		['username'=>'LudoP', 		'password'=>'yochicco', 'role'=>0], 
+		['username'=>'dario2994', 	'password'=>'acca', 'role'=>2], 
+		['username'=>'fph', 		'password'=>'pizzica', 'role'=>0], 
+		['username'=>'walypala23', 	'password'=>'gamma', 'role'=>0], 
+		['username'=>'SimoTheWolf', 'password'=>'vero o falso?', 'role'=>0]
+	];
+	
 	foreach($Users as $User){
 		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>PasswordHash($User['password']), 'role'=>$User['role']]));
 	}
@@ -150,12 +153,15 @@ function PopulateUsers($db) {
 }
 
 function PopulateContests($db) {
-	$Contests=[	['name'=>'Senior 2013', 				'date'=>'2006-04-29', 	'blocked'=>1],
-				['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-26', 	'blocked'=>1],
-				['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1],
-				['name'=>'Preimo 2010 TST giorno 2', 	'date'=>'2010-08-15', 	'blocked'=>0],
-				['name'=>'IMO 2013 day1', 				'date'=>'2012-07-15',	'blocked'=>0],
-				['name'=>'Senior 2012 Test Iniziale', 	'date'=>'2007-04-04',	'blocked'=>0]];
+	$Contests=[	
+		['name'=>'Senior 2013', 				'date'=>'2006-04-29', 	'blocked'=>1],
+		['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-26', 	'blocked'=>1],
+		['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1],
+		['name'=>'Preimo 2010 TST giorno 2', 	'date'=>'2010-08-15', 	'blocked'=>0],
+		['name'=>'IMO 2013 day1', 				'date'=>'2012-07-15',	'blocked'=>0],
+		['name'=>'Senior 2012 Test Iniziale', 	'date'=>'2007-04-04',	'blocked'=>0]
+	];
+	
 	foreach($Contests as $Contest) {
 		Query($db,QueryInsert('Contests',['name'=>$Contest['name'], 'date'=>$Contest['date'], 'blocked'=>$Contest['blocked'] ]));
 	}
@@ -179,22 +185,25 @@ function PopulatePermissions($db){
 }
 
 function PopulateContestants($db) {
-	$Contestants=[	['name'=>'Federico', 	'surname'=>'Glaudo',			'school'=>'L.S. Righi',				'email'=>'dario2994@gmail.com'],
-					['name'=>'Giada', 		'surname'=>'Franz',				'school'=>'L.S. Marinelli',			'email'=>'walypala23@gmail.com'],			
-					['name'=>'Gioacchino', 	'surname'=>'Antonelli',			'school'=>'L.S. Tedone',			'email'=>'genius@figus.it'],
-					['name'=>'Luca', 		'surname'=>'Minutillo Menga',	'school'=>'L.S. Staminchia',		'email'=>'porno@star.pr'],
-					['name'=>'Francesco', 	'surname'=>'Florian',			'school'=>'L.S. Copernico',			'email'=>'fraflo@gmail.com'],
-					['name'=>'Claudio', 	'surname'=>'Afeltra',			'school'=>'L.S. Sambuca',			'email'=>'tarvisio@forever.it'],
-					['name'=>'Paolo', 		'surname'=>'Abiuso',			'school'=>'L.S. Lambada',			'email'=>'peppapaolo@pig.en'],
-					['name'=>'Leonardo', 	'surname'=>'Fiore',				'school'=>'L.S. Cotoletta',			'email'=>'leonardinho@libero.it'],
-					['name'=>'Lorenzo', 	'surname'=>'Benedini',			'school'=>'L.S. Figus',				'email'=>'benzodine@tiscali.it'],
-					['name'=>'Davide', 		'surname'=>'Lofano',			'school'=>'Lungo Nome di scuola',	'email'=>'d.lofano@gmail.com'],
-					['name'=>'Alice', 		'surname'=>'Cortinovis',		'school'=>'L.S. Assurbanipal',		'email'=>'corti.alice@tiscali.it'],
-					['name'=>'Emanuele', 	'surname'=>'Tron',				'school'=>'L.S. Anzianotto',		'email'=>'trontolino@amoroso.com'],
-					['name'=>'Matteo', 		'surname'=>'Becchi',			'school'=>'L.C. Calasi',			'email'=>'matteo.bec@chi.it'],
-					['name'=>'Filippo', 	'surname'=>'Revello',			'school'=>'L.C. Anselmo',			'email'=>'fifaloser@gmail.com'],
-					['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid',			'email'=>'fabio.ferri@libero.com'],
-					['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli',		'email'=>'gigi@gigi.it']];
+	$Contestants=[	
+		['name'=>'Federico', 	'surname'=>'Glaudo',			'school'=>'L.S. Righi',				'email'=>'dario2994@gmail.com'],
+		['name'=>'Giada', 		'surname'=>'Franz',				'school'=>'L.S. Marinelli',			'email'=>'walypala23@gmail.com'],			
+		['name'=>'Gioacchino', 	'surname'=>'Antonelli',			'school'=>'L.S. Tedone',			'email'=>'genius@figus.it'],
+		['name'=>'Luca', 		'surname'=>'Minutillo Menga',	'school'=>'L.S. Staminchia',		'email'=>'porno@star.pr'],
+		['name'=>'Francesco', 	'surname'=>'Florian',			'school'=>'L.S. Copernico',			'email'=>'fraflo@gmail.com'],
+		['name'=>'Claudio', 	'surname'=>'Afeltra',			'school'=>'L.S. Sambuca',			'email'=>'tarvisio@forever.it'],
+		['name'=>'Paolo', 		'surname'=>'Abiuso',			'school'=>'L.S. Lambada',			'email'=>'peppapaolo@pig.en'],
+		['name'=>'Leonardo', 	'surname'=>'Fiore',				'school'=>'L.S. Cotoletta',			'email'=>'leonardinho@libero.it'],
+		['name'=>'Lorenzo', 	'surname'=>'Benedini',			'school'=>'L.S. Figus',				'email'=>'benzodine@tiscali.it'],
+		['name'=>'Davide', 		'surname'=>'Lofano',			'school'=>'Lungo Nome di scuola',	'email'=>'d.lofano@gmail.com'],
+		['name'=>'Alice', 		'surname'=>'Cortinovis',		'school'=>'L.S. Assurbanipal',		'email'=>'corti.alice@tiscali.it'],
+		['name'=>'Emanuele', 	'surname'=>'Tron',				'school'=>'L.S. Anzianotto',		'email'=>'trontolino@amoroso.com'],
+		['name'=>'Matteo', 		'surname'=>'Becchi',			'school'=>'L.C. Calasi',			'email'=>'matteo.bec@chi.it'],
+		['name'=>'Filippo', 	'surname'=>'Revello',			'school'=>'L.C. Anselmo',			'email'=>'fifaloser@gmail.com'],
+		['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid',			'email'=>'fabio.ferri@libero.com'],
+		['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli',		'email'=>'gigi@gigi.it']
+	];
+	
 	foreach($Contestants as $Contestant) {
 		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'email'=>$Contestant['email']]));
 	}
@@ -218,48 +227,50 @@ function PopulateParticipations($db){
 }
 
 function PopulateProblems($db) {
-	$Problems=[	['name'=>'1','ContestId'=>1],
-				['name'=>'2','ContestId'=>1],
-				['name'=>'3','ContestId'=>1],
-				['name'=>'4','ContestId'=>1],
-				['name'=>'5','ContestId'=>1],
-				['name'=>'6','ContestId'=>1],
-				['name'=>'7','ContestId'=>1],
-				['name'=>'8','ContestId'=>1],
-				['name'=>'9','ContestId'=>1],
-				['name'=>'10','ContestId'=>1],
-				['name'=>'11','ContestId'=>1],
-				['name'=>'12','ContestId'=>1],
-				['name'=>'13','ContestId'=>1],
-				['name'=>'14','ContestId'=>1],
-				['name'=>'15','ContestId'=>1],
-				['name'=>'16','ContestId'=>1],
-				['name'=>'A1','ContestId'=>2],
-				['name'=>'A2','ContestId'=>2],
-				['name'=>'A3','ContestId'=>2],
-				['name'=>'C1','ContestId'=>2],
-				['name'=>'C2','ContestId'=>2],
-				['name'=>'C3','ContestId'=>2],
-				['name'=>'G1','ContestId'=>2],
-				['name'=>'G2','ContestId'=>2],
-				['name'=>'G3','ContestId'=>2],
-				['name'=>'N1','ContestId'=>2],
-				['name'=>'N2','ContestId'=>2],
-				['name'=>'N3','ContestId'=>2],
-				['name'=>'1','ContestId'=>3],
-				['name'=>'2','ContestId'=>3],
-				['name'=>'3','ContestId'=>3],
-				['name'=>'1','ContestId'=>4],
-				['name'=>'2','ContestId'=>4],
-				['name'=>'3','ContestId'=>4],
-				['name'=>'Problem 1','ContestId'=>5],
-				['name'=>'Problem 2','ContestId'=>5],
-				['name'=>'Problem 3','ContestId'=>5],
-				['name'=>'Algebra pomeriggio','ContestId'=>6],
-				['name'=>'Algebra mattina','ContestId'=>6],
-				['name'=>'Geometria 2','ContestId'=>6],
-				['name'=>'Geometria contosa','ContestId'=>6],
-				['name'=>'Problema difficile','ContestId'=>6]];
+	$Problems=[	
+		['name'=>'1','ContestId'=>1],
+		['name'=>'2','ContestId'=>1],
+		['name'=>'3','ContestId'=>1],
+		['name'=>'4','ContestId'=>1],
+		['name'=>'5','ContestId'=>1],
+		['name'=>'6','ContestId'=>1],
+		['name'=>'7','ContestId'=>1],
+		['name'=>'8','ContestId'=>1],
+		['name'=>'9','ContestId'=>1],
+		['name'=>'10','ContestId'=>1],
+		['name'=>'11','ContestId'=>1],
+		['name'=>'12','ContestId'=>1],
+		['name'=>'13','ContestId'=>1],
+		['name'=>'14','ContestId'=>1],
+		['name'=>'15','ContestId'=>1],
+		['name'=>'16','ContestId'=>1],
+		['name'=>'A1','ContestId'=>2],
+		['name'=>'A2','ContestId'=>2],
+		['name'=>'A3','ContestId'=>2],
+		['name'=>'C1','ContestId'=>2],
+		['name'=>'C2','ContestId'=>2],
+		['name'=>'C3','ContestId'=>2],
+		['name'=>'G1','ContestId'=>2],
+		['name'=>'G2','ContestId'=>2],
+		['name'=>'G3','ContestId'=>2],
+		['name'=>'N1','ContestId'=>2],
+		['name'=>'N2','ContestId'=>2],
+		['name'=>'N3','ContestId'=>2],
+		['name'=>'1','ContestId'=>3],
+		['name'=>'2','ContestId'=>3],
+		['name'=>'3','ContestId'=>3],
+		['name'=>'1','ContestId'=>4],
+		['name'=>'2','ContestId'=>4],
+		['name'=>'3','ContestId'=>4],
+		['name'=>'Problem 1','ContestId'=>5],
+		['name'=>'Problem 2','ContestId'=>5],
+		['name'=>'Problem 3','ContestId'=>5],
+		['name'=>'Algebra pomeriggio','ContestId'=>6],
+		['name'=>'Algebra mattina','ContestId'=>6],
+		['name'=>'Geometria 2','ContestId'=>6],
+		['name'=>'Geometria contosa','ContestId'=>6],
+		['name'=>'Problema difficile','ContestId'=>6]
+	];
 	
 	foreach($Problems as $Problem) {
 		Query($db,QueryInsert('Problems',['name'=>$Problem['name'], 'ContestId'=>$Problem['ContestId']]));
