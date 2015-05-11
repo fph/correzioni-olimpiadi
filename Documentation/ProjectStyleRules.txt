@@ -1,11 +1,30 @@
-Single-word variable: lowercase
-Multiple-words variable: CamelCase
-Variable passed to the View by the Model: v_VariableNameFollowingPrecedingRules
+INDENTATION
+	Only tabs
+	
+SPACING:
+	Instead of giving rules for spacing, we show two examples with _correct_ spacing:
+	
+	function f(par1, par2, par3) {
+		var dummy = 100 * 20;
+		if (true && !(dummy == 1000)) {
+			return 1 + 2;
+		}
+		else {
+			return 5;
+		}
+	}
 
-This rules have to be applied also to id and className in html and to all variables both in javascript and in php.
-For data attributes snake_case should be used instead, as Uppercase isn't supported.
+NAMING
+	Single-word variable: lowercase
+	Multiple-words variable: CamelCase
+	Variable passed to the View by the Model: v_VariableNameFollowingPrecedingRules
 
-FileNames: Always CamelCase, also single-word names, apart from 'index.php' which must be written this way.
-Database Tables: Always CamelCase, also single-word names.
+	This rules have to be applied also to id and className in html and to all variables both in javascript and in php.
+	For data attributes snake_case should be used instead, as Uppercase isn't supported.
 
-Strings should always be delimited by single quotes. Possible exceptions include: strings containing \n (in php), strings containing single quotes.
+	FileNames: Always CamelCase, also single-word names, apart from 'index.php' which must be written this way.
+	Database Tables: Always CamelCase, also single-word names.
+
+QUOTES:
+	Strings should always be delimited by single quotes. Possible exceptions include: strings containing \n (in php), strings containing single quotes.
+
