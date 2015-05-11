@@ -38,11 +38,11 @@ if( $v_role==2 and $v_user['role']!=2 ) {
 		</select>
 	
 <?php
-	$buttons=[ 'class'=> ['ButtonsSubtitle'], 'buttons'=>[
+	$buttons=['class'=> ['ButtonsSubtitle'], 'buttons'=>[
 		'modify'=>['onclick'=>'ModifyUserRole()'], 
 		'confirm'=>['onclick'=>'ConfirmUserRole()', 'hidden'=>true], 
 		'cancel'=>['onclick'=>'CancelUserRole()', 'hidden'=>true]
-	] ];
+	]];
 	InsertDom('buttons', $buttons);
 }
 ?>

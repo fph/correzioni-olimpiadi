@@ -32,11 +32,11 @@ global $v_contest;
 		</select>
 	
 <?php
-	$buttons=[ 'class'=> ['ButtonsSubtitle'], 'buttons'=>[
+	$buttons=['class'=> ['ButtonsSubtitle'], 'buttons'=>[
 		'modify'=>['onclick'=>'ModifyCorrectionsState()'], 
 		'confirm'=>['onclick'=>'ConfirmCorrectionsState()', 'hidden'=>true], 
 		'cancel'=>['onclick'=>'CancelCorrectionsState()', 'hidden'=>true]
-	] ];
+	]];
 	InsertDom('buttons', $buttons);
 ?>
 	</div>
