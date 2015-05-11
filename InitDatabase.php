@@ -1,23 +1,23 @@
 <?php
 require_once 'Utilities.php';
-SuperRequire_once('General','sqlUtilities.php');
-SuperRequire_once('General','PermissionManager.php');
+SuperRequire_once('General', 'sqlUtilities.php');
+SuperRequire_once('General', 'PermissionManager.php');
 
 
 function CreateDatabase() {
-	$db=new mysqli (dbServer, dbUser, dbPass);
-	if($db->connect_errno) die ($db->connect_error);
+	$db = new mysqli (dbServer, dbUser, dbPass);
+	if ($db->connect_errno) die ($db->connect_error);
 	
 	// $query='DROP DATABASE IF EXISTS `'.dbName.'`'; //DEBUG
 	// Query($db, $query);
 
-	$query='CREATE DATABASE IF NOT EXISTS `'.dbName.'`';
+	$query = 'CREATE DATABASE IF NOT EXISTS `'.dbName.'`';
 	Query($db, $query);
 
 	echo 'Database '.dbName.' created.'.NewLine().NewLine();
 	$db->close();
 	
-	$db=OpenDbConnection();
+	$db = OpenDbConnection();
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `Users` (
@@ -113,8 +113,8 @@ function CreateDatabase() {
 		`id` int NOT NULL AUTO_INCREMENT,
 		`ProblemId` int NOT NULL,
 		`ContestantId` int NOT NULL,
-		`mark` decimal(3,1),
-		`comment` varchar('.comment_MAXLength.') DEFAULT \'\',
+		`mark` decimal(3, 1),
+		`comment` varchar('.comment_MAXLength.') DEFAULT\'\',
 		`UserId` int,
 		
 		PRIMARY KEY (`id`),
@@ -136,7 +136,7 @@ function CreateDatabase() {
 }
 
 function PopulateUsers($db) {
-	$Users=[
+	$Users = [
 		['username'=>'Xamog', 		'password'=>'meraviglioso', 'role'=>1], 
 		['username'=>'LudoP', 		'password'=>'yochicco', 'role'=>0], 
 		['username'=>'dario2994', 	'password'=>'acca', 'role'=>2], 
@@ -145,15 +145,15 @@ function PopulateUsers($db) {
 		['username'=>'SimoTheWolf', 'password'=>'vero o falso?', 'role'=>0]
 	];
 	
-	foreach($Users as $User){
-		Query($db,QueryInsert('Users',['username'=>$User['username'], 'passHash'=>PasswordHash($User['password']), 'role'=>$User['role']]));
+	foreach ($Users as $User) {
+		Query($db, QueryInsert('Users', ['username'=>$User['username'], 'passHash'=>PasswordHash($User['password']), 'role'=>$User['role']]));
 	}
 
 	echo 'Table Users Populated.'.NewLine();
 }
 
 function PopulateContests($db) {
-	$Contests=[	
+	$Contests = [	
 		['name'=>'Senior 2013', 				'date'=>'2006-04-29', 	'blocked'=>1],
 		['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-26', 	'blocked'=>1],
 		['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1],
@@ -162,21 +162,21 @@ function PopulateContests($db) {
 		['name'=>'Senior 2012 Test Iniziale', 	'date'=>'2007-04-04',	'blocked'=>0]
 	];
 	
-	foreach($Contests as $Contest) {
-		Query($db,QueryInsert('Contests',['name'=>$Contest['name'], 'date'=>$Contest['date'], 'blocked'=>$Contest['blocked'] ]));
+	foreach ($Contests as $Contest) {
+		Query($db, QueryInsert('Contests', ['name'=>$Contest['name'], 'date'=>$Contest['date'], 'blocked'=>$Contest['blocked'] ]));
 	}
 
 	echo 'Table Contests Populated.'.NewLine();
 }
 
-function PopulatePermissions($db){
-	$Users=ManyResultQuery($db, QuerySelect('Users',null,['id', 'role']));
-	$Contests=ManyResultQuery($db, QuerySelect('Contests',null,['id']));
+function PopulatePermissions($db) {
+	$Users = ManyResultQuery($db, QuerySelect('Users', null, ['id', 'role']));
+	$Contests = ManyResultQuery($db, QuerySelect('Contests', null, ['id']));
 	
-	foreach($Contests as $Contest){
-		foreach($Users as $User) {
-			if( mt_rand(0,1)==1 and $User['role']==0 ){
-				Query($db,QueryInsert('Permissions',['UserId'=>$User['id'],'ContestId'=>$Contest['id']]));
+	foreach ($Contests as $Contest) {
+		foreach ($Users as $User) {
+			if (mt_rand(0, 1) == 1 and $User['role'] == 0) {
+				Query($db, QueryInsert('Permissions', ['UserId'=>$User['id'], 'ContestId'=>$Contest['id']]));
 			}
 		}
 	}
@@ -185,7 +185,7 @@ function PopulatePermissions($db){
 }
 
 function PopulateContestants($db) {
-	$Contestants=[	
+	$Contestants = [	
 		['name'=>'Federico', 	'surname'=>'Glaudo',			'school'=>'L.S. Righi',				'email'=>'dario2994@gmail.com'],
 		['name'=>'Giada', 		'surname'=>'Franz',				'school'=>'L.S. Marinelli',			'email'=>'walypala23@gmail.com'],			
 		['name'=>'Gioacchino', 	'surname'=>'Antonelli',			'school'=>'L.S. Tedone',			'email'=>'genius@figus.it'],
@@ -204,21 +204,21 @@ function PopulateContestants($db) {
 		['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli',		'email'=>'gigi@gigi.it']
 	];
 	
-	foreach($Contestants as $Contestant) {
-		Query($db,QueryInsert('Contestants',['name'=>$Contestant['name'],'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'email'=>$Contestant['email']]));
+	foreach ($Contestants as $Contestant) {
+		Query($db, QueryInsert('Contestants', ['name'=>$Contestant['name'], 'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'email'=>$Contestant['email']]));
 	}
 	
 	echo 'Table Contestants Populated.'.NewLine();
 }
 
-function PopulateParticipations($db){
-	$Contestants=ManyResultQuery($db,QuerySelect('Contestants',null,['id']));
-	$Contests=ManyResultQuery($db,QuerySelect('Contests',null,['id']));
+function PopulateParticipations($db) {
+	$Contestants = ManyResultQuery($db, QuerySelect('Contestants', null, ['id']));
+	$Contests = ManyResultQuery($db, QuerySelect('Contests', null, ['id']));
 	
-	foreach($Contests as $Contest) {
-		foreach($Contestants as $Contestant){
-			if( mt_rand(0,1)==1 ) {
-				Query($db, QueryInsert('Participations',['ContestId'=>$Contest['id'],'ContestantId'=>$Contestant['id'], 'email'=>mt_rand(0,1)]));
+	foreach ($Contests as $Contest) {
+		foreach ($Contestants as $Contestant) {
+			if (mt_rand(0, 1) == 1) {
+				Query($db, QueryInsert('Participations', ['ContestId'=>$Contest['id'], 'ContestantId'=>$Contestant['id'], 'email'=>mt_rand(0, 1)]));
 			}
 		}
 	}
@@ -227,83 +227,83 @@ function PopulateParticipations($db){
 }
 
 function PopulateProblems($db) {
-	$Problems=[	
-		['name'=>'1','ContestId'=>1],
-		['name'=>'2','ContestId'=>1],
-		['name'=>'3','ContestId'=>1],
-		['name'=>'4','ContestId'=>1],
-		['name'=>'5','ContestId'=>1],
-		['name'=>'6','ContestId'=>1],
-		['name'=>'7','ContestId'=>1],
-		['name'=>'8','ContestId'=>1],
-		['name'=>'9','ContestId'=>1],
-		['name'=>'10','ContestId'=>1],
-		['name'=>'11','ContestId'=>1],
-		['name'=>'12','ContestId'=>1],
-		['name'=>'13','ContestId'=>1],
-		['name'=>'14','ContestId'=>1],
-		['name'=>'15','ContestId'=>1],
-		['name'=>'16','ContestId'=>1],
-		['name'=>'A1','ContestId'=>2],
-		['name'=>'A2','ContestId'=>2],
-		['name'=>'A3','ContestId'=>2],
-		['name'=>'C1','ContestId'=>2],
-		['name'=>'C2','ContestId'=>2],
-		['name'=>'C3','ContestId'=>2],
-		['name'=>'G1','ContestId'=>2],
-		['name'=>'G2','ContestId'=>2],
-		['name'=>'G3','ContestId'=>2],
-		['name'=>'N1','ContestId'=>2],
-		['name'=>'N2','ContestId'=>2],
-		['name'=>'N3','ContestId'=>2],
-		['name'=>'1','ContestId'=>3],
-		['name'=>'2','ContestId'=>3],
-		['name'=>'3','ContestId'=>3],
-		['name'=>'1','ContestId'=>4],
-		['name'=>'2','ContestId'=>4],
-		['name'=>'3','ContestId'=>4],
-		['name'=>'Problem 1','ContestId'=>5],
-		['name'=>'Problem 2','ContestId'=>5],
-		['name'=>'Problem 3','ContestId'=>5],
-		['name'=>'Algebra pomeriggio','ContestId'=>6],
-		['name'=>'Algebra mattina','ContestId'=>6],
-		['name'=>'Geometria 2','ContestId'=>6],
-		['name'=>'Geometria contosa','ContestId'=>6],
-		['name'=>'Problema difficile','ContestId'=>6]
+	$Problems = [	
+		['name'=>'1', 'ContestId'=>1],
+		['name'=>'2', 'ContestId'=>1],
+		['name'=>'3', 'ContestId'=>1],
+		['name'=>'4', 'ContestId'=>1],
+		['name'=>'5', 'ContestId'=>1],
+		['name'=>'6', 'ContestId'=>1],
+		['name'=>'7', 'ContestId'=>1],
+		['name'=>'8', 'ContestId'=>1],
+		['name'=>'9', 'ContestId'=>1],
+		['name'=>'10', 'ContestId'=>1],
+		['name'=>'11', 'ContestId'=>1],
+		['name'=>'12', 'ContestId'=>1],
+		['name'=>'13', 'ContestId'=>1],
+		['name'=>'14', 'ContestId'=>1],
+		['name'=>'15', 'ContestId'=>1],
+		['name'=>'16', 'ContestId'=>1],
+		['name'=>'A1', 'ContestId'=>2],
+		['name'=>'A2', 'ContestId'=>2],
+		['name'=>'A3', 'ContestId'=>2],
+		['name'=>'C1', 'ContestId'=>2],
+		['name'=>'C2', 'ContestId'=>2],
+		['name'=>'C3', 'ContestId'=>2],
+		['name'=>'G1', 'ContestId'=>2],
+		['name'=>'G2', 'ContestId'=>2],
+		['name'=>'G3', 'ContestId'=>2],
+		['name'=>'N1', 'ContestId'=>2],
+		['name'=>'N2', 'ContestId'=>2],
+		['name'=>'N3', 'ContestId'=>2],
+		['name'=>'1', 'ContestId'=>3],
+		['name'=>'2', 'ContestId'=>3],
+		['name'=>'3', 'ContestId'=>3],
+		['name'=>'1', 'ContestId'=>4],
+		['name'=>'2', 'ContestId'=>4],
+		['name'=>'3', 'ContestId'=>4],
+		['name'=>'Problem 1', 'ContestId'=>5],
+		['name'=>'Problem 2', 'ContestId'=>5],
+		['name'=>'Problem 3', 'ContestId'=>5],
+		['name'=>'Algebra pomeriggio', 'ContestId'=>6],
+		['name'=>'Algebra mattina', 'ContestId'=>6],
+		['name'=>'Geometria 2', 'ContestId'=>6],
+		['name'=>'Geometria contosa', 'ContestId'=>6],
+		['name'=>'Problema difficile', 'ContestId'=>6]
 	];
 	
-	foreach($Problems as $Problem) {
-		Query($db,QueryInsert('Problems',['name'=>$Problem['name'], 'ContestId'=>$Problem['ContestId']]));
+	foreach ($Problems as $Problem) {
+		Query($db, QueryInsert('Problems', ['name'=>$Problem['name'], 'ContestId'=>$Problem['ContestId']]));
 	}
 
 	echo 'Table Problems Populated.'.NewLine();
 }
 
-function PopulateCorrections($db){
-	$Users=ManyResultQuery($db, QuerySelect('Users',null,['id']));
-	$Contests=ManyResultQuery($db, QuerySelect('Contests',null,['id']));
+function PopulateCorrections($db) {
+	$Users = ManyResultQuery($db, QuerySelect('Users', null, ['id']));
+	$Contests = ManyResultQuery($db, QuerySelect('Contests', null, ['id']));
 	
-	$CharactersList='abcdefghilmnopqrstuvzabcdefghilmnopqrstuvz        1234567890';
-	$CharactersNumber=strlen($CharactersList);
+	$CharactersList = 'abcdefghilmnopqrstuvzabcdefghilmnopqrstuvz        1234567890';
+	$CharactersNumber = strlen($CharactersList);
 	
-	foreach($Contests as $Contest) {
-		$Problems=ManyResultQuery($db,QuerySelect('Problems',['ContestId'=>$Contest['id']],['id']));
-		$Contestants=ManyResultQuery($db,QuerySelect('Participations',['ContestId'=>$Contest['id']],['ContestantId']));
-		$Correctors=[];
-		foreach($Users as $user) {
-			if (VerifyPermission($db, $user['id'], $Contest['id'])==1) {
+	foreach ($Contests as $Contest) {
+		$Problems = ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$Contest['id']], ['id']));
+		$Contestants = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$Contest['id']], ['ContestantId']));
+		$Correctors = [];
+		foreach ($Users as $user) {
+			if (VerifyPermission($db, $user['id'], $Contest['id']) == 1) {
 				$Correctors[]=$user;
 			}
 		}
-		$CorrectorsNumber=count($Correctors);
-		foreach($Problems as $Problem) {
-			foreach($Contestants as $Contestant) {
-				if( mt_rand(0,1)==1 ) {
-					$CommentLength=mt_rand(0,200);
-					$Comment='';
-					for($j=0;$j<$CommentLength;$j++) $Comment .= $CharactersList[mt_rand(0,$CharactersNumber-1)];
-					$CorrectorId=$Correctors[mt_rand(0,$CorrectorsNumber-1)]['id'];
-					Query($db,QueryInsert('Corrections', 
+		$CorrectorsNumber = count($Correctors);
+		foreach ($Problems as $Problem) {
+			foreach ($Contestants as $Contestant) {
+				if (mt_rand(0, 1) == 1) {
+					$CommentLength = mt_rand(0, 200);
+					$Comment = '';
+					for ($j=0; $j<$CommentLength; $j++) $Comment .= $CharactersList[mt_rand(0, $CharactersNumber-1)];
+					$CorrectorId = $Correctors[mt_rand(0, $CorrectorsNumber-1)]['id'];
+					Query($db, QueryInsert('Corrections', 
 					['ProblemId'=>$Problem['id'], 'ContestantId'=>$Contestant['ContestantId'], 'mark'=>mt_rand(0, 14)/2, 'comment'=>$Comment, 'UserId'=>$CorrectorId]
 					));
 				}
@@ -316,7 +316,7 @@ function PopulateCorrections($db){
 
 CreateDatabase();
 
-$db=OpenDbConnection();
+$db = OpenDbConnection();
 
 PopulateUsers($db);
 PopulateContests($db);

@@ -5,7 +5,7 @@
 			
 			<?php
 				global $MainBarUserId, $MainBarUsername;
-				if( $MainBarUserId!=-1 ) {
+				if ($MainBarUserId != -1) {
 			?>
 			<div id='MainBar_UserList'>
 				<a href='AccountSettings.php' id='UsernameLink'> 

@@ -18,18 +18,18 @@ global $v_contest, $v_problems;
 </h3>
 
 <?php
-$columns=[];
+$columns = [];
 $columns[]=['id'=>'problem', 'name'=>'Problema', 'class'=>['ProblemColumn'], 'order'=>1];
 
-$rows=[];
+$rows = [];
 foreach ($v_problems as $problem) {
-	$row=[
+	$row = [
 	'values'=>['problem'=>$problem['name']], 
 	'redirect'=>['ContestId'=>$v_contest['id'], 'ProblemId'=>$problem['id'] ] ];
 	$rows[]=$row;
 }
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewProblem', 'InitialOrder'=>['ColumnId'=>'problem'] ];
+$table = ['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewProblem', 'InitialOrder'=>['ColumnId'=>'problem'] ];
 
-InsertDom( 'table', $table);
+InsertDom('table', $table);
 ?>

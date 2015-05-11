@@ -1,12 +1,12 @@
 <?php
 require_once 'Utilities.php';
 
-SuperRequire_once('General','SessionManager.php');
+SuperRequire_once('General', 'SessionManager.php');
 
 global $jsInclude, $cssInclude;
 //$jsInclude, $cssInclude contain the css and js which should be included in the page apart from the standard ones (as global.css)
 
-$jsInclude=['ViewParticipation'=>['CorrectionModification', 'ViewParticipation'], 
+$jsInclude = ['ViewParticipation'=>['CorrectionModification', 'ViewParticipation'], 
 			'ViewProblem'=>['CorrectionModification'],
 			'ViewRankingOfAContest'=>['ViewRankingOfAContest'], 
 			'AdminContestants'=>['AdminContestants'], 
@@ -19,11 +19,11 @@ $jsInclude=['ViewParticipation'=>['CorrectionModification', 'ViewParticipation']
 			'AdminContestantsOfAContest'=>['AdminContestantsOfAContest'],
 			'AdminUsersOfAContest'=>['AdminUsersOfAContest'],
 			'AdminStatistics'=>['AdminStatistics'] ];
-$cssInclude=['AdminStatistics'=>['AdminStatistics'],
+$cssInclude = ['AdminStatistics'=>['AdminStatistics'],
 			'ViewParticipation'=>['ViewParticipation'] ];
 
 global $DomInformation;
-$DomInformation=[
+$DomInformation = [
 	'table'=>[], 
 	'date'=>[], 
 	'select'=>[], 
@@ -31,7 +31,7 @@ $DomInformation=[
 	'buttons'=>[] 
 ];
 
-function InsertDom( $type, $obj ) {
+function InsertDom($type, $obj) {
 	global $DomInformation;
 ?>
 	<div class='DivTo<?=ucfirst($type)?> hidden' id='DivTo<?=ucfirst($type)?><?=count($DomInformation[$type])?>'></div>
@@ -39,15 +39,15 @@ function InsertDom( $type, $obj ) {
 	$DomInformation[$type][]=$obj;
 }
 
-function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $message=null ){
-	if( $IsSessionToBeChecked ){
-		$SessionSituation=CheckSession();
-		if( $SessionSituation==-1 ) {
-			SuperRedirect('Model','Login.php');
+function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $message=null) {
+	if ($IsSessionToBeChecked) {
+		$SessionSituation = CheckSession();
+		if ($SessionSituation == -1) {
+			SuperRedirect('Model', 'Login.php');
 			die();
 		}
-		else if( $SessionSituation==0 ) {
-			SuperRedirect('Model','Login.php');
+		else if ($SessionSituation == 0) {
+			SuperRedirect('Model', 'Login.php');
 			die();
 		}
 	}
@@ -58,7 +58,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 <html lang='it'>
 <!-- 	
 	Correzioni Olimpiadi - Written by walypala23 (Giada Franz) and dario2994 (Federico Glaudo)
-	Git repository : https://github.com/walypala23/correzioni-olimpiadi
+	Git repository: https: //github.com/walypala23/correzioni-olimpiadi
 -->
 <head> 
 	<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
@@ -72,8 +72,8 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	<link rel='shortcut icon' href='../View/Images/FaviconV4.ico' title='Favicon'>
 	
 <?php 
-	if( isset($cssInclude[$content]) ) {
-		foreach( $cssInclude[$content] as $cssName ) {
+	if (isset($cssInclude[$content])) {
+		foreach ($cssInclude[$content] as $cssName) {
 			?>
 			<link type='text/css' rel='stylesheet' href='../View/css/<?=$cssName?>.css'>
 			<?php
@@ -84,31 +84,31 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 <body> 
 	<?php 
 		global $MainBarUserId, $MainBarUsername;
-		$MainBarUserId=GetUserIdBySession();
-		$MainBarUsername=GetUsernameBySession();
-		SuperInclude('View','MainBar.php'); 
+		$MainBarUserId = GetUserIdBySession();
+		$MainBarUsername = GetUsernameBySession();
+		SuperInclude('View', 'MainBar.php'); 
 	?>
 	<div class='internalBody' id='<?=$content?>_InternalBody'>
 	
 	<?php
 		global $v_PathDescription;
 		$v_PathDescription=$PathDescription;
-		SuperInclude('View','PagePath.php');
+		SuperInclude('View', 'PagePath.php');
 	?>
 		<div id='ContentContainer'>
-			<?php SuperInclude('View',$content.'.php'); ?>
+			<?php SuperInclude('View', $content.'.php'); ?>
 		</div>
 	</div>
 	
 	<div id='MessageList'> </div>
 	<script type='text/javascript'>
-		var SessionUsername='<?=GetUsernameBySession()?>';
+		var SessionUsername = '<?=GetUsernameBySession()?>';
 		
-		var TablesInformation=<?=json_encode( $DomInformation['table'] )?>;
-		var DatesInformation=<?=json_encode( $DomInformation['date'] )?>;
-		var SelectsInformation=<?=json_encode( $DomInformation['select'] )?>;
-		var LinkTablesInformation=<?=json_encode( $DomInformation['LinkTable'] )?>;
-		var ButtonsInformation=<?=json_encode( $DomInformation['buttons'] )?>;
+		var TablesInformation = <?=json_encode($DomInformation['table'])?>;
+		var DatesInformation = <?=json_encode($DomInformation['date'])?>;
+		var SelectsInformation = <?=json_encode($DomInformation['select'])?>;
+		var LinkTablesInformation = <?=json_encode($DomInformation['LinkTable'])?>;
+		var ButtonsInformation = <?=json_encode($DomInformation['buttons'])?>;
 	</script>
 <!--
 	TODO: Si potrebbe evitare di includere questi quando non necessari
@@ -125,16 +125,16 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	
 	<script>
 		<?php
-		if( !is_null( $message ) ){
+		if (!is_null($message)) {
 			?>
-			ShowMessage( '<?=$message['type']?>' , '<?=$message['text']?>' );
+			ShowMessage('<?=$message['type']?>', '<?=$message['text']?>');
 			<?php
 		} ?>
 	</script>
 	
 	<?php 
-	if( isset($jsInclude[$content]) ) {
-		foreach( $jsInclude[$content] as $jsName ) {
+	if (isset($jsInclude[$content])) {
+		foreach ($jsInclude[$content] as $jsName) {
 			?>
 			<script type='text/javascript' src='../View/js/<?=$jsName?>.js'> </script>
 			<?php

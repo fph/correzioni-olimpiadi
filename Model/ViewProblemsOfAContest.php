@@ -1,14 +1,14 @@
 <?php
 	
 	require_once '../Utilities.php';
-	SuperRequire_once('General','sqlUtilities.php');
+	SuperRequire_once('General', 'sqlUtilities.php');
 	SuperRequire_once('General', 'TemplateCreation.php');
 	SuperRequire_once('General', 'PermissionManager.php');
 	
-	$db=OpenDbConnection();
+	$db = OpenDbConnection();
 	
-	$ContestId=$_GET['ContestId'];
-	CheckPagePermission($db,$ContestId);
+	$ContestId = $_GET['ContestId'];
+	CheckPagePermission($db, $ContestId);
 	
 	//Permission checked
 	
@@ -18,7 +18,7 @@
 	
 	$db->close();
 		
-	TemplatePage('ViewProblemsOfAContest',[	'Index'=>'index.php',
+	TemplatePage('ViewProblemsOfAContest', [	'Index'=>'index.php',
 											'Gare'=>'ViewContests.php',
 											$v_contest['name']=>'ViewContestInformation.php?ContestId='.$ContestId,
 											'Problemi'=>'ViewProblemsOfAContest.php?ContestId='.$ContestId]);

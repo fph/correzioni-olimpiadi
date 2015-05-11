@@ -21,16 +21,16 @@ global $v_contest, $v_problem, $v_corrections;
 </h3>
 
 <?php
-$columns=[];
-$columns[]=['id'=>'surname','name'=>'Cognome','class'=>['SurnameColumn'],'order'=>1];
-$columns[]=['id'=>'name','name'=>'Nome','class'=>['NameColumn']];
-$columns[]=['id'=>'mark','name'=>'Voto','class'=>['MarkColumn'],'order'=>1];
-$columns[]=['id'=>'comment','name'=>'Commento','class'=>['CommentColumn']];
-$columns[]=['id'=>'user','name'=>'Correttore','class'=>['UsernameColumn']];
+$columns = [];
+$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns[]=['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1];
+$columns[]=['id'=>'comment', 'name'=>'Commento', 'class'=>['CommentColumn']];
+$columns[]=['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
 
-$rows=[];
-foreach($v_corrections as $correction) {
-	$row=['values'=>[
+$rows = [];
+foreach ($v_corrections as $correction) {
+	$row = ['values'=>[
 		'surname'=>$correction['contestant']['surname'],
 		'name'=>$correction['contestant']['name'],
 		'mark'=> $correction['mark'],
@@ -40,27 +40,27 @@ foreach($v_corrections as $correction) {
 	$rows[]=$row;
 }
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'surname'] ];
-if( $v_contest['blocked']==0 ) {
-	$buttons=[];
+$table = ['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'surname'] ];
+if ($v_contest['blocked'] == 0) {
+	$buttons = [];
 	$buttons['modify']=['onclick'=>'OnModification'];
 	$buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>true];
 	$buttons['cancel']=['onclick'=>'Clear', 'hidden'=>true];
 	$table['buttons']=$buttons;
 }
 
-InsertDom( 'table', $table);
+InsertDom('table', $table);
 ?>
 
 <script>
-	var ProblemId=<?=$v_problem['id']?>;
+	var ProblemId = <?=$v_problem['id']?>;
 	
 	
-	function GetContestantId(row){
+	function GetContestantId(row) {
 		return GetDataAttribute(row, 'contestant_id');
 	}
 	
-	function GetProblemId(row){
+	function GetProblemId(row) {
 		return ProblemId;
 	}
 </script>

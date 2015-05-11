@@ -4,11 +4,11 @@
 	SuperRequire_once('General', 'TemplateCreation.php');
 	SuperRequire_once('General', 'PermissionManager.php');
 	
-	$db=OpenDbConnection();
+	$db = OpenDbConnection();
 	
-	$ContestId=$_GET['ContestId'];
+	$ContestId = $_GET['ContestId'];
 	
-	CheckPagePermission($db,$ContestId);
+	CheckPagePermission($db, $ContestId);
 	
 	//PermissionChecked	
 	
@@ -16,14 +16,14 @@
 	
 	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
 	
-	foreach($v_contestants as &$con){
-		$con=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
+	foreach ($v_contestants as &$con) {
+		$con = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
 	}
 	
 	
 	$db->close();
 	
-	TemplatePage('ViewContestantsOfAContest',[	'Index'=>'index.php',
+	TemplatePage('ViewContestantsOfAContest', [	'Index'=>'index.php',
 												'Gare'=>'ViewContests.php',
 												$v_contest['name']=>'ViewContestInformation.php?ContestId='.$ContestId,
 												'Partecipanti'=>'ViewContestantsOfAContest.php?ContestId='.$ContestId]);

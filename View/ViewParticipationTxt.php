@@ -23,20 +23,20 @@ global $v_corrections, $v_contestant, $v_contest;
 </h3>
 -->
 
-Caro/a <?=$v_contestant['name']?>,<br>
-questo e' il verbale di correzione dei tuoi esercizi:<br><br>
+Caro/a <?=$v_contestant['name']?>, <br>
+questo e' il verbale di correzione dei tuoi esercizi: <br><br>
 
 <?php
-foreach($v_corrections as $correction) {
+foreach ($v_corrections as $correction) {
 	?>
 	<?=$correction['problem']['name']?> 
 	<?php
-	if($correction['done']) { ?>
+	if ($correction['done']) {?>
 		<?=$correction['mark']?> [<?=$correction['username']?>] <?=$correction['comment']?>
 	<?php }
-	else { ?>
+	else {?>
 		#
-	<?php }	?>
+	<?php } ?>
 	<br>
 	<?php
 }

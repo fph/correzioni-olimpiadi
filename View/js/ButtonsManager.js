@@ -1,4 +1,4 @@
-var ItalianTranslation={
+var ItalianTranslation = {
 	modify	: 'Modifica',
 	trash	: 'Elimina', 
 	confirm	: 'Conferma', 
@@ -7,7 +7,7 @@ var ItalianTranslation={
 	remail	: 'Reinvia email'
 };
 
-var ImageSrc={
+var ImageSrc = {
 	modify	: '../View/Images/ModifyButton.png',
 	trash	: '../View/Images/TrashButton.png',
 	confirm	: '../View/Images/ConfirmButton.png',
@@ -16,7 +16,7 @@ var ImageSrc={
 	remail	: '../View/Images/RemailButton.png'
 };
 
-var ButtonClass={
+var ButtonClass = {
 	modify	: 'ModifyButtonImage',
 	trash	: 'TrashButtonImage',
 	confirm	: 'ConfirmButtonImage',
@@ -25,7 +25,7 @@ var ButtonClass={
 	remail	: 'RemailButtonImage'
 };
 
-var ButtonContainerClass={
+var ButtonContainerClass = {
 	modify	: 'ModifyButtonContainer',
 	trash	: 'TrashButtonContainer',
 	confirm	: 'ConfirmButtonContainer',
@@ -34,12 +34,12 @@ var ButtonContainerClass={
 	remail	: 'RemailButtonContainer'
 };
 
-function CreateButton( type ) {
-	var ButtonSpan=document.createElement('span');
+function CreateButton(type) {
+	var ButtonSpan = document.createElement('span');
 	ButtonSpan.classList.add('ButtonContainer');
 	ButtonSpan.classList.add(ButtonContainerClass[type]);
 	
-	var button=document.createElement('img');
+	var button = document.createElement('img');
 	button.classList.add('ButtonImage');
 	button.classList.add(ButtonClass[type]);
 	button.setAttribute('src', ImageSrc[type]);
@@ -51,16 +51,16 @@ function CreateButton( type ) {
 	return ButtonSpan;
 }
 
-function ShowHideButton( container, type, show ) {
-	if( container.getElementsByClassName(ButtonContainerClass[type]).length != 0 ) {
-		if( show==true ) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.remove('hidden');
-		if( show==false ) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.add('hidden');
+function ShowHideButton(container, type, show) {
+	if (container.getElementsByClassName(ButtonContainerClass[type]).length != 0) {
+		if (show == true) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.remove('hidden');
+		if (show == false) container.getElementsByClassName(ButtonContainerClass[type])[0].classList.add('hidden');
 	}
 }
 
 // obj might change in the function
-function RenderButtons ( obj ) {
-	if( obj.title==true ) {
+function RenderButtons (obj) {
+	if (obj.title == true) {
 		obj.class=['ButtonsTitle'];
 		obj.buttons={
 			modify: {onclick: 'ModifyTitle()'},
@@ -70,51 +70,51 @@ function RenderButtons ( obj ) {
 		};
 	}
 	
-	if( obj.table==true ) {
-		for( var type in obj.buttons ) {
+	if (obj.table == true) {
+		for (var type in obj.buttons) {
 			// The code is this as way in order to avoid repeated append of (this.parent...)
 			// to onclick. 'TableModification' must be saved in obj.buttons[type]
 			// as if it was saved in obj.buttons it would have broken the following lines.
-			if( obj.buttons[type].TableModification==null ) {
+			if (obj.buttons[type].TableModification == null) {
 				obj.buttons[type].TableModification=true;
 				obj.buttons[type].onclick+='(this.parentNode.parentNode.parentNode.parentNode)';
 			}
 		}
 	}
 	
-	var ContainerSpan=document.createElement('span');
+	var ContainerSpan = document.createElement('span');
 	ContainerSpan.classList.add('ButtonsContainer');
-	if( obj.id!= null ) ContainerSpan.id=obj.id;
-	if( obj.class!=null ) {
-		for(var i=0; i<obj.class.length; i++) ContainerSpan.classList.add(obj.class[i]);
+	if (obj.id != null) ContainerSpan.id=obj.id;
+	if (obj.class != null) {
+		for (var i=0; i<obj.class.length; i++) ContainerSpan.classList.add(obj.class[i]);
 	}
 	
-	for( var type in obj.buttons ) {
-		var ButtonObj=obj.buttons[type];
-		var button=CreateButton(type); //TODO: Tutto quello che segue andrebbe spostato in CreateButton?
-		if( ButtonObj.hidden==true ) button.classList.add('hidden');
+	for (var type in obj.buttons) {
+		var ButtonObj = obj.buttons[type];
+		var button = CreateButton(type); //TODO: Tutto quello che segue andrebbe spostato in CreateButton?
+		if (ButtonObj.hidden == true) button.classList.add('hidden');
 		
 		
 		SetDataAttribute(button, 'onclick', ButtonObj.onclick);
 		button.childNodes[0].addEventListener('click', function(e) {
-			eval( GetDataAttribute( this.parentNode, 'onclick' ) );
-		} );
+			eval(GetDataAttribute(this.parentNode, 'onclick'));
+		});
 		
-		if( type=='modify' ) {
+		if (type == 'modify') {
 			button.childNodes[0].addEventListener('click', function(e) {
 				ShowHideButton(this.parentNode.parentNode, 'modify', false);
 				ShowHideButton(this.parentNode.parentNode, 'trash', false);
 				ShowHideButton(this.parentNode.parentNode, 'confirm', true);
 				ShowHideButton(this.parentNode.parentNode, 'cancel', true);
-			} );
+			});
 		}
-		else if( type=='confirm' || type=='cancel' ) {
+		else if (type == 'confirm' || type == 'cancel') {
 			button.childNodes[0].addEventListener('click', function(e) {
 				ShowHideButton(this.parentNode.parentNode, 'modify', true);
 				ShowHideButton(this.parentNode.parentNode, 'trash', true);
 				ShowHideButton(this.parentNode.parentNode, 'confirm', false);
 				ShowHideButton(this.parentNode.parentNode, 'cancel', false);
-			} );
+			});
 		}
 		
 		ContainerSpan.appendChild(button);
@@ -123,10 +123,10 @@ function RenderButtons ( obj ) {
 	return ContainerSpan;
 }
 
-function ChangeMailToRemail( ButtonSpan ) {
+function ChangeMailToRemail(ButtonSpan) {
 	ButtonSpan.classList.add(ButtonContainerClass['remail']);
 	
-	var button=ButtonSpan.getElementsByTagName('img')[0]
+	var button = ButtonSpan.getElementsByTagName('img')[0]
 	button.classList.add(ButtonClass['remail']);
 	button.setAttribute('src', ImageSrc['remail']);
 	button.setAttribute('alt', ItalianTranslation['remail']);
@@ -134,10 +134,10 @@ function ChangeMailToRemail( ButtonSpan ) {
 }
 
 //The variable ButtonsInformation is defined server-side
-if( ButtonsInformation != null ){
-	for(var i=0;i<ButtonsInformation.length;i++) {
-		var button=ButtonsInformation[i];
-		var DivToButtons=document.getElementById('DivToButtons'+i);
-		DivToButtons.parentNode.replaceChild( RenderButtons(button), DivToButtons);
+if (ButtonsInformation != null) {
+	for (var i=0; i<ButtonsInformation.length; i++) {
+		var button = ButtonsInformation[i];
+		var DivToButtons = document.getElementById('DivToButtons'+i);
+		DivToButtons.parentNode.replaceChild(RenderButtons(button), DivToButtons);
 	}
 }

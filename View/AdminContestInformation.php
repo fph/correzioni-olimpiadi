@@ -13,7 +13,7 @@ global $v_contest;
 			} ?>
 		</span>
 		<span class='hidden' id='DateModificationContainer'>
-			<?php InsertDom( 'date', ['id'=>'TitleDateModification']); ?>
+			<?php InsertDom('date', ['id'=>'TitleDateModification']); ?>
 		</span>
 	</span>
 	
@@ -21,9 +21,9 @@ global $v_contest;
 </h2>
 
 <div class='GeneralInformation'>
-	<div id='CorrectionsInformationContainer' data-value='<?=($v_contest['blocked'])?'block':'unblock'?>'>
-		<span id='CorrectionsStateSpan' class='<?= ($v_contest['blocked'])?'CorrectionsCompleted':'CorrectionsInProgress'?>'>
-			<?= ($v_contest['blocked'])?'Correzioni terminate':'Correzioni in corso'?>
+	<div id='CorrectionsInformationContainer' data-value='<?=($v_contest['blocked'])?'block': 'unblock'?>'>
+		<span id='CorrectionsStateSpan' class='<?= ($v_contest['blocked'])?'CorrectionsCompleted': 'CorrectionsInProgress'?>'>
+			<?= ($v_contest['blocked'])?'Correzioni terminate': 'Correzioni in corso'?>
 		</span>
 		
 		<select id='CorrectionsStateSelect' class='hidden'>
@@ -32,7 +32,7 @@ global $v_contest;
 		</select>
 	
 <?php
-	$buttons=['class'=> ['ButtonsSubtitle'], 'buttons'=>[
+	$buttons = ['class'=> ['ButtonsSubtitle'], 'buttons'=>[
 		'modify'=>['onclick'=>'ModifyCorrectionsState()'], 
 		'confirm'=>['onclick'=>'ConfirmCorrectionsState()', 'hidden'=>true], 
 		'cancel'=>['onclick'=>'CancelCorrectionsState()', 'hidden'=>true]
@@ -43,13 +43,13 @@ global $v_contest;
 </div>
 
 <?php
-InsertDom( 'LinkTable', [
-	['name'=>'Partecipanti', 'redirect'=>['url'=>'AdminContestantsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
-	['name'=>'Problemi', 'redirect'=>['url'=>'AdminProblemsOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]],
-	['name'=>'Correttori', 'redirect'=>['url'=>'AdminUsersOfAContest','parameters'=>['ContestId'=>$v_contest['id']] ]]
+InsertDom('LinkTable', [
+	['name'=>'Partecipanti', 'redirect'=>['url'=>'AdminContestantsOfAContest', 'parameters'=>['ContestId'=>$v_contest['id']] ]],
+	['name'=>'Problemi', 'redirect'=>['url'=>'AdminProblemsOfAContest', 'parameters'=>['ContestId'=>$v_contest['id']] ]],
+	['name'=>'Correttori', 'redirect'=>['url'=>'AdminUsersOfAContest', 'parameters'=>['ContestId'=>$v_contest['id']] ]]
 ]);
 ?>
 
 <script>
-	var ContestId=<?=$v_contest['id']?>;
+	var ContestId = <?=$v_contest['id']?>;
 </script>

@@ -1,27 +1,27 @@
 <?php
 	
 	require_once '../Utilities.php';
-	SuperRequire_once('General','sqlUtilities.php');
+	SuperRequire_once('General', 'sqlUtilities.php');
 	SuperRequire_once('General', 'TemplateCreation.php');
 	SuperRequire_once('General', 'PermissionManager.php');
 	
-	$db=OpenDbConnection();
+	$db = OpenDbConnection();
 	
-	$ProblemId=$_GET['ProblemId'];
+	$ProblemId = $_GET['ProblemId'];
 	$v_problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$v_problem['ContestId']]));
 	
-	CheckPagePermission($db,$v_contest['id']);
+	CheckPagePermission($db, $v_contest['id']);
 	
 	//Permission checked
 	
-	$contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$v_contest['id']]));
+	$contestants = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$v_contest['id']]));
 	
 	$v_corrections=[];
 	
 	foreach ($contestants as $con) {
-		$nn=OneResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$ProblemId, 'ContestantId'=>$con['ContestantId']]));
-		if ( is_null($nn) ) {
+		$nn = OneResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$ProblemId, 'ContestantId'=>$con['ContestantId']]));
+		if (is_null($nn)) {
 			$nn['mark']=$nn['username']=null;
 			$nn['comment']='';
 		}
@@ -34,7 +34,7 @@
 	
 	$db->close();
 	
-	TemplatePage('ViewProblem',['Index'=>'index.php',
+	TemplatePage('ViewProblem', ['Index'=>'index.php',
 								'Gare'=>'ViewContests.php',
 								$v_contest['name']=>'ViewContestInformation.php?ContestId='.$v_contest['id'],
 								'Problemi'=>'ViewProblemsOfAContest.php?ContestId='.$v_contest['id'],

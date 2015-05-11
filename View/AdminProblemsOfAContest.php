@@ -20,26 +20,26 @@ global $v_contest, $v_problems;
 </h3>
 
 <?php
-$columns=[];
-$columns[]=['id'=>'problem','name'=>'Problema','class'=>['ProblemColumn'],'order'=>1];
+$columns = [];
+$columns[]=['id'=>'problem', 'name'=>'Problema', 'class'=>['ProblemColumn'], 'order'=>1];
 
-$rows=[];
-foreach($v_problems as $problem) {
-	$row=['values'=>[
+$rows = [];
+foreach ($v_problems as $problem) {
+	$row = ['values'=>[
 		'problem'=>$problem['name']
 		], 'data'=>['problem_id'=>$problem['id'] ] ];
 	$rows[]=$row;
 }
 
-$buttons=[];
+$buttons = [];
 $buttons['modify']=['onclick'=>'OnModification'];
 $buttons['trash']=['onclick'=>'RemoveProblemRequest'];
 $buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>1];
 $buttons['cancel']=['onclick'=>'Clear', 'hidden'=>1];
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminProblemsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'problem'] ];
+$table = ['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminProblemsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'problem'] ];
 
-InsertDom( 'table', $table);
+InsertDom('table', $table);
 ?>
 
 
@@ -63,6 +63,6 @@ InsertDom( 'table', $table);
 
 
 <script>
-	var ContestId=<?=$v_contest['id']?>;
+	var ContestId = <?=$v_contest['id']?>;
 
 </script>

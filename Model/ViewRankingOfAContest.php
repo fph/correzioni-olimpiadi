@@ -2,35 +2,35 @@
 	//~ $start_time = microtime(true);
 	
 	require_once '../Utilities.php';
-	SuperRequire_once('General','sqlUtilities.php');
+	SuperRequire_once('General', 'sqlUtilities.php');
 	SuperRequire_once('General', 'TemplateCreation.php');
 	SuperRequire_once('General', 'PermissionManager.php');
 	
-	$db=OpenDbConnection();
+	$db = OpenDbConnection();
 	
-	$ContestId=$_GET['ContestId'];
+	$ContestId = $_GET['ContestId'];
 	
-	CheckPagePermission($db,$ContestId);
+	CheckPagePermission($db, $ContestId);
 	
 	//PermissionChecked	
 	
 	$v_admin=0;
-	if (IsAdmin($db,getUserIdBySession())) $v_admin=1;
+	if (IsAdmin($db, getUserIdBySession())) $v_admin=1;
 	else $v_admin=0;
 	
-	$v_contest=OneResultQuery($db, QuerySelect('Contests',['id'=>$ContestId]));
-	$v_problems=ManyResultQuery($db, QuerySelect('Problems',['ContestId'=>$ContestId]));
-	$participations=ManyResultQuery($db, QuerySelect('Participations',['ContestId'=>$ContestId],['ContestantId', 'email']));
+	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId]));
+	$participations = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId], ['ContestantId', 'email']));
 	$v_contestants=[];
-	foreach($participations as $participation) {
-		$contestant=OneResultQuery($db, QuerySelect('Contestants',['id'=>$participation['ContestantId']]));
+	foreach ($participations as $participation) {
+		$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
 		$contestant['marks']=[];
 		$contestant['email']=$participation['email'];
 		$v_contestants[$participation['ContestantId']]=$contestant;
 	}
-	foreach($v_problems as $problem) {
-		$ProblemCorrections=ManyResultQuery($db, QuerySelect('Corrections',['ProblemId'=>$problem['id']]));
-		foreach($ProblemCorrections as $correction) {
+	foreach ($v_problems as $problem) {
+		$ProblemCorrections = ManyResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problem['id']]));
+		foreach ($ProblemCorrections as $correction) {
 			$v_contestants[$correction['ContestantId']]['marks'][$correction['ProblemId']]=$correction['mark'];
 		}
 	}

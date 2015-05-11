@@ -1,35 +1,35 @@
 <?php
 require_once '../Utilities.php';
-SuperRequire_once('General','SessionManager.php');
-SuperRequire_once('General','sqlUtilities.php');
-SuperRequire_once('General','PermissionManager.php');
-SuperRequire_once('Modify','ObjectSender.php');
+SuperRequire_once('General', 'SessionManager.php');
+SuperRequire_once('General', 'sqlUtilities.php');
+SuperRequire_once('General', 'PermissionManager.php');
+SuperRequire_once('Modify', 'ObjectSender.php');
 	
-function ValidateDate( $date ) {
-	if( !is_string($date) ) return false;
-	$d=DateTime::createFromFormat('Y-m-d', $date);
-	if( $d==null or $d->format('Y-m-d')!=$date ) return false;
-	if( intval($d->format('Y'))<2000 or 2020<intval($d->format('Y')) ) return false;
+function ValidateDate($date) {
+	if (!is_string($date)) return false;
+	$d = DateTime::createFromFormat('Y-m-d', $date);
+	if ($d == null or $d->format('Y-m-d') != $date) return false;
+	if (intval($d->format('Y'))<2000 or 2020<intval($d->format('Y'))) return false;
 	return true;
 }
 	
 function AddContest($db, $name, $date) {
-	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
+	if (!is_string($name) or strlen($name) <= ContestName_MINLength or strlen($name)>ContestName_MAXLength) {
 		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
 	}
 	
-	if( !ValidateDate( $date ) ) {
+	if (!ValidateDate($date)) {
 		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
 	}
 	
-	Query($db, QueryInsert('Contests',['name'=>$name, 'date'=>$date, 'blocked'=>0]));
+	Query($db, QueryInsert('Contests', ['name'=>$name, 'date'=>$date, 'blocked'=>0]));
 	return ['type'=>'good', 'text'=>'La gara è stata creata con successo', 'data'=>[
-	'ContestId'=>$db->insert_id, 'name'=>$name, 'date'=>$date] ] ;
+	'ContestId'=>$db->insert_id, 'name'=>$name, 'date'=>$date] ];
 }
 
 function RemoveContest($db, $ContestId) {
-	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	if( is_null($Exist1) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 	
@@ -38,11 +38,11 @@ function RemoveContest($db, $ContestId) {
 }
 
 function BlockContest($db, $ContestId) {
-	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	if( is_null($Exist1) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
-	if( $Exist1['blocked']==1 ) {
+	if ($Exist1['blocked'] == 1) {
 		return ['type'=>'bad', 'text'=>'La gara scelta è già bloccata'];
 	}
 	
@@ -51,11 +51,11 @@ function BlockContest($db, $ContestId) {
 }
 
 function UnblockContest($db, $ContestId) {
-	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	if( is_null($Exist1) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
-	if( $Exist1['blocked']==0 ) {
+	if ($Exist1['blocked'] == 0) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non è bloccata'];
 	}
 	
@@ -64,117 +64,117 @@ function UnblockContest($db, $ContestId) {
 }
 
 function ChangeName($db, $ContestId, $name) {
-	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
+	if (!is_string($name) or strlen($name) <= ContestName_MINLength or strlen($name)>ContestName_MAXLength) {
 		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
 	}
 	
-	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	if( is_null($Exist1) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 	
-	Query( $db, QueryUpdate('Contests', ['id'=>$ContestId], ['name'=>$name]));
+	Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['name'=>$name]));
 	return ['type'=>'good', 'text'=>'Il nome è stato cambiato con successo'];
 }
 
 function ChangeDate($db, $ContestId, $date) {
-	if( !ValidateDate( $date ) ) {
+	if (!ValidateDate($date)) {
 		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
 	}
 	
-	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	if( is_null($Exist1) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 	
-	Query( $db, QueryUpdate('Contests', ['id'=>$ContestId], ['date'=>$date]));
+	Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['date'=>$date]));
 	return ['type'=>'good', 'text'=>'La data è stata cambiata con successo'];
 }
 
 function ChangeNameAndDate($db, $ContestId, $name, $date) {
-	if( !is_string( $name ) or strlen( $name )<=ContestName_MINLength or strlen( $name )>ContestName_MAXLength ) {
+	if (!is_string($name) or strlen($name) <= ContestName_MINLength or strlen($name)>ContestName_MAXLength) {
 		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
 	}
 	
-	if( !ValidateDate( $date ) ) {
+	if (!ValidateDate($date)) {
 		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
 	}
 	
-	$Exist1=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	if( is_null($Exist1) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 	
-	Query( $db, QueryUpdate('Contests', ['id'=>$ContestId], ['name'=>$name, 'date'=>$date]));
+	Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['name'=>$name, 'date'=>$date]));
 	return ['type'=>'good', 'text'=>'Il nome e la data sono stati cambiati con successo'];
 }
 
 function AddProblem($db, $ContestId, $name) {
-	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength or strlen( $name )==0) {
+	if (!is_string($name) or strlen($name)>ProblemName_MAXLength or strlen($name) == 0) {
 		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa non vuota di al più '.ProblemName_MAXLength.' caratteri'];
 	}
 	
-	$Exist1=OneResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId, 'name'=>$name] ));
-	if( !is_null( $Exist1 ) ){
+	$Exist1 = OneResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId, 'name'=>$name]));
+	if (!is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta ha già un problema con lo stesso nome'];
 	}
 	
-	Query( $db, QueryInsert( 'Problems', ['ContestId'=>$ContestId, 'name'=>$name] ) );
+	Query($db, QueryInsert('Problems', ['ContestId'=>$ContestId, 'name'=>$name]));
 	return ['type'=>'good', 'text'=>'Il problema è stato aggiunto con successo', 'ProblemId'=>$db->insert_id];
 }
 
 function RemoveProblem($db, $ProblemId) {
-	$Exist1=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
-	if( is_null( $Exist1 ) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
+	if (is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'Il problema non esiste'];
 	}
 	
-	Query( $db, QueryDelete( 'Problems', ['id'=>$ProblemId]) );
+	Query($db, QueryDelete('Problems', ['id'=>$ProblemId]));
 	return ['type'=>'good', 'text'=>'Il problema è stato eliminato con successo', 'ProblemId'=>$ProblemId];
 }
 
-function ChangeProblemName( $db, $ProblemId, $name ){
-	if( !is_string($name) or strlen( $name )>ProblemName_MAXLength or strlen( $name )==0) {
+function ChangeProblemName($db, $ProblemId, $name) {
+	if (!is_string($name) or strlen($name)>ProblemName_MAXLength or strlen($name) == 0) {
 		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa non vuota di al più '.ProblemName_MAXLength.' caratteri'];
 	}
 	
-	$Problem=OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
-	if( is_null( $Problem ) ) {
+	$Problem = OneResultQuery($db, QuerySelect('Problems', ['id'=>$ProblemId]));
+	if (is_null($Problem)) {
 		return ['type'=>'bad', 'text'=>'Il problema non esiste'];
 	}
 	
-	$ContestId=$Problem['ContestId'];
+	$ContestId = $Problem['ContestId'];
 	
-	$Exist1=OneResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId, 'name'=>$name]));
-	if( !is_null( $Exist1 ) ) {
+	$Exist1 = OneResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId, 'name'=>$name]));
+	if (!is_null($Exist1)) {
 		return ['type'=>'bad', 'text'=>'La gara scelta ha già un problema con questo nome'];
 	}
 	
-	Query( $db, QueryUpdate('Problems', ['id'=>$ProblemId], ['name'=>$name]));
+	Query($db, QueryUpdate('Problems', ['id'=>$ProblemId], ['name'=>$name]));
 	return ['type'=>'good', 'text'=>'Il nome del problema è stato cambiato con successo'];
 }
 
 	
 	
 $db= OpenDbConnection();
-if( IsAdmin( $db, GetUserIdBySession() ) == 0 ) {
+if (IsAdmin($db, GetUserIdBySession()) == 0) {
 	$db -> close();
-	SendObject( ['type'=>'bad', 'text'=>'Non hai i permessi per gestire le gare o i problemi'] );
+	SendObject(['type'=>'bad', 'text'=>'Non hai i permessi per gestire le gare o i problemi']);
 	die();
 }
 
-$data=json_decode( $_POST['data'] , 1);
-if( $data['type'] == 'add' ) SendObject( AddContest( $db, $data['name'], $data['date'] ) );
-else if( $data['type'] == 'remove' ) SendObject( RemoveContest( $db, $data['ContestId'] ) );
-else if( $data['type'] == 'block' ) SendObject( BlockContest( $db, $data['ContestId'] ) );
-else if( $data['type'] == 'unblock' ) SendObject( UnblockContest( $db, $data['ContestId'] ) );
-else if( $data['type'] == 'ChangeName' ) SendObject( ChangeName( $db, $data['ContestId'] , $data['name']) );
-else if( $data['type'] == 'ChangeDate' ) SendObject( ChangeDate( $db, $data['ContestId'] , $data['date']) );
-else if( $data['type'] == 'ChangeNameAndDate' ) SendObject( ChangeNameAndDate( $db, $data['ContestId'] , $data['name'], $data['date']) );
-else if( $data['type'] == 'AddProblem' ) SendObject( AddProblem( $db, $data['ContestId'] , $data['name']) );
-else if( $data['type'] == 'RemoveProblem' ) SendObject( RemoveProblem( $db, $data['ProblemId'] ) );
-else if( $data['type'] == 'ChangeProblemName' ) SendObject( ChangeProblemName( $db, $data['ProblemId'] , $data['name']) );
-else SendObject( ['type'=>'bad', 'text'=>'L\'azione scelta non esiste'] );
+$data = json_decode($_POST['data'], 1);
+if ($data['type'] == 'add') SendObject(AddContest($db, $data['name'], $data['date']));
+else if ($data['type'] == 'remove') SendObject(RemoveContest($db, $data['ContestId']));
+else if ($data['type'] == 'block') SendObject(BlockContest($db, $data['ContestId']));
+else if ($data['type'] == 'unblock') SendObject(UnblockContest($db, $data['ContestId']));
+else if ($data['type'] == 'ChangeName') SendObject(ChangeName($db, $data['ContestId'], $data['name']));
+else if ($data['type'] == 'ChangeDate') SendObject(ChangeDate($db, $data['ContestId'], $data['date']));
+else if ($data['type'] == 'ChangeNameAndDate') SendObject(ChangeNameAndDate($db, $data['ContestId'], $data['name'], $data['date']));
+else if ($data['type'] == 'AddProblem') SendObject(AddProblem($db, $data['ContestId'], $data['name']));
+else if ($data['type'] == 'RemoveProblem') SendObject(RemoveProblem($db, $data['ProblemId']));
+else if ($data['type'] == 'ChangeProblemName') SendObject(ChangeProblemName($db, $data['ProblemId'], $data['name']));
+else SendObject(['type'=>'bad', 'text'=>'L\'azione scelta non esiste']);
 
 $db -> close();
 ?>

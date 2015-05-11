@@ -1,6 +1,6 @@
 <?php
-	function SendObject( $obj ){
+	function SendObject($obj) {
 		header('Content-type: application/json');
-		echo json_encode( $obj );
+		echo json_encode($obj);
 	}
 ?>

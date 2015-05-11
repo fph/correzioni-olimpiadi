@@ -4,7 +4,7 @@
 </h2>
 
 <?php
-InsertDom( 'LinkTable', [
+InsertDom('LinkTable', [
 	['name'=>'Partecipanti', 'redirect'=>['url'=>'AdminContestants']],
 	['name'=>'Correttori', 'redirect'=>['url'=>'AdminUsers']],
 	['name'=>'Gare', 'redirect'=>['url'=>'AdminContests']],

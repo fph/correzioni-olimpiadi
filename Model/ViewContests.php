@@ -6,17 +6,17 @@
 	SuperRequire_once('General', 'SessionManager.php');
 	SuperRequire_once('General', 'PermissionManager.php');
 	
-	$db=OpenDbConnection();
+	$db = OpenDbConnection();
 	
-	$allContests=ManyResultQuery($db, QuerySelect('Contests'));
+	$allContests = ManyResultQuery($db, QuerySelect('Contests'));
 	
-	$UserId=getUserIdBySession();
+	$UserId = getUserIdBySession();
 	$v_contests=[];
-	foreach($allContests as $contest){
+	foreach ($allContests as $contest) {
 		if (VerifyPermission($db, $UserId, $contest['id'])) $v_contests[]=$contest;
 	}
 	
 	$db->close();
 	
-	TemplatePage('ViewContests',['Index'=>'index.php','Gare'=>'ViewContests.php']);
+	TemplatePage('ViewContests', ['Index'=>'index.php', 'Gare'=>'ViewContests.php']);
 ?>

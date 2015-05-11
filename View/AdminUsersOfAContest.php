@@ -20,23 +20,23 @@ global $v_contest, $v_users;
 </h3>
 
 <?php
-$columns=[];
+$columns = [];
 $columns[]=['id'=>'username', 'name'=>'Correttore', 'class'=>['UsernameColumn'], 'order'=>1];
 
-$rows=[];
-foreach($v_users as $user) {
-	$row=[
+$rows = [];
+foreach ($v_users as $user) {
+	$row = [
 	'values'=>['username'=>$user['username'] ],
 	'data'=>['user_id'=>$user['id']] ];
-	if( $user['role']!=0 ) $row['class']=['NoTrashButton'];
+	if ($user['role'] != 0) $row['class']=['NoTrashButton'];
 	$rows[]=$row;
 }
 
-$buttons=['trash'=>['onclick'=>'RemovePermissionRequest']];
+$buttons = ['trash'=>['onclick'=>'RemovePermissionRequest']];
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminUsersOfAContestTable', 'InitialOrder'=>['ColumnId'=>'username'] ];
+$table = ['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminUsersOfAContestTable', 'InitialOrder'=>['ColumnId'=>'username'] ];
 
-InsertDom( 'table',  $table );
+InsertDom('table',  $table);
 ?>
 
 <h3 class='PageSubtitle'>
@@ -50,12 +50,12 @@ InsertDom( 'table',  $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <?php InsertDom( 'select', ['id'=>'UserInput','type'=>'user']); ?> </td>
+		<td> <?php InsertDom('select', ['id'=>'UserInput', 'type'=>'user']); ?> </td>
 		<td> <input type='button' value='Aggiungi' onclick='AddPermissionRequest()'> </td>
 	</tr>
 	</table>
 </div>
 
 <script>
-	var ContestId=<?=$v_contest['id']?>;
+	var ContestId = <?=$v_contest['id']?>;
 </script>

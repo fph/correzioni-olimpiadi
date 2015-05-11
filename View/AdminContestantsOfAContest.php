@@ -20,23 +20,23 @@ global $v_contest, $v_contestants;
 </h3>
 
 <?php
-$columns=[];
+$columns = [];
 $columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
 $columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
 
-$rows=[];
-foreach($v_contestants as $contestant) {
-	$row=[
+$rows = [];
+foreach ($v_contestants as $contestant) {
+	$row = [
 	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name']],
 	'data'=>['contestant_id'=>$contestant['id']] ];
 	$rows[]=$row;
 }
 
-$buttons=['trash'=>['onclick'=>'RemoveParticipationRequest']];
+$buttons = ['trash'=>['onclick'=>'RemoveParticipationRequest']];
 
-$table=['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminContestantsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'surname']];
+$table = ['columns'=>$columns, 'rows'=>$rows, 'buttons'=>$buttons, 'id'=>'AdminContestantsOfAContestTable', 'InitialOrder'=>['ColumnId'=>'surname']];
 
-InsertDom( 'table',  $table );
+InsertDom('table',  $table);
 ?>
 
 <h3 class='PageSubtitle'>
@@ -50,12 +50,12 @@ InsertDom( 'table',  $table );
 		<th> </th>
 	</tr>
 	<tr>
-		<td> <?php InsertDom( 'select', ['id'=>'ContestantInput', 'type'=>'contestant']); ?></td>
+		<td> <?php InsertDom('select', ['id'=>'ContestantInput', 'type'=>'contestant']); ?></td>
 		<td> <input type='button' value='Aggiungi' onclick='AddParticipationRequest()'> </td>
 	</tr>
 	</table>
 </div>
 
 <script>
-	var ContestId=<?=$v_contest['id']?>;
+	var ContestId = <?=$v_contest['id']?>;
 </script>
