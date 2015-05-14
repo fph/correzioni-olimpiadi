@@ -10,7 +10,7 @@ define('urlRoot', '/correzioni-olimpiadi');
 //~ define('urlRoot', '/~dario2994/correzioni-olimpiadi');
 define('EmailAddress', 'correzioni@olimat.it'); //This is the mail used to send corrections to the participants. Should be the same used for (/usr/bin/)sendmail configuration.
 
-define('SessionDuration', 3600); //In seconds
+define('SessionDuration', 43200); //In seconds
 define('ContestName_MAXLength', 255);
 define('ContestName_MINLength', 2);
 define('username_MAXLength', 31);
@@ -22,4 +22,4 @@ define('ContestantSurname_MAXLength', 63);
 define('ContestantSchool_MAXLength', 128);
 define('ContestantEmail_MAXLength', 63);
 define('ProblemName_MAXLength', 31);
-define('comment_MAXLength', 1023);
+define('comment_MAXLength', 8191);
