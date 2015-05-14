@@ -46,7 +46,7 @@
 			$corrections[]= $nn;
 		}
 		
-		$MailText = 'Caro/a '.$contestant['name'].",\nquesto è il verbale di correzione dei tuoi esercizi:\n\n";
+		$MailText = 'Caro/a '.$contestant['name'].", \nquesto è il verbale di correzione dei tuoi esercizi: \n\n";
 		foreach ($corrections as $correction) {
 			$MailText.=$correction['problem']['name'].' ';
 			if ($correction['done']) {
