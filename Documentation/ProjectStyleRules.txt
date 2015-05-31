@@ -5,7 +5,7 @@ INDENTATION
 	Only tabs
 	
 SPACING:
-	Instead of giving rules for spacing, we show two examples with _correct_ spacing:
+	Instead of giving rules for spacing, we show an example with _correct_ spacing:
 	
 	function f(par1, par2, par3) {
 		var dummy = 100 * 20;
