@@ -33,32 +33,39 @@
 			));
 			
 			if (is_null($nn)) {
-				$nn['done']=false;
-				$nn['mark']=$nn['UserId']=$nn['problem']=$nn['username']=null;
-				$nn['comment']='';
+				$nn['done'] = false;
+				$nn['mark'] = $nn['UserId']=$nn['problem']=$nn['username']=null;
+				$nn['comment'] = '';
 			}
 			else {
-				$nn['done']=true;
-				$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
+				$nn['done'] = true;
+				$nn['username'] = OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
 			}
-			$nn['problem']=OneResultQuery($db, QuerySelect('Problems', ['id'=>$pro['id']]));
+			$nn['problem'] = OneResultQuery($db, QuerySelect('Problems', ['id'=>$pro['id']]));
 			
-			$corrections[]= $nn;
+			$corrections[] = $nn;
 		}
 		
-		$MailText = 'Caro/a '.$contestant['name'].", \nquesto è il verbale di correzione dei tuoi esercizi: \n\n";
+		$MailText = 'Caro/a '.$contestant['name'].', <br>questo è il verbale di correzione dei tuoi esercizi: <br><br>';
 		foreach ($corrections as $correction) {
-			$MailText.=$correction['problem']['name'].' ';
+			$MailText .= '<u>'.$correction['problem']['name'].'</u> ';
 			if ($correction['done']) {
-				$MailText.=$correction['mark'].' ['.$correction['username'].'] '.$correction['comment'];
-			}
+				$MailText .= '<strong>'.$correction['mark'].'</strong>'.' [<kbd>'.$correction['username'].'</kbd>] '.$correction['comment'];
+			} 
 			else {
-				$MailText.='#';
+				$MailText .= '<strong>#</strong>';
 			}	
-			$MailText.="\n";
+			$MailText .= '<br>';
 		}
+		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
+		
 		$MailObject = 'Verbale di correzione - Ammissione a '.$contest['name'];
-		$MailSent = mail($contestant['email'], $MailObject, $MailText, 'From: correzioni-olimpiadi <'.EmailAddress.'>');
+		
+		$MailHeaders = 'MIME-Version: 1.0'."\r\n";
+    $MailHeaders .= 'Content-Type: text/html; charset=UTF-8'."\r\n";
+    $MailHeaders .= 'From: '.EmailAddress."\r\n";
+    
+		$MailSent = mail($contestant['email'], $MailObject, $MailText, $MailHeaders);
 		
 		if ($MailSent == false) {
 			return ['type'=>'bad', 'text'=>'L\'email non è stata inviata a causa di un errore del server'];
