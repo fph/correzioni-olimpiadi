@@ -19,6 +19,7 @@ function AddContestant($db, $name, $surname, $school, $email) {
 		return ['type'=>'bad', 'text'=>'La scuola deve essere una stringa di al più '.ContestantSchool_MAXLength.' caratteri'];
 	}
 	
+	// TODO: Si dovrebbe fare un sanity check sulla mail (sia qui che in ChangeEmail())
 	if (!is_string($email) or strlen($email) > ContestantEmail_MAXLength) {
 		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.ContestantEmail_MAXLength.' caratteri'];
 	}
