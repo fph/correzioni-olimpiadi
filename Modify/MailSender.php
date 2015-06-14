@@ -61,10 +61,12 @@
 		
 		$MailObject = 'Verbale di correzione - Ammissione a '.$contest['name'];
 		
-		$MailHeaders = 'MIME-Version: 1.0'."\r\n";
+		$MailHeaders = 'From: '.EmailAddress."\r\n";
+		$MailHeaders .= 'Reply-to: '.EmailAddress."\r\n";
+		$MailHeaders .= 'X-Mailer: PHP/' . phpversion();
+		$MailHeaders .= 'MIME-Version: 1.0'."\r\n";
 		$MailHeaders .= 'Content-Type: text/html; charset=UTF-8'."\r\n";
-		$MailHeaders .= 'From: '.EmailAddress."\r\n";
-    
+		
 		$MailSent = mail($contestant['email'], $MailObject, $MailText, $MailHeaders);
 		
 		if ($MailSent == false) {

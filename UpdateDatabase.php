@@ -11,7 +11,7 @@ function AddContestantsEmailColumn() {
 	
 	$db = OpenDbConnection();
 	
-	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>'CorOli', 'TABLE_NAME'=>'Contestants', 'COLUMN_NAME'=>'email']));
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contestants', 'COLUMN_NAME'=>'email']));
 	if (is_null($ColumnExists)) {
 		$query = 'ALTER TABLE `Contestants` ADD COLUMN `email` varchar('.ContestantEmail_MAXLength.') NOT NULL';
 		Query($db, $query);
@@ -28,7 +28,7 @@ function AddContestantsEmailColumn() {
 
 function AddParticipationEmailBoolean() {
 	$db = OpenDbConnection();
-	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>'CorOli', 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'email']));
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'email']));
 	if (is_null($ColumnExists)) {
 		$query = 'ALTER TABLE `Participations` ADD COLUMN `email` Boolean NOT NULL DEFAULT false';
 		Query($db, $query);
@@ -45,7 +45,7 @@ function AddParticipationEmailBoolean() {
 function AddUserRoleColumn() {
 	$db = OpenDbConnection();
 	
-	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>'CorOli', 'TABLE_NAME'=>'Users', 'COLUMN_NAME'=>'role']));
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Users', 'COLUMN_NAME'=>'role']));
 	
 	if (is_null($ColumnExists)) {
 		$query = 'ALTER TABLE `Users` ADD COLUMN `role` int NOT NULL DEFAULT 0';
