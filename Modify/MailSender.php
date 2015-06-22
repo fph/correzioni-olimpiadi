@@ -3,7 +3,7 @@
 	SuperRequire_once('General', 'SessionManager.php');
 	SuperRequire_once('General', 'sqlUtilities.php');
 	SuperRequire_once('General', 'PermissionManager.php');
-	require 'PHPMailerAutoload.php'; // PhpMailer library
+	require PHPMailerPath; // PhpMailer library
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
 	function SendMail($db, $ContestId, $ContestantId) {
