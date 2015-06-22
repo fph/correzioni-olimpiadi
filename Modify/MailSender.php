@@ -3,6 +3,7 @@
 	SuperRequire_once('General', 'SessionManager.php');
 	SuperRequire_once('General', 'sqlUtilities.php');
 	SuperRequire_once('General', 'PermissionManager.php');
+	require 'PHPMailerAutoload.php'; // PhpMailer library
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
 	function SendMail($db, $ContestId, $ContestantId) {
@@ -59,17 +60,27 @@
 		}
 		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
 		
-		$MailObject = 'Verbale di correzione - Ammissione a '.$contest['name'];
-		
-		$MailHeaders = 'From: '.EmailAddress."\r\n";
-		$MailHeaders .= 'Reply-to: '.EmailAddress."\r\n";
-		$MailHeaders .= 'X-Mailer: PHP/' . phpversion();
-		$MailHeaders .= 'MIME-Version: 1.0'."\r\n";
-		$MailHeaders .= 'Content-Type: text/html; charset=UTF-8'."\r\n";
-		
-		$MailSent = mail($contestant['email'], $MailObject, $MailText, $MailHeaders);
-		
-		if ($MailSent == false) {
+		// Send mail
+		$mail = new PHPMailer;
+		if (EmailSMTP) {
+			$mail->isSMTP();
+			$mail->SMTPDebug = 0; 
+			$mail->Host = EmailHost;
+			$mail->Port = EmailPort;
+			$mail->SMTPSecure = 'tls';
+			$mail->SMTPAuth = true;
+			$mail->Username = EmailUsername;
+			$mail->Password = EmailPassword;
+		}
+		else {
+			$mail->isSendmail();
+		}
+		$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
+		$mail->addAddress($contestant['email']);
+		$mail->Subject = 'Verbale di correzione - Ammissione a '.$contest['name'];
+		$mail->isHTML(true);
+		$mail->Body = $MailText;
+		if (!$mail->send()) {
 			return ['type'=>'bad', 'text'=>'L\'email non è stata inviata a causa di un errore del server'];
 		}
 		

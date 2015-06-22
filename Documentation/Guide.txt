@@ -14,6 +14,8 @@ INSTALLATION
 	
 	Now you have to configure Constants.php with the user and password just created, some urls referring to your server structure and some other options.
 	
+	In order to use the mail-related feature you should install the PHPMailer library in a folder included in PHP include_path (e.g. /usr/share/pear) and add the openssl extension to php.
+	
 	Then execute InitDatabase.php which will create the whole database populating it nearly randomly.
 	
 	Now you should have a properly working system.

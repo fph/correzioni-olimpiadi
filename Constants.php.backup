@@ -8,7 +8,18 @@ define('ServerRoot', '/var/www/html/correzioni-olimpiadi');
 define('urlRoot', '/correzioni-olimpiadi');
 //~ define('ServerRoot', '/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-olimpiadi');
 //~ define('urlRoot', '/~dario2994/correzioni-olimpiadi');
-define('EmailAddress', '"Email Name" <email@domain.boh>'); //This is the mail used to send corrections to the participants. Should be the same used for (/usr/bin/)sendmail configuration.
+
+// Email configuration (the default is a typical gmail configuration)
+// 'EmailSMTP = false' implies the usage of local sendmail to send the email
+// 'EmailSMTP = true' sends the email through the configured SMTP
+define('EmailSMTP', true);
+// In case of 'EmailSMTP = true', mail server information and authentication data
+define('EmailHost', 'smtp.gmail.com');
+define('EmailPort', 587); 
+define('EmailUsername', 'username@gmail.com');
+define('EmailPassword', 'password');
+//This is the mail address used to send corrections to the participants. 
+define('EmailAddress', 'username@gmail.com');
 
 define('SessionDuration', 43200); //In seconds
 define('ContestName_MAXLength', 255);
