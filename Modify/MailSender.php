@@ -62,6 +62,8 @@
 		
 		// Send mail
 		$mail = new PHPMailer;
+		$mail->CharSet = 'UTF-8';
+		
 		if (EmailSMTP) {
 			$mail->isSMTP();
 			$mail->SMTPDebug = 0; 
