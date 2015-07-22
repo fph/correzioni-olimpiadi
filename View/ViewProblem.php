@@ -24,7 +24,7 @@ global $v_contest, $v_problem, $v_corrections;
 $columns = [];
 $columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
 $columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
-$columns[]=['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1];
+$columns[]=['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
 $columns[]=['id'=>'comment', 'name'=>'Commento', 'class'=>['CommentColumn']];
 $columns[]=['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
 
