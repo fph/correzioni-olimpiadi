@@ -114,7 +114,7 @@ function ChangeUsername($db, $UserId, $username) {
 //Check whether the user exists and he's not an admin and whether the password satisfies some standards.
 //If all it's ok change the password of the user.
 function ChangePassword($db, $UserId, $password) {
-	if (!is_string($password) or strlen($password)>password_MAXLength or strlen($username)<4) {
+	if (!is_string($password) or strlen($password)>password_MAXLength or strlen($password)<4) {
 		return ['type'=>'bad', 'text'=>'La password deve essere una stringa con un numero di caratteri tra '.password_MINLength.' e '.password_MAXLength];
 	}
 	
@@ -127,7 +127,7 @@ function ChangePassword($db, $UserId, $password) {
 		return ['type'=>'bad', 'text'=>'Il correttore selezionato non esiste'];
 	}
 	
-	Query($db, QueryUpdate('Users', ['id'=>$Userid], ['passHash'=>PasswordHash($password)]));
+	Query($db, QueryUpdate('Users', ['id'=>$UserId], ['passHash'=>PasswordHash($password)]));
 	
 	return ['type'=>'good', 'text'=>'Password cambiata con successo'];
 }

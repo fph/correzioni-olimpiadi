@@ -67,6 +67,29 @@ $table = ['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewContestInformatio
 InsertDom('table',  $table);
 ?>
 
+<?php
+if ($v_user['role'] == 0) {
+?>
+<h3 class="PageSubtitle">
+	Reimposta la password
+</h3>
+
+<div class='FormContainer'>
+	<table>
+	<tr>
+		<th> Nuova password </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<td> <input type='text' name='NewPassword' id='NewPasswordInput'> </td>
+		<td> <input type='button' value='Reimposta' onclick='ChangePasswordRequest()'> </td>
+	</tr>
+	</table>
+</div>
+<?php
+}
+?>
+
 <script>
 	var UserId = <?=$v_user['id']?>;
 </script>

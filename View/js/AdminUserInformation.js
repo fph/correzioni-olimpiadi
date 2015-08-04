@@ -102,3 +102,8 @@ function ModifyUserRole() {
 	else if (value == 'SuperAdmin') select.selectedIndex=2;
 	select.classList.remove('hidden');
 }
+
+function ChangePasswordRequest() {
+	var password = document.getElementById('NewPasswordInput').value;
+	MakeAjaxRequest('../Modify/ManageUser.php', {UserId: UserId, password: password, type: 'ChangePassword'});
+}

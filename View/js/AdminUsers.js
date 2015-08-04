@@ -3,10 +3,14 @@ function AddUser(response) {
 		var username = response.data['username'];
 		var UserId = response.data['UserId'];
 
-		AddRow(document.getElementById('AdminUsersTable'),
-		{	redirect: {'UserId': UserId},
-			values: {'username': username}},
-			'username');
+		AddRow(
+			document.getElementById('AdminUsersTable'),
+			{	
+				redirect: {'UserId': UserId},
+				values: {'username': username}
+			},
+			'username'
+		);
 	}
 }
 
