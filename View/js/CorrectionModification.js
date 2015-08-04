@@ -22,7 +22,19 @@ function MakeChanges(response) {
 	
 	if (response.type == 'good') {
 		SetDataAttribute(MarkTd, 'old_value', GetDataAttribute(MarkTd, 'new_value'));
-		SetDataAttribute(CommentTd, 'old_value', GetDataAttribute(CommentTd, 'new_value'));
+		
+		// old_value is escaped, instead new_value is not.
+		// Here new_value is escaped and assigned to old_value
+		var UnescapedComment = GetDataAttribute(CommentTd, 'new_value');
+		var EscapedComment = UnescapedComment
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/"/g, "&quot;")
+			.replace(/'/g, "&#039;")
+			.replace(/\//g, "&#x2F;");
+		SetDataAttribute(CommentTd, 'old_value', EscapedComment);
+		
 		UserTd.innerHTML=GetDataAttribute(UserTd, 'new_value');
 	}
 	SetDataAttribute(MarkTd, 'new_value', null);
@@ -42,7 +54,11 @@ function Confirm(row) {
 	SetDataAttribute(MarkTd, 'new_value', mark);
 	
 	var CommentTd = row.getElementsByClassName('CommentColumn')[0];
-	var comment = CommentTd.getElementsByClassName('ContentEditable')[0].textContent; //textContent instead of innerHTML because browsers behaves differently with newlines in contentEditable
+	// textContent is used instead of innerHTML because browsers behaves differently with newlines in contentEditable
+	// But textContent unescapes html special chars, and this fact is handled in MakeChanges
+	// and not here as it is better to leave the comment unescaped, otherwise it 
+	// would be doubly escaped (once client-side, once server-side) 
+	var comment = CommentTd.getElementsByClassName('ContentEditable')[0].textContent;
 	SetDataAttribute(CommentTd, 'new_value', comment);
 	
 	var UserTd = row.getElementsByClassName('UsernameColumn')[0];
