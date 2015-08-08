@@ -6,9 +6,11 @@
 	
 	$db = OpenDbConnection();
 	
-	$v_admin=0;
-	if (IsAdmin($db, getUserIdBySession())) $v_admin=1;
-	else $v_admin=0;
+	$v_admin = 0;
+	if (IsAdmin($db, getUserIdBySession())) $v_admin = 1;
+	
+	$v_SuperAdmin = 0;
+	if (IsSuperAdmin($db, getUserIdBySession())) $v_SuperAdmin = 1;
 	
 	$db->close();
 	

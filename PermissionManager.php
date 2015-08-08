@@ -30,12 +30,18 @@ function VerifyPermission($db, $UserId, $ContestId) {
 	else return 1;
 }
 
-function CheckPagePermission($db, $ContestId) {//$ContestId == -1 means admin.
+//$ContestId == -1 means admin.
+//$ContestId == -2 means SuperAdmin
+function CheckPagePermission($db, $ContestId) {
 	if ($ContestId >= 0 and VerifyPermission($db, GetUserIdBySession(), $ContestId) == 0) {
 		SuperRedirect('Model', 'index.php');
 		die();
 	}
 	else if ($ContestId == -1 and IsAdmin($db, GetUserIdBySession()) == 0) {
+		SuperRedirect('Model', 'index.php');
+		die();
+	}
+	else if ($ContestId == -2 and IsSuperAdmin($db, GetUserIdBySession()) == 0) {
 		SuperRedirect('Model', 'index.php');
 		die();
 	}

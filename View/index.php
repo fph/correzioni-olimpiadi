@@ -1,5 +1,5 @@
 <?php
-global $v_admin;
+global $v_admin, $v_SuperAdmin;
 ?>
 
 
@@ -9,6 +9,7 @@ global $v_admin;
 
 <?php 
 $links = [ ['name'=>'Gare', 'redirect'=>['url'=>'ViewContests']] ];
-if ($v_admin == 1) $links[]=['name'=>'Amministrazione', 'redirect'=>['url'=>'AdminAdministration']];
+if ($v_admin == 1) $links []= ['name'=>'Amministrazione', 'redirect'=>['url'=>'AdminAdministration']];
+if ($v_SuperAdmin == 1) $links []= ['name'=>'Configurazioni', 'redirect'=>['url'=>'Configurations']];
 InsertDom('LinkTable',  $links); 
 ?>
