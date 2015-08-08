@@ -72,6 +72,12 @@ function RemoveParticipation($db, $ContestantId, $ContestId) {
 	}
 	
 	Query($db, QueryDelete('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	
+	$ContestProblems = ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId], ['id']));
+	foreach ($ContestProblems as $problem) {
+		Query($db, QueryDelete('Corrections', ['ContestantId'=>$ContestantId, 'ProblemId'=>$problem['id']]));
+	}
+	
 	return ['type'=>'good', 'text'=>'La partecipazione è stata eliminata con successo', 'data'=>['ContestantId'=>$ContestantId] ];
 }
 
