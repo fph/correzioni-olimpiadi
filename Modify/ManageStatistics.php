@@ -52,14 +52,14 @@
 		
 		//Here I build the table using only $contests and $AllContestants
 		$columns = [];
-		$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>['SurnameAndNameColumn'], 'order'=>1, 'type'=>'string'];
+		$columns[] = ['id'=>'contestant', 'name'=>'Partecipante', 'class'=>['SurnameAndNameColumn'], 'order'=>1, 'type'=>'string'];
 		foreach ($contests as $contest) {
 			foreach ($contest['problems'] as $problem) {
-				$columns[]=['id'=>'Problem'.strval($problem['id']), 'name'=>$problem['name'], 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
+				$columns[] = ['id'=>'Problem'.strval($problem['id']), 'name'=>$problem['name'], 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
 			}
-			$columns[]=['id'=>'Contest'.strval($contest['id']), 'name'=>$contest['name'], 'class'=>['MarkColumn', 'ContestScoreColumn'], 'order'=>1, 'type'=>'number'];
+			$columns[] = ['id'=>'Contest'.strval($contest['id']), 'name'=>$contest['name'], 'class'=>['MarkColumn', 'ContestScoreColumn'], 'order'=>1, 'type'=>'number'];
 		}
-		$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>['MarkColumn', 'ScoreColumn'], 'order'=>1, 'type'=>'number'];
+		$columns[] = ['id'=>'score', 'name'=>'Punteggio', 'class'=>['MarkColumn', 'ScoreColumn'], 'order'=>1, 'type'=>'number'];
 		
 		$rows = [];
 		foreach ($AllContestants as $contestant) {
@@ -69,7 +69,7 @@
 				$SubTotal = 0;
 				foreach ($contest['problems'] as $problem) {
 					if (isset($contestant['marks'][$problem['id']])) {
-						$values['Problem'.$problem['id']]=$contestant['marks'][$problem['id']];
+						$values['Problem'.$problem['id']] = $contestant['marks'][$problem['id']];
 						$mark = $contestant['marks'][$problem['id']];
 						$SubTotal += $mark;
 					}
@@ -81,15 +81,15 @@
 			$rows[]=['values'=>$values];
 		}
 		
-		$table = ['columns'=>$columns, 'rows'=>$rows, 'id'=>'MultipleRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1] ];
+		$table = ['columns'=>$columns, 'rows'=>$rows, 'id'=>'MultipleRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1], 'LineNumbers'=>true];
 		
-		$table['type']='good';
-		$table['text']='Creato le statistiche con successo';
+		$table['type'] = 'good';
+		$table['text'] = 'Creato le statistiche con successo';
 		return $table;
 	}
 	
 	
-	$db= OpenDbConnection();
+	$db = OpenDbConnection();
 	if (IsAdmin($db, GetUserIdBySession()) == 0) {
 		$db -> close();
 		SendObject(['type'=>'bad', 'text'=>'Non hai i permessi per vedere le statistiche']);

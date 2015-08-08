@@ -26,23 +26,41 @@ table.InformationTable > theader td, table.InformationTable > tbody td {
 	padding: 5px 5px;
 }
 
-table.InformationTable > tbody > tr:hover td:not(.ButtonsTd) {
+table.InformationTable > tbody > tr:hover td:not(.ButtonsTd):not(.LineNumbersTd) {
 	background-color: aliceblue;
 	color:#000066;
 }
 
 /*
-	Modify and cancel button border-button
+  Remove borders from button cells and line numbers cells
 */
 
 
-table.InformationTable th.ButtonsTh {
+table.InformationTable th.ButtonsTh, table.InformationTable th.LineNumbersTh {
 	border-bottom: 2px #6678b1;
 }
 
-table.InformationTable td.ButtonsTd {
+table.InformationTable td.ButtonsTd, table.InformationTable td.LineNumbersTd {
 	border-bottom: 1px #ECF3FA;
+}
+
+/*
+  Configurations for button cells and line numbers cells 
+*/
+
+table.InformationTable td.ButtonsTd {
 	width: 50px;
+}
+
+table.InformationTable th.LineNumbersTh {
+	padding: 0px;
+}
+
+table.InformationTable td.LineNumbersTd {
+	color: gray;
+	font-family: monospace;
+	font-size: 0.8em;
+	padding: 0px;
 }
 
 /*

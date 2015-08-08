@@ -64,6 +64,11 @@ function CreateRow(obj, row) {
 		for (var key in row.data) SetDataAttribute(tr, key, row.data[key]);
 	}
 	
+	if (obj.LineNumbers != null && obj.LineNumbers == true) {
+		var LineNumbersTd = document.createElement('td');
+		LineNumbersTd.classList.add('LineNumbersTd');
+		tr.appendChild(LineNumbersTd);
+	}
 	for (var j=0; j<obj.columns.length; j++) {
 		var column = obj.columns[j];
 		var td = document.createElement('td');
@@ -76,9 +81,9 @@ function CreateRow(obj, row) {
 		tr.appendChild(td);
 	}
 	if (obj.buttons != null) {
-		ButtonsTd = document.createElement('td');
+		var ButtonsTd = document.createElement('td');
 		ButtonsTd.classList.add('ButtonsTd');
-		ButtonsObj = {table: true, buttons: obj.buttons};
+		var ButtonsObj = {table: true, buttons: obj.buttons};
 		ButtonsTd.appendChild(RenderButtons(ButtonsObj));
 		ButtonsTd.addEventListener('click', function() {
 			event.stopPropagation();
@@ -177,6 +182,13 @@ function SortRows(obj, ColumnId, ascending) {
 	if (ascending) obj.rows.reverse();
 }
 
+function AddLineNumbers(table) {
+	LineNumbersTds = table.getElementsByClassName('LineNumbersTd');
+	for (var i = 0; i < LineNumbersTds.length; i++) {
+		LineNumbersTds[i].innerHTML = i+1;
+	}
+}
+
 function RenderTable(obj) {
 	//Initial rows ordering
 	if (obj.InitialOrder != null) {
@@ -212,6 +224,13 @@ function RenderTable(obj) {
 	//Table header
 	var TableHeader = document.createElement('thead');
 	var TableHeaderTr = document.createElement('tr');
+	
+	if (obj.LineNumbers != null && obj.LineNumbers == true) {
+		var LineNumbersTh = document.createElement('th');
+		LineNumbersTh.classList.add('LineNumbersTh');
+		TableHeaderTr.appendChild(LineNumbersTh);
+	}
+	
 	for (var i=0; i<obj.columns.length; i++) {
 		var column = obj.columns[i];
 		var th = document.createElement('th');
@@ -250,7 +269,7 @@ function RenderTable(obj) {
 		}
 		TableHeaderTr.appendChild(th);
 	}
-	if (obj.buttons) {
+	if (obj.buttons != null) {
 		var ButtonContainerTh = document.createElement('th');
 		ButtonContainerTh.classList.add('ButtonsTh');
 		TableHeaderTr.appendChild(ButtonContainerTh);
@@ -293,6 +312,8 @@ function RenderTable(obj) {
 	}
 	table.appendChild(tbody);
 	
+	AddLineNumbers(table);
+	
 	return table;
 }
 
@@ -326,6 +347,8 @@ function AddRow(table, row, OrderBy) {
 	}
 	
 	SetTableObject(table, obj);
+	
+	AddLineNumbers(table);
 }
 
 function RemoveRow(table, row) {
@@ -338,6 +361,8 @@ function RemoveRow(table, row) {
 	tbody.removeChild(row);
 	obj.rows.splice(i, 1);
 	SetTableObject(table, obj);
+	
+	AddLineNumbers(table);
 }
 
 function SortTableRows(table, ColumnId, ascending) {

@@ -7,6 +7,7 @@ TableObject
 	InitialOrder => object
 					ColumnId => string !
 					ascending => boolean
+	LineNumbers => boolean
 	buttons => [ ButtonType=> button]
 	ExportCsv => boolean
 	data => object
