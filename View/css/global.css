@@ -83,15 +83,16 @@ div.internalBody {
 	padding: 5px 0px;
 }
 
-.LinkTable span {
+.LinkTable a {
 	padding: 5px 30px 5px 5px;
 	border-radius: 0px 10px 10px 0px;
 	border: 1px solid #039;
 	color: #039;
 	font-weight: bold;
 	display: block;
+	text-decoration: none;
 }
-.LinkTable span:hover {
+.LinkTable a:hover {
 	background-color: aliceblue;
 	color: #000066;
 }

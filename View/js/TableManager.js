@@ -50,6 +50,7 @@ function CreateRow(obj, row) {
 	if (obj.redirect != null) {
 		SetDataAttribute(tr, 'redirect_url', obj.redirect);
 		SetDataAttribute(tr, 'redirect_obj', JSON.stringify(row.redirect));
+		// TODO: Sarebbe meglio se fosse un link normale
 		tr.addEventListener('click', function(e) {
 			Redirect(GetDataAttribute(this, 'redirect_url'), JSON.parse(GetDataAttribute(this, 'redirect_obj'))); 
 		});

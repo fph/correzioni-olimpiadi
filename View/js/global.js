@@ -1,16 +1,22 @@
-//Takes url and Get Parameters (as an object) and redirect the page as requested
-function Redirect(pageUrl, getElements) {
-	var url = pageUrl+'.php';
-	if (getElements != null) {
+//Takes the page name and, eventually, parameters to be passed via get (as an object)
+//and returns the corresponding url.
+function CreateUrl(PageName, GetParameters) {
+	var url = PageName+'.php';
+	if (GetParameters != null) {
 		var i = 0;
-		for (var el in getElements) {
-			if (i == 0) url+='?';
-			else url+='&';
+		for (var key in GetParameters) {
+			if (i == 0) url += '?';
+			else url += '&';
 			i++;
-			url += el+'='+getElements[el];
+			url += key + '=' + GetParameters[key];
 		}
 	}
-	document.location=url;
+	return url;
+}
+
+//Redirect to the page returned by CreateUrl
+function Redirect(PageName, GetParameters) {
+	document.location = CreateUrl(PageName, GetParameters);
 }
 
 
