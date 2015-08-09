@@ -30,10 +30,10 @@ global $v_admin, $v_corrections, $v_contestant, $v_contest, $v_MailSent;
 
 <?php
 $columns = [];
-$columns[]=['id'=>'problem', 'name'=>'Problema', 'class'=>['ProblemColumn'], 'order'=>1];
-$columns[]=['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1];
-$columns[]=['id'=>'comment', 'name'=>'Commento', 'class'=>['CommentColumn']];
-$columns[]=['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
+$columns[] = ['id'=>'problem', 'name'=>'Problema', 'class'=>['ProblemColumn'], 'order'=>1];
+$columns[] = ['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
+$columns[] = ['id'=>'comment', 'name'=>'Commento', 'class'=>['CommentColumn']];
+$columns[] = ['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
 
 $rows = [];
 foreach ($v_corrections as $correction) {
