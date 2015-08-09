@@ -8,6 +8,7 @@ SuperRequire_once('Modify', 'ObjectSender.php');
 //Receive the request to create a user, check whether the username is already used and if both password an username satisfy some rules.
 //If all is ok create the user.
 function AddUser($db, $username, $password) {
+	//TODO: controllare che siano lettere e numeri
 	if (!is_string($username) or strlen($username)>username_MAXLength or strlen($username)<username_MINLength) {
 		return ['type'=>'bad', 'text'=>'Lo username deve essere una stringa con un numero di caratteri tra '.username_MINLength.' e '.username_MAXLength];
 	}
