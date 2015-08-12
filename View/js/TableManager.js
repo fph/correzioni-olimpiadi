@@ -338,7 +338,7 @@ function AddRow(table, row, OrderBy) {
 			}
 		}
 		var i = 0;
-		for (; i<obj.rows.length; i++) {
+		for (; i < obj.rows.length; i++) {
 			if (SuperCompare(obj.rows[i].values[OrderBy], row.values[OrderBy], type) == 1) break;
 		}
 		if (i == obj.rows.length) tbody.appendChild(NewRow);
@@ -355,7 +355,7 @@ function RemoveRow(table, row) {
 	var obj = GetTableObject(table);
 	var tbody = table.getElementsByTagName('tbody')[0];
 	var i = 0;
-	for (; i<tbody.childNodes.length; i++) {
+	for (; i < tbody.childNodes.length; i++) {
 		if (tbody.childNodes[i] == row) break;
 	}
 	tbody.removeChild(row);
@@ -373,7 +373,7 @@ function SortTableRows(table, ColumnId, ascending) {
 
 //The variable TablesInformation is defined server-side
 if (TablesInformation != null) {
-	for (var i=0; i<TablesInformation.length; i++) {
+	for (var i = 0; i < TablesInformation.length; i++) {
 		var table = TablesInformation[i];
 		var DivToTable = document.getElementById('DivToTable'+i);
 		DivToTable.parentNode.replaceChild(RenderTable(table), DivToTable);

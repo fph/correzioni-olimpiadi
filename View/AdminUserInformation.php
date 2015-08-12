@@ -70,7 +70,7 @@ InsertDom('table',  $table);
 <?php
 if ($v_user['role'] == 0) {
 ?>
-<h3 class="PageSubtitle">
+<h3 class='PageSubtitle'>
 	Reimposta la password
 </h3>
 
