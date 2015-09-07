@@ -28,7 +28,8 @@ $DomInformation = [
 	'date'=>[], 
 	'select'=>[], 
 	'LinkTable'=>[], 
-	'buttons'=>[] 
+	'buttons'=>[],
+	'form'=>[]
 ];
 
 function InsertDom($type, $obj) {
@@ -109,6 +110,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		var SelectsInformation = <?=json_encode($DomInformation['select'])?>;
 		var LinkTablesInformation = <?=json_encode($DomInformation['LinkTable'])?>;
 		var ButtonsInformation = <?=json_encode($DomInformation['buttons'])?>;
+		var FormsInformation = <?=json_encode($DomInformation['form'])?>;
 	</script>
 <!--
 	TODO: Si potrebbe evitare di includere questi quando non necessari
@@ -122,6 +124,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	<script type='text/javascript' src='../View/js/AjaxSelect.js'> </script>
 	<script type='text/javascript' src='../View/js/DateInput.js'> </script>
 	<script type='text/javascript' src='../View/js/LinkTable.js'> </script>
+	<script type='text/javascript' src='../View/js/FormManager.js'> </script>
 	
 	<script>
 		<?php
