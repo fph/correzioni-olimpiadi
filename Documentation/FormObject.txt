@@ -1,0 +1,20 @@
+Lines ending with ! are NOT optional.
+
+FormObject
+	id => string
+	SubmitText => string
+	SubmitId => string
+	SubmitFunction => string !
+	inputs => [input] !
+
+input
+	type => string !
+	title => string !
+	name => string
+	
+	if type == 'AjaxSelect'
+		select => SelectObject !
+	else if type == 'date'
+		date => DateObject !
+	else
+		RandomProperties => string
