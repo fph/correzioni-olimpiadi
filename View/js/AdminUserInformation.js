@@ -103,7 +103,7 @@ function ModifyUserRole() {
 	select.classList.remove('hidden');
 }
 
-function ChangePasswordRequest() {
-	var password = document.getElementById('NewPasswordInput').value;
+function ChangePasswordRequest(inputs) {
+	var password = inputs.namedItem('NewPassword').value;
 	MakeAjaxRequest('../Modify/ManageUser.php', {UserId: UserId, password: password, type: 'ChangePassword'});
 }

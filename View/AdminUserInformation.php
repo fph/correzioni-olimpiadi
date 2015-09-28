@@ -74,19 +74,12 @@ if ($v_user['role'] == 0) {
 	Reimposta la password
 </h3>
 
-<div class='FormContainer'>
-	<table>
-	<tr>
-		<th> Nuova password </th>
-		<th> </th>
-	</tr>
-	<tr>
-		<td> <input type='text' name='NewPassword' id='NewPasswordInput'> </td>
-		<td> <input type='button' value='Reimposta' onclick='ChangePasswordRequest()'> </td>
-	</tr>
-	</table>
-</div>
 <?php
+	$form = ['SubmitText'=>'Reimposta', 'SubmitFunction'=>'ChangePasswordRequest(this.elements)', 'inputs'=>[
+		['type'=>'text', 'title'=>'Nuova password', 'name'=>'NewPassword']
+	]];
+
+	InsertDom('form', $form);
 }
 ?>
 

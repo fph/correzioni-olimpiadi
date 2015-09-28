@@ -43,18 +43,13 @@ InsertDom('table',  $table);
 	Aggiungi un partecipante
 </h3>
 
-<div class='FormContainer'>
-	<table>
-	<tr>
-		<th> Partecipante </th>
-		<th> </th>
-	</tr>
-	<tr>
-		<td> <?php InsertDom('select', ['id'=>'ContestantInput', 'type'=>'contestant']); ?></td>
-		<td> <input type='button' value='Aggiungi' onclick='AddParticipationRequest()'> </td>
-	</tr>
-	</table>
-</div>
+<?php
+$form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddParticipationRequest(this.elements)', 'inputs'=>[
+	['type'=>'AjaxSelect', 'title'=>'Partecipante', 'select'=>['id'=>'ContestantInput', 'type'=>'contestant', 'name'=>'ContestantId']]
+]];
+
+InsertDom('form', $form);
+?>
 
 <script>
 	var ContestId = <?=$v_contest['id']?>;

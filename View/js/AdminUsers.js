@@ -14,8 +14,8 @@ function AddUser(response) {
 	}
 }
 
-function AddUserRequest() {
-	var username = document.getElementById('UsernameInput').value;
-	var password = document.getElementById('PasswordInput').value;
+function AddUserRequest(inputs) {
+	var username = inputs.namedItem('username').value;
+	var password = inputs.namedItem('password').value;
 	MakeAjaxRequest('../Modify/ManageUser.php', {username: username, password: password, type: 'add'}, AddUser);
 }

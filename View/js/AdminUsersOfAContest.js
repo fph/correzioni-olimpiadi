@@ -23,7 +23,7 @@ function AddPermission(response) {
 	}
 }
 
-function AddPermissionRequest() {
-	var UserId = GetSelectValue('UserInput');
+function AddPermissionRequest(inputs) {
+	var UserId = inputs.namedItem('UserId').value;
 	MakeAjaxRequest('../Modify/ManageUser.php', {ContestId: ContestId, UserId: UserId, type: 'AddPermission'}, AddPermission);
 }

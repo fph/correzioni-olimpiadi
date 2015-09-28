@@ -43,18 +43,13 @@ InsertDom('table',  $table);
 	Aggiungi un correttore
 </h3>
 
-<div class='FormContainer'>
-	<table>
-	<tr>
-		<th> Username </th>
-		<th> </th>
-	</tr>
-	<tr>
-		<td> <?php InsertDom('select', ['id'=>'UserInput', 'type'=>'user']); ?> </td>
-		<td> <input type='button' value='Aggiungi' onclick='AddPermissionRequest()'> </td>
-	</tr>
-	</table>
-</div>
+<?php
+$form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddPermissionRequest(this.elements)', 'inputs'=>[
+	['type'=>'AjaxSelect', 'title'=>'Username', 'select'=>['id'=>'UserInput', 'type'=>'user', 'name'=>'UserId']]
+]];
+
+InsertDom('form', $form);
+?>
 
 <script>
 	var ContestId = <?=$v_contest['id']?>;

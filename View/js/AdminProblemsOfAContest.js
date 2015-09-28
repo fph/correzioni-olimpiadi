@@ -13,17 +13,18 @@ function RemoveProblemRequest(row) {
 
 function AddProblem(response) {
 	if (response.type == 'good') {
-		var problem = document.getElementById('ProblemInput').value;
+		var ProblemName = response.data['ProblemName'];
+		var ProblemId = response.data['ProblemId'];
 		AddRow(document.getElementById('AdminProblemsOfAContestTable'),
-		{	values: {'problem': problem},
-			data: {'problem_id': response.ProblemId}},
+		{	values: {'problem': ProblemName},
+			data: {'problem_id': ProblemId}},
 		'problem');
 	}
 }
 
-function AddProblemRequest() {
-	var problem = document.getElementById('ProblemInput').value;
-	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, name: problem, type: 'AddProblem'}, AddProblem);
+function AddProblemRequest(inputs) {
+	var ProblemName = inputs.namedItem('ProblemName').value;
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, name: ProblemName, type: 'AddProblem'}, AddProblem);
 }
 
 function Clear(row) {
@@ -39,8 +40,8 @@ function Clear(row) {
 	var TrashButtons = document.getElementsByClassName('TrashButtonContainer');
 	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.remove('hidden');
 
-	var InputButton = document.getElementById('InputButton');
-	InputButton.removeAttribute('disabled', 'disabled');
+	var AddProblemButton = document.getElementById('AddProblemButton');
+	AddProblemButton.removeAttribute('disabled', 'disabled');
 }
 
 function MakeChanges(response) {
@@ -85,6 +86,6 @@ function OnModification(row) {
 	var TrashButtons = document.getElementsByClassName('TrashButtonContainer');
 	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.add('hidden');
 
-	var InputButton = document.getElementById('InputButton');
-	InputButton.setAttribute('disabled', 'disabled');
+	var AddProblemButton = document.getElementById('AddProblemButton');
+	AddProblemButton.setAttribute('disabled', 'disabled');
 }

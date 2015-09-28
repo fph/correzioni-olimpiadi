@@ -120,7 +120,9 @@ function AddProblem($db, $ContestId, $name) {
 	}
 	
 	Query($db, QueryInsert('Problems', ['ContestId'=>$ContestId, 'name'=>$name]));
-	return ['type'=>'good', 'text'=>'Il problema è stato aggiunto con successo', 'ProblemId'=>$db->insert_id];
+	return ['type'=>'good', 'text'=>'Il problema è stato aggiunto con successo', 'data'=>[
+		'ProblemId'=>$db->insert_id, 'ProblemName'=>$name
+	]];
 }
 
 function RemoveProblem($db, $ProblemId) {

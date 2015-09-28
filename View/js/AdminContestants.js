@@ -13,10 +13,10 @@ function AddContestant(response) {
 	}
 }
 
-function AddContestantRequest() {
-	var surname = document.getElementById('SurnameInput').value;
-	var name = document.getElementById('NameInput').value;
-	var school = document.getElementById('SchoolInput').value;
-	var email = document.getElementById('EmailInput').value;
+function AddContestantRequest(inputs) {
+	var surname = inputs.namedItem('surname').value;
+	var name = inputs.namedItem('name').value;
+	var school = inputs.namedItem('school').value;
+	var email = inputs.namedItem('email').value;
 	MakeAjaxRequest('../Modify/ManageContestant.php', {surname: surname, name: name, school: school, email: email, type: 'add'}, AddContestant);
 }

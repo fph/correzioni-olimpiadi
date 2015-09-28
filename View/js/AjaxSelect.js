@@ -81,11 +81,12 @@ function RenderSelect(obj) {
 		this.classList.remove('AjaxSelectTextBad');
 	});
 	
-	var ValueSelect= document.createElement('input');
+	var ValueSelect = document.createElement('input');
 	ValueSelect.classList.add('AjaxSelectValue');
+	if (obj.name != null) ValueSelect.name = obj.name; 
 	
 	var ContainerDiv = document.createElement('div');
-	ContainerDiv.id=id;
+	ContainerDiv.id = id;
 	ContainerDiv.classList.add('AjaxSelectContainer');
 	
 	var OptionsDiv = document.createElement('div');

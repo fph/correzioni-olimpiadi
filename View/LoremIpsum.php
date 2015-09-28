@@ -7,9 +7,11 @@
 
 <?php InsertDom('select', ['id'=>'staminchia', 'type'=>'contest']); ?>
 
-<?php InsertDom('form', ['id'=>'staceppa', 'SubmitText'=>'Crepelle', 'SubmitFunction'=>'console.log(this)', 'inputs'=>[
-	['type'=>'text', 'title'=>'username'],
-	['type'=>'password', 'title'=>'password']
+<?php InsertDom('form', ['id'=>'staceppa', 'SubmitText'=>'Crepelle', 'SubmitFunction'=>'console.log(this.elements)', 'inputs'=>[
+	['type'=>'AjaxSelect', 'title'=>'AjaxamiStoCazzo', 'select'=>['id'=>'AjaxProva', 'type'=>'contest']],
+	['type'=>'date', 'title'=>'data di Natale', 'date'=>['id'=>'DataProva']],
+	['type'=>'text', 'title'=>'username', 'name'=>'user'],
+	['type'=>'password', 'title'=>'password', 'name'=>'password']
 ]]);?>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pulvinar, odio placerat mollis vulputate, metus ligula auctor nulla, ac tempus odio lectus ac eros. Ut nec libero purus. Suspendisse et justo ut metus vestibulum auctor eu adipiscing neque. Pellentesque sed dui quis nisi laoreet pellentesque. Vestibulum ut orci imperdiet, tincidunt dui eu, pulvinar purus. Cras vitae odio euismod dolor pellentesque porttitor. Aenean bibendum venenatis congue. Vestibulum pulvinar ultrices scelerisque. Quisque sodales a sem in scelerisque. Etiam blandit auctor sollicitudin. Nullam eu nibh vitae velit iaculis consectetur. Phasellus ligula eros, condimentum ac tortor id, mollis ultricies diam. Cras ut dui ligula.
 

@@ -37,21 +37,12 @@ InsertDom('table',  $table);
 	Aggiungi un partecipante
 </h3>
 
-<div class='FormContainer'>
-	<table>
-	<tr>
-		<th> Cognome </th>
-		<th> Nome </th>
-		<th> Scuola </th>
-		<th> Email </th>
-		<th> </th>
-	</tr>
-	<tr>
-		<td> <input type='text' name='surname' id='SurnameInput'> </td>
-		<td> <input type='text' name='name' id='NameInput'> </td>
-		<td> <input type='text' name='school' id='SchoolInput'> </td>
-		<td> <input type='text' name='email' id='EmailInput'> </td>
-		<td> <input type='button' value='Aggiungi' onclick='AddContestantRequest()'> </td>
-	</tr>
-	</table>
-</div>
+<?php
+$form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddContestantRequest(this.elements)', 'inputs'=>[
+	['type'=>'text', 'title'=>'Cognome', 'name'=>'surname'],
+	['type'=>'text', 'title'=>'Nome', 'name'=>'name'],
+	['type'=>'text', 'title'=>'Scuola', 'name'=>'school'],
+	['type'=>'text', 'title'=>'Email', 'name'=>'email']
+]];
+InsertDom('form', $form);
+?>

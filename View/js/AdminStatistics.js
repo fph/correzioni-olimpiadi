@@ -6,10 +6,10 @@ function DeletePreviousStatistics() {
 }
 
 //This function add the contests to the list of those which will be present in the statistics table
-function AddContestToStatistics() {
+function AddContestToStatistics(inputs) {
 	var contest = GetSelectText('ContestInput');
-	var weight = document.getElementById('WeightInput').value;
-	var ContestId = GetSelectValue('ContestInput');
+	var weight = inputs.namedItem('weight').value;
+	var ContestId = inputs.namedItem('ContestId').value;
 	//Maybe check if the contest is already present?
 	
 	AddRow(document.getElementById('AdminContestWeightTable'), {

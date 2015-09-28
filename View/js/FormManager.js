@@ -31,7 +31,7 @@ function RenderForm(obj) {
 		var InputObj = obj.inputs[i];
 		var input;
 		if (InputObj.type == 'AjaxSelect') {
-			input = RenderSelect(InputObj.select)
+			input = RenderSelect(InputObj.select);
 		}
 		else if (InputObj.type == 'date') {
 			input = RenderDate(InputObj.date);
@@ -39,8 +39,14 @@ function RenderForm(obj) {
 		else {
 			input = document.createElement('input');
 			input.type = InputObj.type;
-			for (var property in InputObj.properties) {
-				input.setAttribute(property, InputObj[property]);
+			input.name = InputObj.name;
+			
+			for (var property in InputObj) {
+				if (InputObj.hasOwnProperty(property)) {
+					if (property != 'type' && property != 'name') {
+						input.setAttribute(property, InputObj[property]);
+					}
+				}
 			}
 		}
 		var td = document.createElement('td');
@@ -50,6 +56,7 @@ function RenderForm(obj) {
 	var submit = document.createElement('input');
 	submit.type = 'submit';
 	if (obj.SubmitText != null) submit.value = obj.SubmitText;
+	if (obj.SubmitId != null) submit.id = obj.SubmitId;
 	MainTr.appendChild(submit);
 	
 	table.appendChild(MainTr);

@@ -22,7 +22,7 @@ global $v_contests;
 			'name'=> $contest['name'], 'blocked'=>'', 'date'=>$contest['date'] ]
 		];
 		if ($contest['blocked'] == 1) $row['values']['blocked'] = 'Correzioni terminate';
-		$rows[]=$row;
+		$rows[]= $row;
 	}
 	$table = ['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'AdminContestInformation', 'id'=> 'AdminContestsTable', 'InitialOrder'=>['ColumnId'=>'date'] ];
 	InsertDom('table',  $table);
@@ -32,19 +32,10 @@ global $v_contests;
 	Aggiungi una gara
 </h3>
 
-<div class='FormContainer'>
-	<table>
-	<tr>
-		<th> Nome </th>
-		<th> Data </th>
-		<th> </th>
-	</tr>
-	<tr>
-		<td> <input type='text' id='ContestInputName'> </td>
-		<td> 
-			<?php InsertDom('date', ['id'=>'ContestInputDate']); ?>
-		</td>
-		<td> <input type='button' value='Aggiungi' onclick='AddContestRequest()'> </td>
-	</tr>
-	</table>
-</div>
+<?php
+$form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddContestRequest(this.elements)', 'inputs'=>[
+	['type'=>'text', 'title'=>'Nome', 'name'=>'name'],
+	['type'=>'date', 'title'=>'Data', 'date'=>['id'=>'ContestInputDate', 'name'=>'date']]
+]];
+InsertDom('form', $form);
+?>

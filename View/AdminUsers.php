@@ -32,17 +32,10 @@ InsertDom('table',  $table);
 	Aggiungi un correttore
 </h3>
 
-<div class='FormContainer'>
-	<table>
-	<tr>
-		<th> Username </th>
-		<th>Password</th>
-		<th> </th>
-	</tr>
-	<tr>
-		<td> <input type='text' name='username' id='UsernameInput'> </td>
-		<td> <input type='text' name='password' id='PasswordInput'> </td>
-		<td> <input type='button' value='Aggiungi' onclick='AddUserRequest()'> </td>
-	</tr>
-	</table>
-</div>
+<?php
+$form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddUserRequest(this.elements)', 'inputs'=>[
+	['type'=>'text', 'title'=>'Username', 'name'=>'username'],
+	['type'=>'text', 'title'=>'Password', 'name'=>'password']
+]];
+InsertDom('form', $form);
+?>
