@@ -20,7 +20,7 @@ Indica la mail che hai inserito l'ultima volta che hai usato il sito.
 A tale mail ti verrà inviato un codice, che dovrai reinserire su questo sito, per mostrare di essere l'utente proprietario della mail.
 <?php
 $form = ['SubmitFunction'=>'SendCode(this)', 'SubmitText'=>'Invia codice di verifica', 'inputs'=>[
-	['type'=>'text', 'title'=>'Indirizzo email', 'name'=>'mail', 'placeholder'=>'user@domain.com']
+	['type'=>'email', 'title'=>'Indirizzo email', 'name'=>'email', 'placeholder'=>'user@domain.com']
 ]];
 
 InsertDom('form', $form);
@@ -46,29 +46,68 @@ InsertDom('form', $form);
 
 	<form id='ContestantInfo'>
 		<fieldset>
-		<legend>Dati personali</legend>
-			<label for='NameInput'>Nome</label> <input type='text' name='name' id='NameInput'> <br>
-			<label for='SurnameInput'>Cognome</label> <input type='text' name='surname' id='SurnameInput'> <br>
-			
-			<label for='EmailInput'>Indirizzo email</label> 
-			<input type='text' name='email' id='EmailInput'placeholder='user@domain.com'> A questo indirizzo verranno mandati i risultati delle correzioni del tuo elaborato e verrà usato per comunicare con te riguardo l'organizzazione dello stage nel caso in cui tu venga ammesso.
+			<legend>Dati personali</legend>
+			<table><tbody>
+				<tr>
+					<td>
+					<label for='NameInput'>Nome</label> 
+					</td>
+					<td>
+						<input type='text' name='name' id='NameInput'>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for='SurnameInput'>Cognome</label> 
+					</td>
+					<td>	
+						<input type='text' name='surname' id='SurnameInput'>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<label for='EmailInput'>Indirizzo email</label> 
+					</td>
+					<td>
+						<input type='email' name='email' id='EmailInput'placeholder='user@domain.com'> 
+					</td>
+					<td>
+						A questo indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
+					</td>
+				</tr>
+			</tbody></table>
 		</fieldset>
 		
 		<fieldset>
 		<legend>Scuola</legend>
-		<label for='SchoolInput'>Nome della scuola</label> 
-		<input type='text' name='school' id='SchoolInput'> <br>
-		
-		<label for='SchoolYearInput'>Indirizzo email</label> 
-		<select name='SchoolYear' id='SchoolYearInput'>
-			<option value='' style='display:none;'></option>
-			<option value='1'>Primo anno</option>
-			<option value='2'>Secondo anno</option>
-			<option value='3'>Terzo anno</option>
-			<option value='4'>Quarto anno</option>
-			<option value='5'>Quinto anno</option>
-		</select>
-		Se stai per iniziare il quarto anno allora indica il quarto anno. Se stai frequentando la seconda, allora indica il secondo anno. Se frequenti un liceo classico, indica l'anno dall'inizio del ginnasio (quindi quinto ginnasio coincide con secondo anno).
+		<table><tbody>
+			<tr>
+				<td>
+					<label for='SchoolInput'>Nome della scuola</label> 
+				</td>
+				<td>
+					<input type='text' name='school' id='SchoolInput' placeholder='Liceo Scientifico Garibaldi'> <br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='SchoolYearInput'>Anno di corso</label> 
+				</td>
+				<td>
+					<select name='SchoolYear' id='SchoolYearInput'>
+						<option value='' style='display:none;'></option>
+						<option value='1'>Primo anno</option>
+						<option value='2'>Secondo anno</option>
+						<option value='3'>Terzo anno</option>
+						<option value='4'>Quarto anno</option>
+						<option value='5'>Quinto anno</option>
+					</select>
+				</td>
+				<td>
+					Indica l'anno di corso che stai per iniziare o quello che stai frequentando. Se frequenti un liceo classico, indica l'anno dall'inizio del ginnasio (es. quinto ginnasio coincide con secondo anno).
+				</td>
+			</tr>
+		</tbody></table>
 		</fieldset>
 	</form>
 </div>

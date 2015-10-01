@@ -8,7 +8,7 @@ form#ContestantInfo {
 }
 
 form#ContestantInfo fieldset {
-	margin: 10px 0px;
+	margin: 15px 0px;
 	padding: 10px 20px;
 	background-color: #F3F3F3;
 	border-radius: 5px;
@@ -21,5 +21,30 @@ form#ContestantInfo legend {
 }
 
 form#ContestantInfo label {
-	
+	font-family: monospace;
+	font-size: 115%;
+}
+
+form#ContestantInfo td {
+	padding: 3px 2px;
+}
+
+form#ContestantInfo tr td:first-child {
+	width: 10em;
+}
+
+form#ContestantInfo tr td:nth-child(3) {
+	font-style: italic;
+	font-size: 80%;
+	padding-left: 1em;
+}
+
+form#ContestantInfo input {
+	padding: 5px;
+	border-radius:5px;
+}
+
+select#SchoolYearInput {
+	padding: 4px;
+	width: 100%;
 }
