@@ -18,9 +18,11 @@ $jsInclude = ['ViewParticipation'=>['CorrectionModification', 'ViewParticipation
 			'AdminContestInformation'=>['AdminContestInformation'],
 			'AdminContestantsOfAContest'=>['AdminContestantsOfAContest'],
 			'AdminUsersOfAContest'=>['AdminUsersOfAContest'],
-			'AdminStatistics'=>['AdminStatistics'] ];
+			'AdminStatistics'=>['AdminStatistics'],
+			'ParticipationRequest'=>['ParticipationRequest']];
 $cssInclude = ['AdminStatistics'=>['AdminStatistics'],
-			'ViewParticipation'=>['ViewParticipation'] ];
+			'ViewParticipation'=>['ViewParticipation'],
+			'ParticipationRequest'=>['ParticipationRequest'] ];
 
 global $DomInformation;
 $DomInformation = [

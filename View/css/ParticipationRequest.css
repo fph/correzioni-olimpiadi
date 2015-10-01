@@ -1,0 +1,25 @@
+div.ParticipationRequestDiv {
+	margin: 15px 0px;
+}
+
+form#ContestantInfo {
+	margin-top: 10px;
+	padding: 5px;
+}
+
+form#ContestantInfo fieldset {
+	margin: 10px 0px;
+	padding: 10px 20px;
+	background-color: #F3F3F3;
+	border-radius: 5px;
+	border: 1px solid forestgreen;
+}
+
+form#ContestantInfo legend {
+	color: forestgreen;
+	font-weight: bold;
+}
+
+form#ContestantInfo label {
+	
+}
