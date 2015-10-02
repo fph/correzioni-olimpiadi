@@ -46,36 +46,36 @@ InsertDom('form', $form);
 
 	<form id='ContestantInfo'>
 		<fieldset>
-			<legend>Dati personali</legend>
-			<table><tbody>
-				<tr>
-					<td>
-					<label for='NameInput'>Nome</label> 
-					</td>
-					<td>
-						<input type='text' name='name' id='NameInput'>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for='SurnameInput'>Cognome</label> 
-					</td>
-					<td>	
-						<input type='text' name='surname' id='SurnameInput'>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<label for='EmailInput'>Indirizzo email</label> 
-					</td>
-					<td>
-						<input type='email' name='email' id='EmailInput'placeholder='user@domain.com'> 
-					</td>
-					<td>
-						A questo indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
-					</td>
-				</tr>
-			</tbody></table>
+		<legend>Dati personali</legend>
+		<table><tbody>
+			<tr>
+				<td>
+				<label for='NameInput'>Nome</label> 
+				</td>
+				<td>
+					<input type='text' name='name' id='NameInput'>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='SurnameInput'>Cognome</label> 
+				</td>
+				<td>	
+					<input type='text' name='surname' id='SurnameInput'>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<label for='EmailInput'>Indirizzo email</label> 
+				</td>
+				<td>
+					<input type='email' name='email' id='EmailInput'placeholder='user@domain.com'> 
+				</td>
+				<td>
+					A questo indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
+				</td>
+			</tr>
+		</tbody></table>
 		</fieldset>
 		
 		<fieldset>
@@ -109,24 +109,80 @@ InsertDom('form', $form);
 			</tr>
 		</tbody></table>
 		</fieldset>
+		
+		<fieldset>
+		<legend>Stage</legend>
+		<table><tbody>
+			<tr>
+				<td>
+					<label for='StagesNumberInput'>Numero di stage</label> 
+				</td>
+				<td>
+					<input type='number' min='0' step='1' name='StagesNumber' id='StagesNumberInput'>
+				</td>
+				<td>
+					Indica a quanti stage a Pisa (senior, winter camp o preIMO) hai già partecipato.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='ContestChoiceInput'>Nome stage o tipo di esercizi</label> 
+				</td>
+				<td>
+					<select name='ContestChoice' id='ContestChoiceInput'>
+						<option value='' style='display:none;'></option>
+						<option value='contestid1'>Winter camp 2016</option>
+						<option value='contestid2'>preIMO 2016</option>
+					</select>
+				</td>
+				<td>
+					Indica a quale stage vuoi partecipare e, se necessario, quali esercizi hai dovuto risolvere.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='PaidVolunteerInput'>Spesato o volontario</label> 
+				</td>
+				<td>
+					<select name='PaidVolunteer' id='PaidVolunteerInput'>
+						<option value='' style='display:none;'></option>
+						<option value='paid'>Spesato</option>
+						<option value='volunteer'>Volontario</option>
+					</select>
+				</td>
+				<td>
+					Spesato vuol dire che sei tra coloro che avranno vitto e alloggio pagati dall'organizzazione.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='ExercisesInput'>Esercizi per l'ammissione</label> 
+				</td>
+				<td>
+					<input type='file' accept='.pdf' name='Exercises' id='ExercisesInput'>
+				</td>
+				<td>
+					Devi uploadare un documento in pdf, di dimensione minore di 10mb, contenente le tue soluzioni agli esercizi d'ammissione.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='VolunteerRequestInput'>Domanda di partecipazione</label> 
+				</td>
+				<td>
+					<input type='file' accept='.pdf' name='VolunteerRequest' id='VolunteerRequestInput'>
+				</td>
+				<td>
+					Devi uploadare un documento in pdf, di dimensione minore di 10mb, contenente la richiesta di partecipazione come volontario.
+				</td>
+			</tr>
+		</tbody></table>
+		
+		</fieldset>
+		<input type='submit' value='Invia richiesta di partecipazione'>
 	</form>
 </div>
 
-<!--
-<div class='FormContainer'>
-	<form class='UserForm' id='LoginForm' method='POST' action='Login.php'>
-		<table>
-		<tr>
-			<th> Username</th>
-			<th> Password</th>
-			<th> </th>
-		</tr>
-		<tr>
-			<td> <input type='text' name='username'> </td>
-			<td> <input type='password' name='password'> </td>
-			<td> <input type='submit' value='Login'> </td>
-		</tr>
-		</table>
-	</form>
+<div>
+	
 </div>
--->

@@ -30,7 +30,12 @@ form#ContestantInfo td {
 }
 
 form#ContestantInfo tr td:first-child {
-	width: 10em;
+	width: 13em;
+}
+
+
+form#ContestantInfo tr td:nth-child(2) {
+	width: 15em;
 }
 
 form#ContestantInfo tr td:nth-child(3) {
@@ -39,12 +44,20 @@ form#ContestantInfo tr td:nth-child(3) {
 	padding-left: 1em;
 }
 
-form#ContestantInfo input {
-	padding: 5px;
-	border-radius:5px;
+form#ContestantInfo input[type='submit'] {
+	width: 100%;
+	padding: 10px;
+	font-weight: bold;
 }
 
-select#SchoolYearInput {
+form#ContestantInfo input:not([type='submit']):not([type='button']) {
+	padding: 5px;
+	border-radius:5px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+form#ContestantInfo select {
 	padding: 4px;
 	width: 100%;
 }
