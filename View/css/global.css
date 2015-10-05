@@ -7,7 +7,7 @@ html,body {
 }
 
 body {
-	background: #F6F4F0;
+	background: #F6F4F0 url('../Images/BackgroundTexture.png') repeat top left;
 	margin: 0px;
 	font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Sans-Serif';
 }
