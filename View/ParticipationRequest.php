@@ -19,7 +19,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo mail@
 Indica la mail che hai inserito l'ultima volta che hai usato il sito.
 A tale mail ti verrà inviato un codice, che dovrai reinserire su questo sito, per mostrare di essere l'utente proprietario della mail.
 <?php
-$form = ['SubmitFunction'=>'SendCode(this)', 'SubmitText'=>'Invia codice di verifica', 'inputs'=>[
+$form = ['SubmitFunction'=>'SendCode(this.elements)', 'SubmitText'=>'Invia codice di verifica', 'inputs'=>[
 	['type'=>'email', 'title'=>'Indirizzo email', 'name'=>'email', 'placeholder'=>'user@domain.com']
 ]];
 
@@ -33,8 +33,9 @@ Quando ti arriva la mail contenente il codice di verifica, inserisci tale codice
 Se il codice non dovesse arrivarti entro una decina di minuti, riprova.
 -->
 <?php
-$form = ['SubmitFunction'=>'CheckCode(this)', 'SubmitText'=>'Controlla il codice', 'inputs'=>[
-	['type'=>'text', 'title'=>'Codice di verifica', 'name'=>'code']
+$form = ['id'=>'CheckCodeForm', 'SubmitFunction'=>'CheckCode(this.elements)', 'SubmitText'=>'Controlla il codice', 'inputs'=>[
+	['type'=>'text', 'title'=>'Codice di verifica', 'name'=>'code'],
+	['type'=>'hidden', 'title'=>'FIXME', 'name'=>'email']
 ]];
 
 InsertDom('form', $form);

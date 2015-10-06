@@ -133,6 +133,17 @@ function CreateDatabase() {
 	) ENGINE=InnoDB';
 	Query($db, $query);
 	echo 'Table Corrections created.'.NewLine();
+	
+	$query=
+	'CREATE TABLE IF NOT EXISTS `VerificationCodes` (
+		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
+		`code` char(6) NOT NULL,
+		`timestamp` timestamp NOT NULL,
+		
+		PRIMARY KEY (`email`)
+	) ENGINE=InnoDB';
+	Query($db, $query);
+	echo 'Table VerificationCodes created.'.NewLine();
 
 	echo 'All tables have been created'.NewLine().NewLine();
 	$db->close();
@@ -350,6 +361,7 @@ PopulateContestants($db);
 PopulateParticipations($db);
 PopulateProblems($db);
 PopulateCorrections($db); //It's slow... it's not a problem.
+// TODO: PopulateVerificationCodes
 echo 'All tables have been populated.'.NewLine().NewLine();
 
 $db->close();
