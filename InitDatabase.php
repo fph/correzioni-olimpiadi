@@ -137,7 +137,7 @@ function CreateDatabase() {
 	$query=
 	'CREATE TABLE IF NOT EXISTS `VerificationCodes` (
 		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
-		`code` char(6) NOT NULL,
+		`code` char(12) NOT NULL,
 		`timestamp` timestamp NOT NULL,
 		
 		PRIMARY KEY (`email`)

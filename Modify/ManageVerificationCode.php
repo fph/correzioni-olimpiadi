@@ -5,10 +5,17 @@
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
 	function SendCode($db, $ContestantEmail) {
-		// FIXME: The use of mt_rand is not secure
-		$code = crypt($ContestantEmail, '$5$'.mt_rand(1000000, 9999999)); // SHA-256 hash
-		$code = substr($code, 11, 7); // The first 11 chars are the seed
-		$code = substr(base64_encode($code), 0, 6); // In order to have only alphanumeric chars
+		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail]));
+		
+		if (!is_null($row)) {
+			$timestamp = new Datetime($row['timestamp']);
+			$timestamp->add(new DateInterval('PT10M')); // sums 10 minutes to the timestamp
+			if (new Datetime('now') < $timestamp) {
+				return ['type'=>'bad', 'text'=>'Prima di poter inviare un altro codice devono passare 10 minuti'];
+			}
+		}
+		
+		$code = bin2hex(openssl_random_pseudo_bytes(6));		
 				
 		$MailText = 'Il codice di verifica che devi inserire sul sito <strong>Correzioni Olimpiadi</strong> è:<br>';
 		$MailText .= '<big>'.$code.'</big><br><br>';
@@ -51,9 +58,10 @@
 	function CheckCode($db, $ContestantEmail, $code) {
 		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail, 'code'=>$code]));
 		if (is_null($row)) return ['type'=>'bad', 'text'=>'Il codice di verifica non è corretto'];
+		
 		$timestamp = new Datetime($row['timestamp']);
-		$DiffHours = $timestamp->diff(new Datetime('now'))->format('%h');
-		if ($DiffHours >= 6) return ['type'=>'bad', 'text'=>'Il codice di verifica è scaduto'];
+		$timestamp->add(new DateInterval('PT6H')); // sums 6 hours to the timestamp
+		if (new Datetime('now') > $timestamp) return ['type'=>'bad', 'text'=>'Il codice di verifica è scaduto'];
 		
 		return ['type'=>'good', 'text'=>'Il codice di verifica è corretto'];
 	}
