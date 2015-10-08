@@ -35,17 +35,19 @@ Se il codice non dovesse arrivarti entro una decina di minuti, riprova.
 <?php
 $form = ['id'=>'CheckCodeForm', 'SubmitFunction'=>'CheckCode(this.elements)', 'SubmitText'=>'Controlla il codice', 'inputs'=>[
 	['type'=>'text', 'title'=>'Codice di verifica', 'name'=>'code'],
-	['type'=>'hidden', 'title'=>'FIXME', 'name'=>'email']
+	['type'=>'text', 'name'=>'email']
 ]];
 
 InsertDom('form', $form);
 ?>
 </div>
 
-<div class='ParticipationRequestDiv'>
-	Compila il seguente questionario. I dati saranno trattati con la massima riservatezza ed usati unicamente per gestire le ammissioni allo stage ed il suo svolgimento. 
+<div class='ContestantInfoDiv'>
+	Compila il seguente questionario. 
+	I dati saranno trattati con la massima riservatezza ed usati unicamente per gestire le ammissioni allo stage ed il suo svolgimento. 
 
-	<form id='ContestantInfo'>
+	<form id='ContestantInfo' class='BigForm' onsubmit='CreateContestant(this.elements); return false'>
+		<input type='hidden' name='code'>
 		<fieldset>
 		<legend>Dati personali</legend>
 		<table><tbody>
@@ -76,12 +78,6 @@ InsertDom('form', $form);
 					A questo indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
 				</td>
 			</tr>
-		</tbody></table>
-		</fieldset>
-		
-		<fieldset>
-		<legend>Scuola</legend>
-		<table><tbody>
 			<tr>
 				<td>
 					<label for='SchoolInput'>Nome della scuola</label> 
@@ -105,12 +101,18 @@ InsertDom('form', $form);
 					</select>
 				</td>
 				<td>
-					Indica l'anno di corso che stai per iniziare o quello che stai frequentando. Se frequenti un liceo classico, indica l'anno dall'inizio del ginnasio (es. quinto ginnasio coincide con secondo anno).
+					Indica l'anno di corso che devi iniziare (se è Estate) o quello che stai frequentando. Se frequenti un liceo classico, indica l'anno dall'inizio del ginnasio (es. quinto ginnasio coincide con secondo anno).
 				</td>
 			</tr>
 		</tbody></table>
 		</fieldset>
-		
+		<input type='submit' value='Registra i miei dati'>
+	</form>
+	
+</div>
+
+<div id='ParticipationInfoDiv'>
+	<form id='ParticipationInfo' class='BigForm'>
 		<fieldset>
 		<legend>Stage</legend>
 		<table><tbody>

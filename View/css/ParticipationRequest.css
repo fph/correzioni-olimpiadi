@@ -2,12 +2,12 @@ div.ParticipationRequestDiv {
 	margin: 15px 0px;
 }
 
-form#ContestantInfo {
+form.BigForm {
 	margin-top: 10px;
 	padding: 5px;
 }
 
-form#ContestantInfo fieldset {
+form.BigForm fieldset {
 	margin: 15px 0px;
 	padding: 10px 20px;
 	background-color: #F3F3F3;
@@ -15,49 +15,49 @@ form#ContestantInfo fieldset {
 	border: 1px solid forestgreen;
 }
 
-form#ContestantInfo legend {
+form.BigForm legend {
 	color: forestgreen;
 	font-weight: bold;
 }
 
-form#ContestantInfo label {
+form.BigForm label {
 	font-family: monospace;
 	font-size: 115%;
 }
 
-form#ContestantInfo td {
+form.BigForm td {
 	padding: 3px 2px;
 }
 
-form#ContestantInfo tr td:first-child {
+form.BigForm tr td:first-child {
 	width: 13em;
 }
 
 
-form#ContestantInfo tr td:nth-child(2) {
+form.BigForm tr td:nth-child(2) {
 	width: 15em;
 }
 
-form#ContestantInfo tr td:nth-child(3) {
+form.BigForm tr td:nth-child(3) {
 	font-style: italic;
 	font-size: 80%;
 	padding-left: 1em;
 }
 
-form#ContestantInfo input[type='submit'] {
+form.BigForm input[type='submit'] {
 	width: 100%;
 	padding: 10px;
 	font-weight: bold;
 }
 
-form#ContestantInfo input:not([type='submit']):not([type='button']) {
+form.BigForm input:not([type='submit']):not([type='button']) {
 	padding: 5px;
 	border-radius:5px;
 	width: 100%;
 	box-sizing: border-box;
 }
 
-form#ContestantInfo select {
+form.BigForm select {
 	padding: 4px;
 	width: 100%;
 }

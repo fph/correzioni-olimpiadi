@@ -65,7 +65,7 @@
 		$timestamp->add(new DateInterval('PT6H')); // sums 6 hours to the timestamp
 		if (new Datetime('now') > $timestamp) return ['type'=>'bad', 'text'=>'Il codice di verifica è scaduto'];
 		
-		return ['type'=>'good', 'text'=>'Il codice di verifica è corretto'];
+		return ['type'=>'good', 'text'=>'Il codice di verifica è corretto', 'data'=>['email'=>$ContestantEmail, 'code'=>$code]];
 	}
 	
 	$db= OpenDbConnection();
