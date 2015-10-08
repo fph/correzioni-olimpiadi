@@ -5,6 +5,8 @@
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
 	function SendCode($db, $ContestantEmail) {
+		if (!filter_var($ContestantEmail)) return ['type'=>'bad', 'text'=>'L\'email inserita non è valida'];
+		
 		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail]));
 		
 		if (!is_null($row)) {
