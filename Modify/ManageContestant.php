@@ -43,7 +43,6 @@ function RemoveContestant($db, $ContestantId) {
 }
 
 function AddParticipation($db, $ContestantId, $ContestId) {
-	
 	$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	if (is_null($contestant)) {
 		return ['type'=>'bad', 'text'=>'Il partecipante selezionato non esiste'];

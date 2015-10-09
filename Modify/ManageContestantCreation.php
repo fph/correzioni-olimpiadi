@@ -75,11 +75,16 @@ $data = json_decode($_POST['data'], 1);
 $row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$data['email'], 'code'=>$data['code']]));
 if (is_null($row)) {
 	SendObject(['type'=>'bad', 'text'=>'Il codice di verifica non è corretto']);
+	$db->close();
 	die();
 }
 $timestamp = new Datetime($row['timestamp']);
 $timestamp->add(new DateInterval('PT6H')); // sums 6 hours to the timestamp
-if (new Datetime('now') > $timestamp) SendObject(['type'=>'bad', 'text'=>'Il codice di verifica è scaduto']);
+if (new Datetime('now') > $timestamp) {
+	SendObject(['type'=>'bad', 'text'=>'Il codice di verifica è scaduto']);
+	$db->close();
+	die();
+}
 
 // Contestant validation and creation
 SendObject(CreateContestant($db, $data['name'], $data['surname'], $data['school'], $data['email'], $data['SchoolYear']));

@@ -32,6 +32,20 @@ function CreateContestant(inputs) {
 	var email = inputs.namedItem('email').value;
 	var SchoolYear = inputs.namedItem('SchoolYear').value;
 	var code = inputs.namedItem('code').value;
+	MakeAjaxRequest('../Modify/ManageContestantCreation.php', {name: name, surname: surname, school: school, email: email, SchoolYear: SchoolYear, code: code});
+}
+
+
+function CreateParticipation(form) {
+	// var ContestantId = inputs.namedItem('ContestantId').value;
+	// var ContestId = inputs.namedItem('ContestId').value;
+	// var StagesNumber = inputs.namedItem('StagesNumber').value;
+	// var code = inputs.namedItem('code').value;
 	
-	MakeAjaxRequest('../Modify/ManageContestantCreation.php', {name: name, surname: surname, school: school, email: email, SchoolYear: SchoolYear, code:code});
+	// var solutions = inputs.namedItem('solutions').files[0];
+	// formData.append('solutions', solutions, solutions.name);
+	
+	// var xxx = new FormData(form);
+	var ParticipationData = new FormData(form);
+	MakeAjaxRequest('../Modify/ManageParticipationCreation.php', ParticipationData, null, null, true);
 }

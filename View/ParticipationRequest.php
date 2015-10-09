@@ -112,7 +112,9 @@ InsertDom('form', $form);
 </div>
 
 <div id='ParticipationInfoDiv'>
-	<form id='ParticipationInfo' class='BigForm'>
+	<form id='ParticipationInfo' enctype='multipart/form-data' class='BigForm' onsubmit='CreateParticipation(this); return false'>
+		<input type='text' name='ContestantId'>
+		<input type='text' name='code'>
 		<fieldset>
 		<legend>Stage</legend>
 		<table><tbody>
@@ -129,13 +131,13 @@ InsertDom('form', $form);
 			</tr>
 			<tr>
 				<td>
-					<label for='ContestChoiceInput'>Nome stage o tipo di esercizi</label> 
+					<label for='ContestIdInput'>Nome stage o tipo di esercizi</label> 
 				</td>
 				<td>
-					<select name='ContestChoice' id='ContestChoiceInput'>
+					<select name='ContestId' id='ContestIdInput'>
 						<option value='' style='display:none;'></option>
-						<option value='contestid1'>Winter camp 2016</option>
-						<option value='contestid2'>preIMO 2016</option>
+						<option value='5'>Winter camp 2016</option>
+						<option value='45'>preIMO 2016</option>
 					</select>
 				</td>
 				<td>
@@ -159,10 +161,10 @@ InsertDom('form', $form);
 			</tr>
 			<tr>
 				<td>
-					<label for='ExercisesInput'>Esercizi per l'ammissione</label> 
+					<label for='SolutionsInput'>Esercizi per l'ammissione</label> 
 				</td>
 				<td>
-					<input type='file' accept='.pdf' name='Exercises' id='ExercisesInput'>
+					<input type='file' accept='.pdf' name='solutions' id='SolutionsInput'>
 				</td>
 				<td>
 					Devi uploadare un documento in pdf, di dimensione minore di 10mb, contenente le tue soluzioni agli esercizi d'ammissione.

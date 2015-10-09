@@ -1,10 +1,15 @@
-function MakeAjaxRequest(url, data, exec, NoMessage) {
+function MakeAjaxRequest(url, data, exec, NoMessage, FormData) {
 	var ajaxReq;
 	if (window.XMLHttpRequest) ajaxReq = new XMLHttpRequest();
 	else ajaxReq = new ActiveXObject('Microsoft.XMLHTTP');
 	ajaxReq.open('POST', url, true);
-	ajaxReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	ajaxReq.send('data='+encodeURIComponent(JSON.stringify(data)));
+
+	if (FormData) ajaxReq.send(data);
+	else {
+		ajaxReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		ajaxReq.send('data='+encodeURIComponent(JSON.stringify(data)));
+	}
+	
 	document.getElementsByTagName('html')[0].classList.add('CursorWait');
 	ajaxReq.onreadystatechange = function() {
 		if (ajaxReq.readyState == 4 && ajaxReq.status == 200) {
