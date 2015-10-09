@@ -137,7 +137,7 @@ InsertDom('form', $form);
 					<select name='ContestId' id='ContestIdInput'>
 						<option value='' style='display:none;'></option>
 						<option value='5'>Winter camp 2016</option>
-						<option value='45'>preIMO 2016</option>
+						<option value='3'>preIMO 2016</option>
 					</select>
 				</td>
 				<td>

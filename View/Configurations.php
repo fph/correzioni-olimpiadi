@@ -31,7 +31,8 @@ $ConfigurationsNames = [
 	'ContestantSchool_MAXLength',
 	'ContestantEmail_MAXLength',
 	'ProblemName_MAXLength',
-	'comment_MAXLength'
+	'comment_MAXLength',
+	'PdfSize_MAX'
 ];
 
 $rows = [];

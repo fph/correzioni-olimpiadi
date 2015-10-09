@@ -39,10 +39,10 @@ function CreateParticipation($db, $ContestantId, $ContestId, $PdfFile) {
 	
 	// Choosing filename
 	$PdfName = bin2hex(openssl_random_pseudo_bytes(6));	
-	while (file_exists('../uploads/'.$PdfName.'.pdf')) $PdfName = bin2hex(openssl_random_pseudo_bytes(6));
+	while (file_exists(UploadDirectory.$PdfName.'.pdf')) $PdfName = bin2hex(openssl_random_pseudo_bytes(6));
 	
 	// Saving the uploaded file in the correct position
-	if (!move_uploaded_file($PdfFile['tmp_name'], '../uploads/'.$PdfName.'.pdf')) {
+	if (!move_uploaded_file($PdfFile['tmp_name'], UploadDirectory.$PdfName.'.pdf')) {
 		return ['type'=>'bad', 'text'=>'C\'è stato un errore nella gestione del file delle soluzioni'];
 	}
 	
