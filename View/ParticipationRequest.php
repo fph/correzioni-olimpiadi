@@ -16,10 +16,10 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo mail@
 </div>
 
 <div class='ParticipationRequestDiv'>
-<p id='NewContestantEmail'>
+<p class='Newuser'>
 	Inserisci il tuo indirizzo email. A tale indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
 </p>
-<p id='OldContestantEmail'>
+<p class='OldUser'>
 	Indica l'indirizzo email che hai inserito l'ultima volta che hai usato il sito.
 </p>
 A tale indirizzo ti verrà inviato un codice, che dovrai reinserire su questo sito, per mostrare di essere l'utente proprietario della mail.
@@ -42,7 +42,7 @@ Se il codice non dovesse arrivarti entro una decina di minuti, riprova.
 $form = ['id'=>'CheckCodeForm', 'SubmitFunction'=>'CheckCode(this.elements)', 'SubmitText'=>'Controlla il codice', 'inputs'=>[
 	['type'=>'hidden', 'name'=>'OldUser'],
 	['type'=>'text', 'title'=>'Codice di verifica', 'name'=>'code'],
-	['type'=>'text', 'name'=>'email']
+	['type'=>'hidden', 'name'=>'email']
 ]];
 
 InsertDom('form', $form);
@@ -50,14 +50,12 @@ InsertDom('form', $form);
 </div>
 
 <div class='ContestantInfoDiv'>
-	Compila il seguente questionario. 
+	<p class='NewUser'>Compila il seguente questionario.</p>
+	<p class='OldUser'>Conferma i seguenti dati oppure modificali se non sono corretti.</p>
 	I dati saranno trattati con la massima riservatezza ed usati unicamente per gestire le ammissioni allo stage ed il suo svolgimento. 
 
 	<form id='ContestantInfo' class='BigForm' onsubmit='CreateContestant(this.elements); return false'>
-<!--
 		<input type='hidden' name='OldUser'>
-		<input type='hidden' name='ContestantId'>
--->
 		<input type='hidden' name='code'>
 		<fieldset>
 		<legend>Dati personali</legend>
@@ -83,7 +81,7 @@ InsertDom('form', $form);
 				<label for='EmailInput'>Indirizzo email</label> 
 				</td>
 				<td>
-					<input type='email' name='email' id='EmailInput'placeholder='user@domain.com'> 
+					<input type='email' name='email' id='EmailInput' placeholder='user@domain.com' disabled='disabled'> 
 				</td>
 				<td>
 					A questo indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
@@ -124,8 +122,8 @@ InsertDom('form', $form);
 
 <div id='ParticipationInfoDiv'>
 	<form id='ParticipationInfo' enctype='multipart/form-data' class='BigForm' onsubmit='CreateParticipation(this); return false'>
-		<input type='text' name='ContestantId'>
-		<input type='text' name='code'>
+		<input type='hidden' name='ContestantId'>
+		<input type='hidden' name='code'>
 		<fieldset>
 		<legend>Stage</legend>
 		<table><tbody>

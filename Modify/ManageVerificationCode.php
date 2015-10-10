@@ -23,6 +23,7 @@
 		if (!is_null($row)) {
 			$timestamp = new Datetime($row['timestamp']);
 			$timestamp->add(new DateInterval('PT10M')); // sums 10 minutes to the timestamp
+			//DEBUG: Comment following lines
 			if (new Datetime('now') < $timestamp) {
 				return ['type'=>'bad', 'text'=>'Prima di poter inviare un altro codice devono passare 10 minuti'];
 			}
@@ -94,7 +95,6 @@
 			$SchoolYear = $CurrentYear + (5 - $LastOlympicYear) + (($CurrentMonth >= 6)?1:0);
 			
 			$data = [
-				'ContestantId'=>$row['id'],
 				'name'=>$row['name'],
 				'surname'=>$row['surname'],
 				'school'=>$row['school'],

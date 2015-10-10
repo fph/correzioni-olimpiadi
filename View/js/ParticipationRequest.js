@@ -1,12 +1,14 @@
 function SetOldUser(val) {
 	document.getElementById('SendCodeForm').elements.namedItem('OldUser').value = val;
 	document.getElementById('CheckCodeForm').elements.namedItem('OldUser').value = val;
+	document.getElementById('ContestantInfo').elements.namedItem('OldUser').value = val;
 }
 
 function CodeSent(response) {
 	if (response.type == 'good') {
 		var email = response.data['email'];
 		document.getElementById('CheckCodeForm').elements.namedItem('email').value = email;
+		document.getElementById('ContestantInfo').elements.namedItem('email').value = email;
 	}
 }
 
@@ -22,7 +24,6 @@ function CodeConfirmed(response) {
 		var ContestantInputs = document.getElementById('ContestantInfo').elements;
 		var email = response.data['email'];
 		var code = response.data['code'];
-		ContestantInputs.namedItem('email').value = email;
 		ContestantInputs.namedItem('code').value = code;
 		document.getElementById('ParticipationInfo').elements.namedItem('code').value = code;
 		if (response.data['OldUser']) {
@@ -35,7 +36,6 @@ function CodeConfirmed(response) {
 			ContestantInputs.namedItem('surname').value = surname;
 			ContestantInputs.namedItem('school').value = school;
 			ContestantInputs.namedItem('SchoolYear').value = SchoolYear;
-			document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = ContestantId;
 		}
 	}
 }
@@ -47,6 +47,12 @@ function CheckCode(inputs) {
 	MakeAjaxRequest('../Modify/ManageVerificationCode.php', {email: email, code: code, OldUser: OldUser, type: 'check'}, CodeConfirmed);
 }
 
+function ContestantCreated(response) {
+	if (response.type=='good') {
+		document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = response.data['ContestantId'];
+	}
+}
+
 function CreateContestant(inputs) {
 	var name = inputs.namedItem('name').value;
 	var surname = inputs.namedItem('surname').value;
@@ -54,7 +60,9 @@ function CreateContestant(inputs) {
 	var email = inputs.namedItem('email').value;
 	var SchoolYear = inputs.namedItem('SchoolYear').value;
 	var code = inputs.namedItem('code').value;
-	MakeAjaxRequest('../Modify/ManageContestantCreation.php', {name: name, surname: surname, school: school, email: email, SchoolYear: SchoolYear, code: code});
+	var OldUser = inputs.namedItem('OldUser').value;
+	
+	MakeAjaxRequest('../Modify/ManageContestantCreation.php', {name: name, surname: surname, school: school, email: email, SchoolYear: SchoolYear, code: code, OldUser: OldUser}, ContestantCreated);
 }
 
 
