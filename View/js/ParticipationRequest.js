@@ -37,6 +37,9 @@ function CodeConfirmed(response) {
 			ContestantInputs.namedItem('school').value = school;
 			ContestantInputs.namedItem('SchoolYear').value = SchoolYear;
 		}
+		
+		document.getElementById('ContestantInfoDiv').classList.remove('BeforeForm');
+		document.getElementById('ContestantInfoDiv').classList.add('ShowingForm');
 	}
 }
 
@@ -51,6 +54,12 @@ function ContestantCreated(response) {
 	if (response.type=='good') {
 		document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = response.data['ContestantId'];
 	}
+	// DEBUG
+	document.getElementById('ContestantInfoDiv').classList.remove('ShowingForm');
+	document.getElementById('ContestantInfoDiv').classList.add('AfterForm');
+	
+	document.getElementById('ParticipationInfoDiv').classList.remove('BeforeForm');
+	document.getElementById('ParticipationInfoDiv').classList.add('ShowingForm');
 }
 
 function CreateContestant(inputs) {
