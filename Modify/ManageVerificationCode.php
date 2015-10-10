@@ -4,11 +4,22 @@
 	require PHPMailerPath; // PhpMailer library
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
-	function SendCode($db, $ContestantEmail) {
-		if (!filter_var($ContestantEmail)) return ['type'=>'bad', 'text'=>'L\'email inserita non è valida'];
+	function SendCode($db, $ContestantEmail, $OldUser) {
+		if (!filter_var($ContestantEmail, FILTER_VALIDATE_EMAIL)) {
+			return ['type'=>'bad', 'text'=>'L\'email inserita non è valida'];
+		}
+		
+		$row = OneResultQuery($db, QuerySelect('Contestants', ['email'=>$ContestantEmail]));
+		
+		if (is_null($row) and $OldUser) {
+			return ['type'=>'bad', 'text'=>'L\'email inserita non è registrata su questo sito'];
+		}
+		
+		if (!is_null($row) and !$OldUser) {
+			return ['type'=>'bad', 'text'=>'L\'email è già usata da un partecipante'];
+		}
 		
 		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail]));
-		
 		if (!is_null($row)) {
 			$timestamp = new Datetime($row['timestamp']);
 			$timestamp->add(new DateInterval('PT10M')); // sums 10 minutes to the timestamp
@@ -57,22 +68,51 @@
 		return ['type'=>'good', 'text'=>'Codice inviato con successo', 'data'=>['email'=>$ContestantEmail]];
 	}
 
-	function CheckCode($db, $ContestantEmail, $code) {
+	function CheckCode($db, $ContestantEmail, $code, $OldUser) {
 		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail, 'code'=>$code]));
-		if (is_null($row)) return ['type'=>'bad', 'text'=>'Il codice di verifica non è corretto'];
+		if (is_null($row)) {
+			return ['type'=>'bad', 'text'=>'Il codice di verifica non è corretto'];
+		}
 		
 		$timestamp = new Datetime($row['timestamp']);
 		$timestamp->add(new DateInterval('PT6H')); // sums 6 hours to the timestamp
-		if (new Datetime('now') > $timestamp) return ['type'=>'bad', 'text'=>'Il codice di verifica è scaduto'];
-		
-		return ['type'=>'good', 'text'=>'Il codice di verifica è corretto', 'data'=>['email'=>$ContestantEmail, 'code'=>$code]];
+		if (new Datetime('now') > $timestamp) {
+			return ['type'=>'bad', 'text'=>'Il codice di verifica è scaduto'];
+		}
+		$data = ['email'=>$ContestantEmail, 'code'=>$code, 'OldUser'=>false];
+		if ($OldUser) {
+			$row = OneResultQuery($db, QuerySelect('Contestants', ['email'=>$ContestantEmail]));
+			if (is_null($row)) {
+				return ['type'=>'bad', 'text'=>'Non ci sono i dati relativi a tale email'];
+			}
+			
+			// Calculation of SchoolYear
+			$LastOlympicYear = $row['LastOlympicYear'];
+			$NowTime = new Datetime('now');
+			$CurrentYear = intval($NowTime->format('Y'));
+			$CurrentMonth = intval($NowTime->format('m'));
+			$SchoolYear = $CurrentYear + (5 - $LastOlympicYear) + (($CurrentMonth >= 6)?1:0);
+			
+			$data = [
+				'ContestantId'=>$row['id'],
+				'name'=>$row['name'],
+				'surname'=>$row['surname'],
+				'school'=>$row['school'],
+				'email'=>$row['email'],
+				'SchoolYear'=>$SchoolYear,
+				'code'=>$code,
+				'OldUser'=>true
+			];
+		}
+			
+		return ['type'=>'good', 'text'=>'Il codice di verifica è corretto', 'data'=>$data];
 	}
 	
 	$db= OpenDbConnection();
 	$data = json_decode($_POST['data'], 1);
 	
-	if ($data['type'] == 'send') SendObject(SendCode($db, $data['email']));
-	else if ($data['type'] == 'check') SendObject(CheckCode($db, $data['email'], $data['code']));
+	if ($data['type'] == 'send') SendObject(SendCode($db, $data['email'], $data['OldUser']));
+	else if ($data['type'] == 'check') SendObject(CheckCode($db, $data['email'], $data['code'], $data['OldUser']));
 	else SendObject(['type'=>'bad', 'text'=>'L\'azione scelta non esiste']);
 	
 	$db->close();

@@ -8,7 +8,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo mail@
 
 <div class='ParticipationRequestDiv'>
 	Hai mai usato questo sito? 
-	<select name='AlreadyRegistered' onchange='console.log(this.value)'>
+	<select name='AlreadyRegistered' onchange='SetOldUser(this.value)'>
 		<option value='' style='display:none;'></option>
 		<option value='1'>Sì</option>
 		<option value='0'>No</option>
@@ -16,10 +16,16 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo mail@
 </div>
 
 <div class='ParticipationRequestDiv'>
-Indica la mail che hai inserito l'ultima volta che hai usato il sito.
-A tale mail ti verrà inviato un codice, che dovrai reinserire su questo sito, per mostrare di essere l'utente proprietario della mail.
+<p id='NewContestantEmail'>
+	Inserisci il tuo indirizzo email. A tale indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
+</p>
+<p id='OldContestantEmail'>
+	Indica l'indirizzo email che hai inserito l'ultima volta che hai usato il sito.
+</p>
+A tale indirizzo ti verrà inviato un codice, che dovrai reinserire su questo sito, per mostrare di essere l'utente proprietario della mail.
 <?php
-$form = ['SubmitFunction'=>'SendCode(this.elements)', 'SubmitText'=>'Invia codice di verifica', 'inputs'=>[
+$form = ['id'=>'SendCodeForm','SubmitFunction'=>'SendCode(this.elements)', 'SubmitText'=>'Invia codice di verifica', 'inputs'=>[
+	['type'=>'hidden', 'name'=>'OldUser'], 
 	['type'=>'email', 'title'=>'Indirizzo email', 'name'=>'email', 'placeholder'=>'user@domain.com']
 ]];
 
@@ -34,6 +40,7 @@ Se il codice non dovesse arrivarti entro una decina di minuti, riprova.
 -->
 <?php
 $form = ['id'=>'CheckCodeForm', 'SubmitFunction'=>'CheckCode(this.elements)', 'SubmitText'=>'Controlla il codice', 'inputs'=>[
+	['type'=>'hidden', 'name'=>'OldUser'],
 	['type'=>'text', 'title'=>'Codice di verifica', 'name'=>'code'],
 	['type'=>'text', 'name'=>'email']
 ]];
@@ -47,6 +54,10 @@ InsertDom('form', $form);
 	I dati saranno trattati con la massima riservatezza ed usati unicamente per gestire le ammissioni allo stage ed il suo svolgimento. 
 
 	<form id='ContestantInfo' class='BigForm' onsubmit='CreateContestant(this.elements); return false'>
+<!--
+		<input type='hidden' name='OldUser'>
+		<input type='hidden' name='ContestantId'>
+-->
 		<input type='hidden' name='code'>
 		<fieldset>
 		<legend>Dati personali</legend>

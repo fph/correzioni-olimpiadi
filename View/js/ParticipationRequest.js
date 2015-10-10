@@ -1,3 +1,8 @@
+function SetOldUser(val) {
+	document.getElementById('SendCodeForm').elements.namedItem('OldUser').value = val;
+	document.getElementById('CheckCodeForm').elements.namedItem('OldUser').value = val;
+}
+
 function CodeSent(response) {
 	if (response.type == 'good') {
 		var email = response.data['email'];
@@ -7,22 +12,39 @@ function CodeSent(response) {
 
 function SendCode(inputs) {
 	var email = inputs.namedItem('email').value;
-	MakeAjaxRequest('../Modify/ManageVerificationCode.php', {email: email, type: 'send'}, CodeSent);
+	var OldUser = inputs.namedItem('OldUser').value;
+	
+	MakeAjaxRequest('../Modify/ManageVerificationCode.php', {email: email, OldUser: OldUser, type: 'send'}, CodeSent);
 }
 
 function CodeConfirmed(response) {
 	if (response.type == 'good') {
+		var ContestantInputs = document.getElementById('ContestantInfo').elements;
 		var email = response.data['email'];
 		var code = response.data['code'];
-		document.getElementById('ContestantInfo').elements.namedItem('email').value = email;
-		document.getElementById('ContestantInfo').elements.namedItem('code').value = code;
+		ContestantInputs.namedItem('email').value = email;
+		ContestantInputs.namedItem('code').value = code;
+		document.getElementById('ParticipationInfo').elements.namedItem('code').value = code;
+		if (response.data['OldUser']) {
+			var name = response.data['name'];
+			var	surname = response.data['surname'];
+			var school = response.data['school'];
+			var SchoolYear = response.data['SchoolYear'];
+			var ContestantId = response.data['ContestantId'];
+			ContestantInputs.namedItem('name').value = name;
+			ContestantInputs.namedItem('surname').value = surname;
+			ContestantInputs.namedItem('school').value = school;
+			ContestantInputs.namedItem('SchoolYear').value = SchoolYear;
+			document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = ContestantId;
+		}
 	}
 }
 
 function CheckCode(inputs) {
 	var email = inputs.namedItem('email').value;
 	var code = inputs.namedItem('code').value;
-	MakeAjaxRequest('../Modify/ManageVerificationCode.php', {email: email, code: code, type: 'check'}, CodeConfirmed);
+	var OldUser = inputs.namedItem('OldUser').value;
+	MakeAjaxRequest('../Modify/ManageVerificationCode.php', {email: email, code: code, OldUser: OldUser, type: 'check'}, CodeConfirmed);
 }
 
 function CreateContestant(inputs) {
