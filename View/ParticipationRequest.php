@@ -87,7 +87,10 @@ Dati personali
 					<label for='EmailInput'>Indirizzo email</label> 
 					</td>
 					<td>
-						<input type='email' name='email' id='EmailInput' placeholder='user@domain.com' disabled='disabled'> 
+<!--
+						DEBUG: Togliere disabled='disabled'
+-->
+						<input type='email' name='email' id='EmailInput' placeholder='user@domain.com'> 
 					</td>
 					<td>
 						A questo indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
@@ -164,7 +167,7 @@ Dati personali
 						<label for='PaidVolunteerInput'>Spesato o volontario</label> 
 					</td>
 					<td>
-						<select name='PaidVolunteer' id='PaidVolunteerInput'>
+						<select name='PaidVolunteer' id='PaidVolunteerInput' onchange='ChangingVolunteer(this.value)'>
 							<option value='' style='display:none;'></option>
 							<option value='paid'>Spesato</option>
 							<option value='volunteer'>Volontario</option>
@@ -185,7 +188,7 @@ Dati personali
 						Devi uploadare un documento in pdf, di dimensione minore di 10mb, contenente le tue soluzioni agli esercizi d'ammissione.
 					</td>
 				</tr>
-				<tr>
+				<tr class='hidden'>
 					<td>
 						<label for='VolunteerRequestInput'>Domanda di partecipazione</label> 
 					</td>
