@@ -2,6 +2,32 @@ div.ParticipationRequestDiv {
 	margin: 15px 0px;
 }
 
+/*
+	FormContainer improvement
+*/
+div.FormContainer table {
+	min-width: 600px;
+	margin: 10px auto; 
+}
+
+div.FormContainer td {
+	padding: 10px;
+}
+
+div.FormContainer input {
+	display: block;
+	margin: 0px auto !important;
+	width: 100%
+}
+
+div.FormContainer input:not([type='submit']):not([type='button']) {
+	padding: 5px;
+	border-radius:5px;
+}
+
+div.FormContainer input[type='submit'] {
+	padding: 5px;
+}
 
 /*
 	Transition
@@ -16,13 +42,17 @@ body {
 
 div.BigFormContainer {
 	transition: opacity 1s, left 1s;
+/*
 	position: absolute;
+*/
 	top: 0px;
 	width: 100%;
 }
 
 div.BeforeForm {
+/*
 	opacity: 0;
+*/
 	left: -2000px;
 }
 

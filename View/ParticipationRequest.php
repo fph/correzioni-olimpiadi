@@ -1,3 +1,7 @@
+<?php 
+	global $v_ActiveContests;
+?>
+
 <h2 class='pageTitle'>Richiesta di partecipazione</h2>
 <div class='ParticipationRequestDiv'>
 Seguendo le istruzioni date in questa pagina arriverai ad iscriverti ad uno stage delle olimpiadi di Matematica.
@@ -42,7 +46,7 @@ Se il codice non dovesse arrivarti entro una decina di minuti, riprova.
 $form = ['id'=>'CheckCodeForm', 'SubmitFunction'=>'CheckCode(this.elements)', 'SubmitText'=>'Controlla il codice', 'inputs'=>[
 	['type'=>'hidden', 'name'=>'OldUser'],
 	['type'=>'text', 'title'=>'Codice di verifica', 'name'=>'code'],
-	['type'=>'text', 'name'=>'email']
+	['type'=>'hidden', 'name'=>'email']
 ]];
 
 InsertDom('form', $form);
@@ -154,8 +158,10 @@ Dati personali
 					<td>
 						<select name='ContestId' id='ContestIdInput'>
 							<option value='' style='display:none;'></option>
-							<option value='5'>Winter camp 2016</option>
-							<option value='3'>preIMO 2016</option>
+<?php
+	foreach ($v_ActiveContests as $contest) {?>
+							<option value='<?=$contest['id']?>'><?=$contest['name']?></option>
+<?php } ?>
 						</select>
 					</td>
 					<td>

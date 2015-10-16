@@ -9,6 +9,7 @@
 	
 	CheckPagePermission($db, -2);
 	
+	$db->close();
 	//PermissionChecked	
-	TemplatePage('Configurations', [	'Index'=>'index.php',
-																		'Configurazioni'=>'Configurations.php']);
+	TemplatePage('Configurations', ['Index'=>'index.php', 
+									'Configurazioni'=>'Configurations.php']);

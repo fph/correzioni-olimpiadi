@@ -45,10 +45,15 @@ function ValidateParticipation($db, $ContestantId, $ContestId, $StagesNumber,$Pa
 		return ['type'=>'bad', 'text'=>'Il partecipante non esiste'];
 	}
 	
-	// Check existence of the contest
+	// Check contest
 	$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	if (is_null($contest)) {
 		return ['type'=>'bad', 'text'=>'La gara selezionata non esiste'];
+	}
+	
+	$Deadline = new Datetime($contest['date']);
+	if ((new Datetime('now'))->setTime(0, 0, 0) > $Deadline) {
+		return ['type'=>'bad', 'text'=>'È terminato il periodo in cui era possibile iscriversi alla gara selezionata'];
 	}
 	
 	// Check StagesNumber
@@ -95,45 +100,55 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 		return ['type'=>'bad', 'text'=>'C\'è stato un errore nella gestione del file delle soluzioni'];
 	}
 	
-	// Sending the volunteer request email
+	// Preparing email
+	$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
+	$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	
+	$mail = new PHPMailer;
+	$mail->CharSet = 'UTF-8';
+	
+	if (EmailSMTP) {
+		$mail->isSMTP();
+		$mail->SMTPDebug = 0; 
+		$mail->Host = EmailHost;
+		$mail->Port = EmailPort;
+		$mail->SMTPSecure = 'tls';
+		$mail->SMTPAuth = true;
+		$mail->Username = EmailUsername;
+		$mail->Password = EmailPassword;
+	}
+	else {
+		$mail->isSendmail();
+	}
+	$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
+	$mail->addAddress(VolunteerRequestEmailAddress);
+	$mail->Subject = 'Richiesta di partecipazione '.$contest['name'];
+	$mail->isHTML(true);
+	
+	// Writing MailText
+	$MailText = '';
 	if ($PaidVolunteer == 'volunteer') {
-		$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
-		$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-		
 		$MailText = 'Gentile segreteria UMI,<br>';
 		$MailText .= 'Sono '.$contestant['name'].' '.$contestant['surname'].' e scrivo per chiedere di partecipare come volontario allo stage '.$contest['name'].'.<br>';
 		$MailText .= 'La mia scuola è '.$contestant['school'].' e il mio indirizzo email è '.$contestant['email'].'.<br>';
 		$MailText .= 'In passato ho partecipato a '.$StagesNumber.' stage a Pisa.<br>';
 		$MailText .= 'In allegato si trova la richiesta di partecipazione in formato pdf.<br><br>';
 		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
-		
-		// Send mail
-		$mail = new PHPMailer;
-		$mail->CharSet = 'UTF-8';
-		
-		if (EmailSMTP) {
-			$mail->isSMTP();
-			$mail->SMTPDebug = 0; 
-			$mail->Host = EmailHost;
-			$mail->Port = EmailPort;
-			$mail->SMTPSecure = 'tls';
-			$mail->SMTPAuth = true;
-			$mail->Username = EmailUsername;
-			$mail->Password = EmailPassword;
-		}
-		else {
-			$mail->isSendmail();
-		}
-		$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
-		$mail->addAddress(VolunteerRequestEmailAddress);
-		$mail->Subject = 'Richiesta di partecipazione al '.$contest['name'];
-		$mail->isHTML(true);
-		$mail->Body = $MailText;
-		$CleanedSurname = preg_replace('/\PL/u', '', $contestant['surname']);
-		$mail->AddAttachment($VolunteerRequest['tmp_name'], 'RichiestaPartecipazione_'.$CleanedSurname.'.pdf');
-		if (!$mail->send()) {
-			return ['type'=>'bad', 'text'=>'L\'email con la richiesta di partecipazione non è stata inviata a causa di un errore del server'];
-		}
+	}
+	else {
+		$MailText = 'Gentile segreteria UMI,<br>';
+		$MailText .= 'Sono '.$contestant['name'].' '.$contestant['surname'].' e scrivo per chiedere di partecipare come spesato allo stage '.$contest['name'].'.<br>';
+		$MailText .= 'La mia scuola è '.$contestant['school'].' e il mio indirizzo email è '.$contestant['email'].'.<br>';
+		$MailText .= 'In passato ho partecipato a '.$StagesNumber.' stage a Pisa.<br><br>';
+		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
+	}
+	
+	// Send mail	
+	$mail->Body = $MailText;
+	$CleanedSurname = preg_replace('/\PL/u', '', $contestant['surname']);
+	$mail->AddAttachment($VolunteerRequest['tmp_name'], 'RichiestaPartecipazione_'.$CleanedSurname.'.pdf');
+	if (!$mail->send()) {
+		return ['type'=>'bad', 'text'=>'L\'email con la richiesta di partecipazione non è stata inviata a causa di un errore del server'];
 	}
 
 	Query($db, QueryInsert('Participations', [

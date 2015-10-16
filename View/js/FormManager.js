@@ -62,7 +62,10 @@ function RenderForm(obj) {
 	submit.type = 'submit';
 	if (obj.SubmitText != null) submit.value = obj.SubmitText;
 	if (obj.SubmitId != null) submit.id = obj.SubmitId;
-	MainTr.appendChild(submit);
+	
+	var td = document.createElement('td');
+	td.appendChild(submit);
+	MainTr.appendChild(td);
 	
 	table.appendChild(MainTr);
 	form.appendChild(table);
