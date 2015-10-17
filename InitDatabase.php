@@ -68,7 +68,7 @@ function CreateDatabase() {
 		`surname` varchar('.ContestantSurname_MAXLength.') NOT NULL,
 		`school` varchar('.ContestantSchool_MAXLength.') NOT NULL,
 		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
-		`LastOlympicYear` int NOT NULL,
+		`LastOlympicYear` int NOT NULL DEFAULT 2050,
 		PRIMARY KEY (`id`),
 		KEY(`surname`)
 	) ENGINE=InnoDB';
@@ -81,8 +81,7 @@ function CreateDatabase() {
 		`ContestId` int NOT NULL,
 		`ContestantId` int NOT NULL,
 		`email` Boolean NOT NULL DEFAULT false,
-		`solutions` varchar(31) NOT NULL,
-		`VolunteerRequest` varchar(31) DEFAULT NULL,
+		`solutions` varchar(31) DEFAULT NULL,
 
 		PRIMARY KEY (`id`),
 		KEY(`ContestId`),
@@ -251,9 +250,7 @@ function PopulateParticipations($db) {
 				Query($db, QueryInsert('Participations', [
 					'ContestId'=>$Contest['id'], 
 					'ContestantId'=>$Contestant['id'], 
-					'email'=>mt_rand(0, 1), 
-					'solutions'=>'rj2o31a.pdf', 
-					'VolunteerRequest'=>(mt_rand(0,1) ? 'abcdef.pdf' : null)
+					'email'=>mt_rand(0, 1) 
 				]));
 			}
 		}

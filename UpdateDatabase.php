@@ -128,7 +128,7 @@ function AddLastOlympicYearColumn() {
 	
 	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contestants', 'COLUMN_NAME'=>'LastOlympicYear']));
 	if (is_null($ColumnExists)) {
-		$query = 'ALTER TABLE `Contestants` ADD COLUMN `LastOlympicYear` int NOT NULL';
+		$query = 'ALTER TABLE `Contestants` ADD COLUMN `LastOlympicYear` int NOT NULL DEFAULT 2050';
 		Query($db, $query);
 		
 		echo 'The \'LastOlympicYear\' column has been added in the \'Contestants\' table.'.NewLine();
@@ -146,7 +146,7 @@ function AddFilenamesColumns() {
 	
 	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'solutions']));
 	if (is_null($ColumnExists)) {
-		$query = 'ALTER TABLE `Participations` ADD COLUMN `solutions` varchar(31) NOT NULL';
+		$query = 'ALTER TABLE `Participations` ADD COLUMN `solutions` varchar(31) DEFAULT NULL';
 		Query($db, $query);
 		
 		echo 'The \'solutions\' column has been added in the \'Participations\' table.'.NewLine();
@@ -155,16 +155,16 @@ function AddFilenamesColumns() {
 		echo 'The \'solutions\' column already exists in the \'Participations\' table.'.NewLine();
 	}
 	
-	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'VolunteerRequest']));
-	if (is_null($ColumnExists)) {
-		$query = 'ALTER TABLE `Participations` ADD COLUMN `VolunteerRequest` varchar(31)';
-		Query($db, $query);
+	// $ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'VolunteerRequest']));
+	// if (is_null($ColumnExists)) {
+		// $query = 'ALTER TABLE `Participations` ADD COLUMN `VolunteerRequest` varchar(31) DEFAULT NULL';
+		// Query($db, $query);
 		
-		echo 'The \'VolunteerRequest\' column has been added in the \'Participations\' table.'.NewLine();
-	}
-	else {
-		echo 'The \'VolunteerRequest\' column already exists in the \'Participations\' table.'.NewLine();
-	}
+		// echo 'The \'VolunteerRequest\' column has been added in the \'Participations\' table.'.NewLine();
+	// }
+	// else {
+		// echo 'The \'VolunteerRequest\' column already exists in the \'Participations\' table.'.NewLine();
+	// }
 	
 	$db->close();
 	return true;

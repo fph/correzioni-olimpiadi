@@ -29,7 +29,7 @@
 			}
 		}
 		
-		$code = bin2hex(openssl_random_pseudo_bytes(6));		
+		$code = GenerateRandomString();		
 				
 		$MailText = 'Il codice di verifica che devi inserire sul sito <strong>Correzioni Olimpiadi</strong> è:<br>';
 		$MailText .= '<big>'.$code.'</big><br><br>';

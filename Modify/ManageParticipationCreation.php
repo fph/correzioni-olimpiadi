@@ -92,8 +92,8 @@ function ValidateParticipation($db, $ContestantId, $ContestId, $StagesNumber,$Pa
 
 function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $PaidVolunteer, $solutions, $VolunteerRequest) {
 	// Choosing filename
-	$PdfName = bin2hex(openssl_random_pseudo_bytes(6));	
-	while (file_exists(UploadDirectory.$PdfName.'.pdf')) $PdfName = bin2hex(openssl_random_pseudo_bytes(6));
+	$PdfName = GenerateRandomString();	
+	while (file_exists(UploadDirectory.$PdfName.'.pdf')) $PdfName = GenerateRandomString();
 	
 	// Saving the uploaded file in the correct position
 	if (!move_uploaded_file($solutions['tmp_name'], UploadDirectory.$PdfName.'.pdf')) {
@@ -145,7 +145,7 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	
 	// Send mail	
 	$mail->Body = $MailText;
-	$CleanedSurname = preg_replace('/\PL/u', '', $contestant['surname']);
+	$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
 	$mail->AddAttachment($VolunteerRequest['tmp_name'], 'RichiestaPartecipazione_'.$CleanedSurname.'.pdf');
 	if (!$mail->send()) {
 		return ['type'=>'bad', 'text'=>'L\'email con la richiesta di partecipazione non è stata inviata a causa di un errore del server'];
