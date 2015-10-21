@@ -172,6 +172,23 @@ div.FormContainer table {
 }
 
 /*
+	Download icons
+*/
+a.DownloadPdfIcon > img{
+	width: 22px;
+	height: 22px;
+}
+
+a.DownloadZipIcon {
+	margin-left: 1em;
+	vertical-align: sub;
+}
+
+/*
+	TODO: Ridurre la larghezza dei td che contengono icone!
+*/
+
+/*
 	General Information
 */
 

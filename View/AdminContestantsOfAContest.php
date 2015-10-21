@@ -23,15 +23,20 @@ global $v_contest, $v_contestants;
 $columns = [];
 $columns []= ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
 $columns []= ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
-$columns []= ['id'=>'solutions', 'name'=>'Soluzioni'];
+$columns []= ['id'=>'solutions', 'name'=>'Soluzioni', 'class'=>['DownloadColumn']];
 
 $rows = [];
 foreach ($v_contestants as $contestant) {
+	$SolutionsLink = '';
+	if ($contestant['SolutionsBoolean'] === 1) {
+		$SolutionsLink = '<a href=\'../Modify/ManageFiles.php?type=ParticipationFile&ContestId='.$v_contest['id'].'&ContestantId='.$contestant['id'].'\' download class=\'DownloadPdfIcon\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
+	}
+	
 	$row = [
 		'values'=>[
 			'surname'=>$contestant['surname'], 
 			'name'=>$contestant['name'], 
-			'solutions'=>'<a href=\'../Modify/ManageFiles.php?type=ParticipationFile&ContestId='.$v_contest['id'].'&ContestantId='.$contestant['id'].'\' download><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\'></a>'
+			'solutions'=>$SolutionsLink
 		],
 		'data'=>['contestant_id'=>$contestant['id']] 
 	];

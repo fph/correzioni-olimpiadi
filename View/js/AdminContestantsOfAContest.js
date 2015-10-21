@@ -17,12 +17,22 @@ function AddParticipation(response) {
 		var surname = response.data['surname'];
 		var name = response.data['name'];
 		var ContestantId = response.data['ContestantId'];
+		var SolutionsBoolean = response.data['SolutionsBoolean'];
+		
+		var solutions = '';
+		if (SolutionsBoolean) {
+			solutions = '<a href=\'../Modify/ManageFiles.php?type=ParticipationFile&ContestId=' + ContestId + '&ContestantId=' + ContestantId + '\' download class=\'DownloadPdfIcon\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
+		}
 		
 		// TODO: Qui si dovrebbe piazzare anche il link per il download
-		AddRow(document.getElementById('AdminContestantsOfAContestTable'),
-		{	values: {'surname': surname, 'name': name},
-			data: {'contestant_id': ContestantId}},
-			'surname');
+		AddRow(document.getElementById('AdminContestantsOfAContestTable'), {
+			values: {
+				'surname': surname, 
+				'name': name,
+				'solutions': solutions
+			},
+			data: {'contestant_id': ContestantId}
+		}, 'surname');
 	}
 }
 

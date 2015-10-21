@@ -72,6 +72,20 @@ function CreateZip($db, $ContestId) {
 		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
 	}
 	
+	$AllParticipations = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
+	
+	// Checking whether the is at least one pdf (because otherwise ZipArchive doesn't create the zip file)
+	$NoPdf = true;
+	foreach ($AllParticipations as $participation) {
+		if (!is_null($participation['solutions'])) {
+			$NoPdf = false;
+			break;
+		}
+	}
+	if ($NoPdf === true) {
+		return  ['type'=>'bad', 'text'=>'Non è presente neanche un elaborato'];
+	}
+	
 	// Generate filename
 	if (is_null($contest['SolutionsZip'])) {
 		$ZipName = GenerateRandomString();	
@@ -83,7 +97,6 @@ function CreateZip($db, $ContestId) {
 	$zip = new ZipArchive;
 	$zip->open(UploadDirectory.$contest['SolutionsZip'].'.zip', ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 	
-	$AllParticipations = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
 	foreach ($AllParticipations as $participation) {
 		if (!is_null($participation['solutions'])) {
 			$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));

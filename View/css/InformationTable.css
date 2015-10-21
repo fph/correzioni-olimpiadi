@@ -75,6 +75,10 @@ table.InformationTable .CommentColumn {
 	width: 50%;
 }
 
+table.InformationTable .DownloadColumn {
+	text-align: center;
+}
+
 /*
 	OnModification
 */
