@@ -24,7 +24,6 @@ function AddParticipation(response) {
 			solutions = '<a href=\'../Modify/DownloadFiles.php?type=ParticipationPdf&ContestId=' + ContestId + '&ContestantId=' + ContestantId + '\' download class=\'DownloadIconTable\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
 		}
 		
-		// TODO: Qui si dovrebbe piazzare anche il link per il download
 		AddRow(document.getElementById('AdminContestantsOfAContestTable'), {
 			values: {
 				'surname': surname, 
