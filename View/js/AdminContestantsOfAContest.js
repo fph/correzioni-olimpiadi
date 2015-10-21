@@ -21,7 +21,7 @@ function AddParticipation(response) {
 		
 		var solutions = '';
 		if (SolutionsBoolean) {
-			solutions = '<a href=\'../Modify/ManageFiles.php?type=ParticipationFile&ContestId=' + ContestId + '&ContestantId=' + ContestantId + '\' download class=\'DownloadPdfIcon\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
+			solutions = '<a href=\'../Modify/DownloadFiles.php?type=ParticipationPdf&ContestId=' + ContestId + '&ContestantId=' + ContestantId + '\' download class=\'DownloadIconTable\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
 		}
 		
 		// TODO: Qui si dovrebbe piazzare anche il link per il download

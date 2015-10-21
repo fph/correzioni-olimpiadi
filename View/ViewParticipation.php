@@ -1,5 +1,5 @@
 <?php
-global $v_admin, $v_corrections, $v_contestant, $v_contest, $v_MailSent;
+global $v_admin, $v_corrections, $v_contestant, $v_contest, $v_MailSent, $v_SolutionsBoolean;
 ?>
 
 <h2 class='PageTitle'>
@@ -15,8 +15,18 @@ global $v_admin, $v_corrections, $v_contestant, $v_contest, $v_MailSent;
 	</span>
 </h2>
 <h3 class='PageSubtitle'>
-	<span class='contestant_title'>
+	<span>
 		<?=$v_contestant['surname']?> <?=$v_contestant['name']?> 
+	</span>
+	
+	<span>
+<?php
+	if ($v_SolutionsBoolean) { ?>
+		<a href='../Modify/DownloadFiles.php?type=ParticipationPdf&ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>' download class='DownloadIconSubtitle'><img src='../View/Images/DownloadPdf.png' alt='Scarica elaborato' title='Scarica elaborato'></a>
+<?php } ?>
+	</span>
+	
+	<span>
 <?php	if ($v_admin == 1) {?>
 			(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
 			<?php 

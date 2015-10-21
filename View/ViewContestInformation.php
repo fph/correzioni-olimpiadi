@@ -16,7 +16,7 @@ global $v_contest;
 	<span>
 <?php
 	if (!is_null($v_contest['SolutionsZip'])) { ?>
-		<a href='../Modify/ManageFiles.php?type=ContestZip&ContestId=<?=$v_contest['id']?>' download class='DownloadZipIcon'><img src='../View/Images/DownloadZip.png' alt='Scarica tutti gli elaborati dei partecipanti' title='Scarica tutti gli elaborati dei partecipanti'></a>
+		<a href='../Modify/DownloadFiles.php?type=ContestZip&ContestId=<?=$v_contest['id']?>' download class='DownloadIconTitle'><img src='../View/Images/DownloadZip.png' alt='Scarica tutti gli elaborati dei partecipanti' title='Scarica tutti gli elaborati dei partecipanti'></a>
 <?php } ?>
 	</span>
 </h2>

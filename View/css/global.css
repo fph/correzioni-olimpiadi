@@ -174,14 +174,24 @@ div.FormContainer table {
 /*
 	Download icons
 */
-a.DownloadPdfIcon > img{
+a.DownloadIconTable > img{
 	width: 22px;
 	height: 22px;
 }
 
-a.DownloadZipIcon {
+a.DownloadIconTitle {
 	margin-left: 1em;
 	vertical-align: sub;
+}
+
+a.DownloadIconSubtitle {
+	margin-left: 0.4em;
+	margin-right: 0.7em;
+	vertical-align: sub;
+}
+
+a.DownloadIconSubtitle > img {
+	height: 1.3em;
 }
 
 /*

@@ -29,7 +29,7 @@ $rows = [];
 foreach ($v_contestants as $contestant) {
 	$SolutionsLink = '';
 	if ($contestant['SolutionsBoolean'] === 1) {
-		$SolutionsLink = '<a href=\'../Modify/ManageFiles.php?type=ParticipationFile&ContestId='.$v_contest['id'].'&ContestantId='.$contestant['id'].'\' download class=\'DownloadPdfIcon\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
+		$SolutionsLink = '<a href=\'../Modify/DownloadFiles.php?type=ParticipationPdf&ContestId='.$v_contest['id'].'&ContestantId='.$contestant['id'].'\' download class=\'DownloadIconTable\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
 	}
 	
 	$row = [
