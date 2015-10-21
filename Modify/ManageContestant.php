@@ -42,7 +42,7 @@ function RemoveContestant($db, $ContestantId) {
 	return ['type'=>'good', 'text'=>'Partecipante eliminato con successo'];
 }
 
-function AddParticipation($db, $ContestantId, $ContestId) {
+function AddParticipation($db, $ContestantId, $ContestId, $solutions) {
 	$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	if (is_null($contestant)) {
 		return ['type'=>'bad', 'text'=>'Il partecipante selezionato non esiste'];
@@ -58,16 +58,51 @@ function AddParticipation($db, $ContestantId, $ContestId) {
 		return ['type'=>'bad', 'text'=>'La partecipazione scelta è già presente'];
 	}
 	
-	Query($db, QueryInsert('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
-	return ['type'=>'good', 'text'=>'La partecipazione è stata aggiunta con successo', 'data'=> 
-	['ContestantId'=>$ContestantId, 'surname'=>$contestant['surname'], 'name'=>$contestant['name'] ]];
+	// Validating $solutions
+	if (is_array($solutions['error']) or $solutions['error'] !== UPLOAD_ERR_OK) {
+		return ['type'=>'bad', 'text'=>'C\'è stato un errore nell\'upload del file delle soluzioni'];
+	}
 	
+	if ($solutions['size'] > PdfSize_MAX*1000000) {
+		return ['type'=>'bad', 'text'=>'Il file delle soluzioni può pesare alpiù '.PdfSize_MAX.'Mb'];
+	}
+
+	$finfo = new finfo(FILEINFO_MIME_TYPE);
+	if ($finfo->file($solutions['tmp_name']) !== 'application/pdf') {
+		return ['type'=>'bad', 'text'=>'Il file delle soluzioni deve essere in formato pdf'];
+	}
+	
+	// Choosing filename
+	$PdfName = GenerateRandomString();	
+	while (file_exists(UploadDirectory.$PdfName.'.pdf')) $PdfName = GenerateRandomString();
+	
+	// Saving the uploaded file in the correct position
+	if (!move_uploaded_file($solutions['tmp_name'], UploadDirectory.$PdfName.'.pdf')) {
+		return ['type'=>'bad', 'text'=>'C\'è stato un errore nel salvataggio del file delle soluzioni'];
+	}
+	
+	Query($db, QueryInsert('Participations', [
+		'ContestId'=>$ContestId, 
+		'ContestantId'=>$ContestantId,
+		'solutions'=>$PdfName
+	]));
+	
+	return ['type'=>'good', 'text'=>'La partecipazione è stata aggiunta con successo', 'data'=>[
+		'ContestantId'=>$ContestantId, 
+		'surname'=>$contestant['surname'], 
+		'name'=>$contestant['name']
+	]];
 }
 
 function RemoveParticipation($db, $ContestantId, $ContestId) {
-	$contestant = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
-	if (is_null($contestant)) {
+	$participation = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	if (is_null($participation)) {
 		return ['type'=>'bad', 'text'=>'La partecipazione selezionata non esiste'];
+	}
+	
+	// Deleting solutions pdf
+	if (!is_null($participation['solutions'])) {
+		unlink(UploadDirectory.$participation['solutions'].'.pdf');
 	}
 	
 	Query($db, QueryDelete('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
@@ -138,7 +173,7 @@ if (IsAdmin($db, GetUserIdBySession()) == 0) {
 $data = json_decode($_POST['data'], 1);
 if ($data['type'] == 'add') SendObject(AddContestant($db, $data['name'], $data['surname'], $data['school'], $data['email']));
 else if ($data['type'] == 'remove') SendObject(RemoveContestant($db, $data['ContestantId']));
-else if ($data['type'] == 'AddParticipation') SendObject(AddParticipation($db, $data['ContestantId'], $data['ContestId']));
+else if ($data['type'] == 'AddParticipation') SendObject(AddParticipation($db, $data['ContestantId'], $data['ContestId'], $_FILES['solutions']));
 else if ($data['type'] == 'RemoveParticipation') SendObject(RemoveParticipation($db, $data['ContestantId'], $data['ContestId']));
 else if ($data['type'] == 'ChangeNameAndSurname') SendObject(ChangeNameAndSurname($db, $data['ContestantId'], $data['name'], $data['surname']));
 else if ($data['type'] == 'ChangeSchool') SendObject(ChangeSchool($db, $data['ContestantId'], $data['school']));

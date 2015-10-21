@@ -169,13 +169,13 @@ if (IsAdmin($db, GetUserIdBySession()) == 0) {
 }
 
 $data = json_decode($_POST['data'], 1);
-if ($data['type'] == 'add') SendObject(AddUser($db, $data['username'], $data['password']));
-else if ($data['type'] == 'remove') SendObject(RemoveUser($db, $data['UserId']));
-else if ($data['type'] == 'AddPermission') SendObject(AddPermission($db, $data['UserId'], $data['ContestId']));
-else if ($data['type'] == 'RemovePermission') SendObject(RemovePermission($db, $data['UserId'], $data['ContestId']));
-else if ($data['type'] == 'ChangeUsername') SendObject(ChangeUsername($db, $data['UserId'], $data['username']));
-else if ($data['type'] == 'ChangePassword') SendObject(ChangePassword($db, $data['UserId'], $data['password']));
-else if ($data['type'] == 'ChangeRole') SendObject(ChangeRole($db, $data['UserId'], $data['UserRole']));
+if ($data['type'] === 'add') SendObject(AddUser($db, $data['username'], $data['password']));
+else if ($data['type'] === 'remove') SendObject(RemoveUser($db, $data['UserId']));
+else if ($data['type'] === 'AddPermission') SendObject(AddPermission($db, $data['UserId'], $data['ContestId']));
+else if ($data['type'] === 'RemovePermission') SendObject(RemovePermission($db, $data['UserId'], $data['ContestId']));
+else if ($data['type'] === 'ChangeUsername') SendObject(ChangeUsername($db, $data['UserId'], $data['username']));
+else if ($data['type'] === 'ChangePassword') SendObject(ChangePassword($db, $data['UserId'], $data['password']));
+else if ($data['type'] === 'ChangeRole') SendObject(ChangeRole($db, $data['UserId'], $data['UserRole']));
 else SendObject(['type'=>'bad', 'text'=>'L\'azione scelta non esiste']);
 
 

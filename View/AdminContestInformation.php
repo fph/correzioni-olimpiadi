@@ -40,6 +40,10 @@ global $v_contest;
 	InsertDom('buttons', $buttons);
 ?>
 	</div>
+	
+	<div id='SolutionsZipInformationContainer'>
+		<input id='SolutionsZipButton' type='submit' value='<?=(is_null($v_contest['SolutionsZip']))?'Genera':'Rigenera'?> lo zip degli elaborati' onclick='CreateZip()'>
+	</div>
 </div>
 
 <?php

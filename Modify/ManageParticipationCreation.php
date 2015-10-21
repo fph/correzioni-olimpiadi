@@ -67,13 +67,11 @@ function ValidateParticipation($db, $ContestantId, $ContestId, $StagesNumber,$Pa
 		return ['type'=>'bad', 'text'=>'Non è stato specificato se \'volontario\' o \'spesato\''];
 	}
 	
-	// TODO: Controllare che sia possibile iscriversi alla gara ContestId
-	
 	// DEBUG: Commentare le righe seguenti
-	// $participation = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
-	// if (!is_null($participation)) {
-		// return ['type'=>'bad', 'text'=>'Il partecipante già è iscritto alla gara'];
-	// }
+	$participation = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	if (!is_null($participation)) {
+		return ['type'=>'bad', 'text'=>'Il partecipante già è iscritto alla gara'];
+	}
 	
 	$SolutionsValidation = ValidateSolutions($solutions);
 	if ($SolutionsValidation['type'] === 'bad') {
@@ -97,7 +95,7 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	
 	// Saving the uploaded file in the correct position
 	if (!move_uploaded_file($solutions['tmp_name'], UploadDirectory.$PdfName.'.pdf')) {
-		return ['type'=>'bad', 'text'=>'C\'è stato un errore nella gestione del file delle soluzioni'];
+		return ['type'=>'bad', 'text'=>'C\'è stato un errore nel salvataggio del file delle soluzioni'];
 	}
 	
 	// Preparing email

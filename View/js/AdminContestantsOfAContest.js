@@ -18,6 +18,7 @@ function AddParticipation(response) {
 		var name = response.data['name'];
 		var ContestantId = response.data['ContestantId'];
 		
+		// TODO: Qui si dovrebbe piazzare anche il link per il download
 		AddRow(document.getElementById('AdminContestantsOfAContestTable'),
 		{	values: {'surname': surname, 'name': name},
 			data: {'contestant_id': ContestantId}},
@@ -26,6 +27,12 @@ function AddParticipation(response) {
 }
 
 function AddParticipationRequest(inputs) {
+	// It is mandatory to use formdata as it is the only way to send a file through ajax
+	// Anyway it sends everything in the usual 'data' way apart from the pdf file.
+	var ParticipationData = new FormData();
+	ParticipationData.append('solutions', inputs.namedItem('solutions').files[0]);
 	var ContestantId = inputs.namedItem('ContestantId').value;
-	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId: ContestId, ContestantId: ContestantId, type: 'AddParticipation'}, AddParticipation);
+	ParticipationData.append('data', JSON.stringify({ContestId: ContestId, ContestantId: ContestantId, type: 'AddParticipation'}));
+	
+	MakeAjaxRequest('../Modify/ManageContestant.php', ParticipationData, AddParticipation, null, true);
 }

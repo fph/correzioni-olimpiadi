@@ -37,6 +37,7 @@ function CreateDatabase() {
 		`name` varchar('.ContestName_MAXLength.') NOT NULL,
 		`date` date,
 		`blocked` Boolean,
+		`SolutionsZip` varchar(31) DEFAULT NULL,
 		PRIMARY KEY (`id`),
 		KEY(`name`)
 	) ENGINE=InnoDB';

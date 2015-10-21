@@ -3,8 +3,11 @@ require_once '../Utilities.php';
 SuperRequire_once('General', 'sqlUtilities.php');
 SuperRequire_once('General', 'PermissionManager.php');
 
-function GetParticipationFile($db, $ParticipationId) {
-	$participation = OneResultQuery($db, QuerySelect('Participations', ['id'=>$ParticipationId]));
+function GetParticipationFile($db, $ContestId, $ContestantId) {
+	$participation = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	
+	if (is_null($participation) or is_null($participation['solutions'])) return;
+	
 	$PdfName = UploadDirectory.$participation['solutions'].'.pdf';
 	$PdfFile = file_get_contents($PdfName);
 	
@@ -19,6 +22,9 @@ function GetParticipationFile($db, $ParticipationId) {
 
 function GetContestZip($db, $ContestId) {
 	$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	
+	if (is_null($contest['SolutionsZip'])) return;
+	
 	$ZipName = UploadDirectory.$contest['SolutionsZip'].'.zip';
 	$ZipFile = file_get_contents($ZipName);
 	
@@ -29,41 +35,15 @@ function GetContestZip($db, $ContestId) {
 	echo $ZipFile;
 }
 
-function CreateContestZip($db, $ContestId) {
-	$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	
-	// Generate filename
-	if (is_null($contest['SolutionsZip'])) {
-		$ZipName = GenerateRandomString();	
-		while (file_exists(UploadDirectory.$ZipName.'.zip')) $ZipName = GenerateRandomString();
-		Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['SolutionsZip'=>$ZipName]));
-		$contest['SolutionsZip'] = $ZipName;
-	}
-	
-	$zip = new ZipArchive;
-	$zip->open(UploadDirectory.$contest['SolutionsZip'].'.zip', ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
-	
-	$AllParticipations = ManyResultsQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
-	foreach ($AllParticipations as $participation) {
-		if (!is_null($participation['solutions'])) {
-			$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
-			$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
-			$zip->addFile(UploadDirectory.$participation['solutions'].'.pdf', $CleanedSurname.'.pdf');
-		}
-	}
-	
-	$zip->close();
-}
-
 
 // FIXME: Dovrei verificare un mare di cose
 $db = OpenDbConnection();
 $ContestId = $_GET['ContestId'];
 
-if (VerifyPermission($db, GetUserIdBySession(), $ContestId) {
+if (VerifyPermission($db, GetUserIdBySession(), $ContestId)) {
 	$type = $_GET['type'];
 	if ($type === 'ContestZip') GetContestZip($db, $ContestId);
-	else if ($type === 'ParticipationFile') GetParticipationFile($db, $_GET['ParticipationId']);
+	else if ($type === 'ParticipationFile') GetParticipationFile($db, $_GET['ContestId'], $_GET['ContestantId']);
 }
 
 $db->close();

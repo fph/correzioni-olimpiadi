@@ -155,16 +155,16 @@ function AddFilenamesColumns() {
 		echo 'The \'solutions\' column already exists in the \'Participations\' table.'.NewLine();
 	}
 	
-	// $ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'VolunteerRequest']));
-	// if (is_null($ColumnExists)) {
-		// $query = 'ALTER TABLE `Participations` ADD COLUMN `VolunteerRequest` varchar(31) DEFAULT NULL';
-		// Query($db, $query);
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contests', 'COLUMN_NAME'=>'SolutionsZip']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Contests` ADD COLUMN `SolutionsZip` varchar(31) DEFAULT NULL';
+		Query($db, $query);
 		
-		// echo 'The \'VolunteerRequest\' column has been added in the \'Participations\' table.'.NewLine();
-	// }
-	// else {
-		// echo 'The \'VolunteerRequest\' column already exists in the \'Participations\' table.'.NewLine();
-	// }
+		echo 'The \'SolutionsZip\' column has been added in the \'Contests\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'SolutionsZip\' column already exists in the \'Contests\' table.'.NewLine();
+	}
 	
 	$db->close();
 	return true;
@@ -183,7 +183,7 @@ function CreateVerificationCodesTable() {
 		PRIMARY KEY (`email`)
 	) ENGINE=InnoDB';
 	Query($db, $query);
-	echo 'The \'VerificationCodes\' table has been created.'.NewLine();
+	echo 'The \'VerificationCodes\' table has been created (if it already existed nothing has been changed).'.NewLine();
 	
 	$db->close();
 	return true;

@@ -1,5 +1,4 @@
-The following rules are not completely followed in the project, but should
-be followed writing new code.
+The following rules are not completely followed in the project, but should be followed writing new code.
 
 INDENTATION
 	Only tabs
@@ -31,3 +30,5 @@ NAMING
 QUOTES:
 	Strings should always be delimited by single quotes. Possible exceptions include: strings containing \n (in php), strings containing single quotes.
 
+EQUALITY:
+	In php === should be used (everywhere) instead of ==.

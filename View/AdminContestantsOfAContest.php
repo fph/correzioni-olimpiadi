@@ -21,15 +21,21 @@ global $v_contest, $v_contestants;
 
 <?php
 $columns = [];
-$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
-$columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns []= ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns []= ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns []= ['id'=>'solutions', 'name'=>'Soluzioni'];
 
 $rows = [];
 foreach ($v_contestants as $contestant) {
 	$row = [
-	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name']],
-	'data'=>['contestant_id'=>$contestant['id']] ];
-	$rows[]=$row;
+		'values'=>[
+			'surname'=>$contestant['surname'], 
+			'name'=>$contestant['name'], 
+			'solutions'=>'<a href=\'../Modify/ManageFiles.php?type=ParticipationFile&ContestId='.$v_contest['id'].'&ContestantId='.$contestant['id'].'\' download><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\'></a>'
+		],
+		'data'=>['contestant_id'=>$contestant['id']] 
+	];
+	$rows []= $row;
 }
 
 $buttons = ['trash'=>['onclick'=>'RemoveParticipationRequest']];
@@ -45,7 +51,8 @@ InsertDom('table',  $table);
 
 <?php
 $form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddParticipationRequest(this.elements)', 'inputs'=>[
-	['type'=>'AjaxSelect', 'title'=>'Partecipante', 'select'=>['id'=>'ContestantInput', 'type'=>'contestant', 'name'=>'ContestantId']]
+	['type'=>'AjaxSelect', 'title'=>'Partecipante', 'select'=>['id'=>'ContestantInput', 'type'=>'contestant', 'name'=>'ContestantId']],
+	['type'=>'file', 'title'=>'Elaborato', 'accept'=>'.pdf', 'name'=>'solutions']
 ]];
 
 InsertDom('form', $form);
