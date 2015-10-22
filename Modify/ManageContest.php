@@ -101,6 +101,13 @@ function CreateZip($db, $ContestId) {
 		if (!is_null($participation['solutions'])) {
 			$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
 			$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
+			
+			// Dealing with homonyms
+			if ($zip->locateName($CleanedSurname.'.pdf') !== false) {
+				$i = 2;
+				while ($zip->locateName($CleanedSurname.strval($i).'.pdf') !== false) $i++;
+				$CleanedSurname .= strval($i);
+			}
 			$zip->addFile(UploadDirectory.$participation['solutions'].'.pdf', $CleanedSurname.'.pdf');
 		}
 	}
