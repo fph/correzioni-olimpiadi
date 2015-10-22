@@ -1,4 +1,16 @@
 function SetOldUser(val) {
+	var AllNewUserThings = document.getElementsByClassName('NewUser');
+	var AllOldUserThings = document.getElementsByClassName('OldUser');
+	
+	if (val == '0') {
+		for (var i = 0; i < AllOldUserThings.length; i++) AllOldUserThings[i].classList.add('hidden');
+		for (var i = 0; i < AllNewUserThings.length; i++) AllNewUserThings[i].classList.remove('hidden');
+	}
+	else if (val == '1') {
+		for (var i = 0; i < AllNewUserThings.length; i++) AllNewUserThings[i].classList.add('hidden');
+		for (var i = 0; i < AllOldUserThings.length; i++) AllOldUserThings[i].classList.remove('hidden');
+	}
+	
 	document.getElementById('SendCodeForm').elements.namedItem('OldUser').value = val;
 	document.getElementById('CheckCodeForm').elements.namedItem('OldUser').value = val;
 	document.getElementById('ContestantInfo').elements.namedItem('OldUser').value = val;
@@ -53,13 +65,13 @@ function CheckCode(inputs) {
 function ContestantCreated(response) {
 	if (response.type=='good') {
 		document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = response.data['ContestantId'];
+			
+		document.getElementById('ContestantInfoDiv').classList.remove('ShowingForm');
+		document.getElementById('ContestantInfoDiv').classList.add('AfterForm');
+		
+		document.getElementById('ParticipationInfoDiv').classList.remove('BeforeForm');
+		document.getElementById('ParticipationInfoDiv').classList.add('ShowingForm');
 	}
-	// DEBUG
-	document.getElementById('ContestantInfoDiv').classList.remove('ShowingForm');
-	document.getElementById('ContestantInfoDiv').classList.add('AfterForm');
-	
-	document.getElementById('ParticipationInfoDiv').classList.remove('BeforeForm');
-	document.getElementById('ParticipationInfoDiv').classList.add('ShowingForm');
 }
 
 function CreateContestant(inputs) {

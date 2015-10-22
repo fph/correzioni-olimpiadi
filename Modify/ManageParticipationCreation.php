@@ -67,7 +67,7 @@ function ValidateParticipation($db, $ContestantId, $ContestId, $StagesNumber,$Pa
 		return ['type'=>'bad', 'text'=>'Non è stato specificato se \'volontario\' o \'spesato\''];
 	}
 	
-	// DEBUG: Commentare le righe seguenti
+	// Check participation doesn't exist already
 	$participation = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
 	if (!is_null($participation)) {
 		return ['type'=>'bad', 'text'=>'Il partecipante già è iscritto alla gara'];
