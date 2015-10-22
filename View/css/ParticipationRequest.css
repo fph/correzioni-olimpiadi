@@ -1,5 +1,5 @@
-div.ParticipationRequestDiv {
-	margin: 15px 0px;
+body {
+	line-height: 1.4;
 }
 
 /*
@@ -36,28 +36,29 @@ body {
 	overflow-x:hidden
 }
 
-#BigFormParentContainer {
+#TransitionContainer {
 	position: relative;
+	margin: 30px 0px;
 }
 
-div.BigFormContainer {
+div.TransitionDiv {
 	transition: opacity 1s, left 1s;
 	position: absolute;
 	top: 0px;
 	width: 100%;
 }
 
-div.BeforeForm {
+div.BeforeTransition {
 	opacity: 0;
 	left: -2000px;
 }
 
-div.ShowingForm {
+div.DuringTransition {
 	opacity: 1;
 	left: 0px;
 }
 
-div.AfterForm {
+div.AfterTransition {
 	opacity: 0;
 	left: 2000px;
 }

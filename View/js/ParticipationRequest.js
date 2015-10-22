@@ -1,3 +1,15 @@
+function AdvanceTransition(id1, id2) {
+	if (id1 != null) {
+		document.getElementById(id1).classList.remove('DuringTransition');
+		document.getElementById(id1).classList.add('AfterTransition');
+	}
+	
+	if (id2 != null) {
+		document.getElementById(id2).classList.remove('BeforeTransition');
+		document.getElementById(id2).classList.add('DuringTransition');
+	}
+}
+
 function SetOldUser(val) {
 	var AllNewUserThings = document.getElementsByClassName('NewUser');
 	var AllOldUserThings = document.getElementsByClassName('OldUser');
@@ -14,6 +26,8 @@ function SetOldUser(val) {
 	document.getElementById('SendCodeForm').elements.namedItem('OldUser').value = val;
 	document.getElementById('CheckCodeForm').elements.namedItem('OldUser').value = val;
 	document.getElementById('ContestantInfo').elements.namedItem('OldUser').value = val;
+	
+	AdvanceTransition(null, 'SendCodeDiv');
 }
 
 function CodeSent(response) {
@@ -21,6 +35,8 @@ function CodeSent(response) {
 		var email = response.data['email'];
 		document.getElementById('CheckCodeForm').elements.namedItem('email').value = email;
 		document.getElementById('ContestantInfo').elements.namedItem('email').value = email;
+		
+		AdvanceTransition('SendCodeDiv', 'CheckCodeDiv');
 	}
 }
 
@@ -50,8 +66,7 @@ function CodeConfirmed(response) {
 			ContestantInputs.namedItem('SchoolYear').value = SchoolYear;
 		}
 		
-		document.getElementById('ContestantInfoDiv').classList.remove('BeforeForm');
-		document.getElementById('ContestantInfoDiv').classList.add('ShowingForm');
+		AdvanceTransition('SendCodeDiv', 'ContestantInfoDiv');
 	}
 }
 
@@ -66,11 +81,7 @@ function ContestantCreated(response) {
 	if (response.type=='good') {
 		document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = response.data['ContestantId'];
 			
-		document.getElementById('ContestantInfoDiv').classList.remove('ShowingForm');
-		document.getElementById('ContestantInfoDiv').classList.add('AfterForm');
-		
-		document.getElementById('ParticipationInfoDiv').classList.remove('BeforeForm');
-		document.getElementById('ParticipationInfoDiv').classList.add('ShowingForm');
+		AdvanceTransition('ContestantInfoDiv', 'ParticipationInfoDiv');
 	}
 }
 
@@ -95,7 +106,13 @@ function ChangingVolunteer(val) {
 	}
 }
 
+function ParticipationCreated(response) {
+	if (response.type=='good') {
+		AdvanceTransition('ParticipationInfoDiv', 'RegistrationEndDiv');
+	}
+}
+
 function CreateParticipation(form) {
 	var ParticipationData = new FormData(form);
-	MakeAjaxRequest('../Modify/ManageParticipationCreation.php', ParticipationData, null, null, true);
+	MakeAjaxRequest('../Modify/ManageParticipationCreation.php', ParticipationData, ParticipationCreated, null, true);
 }
