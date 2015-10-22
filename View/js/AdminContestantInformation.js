@@ -143,3 +143,57 @@ function ModifyEmail() {
 	confirm_button.classList.remove('hidden');
 	cancel_button.classList.remove('hidden');
 }
+
+//~ LastOlympicYear
+function EndLastOlympicYearModification() {
+	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.remove('hidden');
+	confirm_button.classList.add('hidden');
+	cancel_button.classList.add('hidden');
+	
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	LastOlympicYearSpan.classList.remove('ContentEditable');
+	LastOlympicYearSpan.setAttribute('contenteditable', 'false');
+}
+
+function CancelLastOlympicYear() {
+	EndLastOlympicYearModification();
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	LastOlympicYearSpan.innerHTML=GetDataAttribute(LastOlympicYearSpan, 'old_value');
+	SetDataAttribute(LastOlympicYearSpan, 'old_value', null);
+}
+
+function MakeChangesLastOlympicYear(response) {
+	if (response.type == 'bad') {
+		CancelLastOlympicYear();
+	}
+}
+
+function ConfirmLastOlympicYear() {
+	EndLastOlympicYearModification();
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, LastOlympicYear: LastOlympicYearSpan.textContent, type: 'ChangeLastOlympicYear'}, MakeChangesLastOlympicYear);
+}
+
+
+function ModifyLastOlympicYear() {
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	SetDataAttribute(LastOlympicYearSpan, 'old_value', LastOlympicYearSpan.innerHTML);
+	LastOlympicYearSpan.classList.add('ContentEditable');
+	LastOlympicYearSpan.setAttribute('contenteditable', 'true');
+	
+	var subtitle = document.getElementsByClassName('PageSubtitle')[2];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.add('hidden');
+	confirm_button.classList.remove('hidden');
+	cancel_button.classList.remove('hidden');
+}

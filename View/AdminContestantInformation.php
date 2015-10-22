@@ -34,6 +34,19 @@ global $v_contestant, $v_contests;
 ?>
 </h3>
 
+<h3 class='PageSubtitle'>
+	<span>Ultimo anno IMO: </span>
+	<span id='ContestantLastOlympicYear'><?=$v_contestant['LastOlympicYear']?></span>
+<?php
+	$ButtonsSubtitle3 = ['class'=>['ButtonsSubtitle'], 'buttons'=>[
+		'modify'=>['onclick'=>'ModifyLastOlympicYear()'], 
+		'confirm'=>['onclick'=>'ConfirmLastOlympicYear()', 'hidden'=>true], 
+		'cancel'=>['onclick'=>'CancelLastOlympicYear()', 'hidden'=>true] 
+	]];
+	InsertDom('buttons', $ButtonsSubtitle3);
+?>
+</h3>
+
 <?php
 $columns = [];
 $columns[]=['id'=>'contest', 'name'=>'Gara', 'class'=>['ContestColumn'], 'order'=>1, 'type'=>'string'];
