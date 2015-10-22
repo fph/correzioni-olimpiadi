@@ -1,10 +1,12 @@
+<?php
+	global $MainBarUserId, $MainBarUsername, $v_content;
+?>
 <div id='MainBar_container'>
 	<div id='MainBar_floater'>
 		<div id='MainBar_inner'>
-			<a href='index.php'> <h1 id='MainBar_title'> Olimpiadi di Matematica - Correzioni </h1> </a>
+			<a href='<?=($v_content !== 'ParticipationRequest')?'index.php':'ParticipationRequest.php'?>'> <h1 id='MainBar_title'> Olimpiadi di Matematica - Correzioni </h1> </a>
 			
 			<?php
-				global $MainBarUserId, $MainBarUsername;
 				if ($MainBarUserId != -1) {
 			?>
 			<div id='MainBar_UserList'>
