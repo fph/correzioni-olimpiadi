@@ -6,7 +6,7 @@ SuperRequire_once('General', 'PermissionManager.php');
 SuperRequire_once('Modify', 'ObjectSender.php');
 
 
-function AddContestant($db, $name, $surname, $school, $email) {
+function AddContestant($db, $name, $surname, $school, $email, $LastOlympicYear) {
 	if (!is_string($name) or strlen($name) > ContestantName_MAXLength or strlen($name) == 0) {
 		return ['type'=>'bad', 'text'=>'Il nome deve essere una stringa di al più '.ContestantName_MAXLength.' caratteri'];
 	}
@@ -23,22 +23,24 @@ function AddContestant($db, $name, $surname, $school, $email) {
 	if (!is_string($email) or strlen($email) > ContestantEmail_MAXLength) {
 		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.ContestantEmail_MAXLength.' caratteri'];
 	}
+	
+	$LastOlympicYear = intval($LastOlympicYear);
 
-	Query($db, QueryInsert('Contestants', ['name'=>$name, 'surname'=>$surname, 'school'=>$school, 'email'=>$email]));
+	Query($db, QueryInsert('Contestants', ['name'=>$name, 'surname'=>$surname, 'school'=>$school, 'email'=>$email, 'LastOlympicYear'=>$LastOlympicYear]));
 
 	return ['type'=>'good', 'text'=>'Partecipante creato con successo', 'data'=>[
-	'ContestantId'=> $db->insert_id, 'surname'=>$surname, 'name'=>$name, 'school'=>$school, 'email'=>$email]];
+	'ContestantId'=> $db->insert_id, 'surname'=>$surname, 'name'=>$name, 'school'=>$school, 'email'=>$email, 'LastOlympicYear'=>$LastOlympicYear]];
 }
 
 function RemoveContestant($db, $ContestantId) {
-	
 	$result = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	if (is_null($result)) {
 		return ['type'=>'bad', 'text'=>'Il partecipante selezionato non esiste'];
 	}
 
 	Query($db, QueryDelete('Contestants', ['id'=>$ContestantId]));
-
+	//TODO: All participations should be deleted?
+	
 	return ['type'=>'good', 'text'=>'Partecipante eliminato con successo'];
 }
 
@@ -167,6 +169,17 @@ function ChangeEmail($db, $ContestantId, $email) {
 	return ['type'=>'good', 'text'=>'L\'email del partecipante è stata modificata con successo'];
 }
 
+function ChangeLastOlympicYear($db, $ContestantId, $LastOlympicYear) {
+	$LastOlympicYear = intval($LastOlympicYear);
+	$Exist1 = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
+	if (is_null($Exist1)) {
+		return ['type'=>'bad', 'text'=>'Il partecipante selezionato non esiste'];
+	}
+
+	Query($db, QueryUpdate('Contestants', ['id'=>$ContestantId], ['LastOlympicYear'=>$LastOlympicYear]));
+	return ['type'=>'good', 'text'=>'L\'ultimo anno olimpico del partecipante è stato modificato con successo'];	
+}
+
 $db= OpenDbConnection();
 if (IsAdmin($db, GetUserIdBySession()) == 0) {
 	$db -> close();
@@ -175,7 +188,7 @@ if (IsAdmin($db, GetUserIdBySession()) == 0) {
 }
 
 $data = json_decode($_POST['data'], 1);
-if ($data['type'] == 'add') SendObject(AddContestant($db, $data['name'], $data['surname'], $data['school'], $data['email']));
+if ($data['type'] == 'add') SendObject(AddContestant($db, $data['name'], $data['surname'], $data['school'], $data['email'], $data['LastOlympicYear']));
 else if ($data['type'] == 'remove') SendObject(RemoveContestant($db, $data['ContestantId']));
 else if ($data['type'] == 'AddParticipation') {
 	if (isset($_FILES['solutions'])) SendObject(AddParticipation($db, $data['ContestantId'], $data['ContestId'], $_FILES['solutions']));
@@ -185,6 +198,7 @@ else if ($data['type'] == 'RemoveParticipation') SendObject(RemoveParticipation(
 else if ($data['type'] == 'ChangeNameAndSurname') SendObject(ChangeNameAndSurname($db, $data['ContestantId'], $data['name'], $data['surname']));
 else if ($data['type'] == 'ChangeSchool') SendObject(ChangeSchool($db, $data['ContestantId'], $data['school']));
 else if ($data['type'] == 'ChangeEmail') SendObject(ChangeEmail($db, $data['ContestantId'], $data['email']));
+else if ($data['type'] == 'ChangeLastOlympicYear') SendObject(ChangeLastOlympicYear($db, $data['ContestantId'], $data['LastOlympicYear']));
 else SendObject(['type'=>'bad', 'text'=>'L\'azione scelta non esiste']);
 
 

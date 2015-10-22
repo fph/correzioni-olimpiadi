@@ -4,11 +4,12 @@ function AddContestant(response) {
 		var name = response.data['name'];
 		var school = response.data['school'];
 		var email = response.data['email'];
+		var LastOlympicYear = response.data['LastOlympicYear'];
 		var ContestantId = response.data['ContestantId'];
 		
 		AddRow(document.getElementById('AdminContestantsTable'), {
 			redirect: {'ContestantId': ContestantId},
-			values: {'surname': surname, 'name': name, 'school': school, 'email': email} 
+			values: {'surname': surname, 'name': name, 'school': school, 'email': email, 'LastOlympicYear': LastOlympicYear} 
 		}, 'surname');
 	}
 }
@@ -18,5 +19,6 @@ function AddContestantRequest(inputs) {
 	var name = inputs.namedItem('name').value;
 	var school = inputs.namedItem('school').value;
 	var email = inputs.namedItem('email').value;
-	MakeAjaxRequest('../Modify/ManageContestant.php', {surname: surname, name: name, school: school, email: email, type: 'add'}, AddContestant);
+	var LastOlympicYear = inputs.namedItem('LastOlympicYear').value;
+	MakeAjaxRequest('../Modify/ManageContestant.php', {surname: surname, name: name, school: school, email: email, LastOlympicYear: LastOlympicYear, type: 'add'}, AddContestant);
 }
