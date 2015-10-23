@@ -13,10 +13,10 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 </div>
 
 <div id='TransitionContainer'>
-	<div class='TransitionButton ActiveButton' id='PreviousButton'>
+	<div class='TransitionButton' id='PreviousButton' onclick='PreviousTransition()'>
 		Indietro
 	</div>
-	<div class='TransitionButton ActiveButton' id='NextButton'>
+	<div class='TransitionButton hidden' id='NextButton' onclick='NextTransition()'>
 		Avanti
 	</div>
 	
@@ -56,7 +56,9 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 	</div>
 
 	<div class='TransitionDiv BeforeTransition' id='CheckCodeDiv'>
-		Quando ti arriva la mail contenente il codice di verifica, inserisci tale codice in questa pagina (quindi non chiudere la pagina).
+		<p>
+			Quando ti arriva la mail contenente il codice di verifica, inserisci tale codice in questa pagina (quindi non chiudere la pagina).
+		</p>
 		<!--
 		Se il codice non dovesse arrivarti entro una decina di minuti, riprova.
 		-->
@@ -74,8 +76,9 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 	<div class='TransitionDiv BeforeTransition' id='ContestantInfoDiv'>
 		<p class='NewUser'>Compila il seguente questionario.</p>
 		<p class='OldUser'>Conferma i seguenti dati oppure modificali se non sono corretti.</p>
-		I dati saranno trattati con la massima riservatezza ed usati unicamente per gestire le ammissioni allo stage ed il suo svolgimento. 
-
+		<p>
+			I dati saranno trattati con la massima riservatezza ed usati unicamente per gestire le ammissioni allo stage ed il suo svolgimento. 
+		</p>
 		<form id='ContestantInfo' class='BigForm' onsubmit='CreateContestant(this.elements); return false'>
 			<input type='hidden' name='OldUser'>
 			<input type='hidden' name='code'>

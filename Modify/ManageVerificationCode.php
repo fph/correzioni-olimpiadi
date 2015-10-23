@@ -19,15 +19,15 @@
 			return ['type'=>'bad', 'text'=>'L\'email è già usata da un partecipante'];
 		}
 		
-		// Checking whether is passed enough time from last email sent with a code
-		// $row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail]));
-		// if (!is_null($row)) {
-			// $timestamp = new Datetime($row['timestamp']);
-			// $timestamp->add(new DateInterval('PT10M')); // sums 10 minutes to the timestamp
-			// if (new Datetime('now') < $timestamp) {
-				// return ['type'=>'bad', 'text'=>'Prima di poter inviare un altro codice devono passare 10 minuti'];
-			// }
-		// }
+		Checking whether is passed enough time from last email sent with a code
+		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail]));
+		if (!is_null($row)) {
+			$timestamp = new Datetime($row['timestamp']);
+			$timestamp->add(new DateInterval('PT10M')); // sums 10 minutes to the timestamp
+			if (new Datetime('now') < $timestamp) {
+				return ['type'=>'bad', 'text'=>'Prima di poter inviare un altro codice devono passare 10 minuti'];
+			}
+		}
 		
 		$code = GenerateRandomString();		
 				

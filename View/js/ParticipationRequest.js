@@ -3,6 +3,29 @@ var TransitionIterator = 0;
 var LastTransitionIterator = 0;
 
 
+function UpdateButtons() {
+	if (TransitionIterator == TransitionDivs.length-1) {
+		document.getElementById('PreviousButton').classList.add('hidden');
+		document.getElementById('NextButton').classList.add('hidden');
+		
+		return;
+	}
+	
+	if (TransitionIterator == 0) {
+		document.getElementById('PreviousButton').classList.add('hidden');
+	}
+	else {
+		document.getElementById('PreviousButton').classList.remove('hidden');
+	}
+	
+	if (TransitionIterator == LastTransitionIterator) {
+		document.getElementById('NextButton').classList.add('hidden');
+	}
+	else {
+		document.getElementById('NextButton').classList.remove('hidden');
+	}
+}
+
 function NextTransition() {
 	var id1 = TransitionDivs[TransitionIterator];
 	var id2 = TransitionDivs[TransitionIterator+1];
@@ -20,13 +43,7 @@ function NextTransition() {
 	
 	if (TransitionIterator > LastTransitionIterator) LastTransitionIterator = TransitionIterator;
 	
-	if (TransitionIterator == LastTransitionIterator) {
-		// TODO: Disabilitare bottone avanti
-	}
-	
-	if (TransitionIterator == TransitionDivs.length - 1) {
-		// TODO: Concluso, far scomparire tutti i bottoni
-	}
+	UpdateButtons();
 }
 
 function PreviousTransition() {
@@ -44,9 +61,7 @@ function PreviousTransition() {
 		document.getElementById(id2).classList.add('DuringTransition');
 	}
 	
-	if (TransitionIterator == 0) {
-		// TODO: Disabilitare bottone indietro
-	}
+	UpdateButtons();
 }
 
 function SetOldUser(val) {

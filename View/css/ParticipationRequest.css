@@ -3,6 +3,11 @@ body {
 	letter-spacing: 0.3px;
 }
 
+#RegistrationEndDiv {
+	font-size: large;
+	color: forestgreen;
+}
+
 /*
 	FormContainer improvement
 */
@@ -45,7 +50,7 @@ body {
 div.TransitionDiv {
 	transition: opacity 1s, left 1s;
 	position: absolute;
-	top: 30px;
+	top: 50px;
 	width: 100%;
 }
 
@@ -70,30 +75,30 @@ div.AfterTransition {
 .TransitionButton {
 	position: absolute;
 	top: 0px;
-	background-color: aliceblue;
-	border: 1px solid black;
+	background: linear-gradient(to top, green, lightgreen);
 	font-size: 1.2em;
 	font-weight: bold;
 	width: 4.5em;
 	cursor: pointer;
+	box-shadow: 6px 6px 5px #888888;
+	transition: color 0.4s;
 }
 
 .TransitionButton:hover {
-	background-color: blue;
+	background: linear-gradient(to top, darkgreen, green, lightgreen);
 	color: white;
-	border-color: white;
 }
 
 #PreviousButton {
-	left: 0px;
-	border-radius: 20px 0px 0px 20px;
+	left: -20px;
+	border-radius: 20px 3px 3px 20px;
 	padding: 2px 9px 2px 20px;
 	text-align: right;
 }
 
 #NextButton {
-	right: 0px;
-	border-radius: 0px 20px 20px 0px;
+	right: -20px;
+	border-radius: 3px 20px 20px 3px;
 	padding: 2px 20px 2px 9px;
 	text-align: left;
 }	
