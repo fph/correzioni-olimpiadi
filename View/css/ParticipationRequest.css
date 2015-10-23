@@ -1,5 +1,6 @@
 body {
 	line-height: 1.4;
+	letter-spacing: 0.3px;
 }
 
 /*
@@ -44,13 +45,13 @@ body {
 div.TransitionDiv {
 	transition: opacity 1s, left 1s;
 	position: absolute;
-	top: 0px;
+	top: 30px;
 	width: 100%;
 }
 
 div.BeforeTransition {
 	opacity: 0;
-	left: -2000px;
+	left: +2000px;
 }
 
 div.DuringTransition {
@@ -60,8 +61,42 @@ div.DuringTransition {
 
 div.AfterTransition {
 	opacity: 0;
-	left: 2000px;
+	left: -2000px;
 }
+
+/*
+	Transition buttons
+*/
+.TransitionButton {
+	position: absolute;
+	top: 0px;
+	background-color: aliceblue;
+	border: 1px solid black;
+	font-size: 1.2em;
+	font-weight: bold;
+	width: 4.5em;
+	cursor: pointer;
+}
+
+.TransitionButton:hover {
+	background-color: blue;
+	color: white;
+	border-color: white;
+}
+
+#PreviousButton {
+	left: 0px;
+	border-radius: 20px 0px 0px 20px;
+	padding: 2px 9px 2px 20px;
+	text-align: right;
+}
+
+#NextButton {
+	right: 0px;
+	border-radius: 0px 20px 20px 0px;
+	padding: 2px 20px 2px 9px;
+	text-align: left;
+}	
 
 /*
 	BigForm style

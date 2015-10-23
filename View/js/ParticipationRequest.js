@@ -1,4 +1,13 @@
-function AdvanceTransition(id1, id2) {
+var TransitionDivs = ['OldUserDiv', 'SendCodeDiv', 'CheckCodeDiv', 'ContestantInfoDiv', 'ParticipationInfoDiv', 'RegistrationEndDiv'];
+var TransitionIterator = 0;
+var LastTransitionIterator = 0;
+
+
+function NextTransition() {
+	var id1 = TransitionDivs[TransitionIterator];
+	var id2 = TransitionDivs[TransitionIterator+1];
+	TransitionIterator++;
+	
 	if (id1 != null) {
 		document.getElementById(id1).classList.remove('DuringTransition');
 		document.getElementById(id1).classList.add('AfterTransition');
@@ -7,6 +16,36 @@ function AdvanceTransition(id1, id2) {
 	if (id2 != null) {
 		document.getElementById(id2).classList.remove('BeforeTransition');
 		document.getElementById(id2).classList.add('DuringTransition');
+	}
+	
+	if (TransitionIterator > LastTransitionIterator) LastTransitionIterator = TransitionIterator;
+	
+	if (TransitionIterator == LastTransitionIterator) {
+		// TODO: Disabilitare bottone avanti
+	}
+	
+	if (TransitionIterator == TransitionDivs.length - 1) {
+		// TODO: Concluso, far scomparire tutti i bottoni
+	}
+}
+
+function PreviousTransition() {
+	var id1 = TransitionDivs[TransitionIterator];
+	var id2 = TransitionDivs[TransitionIterator-1];
+	TransitionIterator--;
+	
+	if (id1 != null) {
+		document.getElementById(id1).classList.remove('DuringTransition');
+		document.getElementById(id1).classList.add('BeforeTransition');
+	}
+	
+	if (id2 != null) {
+		document.getElementById(id2).classList.remove('AfterTransition');
+		document.getElementById(id2).classList.add('DuringTransition');
+	}
+	
+	if (TransitionIterator == 0) {
+		// TODO: Disabilitare bottone indietro
 	}
 }
 
@@ -27,7 +66,7 @@ function SetOldUser(val) {
 	document.getElementById('CheckCodeForm').elements.namedItem('OldUser').value = val;
 	document.getElementById('ContestantInfo').elements.namedItem('OldUser').value = val;
 	
-	AdvanceTransition(null, 'SendCodeDiv');
+	NextTransition();
 }
 
 function CodeSent(response) {
@@ -36,7 +75,7 @@ function CodeSent(response) {
 		document.getElementById('CheckCodeForm').elements.namedItem('email').value = email;
 		document.getElementById('ContestantInfo').elements.namedItem('email').value = email;
 		
-		AdvanceTransition('SendCodeDiv', 'CheckCodeDiv');
+		NextTransition();
 	}
 }
 
@@ -66,7 +105,7 @@ function CodeConfirmed(response) {
 			ContestantInputs.namedItem('SchoolYear').value = SchoolYear;
 		}
 		
-		AdvanceTransition('SendCodeDiv', 'ContestantInfoDiv');
+		NextTransition();
 	}
 }
 
@@ -81,7 +120,7 @@ function ContestantCreated(response) {
 	if (response.type=='good') {
 		document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = response.data['ContestantId'];
 			
-		AdvanceTransition('ContestantInfoDiv', 'ParticipationInfoDiv');
+		NextTransition();
 	}
 }
 
@@ -108,7 +147,7 @@ function ChangingVolunteer(val) {
 
 function ParticipationCreated(response) {
 	if (response.type=='good') {
-		AdvanceTransition('ParticipationInfoDiv', 'RegistrationEndDiv');
+		NextTransition();
 	}
 }
 

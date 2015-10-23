@@ -12,17 +12,28 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 -->
 </div>
 
-
-<div class='ParticipationRequestDiv'>
-	Hai mai usato questo sito? 
-	<select name='AlreadyRegistered' onchange='SetOldUser(this.value)'>
-		<option value='' style='display:none;'></option>
-		<option value='1'>Sì</option>
-		<option value='0'>No</option>
-	</select>
-</div>
-
 <div id='TransitionContainer'>
+	<div class='TransitionButton ActiveButton' id='PreviousButton'>
+		Indietro
+	</div>
+	<div class='TransitionButton ActiveButton' id='NextButton'>
+		Avanti
+	</div>
+	
+	
+	<div class='TransitionDiv DuringTransition' id='OldUserDiv'>
+		<p>
+			Se hai mai usato questo sito oppure hai provato a partecipare (indifferentemente dall'esito della richiesta) al <em>Winter Camp 2015</em> o al <em>Senior 2015</em> allora indica che sei già registrato.
+			Se invece non hai mai usato questo sito e non hai mandato gli esercizi per nessuno dei due stage precedenti allora indica che non sei registrato.
+		</p>
+		Sei già registrato su questo sito? 
+		<select name='AlreadyRegistered' onchange='SetOldUser(this.value)'>
+			<option value='' style='display:none;'></option>
+			<option value='1'>Sì</option>
+			<option value='0'>No</option>
+		</select>
+	</div>
+	
 	<div class='TransitionDiv BeforeTransition' id='SendCodeDiv'>
 		<p class='NewUser'>
 			Inserisci il tuo indirizzo email. L'email sarà usata per comunicarti i risultati delle correzioni e tutte le informazioni riguardanti lo stage.
