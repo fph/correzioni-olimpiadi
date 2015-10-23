@@ -13,7 +13,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 </div>
 
 <div id='TransitionContainer'>
-	<div class='TransitionButton' id='PreviousButton' onclick='PreviousTransition()'>
+	<div class='TransitionButton hidden' id='PreviousButton' onclick='PreviousTransition()'>
 		Indietro
 	</div>
 	<div class='TransitionButton hidden' id='NextButton' onclick='NextTransition()'>
