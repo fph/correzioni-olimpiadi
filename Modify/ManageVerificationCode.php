@@ -19,7 +19,7 @@
 			return ['type'=>'bad', 'text'=>'L\'email è già usata da un partecipante'];
 		}
 		
-		Checking whether is passed enough time from last email sent with a code
+		// Checking whether is passed enough time from last email sent with a code
 		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail]));
 		if (!is_null($row)) {
 			$timestamp = new Datetime($row['timestamp']);
