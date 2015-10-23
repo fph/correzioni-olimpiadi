@@ -75,17 +75,17 @@ div.AfterTransition {
 .TransitionButton {
 	position: absolute;
 	top: 0px;
-	background: linear-gradient(to top, green, lightgreen);
+	background: linear-gradient(to top, green, rgba(0, 128, 0, 0.5));
+	color: white;
 	font-size: 1.2em;
 	font-weight: bold;
 	width: 4.5em;
 	cursor: pointer;
-	box-shadow: 6px 6px 5px #888888;
-	transition: color 0.4s;
+	border: 1px solid green;
 }
 
 .TransitionButton:hover {
-	background: linear-gradient(to top, darkgreen, green, lightgreen);
+	background: linear-gradient(to top, green, lightgreen);
 	color: white;
 }
 

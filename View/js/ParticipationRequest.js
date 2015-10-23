@@ -134,7 +134,15 @@ function CheckCode(inputs) {
 function ContestantCreated(response) {
 	if (response.type=='good') {
 		document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = response.data['ContestantId'];
-			
+		
+		// No more new user
+		for (var i = 0; i < AllNewUserThings.length; i++) AllNewUserThings[i].classList.add('hidden');
+		for (var i = 0; i < AllOldUserThings.length; i++) AllOldUserThings[i].classList.remove('hidden');
+		
+		document.getElementById('SendCodeForm').elements.namedItem('OldUser').value = '1';
+		document.getElementById('CheckCodeForm').elements.namedItem('OldUser').value = '1';
+		document.getElementById('ContestantInfo').elements.namedItem('OldUser').value = '1';	
+		
 		NextTransition();
 	}
 }
