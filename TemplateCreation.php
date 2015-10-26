@@ -18,9 +18,12 @@ $jsInclude = ['ViewParticipation'=>['CorrectionModification', 'ViewParticipation
 			'AdminContestInformation'=>['AdminContestInformation'],
 			'AdminContestantsOfAContest'=>['AdminContestantsOfAContest'],
 			'AdminUsersOfAContest'=>['AdminUsersOfAContest'],
-			'AdminStatistics'=>['AdminStatistics'] ];
+			'AdminStatistics'=>['AdminStatistics'],
+			'ParticipationRequest'=>['ParticipationRequest']];
 $cssInclude = ['AdminStatistics'=>['AdminStatistics'],
-			'ViewParticipation'=>['ViewParticipation'] ];
+			'ViewParticipation'=>['ViewParticipation'],
+			'ParticipationRequest'=>['ParticipationRequest'],
+			'AdminContestInformation'=>['AdminContestInformation'] ];
 
 global $DomInformation;
 $DomInformation = [
@@ -84,9 +87,10 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 
 <body> 
 	<?php 
-		global $MainBarUserId, $MainBarUsername;
+		global $MainBarUserId, $MainBarUsername, $v_content;
 		$MainBarUserId = GetUserIdBySession();
 		$MainBarUsername = GetUsernameBySession();
+		$v_content = $content;
 		SuperInclude('View', 'MainBar.php'); 
 	?>
 	<div class='internalBody' id='<?=$content?>_InternalBody'>

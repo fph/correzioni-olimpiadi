@@ -15,10 +15,13 @@
 	
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	
-	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
+	$participations=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
 	
-	foreach ($v_contestants as &$con) {
-		$con = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
+	$v_contestants = [];
+	foreach ($participations as $participation) {
+		$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
+		$contestant['SolutionsBoolean'] = is_null($participation['solutions'])?0:1;
+		$v_contestants []= $contestant;
 	}
 	
 	$db->close();

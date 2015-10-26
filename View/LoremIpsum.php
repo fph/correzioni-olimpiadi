@@ -1,5 +1,15 @@
 <h1 class='pageTitle'> Lorem Ipsum </h1>
 
+<?php 
+	global $v_StupidParticipation;
+	if (is_null($v_StupidParticipation['solutions'])) {
+		echo 'NO PROBLEM';
+	}
+	else {
+		echo 'CAZZI AMARI';
+	}
+?>
+
 <?php InsertDom('LinkTable', [
 	['name'=>'Primo link', 'redirect'=>['url'=>'index']], 
 	['name'=>'Secondo link', 'redirect'=>['url'=>'ViewContestantsOfAContest', 'parameters'=>['ContestId' => 15] ] ] 

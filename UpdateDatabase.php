@@ -123,6 +123,95 @@ function ChangeCommentToText() {
 	return true;
 }
 
+function AddLastOlympicYearColumn() {
+	$db = OpenDbConnection();
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contestants', 'COLUMN_NAME'=>'LastOlympicYear']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Contestants` ADD COLUMN `LastOlympicYear` int NOT NULL DEFAULT 2050';
+		Query($db, $query);
+		
+		echo 'The \'LastOlympicYear\' column has been added in the \'Contestants\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'LastOlympicYear\' column already exists in the \'Contestants\' table.'.NewLine();
+	}
+	
+	$db->close();
+	return true;
+}
+
+function AddFilenamesColumns() {
+	$db = OpenDbConnection();
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'solutions']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Participations` ADD COLUMN `solutions` varchar(31) DEFAULT NULL';
+		Query($db, $query);
+		
+		echo 'The \'solutions\' column has been added in the \'Participations\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'solutions\' column already exists in the \'Participations\' table.'.NewLine();
+	}
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contests', 'COLUMN_NAME'=>'SolutionsZip']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Contests` ADD COLUMN `SolutionsZip` varchar(31) DEFAULT NULL';
+		Query($db, $query);
+		
+		echo 'The \'SolutionsZip\' column has been added in the \'Contests\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'SolutionsZip\' column already exists in the \'Contests\' table.'.NewLine();
+	}
+	
+	$db->close();
+	return true;
+}
+
+
+function CreateVerificationCodesTable() {
+	$db = OpenDbConnection();
+	
+	$query=
+	'CREATE TABLE IF NOT EXISTS `VerificationCodes` (
+		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
+		`code` char(12) NOT NULL,
+		`timestamp` timestamp NOT NULL,
+		
+		PRIMARY KEY (`email`)
+	) ENGINE=InnoDB';
+	Query($db, $query);
+	echo 'The \'VerificationCodes\' table has been created (if it already existed nothing has been changed).'.NewLine();
+	
+	$db->close();
+	return true;
+}
+
+function AddContestantsSchoolCityColumn() {
+	if (!defined('ContestantSchoolCity_MAXLength')) {
+		echo 'Before updating, Constants.php must be modified (defining \'ContestantSchoolCity_MAXLength\').'.NewLine();
+		return false;
+	}
+	
+	$db = OpenDbConnection();
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contestants', 'COLUMN_NAME'=>'SchoolCity']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Contestants` ADD COLUMN `SchoolCity` varchar('.ContestantSchoolCity_MAXLength.') NOT NULL DEFAULT \'\'';
+		Query($db, $query);
+		
+		echo 'The \'SchoolCity\' column has been added in the \'Contestants\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'SchoolCity\' column already exists in the \'Contestants\' table.'.NewLine();
+	}
+	
+	$db->close();
+	return true;
+}
+
 if (!AddContestantsEmailColumn()) {
 	die('Error while adding contestant email column');
 }
@@ -141,6 +230,22 @@ if (!ChangeMarkToFloat()) {
 
 if (!ChangeCommentToText()) {
 	die('Error while changing mark column from VARCHAR to TEXT');
+}
+
+if (!AddLastOlympicYearColumn()) {
+	die('Error while changing mark column from VARCHAR to TEXT');
+}
+
+if (!AddFilenamesColumns()) {
+	die('Error while changing mark column from VARCHAR to TEXT');
+}
+
+if (!CreateVerificationCodesTable()) {
+	die('Error while creating VerificationCodes table');
+}
+
+if (!AddContestantsSchoolCityColumn()) {
+	die('Error while adding SchoolCity column');
 }
 
 echo 'Database has been updated successfully!'.NewLine();

@@ -13,24 +13,24 @@
 	
 	$ContestId = $_GET['ContestId'];
 	
-	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	$v_contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 
 	$admins = ManyResultQuery($db, QuerySelect('Users', ['role'=>1]));
 	$SuperAdmins = ManyResultQuery($db, QuerySelect('Users', ['role'=>2]));
 	$permissions = ManyResultQuery($db, QuerySelect('Permissions', ['ContestId'=>$ContestId]));
 	
-	$v_users=[];
+	$v_users = [];
 	
-	foreach ($admins as &$user) {
-		$v_users[]=$user;
+	foreach ($admins as $user) {
+		$v_users []= $user;
 	}
-	foreach ($SuperAdmins as &$user) {
-		$v_users[]=$user;
+	foreach ($SuperAdmins as $user) {
+		$v_users []= $user;
 	}
-	foreach ($permissions as &$permission) {
+	foreach ($permissions as $permission) {
 		$user = OneResultQuery($db, QuerySelect('Users', ['id'=>$permission['UserId']]));
 		if ($user['role'] == 0) {
-			$v_users[]=$user;
+			$v_users []= $user;
 		}
 	}
 	

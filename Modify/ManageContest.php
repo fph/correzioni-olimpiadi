@@ -34,6 +34,8 @@ function RemoveContest($db, $ContestId) {
 	}
 	
 	Query($db, QueryDelete('Contests', ['id'=>$ContestId]));
+	// TODO: Should delete all corrections, all remaining files and so on (should call RemoveParticipation)
+	
 	return ['type'=>'good', 'text'=>'La gara è stata eliminata con successo', 'ContestId'=>$ContestId];
 }
 
@@ -61,6 +63,58 @@ function UnblockContest($db, $ContestId) {
 	
 	Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['blocked'=>0]));
 	return ['type'=>'good', 'text'=>'La gara è stata sbloccata con successo'];
+}
+
+function CreateZip($db, $ContestId) {
+	$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	
+	if (is_null($contest)) {
+		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
+	}
+	
+	$AllParticipations = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
+	
+	// Checking whether the is at least one pdf (because otherwise ZipArchive doesn't create the zip file)
+	$NoPdf = true;
+	foreach ($AllParticipations as $participation) {
+		if (!is_null($participation['solutions'])) {
+			$NoPdf = false;
+			break;
+		}
+	}
+	if ($NoPdf === true) {
+		return  ['type'=>'bad', 'text'=>'Non è presente neanche un elaborato'];
+	}
+	
+	// Generate filename
+	if (is_null($contest['SolutionsZip'])) {
+		$ZipName = GenerateRandomString();	
+		while (file_exists(UploadDirectory.$ZipName.'.zip')) $ZipName = GenerateRandomString();
+		Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['SolutionsZip'=>$ZipName]));
+		$contest['SolutionsZip'] = $ZipName;
+	}
+	
+	$zip = new ZipArchive;
+	$zip->open(UploadDirectory.$contest['SolutionsZip'].'.zip', ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+	
+	foreach ($AllParticipations as $participation) {
+		if (!is_null($participation['solutions'])) {
+			$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
+			$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
+			
+			// Dealing with homonyms
+			if ($zip->locateName($CleanedSurname.'.pdf') !== false) {
+				$i = 2;
+				while ($zip->locateName($CleanedSurname.strval($i).'.pdf') !== false) $i++;
+				$CleanedSurname .= strval($i);
+			}
+			$zip->addFile(UploadDirectory.$participation['solutions'].'.pdf', $CleanedSurname.'.pdf');
+		}
+	}
+	
+	$zip->close();
+	
+	return ['type'=>'good', 'text'=>'Il file zip è stato generato con successo'];
 }
 
 function ChangeName($db, $ContestId, $name) {
@@ -170,6 +224,7 @@ if ($data['type'] == 'add') SendObject(AddContest($db, $data['name'], $data['dat
 else if ($data['type'] == 'remove') SendObject(RemoveContest($db, $data['ContestId']));
 else if ($data['type'] == 'block') SendObject(BlockContest($db, $data['ContestId']));
 else if ($data['type'] == 'unblock') SendObject(UnblockContest($db, $data['ContestId']));
+else if ($data['type'] == 'CreateZip') SendObject(CreateZip($db, $data['ContestId']));
 else if ($data['type'] == 'ChangeName') SendObject(ChangeName($db, $data['ContestId'], $data['name']));
 else if ($data['type'] == 'ChangeDate') SendObject(ChangeDate($db, $data['ContestId'], $data['date']));
 else if ($data['type'] == 'ChangeNameAndDate') SendObject(ChangeNameAndDate($db, $data['ContestId'], $data['name'], $data['date']));

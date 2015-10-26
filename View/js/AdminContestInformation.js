@@ -114,3 +114,13 @@ function ModifyCorrectionsState() {
 	select.selectedIndex=(GetDataAttribute(container, 'value') == 'block')?0: 1;
 	select.classList.remove('hidden');
 }
+
+function CreatedZip(response) {
+	if (response.type == 'good') {
+		document.getElementById('SolutionsZipButton').value = 'Rigenera lo zip degli elaborati';
+	}
+}
+
+function CreateZip() {
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:'CreateZip'}, CreatedZip);
+}

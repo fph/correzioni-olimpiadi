@@ -17,15 +17,31 @@ function AddParticipation(response) {
 		var surname = response.data['surname'];
 		var name = response.data['name'];
 		var ContestantId = response.data['ContestantId'];
+		var SolutionsBoolean = response.data['SolutionsBoolean'];
 		
-		AddRow(document.getElementById('AdminContestantsOfAContestTable'),
-		{	values: {'surname': surname, 'name': name},
-			data: {'contestant_id': ContestantId}},
-			'surname');
+		var solutions = '';
+		if (SolutionsBoolean) {
+			solutions = '<a href=\'../Modify/DownloadFiles.php?type=ParticipationPdf&ContestId=' + ContestId + '&ContestantId=' + ContestantId + '\' download class=\'DownloadIconTable\'><img src=\'../View/Images/DownloadPdf.png\' alt=\'Scarica elaborato\' title=\'Scarica elaborato\'></a>';
+		}
+		
+		AddRow(document.getElementById('AdminContestantsOfAContestTable'), {
+			values: {
+				'surname': surname, 
+				'name': name,
+				'solutions': solutions
+			},
+			data: {'contestant_id': ContestantId}
+		}, 'surname');
 	}
 }
 
 function AddParticipationRequest(inputs) {
+	// It is mandatory to use formdata as it is the only way to send a file through ajax
+	// Anyway it sends everything in the usual 'data' way apart from the pdf file.
+	var ParticipationData = new FormData();
+	ParticipationData.append('solutions', inputs.namedItem('solutions').files[0]);
 	var ContestantId = inputs.namedItem('ContestantId').value;
-	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestId: ContestId, ContestantId: ContestantId, type: 'AddParticipation'}, AddParticipation);
+	ParticipationData.append('data', JSON.stringify({ContestId: ContestId, ContestantId: ContestantId, type: 'AddParticipation'}));
+	
+	MakeAjaxRequest('../Modify/ManageContestant.php', ParticipationData, AddParticipation, null, true);
 }

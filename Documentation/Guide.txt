@@ -16,6 +16,10 @@ INSTALLATION
 	
 	In order to use the mail-related feature you should install the PHPMailer library in a folder included in PHP include_path (e.g. /usr/share/pear) and add the openssl extension to php.
 	
+	Moreover you should change (in php.ini or in an equivalent configuration file) the constants post_max_size, upload_max_filesize. They should be raised at 50M (or more depending on the value of PdfSize_MAX you choose in Constants.php).
+	
+	Always in php.ini, you should uncomment the line that enables the zip extension (named zip.so).
+	
 	Then execute InitDatabase.php which will create the whole database populating it nearly randomly.
 	
 	Now you should have a properly working system.

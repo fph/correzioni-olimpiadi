@@ -90,9 +90,47 @@ function ModifySchool() {
 	var subtitle = document.getElementsByClassName('PageSubtitle')[0];
 }
 
+//~ SchoolCity
+function EndSchoolCityModification() {
+	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+	
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	SchoolCitySpan.classList.remove('ContentEditable');
+	SchoolCitySpan.setAttribute('contenteditable', 'false');
+}
+
+function CancelSchoolCity() {
+	EndSchoolCityModification();
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	SchoolCitySpan.innerHTML=GetDataAttribute(SchoolCitySpan, 'old_value');
+	SetDataAttribute(SchoolCitySpan, 'old_value', null);
+}
+
+function MakeChangesSchoolCity(response) {
+	if (response.type == 'bad') {
+		CancelSchoolCity();
+	}
+}
+
+function ConfirmSchoolCity() {
+	EndSchoolCityModification();
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, SchoolCity: SchoolCitySpan.innerHTML, type: 'ChangeSchoolCity'}, MakeChangesSchoolCity);
+}
+
+
+function ModifySchoolCity() {
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	SetDataAttribute(SchoolCitySpan, 'old_value', SchoolCitySpan.innerHTML);
+	SchoolCitySpan.classList.add('ContentEditable');
+	SchoolCitySpan.setAttribute('contenteditable', 'true');
+	
+	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+}
+
 //~ Email
 function EndEmailModification() {
-	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+	var subtitle = document.getElementsByClassName('PageSubtitle')[2];
 
 	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
 	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
@@ -133,7 +171,61 @@ function ModifyEmail() {
 	EmailSpan.classList.add('ContentEditable');
 	EmailSpan.setAttribute('contenteditable', 'true');
 	
-	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+	var subtitle = document.getElementsByClassName('PageSubtitle')[2];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.add('hidden');
+	confirm_button.classList.remove('hidden');
+	cancel_button.classList.remove('hidden');
+}
+
+//~ LastOlympicYear
+function EndLastOlympicYearModification() {
+	var subtitle = document.getElementsByClassName('PageSubtitle')[3];
+
+	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
+	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
+	var cancel_button=subtitle.getElementsByClassName('CancelButtonContainer')[0];
+
+	modify_button.classList.remove('hidden');
+	confirm_button.classList.add('hidden');
+	cancel_button.classList.add('hidden');
+	
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	LastOlympicYearSpan.classList.remove('ContentEditable');
+	LastOlympicYearSpan.setAttribute('contenteditable', 'false');
+}
+
+function CancelLastOlympicYear() {
+	EndLastOlympicYearModification();
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	LastOlympicYearSpan.innerHTML=GetDataAttribute(LastOlympicYearSpan, 'old_value');
+	SetDataAttribute(LastOlympicYearSpan, 'old_value', null);
+}
+
+function MakeChangesLastOlympicYear(response) {
+	if (response.type == 'bad') {
+		CancelLastOlympicYear();
+	}
+}
+
+function ConfirmLastOlympicYear() {
+	EndLastOlympicYearModification();
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, LastOlympicYear: LastOlympicYearSpan.textContent, type: 'ChangeLastOlympicYear'}, MakeChangesLastOlympicYear);
+}
+
+
+function ModifyLastOlympicYear() {
+	var LastOlympicYearSpan = document.getElementById('ContestantLastOlympicYear');
+	SetDataAttribute(LastOlympicYearSpan, 'old_value', LastOlympicYearSpan.innerHTML);
+	LastOlympicYearSpan.classList.add('ContentEditable');
+	LastOlympicYearSpan.setAttribute('contenteditable', 'true');
+	
+	var subtitle = document.getElementsByClassName('PageSubtitle')[3];
 
 	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
 	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];

@@ -14,35 +14,39 @@
 	
 	//PermissionChecked
 	
-	$v_MailSent=OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId], ['email']))['email'];
+	$participation = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	$v_MailSent = $participation['email'];
+	$v_SolutionsBoolean = !is_null($participation['solutions']);
 	
-	$v_admin=0;
-	if (IsAdmin($db, getUserIdBySession())) $v_admin=1;
-	else $v_admin=0;
+	
+	$v_admin = 0;
+	if (IsAdmin($db, getUserIdBySession())) $v_admin = 1;
+	else $v_admin = 0;
 
-	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
-	$v_contestant=OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
+	$v_contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	$v_contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 	
 	$problems = ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId]));
 	
-	$v_corrections=[];
+	$v_corrections = [];
 	
-	foreach ($problems as $pro) {
-		$nn = OneResultQuery($db, QuerySelect('Corrections', 
-		['ProblemId'=>$pro['id'], 'ContestantId'=>$ContestantId], 
+	foreach ($problems as $problem) {
+		$correction = OneResultQuery($db, QuerySelect('Corrections', 
+		['ProblemId'=>$problem['id'], 'ContestantId'=>$ContestantId], 
 		['mark', 'comment', 'UserId']
 		));
 		
-		if (is_null($nn)) {
-			$nn['mark']=$nn['UserId']=$nn['username']=null; //UserId is defined only to have the same object structure in both cases.
-			$nn['comment']='';
+		if (is_null($correction)) {
+			// UserId is defined only to have the same object structure in both cases.
+			$correction['mark'] = $correction['UserId'] = $correction['username'] = null; 
+			$correction['comment'] = '';
 		}
 		else {
-			$nn['username']=OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
+			$correction['username'] = OneResultQuery($db, QuerySelect('Users', ['id'=>$correction['UserId']], ['username']))['username'];
 		}
-		$nn['problem']=OneResultQuery($db, QuerySelect('Problems', ['id'=>$pro['id']]));
+		$correction['problem'] = OneResultQuery($db, QuerySelect('Problems', ['id'=>$problem['id']]));
 		
-		$v_corrections[]= $nn;
+		$v_corrections[]= $correction;
 	}
 	
 	

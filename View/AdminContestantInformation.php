@@ -23,14 +23,39 @@ global $v_contestant, $v_contests;
 </h3>
 
 <h3 class='PageSubtitle'>
-	<span id='ContestantEmail'><?=$v_contestant['email']?></span>
+	<span id='ContestantSchoolCity'><?=$v_contestant['SchoolCity']?></span>
 <?php
 	$ButtonsSubtitle2 = ['class'=>['ButtonsSubtitle'], 'buttons'=>[
+		'modify'=>['onclick'=>'ModifySchoolCity()'], 
+		'confirm'=>['onclick'=>'ConfirmSchoolCity()', 'hidden'=>true], 
+		'cancel'=>['onclick'=>'CancelSchoolCity()', 'hidden'=>true] 
+	]];
+	InsertDom('buttons', $ButtonsSubtitle2);
+?>
+</h3>
+
+<h3 class='PageSubtitle'>
+	<span id='ContestantEmail'><?=$v_contestant['email']?></span>
+<?php
+	$ButtonsSubtitle3 = ['class'=>['ButtonsSubtitle'], 'buttons'=>[
 		'modify'=>['onclick'=>'ModifyEmail()'], 
 		'confirm'=>['onclick'=>'ConfirmEmail()', 'hidden'=>true], 
 		'cancel'=>['onclick'=>'CancelEmail()', 'hidden'=>true] 
 	]];
-	InsertDom('buttons', $ButtonsSubtitle2);
+	InsertDom('buttons', $ButtonsSubtitle3);
+?>
+</h3>
+
+<h3 class='PageSubtitle'>
+	<span>Ultimo anno IMO: </span>
+	<span id='ContestantLastOlympicYear'><?=$v_contestant['LastOlympicYear']?></span>
+<?php
+	$ButtonsSubtitle4 = ['class'=>['ButtonsSubtitle'], 'buttons'=>[
+		'modify'=>['onclick'=>'ModifyLastOlympicYear()'], 
+		'confirm'=>['onclick'=>'ConfirmLastOlympicYear()', 'hidden'=>true], 
+		'cancel'=>['onclick'=>'CancelLastOlympicYear()', 'hidden'=>true] 
+	]];
+	InsertDom('buttons', $ButtonsSubtitle4);
 ?>
 </h3>
 

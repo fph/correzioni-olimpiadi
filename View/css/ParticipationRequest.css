@@ -1,0 +1,167 @@
+body {
+	line-height: 1.4;
+	letter-spacing: 0.3px;
+}
+
+#RegistrationEndDiv {
+	font-size: large;
+	color: forestgreen;
+}
+
+/*
+	FormContainer improvement
+*/
+div.FormContainer table {
+	min-width: 600px;
+	margin: 10px auto; 
+}
+
+div.FormContainer td {
+	padding: 10px;
+}
+
+div.FormContainer input {
+	display: block;
+	margin: 0px auto !important;
+	width: 100%
+}
+
+div.FormContainer input:not([type='submit']):not([type='button']) {
+	padding: 5px;
+	border-radius:5px;
+}
+
+div.FormContainer input[type='submit'] {
+	padding: 5px;
+}
+
+/*
+	Transition
+*/
+body {
+	overflow-x:hidden
+}
+
+#TransitionContainer {
+	position: relative;
+	margin: 30px 0px;
+}
+
+div.TransitionDiv {
+	transition: opacity 1s, left 1s;
+	position: absolute;
+	top: 50px;
+	width: 100%;
+}
+
+div.BeforeTransition {
+	opacity: 0;
+	left: +2000px;
+}
+
+div.DuringTransition {
+	opacity: 1;
+	left: 0px;
+}
+
+div.AfterTransition {
+	opacity: 0;
+	left: -2000px;
+}
+
+/*
+	Transition buttons
+*/
+.TransitionButton {
+	position: absolute;
+	top: 0px;
+	background: linear-gradient(to top, green, rgba(0, 128, 0, 0.5));
+	color: white;
+	font-size: 1.2em;
+	font-weight: bold;
+	width: 4.5em;
+	cursor: pointer;
+	border: 1px solid green;
+}
+
+.TransitionButton:hover {
+	background: linear-gradient(to top, green, lightgreen);
+	color: white;
+}
+
+#PreviousButton {
+	left: -20px;
+	border-radius: 20px 3px 3px 20px;
+	padding: 2px 9px 2px 20px;
+	text-align: right;
+}
+
+#NextButton {
+	right: -20px;
+	border-radius: 3px 20px 20px 3px;
+	padding: 2px 20px 2px 9px;
+	text-align: left;
+}	
+
+/*
+	BigForm style
+*/
+form.BigForm {
+	margin-top: 10px;
+	padding: 5px;
+}
+
+form.BigForm fieldset {
+	margin: 15px 0px;
+	padding: 10px 20px;
+	background-color: #F3F3F3;
+	border-radius: 5px;
+	border: 1px solid forestgreen;
+}
+
+form.BigForm legend {
+	color: forestgreen;
+	font-weight: bold;
+}
+
+form.BigForm label {
+	font-family: monospace;
+	font-size: 115%;
+}
+
+form.BigForm td {
+	padding: 3px 2px;
+}
+
+form.BigForm tr td:first-child {
+	width: 13em;
+}
+
+
+form.BigForm tr td:nth-child(2) {
+	width: 15em;
+}
+
+form.BigForm tr td:nth-child(3) {
+	font-style: italic;
+	font-size: 80%;
+	padding-left: 1em;
+}
+
+form.BigForm input[type='submit'] {
+	width: 100%;
+	padding: 10px;
+	font-weight: bold;
+}
+
+form.BigForm input:not([type='submit']):not([type='button']) {
+	padding: 5px;
+	border-radius:5px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+form.BigForm select {
+	padding: 4px;
+	width: 100%;
+}

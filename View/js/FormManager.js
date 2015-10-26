@@ -15,9 +15,11 @@ function RenderForm(obj) {
 	var TableHeaderTr = document.createElement('tr');
 	
 	for (var i = 0; i < obj.inputs.length; i++) {
-		var th = document.createElement('th');
-		th.innerHTML = obj.inputs[i].title;
-		TableHeaderTr.appendChild(th);
+		if (obj.inputs[i].type != 'hidden') {
+			var th = document.createElement('th');
+			th.innerHTML = obj.inputs[i].title;
+			TableHeaderTr.appendChild(th);
+		}
 	}
 	var SubmitTh = document.createElement('th');
 	TableHeaderTr.appendChild(SubmitTh);
@@ -49,15 +51,21 @@ function RenderForm(obj) {
 				}
 			}
 		}
-		var td = document.createElement('td');
-		td.appendChild(input);
-		MainTr.appendChild(td);
+		if (InputObj.type == 'hidden') form.appendChild(input);
+		else {
+			var td = document.createElement('td');
+			td.appendChild(input);
+			MainTr.appendChild(td);
+		}
 	}
 	var submit = document.createElement('input');
 	submit.type = 'submit';
 	if (obj.SubmitText != null) submit.value = obj.SubmitText;
 	if (obj.SubmitId != null) submit.id = obj.SubmitId;
-	MainTr.appendChild(submit);
+	
+	var td = document.createElement('td');
+	td.appendChild(submit);
+	MainTr.appendChild(td);
 	
 	table.appendChild(MainTr);
 	form.appendChild(table);

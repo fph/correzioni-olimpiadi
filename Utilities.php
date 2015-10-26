@@ -85,3 +85,8 @@ function NewLine() {
 	if ($SapiType == 'apache' or $SapiType == 'apache2filter' or $SapiType == 'apache2handler') return '<br>'; //browser
 	else return PHP_EOL; //terminal
 }
+
+// Returns an alphanumeric string of 12 chars
+function GenerateRandomString() {
+	return bin2hex(openssl_random_pseudo_bytes(6));
+}
