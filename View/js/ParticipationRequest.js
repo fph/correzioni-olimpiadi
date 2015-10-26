@@ -112,11 +112,13 @@ function CodeConfirmed(response) {
 			var name = response.data['name'];
 			var	surname = response.data['surname'];
 			var school = response.data['school'];
+			var SchoolCity = response.data['SchoolCity'];
 			var SchoolYear = response.data['SchoolYear'];
 			var ContestantId = response.data['ContestantId'];
 			ContestantInputs.namedItem('name').value = name;
 			ContestantInputs.namedItem('surname').value = surname;
 			ContestantInputs.namedItem('school').value = school;
+			ContestantInputs.namedItem('SchoolCity').value = SchoolCity;
 			ContestantInputs.namedItem('SchoolYear').value = SchoolYear;
 		}
 		
@@ -135,7 +137,10 @@ function ContestantCreated(response) {
 	if (response.type=='good') {
 		document.getElementById('ParticipationInfo').elements.namedItem('ContestantId').value = response.data['ContestantId'];
 		
-		// No more new user
+		// No more new user		
+		var AllNewUserThings = document.getElementsByClassName('NewUser');
+		var AllOldUserThings = document.getElementsByClassName('OldUser');
+		
 		for (var i = 0; i < AllNewUserThings.length; i++) AllNewUserThings[i].classList.add('hidden');
 		for (var i = 0; i < AllOldUserThings.length; i++) AllOldUserThings[i].classList.remove('hidden');
 		
@@ -151,12 +156,22 @@ function CreateContestant(inputs) {
 	var name = inputs.namedItem('name').value;
 	var surname = inputs.namedItem('surname').value;
 	var school = inputs.namedItem('school').value;
+	var SchoolCity = inputs.namedItem('SchoolCity').value;
 	var email = inputs.namedItem('email').value;
 	var SchoolYear = inputs.namedItem('SchoolYear').value;
 	var code = inputs.namedItem('code').value;
 	var OldUser = inputs.namedItem('OldUser').value;
 	
-	MakeAjaxRequest('../Modify/ManageContestantCreation.php', {name: name, surname: surname, school: school, email: email, SchoolYear: SchoolYear, code: code, OldUser: OldUser}, ContestantCreated);
+	MakeAjaxRequest('../Modify/ManageContestantCreation.php', {
+		name: name, 
+		surname: surname, 
+		school: school, 
+		SchoolCity: SchoolCity, 
+		email: email, 
+		SchoolYear: SchoolYear, 
+		code: code, 
+		OldUser: OldUser
+	}, ContestantCreated);
 }
 
 function ChangingVolunteer(val) {

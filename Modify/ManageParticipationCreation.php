@@ -128,7 +128,7 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	if ($PaidVolunteer == 'volunteer') {
 		$MailText = 'Gentile segreteria UMI,<br>';
 		$MailText .= 'Sono '.$contestant['name'].' '.$contestant['surname'].' e scrivo per chiedere di partecipare come volontario allo stage '.$contest['name'].'.<br>';
-		$MailText .= 'La mia scuola è '.$contestant['school'].' e il mio indirizzo email è '.$contestant['email'].'.<br>';
+		$MailText .= 'La mia scuola è '.$contestant['school'].' di '.$contestant['SchoolCity'].' e il mio indirizzo email è '.$contestant['email'].'.<br>';
 		$MailText .= 'In passato ho partecipato a '.$StagesNumber.' stage a Pisa.<br>';
 		$MailText .= 'In allegato si trova la richiesta di partecipazione in formato pdf.<br><br>';
 		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
@@ -136,7 +136,7 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	else {
 		$MailText = 'Gentile segreteria UMI,<br>';
 		$MailText .= 'Sono '.$contestant['name'].' '.$contestant['surname'].' e scrivo per chiedere di partecipare come spesato allo stage '.$contest['name'].'.<br>';
-		$MailText .= 'La mia scuola è '.$contestant['school'].' e il mio indirizzo email è '.$contestant['email'].'.<br>';
+		$MailText .= 'La mia scuola è '.$contestant['school'].' di '.$contestant['SchoolCity'].' e il mio indirizzo email è '.$contestant['email'].'.<br>';
 		$MailText .= 'In passato ho partecipato a '.$StagesNumber.' stage a Pisa.<br><br>';
 		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
 	}
@@ -145,6 +145,7 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	$mail->Body = $MailText;
 	$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
 	$mail->AddAttachment($VolunteerRequest['tmp_name'], 'RichiestaPartecipazione_'.$CleanedSurname.'.pdf');
+	$mail->AddAttachment(UploadDirectory.$PdfName.'.pdf', 'Soluzioni_'.$CleanedSurname.'.pdf');
 	if (!$mail->send()) {
 		return ['type'=>'bad', 'text'=>'L\'email con la richiesta di partecipazione non è stata inviata a causa di un errore del server'];
 	}

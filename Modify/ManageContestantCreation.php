@@ -3,7 +3,7 @@ require_once '../Utilities.php';
 SuperRequire_once('General', 'sqlUtilities.php');
 SuperRequire_once('Modify', 'ObjectSender.php');
 
-function CreateContestant($db, $name, $surname, $school, $email, $SchoolYear, $OldUser) {
+function CreateContestant($db, $name, $surname, $school, $SchoolCity, $email, $SchoolYear, $OldUser) {
 	// Length validation
 	if (!is_string($name) or strlen($name) > ContestantName_MAXLength or strlen($name) == 0) {
 		return ['type'=>'bad', 'text'=>'Il nome deve essere una stringa di al più '.ContestantName_MAXLength.' caratteri'];
@@ -15,6 +15,10 @@ function CreateContestant($db, $name, $surname, $school, $email, $SchoolYear, $O
 	
 	if (!is_string($school) or strlen($school) > ContestantSchool_MAXLength or strlen($school) <= 2) {
 		return ['type'=>'bad', 'text'=>'La scuola deve essere una stringa di al più '.ContestantSchool_MAXLength.' caratteri'];
+	}
+	
+	if (!is_string($SchoolCity) or strlen($SchoolCity) > ContestantSchoolCity_MAXLength or strlen($SchoolCity) <= 2) {
+		return ['type'=>'bad', 'text'=>'La città della scuola deve essere una stringa di al più '.ContestantSchoolCity_MAXLength.' caratteri'];
 	}
 	
 	if (!is_string($email) or strlen($email) > ContestantEmail_MAXLength or strlen($email) < 5) {
@@ -31,7 +35,11 @@ function CreateContestant($db, $name, $surname, $school, $email, $SchoolYear, $O
 	}
 	
 	if (!preg_match("/^[\p{L} '\-\.,0-9]+$/u", $school)) {
-		return ['type'=>'bad', 'text'=>'Il nome della scuola può contenere solo lettere, numeri, apostrofi e \'-\''];
+		return ['type'=>'bad', 'text'=>'Il nome della scuola può contenere solo lettere, numeri, apostrofi, virgole, punti e  \'-\''];
+	}
+	
+	if (!preg_match("/^[\p{L} '\-\.,]+$/u", $SchoolCity)) {
+		return ['type'=>'bad', 'text'=>'La città della scuola può contenere solo lettere, apostrofi, virgole, punti e \'-\''];
 	}
 	
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -60,6 +68,7 @@ function CreateContestant($db, $name, $surname, $school, $email, $SchoolYear, $O
 			'name'=>$name,
 			'surname'=>$surname, 
 			'school'=>$school, 
+			'SchoolCity'=>$SchoolCity,
 			'email'=>$email,
 			'LastOlympicYear'=>$LastOlympicYear
 		]));
@@ -74,6 +83,7 @@ function CreateContestant($db, $name, $surname, $school, $email, $SchoolYear, $O
 			'name'=>$name,
 			'surname'=>$surname, 
 			'school'=>$school, 
+			'SchoolCity'=>$SchoolCity,
 			'email'=>$email,
 			'LastOlympicYear'=>$LastOlympicYear
 		]));
@@ -101,7 +111,7 @@ if (new Datetime('now') > $timestamp) {
 }
 
 // Contestant validation and creation
-SendObject(CreateContestant($db, $data['name'], $data['surname'], $data['school'], $data['email'], $data['SchoolYear'], $data['OldUser']));
+SendObject(CreateContestant($db, $data['name'], $data['surname'], $data['school'], $data['SchoolCity'], $data['email'], $data['SchoolYear'], $data['OldUser']));
 
 $db->close();
 ?>

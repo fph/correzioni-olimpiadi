@@ -98,6 +98,7 @@
 				'name'=>$row['name'],
 				'surname'=>$row['surname'],
 				'school'=>$row['school'],
+				'SchoolCity'=>$row['SchoolCity'],
 				'email'=>$row['email'],
 				'SchoolYear'=>$SchoolYear,
 				'code'=>$code,

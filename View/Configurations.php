@@ -29,6 +29,7 @@ $ConfigurationsNames = [
 	'ContestantName_MAXLength',
 	'ContestantSurname_MAXLength',
 	'ContestantSchool_MAXLength',
+	'ContestantSchoolCity_MAXLength',
 	'ContestantEmail_MAXLength',
 	'ProblemName_MAXLength',
 	'comment_MAXLength',

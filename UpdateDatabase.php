@@ -189,6 +189,29 @@ function CreateVerificationCodesTable() {
 	return true;
 }
 
+function AddContestantsSchoolCityColumn() {
+	if (!defined('ContestantSchoolCity_MAXLength')) {
+		echo 'Before updating, Constants.php must be modified (defining \'ContestantSchoolCity_MAXLength\').'.NewLine();
+		return false;
+	}
+	
+	$db = OpenDbConnection();
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contestants', 'COLUMN_NAME'=>'SchoolCity']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Contestants` ADD COLUMN `SchoolCity` varchar('.ContestantSchoolCity_MAXLength.') NOT NULL DEFAULT \'\'';
+		Query($db, $query);
+		
+		echo 'The \'SchoolCity\' column has been added in the \'Contestants\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'SchoolCity\' column already exists in the \'Contestants\' table.'.NewLine();
+	}
+	
+	$db->close();
+	return true;
+}
+
 if (!AddContestantsEmailColumn()) {
 	die('Error while adding contestant email column');
 }
@@ -219,6 +242,10 @@ if (!AddFilenamesColumns()) {
 
 if (!CreateVerificationCodesTable()) {
 	die('Error while creating VerificationCodes table');
+}
+
+if (!AddContestantsSchoolCityColumn()) {
+	die('Error while adding SchoolCity column');
 }
 
 echo 'Database has been updated successfully!'.NewLine();

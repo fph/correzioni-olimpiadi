@@ -68,6 +68,7 @@ function CreateDatabase() {
 		`name` varchar('.ContestantName_MAXLength.') NOT NULL,
 		`surname` varchar('.ContestantSurname_MAXLength.') NOT NULL,
 		`school` varchar('.ContestantSchool_MAXLength.') NOT NULL,
+		`SchoolCity` varchar('.ContestantSchoolCity_MAXLength.') NOT NULL,
 		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
 		`LastOlympicYear` int NOT NULL DEFAULT 2050,
 		PRIMARY KEY (`id`),
@@ -200,38 +201,77 @@ function PopulatePermissions($db) {
 
 function PopulateContestants($db) {
 	$Contestants = [	
-		['name'=>'Federico', 	'surname'=>'Glaudo',			'school'=>'L.S. Righi',				'email'=>'dario2994@gmail.com', 
-		'LastOlympicYear'=>2030],
-		['name'=>'Giada', 		'surname'=>'Franz',				'school'=>'L.S. Marinelli',			'email'=>'walypala23@gmail.com', 
-		'LastOlympicYear'=>2016],			
-		['name'=>'Gioacchino', 	'surname'=>'Antonelli',			'school'=>'L.S. Tedone',			'email'=>'genius@figus.it', 
-		'LastOlympicYear'=>2014],
-		['name'=>'Luca', 		'surname'=>'Minutillo Menga',	'school'=>'L.S. Staminchia',		'email'=>'porno@star.pr', 
-		'LastOlympicYear'=>2018],
-		['name'=>'Francesco', 	'surname'=>'Florian',			'school'=>'L.S. Copernico',			'email'=>'fraflo@gmail.com', 
-		'LastOlympicYear'=>2020],
-		['name'=>'Claudio', 	'surname'=>'Afeltra',			'school'=>'L.S. Sambuca',			'email'=>'tarvisio@forever.it', 
-		'LastOlympicYear'=>2021],
-		['name'=>'Paolo', 		'surname'=>'Abiuso',			'school'=>'L.S. Lambada',			'email'=>'peppapaolo@pig.en', 
-		'LastOlympicYear'=>2017],
-		['name'=>'Leonardo', 	'surname'=>'Fiore',				'school'=>'L.S. Cotoletta',			'email'=>'leonardinho@libero.it', 
-		'LastOlympicYear'=>2016],
-		['name'=>'Lorenzo', 	'surname'=>'Benedini',			'school'=>'L.S. Figus',				'email'=>'benzodine@tiscali.it', 
-		'LastOlympicYear'=>2013],
-		['name'=>'Davide', 		'surname'=>'Lofano',			'school'=>'Lungo Nome di scuola',	'email'=>'d.lofano@gmail.com', 
-		'LastOlympicYear'=>2019],
-		['name'=>'Alice', 		'surname'=>'Cortinovis',		'school'=>'L.S. Assurbanipal',		'email'=>'corti.alice@tiscali.it', 
-		'LastOlympicYear'=>2020],
-		['name'=>'Emanuele', 	'surname'=>'Tron',				'school'=>'L.S. Anzianotto',		'email'=>'trontolino@amoroso.com', 
-		'LastOlympicYear'=>2022],
-		['name'=>'Matteo', 		'surname'=>'Becchi',			'school'=>'L.C. Calasi',			'email'=>'matteo.bec@chi.it', 
-		'LastOlympicYear'=>2010],
-		['name'=>'Filippo', 	'surname'=>'Revello',			'school'=>'L.C. Anselmo',			'email'=>'fifaloser@gmail.com', 
-		'LastOlympicYear'=>2005],
-		['name'=>'Fabio', 		'surname'=>'Ferri',				'school'=>'L.C. Rambokid',			'email'=>'fabio.ferri@libero.com', 
-		'LastOlympicYear'=>2004],
-		['name'=>'Luigi', 		'surname'=>'Pagano',			'school'=>'L.S. Banzo Bazoli',		'email'=>'gigi@gigi.it', 
-		'LastOlympicYear'=>2002]
+		[	'name'=>'Federico', 	
+			'surname'=>'Glaudo',
+			'school'=>'L.S. Righi',
+			'SchoolCity'=>'Roma, RM',				
+			'email'=>'dario2994@gmail.com', 
+			'LastOlympicYear'=>2030
+		],
+		[
+			'name'=>'Giada', 
+			'surname'=>'Franz',	
+			'school'=>'L.S. Marinelli',
+			'SchoolCity'=>'Napoli, NA',	
+			'email'=>'walypala23@gmail.com', 
+			'LastOlympicYear'=>2016
+		],
+		[
+			'name'=>'Luca',
+			'surname'=>'Minutillo Menga',
+			'school'=>'L.S. Staminchia',
+			'SchoolCity'=>'Poretto, BR',
+			'email'=>'porno@star.pr', 
+			'LastOlympicYear'=>2018
+		],
+		[
+			'name'=>'Francesco',
+			'surname'=>'Florian',
+			'school'=>'L.S. Copernico',
+			'SchoolCity'=>'Mazzulonia, XX',
+			'email'=>'fraflo@gmail.com', 
+			'LastOlympicYear'=>2020
+		],
+		[
+			'name'=>'Claudio', 
+			'surname'=>'Afeltra',
+			'school'=>'L.S. Sambuca',
+			'SchoolCity'=>'Nordissimo, LF',
+			'email'=>'tarvisio@forever.it', 
+			'LastOlympicYear'=>2021
+		],
+		[
+			'name'=>'Emanuele', 	
+			'surname'=>'Tron',				
+			'school'=>'L.S. Anzianotto',
+			'SchoolCity'=>'Barcia, LA',		
+			'email'=>'trontolino@amoroso.com', 
+			'LastOlympicYear'=>2022
+		],
+		[
+			'name'=>'Matteo', 		
+			'surname'=>'Becchi',			
+			'school'=>'L.C. Calasi',
+			'SchoolCity'=>'Paesino, PR',			
+			'email'=>'matteo.bec@chi.it', 
+			'LastOlympicYear'=>2010
+		],
+		[
+			'name'=>'Filippo', 	
+			'surname'=>'Revello',			
+			'school'=>'L.C. Anselmo',
+			'SchoolCity'=>'Brutta, CI',			
+			'email'=>'fifaloser@gmail.com', 
+			'LastOlympicYear'=>2005
+		],
+		[
+			'name'=>'Fabio', 		
+			'surname'=>'Ferri',				
+			'school'=>'L.C. Rambokid',
+			'SchoolCity'=>'Chiusi, TO',			
+			'email'=>'fabio.ferri@libero.com', 
+			'LastOlympicYear'=>2004
+		]
 	];
 	
 	foreach ($Contestants as $Contestant) {

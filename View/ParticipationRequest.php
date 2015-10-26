@@ -117,7 +117,19 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 						<label for='SchoolInput'>Nome della scuola</label> 
 					</td>
 					<td>
-						<input type='text' name='school' id='SchoolInput' placeholder='Liceo Scientifico Garibaldi'> <br>
+						<input type='text' name='school' id='SchoolInput' placeholder='Liceo Scientifico Garibaldi'>
+					</td>
+					<td>
+						Indicare <em>solo il nome della scuola</em> e non la città della scuola, che va inserita nel campo successivo.
+						<span class='OldUser'>È probabile che sia presente anche la città della scuola, nel caso <em>cancellatela</em> e scrivetela nel prossimo campo.</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for='SchoolCityInput'>Città della scuola</label>
+					</td>
+					<td>
+						<input type='text' name='SchoolCity' id='SchoolCityInput' placeholder='Cariati, CS'>
 					</td>
 				</tr>
 				<tr>
