@@ -275,7 +275,7 @@ function PopulateContestants($db) {
 	];
 	
 	foreach ($Contestants as $Contestant) {
-		Query($db, QueryInsert('Contestants', ['name'=>$Contestant['name'], 'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'email'=>$Contestant['email'], 'LastOlympicYear'=>$Contestant['LastOlympicYear']]));
+		Query($db, QueryInsert('Contestants', ['name'=>$Contestant['name'], 'surname'=>$Contestant['surname'], 'school'=>$Contestant['school'], 'SchoolCity'=>$Contestant['SchoolCity'], 'email'=>$Contestant['email'], 'LastOlympicYear'=>$Contestant['LastOlympicYear']]));
 	}
 	
 	echo 'Table Contestants Populated.'.NewLine();

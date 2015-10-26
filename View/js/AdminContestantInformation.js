@@ -90,9 +90,47 @@ function ModifySchool() {
 	var subtitle = document.getElementsByClassName('PageSubtitle')[0];
 }
 
+//~ SchoolCity
+function EndSchoolCityModification() {
+	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+	
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	SchoolCitySpan.classList.remove('ContentEditable');
+	SchoolCitySpan.setAttribute('contenteditable', 'false');
+}
+
+function CancelSchoolCity() {
+	EndSchoolCityModification();
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	SchoolCitySpan.innerHTML=GetDataAttribute(SchoolCitySpan, 'old_value');
+	SetDataAttribute(SchoolCitySpan, 'old_value', null);
+}
+
+function MakeChangesSchoolCity(response) {
+	if (response.type == 'bad') {
+		CancelSchoolCity();
+	}
+}
+
+function ConfirmSchoolCity() {
+	EndSchoolCityModification();
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	MakeAjaxRequest('../Modify/ManageContestant.php', {ContestantId: ContestantId, SchoolCity: SchoolCitySpan.innerHTML, type: 'ChangeSchoolCity'}, MakeChangesSchoolCity);
+}
+
+
+function ModifySchoolCity() {
+	var SchoolCitySpan = document.getElementById('ContestantSchoolCity');
+	SetDataAttribute(SchoolCitySpan, 'old_value', SchoolCitySpan.innerHTML);
+	SchoolCitySpan.classList.add('ContentEditable');
+	SchoolCitySpan.setAttribute('contenteditable', 'true');
+	
+	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+}
+
 //~ Email
 function EndEmailModification() {
-	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+	var subtitle = document.getElementsByClassName('PageSubtitle')[2];
 
 	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
 	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
@@ -133,7 +171,7 @@ function ModifyEmail() {
 	EmailSpan.classList.add('ContentEditable');
 	EmailSpan.setAttribute('contenteditable', 'true');
 	
-	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+	var subtitle = document.getElementsByClassName('PageSubtitle')[2];
 
 	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
 	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
@@ -146,7 +184,7 @@ function ModifyEmail() {
 
 //~ LastOlympicYear
 function EndLastOlympicYearModification() {
-	var subtitle = document.getElementsByClassName('PageSubtitle')[1];
+	var subtitle = document.getElementsByClassName('PageSubtitle')[3];
 
 	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
 	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];
@@ -187,7 +225,7 @@ function ModifyLastOlympicYear() {
 	LastOlympicYearSpan.classList.add('ContentEditable');
 	LastOlympicYearSpan.setAttribute('contenteditable', 'true');
 	
-	var subtitle = document.getElementsByClassName('PageSubtitle')[2];
+	var subtitle = document.getElementsByClassName('PageSubtitle')[3];
 
 	var modify_button=subtitle.getElementsByClassName('ModifyButtonContainer')[0];
 	var confirm_button=subtitle.getElementsByClassName('ConfirmButtonContainer')[0];

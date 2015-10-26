@@ -17,6 +17,7 @@ $columns = [];
 $columns []= ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1, 'type'=>'string'];
 $columns []= ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
 $columns []= ['id'=>'school', 'name'=>'Scuola', 'class'=>['SchoolColumn']];
+$columns []= ['id'=>'SchoolCity', 'name'=>'Città della scuola', 'order'=>1];
 $columns []= ['id'=>'email', 'name'=>'Email', 'class'=>['EmailColunm']];
 $columns []= ['id'=>'LastOlympicYear', 'name'=>'Ultimo anno IMO', 'order'=>1, 'type'=>'number'];
 
@@ -26,7 +27,8 @@ foreach ($v_contestants as $contestant) {
 	'values'=>[
 		'surname'=>$contestant['surname'], 
 		'name'=>$contestant['name'], 
-		'school'=>$contestant['school'], 
+		'school'=>$contestant['school'],
+		'SchoolCity'=>$contestant['SchoolCity'], 
 		'email'=>$contestant['email'], 
 		'LastOlympicYear'=>$contestant['LastOlympicYear']
 	], 'redirect'=>['ContestantId'=>$contestant['id'] ] ];
@@ -48,6 +50,7 @@ $form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddContestantRequest(this.
 	['type'=>'text', 'title'=>'Cognome', 'name'=>'surname'],
 	['type'=>'text', 'title'=>'Nome', 'name'=>'name'],
 	['type'=>'text', 'title'=>'Scuola', 'name'=>'school'],
+	['type'=>'text', 'title'=>'Città della scuola', 'name'=>'SchoolCity'],
 	['type'=>'email', 'title'=>'Email', 'name'=>'email'],
 	['type'=>'number', 'title'=>'Ultimo anno IMO', 'name'=>'LastOlympicYear', 'step'=>'1', 'min'=>'2010']
 ]];
