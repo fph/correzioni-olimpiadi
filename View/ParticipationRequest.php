@@ -215,7 +215,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 						<input type='file' accept='.pdf' name='solutions' id='SolutionsInput'>
 					</td>
 					<td>
-						Devi uploadare un documento in pdf, di dimensione minore di 10mb, contenente le tue soluzioni agli esercizi d'ammissione.
+						Devi uploadare un documento in pdf, di dimensione minore di <?=PdfSize_MAX?>MB, contenente le tue soluzioni agli esercizi d'ammissione.
 					</td>
 				</tr>
 				<tr class='hidden'>
@@ -226,7 +226,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>m
 						<input type='file' accept='.pdf' name='VolunteerRequest' id='VolunteerRequestInput'>
 					</td>
 					<td>
-						Devi uploadare un documento in pdf, di dimensione minore di 10mb, contenente la richiesta di partecipazione come volontario.
+						Devi uploadare un documento in pdf, di dimensione minore di <?=PdfSize_MAX?>MB, contenente la richiesta di partecipazione come volontario.
 					</td>
 				</tr>
 			</tbody></table>
