@@ -19,7 +19,7 @@ define('EmailHost', 'smtp.gmail.com');
 define('EmailPort', 587); 
 define('EmailUsername', 'username@gmail.com');
 define('EmailPassword', 'password');
-// This is the email address used to send corrections to the participants. 
+// The mail used to send corrections, verification codes and to receive any issues regarding the site
 define('EmailAddress', 'username@gmail.com');
 // All volunteers' requests will be sent to this address
 define('VolunteerRequestEmailAddress', 'user@domain.com');

@@ -6,10 +6,7 @@
 <div class='ParticipationRequestDiv'>
 Seguendo le istruzioni date in questa pagina arriverai ad iscriverti ad uno stage delle olimpiadi di Matematica.
 Per procedere è necessario che tu abbia un indirizzo email, che abbia già pronto il pdf con gli esercizi richiesti per l'ammissione e che, se sei un volontario, abbia anche preparato il pdf con la domanda d'ammissione.
-Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em>mail@mail.com</em> indicando chi sei e quale è il problema.
-<!--
-	FIXME: Mettere un vero indirizzo al posto di mail@mail.com
--->
+Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><?=EmailAddress?></em> indicando chi sei e quale è il problema.
 </div>
 
 <div id='TransitionContainer'>
