@@ -2,6 +2,21 @@ var TransitionDivs = ['OldUserDiv', 'SendCodeDiv', 'CheckCodeDiv', 'ContestantIn
 var TransitionIterator = 0;
 var LastTransitionIterator = 0;
 
+// This functions sets correctly the height of div#TransitionContainer
+// Otherwise the body might be smaller than one of TransitionDivs and the style of the page would be fucked.
+function SetTransitionContainerHeight() {
+	var MaxHeight = 0;
+	for (var i = 0; i < TransitionDivs.length; i++ ) {
+		var div = document.getElementById(TransitionDivs[i]);
+		MaxHeight = Math.max(MaxHeight, div.offsetHeight);
+	}
+	
+	// Margins, position absolute etc...
+	MaxHeight += 30;
+	
+	// console.log(MaxHeight);
+	document.getElementById('TransitionContainer').style.height = MaxHeight.toString() + 'px';
+}
 
 function UpdateButtons() {
 	if (TransitionIterator == TransitionDivs.length-1) {
@@ -193,3 +208,5 @@ function CreateParticipation(form) {
 	var ParticipationData = new FormData(form);
 	MakeAjaxRequest('../Modify/ManageParticipationCreation.php', ParticipationData, ParticipationCreated, null, true);
 }
+
+SetTransitionContainerHeight();
