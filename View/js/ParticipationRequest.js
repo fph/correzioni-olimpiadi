@@ -14,7 +14,6 @@ function SetTransitionContainerHeight() {
 	// Margins, position absolute etc...
 	MaxHeight += 30;
 	
-	// console.log(MaxHeight);
 	document.getElementById('TransitionContainer').style.height = MaxHeight.toString() + 'px';
 }
 
