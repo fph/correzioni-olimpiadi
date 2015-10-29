@@ -206,6 +206,7 @@ function ParticipationCreated(response) {
 function CreateParticipation(form) {
 	var ParticipationData = new FormData(form);
 	MakeAjaxRequest('../Modify/ManageParticipationCreation.php', ParticipationData, ParticipationCreated, null, true);
+	ShowMessage('good', 'L\'upload dei file potrebbe richiedere qualche minuto, non chiudete la pagina');
 }
 
 SetTransitionContainerHeight();

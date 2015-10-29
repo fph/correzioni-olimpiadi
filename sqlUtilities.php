@@ -116,7 +116,7 @@ function QueryInsert($TableName, $data) {
 		$QueryValue .= EscapeInput($value);
 	}
 	$QueryField .= ')';
-	$QueryValue .=')';
+	$QueryValue .= ')';
 	
 	return $query.' '.$QueryField.' '.$QueryValue;
 }

@@ -8,6 +8,7 @@ SuperRequire_once('General', 'TemplateCreation.php');
 function UserRole($db, $UserId) {
 	$user = OneResultQuery($db, QuerySelect('Users', ['id'=>$UserId]), ['role']);
 	if (is_null($user)) return -1;
+	// FIXME: Forse dovrei ritornare intval di $user['role']
 	return $user['role']; 
 }
 

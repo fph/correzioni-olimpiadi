@@ -57,8 +57,7 @@ function ValidateParticipation($db, $ContestantId, $ContestId, $StagesNumber,$Pa
 	}
 	
 	// Check StagesNumber
-	$StagesNumber = intval($StagesNumber);
-	if ($StagesNumber < 0 or 20 < $StagesNumber) {
+	if (!is_numeric($StagesNumber) or intval($StagesNumber) < 0 or 20 < intval($StagesNumber)) {
 		return ['type'=>'bad', 'text'=>'Il numero di partecipazioni a stage passati deve essere un numero tra 0 e 20'];
 	}
 	
@@ -129,7 +128,7 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 		$MailText = 'Gentile segreteria UMI,<br>';
 		$MailText .= 'Sono '.$contestant['name'].' '.$contestant['surname'].' e scrivo per chiedere di partecipare come volontario allo stage '.$contest['name'].'.<br>';
 		$MailText .= 'La mia scuola è '.$contestant['school'].' di '.$contestant['SchoolCity'].' e il mio indirizzo email è '.$contestant['email'].'.<br>';
-		$MailText .= 'In passato ho partecipato a '.$StagesNumber.' stage a Pisa.<br>';
+		$MailText .= 'In passato ho partecipato a '.strval(intval($StagesNumber)).' stage a Pisa.<br>';
 		$MailText .= 'In allegato si trova la richiesta di partecipazione in formato pdf.<br><br>';
 		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
 	}
