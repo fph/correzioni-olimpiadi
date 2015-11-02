@@ -36,7 +36,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 			Inserisci il tuo indirizzo email. L'email sarà usata per comunicarti i risultati delle correzioni e tutte le informazioni riguardanti lo stage.
 		</p>
 		<p class='OldUser'>
-			Indica <b>lo stesso indirizzo email</b> che hai inserito l'ultima volta che hai usato il sito. Se non hai più accesso all'indirizzo che hai usato la volta scorsa oppure vuoi cambiarlo, scrivi a <em>mail@mail.com</em> chi sei (preferibilmente dimostrando in qualche modo di essere chi dici di essere) e quale indirizzo email vorresti usare. 
+			Indica <b>lo stesso indirizzo email</b> che hai inserito l'ultima volta che hai usato il sito. Se non hai più accesso all'indirizzo che hai usato la volta scorsa oppure vuoi cambiarlo, scrivi a <em><?=EmailAddress?></em> chi sei (preferibilmente dimostrando in qualche modo di essere chi dici di essere) e quale indirizzo email vorresti usare. 
 			Se invece non ricordi quale indirizzo avevi usato, puoi provare ad inviare il codice a tutti gli indirizzi possibili e il sistema invierà il codice solamente all'indirizzo che avevi usato.
 		</p>
 		<p>
