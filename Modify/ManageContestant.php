@@ -71,8 +71,8 @@ function AddParticipation($db, $ContestantId, $ContestId, $solutions) {
 			return ['type'=>'bad', 'text'=>'C\'è stato un errore nell\'upload del file delle soluzioni'];
 		}
 		
-		if ($solutions['size'] > PdfSize_MAX*1000000) {
-			return ['type'=>'bad', 'text'=>'Il file delle soluzioni può pesare alpiù '.PdfSize_MAX.'Mb'];
+		if ($solutions['size'] > solutions_MAXSize*1000000) {
+			return ['type'=>'bad', 'text'=>'Il file delle soluzioni può pesare alpiù '.solutions_MAXSize.'MB'];
 		}
 
 		$finfo = new finfo(FILEINFO_MIME_TYPE);

@@ -33,7 +33,8 @@ $ConfigurationsNames = [
 	'ContestantEmail_MAXLength',
 	'ProblemName_MAXLength',
 	'comment_MAXLength',
-	'PdfSize_MAX'
+	'solutions_MAXSize',
+	'VolunteerRequest_MAXSize',
 ];
 
 $rows = [];

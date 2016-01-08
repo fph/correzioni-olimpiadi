@@ -4,8 +4,8 @@
 
 <h2 class='pageTitle'>Richiesta di partecipazione</h2>
 <div class='ParticipationRequestDiv'>
-Seguendo le istruzioni date in questa pagina arriverai ad iscriverti ad uno stage delle olimpiadi di Matematica.
-Per procedere è necessario che tu abbia un indirizzo email, che abbia già pronto il pdf con gli esercizi richiesti per l'ammissione e che, se sei un volontario, abbia anche preparato il pdf con la domanda d'ammissione.
+Seguendo le istruzioni date in questa pagina arriverai ad inviare la richiesta d'ammissione ad uno stage delle olimpiadi di Matematica (oppure le tue soluzioni a degli esercizi di allenamento).
+Per procedere è necessario che tu abbia un indirizzo email, che abbia già pronto il pdf con le soluzioni degli esercizi richiesti e che, se sei un volontario, abbia anche preparato il pdf con la domanda d'ammissione.
 Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><?=EmailAddress?></em> indicando chi sei e quale è il problema.
 </div>
 
@@ -74,7 +74,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 		<p class='NewUser'>Compila il seguente questionario.</p>
 		<p class='OldUser'>Conferma i seguenti dati oppure modificali se non sono corretti.</p>
 		<p>
-			I dati saranno trattati con la massima riservatezza ed usati unicamente per gestire le ammissioni allo stage ed il suo svolgimento. 
+			I dati saranno trattati con la massima riservatezza e non saranno divulgati al di fuori dell'organizzazione delle Olimpiadi di Matematica. 
 		</p>
 		<form id='ContestantInfo' class='BigForm' onsubmit='CreateContestant(this.elements); return false'>
 			<input type='hidden' name='OldUser'>
@@ -104,9 +104,6 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 					</td>
 					<td>
 						<input type='email' name='email' id='EmailInput' placeholder='user@domain.com' disabled='disabled'> 
-					</td>
-					<td>
-						A questo indirizzo verranno mandati i risultati delle correzioni e verrà usato per comunicarti le informazioni riguardanti lo stage.
 					</td>
 				</tr>
 				<tr>
@@ -212,7 +209,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 						<input type='file' accept='.pdf' name='solutions' id='SolutionsInput'>
 					</td>
 					<td>
-						Devi uploadare un documento in pdf, di dimensione minore di <?=PdfSize_MAX?>MB, contenente le tue soluzioni agli esercizi d'ammissione.
+						Devi uploadare un documento in pdf, di dimensione minore di <?=solutions_MAXSize?>MB, contenente le tue soluzioni agli esercizi d'ammissione.
 					</td>
 				</tr>
 				<tr class='hidden'>
@@ -223,7 +220,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 						<input type='file' accept='.pdf' name='VolunteerRequest' id='VolunteerRequestInput'>
 					</td>
 					<td>
-						Devi uploadare un documento in pdf, di dimensione minore di <?=PdfSize_MAX?>MB, contenente la richiesta di partecipazione come volontario.
+						Devi uploadare un documento in pdf, di dimensione minore di <?=VolunteerRequest_MAXSize?>MB, contenente la richiesta di partecipazione come volontario.
 					</td>
 				</tr>
 			</tbody></table>

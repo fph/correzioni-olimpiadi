@@ -9,8 +9,8 @@ function ValidateSolutions($PdfFile) {
 		return ['type'=>'bad', 'text'=>'C\'è stato un errore nell\'upload del file delle soluzioni'];
 	}
 	
-	if ($PdfFile['size'] > PdfSize_MAX*1000000) {
-		return ['type'=>'bad', 'text'=>'Il file delle soluzioni può pesare alpiù '.PdfSize_MAX.'Mb'];
+	if ($PdfFile['size'] > solutions_MAXSize*1000000) {
+		return ['type'=>'bad', 'text'=>'Il file delle soluzioni può pesare alpiù '.solutions_MAXSize.'MB'];
 	}
 
 	$finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -26,8 +26,8 @@ function ValidateVolunteerRequest($PdfFile) {
 		return ['type'=>'bad', 'text'=>'C\'è stato un errore nell\'upload della richiesta di partecipazione'];
 	}
 	
-	if ($PdfFile['size'] > PdfSize_MAX*1000000) {
-		return ['type'=>'bad', 'text'=>'Il file della richiesta di partecipazione può pesare alpiù '.PdfSize_MAX.'Mb'];
+	if ($PdfFile['size'] > VolunteerRequest_MAXSize*1000000) {
+		return ['type'=>'bad', 'text'=>'Il file della richiesta di partecipazione può pesare alpiù '.VolunteerRequest_MAXSize.'MB'];
 	}
 
 	$finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -144,7 +144,7 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	$mail->Body = $MailText;
 	$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
 	$mail->AddAttachment($VolunteerRequest['tmp_name'], 'RichiestaPartecipazione_'.$CleanedSurname.'.pdf');
-	$mail->AddAttachment(UploadDirectory.$PdfName.'.pdf', 'Soluzioni_'.$CleanedSurname.'.pdf');
+	$mail->AddAttachment(UploadDirectory.$PdfName.'.pdf', 'Soluzioni_'.$CleanedSurname.'.pdf'); // TODO: Si potrebbe togliere questo allegato
 	if (!$mail->send()) {
 		return ['type'=>'bad', 'text'=>'L\'email con la richiesta di partecipazione non è stata inviata a causa di un errore del server'];
 	}
@@ -154,6 +154,34 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 		'ContestantId'=>$ContestantId,
 		'solutions'=>$PdfName
 	]));
+	
+	// Confirmation mail
+	$ConfirmMail = new PHPMailer;
+	$ConfirmMail->CharSet = 'UTF-8';
+	
+	if (EmailSMTP) {
+		$ConfirmMail->isSMTP();
+		$ConfirmMail->SMTPDebug = 0; 
+		$ConfirmMail->Host = EmailHost;
+		$ConfirmMail->Port = EmailPort;
+		$ConfirmMail->SMTPSecure = 'tls';
+		$ConfirmMail->SMTPAuth = true;
+		$ConfirmMail->Username = EmailUsername;
+		$ConfirmMail->Password = EmailPassword;
+	}
+	else {
+		$ConfirmMail->isSendmail();
+	}
+	$ConfirmMail->setFrom(EmailAddress, 'Correzioni OliMat'); 
+	$ConfirmMail->addAddress($contestant['email']);
+	$ConfirmMail->Subject = 'Conferma richiesta di partecipazione "'.$contest['name'].'"';
+	$ConfirmMail->isHTML(true);
+	
+	$ConfirmMail->Body = 'Cara/o '.$contestant['name'].',<br>'.'Ti confermiamo che ti sei iscritto/a con successo a "'.$contest['name'].'".';
+	if (!$ConfirmMail->send()) {
+		return ['type'=>'bad', 'text'=>'L\'email di conferma non è stata inviata a causa di un errore del server'];
+	}
+	
 	return ['type'=>'good', 'text'=>'La partecipazione è stata aggiunta con successo', 'data'=>[
 		'ContestantId'=>$ContestantId
 	]];
