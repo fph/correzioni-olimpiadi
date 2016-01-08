@@ -14,12 +14,16 @@ global $v_users;
 
 $columns = [];
 $columns[]=['id'=>'username', 'name'=>'Correttore', 'class'=>['UsernameColumn'], 'order'=>1];
+$columns[]=['id'=>'role', 'name'=>'Ruolo', 'class'=>['RoleColumn'], 'order'=>1];
 
 $rows = [];
+$RoleNames = ['Correttore', 'Amministratore', 'Super amministratore'];
+
 foreach ($v_users as $user) {
 	$row = [
-	'values'=>['username'=>$user['username']], 
-	'redirect'=>['UserId'=>$user['id'] ] ];
+		'values'=>['username'=>$user['username'], 'role'=>$RoleNames[$user['role']]], 
+		'redirect'=>['UserId'=>$user['id']] 
+	];
 	$rows[]=$row;
 } 
 
