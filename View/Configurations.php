@@ -40,7 +40,7 @@ $ConfigurationsNames = [
 $rows = [];
 foreach ($ConfigurationsNames as $name) {
 	$row = ['values'=>['name'=>$name, 'value'=>constant($name)]];
-	$rows []= $row;
+	$rows[] = $row;
 }
 
 $table = ['columns'=>$columns, 'rows'=>$rows, 'id'=>'ConfigurationsTable'];

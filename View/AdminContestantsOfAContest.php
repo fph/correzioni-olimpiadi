@@ -21,9 +21,9 @@ global $v_contest, $v_contestants;
 
 <?php
 $columns = [];
-$columns []= ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
-$columns []= ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
-$columns []= ['id'=>'solutions', 'name'=>'Soluzioni', 'class'=>['DownloadColumn']];
+$columns[] = ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns[] = ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns[] = ['id'=>'solutions', 'name'=>'Soluzioni', 'class'=>['DownloadColumn']];
 
 $rows = [];
 foreach ($v_contestants as $contestant) {
@@ -40,7 +40,7 @@ foreach ($v_contestants as $contestant) {
 		],
 		'data'=>['contestant_id'=>$contestant['id']] 
 	];
-	$rows []= $row;
+	$rows[] = $row;
 }
 
 $buttons = ['trash'=>['onclick'=>'RemoveParticipationRequest']];

@@ -14,12 +14,12 @@ global $v_contestants;
 <?php
 
 $columns = [];
-$columns []= ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1, 'type'=>'string'];
-$columns []= ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
-$columns []= ['id'=>'school', 'name'=>'Scuola', 'class'=>['SchoolColumn']];
-$columns []= ['id'=>'SchoolCity', 'name'=>'Città della scuola', 'order'=>1];
-$columns []= ['id'=>'email', 'name'=>'Email', 'class'=>['EmailColunm']];
-$columns []= ['id'=>'LastOlympicYear', 'name'=>'Ultimo anno IMO', 'order'=>1, 'type'=>'number'];
+$columns[] = ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1, 'type'=>'string'];
+$columns[] = ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns[] = ['id'=>'school', 'name'=>'Scuola', 'class'=>['SchoolColumn']];
+$columns[] = ['id'=>'SchoolCity', 'name'=>'Città della scuola', 'order'=>1];
+$columns[] = ['id'=>'email', 'name'=>'Email', 'class'=>['EmailColunm']];
+$columns[] = ['id'=>'LastOlympicYear', 'name'=>'Ultimo anno IMO', 'order'=>1, 'type'=>'number'];
 
 $rows = [];
 foreach ($v_contestants as $contestant) {

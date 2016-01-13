@@ -22,15 +22,15 @@
 	$v_users = [];
 	
 	foreach ($admins as $user) {
-		$v_users []= $user;
+		$v_users[] = $user;
 	}
 	foreach ($SuperAdmins as $user) {
-		$v_users []= $user;
+		$v_users[] = $user;
 	}
 	foreach ($permissions as $permission) {
 		$user = OneResultQuery($db, QuerySelect('Users', ['id'=>$permission['UserId']]));
 		if ($user['role'] == 0) {
-			$v_users []= $user;
+			$v_users[] = $user;
 		}
 	}
 	

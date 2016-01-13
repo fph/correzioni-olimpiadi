@@ -14,7 +14,7 @@ $v_ActiveContests = [];
 foreach ($AllContests as $contest) {
 	$Deadline = new Datetime($contest['date']);
 	if ((new Datetime('now'))->setTime(0, 0, 0) <= $Deadline) {
-		$v_ActiveContests []= $contest;
+		$v_ActiveContests[] = $contest;
 	}
 }
 

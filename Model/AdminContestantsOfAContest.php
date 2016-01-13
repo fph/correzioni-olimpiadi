@@ -21,7 +21,7 @@
 	foreach ($participations as $participation) {
 		$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
 		$contestant['SolutionsBoolean'] = is_null($participation['solutions'])?0:1;
-		$v_contestants []= $contestant;
+		$v_contestants[] = $contestant;
 	}
 	
 	$db->close();
