@@ -22,31 +22,31 @@ global $v_contest, $v_problem, $v_corrections;
 
 <?php
 $columns = [];
-$columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
-$columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
-$columns[]=['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
-$columns[]=['id'=>'comment', 'name'=>'Commento', 'class'=>['CommentColumn']];
-$columns[]=['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
+$columns[] = ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
+$columns[] = ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns[] = ['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
+$columns[] = ['id'=>'comment', 'name'=>'Commento', 'class'=>['CommentColumn']];
+$columns[] = ['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
 
 $rows = [];
 foreach ($v_corrections as $correction) {
 	$row = ['values'=>[
 		'surname'=>$correction['contestant']['surname'],
 		'name'=>$correction['contestant']['name'],
-		'mark'=> $correction['mark'],
-		'comment'=> $correction['comment'],
-		'user'=> $correction['username']
+		'mark'=>($correction['mark']=='-1')?'∅':$correction['mark'],
+		'comment'=>$correction['comment'],
+		'user'=>$correction['username']
 		], 'data'=>['contestant_id'=>$correction['contestant']['id'] ] ];
-	$rows[]=$row;
+	$rows[] = $row;
 }
 
 $table = ['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'surname'] ];
 if ($v_contest['blocked'] == 0) {
 	$buttons = [];
-	$buttons['modify']=['onclick'=>'OnModification'];
-	$buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>true];
-	$buttons['cancel']=['onclick'=>'Clear', 'hidden'=>true];
-	$table['buttons']=$buttons;
+	$buttons['modify'] = ['onclick'=>'OnModification'];
+	$buttons['confirm'] = ['onclick'=>'Confirm', 'hidden'=>true];
+	$buttons['cancel'] = ['onclick'=>'Clear', 'hidden'=>true];
+	$table['buttons'] = $buttons;
 }
 
 InsertDom('table', $table);

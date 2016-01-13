@@ -32,7 +32,7 @@ foreach ($v_corrections as $correction) {
 	<?=$correction['problem']['name']?> 
 	<?php
 	if ($correction['done']) {?>
-		<?=$correction['mark']?> [<?=$correction['username']?>] <?=$correction['comment']?>
+		<?=($correction['mark'] == '-1')?'∅':$correction['mark']?> [<?=$correction['username']?>] <?=$correction['comment']?>
 	<?php }
 	else {?>
 		#

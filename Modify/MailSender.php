@@ -29,8 +29,8 @@
 		
 		foreach ($problems as $pro) {
 			$nn = OneResultQuery($db, QuerySelect('Corrections', 
-			['ProblemId'=>$pro['id'], 'ContestantId'=>$ContestantId], 
-			['mark', 'comment', 'UserId']
+				['ProblemId'=>$pro['id'], 'ContestantId'=>$ContestantId], 
+				['mark', 'comment', 'UserId']
 			));
 			
 			if (is_null($nn)) {
@@ -51,7 +51,8 @@
 		foreach ($corrections as $correction) {
 			$MailText .= '<u>'.$correction['problem']['name'].'</u> ';
 			if ($correction['done']) {
-				$MailText .= '<strong>'.$correction['mark'].'</strong>'.' [<kbd>'.$correction['username'].'</kbd>] '.$correction['comment'];
+				$MailText .= '<strong>'.(($correction['mark'] == '-1')?'∅':$correction['mark']).'</strong>';
+				$MailText .= ' [<kbd>'.$correction['username'].'</kbd>] '.$correction['comment'];
 			} 
 			else {
 				$MailText .= '<strong>#</strong>';

@@ -49,7 +49,7 @@ $rows = [];
 foreach ($v_corrections as $correction) {
 	$row = ['values'=>[
 		'problem'=>$correction['problem']['name'],
-		'mark'=>$correction['mark'],
+		'mark'=>($correction['mark']=='-1')?'∅':$correction['mark'],
 		'comment'=>$correction['comment'],
 		'user'=>$correction['username']
 		], 'data'=>['problem_id'=>$correction['problem']['id'] ] ];

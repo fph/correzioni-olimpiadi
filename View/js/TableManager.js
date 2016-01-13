@@ -141,8 +141,11 @@ function StringCompare(a, b) {//Natural sorting
 
 function NumberCompare(a, b) {
 	if (a == null && b == null) return 0;
-	else if (a == null) return -1;
-	else if (b == null) return 1;
+	else if (a == '∅' && b == '∅') return 0;
+	else if (a == null && b == '∅') return -1;
+	else if (a == '∅' && b == null) return 1;
+	else if (a == null || a == '∅') return -1;
+	else if (b == null || b == '∅') return 1;
 	var x = parseFloat(a);
 	var y = parseFloat(b);
 	if (x == y) return 0;

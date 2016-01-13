@@ -34,11 +34,12 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 		$total = 0;
 		foreach ($v_problems as $problem) {
 			if (isset($contestant['marks'][$problem['id']])) {
-				$values[$problem['id']]=$contestant['marks'][$problem['id']];
-				$total += $contestant['marks'][$problem['id']];
+				$mark = $contestant['marks'][$problem['id']];
+				$values[$problem['id']] = ($mark == '-1')?'∅':$mark;
+				$total += ($mark == '-1')?0:$mark;
 			}
 		}
-		$values['score']=$total;
+		$values['score'] = $total;
 		
 		$row = [
 			'values'=>$values,
@@ -47,7 +48,7 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 		];
 		if ($contestant['email'] == 1) $row['class']=['ContestantWithRemail'];
 		
-		$rows[]=$row;
+		$rows[] = $row;
 	}
 	
 	$buttons = null;

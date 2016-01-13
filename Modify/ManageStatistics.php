@@ -14,7 +14,7 @@
 		$ContestNumber = count($list);
 		$contests = [];
 		$AllContestants = [];
-		for ($i=0; $i<$ContestNumber; $i++) {
+		for ($i = 0; $i < $ContestNumber; $i++) {
 			$input = $list[$i];
 			$id = $input['ContestId'];
 			if (!is_numeric($input['weight']) or $input['weight']<0 or $input['weight']>100) {
@@ -24,30 +24,30 @@
 			if (is_null($contest)) {
 				return ['type'=>'bad', 'text'=>'Una delle gare scelte non esiste'];
 			}
-			$contest['weight']=$input['weight'];
+			$contest['weight'] = $input['weight'];
 			
 			$ContestParticipations = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$id]));
 			foreach ($ContestParticipations as $participation) {
 				$ContestantId = $participation['ContestantId'];
 				if (!isset($AllContestants[$ContestantId])) {
 					$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
-					$AllContestants[$ContestantId]=$contestant;
+					$AllContestants[$ContestantId] = $contestant;
 				}
 			}
 			
-			$contest['problems']=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$id]));
+			$contest['problems'] = ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$id]));
 			usort($contest['problems'], BuildSorter('name'));
 			$ProbNum = count($contest['problems']);
 			
-			for ($j=0; $j<$ProbNum; $j++) {
+			for ($j = 0; $j < $ProbNum; $j++) {
 				$ProblemId = $contest['problems'][$j]['id'];
 				$ProblemCorrections = ManyResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$ProblemId], ['mark', 'ContestantId']));
 				foreach ($ProblemCorrections as $correction) {
-					$AllContestants[$correction['ContestantId']]['marks'][$ProblemId]=$correction['mark'];
+					$AllContestants[$correction['ContestantId']]['marks'][$ProblemId] = $correction['mark'];
 				}
 			}
 			
-			$contests[]=$contest;
+			$contests[] = $contest;
 		}
 		
 		//Here I build the table using only $contests and $AllContestants
@@ -69,16 +69,16 @@
 				$SubTotal = 0;
 				foreach ($contest['problems'] as $problem) {
 					if (isset($contestant['marks'][$problem['id']])) {
-						$values['Problem'.$problem['id']] = $contestant['marks'][$problem['id']];
 						$mark = $contestant['marks'][$problem['id']];
-						$SubTotal += $mark;
+						$values['Problem'.$problem['id']] = ($mark == '-1')?'∅':$mark;
+						$SubTotal += ($mark == '-1')?0:$mark;
 					}
 				}
-				$values['Contest'.$contest['id']]=$SubTotal;
+				$values['Contest'.$contest['id']] = $SubTotal;
 				$total += $SubTotal*$contest['weight'];
 			}
-			$values['score']=$total;
-			$rows[]=['values'=>$values];
+			$values['score'] = $total;
+			$rows[] = ['values'=>$values];
 		}
 		
 		$table = ['columns'=>$columns, 'rows'=>$rows, 'id'=>'MultipleRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1], 'LineNumbers'=>true];
