@@ -90,3 +90,36 @@ function NewLine() {
 function GenerateRandomString() {
 	return bin2hex(openssl_random_pseudo_bytes(6));
 }
+
+
+function SendMail($address, $subject, $body, $attachments = []) {
+	require PHPMailerPath; // PhpMailer library
+	
+	$mail = new PHPMailer;
+	$mail->CharSet = 'UTF-8';
+	
+	if (EmailSMTP) {
+		$mail->isSMTP();
+		$mail->SMTPDebug = 0; 
+		$mail->Host = EmailHost;
+		$mail->Port = EmailPort;
+		$mail->SMTPSecure = 'tls';
+		$mail->SMTPAuth = true;
+		$mail->Username = EmailUsername;
+		$mail->Password = EmailPassword;
+	}
+	else {
+		$mail->isSendmail();
+	}
+	$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
+	$mail->addAddress($address);
+	$mail->Subject = $subject;
+	$mail->isHTML(true);
+	$mail->Body = $body;
+	
+	foreach ($attachments as $att) {
+		$mail->AddAttachment($att['file'], $att['name']);
+	}
+	
+	return $mail->send();
+} 

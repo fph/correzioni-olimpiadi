@@ -6,5 +6,5 @@ function ChangeMailColor(response) {
 }
 
 function SendMail(ContestId, ContestantId) {
-	MakeAjaxRequest('../Modify/MailSender.php', {ContestId: ContestId, ContestantId: ContestantId}, ChangeMailColor);
+	MakeAjaxRequest('../Modify/ReportSender.php', {ContestId: ContestId, ContestantId: ContestantId}, ChangeMailColor);
 }

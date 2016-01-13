@@ -1,7 +1,6 @@
 <?php
 	require_once '../Utilities.php';
 	SuperRequire_once('General', 'sqlUtilities.php');
-	require PHPMailerPath; // PhpMailer library
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
 	function SendCode($db, $ContestantEmail, $OldUser) {
@@ -30,34 +29,16 @@
 		}
 		
 		$code = GenerateRandomString();		
-				
-		$MailText = 'Il codice di verifica che devi inserire sul sito <strong>Correzioni Olimpiadi</strong> è:<br>';
-		$MailText .= '<big>'.$code.'</big><br><br>';
-		$MailText .= 'p.s. Se non hai richiesto l\'invio del codice di verifica, ignora questa email.';
 		
-		// Send mail
-		$mail = new PHPMailer;
-		$mail->CharSet = 'UTF-8';
 		
-		if (EmailSMTP) {
-			$mail->isSMTP();
-			$mail->SMTPDebug = 0; 
-			$mail->Host = EmailHost;
-			$mail->Port = EmailPort;
-			$mail->SMTPSecure = 'tls';
-			$mail->SMTPAuth = true;
-			$mail->Username = EmailUsername;
-			$mail->Password = EmailPassword;
-		}
-		else {
-			$mail->isSendmail();
-		}
-		$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
-		$mail->addAddress($ContestantEmail);
-		$mail->Subject = 'Codice di verifica - Correzioni Olimpiadi';
-		$mail->isHTML(true);
-		$mail->Body = $MailText;
-		if (!$mail->send()) {
+		// Send mail		
+		$MailBody = 'Il codice di verifica che devi inserire sul sito <strong>Correzioni Olimpiadi</strong> è:<br>';
+		$MailBody .= '<big>'.$code.'</big><br><br>';
+		$MailBody .= 'p.s. Se non hai richiesto l\'invio del codice di verifica, ignora questa email.';
+		
+		$SendingSuccess = SendMail($ContestantEmail, 'Codice di verifica - Correzioni Olimpiadi', $MailBody);
+		
+		if (!$SendingSuccess) {
 			return ['type'=>'bad', 'text'=>'Il codice non è stato inviato a causa di un errore nell\'invio della mail'];
 		}
 		

@@ -8,7 +8,7 @@ function MailSent(response) {
 }
 
 function SendMail(row) {
-	MakeAjaxRequest('../Modify/MailSender.php', {ContestId: ContestId, ContestantId: GetDataAttribute(row, 'ContestantId')}, MailSent);
+	MakeAjaxRequest('../Modify/ReportSender.php', {ContestId: ContestId, ContestantId: GetDataAttribute(row, 'ContestantId')}, MailSent);
 	row.classList.add('MailingRow');
 }
 

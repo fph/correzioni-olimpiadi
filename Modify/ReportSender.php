@@ -3,10 +3,9 @@
 	SuperRequire_once('General', 'SessionManager.php');
 	SuperRequire_once('General', 'sqlUtilities.php');
 	SuperRequire_once('General', 'PermissionManager.php');
-	require PHPMailerPath; // PhpMailer library
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
-	function SendMail($db, $ContestId, $ContestantId) {
+	function SendReport($db, $ContestId, $ContestantId) {
 		$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 		$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 		if (is_null($contest)) {
@@ -47,43 +46,23 @@
 			$corrections[] = $nn;
 		}
 		
-		$MailText = 'Caro/a '.$contestant['name'].', <br>questo è il verbale di correzione dei tuoi esercizi: <br><br>';
+		$MailBody = 'Caro/a '.$contestant['name'].', <br>questo è il verbale di correzione dei tuoi esercizi: <br><br>';
 		foreach ($corrections as $correction) {
-			$MailText .= '<u>'.$correction['problem']['name'].'</u> ';
+			$MailBody .= '<u>'.$correction['problem']['name'].'</u> ';
 			if ($correction['done']) {
-				$MailText .= '<strong>'.(($correction['mark'] == '-1')?'∅':$correction['mark']).'</strong>';
-				$MailText .= ' [<kbd>'.$correction['username'].'</kbd>] '.$correction['comment'];
+				$MailBody .= '<strong>'.(($correction['mark'] == '-1')?'∅':$correction['mark']).'</strong>';
+				$MailBody .= ' [<kbd>'.$correction['username'].'</kbd>] '.$correction['comment'];
 			} 
 			else {
-				$MailText .= '<strong>#</strong>';
+				$MailBody .= '<strong>#</strong>';
 			}	
-			$MailText .= '<br>';
+			$MailBody .= '<br>';
 		}
-		$MailText .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
+		$MailBody .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
 		
-		// Send mail
-		$mail = new PHPMailer;
-		$mail->CharSet = 'UTF-8';
+		$SendingSuccess = SendMail($contestant['email'], 'Verbale di correzione - Ammissione a '.$contest['name'], $MailBody);
 		
-		if (EmailSMTP) {
-			$mail->isSMTP();
-			$mail->SMTPDebug = 0; 
-			$mail->Host = EmailHost;
-			$mail->Port = EmailPort;
-			$mail->SMTPSecure = 'tls';
-			$mail->SMTPAuth = true;
-			$mail->Username = EmailUsername;
-			$mail->Password = EmailPassword;
-		}
-		else {
-			$mail->isSendmail();
-		}
-		$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
-		$mail->addAddress($contestant['email']);
-		$mail->Subject = 'Verbale di correzione - Ammissione a '.$contest['name'];
-		$mail->isHTML(true);
-		$mail->Body = $MailText;
-		if (!$mail->send()) {
+		if (!$SendingSuccess) {
 			return ['type'=>'bad', 'text'=>'L\'email non è stata inviata a causa di un errore del server'];
 		}
 		
@@ -103,5 +82,5 @@
 	
 	$data = json_decode($_POST['data'], 1);
 	
-	SendObject(SendMail($db, $data['ContestId'], $data['ContestantId']));
+	SendObject(SendReport($db, $data['ContestId'], $data['ContestantId']));
 	$db->close();

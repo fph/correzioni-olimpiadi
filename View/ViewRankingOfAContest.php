@@ -20,13 +20,13 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 
 <?php
 	$columns = [];
-	$columns[]=['id'=>'contestant', 'name'=>'Partecipante', 'class'=>['SurnameAndNameColumn'], 'order'=>1, 'type'=>'string'];
+	$columns[] = ['id'=>'contestant', 'name'=>'Partecipante', 'class'=>['SurnameAndNameColumn'], 'order'=>1, 'type'=>'string'];
 	
 	usort($v_problems, BuildSorter('name'));
 	foreach ($v_problems as $problem) {
-		$columns[]=['id'=>strval($problem['id']), 'name'=>$problem['name'], 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
+		$columns[] = ['id'=>strval($problem['id']), 'name'=>$problem['name'], 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
 	}
-	$columns[]=['id'=>'score', 'name'=>'Punteggio', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number']; 
+	$columns[] = ['id'=>'score', 'name'=>'Punteggio', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number']; 
 	
 	$rows = [];
 	foreach ($v_contestants as $contestant) {
@@ -52,7 +52,7 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 	}
 	
 	$buttons = null;
-	if ($v_admin == 1) $buttons=['mail'=>['onclick'=>'SendMail']];
+	if ($v_admin == 1) $buttons = ['mail'=>['onclick'=>'SendMail']];
 	
 	$table = ['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1], 'LineNumbers'=>true, 'buttons'=>$buttons ];
 	InsertDom('table', $table);
