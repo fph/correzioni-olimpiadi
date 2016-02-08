@@ -15,7 +15,7 @@ function GetParticipationPdf($db, $ContestId, $ContestantId) {
 	header('Content-Length: '.filesize($PdfName));
 	$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
 	$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
-	header('Content-Disposition:attachment;filename=\''.$CleanedSurname.'.pdf\'');
+	header('Content-Disposition:attachment;filename="'.$CleanedSurname.'.pdf"');
 	echo $PdfFile;
 }
 
@@ -31,7 +31,7 @@ function GetContestZip($db, $ContestId) {
 	header('Content-type: application/octet-stream');
 	header('Content-Length: '.filesize($ZipName) );
 	$CleanedContest = preg_replace('/[^\p{L}0-9\-]/u', '', $contest['name']);
-	header('Content-Disposition:attachment;filename=\''.$CleanedContest.'.zip\'');
+	header('Content-Disposition:attachment;filename="'.$CleanedContest.'.zip"');
 	echo $ZipFile;
 }
 
