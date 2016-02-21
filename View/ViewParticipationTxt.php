@@ -29,13 +29,13 @@ questo e' il verbale di correzione dei tuoi esercizi: <br><br>
 <?php
 foreach ($v_corrections as $correction) {
 	?>
-	<?=$correction['problem']['name']?> 
+	<u><?=$correction['problem']['name']?></u> 
 	<?php
 	if ($correction['done']) {?>
-		<?=($correction['mark'] == '-1')?'∅':$correction['mark']?> [<?=$correction['username']?>] <?=$correction['comment']?>
+		<strong><?=($correction['mark'] == '-1')?'∅':$correction['mark']?></strong> [<kbd><?=$correction['username']?></kbd>] <?=$correction['comment']?>
 	<?php }
 	else {?>
-		#
+		<strong>#</strong>
 	<?php } ?>
 	<br>
 	<?php
