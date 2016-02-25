@@ -22,17 +22,20 @@ global $v_contest, $v_problem, $v_corrections;
 
 <?php
 $columns = [];
-$columns[] = ['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
-$columns[] = ['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns[] = ['id'=>'participant', 'name'=>'Partecipante', 'class'=>['SurnameAndNameColumn'], 'order'=>1];
 $columns[] = ['id'=>'mark', 'name'=>'Voto', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
 $columns[] = ['id'=>'comment', 'name'=>'Commento', 'class'=>['CommentColumn']];
 $columns[] = ['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
 
 $rows = [];
 foreach ($v_corrections as $correction) {
+	$FullName = $correction['contestant']['surname'] . ' ' . $correction['contestant']['name'];
+	$ParticipantLink = '<a data-sort_name=\'' . $FullName. '\' 
+						class=\'ContestantLink\' 
+						href=\'ViewParticipation.php?ContestId='.$v_contest['id'] . 
+						'&ContestantId='.$correction['contestant']['id'].'\'>';
 	$row = ['values'=>[
-		'surname'=>$correction['contestant']['surname'],
-		'name'=>$correction['contestant']['name'],
+		'participant'=>$ParticipantLink . $FullName . '</a>',
 		'mark'=>($correction['mark']=='-1')?'∅':$correction['mark'],
 		'comment'=>$correction['comment'],
 		'user'=>$correction['username']
@@ -40,7 +43,7 @@ foreach ($v_corrections as $correction) {
 	$rows[] = $row;
 }
 
-$table = ['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'surname'] ];
+$table = ['columns'=>$columns, 'rows'=>$rows, 'InitialOrder'=>['ColumnId'=>'participant'] ];
 if ($v_contest['blocked'] == 0) {
 	$buttons = [];
 	$buttons['modify'] = ['onclick'=>'OnModification'];

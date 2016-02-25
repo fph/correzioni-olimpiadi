@@ -21,7 +21,8 @@ $jsInclude = ['ViewParticipation'=>['CorrectionModification', 'ViewParticipation
 			'AdminStatistics'=>['AdminStatistics'],
 			'ParticipationRequest'=>['ParticipationRequest']];
 $cssInclude = ['AdminStatistics'=>['AdminStatistics'],
-			'ViewParticipation'=>['ViewParticipation'],
+			'ViewParticipation'=>['ViewParticipationProblem'],
+			'ViewProblem'=>['ViewParticipationProblem'],
 			'ParticipationRequest'=>['ParticipationRequest'],
 			'AdminContestInformation'=>['AdminContestInformation'] ];
 

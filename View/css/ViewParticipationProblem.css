@@ -1,0 +1,10 @@
+#CorrectionRecord, .ProblemLink, .ContestantLink {
+	text-decoration: none;
+	color: green;
+	font-weight:normal;
+}
+
+#CorrectionRecord:hover, .ProblemLink:hover, .ContestantLink:hover {
+	text-decoration: underline;
+	color: green;
+}

@@ -47,8 +47,12 @@ $columns[] = ['id'=>'user', 'name'=>'Correttore', 'class'=>['UsernameColumn']];
 
 $rows = [];
 foreach ($v_corrections as $correction) {
+	$ProblemLink = '<a data-sort_name=\'' . $correction['problem']['name'] . '\' 
+					class=\'ProblemLink\'
+					href=\'ViewProblem.php?ContestId='.$v_contest['id'] . 
+					'&ProblemId='.$correction['problem']['id'].'\'>';
 	$row = ['values'=>[
-		'problem'=>$correction['problem']['name'],
+		'problem'=>$ProblemLink . $correction['problem']['name'] . '</a>',
 		'mark'=>($correction['mark']=='-1')?'∅':$correction['mark'],
 		'comment'=>$correction['comment'],
 		'user'=>$correction['username']
