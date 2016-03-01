@@ -24,31 +24,31 @@ function MakeCorrection($db, $ContestId, $ProblemId, $ContestantId, $mark, $comm
 		return ['type'=>'bad', 'text'=>'Il commento può avere al più '.comment_MAXLength.' caratteri, il tuo ne ha '.strlen($comment).' (i caratteri speciali valgono più degli altri)'];
 	}
 	
-	$Blocked = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId], ['blocked']))['blocked'];
-	if ($Blocked == 1) {
+	$blocked = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId], ['blocked']))['blocked'];
+	if ($blocked == 1) {
 		return ['type'=>'bad', 'text'=>'Le correzioni della gara scelta sono terminate'];
 	}
 
-	$Permission = VerifyPermission($db, GetUserIdBySession(), $ContestId);
-	if ($Permission == 0) {
+	$permission = VerifyPermission($db, GetUserIdBySession(), $ContestId);
+	if ($permission == 0) {
 		return ['type'=>'bad', 'text'=>'Non hai i permessi per correggere questa gara'];
 	}
 	
-	$ParticipationId= OneResultQuery ($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	$ParticipationId = OneResultQuery ($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
 	if (is_null ($ParticipationId)) {
 		return ['type'=>'bad', 'text'=>'Il partecipante selezionato non ha partecipato alla gara'];
 	}
 
-	$Correction =OneResultQuery ($db, QuerySelect('Corrections', ['ProblemId'=>$ProblemId, 'ContestantId'=>$ContestantId]));
+	$correction = OneResultQuery ($db, QuerySelect('Corrections', ['ProblemId'=>$ProblemId, 'ContestantId'=>$ContestantId]));
 
-	if (is_null($Correction)) {
+	if (is_null($correction)) {
 		Query($db, QueryInsert('Corrections', 
 		['ProblemId'=>$ProblemId, 'ContestantId'=>$ContestantId, 'mark'=>$mark, 'comment'=>$comment, 'UserId'=>GetUserIdBySession() ]));
 	}
 
 	else {
-		if ($mark == $Correction['mark']) Query($db, QueryUpdate('Corrections', ['id'=>$Correction['id']], ['comment'=>$comment]));
-		else Query($db, QueryUpdate('Corrections', ['id'=>$Correction['id']], ['mark'=>$mark, 'comment'=>$comment, 'UserId'=>GetUserIdBySession() ]));
+		if ($mark === $correction['mark']) Query($db, QueryUpdate('Corrections', ['id'=>$correction['id']], ['comment'=>$comment]));
+		else Query($db, QueryUpdate('Corrections', ['id'=>$correction['id']], ['mark'=>$mark, 'comment'=>$comment, 'UserId'=>GetUserIdBySession() ]));
 	}
 	
 	return ['type'=>'good', 'text'=>'Correzione salvata con successo'];
