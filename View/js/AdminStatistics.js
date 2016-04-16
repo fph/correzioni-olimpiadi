@@ -7,69 +7,26 @@ function DeletePreviousStatistics() {
 
 //This function add the contests to the list of those which will be present in the statistics table
 function AddContestToStatistics(inputs) {
+	if (GetSelectStatus('ContestInput') != 1) {
+		ShowMessage('bad', 'Si deve selezionare correttamente una gara per aggiungerla alle statistiche');
+		return;
+	}
+	
 	var contest = GetSelectText('ContestInput');
+	var ContestId = GetSelectValue('ContestInput');
 	var weight = inputs.namedItem('weight').value;
-	var ContestId = inputs.namedItem('ContestId').value;
+	
+	if (weight < 0.01) {
+		ShowMessage('bad', 'Si deve scegliere un peso positivo');
+		return; 
+	}
+	
 	//Maybe check if the contest is already present?
 	
 	AddRow(document.getElementById('AdminContestWeightTable'), {
 		values: {'contest': contest, 'weight': weight},
 		data: {'contest_id': ContestId},
 	}, 'contest');
-}
-
-function Clear(row) {
-	var WeightTd = row.getElementsByClassName('WeightColumn')[0];
-
-	WeightTd.innerHTML=GetDataAttribute(WeightTd, 'old_value');
-	SetDataAttribute(WeightTd, 'old_value', null);
-
-	var ModifyButtons = document.getElementsByClassName('ModifyButtonContainer');
-	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.remove('hidden');
-
-	var TrashButtons = document.getElementsByClassName('TrashButtonContainer');
-	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.remove('hidden');
-
-	var ViewStatisticsButton = document.getElementById('ViewStatisticsButton');
-	ViewStatisticsButton.removeAttribute('disabled', 'disabled');
-
-	var AddContestButton = document.getElementById('AddContestButton');
-	AddContestButton.removeAttribute('disabled', 'disabled');
-}
-
-function Confirm(row) {
-	var WeightTd = row.getElementsByClassName('WeightColumn')[0];
-
-	var WeightValue = WeightTd.getElementsByClassName('ContentEditable')[0].innerHTML;
-	SetDataAttribute(WeightTd, 'old_value', WeightValue);
-
-	Clear(row);
-}
-
-function OnModification(row) {
-
-	var WeightTd = row.getElementsByClassName('WeightColumn')[0];
-	var WeightValue = WeightTd.innerHTML;
-	SetDataAttribute(WeightTd, 'old_value', WeightValue);
-
-
-	var WeightEditable = document.createElement('div');
-	WeightEditable.setAttribute('contenteditable', 'true');
-	WeightEditable.classList.add('ContentEditable');
-	WeightEditable.innerHTML=WeightValue;
-	WeightTd.replaceChild(WeightEditable, WeightTd.childNodes[0]);
-
-	var ModifyButtons = document.getElementsByClassName('ModifyButtonContainer');
-	for (i=0; i<ModifyButtons.length; i++) ModifyButtons[i].classList.add('hidden');
-
-	var TrashButtons = document.getElementsByClassName('TrashButtonContainer');
-	for (i=0; i<TrashButtons.length; i++) TrashButtons[i].classList.add('hidden');
-
-	var ViewStatisticsButton = document.getElementById('ViewStatisticsButton');
-	ViewStatisticsButton.setAttribute('disabled', 'disabled');
-
-	var AddContestButton = document.getElementById('AddContestButton');
-	AddContestButton.setAttribute('disabled', 'disabled');
 }
 
 function RemoveContest(row) {

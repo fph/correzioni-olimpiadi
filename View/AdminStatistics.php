@@ -22,10 +22,7 @@ $columns[]= ['id'=>'weight', 'name'=>'Peso', 'order'=>1, 'class'=>['WeightColumn
 $rows = [];
 
 $buttons = [];
-$buttons['modify']=['onclick'=>'OnModification'];
 $buttons['trash']=['onclick'=>'RemoveContest'];
-$buttons['confirm']=['onclick'=>'Confirm', 'hidden'=>1];
-$buttons['cancel']=['onclick'=>'Clear', 'hidden'=>1];
 
 $table = ['columns'=>$columns, 'rows'=> $rows, 'buttons'=>$buttons, 'id'=>'AdminContestWeightTable', 'InitialOrder'=>['ColumnId'=>'contest'] ];
 InsertDom('table',  $table);

@@ -56,6 +56,7 @@ function RenderSelect(obj) {
 	
 	if (type == 'contestant') TextSelect.setAttribute('placeholder', 'Cognome Nome');
 	
+	// Key pressed
 	TextSelect.addEventListener('keyup', function(e) {
 		GetSelectSuggestions(this);
 		var ValueInput = this.nextSibling;
@@ -64,6 +65,7 @@ function RenderSelect(obj) {
 		this.classList.remove('AjaxSelectTextBad');
 	});
 	
+	// Losing focus
 	TextSelect.addEventListener('blur', function(e) {
 		var TextInput = this;
 		var ValueInput = this.nextSibling;
@@ -73,6 +75,7 @@ function RenderSelect(obj) {
 		else if (TextInput.value != '') TextInput.classList.add('AjaxSelectTextBad'); 
 	});
 	
+	// Getting focus
 	TextSelect.addEventListener('focus', function(e) {
 		GetSelectSuggestions(this);
 		var OptionsDiv = this.parentNode.getElementsByClassName('AjaxSelectOptionsDiv')[0];
@@ -104,6 +107,12 @@ function GetSelectText(id) {
 
 function GetSelectValue(id) {
 	return document.getElementById(id).getElementsByClassName('AjaxSelectValue')[0].value;
+}
+
+function GetSelectStatus(id) {
+	if (GetSelectText(id) == '' && GetSelectValue(id) == '') return '0'; // empty
+	if (GetSelectText(id) == '' || GetSelectValue(id) == '') return '-1'; // incorrect
+	return '1'; // correct
 }
 
 //The variable SelectsInformation is defined server-side
