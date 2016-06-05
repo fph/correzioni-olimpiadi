@@ -42,4 +42,4 @@ define('ContestantEmail_MAXLength', 63);
 define('ProblemName_MAXLength', 31);
 define('comment_MAXLength', 8191);
 define('solutions_MAXSize', 20); // In Megabytes
-define('VolunteerRequest_MAXSize', 10); // In Megabytes
+define('VolunteerRequest_MAXSize', 4); // In Megabytes
