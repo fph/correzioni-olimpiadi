@@ -93,7 +93,7 @@ function GenerateRandomString() {
 
 
 function SendMail($address, $subject, $body, $attachments = []) {
-	require PHPMailerPath; // PhpMailer library
+	require_once PHPMailerPath; // PhpMailer library
 	
 	$mail = new PHPMailer;
 	$mail->CharSet = 'UTF-8';
