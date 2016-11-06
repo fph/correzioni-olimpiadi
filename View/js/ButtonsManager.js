@@ -4,8 +4,8 @@ var ItalianTranslation = {
 	confirm		: 'Conferma', 
 	cancel		: 'Annulla', 
 	GoodMail	: 'Invia email',
-	BadMail	 : 'Invia email di non idoneità',
-	GoodRemail  : 'Reinvia email',
+	BadMail		: 'Invia email di non idoneità',
+	GoodRemail	: 'Reinvia email',
 	BadRemail	: 'Reinvia email di non idoneità',
 };
 
