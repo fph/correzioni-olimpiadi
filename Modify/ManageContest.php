@@ -22,7 +22,7 @@ function AddContest($db, $name, $date) {
 		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
 	}
 	
-	Query($db, QueryInsert('Contests', ['name'=>$name, 'date'=>$date, 'blocked'=>0]));
+	Query($db, QueryInsert('Contests', ['name'=>$name, 'date'=>$date, 'blocked'=>0, 'NotAcceptedEmail'=>'']));
 	return ['type'=>'good', 'text'=>'La gara è stata creata con successo', 'data'=>[
 	'ContestId'=>$db->insert_id, 'name'=>$name, 'date'=>$date] ];
 }
@@ -146,7 +146,7 @@ function ChangeDate($db, $ContestId, $date) {
 }
 
 function ChangeNameAndDate($db, $ContestId, $name, $date) {
-	if (!is_string($name) or strlen($name) <= ContestName_MINLength or strlen($name)>ContestName_MAXLength) {
+	if (!is_string($name) or strlen($name) <= ContestName_MINLength or strlen($name) > ContestName_MAXLength) {
 		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
 	}
 	
@@ -163,8 +163,21 @@ function ChangeNameAndDate($db, $ContestId, $name, $date) {
 	return ['type'=>'good', 'text'=>'Il nome e la data sono stati cambiati con successo'];
 }
 
+function ChangeNotAcceptedEmail($db, $ContestId, $NotAcceptedEmail) {
+	if (!is_string($NotAcceptedEmail) or strlen($NotAcceptedEmail) > ContestNotAcceptedEmail_MAXLength) {
+		return ['type'=>'bad', 'text'=>'Il paragrafo della mail per i segati deve essere una stringa con al più '.ContestNotAcceptedEmail_MAXLength.' caratteri'];
+	}
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
+		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
+	}
+
+	Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['NotAcceptedEmail'=>$NotAcceptedEmail]));
+	return ['type'=>'good', 'text'=>'Il paragrafo della mai per i segati è stato cambiato con successo'];
+}
+
 function AddProblem($db, $ContestId, $name) {
-	if (!is_string($name) or strlen($name)>ProblemName_MAXLength or strlen($name) == 0) {
+	if (!is_string($name) or strlen($name) > ProblemName_MAXLength or strlen($name) == 0) {
 		return ['type'=>'bad', 'text'=>'Il nome del problema deve essere una stringa non vuota di al più '.ProblemName_MAXLength.' caratteri'];
 	}
 	
@@ -228,6 +241,7 @@ else if ($data['type'] == 'CreateZip') SendObject(CreateZip($db, $data['ContestI
 else if ($data['type'] == 'ChangeName') SendObject(ChangeName($db, $data['ContestId'], $data['name']));
 else if ($data['type'] == 'ChangeDate') SendObject(ChangeDate($db, $data['ContestId'], $data['date']));
 else if ($data['type'] == 'ChangeNameAndDate') SendObject(ChangeNameAndDate($db, $data['ContestId'], $data['name'], $data['date']));
+else if ($data['type'] == 'ChangeNotAcceptedEmail') SendObject(ChangeNotAcceptedEmail($db, $data['ContestId'], $data['NotAcceptedEmail']));
 else if ($data['type'] == 'AddProblem') SendObject(AddProblem($db, $data['ContestId'], $data['name']));
 else if ($data['type'] == 'RemoveProblem') SendObject(RemoveProblem($db, $data['ProblemId']));
 else if ($data['type'] == 'ChangeProblemName') SendObject(ChangeProblemName($db, $data['ProblemId'], $data['name']));

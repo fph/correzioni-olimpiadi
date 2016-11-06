@@ -52,7 +52,9 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 	}
 	
 	$buttons = null;
-	if ($v_admin == 1) $buttons = ['mail'=>['onclick'=>'SendMail']];
+	if ($v_admin == 1) {
+		$buttons = ['GoodMail'=>['onclick'=>'SendGoodMail'], 'BadMail'=>['onclick'=>'SendBadMail']];
+	}
 	
 	$table = ['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'id'=> 'ContestRankingTable', 'InitialOrder'=>['ColumnId'=>'score', 'ascending'=>1], 'LineNumbers'=>true, 'buttons'=>$buttons ];
 	InsertDom('table', $table);

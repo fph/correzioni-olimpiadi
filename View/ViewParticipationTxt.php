@@ -24,7 +24,7 @@ global $v_corrections, $v_contestant, $v_contest;
 -->
 
 Caro/a <?=$v_contestant['name']?>, <br>
-questo e' il verbale di correzione dei tuoi esercizi: <br><br>
+questo è il verbale di correzione dei tuoi esercizi: <br><br>
 
 <?php
 foreach ($v_corrections as $correction) {

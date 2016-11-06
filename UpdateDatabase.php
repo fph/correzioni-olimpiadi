@@ -212,6 +212,29 @@ function AddContestantsSchoolCityColumn() {
 	return true;
 }
 
+function AddNotAcceptedEmailColumn() {
+	if (!defined('ContestNotAcceptedEmail_MAXLength')) {
+		echo 'Before updating, Constants.php must be modified (defining \'ContestNotAcceptedEmail_MAXLength\').'.NewLine();
+		return false;
+	}
+	
+	$db = OpenDbConnection();
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contests', 'COLUMN_NAME'=>'NotAcceptedEmail']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Contests` ADD COLUMN `NotAcceptedEmail` varchar('.ContestNotAcceptedEmail_MAXLength.') NOT NULL DEFAULT \'\'';
+		Query($db, $query);
+		
+		echo 'The \'NotAcceptedEmail\' column has been added in the \'Contests\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'NotAcceptedEmail\' column already exists in the \'Contests\' table.'.NewLine();
+	}
+	
+	$db->close();
+	return true;
+}
+
 if (!AddContestantsEmailColumn()) {
 	die('Error while adding contestant email column');
 }
@@ -246,6 +269,10 @@ if (!CreateVerificationCodesTable()) {
 
 if (!AddContestantsSchoolCityColumn()) {
 	die('Error while adding SchoolCity column');
+}
+
+if (!AddNotAcceptedEmailColumn()) {
+	die('Error while adding NotAcceptedEmail column');
 }
 
 echo 'Database has been updated successfully!'.NewLine();

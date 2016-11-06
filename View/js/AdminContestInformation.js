@@ -122,5 +122,19 @@ function CreatedZip(response) {
 }
 
 function CreateZip() {
-	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type:'CreateZip'}, CreatedZip);
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, type: 'CreateZip'}, CreatedZip);
+}
+
+function ChangedNotAcceptedEmail(response) {
+	if (response.type == 'good') {
+		var textarea = document.getElementById('NotAcceptedEmailTextarea');
+		textarea.removeAttribute('disabled');
+	}
+}
+
+function ChangeNotAcceptedEmail() {
+	var textarea = document.getElementById('NotAcceptedEmailTextarea');
+	var NewValue = textarea.value;
+	textarea.setAttribute('disabled', 'disabled');
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, NotAcceptedEmail: NewValue, type: 'ChangeNotAcceptedEmail'}, ChangedNotAcceptedEmail);
 }

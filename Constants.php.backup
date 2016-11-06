@@ -30,6 +30,7 @@ define('PHPMailerPath', 'PHPMailerAutoload.php');
 define('SessionDuration', 43200); // In seconds
 define('ContestName_MAXLength', 255);
 define('ContestName_MINLength', 2);
+define('ContestNotAcceptedEmail_MAXLength', 8191);
 define('username_MAXLength', 31);
 define('username_MINLength', 3);
 define('password_MAXLength', 63);

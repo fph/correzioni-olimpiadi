@@ -30,8 +30,18 @@ global $v_admin, $v_corrections, $v_contestant, $v_contest, $v_MailSent, $v_Solu
 <?php	if ($v_admin == 1) {?>
 			(<a id='CorrectionRecord' href="ViewParticipationTxt.php?ContestId=<?=$v_contest['id']?>&ContestantId=<?=$v_contestant['id']?>">verbale di correzione</a>
 			<?php 
-				if ($v_MailSent == 0) InsertDom('buttons', ['buttons'=>['mail'=>['onclick'=>'SendMail('.$v_contest['id'].', '.$v_contestant['id'].')']]]); 
-				else InsertDom('buttons', ['buttons'=>['remail'=>['onclick'=>'SendMail('.$v_contest['id'].', '.$v_contestant['id'].')']]]);
+				if ($v_MailSent == 0) {
+					InsertDom('buttons', ['buttons'=>[
+						'GoodMail'=>['onclick'=>'SendGoodMail('.$v_contest['id'].', '.$v_contestant['id'].')'],
+						'BadMail'=>['onclick'=>'SendBadMail('.$v_contest['id'].', '.$v_contestant['id'].')']
+					]]); 
+				}
+				else {
+					InsertDom('buttons', ['buttons'=>[
+						'GoodRemail'=>['onclick'=>'SendGoodMail('.$v_contest['id'].', '.$v_contestant['id'].')'],
+						'BadRemail'=>['onclick'=>'SendBadMail('.$v_contest['id'].', '.$v_contestant['id'].')']
+					]]);
+				}
 			?>
 			)
 <?php  } ?>

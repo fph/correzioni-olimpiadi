@@ -5,11 +5,14 @@
 	SuperRequire_once('General', 'PermissionManager.php');
 	SuperRequire_once('Modify', 'ObjectSender.php');
 
-	function SendReport($db, $ContestId, $ContestantId) {
+	function SendReport($db, $ContestId, $ContestantId, $accepted) {
 		$contest = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 		$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$ContestantId]));
 		if (is_null($contest)) {
 			return ['type'=>'bad', 'text'=>'La gara selezionata non esiste'];
+		}
+		if (!$accepted and strlen($contest['NotAcceptedEmail']) == 0) {
+			return ['type'=>'bad', 'text'=>'Per mandare l\'email personalizzata ai segati si deve impostare il contenuto della mail'];
 		}
 		if (is_null($contestant)) {
 			return ['type'=>'bad', 'text'=>'Il partecipante selezionato non esiste'];
@@ -45,8 +48,18 @@
 			
 			$corrections[] = $nn;
 		}
-		
-		$MailBody = 'Caro/a '.$contestant['name'].', <br>questo è il verbale di correzione dei tuoi esercizi: <br><br>';
+
+		$MailBody = 'Caro/a '.$contestant['name'].', <br>';
+
+		if ($accepted) {
+			$MailBody .= 'questo è il verbale di correzione dei tuoi esercizi: ';
+		}
+		else {
+			// nl2br stands for newline to <br>
+			$MailBody .= nl2br($contest['NotAcceptedEmail']);
+		}
+		$MailBody .= '<br><br>';
+
 		foreach ($corrections as $correction) {
 			$MailBody .= '<u>'.$correction['problem']['name'].'</u> ';
 			if ($correction['done']) {
@@ -82,5 +95,5 @@
 	
 	$data = json_decode($_POST['data'], 1);
 	
-	SendObject(SendReport($db, $data['ContestId'], $data['ContestantId']));
+	SendObject(SendReport($db, $data['ContestId'], $data['ContestantId'], $data['accepted']));
 	$db->close();

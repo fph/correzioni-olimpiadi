@@ -1,19 +1,24 @@
 function MailSent(response) {
 	var MailingRow = document.getElementsByClassName('MailingRow')[0];
 	if (response.type == 'good') {
-		var MailButtonContainer = MailingRow.getElementsByClassName('MailButtonContainer');
-		if (MailButtonContainer.length>0) ChangeMailToRemail(MailButtonContainer[0]);
+		var ButtonsContainer = MailingRow.getElementsByClassName('ButtonsContainer')[0];
+		ChangeMailToRemail(ButtonsContainer);
 	}
 	MailingRow.classList.remove('MailingRow');
 }
 
-function SendMail(row) {
-	MakeAjaxRequest('../Modify/ReportSender.php', {ContestId: ContestId, ContestantId: GetDataAttribute(row, 'ContestantId')}, MailSent);
+function SendGoodMail(row) {
+	MakeAjaxRequest('../Modify/ReportSender.php', {ContestId: ContestId, ContestantId: GetDataAttribute(row, 'ContestantId'), accepted: true}, MailSent);
+	row.classList.add('MailingRow');
+}
+
+function SendBadMail(row) {
+	MakeAjaxRequest('../Modify/ReportSender.php', {ContestId: ContestId, ContestantId: GetDataAttribute(row, 'ContestantId'), accepted: false}, MailSent);
 	row.classList.add('MailingRow');
 }
 
 var RowsWithRemail = document.getElementsByClassName('ContestantWithRemail');
-for (var i=0; i<RowsWithRemail.length; i++) {
+for (var i = 0; i < RowsWithRemail.length; i++) {
 	var row = RowsWithRemail[i];
-	ChangeMailToRemail(row.getElementsByClassName('MailButtonContainer')[0]);
+	ChangeMailToRemail(row.getElementsByClassName('ButtonsContainer')[0]);
 }

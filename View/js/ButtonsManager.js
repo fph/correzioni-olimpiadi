@@ -1,37 +1,45 @@
 var ItalianTranslation = {
-	modify	: 'Modifica',
-	trash	: 'Elimina', 
-	confirm	: 'Conferma', 
-	cancel	: 'Annulla', 
-	mail	: 'Invia email',
-	remail	: 'Reinvia email'
+	modify		: 'Modifica',
+	trash		: 'Elimina', 
+	confirm		: 'Conferma', 
+	cancel		: 'Annulla', 
+	GoodMail	: 'Invia email',
+	BadMail	 : 'Invia email di non idoneità',
+	GoodRemail  : 'Reinvia email',
+	BadRemail	: 'Reinvia email di non idoneità',
 };
 
 var ImageSrc = {
-	modify	: '../View/Images/ModifyButton.png',
-	trash	: '../View/Images/TrashButton.png',
-	confirm	: '../View/Images/ConfirmButton.png',
-	cancel	: '../View/Images/CancelButton.png',
-	mail	: '../View/Images/MailButton.png',
-	remail	: '../View/Images/RemailButton.png'
+	modify		: '../View/Images/ModifyButton.png',
+	trash		: '../View/Images/TrashButton.png',
+	confirm		: '../View/Images/ConfirmButton.png',
+	cancel		: '../View/Images/CancelButton.png',
+	GoodMail	: '../View/Images/GoodMailButton.png',
+	BadMail		: '../View/Images/BadMailButton.png',
+	GoodRemail	: '../View/Images/GoodRemailButton.png',
+	BadRemail	: '../View/Images/BadRemailButton.png',
 };
 
 var ButtonClass = {
-	modify	: 'ModifyButtonImage',
-	trash	: 'TrashButtonImage',
-	confirm	: 'ConfirmButtonImage',
-	cancel	: 'CancelButtonImage',
-	mail	: 'MailButtonImage',
-	remail	: 'RemailButtonImage'
+	modify		: 'ModifyButtonImage',
+	trash		: 'TrashButtonImage',
+	confirm		: 'ConfirmButtonImage',
+	cancel		: 'CancelButtonImage',
+	GoodMail	: 'MailButtonImage',
+	BadMail		: 'MailButtonImage',
+	GoodRemail	: 'RemailButtonImage',
+	BadRemail	: 'RemailButtonImage',
 };
 
 var ButtonContainerClass = {
-	modify	: 'ModifyButtonContainer',
-	trash	: 'TrashButtonContainer',
-	confirm	: 'ConfirmButtonContainer',
-	cancel	: 'CancelButtonContainer',
-	mail	: 'MailButtonContainer',
-	remail	: 'RemailButtonContainer'
+	modify		: 'ModifyButtonContainer',
+	trash		: 'TrashButtonContainer',
+	confirm		: 'ConfirmButtonContainer',
+	cancel		: 'CancelButtonContainer',
+	GoodMail	: 'MailButtonContainer',
+	BadMail		: 'MailButtonContainer',
+	GoodRemail	: 'RemailButtonContainer',
+	BadRemail	: 'RemailButtonContainer',
 };
 
 function CreateButton(type) {
@@ -123,14 +131,31 @@ function RenderButtons (obj) {
 	return ContainerSpan;
 }
 
-function ChangeMailToRemail(ButtonSpan) {
-	ButtonSpan.classList.add(ButtonContainerClass['remail']);
-	
-	var button = ButtonSpan.getElementsByTagName('img')[0]
-	button.classList.add(ButtonClass['remail']);
-	button.setAttribute('src', ImageSrc['remail']);
-	button.setAttribute('alt', ItalianTranslation['remail']);
-	button.setAttribute('title', ItalianTranslation['remail']);
+function ChangeMailToRemail(ButtonsContainer) {
+	var MaybeGoodMailButtonSpan = ButtonsContainer.getElementsByClassName(ButtonContainerClass['GoodMail']);
+	if (MaybeGoodMailButtonSpan.length > 0) {
+		var MailButtonSpan = MaybeGoodMailButtonSpan[0];
+		MailButtonSpan.classList.remove(ButtonContainerClass['GoodMail']);
+		MailButtonSpan.classList.add(ButtonContainerClass['GoodRemail']);
+		var button = MailButtonSpan.getElementsByTagName('img')[0]
+		button.classList.remove(ButtonClass['GoodMail']);
+		button.classList.add(ButtonClass['GoodRemail']);
+		button.setAttribute('src', ImageSrc['GoodRemail']);
+		button.setAttribute('alt', ItalianTranslation['GoodRemail']);
+		button.setAttribute('title', ItalianTranslation['GoodRemail']);
+	}
+	var MaybeBadMailButtonSpan = ButtonsContainer.getElementsByClassName(ButtonContainerClass['GoodMail']);
+	if (MaybeBadMailButtonSpan.length > 0) {
+		var MailButtonSpan = MaybeBadMailButtonSpan[0];
+		MailButtonSpan.classList.remove(ButtonContainerClass['BadMail']);
+		MailButtonSpan.classList.add(ButtonContainerClass['BadRemail']);
+		var button = MailButtonSpan.getElementsByTagName('img')[0]
+		button.classList.remove(ButtonClass['BadMail']);
+		button.classList.add(ButtonClass['BadRemail']);
+		button.setAttribute('src', ImageSrc['BadRemail']);
+		button.setAttribute('alt', ItalianTranslation['BadRemail']);
+		button.setAttribute('title', ItalianTranslation['BadRemail']);
+	}
 }
 
 //The variable ButtonsInformation is defined server-side
