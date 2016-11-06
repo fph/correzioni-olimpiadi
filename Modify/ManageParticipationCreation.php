@@ -117,6 +117,19 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 		$MailBody .= 'In passato ho partecipato a '.$StagesNumber.' stage a Pisa.<br><br>';
 		$MailBody .= '<br> p.s. Questa mail è stata inviata in automatico, <u>non rispondete a questo indirizzo</u> poiché nessuno leggerebbe la risposta.';
 	}
+
+	// Here we are checking again if the participation exists already.
+	// This tries to address issue #57, though it's not a great solution
+	// as a race condition is still possible.
+	$participation = OneResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId, 'ContestantId'=>$ContestantId]));
+	if (!is_null($participation)) {
+		return ['type'=>'bad', 'text'=>'Il partecipante già è iscritto alla gara'];
+	}
+	Query($db, QueryInsert('Participations', [
+		'ContestId'=>$ContestId, 
+		'ContestantId'=>$ContestantId,
+		'solutions'=>$PdfName
+	]));
 	
 	// Send mail	
 	$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
@@ -128,14 +141,12 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	$SendingSuccess = SendMail(VolunteerRequestEmailAddress, 'Richiesta di partecipazione '.$contest['name'], $MailBody, $attachments);
 	
 	if (!$SendingSuccess) {
+		Query($db, QueryDelete('Participations', [
+			'ContestId'=>$ContestId, 
+			'ContestantId'=>$ContestantId
+		]));
 		return ['type'=>'bad', 'text'=>'L\'email con la richiesta di partecipazione non è stata inviata a causa di un errore del server'];
 	}
-
-	Query($db, QueryInsert('Participations', [
-		'ContestId'=>$ContestId, 
-		'ContestantId'=>$ContestantId,
-		'solutions'=>$PdfName
-	]));
 	
 	// Confirmation mail
 	$MailBody = 'Cara/o '.$contestant['name'].',<br>'.'Ti confermiamo che ti sei iscritto/a con successo a "'.$contest['name'].'".';

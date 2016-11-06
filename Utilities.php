@@ -111,6 +111,9 @@ function SendMail($address, $subject, $body, $attachments = []) {
 	else {
 		$mail->isSendmail();
 	}
+	// TODO: Maybe add address name if known.
+	// TODO: Maybe add ReplyTo and From. From should be
+	// something@olimpiadi.dm.unibo.it. This might mitigate issue #59.
 	$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
 	$mail->addAddress($address);
 	$mail->Subject = $subject;
