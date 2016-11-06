@@ -126,10 +126,8 @@ function CreateZip() {
 }
 
 function ChangedNotAcceptedEmail(response) {
-	if (response.type == 'good') {
-		var textarea = document.getElementById('NotAcceptedEmailTextarea');
-		textarea.removeAttribute('disabled');
-	}
+	var textarea = document.getElementById('NotAcceptedEmailTextarea');
+	textarea.removeAttribute('disabled');
 }
 
 function ChangeNotAcceptedEmail() {
@@ -140,10 +138,8 @@ function ChangeNotAcceptedEmail() {
 }
 
 function ChangedForwardRegistrationEmail(response) {
-	if (response.type == 'good') {
-		var input = document.getElementById('ForwardRegistrationEmailInput');
-		input.removeAttribute('disabled');
-	}
+	var input = document.getElementById('ForwardRegistrationEmailInput');
+	input.removeAttribute('disabled');
 }
 
 function ChangeForwardRegistrationEmail() {
