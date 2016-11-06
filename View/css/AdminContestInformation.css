@@ -1,7 +1,7 @@
 /*
 	FIXME: Andrebbe uniformato lo stile dei bottoni e cancellata sta cagata
 */
-#SolutionsZipButton, #NotAcceptedEmailButton {
+#SolutionsZipButton, #NotAcceptedEmailButton, #ForwardRegistrationEmailButton {
 	padding: 7px;
 	font-size: large;
 	margin: 10px 0px;
@@ -12,9 +12,19 @@
 	margin-right: 10%;
 }
 
-#NotAcceptedEmailDiv {
+#ForwardRegistrationEmailButton {
+	padding: 3px;
+}
+
+.ExtraDataContainer {
 	margin-top: 50px;
 	margin-left: 7%;
+}
+
+#ForwardRegistrationEmailInput {
+	margin: 10px 20px 5px 10%;
+	font-size: large;
+	padding: 3px;
 }
 
 #NotAcceptedEmailTextarea {

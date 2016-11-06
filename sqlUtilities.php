@@ -2,7 +2,7 @@
 
 $TableInformation = array(
 	'Contestants' => array('id', 'name', 'surname', 'school', 'email', 'LastOlympicYear'), //LastOlympicYear is the last IMO year for that contestant
-	'Contests' => array('id', 'name', 'date', 'NotAcceptedEmail'),
+	'Contests' => array('id', 'name', 'date', 'NotAcceptedEmail', 'ForwardRegistrationEmail'),
 	'Corrections' => array('id', 'ProblemId', 'ContestantId', 'mark', 'comment', 'UserId'),
 	'Participations' => array('id', 'ContestId', 'ContestantId', 'email', 'solutions', 'VolunteerRequest'),
 	'Permissions' => array('id', 'UserId', 'ContestId'),

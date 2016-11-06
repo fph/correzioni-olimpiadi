@@ -173,7 +173,20 @@ function ChangeNotAcceptedEmail($db, $ContestId, $NotAcceptedEmail) {
 	}
 
 	Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['NotAcceptedEmail'=>$NotAcceptedEmail]));
-	return ['type'=>'good', 'text'=>'Il paragrafo della mai per i segati è stato cambiato con successo'];
+	return ['type'=>'good', 'text'=>'Il paragrafo della mail per i segati è stato cambiato con successo'];
+}
+
+function ChangeForwardRegistrationEmail($db, $ContestId, $ForwardRegistrationEmail) {
+	if (!is_string($ForwardRegistrationEmail) or strlen($ForwardRegistrationEmail) > ContestantEmail_MAXLength) {
+		return ['type'=>'bad', 'text'=>'L\'email a cui inoltrare le richieste di partecipation deve essere una stringa con al più '.ContestantEmail_MAXLength.' caratteri'];
+	}
+	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
+	if (is_null($Exist1)) {
+		return ['type'=>'bad', 'text'=>'La gara scelta non esiste'];
+	}
+
+	Query($db, QueryUpdate('Contests', ['id'=>$ContestId], ['ForwardRegistrationEmail'=>$ForwardRegistrationEmail]));
+	return ['type'=>'good', 'text'=>'L\'indirizzo email a cui inoltrare le richieste di partecipazione è stato cambiato con successo'];
 }
 
 function AddProblem($db, $ContestId, $name) {
@@ -242,6 +255,7 @@ else if ($data['type'] == 'ChangeName') SendObject(ChangeName($db, $data['Contes
 else if ($data['type'] == 'ChangeDate') SendObject(ChangeDate($db, $data['ContestId'], $data['date']));
 else if ($data['type'] == 'ChangeNameAndDate') SendObject(ChangeNameAndDate($db, $data['ContestId'], $data['name'], $data['date']));
 else if ($data['type'] == 'ChangeNotAcceptedEmail') SendObject(ChangeNotAcceptedEmail($db, $data['ContestId'], $data['NotAcceptedEmail']));
+else if ($data['type'] == 'ChangeForwardRegistrationEmail') SendObject(ChangeForwardRegistrationEmail($db, $data['ContestId'], $data['ForwardRegistrationEmail']));
 else if ($data['type'] == 'AddProblem') SendObject(AddProblem($db, $data['ContestId'], $data['name']));
 else if ($data['type'] == 'RemoveProblem') SendObject(RemoveProblem($db, $data['ProblemId']));
 else if ($data['type'] == 'ChangeProblemName') SendObject(ChangeProblemName($db, $data['ProblemId'], $data['name']));

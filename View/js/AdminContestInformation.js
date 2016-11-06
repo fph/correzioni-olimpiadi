@@ -138,3 +138,17 @@ function ChangeNotAcceptedEmail() {
 	textarea.setAttribute('disabled', 'disabled');
 	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, NotAcceptedEmail: NewValue, type: 'ChangeNotAcceptedEmail'}, ChangedNotAcceptedEmail);
 }
+
+function ChangedForwardRegistrationEmail(response) {
+	if (response.type == 'good') {
+		var input = document.getElementById('ForwardRegistrationEmailInput');
+		input.removeAttribute('disabled');
+	}
+}
+
+function ChangeForwardRegistrationEmail() {
+	var input = document.getElementById('ForwardRegistrationEmailInput');
+	var NewValue = input.value;
+	input.setAttribute('disabled', 'disabled');
+	MakeAjaxRequest('../Modify/ManageContest.php', {ContestId: ContestId, ForwardRegistrationEmail: NewValue, type: 'ChangeForwardRegistrationEmail'}, ChangedForwardRegistrationEmail);
+}

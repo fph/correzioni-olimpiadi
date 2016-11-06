@@ -138,7 +138,11 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 		['file'=>UploadDirectory.$PdfName.'.pdf', 'name'=>'Soluzioni_'.$CleanedSurname.'.pdf']
 	];
 	
-	$SendingSuccess = SendMail(VolunteerRequestEmailAddress, 'Richiesta di partecipazione '.$contest['name'], $MailBody, $attachments);
+	$SendingSuccess = true;
+	// If ForwardRegistrationEmail is non empty, the email is sent, otherwise nothing is done.
+	if (strlen($contest['ForwardRegistrationEmail']) >= 5) {
+		$SendingSuccess = SendMail($contest['ForwardRegistrationEmail'], 'Richiesta di partecipazione '.$contest['name'], $MailBody, $attachments);
+	}
 	
 	if (!$SendingSuccess) {
 		Query($db, QueryDelete('Participations', [

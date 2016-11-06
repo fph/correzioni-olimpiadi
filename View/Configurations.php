@@ -22,6 +22,7 @@ $ConfigurationsNames = [
 	'SessionDuration',
 	'ContestName_MAXLength',
 	'ContestName_MINLength',
+	'ContestNotAcceptedEmail_MAXLength',
 	'username_MAXLength',
 	'username_MINLength',
 	'password_MAXLength',

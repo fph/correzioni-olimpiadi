@@ -54,9 +54,17 @@ InsertDom('LinkTable', [
 ]);
 ?>
 
+<div class='ExtraDataContainer'>
+	<h3>Indirizzo email a cui inoltrare le richieste di partecipazione</h3>
+	<p>
+		Al seguente indirizzo email saranno inoltrate tutte le richieste di partecipazione alla gara. Se questo campo è lasciato vuoto le richieste non sono inviate a nessuno. Le email mandate, indifferentemente dall'indirizzo inserito, avranno come intestazione "Gentile segreteria UMI".
+	</p>
+	<input id='ForwardRegistrationEmailInput' type='email' value='<?= $v_contest['ForwardRegistrationEmail']?>'>
+	<input id='ForwardRegistrationEmailButton' type='submit' onclick='ChangeForwardRegistrationEmail()' value='Salva indirizzo'>
+</div>
 
-<div id='NotAcceptedEmailDiv'>
-	<h3>Mail per i segati</h3>
+<div class='ExtraDataContainer'>
+	<h3>Mail personalizzata per i segati</h3>
 	<p>
 		Qui potete scrivere il paragrafo centrale della mail da mandare ai segati.
 		Questo testo sarà preceduto da "Caro Nome," e seguito dal verbalino di correzione. 

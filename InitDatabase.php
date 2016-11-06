@@ -37,6 +37,7 @@ function CreateDatabase() {
 		`name` varchar('.ContestName_MAXLength.') NOT NULL,
 		`date` date,
 		`NotAcceptedEmail` varchar('.ContestNotAcceptedEmail_MAXLength.') NOT NULL,
+		`ForwardRegistrationEmail` varchar ('.ContestantEmail_MAXLength.') NOT NULL,
 		`blocked` Boolean,
 		`SolutionsZip` varchar(31) DEFAULT NULL,
 		PRIMARY KEY (`id`),
@@ -170,16 +171,16 @@ function PopulateUsers($db) {
 
 function PopulateContests($db) {
 	$Contests = [	
-		['name'=>'Senior 2013', 				'date'=>'2006-04-29', 	'blocked'=>1, 'NotAcceptedEmail'=>'Sei scarso, guarda:'],
-		['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-26', 	'blocked'=>1, 'NotAcceptedEmail'=>''],
-		['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1, 'NotAcceptedEmail'=>''],
-		['name'=>'Preimo 2010 TST giorno 2', 	'date'=>'2010-08-15', 	'blocked'=>0, 'NotAcceptedEmail'=>''],
-		['name'=>'IMO 2013 day1', 				'date'=>'2012-07-15',	'blocked'=>0, 'NotAcceptedEmail'=>''],
-		['name'=>'Senior 2012 Test Iniziale', 	'date'=>'2007-04-04',	'blocked'=>0, 'NotAcceptedEmail'=>'Va bene cosi, la prossima volta andrà meglio.']
+		['name'=>'Senior 2013', 				'date'=>'2006-04-29', 	'blocked'=>1, 'NotAcceptedEmail'=>'Sei scarso, guarda:', 'ForwardRegistrationEmail'=>''],
+		['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-26', 	'blocked'=>1, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>'nonexistent298432@gmail.com'],
+		['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>''],
+		['name'=>'Preimo 2010 TST giorno 2', 	'date'=>'2010-08-15', 	'blocked'=>0, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>''],
+		['name'=>'IMO 2013 day1', 				'date'=>'2012-07-15',	'blocked'=>0, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>''],
+		['name'=>'Senior 2012 Test Iniziale', 	'date'=>'2007-04-04',	'blocked'=>0, 'NotAcceptedEmail'=>'Va bene cosi, la prossima volta andrà meglio.', 'ForwardRegistrationEmail'=>'']
 	];
 	
 	foreach ($Contests as $Contest) {
-		Query($db, QueryInsert('Contests', ['name'=>$Contest['name'], 'date'=>$Contest['date'], 'blocked'=>$Contest['blocked'], 'NotAcceptedEmail'=>$Contest['NotAcceptedEmail'] ]));
+		Query($db, QueryInsert('Contests', ['name'=>$Contest['name'], 'date'=>$Contest['date'], 'blocked'=>$Contest['blocked'], 'NotAcceptedEmail'=>$Contest['NotAcceptedEmail'], 'ForwardRegistrationEmail'=>$Contest['ForwardRegistrationEmail'] ]));
 	}
 
 	echo 'Table Contests Populated.'.NewLine();

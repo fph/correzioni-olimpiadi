@@ -21,8 +21,6 @@ define('EmailUsername', 'username@gmail.com');
 define('EmailPassword', 'password');
 // The mail used to send corrections, verification codes and to receive any issues regarding the site
 define('EmailAddress', 'username@gmail.com');
-// All volunteers' requests will be sent to this address
-define('VolunteerRequestEmailAddress', 'user@domain.com');
 // The absolute path to PHPMailerAutoload.php
 // If PHPMailer is in include_path, then you can define it as 'PHPMailerAutoload.php'
 define('PHPMailerPath', 'PHPMailerAutoload.php'); 

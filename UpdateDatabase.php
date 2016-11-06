@@ -235,6 +235,29 @@ function AddNotAcceptedEmailColumn() {
 	return true;
 }
 
+function AddForwardRegistrationEmailColumn() {
+	if (defined('VolunteerRequestEmailAddress')) {
+		echo 'Before updating, Constants.php must be modified (removing \'VolunteerRequestEmailAddress\').'.NewLine();
+		return false;
+	}
+	
+	$db = OpenDbConnection();
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contests', 'COLUMN_NAME'=>'ForwardRegistrationEmail']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Contests` ADD COLUMN `ForwardRegistrationEmail` varchar('.ContestantEmail_MAXLength.') NOT NULL DEFAULT \'\'';
+		Query($db, $query);
+		
+		echo 'The \'ForwardRegistrationEmail\' column has been added in the \'Contests\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'ForwardRegistrationEmail\' column already exists in the \'Contests\' table.'.NewLine();
+	}
+	
+	$db->close();
+	return true;
+}
+
 if (!AddContestantsEmailColumn()) {
 	die('Error while adding contestant email column');
 }
@@ -273,6 +296,10 @@ if (!AddContestantsSchoolCityColumn()) {
 
 if (!AddNotAcceptedEmailColumn()) {
 	die('Error while adding NotAcceptedEmail column');
+}
+
+if (!AddForwardRegistrationEmailColumn()) {
+	die('Error while adding ForwardRegistrationEmail column');
 }
 
 echo 'Database has been updated successfully!'.NewLine();
