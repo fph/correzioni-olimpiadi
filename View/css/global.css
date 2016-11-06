@@ -42,6 +42,12 @@ div.internalBody {
 	min-height: 100%;
 }
 
+@media only screen and (max-width: 1024px) {
+	div.internalBody {
+		width: initial;
+	}
+}
+
 #ContentContainer {
 	margin: 35px 5% 80px 5%;
 }
