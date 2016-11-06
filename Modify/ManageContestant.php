@@ -24,8 +24,8 @@ function AddContestant($db, $name, $surname, $school, $SchoolCity, $email, $Last
 	}
 	
 	// TODO: Si dovrebbe fare un sanity check sulla mail (sia qui che in ChangeEmail())
-	if (!is_string($email) or strlen($email) > ContestantEmail_MAXLength) {
-		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.ContestantEmail_MAXLength.' caratteri'];
+	if (!is_string($email) or strlen($email) > EmailAddress_MAXLength) {
+		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.EmailAddress_MAXLength.' caratteri'];
 	}
 	
 	$LastOlympicYear = intval($LastOlympicYear);
@@ -179,8 +179,8 @@ function ChangeEmail($db, $ContestantId, $email) {
 		return ['type'=>'bad', 'text'=>'Il partecipante selezionato non esiste'];
 	}
 	
-	if (!is_string($email) or strlen($email) > ContestantEmail_MAXLength) {
-		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.ContestantEmail_MAXLength.' caratteri'];
+	if (!is_string($email) or strlen($email) > EmailAddress_MAXLength) {
+		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.EmailAddress_MAXLength.' caratteri'];
 	}
 
 	Query($db, QueryUpdate('Contestants', ['id'=>$ContestantId], ['email'=>$email]));

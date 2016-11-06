@@ -4,8 +4,8 @@ SuperRequire_once('General', 'sqlUtilities.php');
 
 
 function AddContestantsEmailColumn() {
-	if (!defined('ContestantEmail_MAXLength') or !defined('EmailAddress')) {
-		echo 'Before updating, Constants.php must be modified (defining \'ContestantEmail_MAXLength\' and \'EmailAddress\').'.NewLine();
+	if (!defined('EmailAddress_MAXLength') or !defined('EmailAddress')) {
+		echo 'Before updating, Constants.php must be modified (defining \'EmailAddress_MAXLength\' and \'EmailAddress\').'.NewLine();
 		return false;
 	}
 	
@@ -13,7 +13,7 @@ function AddContestantsEmailColumn() {
 	
 	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contestants', 'COLUMN_NAME'=>'email']));
 	if (is_null($ColumnExists)) {
-		$query = 'ALTER TABLE `Contestants` ADD COLUMN `email` varchar('.ContestantEmail_MAXLength.') NOT NULL';
+		$query = 'ALTER TABLE `Contestants` ADD COLUMN `email` varchar('.EmailAddress_MAXLength.') NOT NULL';
 		Query($db, $query);
 		
 		echo 'The \'email\' column has been added in the \'Contestants\' table.'.NewLine();
@@ -176,7 +176,7 @@ function CreateVerificationCodesTable() {
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `VerificationCodes` (
-		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
+		`email` varchar('.EmailAddress_MAXLength.') NOT NULL,
 		`code` char(12) NOT NULL,
 		`timestamp` timestamp NOT NULL,
 		
@@ -245,7 +245,7 @@ function AddForwardRegistrationEmailColumn() {
 	
 	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Contests', 'COLUMN_NAME'=>'ForwardRegistrationEmail']));
 	if (is_null($ColumnExists)) {
-		$query = 'ALTER TABLE `Contests` ADD COLUMN `ForwardRegistrationEmail` varchar('.ContestantEmail_MAXLength.') NOT NULL DEFAULT \'\'';
+		$query = 'ALTER TABLE `Contests` ADD COLUMN `ForwardRegistrationEmail` varchar('.EmailAddress_MAXLength.') NOT NULL DEFAULT \'\'';
 		Query($db, $query);
 		
 		echo 'The \'ForwardRegistrationEmail\' column has been added in the \'Contests\' table.'.NewLine();

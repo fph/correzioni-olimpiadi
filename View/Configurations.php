@@ -18,6 +18,7 @@ $ConfigurationsNames = [
 	// 'EmailPassword',
 	'EmailAddress',
 	// 'PHPMailerPath',
+	'EmailAddress_MAXLength',
 	 
 	'SessionDuration',
 	'ContestName_MAXLength',
@@ -31,7 +32,6 @@ $ConfigurationsNames = [
 	'ContestantSurname_MAXLength',
 	'ContestantSchool_MAXLength',
 	'ContestantSchoolCity_MAXLength',
-	'ContestantEmail_MAXLength',
 	'ProblemName_MAXLength',
 	'comment_MAXLength',
 	'solutions_MAXSize',

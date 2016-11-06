@@ -177,8 +177,8 @@ function ChangeNotAcceptedEmail($db, $ContestId, $NotAcceptedEmail) {
 }
 
 function ChangeForwardRegistrationEmail($db, $ContestId, $ForwardRegistrationEmail) {
-	if (!is_string($ForwardRegistrationEmail) or strlen($ForwardRegistrationEmail) > ContestantEmail_MAXLength) {
-		return ['type'=>'bad', 'text'=>'L\'email a cui inoltrare le richieste di partecipation deve essere una stringa con al più '.ContestantEmail_MAXLength.' caratteri'];
+	if (!is_string($ForwardRegistrationEmail) or strlen($ForwardRegistrationEmail) > EmailAddress_MAXLength) {
+		return ['type'=>'bad', 'text'=>'L\'email a cui inoltrare le richieste di partecipation deve essere una stringa con al più '.EmailAddress_MAXLength.' caratteri'];
 	}
 	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	if (is_null($Exist1)) {

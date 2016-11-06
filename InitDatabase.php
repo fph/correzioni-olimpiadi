@@ -37,7 +37,7 @@ function CreateDatabase() {
 		`name` varchar('.ContestName_MAXLength.') NOT NULL,
 		`date` date,
 		`NotAcceptedEmail` varchar('.ContestNotAcceptedEmail_MAXLength.') NOT NULL,
-		`ForwardRegistrationEmail` varchar ('.ContestantEmail_MAXLength.') NOT NULL,
+		`ForwardRegistrationEmail` varchar ('.EmailAddress_MAXLength.') NOT NULL,
 		`blocked` Boolean,
 		`SolutionsZip` varchar(31) DEFAULT NULL,
 		PRIMARY KEY (`id`),
@@ -71,7 +71,7 @@ function CreateDatabase() {
 		`surname` varchar('.ContestantSurname_MAXLength.') NOT NULL,
 		`school` varchar('.ContestantSchool_MAXLength.') NOT NULL,
 		`SchoolCity` varchar('.ContestantSchoolCity_MAXLength.') NOT NULL,
-		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
+		`email` varchar('.EmailAddress_MAXLength.') NOT NULL,
 		`LastOlympicYear` int NOT NULL DEFAULT 2050,
 		PRIMARY KEY (`id`),
 		KEY(`surname`)
@@ -139,7 +139,7 @@ function CreateDatabase() {
 	
 	$query=
 	'CREATE TABLE IF NOT EXISTS `VerificationCodes` (
-		`email` varchar('.ContestantEmail_MAXLength.') NOT NULL,
+		`email` varchar('.EmailAddress_MAXLength.') NOT NULL,
 		`code` char(12) NOT NULL,
 		`timestamp` timestamp NOT NULL,
 		

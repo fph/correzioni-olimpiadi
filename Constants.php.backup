@@ -24,6 +24,8 @@ define('EmailAddress', 'username@gmail.com');
 // The absolute path to PHPMailerAutoload.php
 // If PHPMailer is in include_path, then you can define it as 'PHPMailerAutoload.php'
 define('PHPMailerPath', 'PHPMailerAutoload.php'); 
+// The max length of all the email addresses handled in the application.
+define('EmailAddress_MAXLength', 63);
 
 define('SessionDuration', 43200); // In seconds
 define('ContestName_MAXLength', 255);
@@ -37,7 +39,6 @@ define('ContestantName_MAXLength', 31);
 define('ContestantSurname_MAXLength', 63);
 define('ContestantSchool_MAXLength', 127);
 define('ContestantSchoolCity_MAXLength', 127);
-define('ContestantEmail_MAXLength', 63);
 define('ProblemName_MAXLength', 31);
 define('comment_MAXLength', 8191);
 define('solutions_MAXSize', 20); // In Megabytes

@@ -21,8 +21,8 @@ function CreateContestant($db, $name, $surname, $school, $SchoolCity, $email, $S
 		return ['type'=>'bad', 'text'=>'La città della scuola deve essere una stringa di al più '.ContestantSchoolCity_MAXLength.' caratteri'];
 	}
 	
-	if (!is_string($email) or strlen($email) > ContestantEmail_MAXLength or strlen($email) < 5) {
-		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.ContestantEmail_MAXLength.' caratteri'];
+	if (!is_string($email) or strlen($email) > EmailAddress_MAXLength or strlen($email) < 5) {
+		return ['type'=>'bad', 'text'=>'L\'email deve essere una stringa di al più '.EmailAddress_MAXLength.' caratteri'];
 	}
 	
 	// Characters validation
