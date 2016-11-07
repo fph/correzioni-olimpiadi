@@ -69,7 +69,7 @@ InsertDom('LinkTable', [
 		Qui potete scrivere il paragrafo centrale della mail da mandare ai segati.
 		Questo testo sarà preceduto da "Caro Nome," e seguito dal verbalino di correzione. 
 	</p>
-	<textarea id='NotAcceptedEmailTextarea' placeholder='Ci dispiace, ma i tuoi esercizi non sono risultati sufficienti per essere ammesso allo stage.
+	<textarea id='NotAcceptedEmailTextarea' placeholder='Ci dispiace, ma i tuoi esercizi non sono risultati sufficienti per essere ammesso allo stage. 
 Questo è il verbale di correzione dei tuoi esercizi: '><?= $v_contest['NotAcceptedEmail']?></textarea>
 	<input id='NotAcceptedEmailButton' type='submit' onclick='ChangeNotAcceptedEmail()' value='Salva paragrafo'>
 </div>
