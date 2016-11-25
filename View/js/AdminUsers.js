@@ -1,13 +1,14 @@
 function AddUser(response) {
 	if (response.type == 'good') {
 		var username = response.data['username'];
+		var role = 'Correttore'
 		var UserId = response.data['UserId'];
 
 		AddRow(
 			document.getElementById('AdminUsersTable'),
 			{	
 				redirect: {'UserId': UserId},
-				values: {'username': username}
+				values: {'username': username, 'role': role}
 			},
 			'username'
 		);
