@@ -96,6 +96,7 @@ function SendMail($address, $subject, $body, $attachments = []) {
 	require_once PHPMailerPath; // PhpMailer library
 	
 	$mail = new PHPMailer;
+	// $mail->SMTPDebug = 2; // Maximum debug level.
 	$mail->CharSet = 'UTF-8';
 	
 	if (EmailSMTP) {
@@ -112,8 +113,7 @@ function SendMail($address, $subject, $body, $attachments = []) {
 		$mail->isSendmail();
 	}
 	// TODO: Maybe add address name if known.
-	// TODO: Maybe add ReplyTo and From. From should be
-	// something@olimpiadi.dm.unibo.it. This might mitigate issue #59.
+	// TODO: Maybe add ReplyTo. This might mitigate issue #59.
 	$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
 	$mail->addAddress($address);
 	$mail->Subject = $subject;

@@ -28,25 +28,28 @@
 		$problems = ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId]));
 
 		usort($problems, BuildSorter('name'));
-		
-		foreach ($problems as $pro) {
-			$nn = OneResultQuery($db, QuerySelect('Corrections', 
-				['ProblemId'=>$pro['id'], 'ContestantId'=>$ContestantId], 
+
+		$corrections = [];
+		foreach ($problems as $prob) {
+			$corr = OneResultQuery($db, QuerySelect('Corrections', 
+				['ProblemId'=>$prob['id'], 'ContestantId'=>$ContestantId], 
 				['mark', 'comment', 'UserId']
 			));
 			
-			if (is_null($nn)) {
-				$nn['done'] = false;
-				$nn['mark'] = $nn['UserId']=$nn['problem']=$nn['username']=null;
-				$nn['comment'] = '';
+			if (is_null($corr)) {
+				$corr['done'] = false;
+				$corr['mark'] = $corr['UserId'] = $corr['problem'] = $corr['username'] = null;
+				$corr['comment'] = '';
 			}
 			else {
-				$nn['done'] = true;
-				$nn['username'] = OneResultQuery($db, QuerySelect('Users', ['id'=>$nn['UserId']], ['username']))['username'];
+				$corr['done'] = true;
+				$corr['username'] = OneResultQuery($db, QuerySelect('Users',
+					['id'=>$corr['UserId']], ['username']
+				))['username'];
 			}
-			$nn['problem'] = OneResultQuery($db, QuerySelect('Problems', ['id'=>$pro['id']]));
+			$corr['problem'] = OneResultQuery($db, QuerySelect('Problems', ['id'=>$prob['id']]));
 			
-			$corrections[] = $nn;
+			$corrections[] = $corr;
 		}
 
 		$MailBody = 'Caro/a '.$contestant['name'].', <br>';

@@ -22,7 +22,8 @@
 		$row = OneResultQuery($db, QuerySelect('VerificationCodes', ['email'=>$ContestantEmail]));
 		if (!is_null($row)) {
 			$timestamp = new Datetime($row['timestamp']);
-			$timestamp->add(new DateInterval('PT10M')); // sums 10 minutes to the timestamp
+			// Sums 10 minutes to the timestamp
+			$timestamp->add(new DateInterval('PT10M'));
 			if (new Datetime('now') < $timestamp) {
 				return ['type'=>'bad', 'text'=>'Prima di poter inviare un altro codice devono passare 10 minuti'];
 			}
