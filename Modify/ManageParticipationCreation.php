@@ -133,9 +133,9 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	
 	// Send mail	
 	$CleanedSurname = preg_replace('/[^\p{L}]/u', '', $contestant['surname']);
+    // Not sending the document with the solutions as it is too big.
 	$attachments = [
-		['file'=>$VolunteerRequest['tmp_name'], 'name'=>'RichiestaPartecipazione_'.$CleanedSurname.'.pdf'],
-		['file'=>UploadDirectory.$PdfName.'.pdf', 'name'=>'Soluzioni_'.$CleanedSurname.'.pdf']
+		['file'=>$VolunteerRequest['tmp_name'], 'name'=>'RichiestaPartecipazione_'.$CleanedSurname.'.pdf']
 	];
 	
 	$SendingSuccess = true;
