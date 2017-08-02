@@ -10,7 +10,7 @@ global $v_contests;
 	$columns = [];
 	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['ContestColumn']];
 	$columns[]= ['id'=>'blocked', 'name'=>'', 'class'=>['CorrectionsCompleted']];
-	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn'], 'order'=>1, 'type'=>'date'];
+	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn'], 'type'=>'date'];
 	
 	$rows = [];
 	foreach ($v_contests as $contest) {
@@ -18,8 +18,8 @@ global $v_contests;
 			'name'=> $contest['name'], 'blocked'=>'', 'date'=>$contest['date'] ]
 		];
 		if ($contest['blocked'] == 1) $row['values']['blocked'] = 'Correzioni terminate';
-		$rows[]=$row;
+		$rows[]= $row;
 	}
-	$table = ['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date'] ];
+	$table = ['columns'=>$columns, 'rows'=> $rows, 'redirect'=> 'ViewContestInformation', 'InitialOrder'=>['ColumnId'=>'date', 'ascending'=>1] ];
 	InsertDom('table',  $table);
 ?>
