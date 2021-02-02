@@ -1,5 +1,5 @@
 var FirstYear = 2000;
-var LastYear =2020;
+var LastYear = new Date().getFullYear() + 10;
 
 function GetDayDom(container) {
 	return container.getElementsByClassName('DateInputDay')[0];

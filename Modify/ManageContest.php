@@ -9,7 +9,7 @@ function ValidateDate($date) {
 	if (!is_string($date)) return false;
 	$d = DateTime::createFromFormat('Y-m-d', $date);
 	if ($d == null or $d->format('Y-m-d') != $date) return false;
-	if (intval($d->format('Y'))<2000 or 2020<intval($d->format('Y'))) return false;
+	if (intval($d->format('Y'))<2000 or intval(date("Y")) + 10 <intval($d->format('Y'))) return false;
 	return true;
 }
 	
@@ -19,7 +19,7 @@ function AddContest($db, $name, $date) {
 	}
 	
 	if (!ValidateDate($date)) {
-		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
+		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e 10 anni nel futuro'];
 	}
 	
 	Query($db, QueryInsert('Contests', ['name'=>$name, 'date'=>$date, 'blocked'=>0, 'NotAcceptedEmail'=>'']));
@@ -133,7 +133,7 @@ function ChangeName($db, $ContestId, $name) {
 
 function ChangeDate($db, $ContestId, $date) {
 	if (!ValidateDate($date)) {
-		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
+		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e 10 anni nel futuro'];
 	}
 	
 	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
@@ -151,7 +151,7 @@ function ChangeNameAndDate($db, $ContestId, $name, $date) {
 	}
 	
 	if (!ValidateDate($date)) {
-		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e il 2020'];
+		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e 10 anni nel futuro'];
 	}
 	
 	$Exist1 = OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
