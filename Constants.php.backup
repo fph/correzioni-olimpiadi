@@ -19,6 +19,9 @@ define('EmailHost', 'smtp.gmail.com');
 define('EmailPort', 587); 
 define('EmailUsername', 'username@gmail.com');
 define('EmailPassword', 'password');
+define('EmailSMTPAuth', false);
+define('EmailSMTPSecure', '');
+
 // The mail used to send corrections, verification codes and to receive any issues regarding the site
 define('EmailAddress', 'username@gmail.com');
 // The absolute path to PHPMailerAutoload.php

@@ -91,9 +91,15 @@ function GenerateRandomString() {
 	return bin2hex(openssl_random_pseudo_bytes(6));
 }
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 function SendMail($address, $subject, $body, $attachments = []) {
-	require_once PHPMailerPath; // PhpMailer library
+	$pmpath = PHPMailerPath;
+
+	require "$pmpath/src/Exception.php";
+	require "$pmpath/src/PHPMailer.php";
+	require "$pmpath/src/SMTP.php";
 	
 	$mail = new PHPMailer;
 	// $mail->SMTPDebug = 2; // Maximum debug level.
@@ -104,8 +110,8 @@ function SendMail($address, $subject, $body, $attachments = []) {
 		$mail->SMTPDebug = 0; 
 		$mail->Host = EmailHost;
 		$mail->Port = EmailPort;
-		$mail->SMTPSecure = 'tls';
-		$mail->SMTPAuth = true;
+		$mail->SMTPSecure = EmailSMTPSecure;
+		$mail->SMTPAuth = EmailSMTPAuth;
 		$mail->Username = EmailUsername;
 		$mail->Password = EmailPassword;
 	}
