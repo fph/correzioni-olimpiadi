@@ -4,8 +4,8 @@ SuperRequire_once('General', 'sqlUtilities.php');
 
 
 function AddContestantsEmailColumn() {
-	if (!defined('EmailAddress_MAXLength') or !defined('EmailAddress')) {
-		echo 'Before updating, Constants.php must be modified (defining \'EmailAddress_MAXLength\' and \'EmailAddress\').'.NewLine();
+	if (!defined('EmailAddress_MAXLength')) {
+		echo 'Before updating, Constants.php must be modified (defining \'EmailAddress_MAXLength\').'.NewLine();
 		return false;
 	}
 	

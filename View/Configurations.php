@@ -13,11 +13,9 @@ $columns[] = ['id'=>'value', 'name'=>'Valore'];
 $ConfigurationsNames = [
 	'EmailSMTP',
 	'EmailHost',
-	// 'EmailPort', 
+	'EmailPort',
 	'EmailUsername',
-	// 'EmailPassword',
-	'EmailAddress',
-	// 'PHPMailerPath',
+	'EmailFrom',
 	'EmailAddress_MAXLength',
 	 
 	'SessionDuration',

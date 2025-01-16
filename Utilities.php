@@ -120,7 +120,7 @@ function SendMail($address, $subject, $body, $attachments = []) {
 	}
 	// TODO: Maybe add address name if known.
 	// TODO: Maybe add ReplyTo. This might mitigate issue #59.
-	$mail->setFrom(EmailAddress, 'Correzioni OliMat'); 
+	$mail->setFrom(EmailFrom, 'Correzioni OliMat');
 	$mail->addAddress($address);
 	$mail->Subject = $subject;
 	$mail->isHTML(true);

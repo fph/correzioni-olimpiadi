@@ -21,9 +21,14 @@ define('EmailUsername', 'username@gmail.com');
 define('EmailPassword', 'password');
 define('EmailSMTPAuth', false);
 define('EmailSMTPSecure', 'none');
+// The From: address. It should be on the same domain as the server, to avoid spam traps.
+define('EmailFrom', 'noreply@olimpiadi.dm.unibo.it');
 
-// The mail used to send corrections, verification codes and to receive any issues regarding the site
-define('EmailAddress', 'username@gmail.com');
+// The mail used to report issues regarding the site
+define('AdminEmail', 'asd@gmail.com');
+// The default e-mail used for participation requests
+define('DefaultEmailAddress', 'dipmat.umi@unibo.it');
+
 // The absolute path to PHPMailer.php
 define('PHPMailerPath', '/var/www/PHPMailer-master/src');
 // The max length of all the email addresses handled in the application.
