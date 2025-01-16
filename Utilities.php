@@ -97,9 +97,9 @@ use PHPMailer\PHPMailer\Exception;
 function SendMail($address, $subject, $body, $attachments = []) {
 	$pmpath = PHPMailerPath;
 
-	require "$pmpath/src/Exception.php";
-	require "$pmpath/src/PHPMailer.php";
-	require "$pmpath/src/SMTP.php";
+	require "$pmpath/Exception.php";
+	require "$pmpath/PHPMailer.php";
+	require "$pmpath/SMTP.php";
 	
 	$mail = new PHPMailer;
 	// $mail->SMTPDebug = 2; // Maximum debug level.

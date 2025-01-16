@@ -24,9 +24,8 @@ define('EmailSMTPSecure', 'none');
 
 // The mail used to send corrections, verification codes and to receive any issues regarding the site
 define('EmailAddress', 'username@gmail.com');
-// The absolute path to PHPMailerAutoload.php
-// If PHPMailer is in include_path, then you can define it as 'PHPMailerAutoload.php'
-define('PHPMailerPath', '/var/www/PHPMailer-master');
+// The absolute path to PHPMailer.php
+define('PHPMailerPath', '/var/www/PHPMailer-master/src');
 // The max length of all the email addresses handled in the application.
 define('EmailAddress_MAXLength', 63);
 
