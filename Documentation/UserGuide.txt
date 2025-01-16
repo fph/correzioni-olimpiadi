@@ -3,7 +3,7 @@ Guide for usage and installation and developing
 # Installation
 
 To install correzioni-olimpiadi you must copy the whole project in a folder which is processed by an apache webserver (using php and mysql).
-Rename the file Constants.php.backup as Constants.php
+Rename the file `Constants_sample.php` to `Constants.php`.
 Then you have to create a user in mysql with username XXX and pass YYY:
 	
 	CREATE USER 'XXX'@'localhost' IDENTIFIED BY 'YYY';
