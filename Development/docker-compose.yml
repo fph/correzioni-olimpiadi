@@ -1,0 +1,27 @@
+services:
+  php:
+    build: .
+    image: correzioni-devel:latest
+    container_name: correzioni-devel
+    volumes:
+      - ..:/var/www/html
+      - ./DevelopmentConstants.php:/var/www/html/Constants.php
+      - ./index.php:/var/www/html/index.php
+    working_dir: /var/www/html
+    ports:
+      - "8024:80"
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: correzioni-devel-mail
+    ports:
+      - "8025:8025"
+
+  mariadb:
+    image: mariadb:latest
+    container_name: correzioni-devel-db
+    environment:
+      MARIADB_ROOT_PASSWORD: "Secret"
+      MARIADB_DATABASE: CorOli
+      MARIADB_USER: Olimpiadi
+      MARIADB_PASSWORD: alfabeto
