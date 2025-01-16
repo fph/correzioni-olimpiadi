@@ -1,32 +1,4 @@
-Guide for usage, installation and developing
-
-INSTALLATION
-
-1) 	To install correzioni-olimpiadi you must copy the whole project in a folder which is processed by an apache webserver (using php and mysql).
-	Rename the file Constants.php.backup as Constants.php
-	Then you have to create a user in mysql with username XXX and pass YYY:
-	
-		CREATE USER 'XXX'@'localhost' IDENTIFIED BY 'YYY';
-		GRANT ALL PRIVILEGES ON CorOli.* TO 'XXX'@'localhost' WITH GRANT OPTION;
-
-		CREATE USER 'XXX'@'%' IDENTIFIED BY 'YYY';
-		GRANT ALL PRIVILEGES ON CorOli.* TO 'XXX'@'%' WITH GRANT OPTION;
-	
-	Now you have to configure Constants.php with the user and password just created, some urls referring to your server structure and some other options.
-	
-	In order to use the mail-related feature you should install the PHPMailer library in a folder included in PHP include_path (e.g. /usr/share/pear) and add the openssl extension to php.
-	
-	Moreover you should change (in php.ini or in an equivalent configuration file) the constants post_max_size, upload_max_filesize. They should be raised at 50M (or more depending on the value of solutions_MAXSize and VolunteerRequest_MAXSize you choose in Constants.php).
-	
-	Always in php.ini, you should uncomment the line that enables the zip extension (named zip.so).
-	
-	Then execute InitDatabase.php which will create the whole database populating it nearly randomly.
-	
-	Now you should have a properly working system.
-	
-2)	To use correzioni-olimpiadi open with a browser the url .../Model/Login.php
-	
-DEVELOPING
+# Development
 
 Constants.php : 
 	Configuration variables of the system.
@@ -54,8 +26,9 @@ View folder:
 Modify Folder:
 	It contains the files which answers to request of the user to change the database.
 
-JS IMPORTANT FILES
-TableManager.js : 	
+# Important Javascript Files
+
+TableManager.js: 	
 	It is the manager of all the tables with class InformationTables which appears in the site.
 	In order to add one of those tables to the html just use the function InsertTable (in TemplateCreation.php).
 	The structure of table object is described in the file Documentation/TableObject.txt.
@@ -82,4 +55,19 @@ ButtonsManager.js:
 		table => boolean,
 		buttons => [ ButtonType=>[ hidden=>boolean, onclick=>string] ]
 		
-	
+# Running a development environment
+
+    cd Development
+    docker compose up
+
+This creates a few docker containers that run a development instance of the project.
+
+The development instance is then available on http://localhost:8024.
+
+Click on the `InitDatabase.php` button in the home page to populate a sample database for development. This includes a few sample users; you can find their credential by opening `InitDatabase.php`.
+
+To recreate the database, use `docker compose down`, since the development database is saved inside the `correzioni-devel-db` image.
+
+Instead of being sent normally, mail messages sent using this development instance can be read on http://localhost:8025.
+
+In case you change `Development/Dockerfile`, remember to rebuild the image with `docker compose build`.
