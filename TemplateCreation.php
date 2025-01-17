@@ -58,6 +58,8 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	}
 	global $jsInclude, $cssInclude;
 	global $DomInformation;
+
+	LoadSession();
 	?>
 <!DOCTYPE html>
 <html lang='it'>

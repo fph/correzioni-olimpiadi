@@ -10,6 +10,7 @@
     <ul>
         <li><a href="/InitDatabase.php">InitDatabase.php</a></li>
         <li><a href="/Model/Login.php">Model/Login.php</a></li>
+        <li><a href="/Model/ParticipationRequest.php">Model/ParticipationRequest.php</a></li>
     </ul>
     <?phpinfo()?>
 </body>
