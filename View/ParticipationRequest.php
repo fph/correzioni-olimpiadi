@@ -19,10 +19,6 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 	
 	
 	<div class='TransitionDiv DuringTransition' id='OldUserDiv'>
-		<p>
-			Se hai mai usato questo sito oppure hai provato a partecipare (indifferentemente dall'esito della richiesta) al <em>Winter Camp 2015</em> o al <em>Senior 2015</em> allora indica che sei già registrato.
-			Se invece non hai mai usato questo sito e non hai mandato gli esercizi per nessuno dei due stage precedenti allora indica che non sei registrato.
-		</p>
 		Sei già registrato su questo sito? 
 		<select name='AlreadyRegistered' onchange='SetOldUser(this.value)'>
 			<option value='' style='display:none;'></option>
@@ -209,7 +205,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 						<input type='file' accept='.pdf' name='solutions' id='SolutionsInput'>
 					</td>
 					<td>
-						Devi uploadare un documento in pdf, di dimensione minore di <?=solutions_MAXSize?>MB, contenente le tue soluzioni agli esercizi d'ammissione.
+						Devi caricare un documento in formato pdf, di dimensione minore di <?=solutions_MAXSize?>MB, contenente le tue soluzioni agli esercizi d'ammissione.
 					</td>
 				</tr>
 				<tr class='hidden'>
@@ -220,7 +216,7 @@ Se dovessi avere qualunque problema con l'iscrizione, scrivi all'indirizzo <em><
 						<input type='file' accept='.pdf' name='VolunteerRequest' id='VolunteerRequestInput'>
 					</td>
 					<td>
-						Devi uploadare un documento in pdf, di dimensione minore di <?=VolunteerRequest_MAXSize?>MB, contenente la richiesta di partecipazione come volontario.
+						Devi caricare un documento in formato pdf, di dimensione minore di <?=VolunteerRequest_MAXSize?>MB, contenente la richiesta di partecipazione come volontario.
 					</td>
 				</tr>
 			</tbody></table>
