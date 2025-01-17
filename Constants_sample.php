@@ -17,15 +17,15 @@ define('EmailSMTP', true);
 // In case of 'EmailSMTP = true', mail server information and authentication data
 define('EmailHost', 'smtp.gmail.com');
 define('EmailPort', 587); 
-define('EmailUsername', 'username@gmail.com');
-define('EmailPassword', 'password');
+define('EmailUsername', '');
+define('EmailPassword', '');
 define('EmailSMTPAuth', false);
 define('EmailSMTPSecure', '');
 // The From: address. It should be on the same domain as the server, to avoid spam traps.
 define('EmailFrom', 'noreply@olimpiadi.dm.unibo.it');
 
 // The mail used to report issues regarding the site
-define('AdminEmail', 'asd@gmail.com');
+define('AdminEmail', 'siteadmin@gmail.com');
 // The default e-mail used for participation requests
 define('DefaultEmailAddress', 'dipmat.umi@unibo.it');
 // The absolute path to PHPMailer.php
