@@ -176,7 +176,7 @@ function PopulateContests($db) {
 		['name'=>'WinterCamp 2011 Ammissione', 	'date'=>'2007-02-26', 	'blocked'=>1, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>'nonexistent298432@gmail.com'],
 		['name'=>'Preimo 2010 TST giorno 1', 	'date'=>'2013-12-25', 	'blocked'=>1, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>''],
 		['name'=>'Preimo 2010 TST giorno 2', 	'date'=>'2010-08-15', 	'blocked'=>0, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>''],
-		['name'=>'IMO 2013 day1', 				'date'=>'2012-07-15',	'blocked'=>0, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>''],
+		['name'=>'IMO 2013 day1', 				'date'=>'2033-07-15',	'blocked'=>0, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>''],
 		['name'=>'Senior 2012 Test Iniziale', 	'date'=>'2007-04-04',	'blocked'=>0, 'NotAcceptedEmail'=>'Va bene cosi, la prossima volta andrà meglio.', 'ForwardRegistrationEmail'=>'']
 	];
 	
