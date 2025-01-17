@@ -258,6 +258,26 @@ function AddForwardRegistrationEmailColumn() {
 	return true;
 }
 
+function AddPastCampsColumn() {
+	
+	$db = OpenDbConnection();
+	
+	$ColumnExists = OneResultQuery($db, QuerySelect('information_schema.COLUMNS', ['TABLE_SCHEMA'=>dbName, 'TABLE_NAME'=>'Participations', 'COLUMN_NAME'=>'PastCamps']));
+	if (is_null($ColumnExists)) {
+		$query = 'ALTER TABLE `Participations` ADD COLUMN `PastCamps` INT DEFAULT NULL';
+		Query($db, $query);
+		
+		echo 'The \'PastCamps\' column has been added in the \'Participations\' table.'.NewLine();
+	}
+	else {
+		echo 'The \'PastCamps\' column already exists in the \'Participations\' table.'.NewLine();
+	}
+	
+	$db->close();
+	return true;
+}
+
+
 if (!AddContestantsEmailColumn()) {
 	die('Error while adding contestant email column');
 }
@@ -301,6 +321,10 @@ if (!AddNotAcceptedEmailColumn()) {
 if (!AddForwardRegistrationEmailColumn()) {
 	die('Error while adding ForwardRegistrationEmail column');
 }
+if (!AddPastCampsColumn()) {
+	die('Error while adding PastCamps column');
+}
+
 
 echo 'Database has been updated successfully!'.NewLine();
 

@@ -86,6 +86,7 @@ function CreateDatabase() {
 		`ContestantId` int NOT NULL,
 		`email` Boolean NOT NULL DEFAULT false,
 		`solutions` varchar(31) DEFAULT NULL,
+		`PastCamps` int DEFAULT NULL,
 
 		PRIMARY KEY (`id`),
 		KEY(`ContestId`),

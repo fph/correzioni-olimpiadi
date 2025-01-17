@@ -128,7 +128,8 @@ function CreateParticipation($db, $ContestantId, $ContestId, $StagesNumber, $Pai
 	Query($db, QueryInsert('Participations', [
 		'ContestId'=>$ContestId, 
 		'ContestantId'=>$ContestantId,
-		'solutions'=>$PdfName
+		'solutions'=>$PdfName,
+		'PastCamps'=>$StagesNumber
 	]));
 	
 	// Send mail	
