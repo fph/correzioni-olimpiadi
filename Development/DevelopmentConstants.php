@@ -6,7 +6,7 @@ define('dbPass', 'alfabeto');
 define('dbName', 'CorOli');
 define('ServerRoot', '/var/www/html/');
 define('urlRoot', '');
-define('UploadDirectory', '/home/user/uploads/'); // The owner of the folder should be the same as httpd process owner
+define('UploadDirectory', '/tmp/'); // The owner of the folder should be the same as httpd process owner
 //~ define('ServerRoot', '/afs/uz.sns.it/nobackup/dario2994/public_html/correzioni-olimpiadi');
 //~ define('urlRoot', '/~dario2994/correzioni-olimpiadi');
 
