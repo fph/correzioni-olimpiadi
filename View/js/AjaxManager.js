@@ -34,5 +34,9 @@ function MakeAjaxRequest(url, data, exec, NoMessage, FormData) {
 			if (NoMessage == null || NoMessage != 1) ShowMessage(response.type, response.text);
 			if (exec) exec(response);
 		}
+		if (ajaxReq.readyState == 4 && ajaxReq.status != 200) {
+			AjaxRequestBeingProcessed = false;  // releasing the mutex
+			ShowMessage('bad', 'Errore nel leggere la risposta del server; chiedi aiuto ai gestori del sito');
+		}
 	};
 }
