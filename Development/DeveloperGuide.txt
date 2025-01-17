@@ -71,3 +71,11 @@ To recreate the database, use `docker compose down`, since the development datab
 Instead of being sent normally, mail messages sent using this development instance can be read on http://localhost:8025.
 
 In case you change `Development/Dockerfile`, remember to rebuild the image with `docker compose build`.
+
+To open a shell on the development container, use
+
+	docker exec -it correzioni-devel-db bash
+
+To open a Mysql/Mariadb session, use
+
+	docker exec -it correzioni-devel-db mariadb -u root -pSecret CorOli
