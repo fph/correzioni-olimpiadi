@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', '0'); //Makes sure errors do not clobber the AJAX response
+
 require_once '../Utilities.php';
 SuperRequire_once('General', 'sqlUtilities.php');
 SuperRequire_once('Modify', 'ObjectSender.php');
