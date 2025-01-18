@@ -165,34 +165,92 @@ function QueryCompletion($TableName, $ConstraintsLike=null, $ConstraintsEqual=nu
 	return $query;
 }
 
-function OneResultQuery($db, $query) {//TODO... si potrebbe in qualche modo ottimizzare la query per avere un unico risultato...
-	$result = $db->query($query) or die($db->error);
-	
-	$row = mysqli_fetch_array($result);
-	// floatval is used to convert `mark` column to float (otherwise it would be string)
-	// That is not clean, but it works (until another column is named mark)
-	// isset returns false if mark == null 
-	if (isset($row['mark'])) {
-		$row['mark']=floatval($row['mark']);
-	}
-	
-	return $row;
+function OneResultSafeQuery($db, $query, $types = '', ...$params) {
+    // Prepare the statement
+    $stmt = $db->prepare($query);
+    if ($stmt === false) {
+        die($db->error);
+    }
+
+    // If there are parameters, bind them to the statement
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
+    }
+
+    // Execute the statement
+    if (!$stmt->execute()) {
+        die($stmt->error);
+    }
+
+    // Get the result
+    $result = $stmt->get_result();
+    if ($result === false) {
+        die($stmt->error);
+    }
+
+    // Fetch a single result row
+    $row = $result->fetch_assoc();
+    if ($row !== null && isset($row['mark'])) {
+        // floatval is used to convert `mark` column to float (otherwise it would be string)
+        // That is not clean, but it works (until another column is named mark)
+        // isset returns false if mark == null 
+        $row['mark'] = floatval($row['mark']);
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    return $row;
+}
+
+function OneResultQuery($db, $query) {
+	return OneResultSafeQuery($db, $query, '');
+}
+
+
+function ManyResultSafeQuery($db, $query, $types, ...$params) {
+    // Prepare the statement
+    $stmt = $db->prepare($query);
+    if ($stmt === false) {
+        die($db->error);
+    }
+
+    // If there are parameters, bind them to the statement
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
+    }
+
+    // Execute the statement
+    if (!$stmt->execute()) {
+        die($stmt->error);
+    }
+
+    // Get the result
+    $result = $stmt->get_result();
+    if ($result === false) {
+        die($stmt->error);
+    }
+
+    // Fetch the results into an array
+    $arr = [];
+    while ($row = $result->fetch_assoc()) {
+        // floatval is used to convert `mark` column to float (otherwise it would be string)
+        // That is not clean, but it works (until another column is named mark)
+        // isset returns false if mark == null 
+        if (isset($row['mark'])) {
+            $row['mark'] = floatval($row['mark']);
+        }
+        $arr[] = $row;
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    return $arr;
 }
 
 function ManyResultQuery($db, $query) {
-	$result = $db->query($query) or die($db->error);
-	$arr = [];
-	while ($row=mysqli_fetch_array($result)) {
-		// floatval is used to convert `mark` column to float (otherwise it would be string)
-		// That is not clean, but it works (until another column is named mark)
-		// isset returns false if mark == null 
-		if (isset($row['mark'])) {
-			$row['mark']=floatval($row['mark']);
-		}
-		$arr[]=$row;
-	}
-	
-	return $arr;
+	return ManyResultSafeQuery($db, $query, '');
 }
 
 function Query($db, $query) {
