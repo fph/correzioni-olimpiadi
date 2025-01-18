@@ -22,13 +22,14 @@ global $v_contest, $v_contestants;
 $columns = [];
 $columns[]=['id'=>'surname', 'name'=>'Cognome', 'class'=>['SurnameColumn'], 'order'=>1];
 $columns[]=['id'=>'name', 'name'=>'Nome', 'class'=>['NameColumn']];
+$columns[]=['id'=>'LastYear', 'name'=>'Ultimo Anno', 'class'=>['LastYearColumn']];
 $rows = [];
 foreach ($v_contestants as $contestant) {
 	$row = [
-	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name']], 
+	'values'=>['surname'=>$contestant['surname'], 'name'=>$contestant['name'], 'LastYear'=>$contestant['LastOlympicYear']],
 	'redirect'=>['ContestId'=>$v_contest['id'], 'ContestantId'=>$contestant['id'] ] ];
 	$rows[]=$row;
-} 
+}
 
 $table = ['columns'=>$columns, 'rows'=>$rows, 'redirect'=>'ViewParticipation', 'InitialOrder'=>['ColumnId'=>'surname'] ];
 

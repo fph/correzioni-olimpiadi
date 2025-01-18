@@ -14,12 +14,10 @@
 	
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	
-	$v_contestants=ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId]));
-	
-	foreach ($v_contestants as &$con) {
-		$con = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$con['ContestantId']]));
-	}
-	
+	$v_contestants=ManyResultSafeQuery($db, 
+		'SELECT * FROM Participations JOIN Contestants ON ContestantId=Contestants.id WHERE ContestId=?',
+		'i', $ContestId
+	);
 	
 	$db->close();
 	
