@@ -294,7 +294,8 @@ function PopulateParticipations($db) {
 				Query($db, QueryInsert('Participations', [
 					'ContestId'=>$Contest['id'], 
 					'ContestantId'=>$Contestant['id'], 
-					'email'=>mt_rand(0, 1) 
+					'email'=>mt_rand(0, 1),
+					'PastCamps'=>mt_rand(0,5)
 				]));
 			}
 		}

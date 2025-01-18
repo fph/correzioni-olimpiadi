@@ -20,14 +20,20 @@
 	
 	$v_contest=OneResultQuery($db, QuerySelect('Contests', ['id'=>$ContestId]));
 	$v_problems=ManyResultQuery($db, QuerySelect('Problems', ['ContestId'=>$ContestId]));
+	
+	
 	$participations = ManyResultQuery($db, QuerySelect('Participations', ['ContestId'=>$ContestId], ['ContestantId', 'email']));
+	$contestants=ManyResultSafeQuery($db,
+		'SELECT * FROM Participations JOIN Contestants ON ContestantId=Contestants.id WHERE ContestId=?',
+		'i', $ContestId
+	);
+
+	// reindex $contestants as an associative array
 	$v_contestants=[];
-	foreach ($participations as $participation) {
-		$contestant = OneResultQuery($db, QuerySelect('Contestants', ['id'=>$participation['ContestantId']]));
-		$contestant['marks']=[];
-		$contestant['email']=$participation['email'];
-		$v_contestants[$participation['ContestantId']]=$contestant;
+	foreach($contestants as $contestant){
+		$v_contestants[$contestant['id']] = $contestant;
 	}
+
 	foreach ($v_problems as $problem) {
 		$ProblemCorrections = ManyResultQuery($db, QuerySelect('Corrections', ['ProblemId'=>$problem['id']]));
 		foreach ($ProblemCorrections as $correction) {

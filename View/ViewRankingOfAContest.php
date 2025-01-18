@@ -26,7 +26,9 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 	foreach ($v_problems as $problem) {
 		$columns[] = ['id'=>strval($problem['id']), 'name'=>$problem['name'], 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
 	}
-	$columns[] = ['id'=>'score', 'name'=>'Punteggio', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number']; 
+	$columns[] = ['id'=>'score', 'name'=>'Punteggio', 'class'=>['MarkColumn'], 'order'=>1, 'type'=>'number'];
+	$columns[] = ['id'=>'LastYear', 'name'=>'Ultimo Anno', 'class'=>['LastYearColumn'], 'order'=>1, 'type'=>'number'];
+	$columns[] = ['id'=>'PastCamps', 'name'=>'Pise', 'class'=>['PastCampsColumn'], 'order'=>1, 'type'=>'number'];
 	
 	$rows = [];
 	foreach ($v_contestants as $contestant) {
@@ -40,6 +42,8 @@ global $v_admin, $v_contest, $v_problems, $v_contestants;
 			}
 		}
 		$values['score'] = $total;
+		$values['LastYear'] = $contestant['LastOlympicYear'];
+		$values['PastCamps'] = $contestant['PastCamps'];
 		
 		$row = [
 			'values'=>$values,
