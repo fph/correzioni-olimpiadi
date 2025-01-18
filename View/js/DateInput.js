@@ -1,6 +1,15 @@
 var FirstYear = 2000;
 var LastYear = new Date().getFullYear() + 10;
 
+function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
 function GetDayDom(container) {
 	return container.getElementsByClassName('DateInputDay')[0];
 }
@@ -75,7 +84,7 @@ function RenderDate (obj) {
 	InputHidden.setAttribute('type', 'hidden');
 	InputHidden.classList.add('DateInputDate');
 	if (obj.name != null) InputHidden.name = obj.name;
-	InputHidden.value='2000-01-01';
+	InputHidden.value=getTodayDate();
 	ContainerSpan.appendChild(InputHidden);
 	var select = [];
 	var XYZ = ['day', 'month', 'year'];
@@ -105,6 +114,7 @@ function RenderDate (obj) {
 	
 	for (var i=0; i<3; i++) ContainerSpan.appendChild(select[XYZ[i]]);
 	UpdateDaysNumber(ContainerSpan);
+	SetDate(getTodayDate(), ContainerSpan);
 	return ContainerSpan;
 }
 

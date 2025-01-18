@@ -13,7 +13,7 @@ function ValidateDate($date) {
 	return true;
 }
 	
-function AddContest($db, $name, $date) {
+function AddContest($db, $name, $date, $ForwardRegistrationEmail) {
 	if (!is_string($name) or strlen($name) <= ContestName_MINLength or strlen($name)>ContestName_MAXLength) {
 		return ['type'=>'bad', 'text'=>'Il nome della gara deve essere una stringa con un numero di caratteri compreso tra '.ContestName_MINLength.' e '.ContestName_MAXLength];
 	}
@@ -21,8 +21,12 @@ function AddContest($db, $name, $date) {
 	if (!ValidateDate($date)) {
 		return ['type'=>'bad', 'text'=>'La data deve essere ben formata e riferirsi ad un giorno nell\'arco di tempo tra il 2000 e 10 anni nel futuro'];
 	}
+
+	if (!is_string($ForwardRegistrationEmail) or strlen($ForwardRegistrationEmail) > EmailAddress_MAXLength) {
+		return ['type'=>'bad', 'text'=>'L\'email a cui inoltrare le richieste di partecipation deve essere una stringa con al più '.EmailAddress_MAXLength.' caratteri'];
+	}
 	
-	Query($db, QueryInsert('Contests', ['name'=>$name, 'date'=>$date, 'blocked'=>0, 'NotAcceptedEmail'=>'']));
+	Query($db, QueryInsert('Contests', ['name'=>$name, 'date'=>$date, 'blocked'=>0, 'NotAcceptedEmail'=>'', 'ForwardRegistrationEmail'=>$ForwardRegistrationEmail]));
 	return ['type'=>'good', 'text'=>'La gara è stata creata con successo', 'data'=>[
 	'ContestId'=>$db->insert_id, 'name'=>$name, 'date'=>$date] ];
 }
@@ -246,7 +250,7 @@ if (IsAdmin($db, GetUserIdBySession()) == 0) {
 }
 
 $data = json_decode($_POST['data'], 1);
-if ($data['type'] == 'add') SendObject(AddContest($db, $data['name'], $data['date']));
+if ($data['type'] == 'add') SendObject(AddContest($db, $data['name'], $data['date'], $data['ForwardRegistrationEmail']));
 else if ($data['type'] == 'remove') SendObject(RemoveContest($db, $data['ContestId']));
 else if ($data['type'] == 'block') SendObject(BlockContest($db, $data['ContestId']));
 else if ($data['type'] == 'unblock') SendObject(UnblockContest($db, $data['ContestId']));

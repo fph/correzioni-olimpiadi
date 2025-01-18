@@ -14,7 +14,7 @@ global $v_contests;
 	$columns = [];
 	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['ContestColumn'], 'order'=>1];
 	$columns[]= ['id'=>'blocked', 'name'=>'', 'class'=>['CorrectionsCompleted']];
-	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn'], 'order'=>1, 'type'=>'date'];
+	$columns[]= ['id'=>'date', 'name'=>'Deadline', 'order'=>1, 'class'=>['DateColumn'], 'order'=>1, 'type'=>'date'];
 	
 	$rows = [];
 	foreach ($v_contests as $contest) {
@@ -35,7 +35,8 @@ global $v_contests;
 <?php
 $form = ['SubmitText'=>'Aggiungi', 'SubmitFunction'=>'AddContestRequest(this.elements)', 'inputs'=>[
 	['type'=>'text', 'title'=>'Nome', 'name'=>'name'],
-	['type'=>'date', 'title'=>'Data', 'date'=>['id'=>'ContestInputDate', 'name'=>'date']]
+	['type'=>'date', 'title'=>'Deadline', 'date'=>['id'=>'ContestInputDate', 'name'=>'date']],
+	['type'=>'email', 'title'=>'Email inoltro domande', 'name'=>'ForwardRegistrationEmail', 'value'=>'dipmat.umi@unibo.it'],
 ]];
 InsertDom('form', $form);
 ?>

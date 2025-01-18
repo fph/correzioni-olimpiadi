@@ -10,7 +10,7 @@ global $v_contests;
 	$columns = [];
 	$columns[]= ['id'=>'name', 'name'=>'Gare', 'order'=>1, 'class'=>['ContestColumn']];
 	$columns[]= ['id'=>'blocked', 'name'=>'', 'class'=>['CorrectionsCompleted']];
-	$columns[]= ['id'=>'date', 'name'=>'Data', 'order'=>1, 'class'=>['DateColumn'], 'type'=>'date'];
+	$columns[]= ['id'=>'date', 'name'=>'Deadline', 'order'=>1, 'class'=>['DateColumn'], 'type'=>'date'];
 	
 	$rows = [];
 	foreach ($v_contests as $contest) {

@@ -14,5 +14,6 @@ function AddContest(response) {//TODO: Non va bene prendere i dati dal form, che
 function AddContestRequest(inputs) {
 	var name = inputs.namedItem('name').value;
 	var date = inputs.namedItem('date').value;
-	MakeAjaxRequest('../Modify/ManageContest.php', {name: name, date: date, type: 'add'}, AddContest);
+	var ForwardRegistrationEmail = inputs.namedItem('ForwardRegistrationEmail').value;
+	MakeAjaxRequest('../Modify/ManageContest.php', {name: name, date: date, ForwardRegistrationEmail: ForwardRegistrationEmail, type: 'add'}, AddContest);
 }
