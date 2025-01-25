@@ -29,6 +29,7 @@ div#MainBar_inner h1#MainBar_title {
 	margin: 0;
 	font-size: 20px;
 	padding-left: 20px;
+	font-weight: bold;
 	color: white;
 }
 
@@ -45,7 +46,7 @@ div#MainBar_inner div#MainBar_UserList {
 #MainBar_UserList a{
 	text-decoration: none;
 	font-weight: bold;
-	color: black;
+	color: white;
 	padding: 0px 4px 0px 8px;
 }
 

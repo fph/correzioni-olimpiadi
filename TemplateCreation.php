@@ -65,11 +65,13 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 <html lang='it'>
 <!-- 	
 	Correzioni Olimpiadi - Written by walypala23 (Giada Franz) and dario2994 (Federico Glaudo)
-	Git repository: https: //github.com/walypala23/correzioni-olimpiadi
+	Updated / Maintained by Federico Poloni
+	Original Git repository: https: //github.com/walypala23/correzioni-olimpiadi
 -->
 <head> 
 	<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
 	<title> Correzioni Olimpiadi</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link type='text/css' rel='stylesheet' href='../View/css/global.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/MainBar.css'>
 	<link type='text/css' rel='stylesheet' href='../View/css/ShowMessage.css'>
@@ -119,6 +121,8 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		var ButtonsInformation = <?=json_encode($DomInformation['buttons'])?>;
 		var FormsInformation = <?=json_encode($DomInformation['form'])?>;
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <!--
 	TODO: Si potrebbe evitare di includere questi quando non necessari
 -->
