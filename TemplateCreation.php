@@ -90,7 +90,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 	} ?>
 </head>
 
-<body> 
+<body class="d-flex flex-column"> 
 	<?php 
 		global $MainBarUserId, $MainBarUsername, $v_content;
 		$MainBarUserId = GetUserIdBySession();

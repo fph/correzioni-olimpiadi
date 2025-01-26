@@ -29,25 +29,6 @@ button {
 	Page structure
 */
 
-div.internalBody {
-	width: 80%;
-	background: white;
-	margin: 0 auto;
-	border-left: solid 1px gray;
-	border-right:solid 1px gray;
-	position: absolute;
-	top: 0px;
-	left:0px;
-	right:0px;
-	min-height: 100%;
-}
-
-@media only screen and (max-width: 1024px) {
-	div.internalBody {
-		width: initial;
-	}
-}
-
 #ContentContainer {
 	margin: 35px 5% 80px 5%;
 }
