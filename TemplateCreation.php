@@ -98,7 +98,7 @@ function TemplatePage($content, $PathDescription, $IsSessionToBeChecked=1, $mess
 		$v_content = $content;
 		SuperInclude('View', 'MainBar.php'); 
 	?>
-	<div class='internalBody' id='<?=$content?>_InternalBody'>
+	<div class='container-lg bg-white' id='<?=$content?>_InternalBody'>
 	
 	<?php
 		global $v_PathDescription;

@@ -1,23 +1,30 @@
 <?php
 	global $MainBarUserId, $MainBarUsername, $v_content;
 ?>
-<div id='MainBar_container'>
-	<div id='MainBar_floater'>
-		<div id='MainBar_inner'>
-			<a href='<?=($v_content !== 'ParticipationRequest')?'index.php':'ParticipationRequest.php'?>'> <h1 id='MainBar_title'> Olimpiadi di Matematica - Correzioni </h1> </a>
-			
-			<?php
-				if ($MainBarUserId != -1) {
-			?>
-			<div id='MainBar_UserList'>
-				<a href='AccountSettings.php' id='UsernameLink'> 
-					<span id='UsernameInner'>
-						<?=$MainBarUsername?>
-					</span>
-				</a>
-				<a href='Logout.php' id='logout'> Logout </a>
-			</div>
-			<?php } ?>
-		</div>
-	</div>
-</div>
+
+<header class="text-white" id="MainBar">
+        <div class="container">
+            <nav class="navbar navbar-expand-md navbar-dark">
+                <a class="navbar-brand fs-3 text-truncate" href='<?=($v_content !== 'ParticipationRequest')?'index.php':'ParticipationRequest.php'?>'>
+                    Correzioni Olimpiadi
+                </a>
+				<?php if ($MainBarUserId != -1) { ?>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href='AccountSettings.php'> 
+                                    <?=$MainBarUsername?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href='Logout.php'> Logout </a>
+                            </li>                        
+                    </ul>
+                </div>
+				<?php } ?>
+            </nav>
+        </div>
+    </header>

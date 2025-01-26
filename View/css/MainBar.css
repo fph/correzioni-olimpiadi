@@ -1,56 +1,9 @@
-div#MainBar_container {
-	display: table;
-	border: none;
-	position: fixed;
-	height: 35px;
-	right: 0;
-	left: 0;
-	z-index: 1000;
-	top: 0;
-	width: 100%;
+#MainBar {
 	background: forestgreen;
 }
 
-div#MainBar_floater {
-	display: table-cell;
-	vertical-align: middle;
-}
-
-div#MainBar_inner {
-	margin-left: auto;
-	margin-right:auto;
-	width: 80%;
-	overflow: hidden;
-	min-width:600px;
-}
-
-div#MainBar_inner h1#MainBar_title {
-	float: left;
-	margin: 0;
-	font-size: 20px;
-	padding-left: 20px;
-	font-weight: bold;
-	color: white;
-}
-
-div#MainBar_inner div#MainBar_UserList {
-	float: right;
-	padding-top:2px;
-	padding-right:20px;
-}
-
-#MainBar_UserList #UsernameLink {
-	border-right:1px solid #006600;
-}
-
-#MainBar_UserList a{
+#MainBar a {
 	text-decoration: none;
 	font-weight: bold;
-	color: white;
-	padding: 0px 4px 0px 8px;
-}
-
-#MainBar_UserList a:hover {
-	text-decoration: none;
 	color: white;
 }
